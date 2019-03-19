@@ -287,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luozongmin.com/2019/03/19/HTTP入门笔记/">
+    <link itemprop="mainEntityOfPage" href="http://luozongmin.com/2019/03/19/Git及Github操作手册/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -307,7 +307,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/19/HTTP入门笔记/" class="post-title-link" itemprop="url">HTTP入门笔记</a>
+                <a href="/2019/03/19/Git及Github操作手册/" class="post-title-link" itemprop="url">Git/Github操作手册</a>
               
             
           </h1>
@@ -332,7 +332,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 09:02:45 / 修改时间：13:26:23" itemprop="dateCreated datePublished" datetime="2019-03-19T09:02:45+08:00">2019-03-19</time>
+              <time title="创建时间：2019-03-19 14:11:43 / 修改时间：14:58:48" itemprop="dateCreated datePublished" datetime="2019-03-19T14:11:43+08:00">2019-03-19</time>
             
 
             
@@ -372,101 +372,19 @@
 
       
         
+          <p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。<br>这里主要介绍一下git/github远程仓库的使用及相关配置。
+          <!--noindex-->
           
-            <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。<br>本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。   </p>
-<h3 id="什么是HTTP"><a href="#什么是HTTP" class="headerlink" title="什么是HTTP?"></a><strong>什么是HTTP?</strong></h3><p>HTTP代表超文本传输协议。 这是互联网中数据通信的基础， 数据通信以客户端发送的请求开始，并以从Web服务器接收的响应结束，而HTTP的作用就是指导浏览器和服务器如何进行沟通。<br>HTTP通信过程简图：<br><img src="https://i.loli.net/2019/03/19/5c904704ccfff.jpg" alt="HTTP通信过程">   </p>
-<ul>
-<li>客户端（通常为浏览器）负责发起请求</li>
-</ul>
-<ul>
-<li>web服务器在 80 端口接收请求</li>
-</ul>
-<ul>
-<li>web服务器之后负责响应请求的内容</li>
-</ul>
-<ul>
-<li>浏览器负责下载响应内容   </li>
-</ul>
-<h3 id="curl命令"><a href="#curl命令" class="headerlink" title="curl命令"></a><strong>curl命令</strong></h3><p>curl是一种命令行工具，作用是发出网络请求，然后得到响应和提取数据，显示在”标准输出”（stdout）上面。后面所说的请求，就是通过使用 curl 命令来实现的。比如输入：<br><code>curl -s -v -- &quot;www.sina.com&quot;</code><br>这一行命令，输出的请求内容为：  </p>
-<pre><code>&gt; GET / HTTP/1.1
-&gt; Host: www.sina.com
-&gt; User-Agent: curl/7.55.0
-&gt; Accept: */*
-&gt;      
-
-响应内容为:    
-&lt; HTTP/1.1 200 OK
-&lt; Date: Sun, 03 Mar 2019 06:17:38 GMT
-&lt; Content-Type: text/html
-&lt; Content-Length: 23568
-&lt; Last-Modified: Sun, 03 Mar 2019 06:16:24 GMT
-&lt; Connection: keep-alive
-&lt; ETag: &quot;5c7b7138-5c10&quot;
-&lt; Expires: Sun, 03 Mar 2019 06:22:38 GMT
-&lt; Cache-Control: max-age=300
-&lt; Accept-Ranges: bytes
-&lt; Set-Cookie: TS0106d18b=0103cff18ca232a2464de8b94e660a71bf04913ec10acc3f4e7336f5c7620c43c          b93a3a1e3e5b394e3b5f0d8d9c8c835e649efa77c; Path=/
-&lt;
-</code></pre><p>想了解关于 curl 里的参数，推荐使用explainshell.com来查看解释，很快捷很详细哦。   </p>
-<h3 id="请求的格式"><a href="#请求的格式" class="headerlink" title="请求的格式 "></a><strong>请求的格式 </strong></h3><p>来自计算机客户端的请求一般包含以下几个部分：    </p>
-<blockquote>
-<p>1 请求行：动词 路径 协议/版本 比如： GET /index.html HTTP/1.1<br>2 请求头：Key1: value1<br>2 Key2: value2<br>Key3: value3<br>Content-Type: application/x-www-form-urlencoded<br>Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a><br>User-Agent: curl/7.54.0<br>回车：没有内容<br>4 消息体：要上传的数据    </p>
-</blockquote>
-<ul>
-<li>请求最多包含四部分，最少包含三部分，最少三部分时消息体可以为空，且第三部分永远是一个回车（\n）</li>
-</ul>
-<ul>
-<li>动词有 GET（从服务器获取资源，一项或多项） POST（在服务器新建一个资源） PUT（在服务器整体更新资源，客户端提供改变后的完整资源）PATCH（在服务器局部更新资源，客户端提供改变的属性） DELETE （从服务器删除资源） 等。如果想用POST，就输入：curl -X POST -d “1234567890” -s -v – “<a href="https://www.sina.com&quot;" target="_blank" rel="noopener">https://www.sina.com&quot;</a></li>
-</ul>
-<ul>
-<li>这里的路径包括「查询参数」，但不包括「锚点」</li>
-</ul>
-<ul>
-<li>如果你没有写路径，那么路径默认为 /</li>
-</ul>
-<ul>
-<li>第 2 部分中的 Content-Type 标注了第 4 部分的格式     </li>
-</ul>
-<h3 id="响应的格式"><a href="#响应的格式" class="headerlink" title="响应的格式"></a><strong>响应的格式</strong></h3><p>来自服务器的响应一般包含以下几个部分：   </p>
-<blockquote>
-<p>1 状态行：协议/版本号 状态码 状态描述<br>响应头：Key1: value1<br>Key2: value2<br>Content-Length: 17931<br>Content-Type: text/html<br>回车：没有内容<br>消息体：要下载的内容    </p>
-</blockquote>
-<ul>
-<li>响应都有4个部分，具体其实跟请求的格式差不多</li>
-</ul>
-<ul>
-<li>常见的状态码：   <blockquote>
-<p>200：请求成功<br>请求的资源被永久转移到其他地方（重定向）<br>404：请求的资源不存在<br>500：内部服务器错误   </p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li>状态码分类      <blockquote>
-<p>1开头：信息，服务器已经收到请求，需要请求者继续执行操作（不常用）<br>2开头：成功，操作被成功接收并处理<br>3开头：重定向，需要进一步操作来完成请求<br>4开头：客户端错误，请求包含语法错误或无法完成请求<br>5开头：服务器错误，服务器在处理请求时发成了错误    </p>
-</blockquote>
-</li>
-</ul>
-<ul>
-<li>状态码列表<br><img src="https://i.loli.net/2019/03/19/5c904b004d435.jpg" alt="状态码1"><br><img src="https://i.loli.net/2019/03/19/5c90744268350.jpg" alt="状态码2">     </li>
-</ul>
-<h3 id="如何在Chrome上检查HTTP请求和响应？"><a href="#如何在Chrome上检查HTTP请求和响应？" class="headerlink" title="如何在Chrome上检查HTTP请求和响应？"></a><strong>如何在Chrome上检查HTTP请求和响应？</strong></h3><p>将Google Chrome视为常用浏览器，在其他浏览器中查看详细信息的过程仍然相同。   </p>
-<ol>
-<li>在Google Chrome中打开网页，然后转到”更多工具 &gt;开发者工具”菜单。</li>
-<li>您也可以通过右键单击页面打开开发人员控制台，然后选择“检查”选项。</li>
-<li>转到“Network”选项，然后重新加载页面。 现在，您将看到页面上每个组件的加载时间。</li>
-<li>点击“Show Overview”图标以删除时间线，以便您可以清楚地查看其他详细信息。</li>
-<li>单击左侧栏上的页面URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><img src="https://i.loli.net/2019/03/19/5c9074fb6cad1.jpg" alt>    </li>
-</ol>
-<p>您可以在上面的部分中详细了解请求和响应的详细信息。 “Headers”选项将显示所选项目的请求和响应的HTTP标头信息的详细信息。    </p>
-<h3 id="HTTP-标头检查工具"><a href="#HTTP-标头检查工具" class="headerlink" title="HTTP 标头检查工具"></a><strong>HTTP 标头检查工具</strong></h3><p>与Chrome类似，还有许多其他免费工具可用于检查HTTP标头中收到的响应代码。 例如，转到此HTTP标头检查工具，输入您要检查的任何URL，然后单击“提交”按钮。<br>例如输入<a href="https://www.baidu.com，您将看到如下标头的详细信息：" target="_blank" rel="noopener">https://www.baidu.com，您将看到如下标头的详细信息：</a>   </p>
-<blockquote>
-<p>HTTP/1.1 200 OK<br>Accept-Ranges: bytes<br>Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform<br>Connection: Keep-Alive<br>Content-Length: 277<br>Content-Type: text/html<br>Date: Sun, 03 Mar 2019 07:27:41 GMT<br>Etag: “575e1f6f-115”<br>Last-Modified: Mon, 13 Jun 2016 02:50:23 GMT<br>Pragma: no-cache<br>Server: bfe/1.0.8.18</p>
-</blockquote>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/19/Git及Github操作手册/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 
@@ -518,7 +436,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://luozongmin.com/2019/03/17/开博大吉/">
+    <link itemprop="mainEntityOfPage" href="http://luozongmin.com/2019/03/19/HTTP入门笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -538,7 +456,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/17/开博大吉/" class="post-title-link" itemprop="url">开博大吉</a>
+                <a href="/2019/03/19/HTTP入门笔记/" class="post-title-link" itemprop="url">HTTP入门笔记</a>
               
             
           </h1>
@@ -563,7 +481,7 @@
                 
               
 
-              <time title="创建时间：2019-03-17 18:41:33 / 修改时间：18:43:43" itemprop="dateCreated datePublished" datetime="2019-03-17T18:41:33+08:00">2019-03-17</time>
+              <time title="创建时间：2019-03-19 09:02:45 / 修改时间：14:58:07" itemprop="dateCreated datePublished" datetime="2019-03-19T09:02:45+08:00">2019-03-19</time>
             
 
             
@@ -603,13 +521,19 @@
 
       
         
+          <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。<br>本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。
+          <!--noindex-->
           
-            <h1 id="哈哈"><a href="#哈哈" class="headerlink" title="哈哈"></a>哈哈</h1><p>我的博客开通啦</p>
-
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/19/HTTP入门笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
           
+          <!--/noindex-->
         
       
-    </div>
+    </p></div>
 
     
 

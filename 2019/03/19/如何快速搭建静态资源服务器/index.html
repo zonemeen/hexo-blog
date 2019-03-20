@@ -98,29 +98,34 @@
 
 
 
-  <meta name="description" content="HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。">
+  <meta name="description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTTP入门笔记">
-<meta property="og:url" content="http://yoursite.com/2019/03/19/HTTP入门笔记/index.html">
+<meta property="og:title" content="如何快速搭建静态资源服务器">
+<meta property="og:url" content="http://yoursite.com/2019/03/19/如何快速搭建静态资源服务器/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。">
+<meta property="og:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c904704ccfff.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c904b004d435.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90744268350.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c9074fb6cad1.jpg">
-<meta property="og:updated_time" content="2019-03-20T09:59:01.093Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90cf7be5b77.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90cff553452.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d02a2727a.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d0fa98ae6.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d1315673b.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d15f2e704.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d19972e2d.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d1fc84445.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d22068577.jpg">
+<meta property="og:updated_time" content="2019-03-20T09:49:37.903Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="HTTP入门笔记">
-<meta name="twitter:description" content="HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/19/5c904704ccfff.jpg">
+<meta name="twitter:title" content="如何快速搭建静态资源服务器">
+<meta name="twitter:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/19/5c90cf7be5b77.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/19/HTTP入门笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/19/如何快速搭建静态资源服务器/">
 
 
 
@@ -130,7 +135,7 @@
   };
 </script>
 
-  <title>HTTP入门笔记 | 米淇淋の个人博客</title>
+  <title>如何快速搭建静态资源服务器 | 米淇淋の个人博客</title>
   
 
 
@@ -312,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/HTTP入门笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/19/如何快速搭建静态资源服务器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -329,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">HTTP入门笔记
+          <h1 class="post-title" itemprop="name headline">如何快速搭建静态资源服务器
 
               
             
@@ -355,7 +360,7 @@
                 
               
 
-              <time title="创建时间：2019-03-19 09:02:45" itemprop="dateCreated datePublished" datetime="2019-03-19T09:02:45+08:00">2019-03-19</time>
+              <time title="创建时间：2019-03-19 19:12:23" itemprop="dateCreated datePublished" datetime="2019-03-19T19:12:23+08:00">2019-03-19</time>
             
 
             
@@ -372,7 +377,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-20 17:59:01" itemprop="dateModified" datetime="2019-03-20T17:59:01+08:00">2019-03-20</time>
+                <time title="修改时间：2019-03-20 17:49:37" itemprop="dateModified" datetime="2019-03-20T17:49:37+08:00">2019-03-20</time>
               
             
           </span>
@@ -424,96 +429,57 @@
       
 
       
-        <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。<br>本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。   <a id="more"></a> </p>
-<h3 id="什么是HTTP"><a href="#什么是HTTP" class="headerlink" title="什么是HTTP?"></a><strong>什么是HTTP?</strong></h3><p>HTTP代表超文本传输协议。 这是互联网中数据通信的基础， 数据通信以客户端发送的请求开始，并以从Web服务器接收的响应结束，而HTTP的作用就是指导浏览器和服务器如何进行沟通。<br>HTTP通信过程简图：   </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c904704ccfff.jpg" alt="HTTP通信过程">     </div></p>
+        <p>在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。<a id="more"></a>以前的时候，都是使用php的本地环境，也算比较方便，但是自从学了nodejs，发现创建http-server更方便。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90cf7be5b77.jpg" alt>  </div></p>
+<h3 id="本文的目的"><a href="#本文的目的" class="headerlink" title="本文的目的"></a>本文的目的</h3><p>在这篇文章中，我将向您展示如何使用NodeJS创建一个非常简单的HTTP服务器。您可以通过http访问目录中的静态资源，如HTML，Javascript，CSS等，比如：  </p>
 <ul>
-<li>客户端（通常为浏览器）负责发起请求</li>
+<li><a href="http://localhost:8080/hello.html" target="_blank" rel="noopener">http://localhost:8080/hello.html</a></li>
+<li><a href="http://localhost:8080/abc.js" target="_blank" rel="noopener">http://localhost:8080/abc.js</a>   </li>
 </ul>
+<p>而不是通过默认的file:///来访问  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90cff553452.jpg" alt>    </div></p>
+<p>那问题是为什么只有需要一个HTTP才能访问静态资源呢？<br>是因为HTML文件含有Javascript文件时，如果通过默认的file://地址来访问此文件的话，浏览器会阻止本地Javascript文件的一些操作，此时就需要安装HTTP-Server来解决这个问题。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d02a2727a.jpg" alt>    </div></p>
+<p>报错信息：  </p>
 <ul>
-<li>web服务器在 80 端口接收请求</li>
+<li>Failed to load file:///E:/webexamples/reactjs/hello-reactjs/person.jsx:</li>
+<li>Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.   </li>
 </ul>
+<h3 id="创建HTTP-Server"><a href="#创建HTTP-Server" class="headerlink" title="创建HTTP-Server"></a>创建HTTP-Server</h3><p>首先，确保已在计算机上安装NodeJS和npm； 否则，请按照以下说明进行安装：  </p>
 <ul>
-<li>web服务器之后负责响应请求的内容</li>
-</ul>
-<ul>
-<li>浏览器负责下载响应内容   </li>
-</ul>
-<h3 id="curl命令"><a href="#curl命令" class="headerlink" title="curl命令"></a><strong>curl命令</strong></h3><p>curl是一种命令行工具，作用是发出网络请求，然后得到响应和提取数据，显示在”标准输出”（stdout）上面。后面所说的请求，就是通过使用 curl 命令来实现的。比如输入：<br><code>curl -s -v -- &quot;www.sina.com&quot;</code><br>这一行命令，输出的请求内容为：  </p>
-<pre><code>&gt; GET / HTTP/1.1
-&gt; Host: www.sina.com
-&gt; User-Agent: curl/7.55.0
-&gt; Accept: */*
-&gt;      
-
-响应内容为:    
-&lt; HTTP/1.1 200 OK
-&lt; Date: Sun, 03 Mar 2019 06:17:38 GMT
-&lt; Content-Type: text/html
-&lt; Content-Length: 23568
-&lt; Last-Modified: Sun, 03 Mar 2019 06:16:24 GMT
-&lt; Connection: keep-alive
-&lt; ETag: &quot;5c7b7138-5c10&quot;
-&lt; Expires: Sun, 03 Mar 2019 06:22:38 GMT
-&lt; Cache-Control: max-age=300
-&lt; Accept-Ranges: bytes
-&lt; Set-Cookie: TS0106d18b=0103cff18ca232a2464de8b94e660a71bf04913ec10acc3f4e7336f5c7620c43c          b93a3a1e3e5b394e3b5f0d8d9c8c835e649efa77c; Path=/
-&lt;
-</code></pre><p>想了解关于 curl 里的参数，推荐使用explainshell.com来查看解释，很快捷很详细哦。   </p>
-<h3 id="请求的格式"><a href="#请求的格式" class="headerlink" title="请求的格式 "></a><strong>请求的格式 </strong></h3><p>来自计算机客户端的请求一般包含以下几个部分：    </p>
-<blockquote>
-<p>1 请求行：动词 路径 协议/版本 比如： GET /index.html HTTP/1.1<br>2 请求头：Key1: value1<br>2 Key2: value2<br>Key3: value3<br>Content-Type: application/x-www-form-urlencoded<br>Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a><br>User-Agent: curl/7.54.0<br>回车：没有内容<br>4 消息体：要上传的数据    </p>
-</blockquote>
-<ul>
-<li>请求最多包含四部分，最少包含三部分，最少三部分时消息体可以为空，且第三部分永远是一个回车（\n）</li>
-</ul>
-<ul>
-<li>动词有 GET（从服务器获取资源，一项或多项） POST（在服务器新建一个资源） PUT（在服务器整体更新资源，客户端提供改变后的完整资源）PATCH（在服务器局部更新资源，客户端提供改变的属性） DELETE （从服务器删除资源） 等。如果想用POST，就输入：curl -X POST -d “1234567890” -s -v – “<a href="https://www.sina.com&quot;" target="_blank" rel="noopener">https://www.sina.com&quot;</a></li>
-</ul>
-<ul>
-<li>这里的路径包括「查询参数」，但不包括「锚点」</li>
-</ul>
-<ul>
-<li>如果你没有写路径，那么路径默认为 /</li>
-</ul>
-<ul>
-<li>第 2 部分中的 Content-Type 标注了第 4 部分的格式     </li>
-</ul>
-<h3 id="响应的格式"><a href="#响应的格式" class="headerlink" title="响应的格式"></a><strong>响应的格式</strong></h3><p>来自服务器的响应一般包含以下几个部分：   </p>
-<blockquote>
-<p>1 状态行：协议/版本号 状态码 状态描述<br>响应头：Key1: value1<br>Key2: value2<br>Content-Length: 17931<br>Content-Type: text/html<br>回车：没有内容<br>消息体：要下载的内容    </p>
-</blockquote>
-<ul>
-<li>响应都有4个部分，具体其实跟请求的格式差不多</li>
-</ul>
-<ul>
-<li>常见的状态码：   <blockquote>
-<p>200：请求成功<br>请求的资源被永久转移到其他地方（重定向）<br>404：请求的资源不存在<br>500：内部服务器错误   </p>
-</blockquote>
+<li>在Windows上安装NodeJS</li>
+<li><p>打开 Git Bash或其他命令行工具，依次输入以下命令，按回车：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org/</span><br><span class="line">npm config set loglevel http</span><br><span class="line">npm config set progress false</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>npm 的配置被存储在 ~/.npmrc，你可以随时改。    </p>
 </li>
 </ul>
+<p>①接下来第一步，先创建一个空目录：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d0fa98ae6.jpg" alt>     </div></p>
+<p>②利用命令行工具进入这个目录，这里用的是Git Bash。右击鼠标，点击Git Bash here，即可用Git Bash打开这个目录：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d1315673b.jpg" alt>    </div></p>
+<p>③运行以下命令安装http-server：<br>&emsp;<code>$ npm install -g http-server</code></p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d15f2e704.jpg" alt>    </div></p>
+<p>④启动HTTP-Server，输入命令：<br>&emsp;<code>$ http-server -c-1</code></p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d19972e2d.jpg" alt>    </div></p>
+<p>到此您的HTTP服务器就已经启动了，它正在端口8080上监听，您可以通过访问以下链接进行检查，3个地址在电脑端打开的是同一份东西：</p>
 <ul>
-<li>状态码分类      <blockquote>
-<p>1开头：信息，服务器已经收到请求，需要请求者继续执行操作（不常用）<br>2开头：成功，操作被成功接收并处理<br>3开头：重定向，需要进一步操作来完成请求<br>4开头：客户端错误，请求包含语法错误或无法完成请求<br>5开头：服务器错误，服务器在处理请求时发成了错误    </p>
-</blockquote>
-</li>
+<li><a href="http://192.168.1.116:8080/" target="_blank" rel="noopener">http://192.168.1.116:8080/</a> （只有这个地址能在手机中预览）</li>
+<li>127.0.0.1:8080/ （2和3性质是一样的）</li>
+<li>localhost:8080/ （较为常用）    </li>
 </ul>
-<ul>
-<li>状态码列表<br><div align="center"><img src="https://i.loli.net/2019/03/19/5c904b004d435.jpg" alt><br><div align="center"><img src="https://i.loli.net/2019/03/19/5c90744268350.jpg" alt>     </div></div></li>
-</ul>
-<h3 id="如何在Chrome上检查HTTP请求和响应？"><a href="#如何在Chrome上检查HTTP请求和响应？" class="headerlink" title="如何在Chrome上检查HTTP请求和响应？"></a><strong>如何在Chrome上检查HTTP请求和响应？</strong></h3><p>将Google Chrome视为常用浏览器，在其他浏览器中查看详细信息的过程仍然相同。   </p>
+<p>⑤在该目录中创建一个HTML文件，您可以通过此HTTP地址访问它：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d1fc84445.jpg" alt>   </div></p>
+<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c90d22068577.jpg" alt>    </div></p>
+<p>⑥这里Windows 用户需要注意了，如果你发现你修改了源代码，页面却无法更新，说明http-server 的缓存还未消除，那么可以这样做：  </p>
 <ol>
-<li>在Google Chrome中打开网页，然后转到”更多工具 &gt;开发者工具”菜单。</li>
-<li>您也可以通过右键单击页面打开开发人员控制台，然后选择“检查”选项。</li>
-<li>转到“Network”选项，然后重新加载页面。 现在，您将看到页面上每个组件的加载时间。</li>
-<li>点击“Show Overview”图标以删除时间线，以便您可以清楚地查看其他详细信息。</li>
-<li>单击左侧栏上的页面URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><div align="center"><img src="https://i.loli.net/2019/03/19/5c9074fb6cad1.jpg" alt>    </div></li>
+<li>打开 Chrome 开发者工具</li>
+<li>点击 Network</li>
+<li>勾选 Disable Cache    </li>
 </ol>
-<p>您可以在上面的部分中详细了解请求和响应的详细信息。 “Headers”选项将显示所选项目的请求和响应的HTTP标头信息的详细信息。    </p>
-<h3 id="HTTP-标头检查工具"><a href="#HTTP-标头检查工具" class="headerlink" title="HTTP 标头检查工具"></a><strong>HTTP 标头检查工具</strong></h3><p>与Chrome类似，还有许多其他免费工具可用于检查HTTP标头中收到的响应代码。 例如，转到此HTTP标头检查工具，输入您要检查的任何URL，然后单击“提交”按钮。<br>例如输入<a href="https://www.baidu.com，您将看到如下标头的详细信息：" target="_blank" rel="noopener">https://www.baidu.com，您将看到如下标头的详细信息：</a>   </p>
-<blockquote>
-<p>HTTP/1.1 200 OK<br>Accept-Ranges: bytes<br>Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform<br>Connection: Keep-Alive<br>Content-Length: 277<br>Content-Type: text/html<br>Date: Sun, 03 Mar 2019 07:27:41 GMT<br>Etag: “575e1f6f-115”<br>Last-Modified: Mon, 13 Jun 2016 02:50:23 GMT<br>Pragma: no-cache<br>Server: bfe/1.0.8.18</p>
-</blockquote>
+<p>这样缓存就不存在了~  </p>
+<h3 id="其他命令安装HTTP-Server"><a href="#其他命令安装HTTP-Server" class="headerlink" title="其他命令安装HTTP-Server"></a>其他命令安装HTTP-Server</h3><p>这里就不仔细介绍步骤了，因为大部分操作和结果与第2步是一样的，直接上命令：<br>第一种方法：<br>安装：<br><code>$ npm i startserver -g</code><br>快速开启：<br><code>$ startserver</code>   </p>
+<p>第二种方法：<br>安装：<br><code>$ npm install -g live-server</code><br>快速开启：<br><code>$ live-server</code><br>如果看到其他有意思的方法，后续还会增加的！<br>以上就是我在近期收集到的一些方法资料，不一定全面，如有错误欢迎指正哦。</p>
 
       
     </div>
@@ -544,14 +510,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/19/HTML常用标签/" rel="next" title="HTML常用标签">
+                <i class="fa fa-chevron-left"></i> HTML常用标签
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/03/19/Git及Github操作手册/" rel="prev" title="Git/Github操作手册">
-                Git/Github操作手册 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/20/CSS笔记—居中布局/" rel="prev" title="CSS笔记—居中布局">
+                CSS笔记—居中布局 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -697,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是HTTP"><span class="nav-number">1.</span> <span class="nav-text">什么是HTTP?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl命令"><span class="nav-number">2.</span> <span class="nav-text">curl命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求的格式"><span class="nav-number">3.</span> <span class="nav-text">请求的格式 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应的格式"><span class="nav-number">4.</span> <span class="nav-text">响应的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何在Chrome上检查HTTP请求和响应？"><span class="nav-number">5.</span> <span class="nav-text">如何在Chrome上检查HTTP请求和响应？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-标头检查工具"><span class="nav-number">6.</span> <span class="nav-text">HTTP 标头检查工具</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文的目的"><span class="nav-number">1.</span> <span class="nav-text">本文的目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建HTTP-Server"><span class="nav-number">2.</span> <span class="nav-text">创建HTTP-Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他命令安装HTTP-Server"><span class="nav-number">3.</span> <span class="nav-text">其他命令安装HTTP-Server</span></a></li></ol></div>
             
 
           </div>

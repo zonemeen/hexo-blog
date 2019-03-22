@@ -99,6 +99,7 @@
 
 
   <meta name="description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
+<meta name="keywords" content="http-server,Node.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何快速搭建静态资源服务器">
 <meta property="og:url" content="http://yoursite.com/2019/03/19/如何快速搭建静态资源服务器/index.html">
@@ -114,7 +115,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d19972e2d.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d1fc84445.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/03/19/5c90d22068577.jpg">
-<meta property="og:updated_time" content="2019-03-20T09:49:37.903Z">
+<meta property="og:updated_time" content="2019-03-21T11:07:28.475Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速搭建静态资源服务器">
 <meta name="twitter:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
@@ -238,6 +239,23 @@
         
         
           
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-categories">
 
     
@@ -255,7 +273,7 @@
         
         
           
-          <li class="menu-item menu-item-archives">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -265,7 +283,24 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -377,7 +412,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-20 17:49:37" itemprop="dateModified" datetime="2019-03-20T17:49:37+08:00">2019-03-20</time>
+                <time title="修改时间：2019-03-21 19:07:28" itemprop="dateModified" datetime="2019-03-21T19:07:28+08:00">2019-03-21</time>
               
             
           </span>
@@ -449,7 +484,7 @@
 <ul>
 <li>在Windows上安装NodeJS</li>
 <li><p>打开 Git Bash或其他命令行工具，依次输入以下命令，按回车：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npm.taobao.org/</span><br><span class="line">npm config set loglevel http</span><br><span class="line">npm config set progress false</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org/</span><br><span class="line">npm config <span class="built_in">set</span> loglevel http</span><br><span class="line">npm config <span class="built_in">set</span> progress <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>npm 的配置被存储在 ~/.npmrc，你可以随时改。    </p>
 </li>
@@ -479,7 +514,8 @@
 </ol>
 <p>这样缓存就不存在了~  </p>
 <h3 id="其他命令安装HTTP-Server"><a href="#其他命令安装HTTP-Server" class="headerlink" title="其他命令安装HTTP-Server"></a>其他命令安装HTTP-Server</h3><p>这里就不仔细介绍步骤了，因为大部分操作和结果与第2步是一样的，直接上命令：<br>第一种方法：<br>安装：<br><code>$ npm i startserver -g</code><br>快速开启：<br><code>$ startserver</code>   </p>
-<p>第二种方法：<br>安装：<br><code>$ npm install -g live-server</code><br>快速开启：<br><code>$ live-server</code><br>如果看到其他有意思的方法，后续还会增加的！<br>以上就是我在近期收集到的一些方法资料，不一定全面，如有错误欢迎指正哦。</p>
+<p>第二种方法：<br>安装：<br><code>$ npm install -g live-server</code><br>快速开启：<br><code>$ live-server</code><br>如果看到其他有意思的方法，后续还会增加的！   </p>
+<p><strong>以上就是我在近期收集到的一些方法资料，不一定全面，如有错误欢迎指正哦。</strong></p>
 
       
     </div>
@@ -500,6 +536,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/http-server/" rel="tag"># http-server</a>
+          
+            <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          
+        </div>
       
 
       
@@ -593,7 +637,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -605,19 +649,58 @@
                 <div class="site-state-item site-state-categories">
                   
                     
+                      <a href="/categories/">
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">3</span>
-                    <span class="site-state-item-name">分类</span>
                   
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -638,6 +721,17 @@
                     
                   
                   <a href="https://github.com/miqilin21" title="GitHub &rarr; https://github.com/miqilin21" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/994718917@qq.com" title="E-Mail &rarr; 994718917@qq.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                 </span>
               
             </div>

@@ -43,6 +43,44 @@
 
 
 
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
 
 
 
@@ -106,7 +144,7 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-21T11:12:01.479Z">
+<meta property="og:updated_time" content="2019-03-30T12:58:05.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS笔记—左右布局">
 <meta name="twitter:description" content="css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。">
@@ -402,7 +440,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-21 19:12:01" itemprop="dateModified" datetime="2019-03-21T19:12:01+08:00">2019-03-21</time>
+                <time title="修改时间：2019-03-30 20:58:05" itemprop="dateModified" datetime="2019-03-30T20:58:05+08:00">2019-03-30</time>
               
             
           </span>
@@ -454,7 +492,8 @@
       
 
       
-        <p>css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。   <a id="more"></a><br>下面是我罗列的几种css实现前端左右布局的方式：   </p>
+        <p>css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。   <a id="more"></a>  </p>
+<p>下面是我罗列的几种css实现前端左右布局的方式：   </p>
 <h4 id="position-absolute实现"><a href="#position-absolute实现" class="headerlink" title="position: absolute实现"></a>position: absolute实现</h4><p>在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">section</span>&gt;</span><br><span class="line">  &lt;div class="left-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Left Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class="right-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Right Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/section&gt; /*以上为html代码*/</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">article</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left-half</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ea68a2</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">0px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right-half</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: pink;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0px</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="table实现"><a href="#table实现" class="headerlink" title="table实现"></a>table实现</h4><p>table布局是页面布局中使用的最早的布局方式，随着前端技术的发展，table布局由于自身的局限性逐渐被div布局取代。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">section</span>&gt;</span><br><span class="line">  &lt;div class="left-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Left Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class="right-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Right Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/section&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span> &#123; </span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: table-cell;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">vertical-align</span>: middle;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left-half</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#ea68a2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right-half</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: pink;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="float实现"><a href="#float实现" class="headerlink" title="float实现"></a>float实现</h4><p>float属性是css中关于布局的一个关键属性，可以产生脱离文档流的布局现象，其left属性值使该区域向父级标签区域的左侧边界放置，right属性值使该区域块向父级标签的右侧边界放置，利用该属性可以实现左右布局。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="selector-tag">section</span>&gt;</span><br><span class="line">  &lt;div class="left-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Left Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class="right-half"&gt;</span><br><span class="line">    &lt;<span class="selector-tag">article</span>&gt;</span><br><span class="line">      &lt;h1&gt;Right Half&lt;/h1&gt;</span><br><span class="line">    &lt;/article&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/section&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span>, <span class="selector-tag">section</span>, <span class="selector-tag">div</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">80%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123; </span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">section</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">article</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span>;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translate</span>(-50%, -50%);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.left-half</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#ea68a2</span>;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.right-half</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: pink;</span><br><span class="line">  <span class="attribute">float</span>: left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">50%</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -585,7 +624,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -612,7 +651,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -649,7 +690,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -1846,7 +1846,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ac3dff;
+  background: #3274ff;
 }
 .links-of-author-item {
   text-align: center;
@@ -2730,7 +2730,7 @@ ul.breadcrumb li+li:last-child {
   clear: both;
 }
 .site-state-item {
-  padding: 0 10px;
+  padding: 0 12px;
 }
 .links-of-author-item a:before,
 .links-of-author-item span.exturl:before {
@@ -2818,7 +2818,7 @@ ul.breadcrumb li+li:last-child {
 }
 .links-of-blogroll {
   text-align: center;
-  padding: 3px 0 0;
+  padding: 10px 0 0;
 }
 .links-of-blogroll-item {
   padding: 0;

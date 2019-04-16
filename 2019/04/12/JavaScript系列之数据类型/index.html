@@ -148,7 +148,7 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="JavaScript提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-16T05:00:32.924Z">
+<meta property="og:updated_time" content="2019-04-16T05:05:10.912Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之数据类型">
 <meta name="twitter:description" content="JavaScript提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。">
@@ -473,7 +473,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-16 13:00:32" itemprop="dateModified" datetime="2019-04-16T13:00:32+08:00">2019-04-16</time>
+                <time title="修改时间：2019-04-16 13:05:10" itemprop="dateModified" datetime="2019-04-16T13:05:10+08:00">2019-04-16</time>
               
             
           </span>
@@ -553,9 +553,9 @@
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript中的字符串必须用引号括起来，有3种类型的引号 出现场合：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"Hello, world!"</span>;  <span class="comment">//双引号</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">'Hello, world!'</span>; <span class="comment">//单引号</span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">`Hello, world!`</span>;  <span class="comment">//反引号</span></span><br></pre></td></tr></table></figure></p>
 <p>双引号和单引号是“简单”引号，它们在JavaScript中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。   </p>
 <p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">"miqilin"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// embed a variable</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="string">`Hello, <span class="subst">$&#123;name&#125;</span>!`</span> ); <span class="comment">// Hello, miqilin!</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// embed an expression</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="string">`the result is <span class="subst">$&#123;<span class="number">1</span> + <span class="number">2</span>&#125;</span>`</span> ); <span class="comment">// the result is 3</span></span><br></pre></td></tr></table></figure></p>
-<p>加反引号后计算$ {…}内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像1 + 2这样的算术表达式或更复杂的东西。   </p>
+<p>加反引号后计算<code>$ {...}</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像1 + 2这样的算术表达式或更复杂的东西。   </p>
 <p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log( <span class="string">"the result is $&#123;1 + 2&#125;"</span> ); <span class="comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：true和false 出现场合：   </p>
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：   </p>
 <ul>
 <li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换){}</code></li>
 <li>字面量或变量定义 <code>var bool = true;</code></li>
@@ -566,7 +566,7 @@
 <ul>
 <li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code>  </li>
 </ul>
-<p>在JavaScript中，null不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
+<p>在JavaScript中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
 <h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined的含义是“未赋值” 出现场合：</p>
 <ul>
 <li>变量声明了，但没赋值 <code>var obj;</code></li>
@@ -579,7 +579,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="number">5</span> + <span class="literal">undefined</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">name</span>: <span class="string">"miqilin"</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Cat();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.sound = <span class="string">"wow"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>但请注意，我们还没有提到过Array，Date，甚至是函数，因为正式地说，它们都是对象类型。</p>
+<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
 
       
     </div>

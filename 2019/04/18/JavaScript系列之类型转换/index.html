@@ -140,29 +140,25 @@
 
 
 
-  <meta name="description" content="我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！     搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。">
-<meta name="keywords" content="Hexo">
+  <meta name="description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
+<meta name="keywords" content="JavaScript,数据类型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo搭建博客中遇到的一些&quot;事&quot;">
-<meta property="og:url" content="https://luozongmin.com/2019/04/03/Hexo搭建博客中遇到的一些“事”/index.html">
+<meta property="og:title" content="JavaScript系列之类型转换">
+<meta property="og:url" content="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！     搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。">
+<meta property="og:description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/04/03/5ca4b489d8f30.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/04/03/5ca4b4ba9b38c.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/04/03/5ca4b5516f9a6.jpg">
-<meta property="og:updated_time" content="2019-04-16T05:11:59.306Z">
+<meta property="og:updated_time" content="2019-04-18T09:31:55.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo搭建博客中遇到的一些&quot;事&quot;">
-<meta name="twitter:description" content="我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！     搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。">
-<meta name="twitter:image" content="https://i.loli.net/2019/04/03/5ca4b489d8f30.jpg">
+<meta name="twitter:title" content="JavaScript系列之类型转换">
+<meta name="twitter:description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
 
 
 
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/04/03/Hexo搭建博客中遇到的一些“事”/">
+  <link rel="canonical" href="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/">
 
 
 
@@ -172,7 +168,7 @@
   };
 </script>
 
-  <title>Hexo搭建博客中遇到的一些"事" | 米淇淋の个人博客</title>
+  <title>JavaScript系列之类型转换 | 米淇淋の个人博客</title>
   
 
 
@@ -417,7 +413,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/03/Hexo搭建博客中遇到的一些“事”/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -434,7 +430,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hexo搭建博客中遇到的一些"事"
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之类型转换
 
               
             
@@ -460,24 +456,12 @@
                 
               
 
-              <time title="创建时间：2019-04-03 21:19:59" itemprop="dateCreated datePublished" datetime="2019-04-03T21:19:59+08:00">2019-04-03</time>
+              <time title="创建时间：2019-04-18 17:17:22 / 修改时间：17:31:55" itemprop="dateCreated datePublished" datetime="2019-04-18T17:17:22+08:00">2019-04-18</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-16 13:11:59" itemprop="dateModified" datetime="2019-04-16T13:11:59+08:00">2019-04-16</time>
               
             
           </span>
@@ -494,7 +478,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -529,31 +513,54 @@
       
 
       
-        <p>我写的这篇<a href="https://luozongmin.com/2019/03/21/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">文章</a>已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！    </p>
-<p>搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。<a id="more"></a>   </p>
-<h4 id="仓库的名字"><a href="#仓库的名字" class="headerlink" title="仓库的名字"></a>仓库的名字</h4><p>仓库的名字的正确格式应该是<code>github用户名.github.io</code>，比如说，如果你的github用户名是test，那么你就应该新建<code>test.github.io</code>的仓库（必须是你的github用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。    </p>
-<h4 id="首页文章内容部分展示"><a href="#首页文章内容部分展示" class="headerlink" title="首页文章内容部分展示"></a>首页文章内容部分展示</h4><p>我用的是next主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的Mrakdown文件内容文字后面添加<code>&lt;!--more--&gt;</code>即可。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: HTML、CSS、JS中unicode字符的处理 </span><br><span class="line">---</span><br><span class="line"># 前言</span><br><span class="line">使用github pages服务搭建博客的好处有：</span><br><span class="line">1. 全是静态文件，访问速度快；</span><br><span class="line">2. 免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</span><br><span class="line">3. 可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">4. 数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</span><br><span class="line">5. 博客内容可以轻松打包、转移、发布到其它平台；</span><br><span class="line">6. 等等；</span><br></pre></td></tr></table></figure></p>
-<p><div align="center"><img src="https://i.loli.net/2019/04/03/5ca4b489d8f30.jpg" alt>   </div></p>
-<h4 id="GitHub-Pages绑定域名后每次hexo-d都会失效"><a href="#GitHub-Pages绑定域名后每次hexo-d都会失效" class="headerlink" title="GitHub Pages绑定域名后每次hexo d都会失效"></a>GitHub Pages绑定域名后每次hexo d都会失效</h4><p>在GitHub Pages绑定域名之后，发现每次<code>hexo d</code>后，域名网址都会报错404，又要重新部署，就有点太麻烦了。  </p>
-<p><div align="center"><img src="https://i.loli.net/2019/04/03/5ca4b4ba9b38c.jpg" alt>   </div></p>
-<p>搞了很久还是不行，后面在网上和群里问出，到这里域名绑定并没有结束，还差关键一步：    </p>
-<p>具体就是在Hexo目录里的source文件下添加一个名为<code>CNAME</code>的文件，注意<strong>这个文件是没有后缀的，千万不要设置成.txt文本文件</strong>，文件的内容就是域名，格式如：   </p>
-<pre><code>luozongmin.com
-</code></pre><p>添加后重新部署文件到github，这个时候再试，应该就成功了。   </p>
-<h4 id="创建分类页面"><a href="#创建分类页面" class="headerlink" title="创建分类页面"></a>创建分类页面</h4><p>添加一个分类页面，并在菜单中显示页面链接。应先新建一个页面，命名为 categories ，命令如下：    </p>
-<pre><code class="bash">$ hexo new page categories 
-</code></pre>
-<p><strong>注意！！！</strong>categories中千万别加””(双引号)，不然会导致部署完后网站中不显示具体分类：    </p>
-<p><div align="center"><img src="https://i.loli.net/2019/04/03/5ca4b5516f9a6.jpg" alt>      </div></p>
-<p>之后在编辑刚新建的页面中，将页面的类型设置为<code>categories</code>； 最后编辑主题的<code>_config.yml</code>，将<code>menu</code>中的<code>categories: /categories</code>注释去掉即可。    </p>
-<h4 id="Busuanzi-统计浏览量失效"><a href="#Busuanzi-统计浏览量失效" class="headerlink" title="Busuanzi 统计浏览量失效"></a>Busuanzi 统计浏览量失效</h4><p>由于busuanzi(不蒜子)的网址更新，导致了使用Hexo Next主题时统计浏览量时失效。   </p>
-<p>解决方法:    </p>
-<p>到hexo的themes文件夹下, 进入\themes\next\layout_third-party\analytics   </p>
-<p>打开: busuanzi-counter.swig    </p>
-<p>将src=“<a href="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”" target="_blank" rel="noopener">https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”</a>    </p>
-<p>修改为src=“<a href="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”" target="_blank" rel="noopener">https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”</a>    </p>
-<p>即可。    </p>
-<p>不蒜子官网:<a href="http://ibruce.info/2015/04/04/busuanzi/" target="_blank" rel="noopener">http://ibruce.info/2015/04/04/busuanzi/</a></p>
+        <p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。<a id="more"></a>    </p>
+<p>以下我将介绍将各种类型的值，分别转换成<strong>数字</strong>、<strong>字符串</strong>或者<strong>布尔值</strong>（基于ES5规范）。   </p>
+<h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h4><p><strong>（1）Number()</strong>   </p>
+<p>使用Number函数，可以将任意类型的值转化成数值。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数值</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="number">123</span>)  <span class="comment">// 123  转换后为原值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'123'</span>)  <span class="comment">// 123  转换为相应的数值，前提能被解析为数值</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'123abc'</span>)   <span class="comment">// NaN  如果不能被解析为数值，则返回 NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔值</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>)  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">false</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>)  <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">5</span>]) <span class="comment">// 5  //包含单个数值的数组将返回数字</span></span><br></pre></td></tr></table></figure>
+<p><strong>（2）ParseInt()</strong>   </p>
+<p><code>parseInt</code>函数可用于将字符串转为整数。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'123'</span>)  <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'   123'</span>)  <span class="comment">// 123  如果字符串头部有空格，空格会被自动去除</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="number">1.23</span>)  <span class="comment">// 1  如果参数不是字符串，则会先转为字符串再转换</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'8a'</span>)  <span class="comment">//  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'abc'</span>)  <span class="comment">// NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'+1'</span>) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'1000'</span>, <span class="number">10</span>) <span class="comment">// 1000  第二个参数（2到36之间），表示被解析的值的进制</span></span><br></pre></td></tr></table></figure>
+<p>如上，<code>Number()</code>函数会整体将目标字符串转为数值，只要有一个字符无法转成数值，目标就会被转为<code>NaN</code>，这点要比<code>parseInt()</code>函数严格很多。   </p>
+<p>这里要注意一点，就是转换’011’时看起来01结构是8进制，实际上JS经过升级，后面加逗号8才是转为8进制或其他进制。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'011'</span>)  <span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'011'</span> , <span class="number">8</span>)  <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
+<p><strong>（3）ParseFloat()</strong><br><code>parseFloat</code>函数用于将一个字符串转为浮点数。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'3.14'</span>)  <span class="comment">//  3.14</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'3.14more'</span>) <span class="comment">// 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseFloat</span>([]) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'AAA'</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">''</span>) <span class="comment">// NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，尤其注意的是，<code>parseFloat</code>会将空字符串转为<code>NaN</code>。  </p>
+<p>这些特点使得<code>parseFloat</code>的转换结果不同于<code>Number</code>函数。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="literal">true</span>)  <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="literal">null</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">''</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">''</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'1.23A'</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'1.23A'</span>) <span class="comment">// 1.23</span></span><br></pre></td></tr></table></figure>
+<p><strong>（4）字符串减0</strong>   </p>
+<p>字符串数字后直接减一个0，可将字符串转为数值。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'1'</span> - <span class="number">0</span>  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="string">'123'</span> - <span class="number">0</span>  <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="string">'1.23'</span> - <span class="number">0</span>  <span class="comment">// 1.23</span></span><br><span class="line"></span><br><span class="line"><span class="string">'12A'</span> - <span class="number">0</span>  <span class="comment">// NaN  字符串里不是数字，则返回NaN</span></span><br><span class="line"><span class="string">'null'</span> - <span class="number">0</span>  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，字符串减0操作既有<code>parseInt</code>、也有<code>parseFloat</code>的功能。   </p>
+<p>还比较省代码数量，在实际应用中会比较常见。   </p>
+<p><strong>（5）字符串前加+</strong>   </p>
+<p>字符串数字前加一个+，可将字符串转为数字。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ <span class="string">'1'</span> <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'1.23'</span> <span class="comment">// 1.23</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'.1'</span> <span class="comment">// 0.1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'-1'</span> <span class="comment">// -1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'12A'</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，字符串前加+操作也有<code>parseInt</code>和<code>parseFloat</code>的功能。  </p>
+<h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p><strong>（1）toString()</strong>   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">123</span></span><br><span class="line">a.toString()  <span class="comment">// "123"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">true</span></span><br><span class="line">a.toString()  <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">undefined</span></span><br><span class="line">a.toString()  <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span></span><br><span class="line">a.toString()  <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;&#125;</span><br><span class="line">a.toString()  <span class="comment">// "[object Object]"</span></span><br></pre></td></tr></table></figure>
+<p>上面代码中，注意一点<code>null</code>、<code>undefined</code>用<code>toString()</code>转为字符串是不行的，而且<code>toString()</code>方法占的字节较多，那么有别的解决方法吗？   </p>
+<p><strong>（2）加’’(双引号)</strong>   </p>
+<p>当然有，更常用的转为字符串方法为：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="number">1</span> + <span class="string">''</span>  <span class="comment">// "1" </span></span><br><span class="line"><span class="string">''</span> + <span class="number">1</span>  <span class="comment">// "1" </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="literal">true</span> + <span class="string">''</span> <span class="comment">// "true"</span></span><br><span class="line"><span class="string">''</span> + <span class="literal">true</span> <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="literal">undefined</span> + <span class="string">''</span>  <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="literal">null</span> + <span class="string">''</span>  <span class="comment">// "null"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">obj + <span class="string">''</span>  <span class="comment">// "[object Object]"</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] + <span class="string">''</span>  <span class="comment">// "1,2,3"  数组，返回该数组的字符串形式</span></span><br></pre></td></tr></table></figure>
+<p>相比<code>toString()</code>方法，这种方法更为常用，且和前后加’’的顺序无关。   </p>
+<p><strong>（3）String()</strong>   </p>
+<p><code>String</code>函数可以将任意类型的值转化成字符串。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="built_in">String</span>(<span class="number">123</span>) <span class="comment">// "123"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">true</span>) <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">undefined</span>) <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">null</span>) <span class="comment">// "null"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// "[object Object]"</span></span><br><span class="line"><span class="built_in">String</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// "1,2,3"  数组，返回该数组的字符串形式</span></span><br></pre></td></tr></table></figure>
+<h4 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h4><p><strong>（1）Boolean()</strong>  </p>
+<p><code>Boolean</code>函数可以将任意类型的值转为布尔值。   </p>
+<p>它的转换规则比较简单：除了以下五个<code>falsy</code>值的转换结果为<code>false</code>，其余的值全部为<code>true</code>。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>) <span class="comment">// false 包括+0、-0</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) <span class="comment">// false 和""一样都为空字符串，这里当成同一种</span></span><br></pre></td></tr></table></figure>
+<p>所以的话，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是，<code>Boolean()</code>操作对于’’和’ ‘（中间有空格）的结果是不一样的：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">'  '</span>)  <span class="comment">// true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容</span></span><br></pre></td></tr></table></figure>
+<p><strong>（2）类型值前加！！</strong>   </p>
+<p>任何数据类型值前面加两个！！，都可以将其转为布尔类型。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!!<span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="number">0</span> <span class="comment">// false </span></span><br><span class="line">!!<span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="string">''</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>从<code>Boolean()</code>九个字符变为！！两个字符，省了代码量；转换规则也与<code>Boolean</code>函数一致，故老手多用此类方法。  </p>
+<p>目前总结的就这么多啦，如有一些遗漏或有误的地方，欢迎大家指正~</p>
 
       
     </div>
@@ -577,7 +584,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/数据类型/" rel="tag"><i class="fa fa-tag"></i> 数据类型</a>
           
         </div>
       
@@ -590,8 +599,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/30/学会如何学习（一）/" rel="next" title="学会如何学习（一）">
-                <i class="fa fa-chevron-left"></i> 学会如何学习（一）
+              <a href="/2019/04/16/一些好用的工具、网站/" rel="next" title="一些好用的工具、网站">
+                <i class="fa fa-chevron-left"></i> 一些好用的工具、网站
               </a>
             
           </div>
@@ -599,10 +608,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/09/学会如何学习（二）/" rel="prev" title="学会如何学习（二）">
-                学会如何学习（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -865,7 +870,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#仓库的名字"><span class="nav-number">1.</span> <span class="nav-text">仓库的名字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#首页文章内容部分展示"><span class="nav-number">2.</span> <span class="nav-text">首页文章内容部分展示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitHub-Pages绑定域名后每次hexo-d都会失效"><span class="nav-number">3.</span> <span class="nav-text">GitHub Pages绑定域名后每次hexo d都会失效</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建分类页面"><span class="nav-number">4.</span> <span class="nav-text">创建分类页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Busuanzi-统计浏览量失效"><span class="nav-number">5.</span> <span class="nav-text">Busuanzi 统计浏览量失效</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ToNumber"><span class="nav-number">1.</span> <span class="nav-text">ToNumber</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ToString"><span class="nav-number">2.</span> <span class="nav-text">ToString</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ToBoolean"><span class="nav-number">3.</span> <span class="nav-text">ToBoolean</span></a></li></ol></div>
             
 
           </div>

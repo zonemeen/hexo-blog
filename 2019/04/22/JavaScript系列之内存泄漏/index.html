@@ -140,25 +140,27 @@
 
 
 
-  <meta name="description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
-<meta name="keywords" content="JavaScript,数据类型">
+  <meta name="description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。">
+<meta name="keywords" content="JavaScript,内存">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript系列之类型转换">
-<meta property="og:url" content="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/index.html">
+<meta property="og:title" content="JavaScript系列之内存泄漏">
+<meta property="og:url" content="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
+<meta property="og:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-18T09:31:55.751Z">
+<meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd822c5c186.png">
+<meta property="og:updated_time" content="2019-04-22T08:59:27.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript系列之类型转换">
-<meta name="twitter:description" content="JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。">
+<meta name="twitter:title" content="JavaScript系列之内存泄漏">
+<meta name="twitter:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/22/5cbd822c5c186.png">
 
 
 
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/">
+  <link rel="canonical" href="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/">
 
 
 
@@ -168,7 +170,7 @@
   };
 </script>
 
-  <title>JavaScript系列之类型转换 | 米淇淋の个人博客</title>
+  <title>JavaScript系列之内存泄漏 | 米淇淋の个人博客</title>
   
 
 
@@ -413,7 +415,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/18/JavaScript系列之类型转换/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -430,7 +432,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript系列之类型转换
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之内存泄漏
 
               
             
@@ -456,7 +458,7 @@
                 
               
 
-              <time title="创建时间：2019-04-18 17:17:22 / 修改时间：17:31:55" itemprop="dateCreated datePublished" datetime="2019-04-18T17:17:22+08:00">2019-04-18</time>
+              <time title="创建时间：2019-04-22 16:41:35 / 修改时间：16:59:27" itemprop="dateCreated datePublished" datetime="2019-04-22T16:41:35+08:00">2019-04-22</time>
             
 
             
@@ -513,54 +515,82 @@
       
 
       
-        <p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。<a id="more"></a>    </p>
-<p>以下我将介绍将各种类型的值，分别转换成<strong>数字</strong>、<strong>字符串</strong>或者<strong>布尔值</strong>（基于ES5规范）。   </p>
-<h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h4><p><strong>（1）Number()</strong>   </p>
-<p>使用Number函数，可以将任意类型的值转化成数值。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数值</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="number">123</span>)  <span class="comment">// 123  转换后为原值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'123'</span>)  <span class="comment">// 123  转换为相应的数值，前提能被解析为数值</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//字符串</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'123abc'</span>)   <span class="comment">// NaN  如果不能被解析为数值，则返回 NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//布尔值</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>)  <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">false</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//undefined</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">undefined</span>)  <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//null</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)  <span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//对象</span></span><br><span class="line"><span class="built_in">Number</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Number</span>([<span class="number">5</span>]) <span class="comment">// 5  //包含单个数值的数组将返回数字</span></span><br></pre></td></tr></table></figure>
-<p><strong>（2）ParseInt()</strong>   </p>
-<p><code>parseInt</code>函数可用于将字符串转为整数。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'123'</span>)  <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'   123'</span>)  <span class="comment">// 123  如果字符串头部有空格，空格会被自动去除</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="number">1.23</span>)  <span class="comment">// 1  如果参数不是字符串，则会先转为字符串再转换</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'8a'</span>)  <span class="comment">//  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'abc'</span>)  <span class="comment">// NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN</span></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'+1'</span>) <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'1000'</span>, <span class="number">10</span>) <span class="comment">// 1000  第二个参数（2到36之间），表示被解析的值的进制</span></span><br></pre></td></tr></table></figure>
-<p>如上，<code>Number()</code>函数会整体将目标字符串转为数值，只要有一个字符无法转成数值，目标就会被转为<code>NaN</code>，这点要比<code>parseInt()</code>函数严格很多。   </p>
-<p>这里要注意一点，就是转换’011’时看起来01结构是8进制，实际上JS经过升级，后面加逗号8才是转为8进制或其他进制。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(<span class="string">'011'</span>)  <span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseInt</span>(<span class="string">'011'</span> , <span class="number">8</span>)  <span class="comment">// 9</span></span><br></pre></td></tr></table></figure>
-<p><strong>（3）ParseFloat()</strong><br><code>parseFloat</code>函数用于将一个字符串转为浮点数。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'3.14'</span>)  <span class="comment">//  3.14</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'3.14more'</span>) <span class="comment">// 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">parseFloat</span>([]) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'AAA'</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">''</span>) <span class="comment">// NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，尤其注意的是，<code>parseFloat</code>会将空字符串转为<code>NaN</code>。  </p>
-<p>这些特点使得<code>parseFloat</code>的转换结果不同于<code>Number</code>函数。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">true</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="literal">true</span>)  <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="literal">null</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">''</span>) <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">''</span>) <span class="comment">// NaN</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'1.23A'</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">parseFloat</span>(<span class="string">'1.23A'</span>) <span class="comment">// 1.23</span></span><br></pre></td></tr></table></figure>
-<p><strong>（4）字符串减0</strong>   </p>
-<p>字符串数字后直接减一个0，可将字符串转为数值。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'1'</span> - <span class="number">0</span>  <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line"><span class="string">'123'</span> - <span class="number">0</span>  <span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="string">'1.23'</span> - <span class="number">0</span>  <span class="comment">// 1.23</span></span><br><span class="line"></span><br><span class="line"><span class="string">'12A'</span> - <span class="number">0</span>  <span class="comment">// NaN  字符串里不是数字，则返回NaN</span></span><br><span class="line"><span class="string">'null'</span> - <span class="number">0</span>  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，字符串减0操作既有<code>parseInt</code>、也有<code>parseFloat</code>的功能。   </p>
-<p>还比较省代码数量，在实际应用中会比较常见。   </p>
-<p><strong>（5）字符串前加+</strong>   </p>
-<p>字符串数字前加一个+，可将字符串转为数字。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+ <span class="string">'1'</span> <span class="comment">// 1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'1.23'</span> <span class="comment">// 1.23</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'.1'</span> <span class="comment">// 0.1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'-1'</span> <span class="comment">// -1</span></span><br><span class="line"></span><br><span class="line">+ <span class="string">'12A'</span> <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，字符串前加+操作也有<code>parseInt</code>和<code>parseFloat</code>的功能。  </p>
-<h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p><strong>（1）toString()</strong>   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">123</span></span><br><span class="line">a.toString()  <span class="comment">// "123"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">true</span></span><br><span class="line">a.toString()  <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">undefined</span></span><br><span class="line">a.toString()  <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="literal">null</span></span><br><span class="line">a.toString()  <span class="comment">// 报错</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;&#125;</span><br><span class="line">a.toString()  <span class="comment">// "[object Object]"</span></span><br></pre></td></tr></table></figure>
-<p>上面代码中，注意一点<code>null</code>、<code>undefined</code>用<code>toString()</code>转为字符串是不行的，而且<code>toString()</code>方法占的字节较多，那么有别的解决方法吗？   </p>
-<p><strong>（2）加’’(双引号)</strong>   </p>
-<p>当然有，更常用的转为字符串方法为：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="number">1</span> + <span class="string">''</span>  <span class="comment">// "1" </span></span><br><span class="line"><span class="string">''</span> + <span class="number">1</span>  <span class="comment">// "1" </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="literal">true</span> + <span class="string">''</span> <span class="comment">// "true"</span></span><br><span class="line"><span class="string">''</span> + <span class="literal">true</span> <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="literal">undefined</span> + <span class="string">''</span>  <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="literal">null</span> + <span class="string">''</span>  <span class="comment">// "null"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;</span><br><span class="line">obj + <span class="string">''</span>  <span class="comment">// "[object Object]"</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] + <span class="string">''</span>  <span class="comment">// "1,2,3"  数组，返回该数组的字符串形式</span></span><br></pre></td></tr></table></figure>
-<p>相比<code>toString()</code>方法，这种方法更为常用，且和前后加’’的顺序无关。   </p>
-<p><strong>（3）String()</strong>   </p>
-<p><code>String</code>函数可以将任意类型的值转化成字符串。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数值</span></span><br><span class="line"><span class="built_in">String</span>(<span class="number">123</span>) <span class="comment">// "123"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 布尔值</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">true</span>) <span class="comment">// "true"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">undefined</span>) <span class="comment">// "undefined"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// null</span></span><br><span class="line"><span class="built_in">String</span>(<span class="literal">null</span>) <span class="comment">// "null"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对象</span></span><br><span class="line"><span class="built_in">String</span>(&#123;<span class="attr">a</span>: <span class="number">1</span>&#125;) <span class="comment">// "[object Object]"</span></span><br><span class="line"><span class="built_in">String</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) <span class="comment">// "1,2,3"  数组，返回该数组的字符串形式</span></span><br></pre></td></tr></table></figure>
-<h4 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h4><p><strong>（1）Boolean()</strong>  </p>
-<p><code>Boolean</code>函数可以将任意类型的值转为布尔值。   </p>
-<p>它的转换规则比较简单：除了以下五个<code>falsy</code>值的转换结果为<code>false</code>，其余的值全部为<code>true</code>。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="literal">undefined</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="number">0</span>) <span class="comment">// false 包括+0、-0</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="literal">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>) <span class="comment">// false 和""一样都为空字符串，这里当成同一种</span></span><br></pre></td></tr></table></figure>
-<p>所以的话，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>([]) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="keyword">new</span> <span class="built_in">Boolean</span>(<span class="literal">false</span>)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>这里需要注意的是，<code>Boolean()</code>操作对于’’和’ ‘（中间有空格）的结果是不一样的：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Boolean</span>(<span class="string">''</span>)  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Boolean</span>(<span class="string">'  '</span>)  <span class="comment">// true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容</span></span><br></pre></td></tr></table></figure>
-<p><strong>（2）类型值前加！！</strong>   </p>
-<p>任何数据类型值前面加两个！！，都可以将其转为布尔类型。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">!!<span class="literal">undefined</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="literal">null</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="number">0</span> <span class="comment">// false </span></span><br><span class="line">!!<span class="literal">NaN</span> <span class="comment">// false</span></span><br><span class="line">!!<span class="string">''</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>从<code>Boolean()</code>九个字符变为！！两个字符，省了代码量；转换规则也与<code>Boolean</code>函数一致，故老手多用此类方法。  </p>
-<p>目前总结的就这么多啦，如有一些遗漏或有误的地方，欢迎大家指正~</p>
+        <p>在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。<a id="more"></a>   </p>
+<p>而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着<code>malloc()</code> 和 <code>free()</code> 这种低级内存管理语言也有可能出现泄露内存的情况。  </p>
+<p>这很麻烦，所以为了编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   </p>
+<h4 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h4><p>现在各大浏览器通常采用的垃圾回收有两种方法：<strong>标记清除（mark and sweep）</strong>、<strong>引用计数(reference counting)</strong>。  </p>
+<p><strong>1、标记清除</strong> </p>
+<p>这是javascript中最常用的垃圾回收方式。  </p>
+<p>工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   </p>
+<p>工作流程：  </p>
+<ol>
+<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>去掉环境中的变量以及被环境中的变量引用的变量的标记。</li>
+<li>之后再被加上标记的变量将被视为准备删除的变量。</li>
+<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间。  </li>
+</ol>
+<p><strong>2、引用计数</strong>  </p>
+<p>工作原理：跟踪记录每个值被引用的次数。   </p>
+<p>工作流程：   </p>
+<ol>
+<li>将一个引用类型的值赋值给这个声明了的变量，这个引用类型值的引用次数就是1。</li>
+<li>同一个值又被赋值给另一个变量，这个引用类型值的引用次数加1。</li>
+<li>当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减1</li>
+<li>当引用次数变成0时，就表示这个值不再用到了。</li>
+<li>当垃圾收集器下一次运行时，它就会释放引用次数是0的值所占的内存。   </li>
+</ol>
+<p>但如果一个值不再需要了，引用数却不为0，垃圾回收机制无法释放这块内存，会导致内存泄漏。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello miqilin'</span>);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。  </p>
+<p>如果增加一行代码，解除arr对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello miqilin'</span>);</span><br><span class="line">arr = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了0，内存就可以释放出来了。  </p>
+<p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。  </p>
+<p>接下来，我将介绍四种常见的JavaScript 内存泄漏。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a>  </p>
+<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.全局变量</strong> </p>
+<p>JavaScript允许的方式之一是它处理未声明变量的方式时：对未声明变量的引用在全局对象内创建一个新变量。 对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     bar = <span class="string">"this is a hidden global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>等同于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">window</span>.bar = <span class="string">"this is an explicit global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实<code>bar</code> 的目地只是在 <code>foo</code> 函数里引用一个变量，如果你没用 <code>var</code> 去声明它，一个意外的全局变量就会被创建。在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。 </p>
+<p>另一种可以创建偶然全局变量的情况是<code>this</code>：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.variable = <span class="string">"potential accidental global"</span>; </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// Foo called on its own, this points to the global object (window)</span></span><br><span class="line"><span class="comment">// rather than being undefined. </span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为了防止这些错误发生，你可以通过增加 ‘use strict’ 来避免它; 加在JavaScript文件的开头， 通过JavaScript严格模式可以防止意外的全局变量。  </p>
+</blockquote>
+<p>尽管我们谈论的是未经考虑的全局变量，但仍有大量代码充斥着明确的全局变量。这些全局变量根据定义是不能被垃圾收集器所收集的（除非被取消或重新分配）。需要特别注意用于临时存储和处理大量信息的全局变量。如果您必须使用全局变量来存储数据，那么请确保将其<strong>分配为空值</strong>，或者在<strong>完成后重新分配数据</strong>。   </p>
+<p><strong>2.计时器或回调被遗忘</strong> </p>
+<p>在JavaScript中使用<code>setInterval</code>非常常见。提供观察者和一些工具的库，在它接受回调时，一旦它的实例化无效，要保证所有引用的这个回调也无效。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someResource = getData(); </span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'Node'</span>);     </span><br><span class="line">     <span class="keyword">if</span>(node) &#123;</span><br><span class="line">         <span class="comment">// Do stuff with node and someResource.</span></span><br><span class="line">         node.innerHTML = <span class="built_in">JSON</span>.stringify(someResource));</span><br><span class="line">     &#125; &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>上边的代码片段显示，再也不需要利用计数器来引用节点和数据。  </p>
+<p><code>node</code>对象可能在某一时刻被替换或移除，这将使这个模块的被多余的间隔处理程序包裹。如果发生这种情况，处理程序和它的依赖项都不会被回收，由于需要先停止间隔（记住，它仍然是活动的）。事实上这都可以归结于<code>someResource</code>，它存储和处理的加载数据不会被回收。   </p>
+<p>对于观察者的情况，重要的是在不需要它们之后进行显式调用以移除它们（或者相关对象即将无法访问）。 在以前，这曾经特别重要，因为某些浏览器（IE 6）就无法很好地管理循环引用（有关详细信息，请参见下文）。 如今，一旦被观察对象变得无法访问，大多数浏览器都可以并将收集观察者处理程序，即使未明确删除侦听器也是如此。 但是，在处理对象之前明确删除这些观察者仍然是一种很好的做法。 例如：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">     element.innerHtml = <span class="string">'text'</span>; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>, onClick); <span class="comment">// Do stuff </span></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>, onClick); </span><br><span class="line">element.parentNode.removeChild(element); </span><br><span class="line"></span><br><span class="line"><span class="comment">// Now when element goes out of scope,</span></span><br><span class="line"><span class="comment">// both element and onClick will be collected even in old browsers that don't</span></span><br><span class="line"><span class="comment">// handle cycles well.</span></span><br></pre></td></tr></table></figure>
+<p>观察者和循环引用曾经是JavaScript开发人员的祸根，因为旧版本的Internet Explorer无法检测DOM节点和JavaScript代码之间的循环引用。如今，现代浏览器（包括Internet Explorer和Microsoft Edge）使用现代垃圾收集算法，可以检测这些周期并正确处理它们。 换句话说，在使节点无法访问之前，不必严格调用<code>removeEventListener</code>。  </p>
+<p>诸如jQuery之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定API时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版Internet Explorer）下运行也是如此。  </p>
+<p><strong>3.闭包</strong></p>
+<p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theThing = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">var</span> replaceThing = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> originalThing = theThing;   </span><br><span class="line">   <span class="keyword">var</span> unused = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (originalThing)</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"hi"</span>);   </span><br><span class="line">&#125;;   </span><br><span class="line">   theThing = &#123;</span><br><span class="line">     longStr: newArray(<span class="number">1000000</span>).join(<span class="string">'*'</span>),</span><br><span class="line">     someMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(someMessage);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;; </span><br><span class="line">setInterval(replaceThing, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<p>一旦调用 <code>replaceThing</code>，<code>theThing</code>得到一个新的对象，包括一个大数组和一个新的闭包（<code>someMethod</code>）。然后，<code>originalThing</code> 通过一个闭包被引用，赋值给 <code>unused</code> 变量（ <code>theThing</code> 被前边的 <code>replaceThing</code> 调用）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。  </p>
+<p>在这个例子中，这个闭包 <code>someMethod</code> 创建的作用域是跟 <code>unused</code> 共享的，<code>unused</code> 引用了 <code>originalThing</code> 。尽管没有用到 <code>unused</code> ，通过 <code>replaceThing</code> 作用于之外的 <code>theThing</code> 用到了 <code>someMethod</code> (例如全局)。由于 <code>someMethod</code> 和 <code>unused</code> 共享闭包作用域，引用 <code>unused</code> 却强制让 <code>originalThing</code> 保持激活状态（两个闭包共享整个作用域）。这阻止了它的回收。  </p>
+<p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。  </p>
+<p>这个问题是被 <a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">Meteor</a> 小组发现的，而且他们有一个厉害的作者将这个问题描述的非常清楚。  </p>
+<p><strong>4.外部 DOM 引用</strong>  </p>
+<p>有些情况下开发人员在数据结构中存储 DOM 节点。假设你想快速更新表格中几行的内容。如果在字典或数组中存储对每个 DOM 行的引用，则会有两个对同一个 DOM 元素的引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">     button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">     image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">     text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>) </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">     button.click();</span><br><span class="line">     <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">     <span class="comment">// Much more logic</span></span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// The button is a direct child of body.</span></span><br><span class="line">     <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// At this point, we still have a reference to #button in the global</span></span><br><span class="line">    <span class="comment">// elements dictionary. In other words, the button element is still in</span></span><br><span class="line">    <span class="comment">// memory and cannot be collected by the GC. </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在涉及 DOM 树内的内部节点或叶节点时，还有一个额外的因素需要考虑。如果你在代码中保留对表格单元格（<td>标记）的引用，并决定从 DOM 中删除该表格，并保留对该特定单元格的引用，则可能会出现严重的内存泄漏。你可能会认为垃圾回收器会释放除了那个单元之外的所有东西。但情况并非如此。由于单元格是表格的子节点，并且子节点保持对父节点的引用，所以<strong>对表格单元格的这种单引用将会把整个表格保留在内存中</strong>。   </td></p>
+<p>我们在 <a href="https://www.sessionstack.com/" target="_blank" rel="noopener">SessionStack</a> 尝试遵循这些最佳做法来编写正确处理内存分配的代码，这就是为什么：将 SessionStack 集成到生产网络应用程序中后，它会开始记录所有内容：所有 DOM 更改，用户交互，JavaScript 异常，堆栈跟踪，网络请求失败，调试消息等。</p>
+<p>使用 SessionStack，您可以将 Web 应用中的问题重现为视频，并查看用户发生的一切。所有这一切都将发生，对您的网络应用程序没有性能影响。</p>
+<p>由于用户可以重新加载页面或导航您的应用程序，因此所有观察者，拦截器，可变分配等都必须正确处理，因此不会导致任何内存泄漏或不增加网络应用程序的内存消耗。我们整合了一个免费的计划，所以你可以试试看。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd822c5c186.png" alt>   </div></p>
+<h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。  </p>
+<p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。  </p>
+<h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
+<li><a href="http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf" target="_blank" rel="noopener">http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf</a></li>
+<li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
+<li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html" target="_blank" rel="noopener">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
+</ul>
+<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~</p>
 
       
     </div>
@@ -586,7 +616,7 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/数据类型/" rel="tag"><i class="fa fa-tag"></i> 数据类型</a>
+            <a href="/tags/内存/" rel="tag"><i class="fa fa-tag"></i> 内存</a>
           
         </div>
       
@@ -599,8 +629,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/16/一些好用的工具、网站/" rel="next" title="一些好用的工具、网站">
-                <i class="fa fa-chevron-left"></i> 一些好用的工具、网站
+              <a href="/2019/04/22/JavaScript系列之内存空间/" rel="next" title="JavaScript系列之内存空间">
+                <i class="fa fa-chevron-left"></i> JavaScript系列之内存空间
               </a>
             
           </div>
@@ -608,10 +638,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/19/Undefined vs Null/" rel="prev" title="Undefined vs Null">
-                Undefined vs Null <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -876,7 +902,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ToNumber"><span class="nav-number">1.</span> <span class="nav-text">ToNumber</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ToString"><span class="nav-number">2.</span> <span class="nav-text">ToString</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ToBoolean"><span class="nav-number">3.</span> <span class="nav-text">ToBoolean</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收机制"><span class="nav-number">1.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四种常见的-JavaScript-内存泄漏"><span class="nav-number">2.</span> <span class="nav-text">四种常见的 JavaScript 内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免内存泄漏"><span class="nav-number">3.</span> <span class="nav-text">避免内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resources"><span class="nav-number">4.</span> <span class="nav-text">Resources</span></a></li></ol></div>
             
 
           </div>

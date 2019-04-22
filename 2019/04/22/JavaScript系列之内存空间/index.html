@@ -141,7 +141,7 @@
 
 
   <meta name="description" content="对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。">
-<meta name="keywords" content="JavaScript,数据类型">
+<meta name="keywords" content="JavaScript,内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript系列之内存空间">
 <meta property="og:url" content="https://luozongmin.com/2019/04/22/JavaScript系列之内存空间/index.html">
@@ -156,7 +156,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd570e6f668.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd5756d59c2.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd7a4eae053.png">
-<meta property="og:updated_time" content="2019-04-22T08:26:16.489Z">
+<meta property="og:updated_time" content="2019-04-22T08:42:18.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之内存空间">
 <meta name="twitter:description" content="对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。">
@@ -465,7 +465,7 @@
                 
               
 
-              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：16:26:16" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
+              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：16:42:18" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
             
 
             
@@ -525,6 +525,10 @@
         <p>对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。</p>
 <p>直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。<a id="more"></a>  </p>
 <p><em>这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。</em>  </p>
+<h4 id="内存空间管理"><a href="#内存空间管理" class="headerlink" title="内存空间管理"></a>内存空间管理</h4><p>JavaScript的内存生命周期:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 分配你所需要的内存</span><br><span class="line">2. 使用分配到的内存（读、写）</span><br><span class="line">3. 不需要时将其释放、归还</span><br></pre></td></tr></table></figure>
+<p>为了便于理解，我们使用一个简单的例子来解释这个周期。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;  <span class="comment">// 在内存中给数值变量分配空间</span></span><br><span class="line">alert(a + <span class="number">90</span>);  <span class="comment">// 使用分配到的内存</span></span><br><span class="line">a = <span class="literal">null</span>; <span class="comment">// 使用完毕之后，释放内存空间</span></span><br></pre></td></tr></table></figure>
 <p>在JS中，每一个数据都需要一个内存空间。内存空间又被分为两种，<strong>栈内存(stack)</strong>与<strong>堆内存(heap)</strong>。  </p>
 <h4 id="栈与堆"><a href="#栈与堆" class="headerlink" title="栈与堆"></a>栈与堆</h4><p>栈(stack)是有序的，主要存放一些<strong>基本类型的变量和对象的地址</strong>，每个区块按照一定次序存放（后进先出），它们都是直接按值存储在栈中的，每种类型的数据占用的内存空间的大小也是确定的，并由系统自动分配和自动释放。   </p>
 <p>因此，这样带来的好处就是，内存可以及时得到回收，相对于堆来说，更加容易管理内存空间，且寻址速度也更快。  </p>
@@ -585,7 +589,7 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/数据类型/" rel="tag"><i class="fa fa-tag"></i> 数据类型</a>
+            <a href="/tags/内存/" rel="tag"><i class="fa fa-tag"></i> 内存</a>
           
         </div>
       
@@ -607,6 +611,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/22/JavaScript系列之内存泄漏/" rel="prev" title="JavaScript系列之内存泄漏">
+                JavaScript系列之内存泄漏 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -677,7 +685,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">19</span>
+                    <span class="site-state-item-count">20</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -757,7 +765,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -869,7 +879,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#栈与堆"><span class="nav-number">1.</span> <span class="nav-text">栈与堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量对象与栈堆内存"><span class="nav-number">2.</span> <span class="nav-text">变量对象与栈堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较抠细节的面试题"><span class="nav-number">3.</span> <span class="nav-text">比较抠细节的面试题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存空间管理"><span class="nav-number">1.</span> <span class="nav-text">内存空间管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈与堆"><span class="nav-number">2.</span> <span class="nav-text">栈与堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量对象与栈堆内存"><span class="nav-number">3.</span> <span class="nav-text">变量对象与栈堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较抠细节的面试题"><span class="nav-number">4.</span> <span class="nav-text">比较抠细节的面试题</span></a></li></ol></div>
             
 
           </div>
@@ -917,7 +927,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">34k</span> 字
+      博客全站共： <span class="post-count">37.3k</span> 字
     </span>
 </div>
 

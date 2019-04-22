@@ -155,7 +155,8 @@
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd56bd41245.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd570e6f668.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd5756d59c2.jpg">
-<meta property="og:updated_time" content="2019-04-22T05:57:38.805Z">
+<meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd7a4eae053.png">
+<meta property="og:updated_time" content="2019-04-22T08:26:16.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之内存空间">
 <meta name="twitter:description" content="对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。">
@@ -464,7 +465,7 @@
                 
               
 
-              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：13:57:38" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
+              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：16:26:16" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
             
 
             
@@ -540,22 +541,24 @@
 <p>这里就回到了最初的疑问，为什么原始类型值要放在栈中，而引用类型值要放在堆中，为什么要分开放置呢？单列一种内存岂不是更省事吗？那接下来，援引<a href="http://blog.sina.com.cn/s/blog_8ecde0fe0102vy6e.html" target="_blank" rel="noopener">这篇文章</a>里边的解释：   </p>
 <p>记住一句话：能量是守衡的，无非是时间换空间，空间换时间的问题。堆比栈大，栈比堆的运算速度快,对象是一个复杂的结构，并且可以自由扩展，如：数组可以无限扩充，对象可以自由添加属性。将他们放在堆中是为了不影响栈的效率。而是通过引用的方式查找到堆中的实际对象再进行操作。相对于简单数据类型而言，简单数据类型就比较稳定，并且它只占据很小的内存。不将简单数据类型放在堆是因为通过引用到堆中查找实际对象是要花费时间的，而这个综合成本远大于直接从栈中取得实际值的成本。所以简单数据类型的值直接存放在栈中。   </p>
 <h4 id="比较抠细节的面试题"><a href="#比较抠细节的面试题" class="headerlink" title="比较抠细节的面试题"></a>比较抠细节的面试题</h4><p>下面的几道是关于内存空间的面试题，虽然不是特别的难，但比较扣细节你稍不注意就错了，我的建议还是老老实实画个内存图再自信的给出正确答案吧。   </p>
-<p>第一题：</p>
+<p><strong>第一题：</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> </span><br><span class="line"><span class="keyword">var</span> b = a </span><br><span class="line">b = <span class="number">2</span> </span><br><span class="line">请问 a 显示是几？</span><br></pre></td></tr></table></figure>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd56687dc08.jpg" alt>     </div></p>
-<p>上图中可以看出，答案为：1。因为修改后两个变量的值是存储在不同的内存空间，变量b的修改并不影响变量a的值。 </p>
-<p>第二题： </p>
+<p>上图中可以看出，答案为：1。在栈内存中的数据发生复制行为时，系统会自动为新的变量分配一个新值。var b = a执行之后，a与b虽然值都等于1，但是他们其实已经是相互独立互不影响的值了。 </p>
+<p><strong>第二题：</strong> </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">name</span>: <span class="string">'a'</span>&#125;</span><br><span class="line"><span class="keyword">var</span> b = a</span><br><span class="line">b = &#123;<span class="attr">name</span>: <span class="string">'b'</span>&#125;</span><br><span class="line">请问现在 a.name 是多少？</span><br></pre></td></tr></table></figure>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd56bd41245.jpg" alt>     </div></p>
 <p>上图中可以看出，答案为：”a”。因为b ={name:’b’}后相当于重新在堆内存中分配内存给对象{name:’b’}，同时栈内存中变量b的指向地址也随之变化，变量a不受影响。   </p>
-<p>第三题：  </p>
+<p><strong>第三题：</strong>  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">name</span>: <span class="string">'a'</span>&#125; </span><br><span class="line"><span class="keyword">var</span> b = a </span><br><span class="line">b.name = <span class="string">'b'</span> </span><br><span class="line">请问现在 a.name 是多少？</span><br></pre></td></tr></table></figure>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd570e6f668.jpg" alt>    </div></p>
-<p>上图中可以看出，答案为：”b”。因为b.name =’b’这个操作让堆内存中的value值更新为”b”，所占的内存还是原来的那块，栈内存中的指向地址和原来的一样，所以a中的name属性值变化了。  </p>
-<p>第四题：  </p>
+<p>上图中可以看出，答案为：”b”。我们通过var b = a执行一次复制引用类型的操作。引用类型的复制同样也会为新的变量自动分配一个新的值保存在栈内存中，但不同的是，这个新的值，仅仅只是引用类型的一个地址指针。当地址指针相同时，尽管他们相互独立，但是在堆内存中访问到的具体对象实际上是同一个，因此b.name =’b’使堆内存中对象的value值变化，a.name的值也随之变化。  </p>
+<p><strong>第四题：</strong> </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">name</span>: <span class="string">'a'</span>&#125; </span><br><span class="line"><span class="keyword">var</span> b = a </span><br><span class="line">b = <span class="literal">null</span> </span><br><span class="line">请问现在 a 是什么？</span><br></pre></td></tr></table></figure>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd5756d59c2.jpg" alt>    </div></p>
 <p>上图中可以看出，答案为：{name: “a”}。因为null为基本类型，存在栈内存当中。因此栈内存中的变量b由之前指向对象的一个地址转变为null，变量a的地址还是指向原先的对象。  </p>
+<p>最后来个图总结一下：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd7a4eae053.png" alt>  </div></p>
 <p>以上都是通过内存图来解释关于内存空间的知识，如有不合理的地方，希望指正一下~后续还会增加内存泄漏以及深浅拷贝的文章，敬请期待！</p>
 
       
@@ -914,7 +917,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">33.9k</span> 字
+      博客全站共： <span class="post-count">34k</span> 字
     </span>
 </div>
 

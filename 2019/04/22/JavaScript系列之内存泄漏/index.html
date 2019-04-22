@@ -148,12 +148,10 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd822c5c186.png">
-<meta property="og:updated_time" content="2019-04-22T08:59:27.963Z">
+<meta property="og:updated_time" content="2019-04-22T10:10:18.173Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之内存泄漏">
 <meta name="twitter:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak）。泄漏是导致整类问题的原因：速度减慢，崩溃，高延迟，甚至是其他应用程序的问题。">
-<meta name="twitter:image" content="https://i.loli.net/2019/04/22/5cbd822c5c186.png">
 
 
 
@@ -458,7 +456,7 @@
                 
               
 
-              <time title="创建时间：2019-04-22 16:41:35 / 修改时间：16:59:27" itemprop="dateCreated datePublished" datetime="2019-04-22T16:41:35+08:00">2019-04-22</time>
+              <time title="创建时间：2019-04-22 16:41:35 / 修改时间：18:10:18" itemprop="dateCreated datePublished" datetime="2019-04-22T16:41:35+08:00">2019-04-22</time>
             
 
             
@@ -546,43 +544,36 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello miqilin'</span>);</span><br><span class="line">arr = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
 <p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了0，内存就可以释放出来了。  </p>
 <p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。  </p>
-<p>接下来，我将介绍四种常见的JavaScript 内存泄漏。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a>  </p>
-<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.全局变量</strong> </p>
-<p>JavaScript允许的方式之一是它处理未声明变量的方式时：对未声明变量的引用在全局对象内创建一个新变量。 对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码： </p>
+<p>接下来，我将介绍四种常见的JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a>  </p>
+<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong> </p>
+<p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     bar = <span class="string">"this is a hidden global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>等同于：</p>
+<p>函数<code>foo</code>内部使用<code>var</code>声明，实际上JS会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">window</span>.bar = <span class="string">"this is an explicit global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实<code>bar</code> 的目地只是在 <code>foo</code> 函数里引用一个变量，如果你没用 <code>var</code> 去声明它，一个意外的全局变量就会被创建。在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。 </p>
+<p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。 </p>
 <p>另一种可以创建偶然全局变量的情况是<code>this</code>：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.variable = <span class="string">"potential accidental global"</span>; </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// Foo called on its own, this points to the global object (window)</span></span><br><span class="line"><span class="comment">// rather than being undefined. </span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>为了防止这些错误发生，你可以通过增加 ‘use strict’ 来避免它; 加在JavaScript文件的开头， 通过JavaScript严格模式可以防止意外的全局变量。  </p>
-</blockquote>
-<p>尽管我们谈论的是未经考虑的全局变量，但仍有大量代码充斥着明确的全局变量。这些全局变量根据定义是不能被垃圾收集器所收集的（除非被取消或重新分配）。需要特别注意用于临时存储和处理大量信息的全局变量。如果您必须使用全局变量来存储数据，那么请确保将其<strong>分配为空值</strong>，或者在<strong>完成后重新分配数据</strong>。   </p>
-<p><strong>2.计时器或回调被遗忘</strong> </p>
-<p>在JavaScript中使用<code>setInterval</code>非常常见。提供观察者和一些工具的库，在它接受回调时，一旦它的实例化无效，要保证所有引用的这个回调也无效。  </p>
+<p><strong>解决方法：</strong></p>
+<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。   </p>
+<p><strong>2.被遗忘的计时器或回调函数</strong> </p>
+<p>在JavaScript中使用<code>setInterval</code>非常常见。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someResource = getData(); </span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'Node'</span>);     </span><br><span class="line">     <span class="keyword">if</span>(node) &#123;</span><br><span class="line">         <span class="comment">// Do stuff with node and someResource.</span></span><br><span class="line">         node.innerHTML = <span class="built_in">JSON</span>.stringify(someResource));</span><br><span class="line">     &#125; &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>上边的代码片段显示，再也不需要利用计数器来引用节点和数据。  </p>
-<p><code>node</code>对象可能在某一时刻被替换或移除，这将使这个模块的被多余的间隔处理程序包裹。如果发生这种情况，处理程序和它的依赖项都不会被回收，由于需要先停止间隔（记住，它仍然是活动的）。事实上这都可以归结于<code>someResource</code>，它存储和处理的加载数据不会被回收。   </p>
-<p>对于观察者的情况，重要的是在不需要它们之后进行显式调用以移除它们（或者相关对象即将无法访问）。 在以前，这曾经特别重要，因为某些浏览器（IE 6）就无法很好地管理循环引用（有关详细信息，请参见下文）。 如今，一旦被观察对象变得无法访问，大多数浏览器都可以并将收集观察者处理程序，即使未明确删除侦听器也是如此。 但是，在处理对象之前明确删除这些观察者仍然是一种很好的做法。 例如：   </p>
+<p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。   </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">     element.innerHtml = <span class="string">'text'</span>; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>, onClick); <span class="comment">// Do stuff </span></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>, onClick); </span><br><span class="line">element.parentNode.removeChild(element); </span><br><span class="line"></span><br><span class="line"><span class="comment">// Now when element goes out of scope,</span></span><br><span class="line"><span class="comment">// both element and onClick will be collected even in old browsers that don't</span></span><br><span class="line"><span class="comment">// handle cycles well.</span></span><br></pre></td></tr></table></figure>
-<p>观察者和循环引用曾经是JavaScript开发人员的祸根，因为旧版本的Internet Explorer无法检测DOM节点和JavaScript代码之间的循环引用。如今，现代浏览器（包括Internet Explorer和Microsoft Edge）使用现代垃圾收集算法，可以检测这些周期并正确处理它们。 换句话说，在使节点无法访问之前，不必严格调用<code>removeEventListener</code>。  </p>
+<p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。 </p>
+<p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
 <p>诸如jQuery之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定API时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版Internet Explorer）下运行也是如此。  </p>
 <p><strong>3.闭包</strong></p>
 <p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theThing = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">var</span> replaceThing = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> originalThing = theThing;   </span><br><span class="line">   <span class="keyword">var</span> unused = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (originalThing)</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"hi"</span>);   </span><br><span class="line">&#125;;   </span><br><span class="line">   theThing = &#123;</span><br><span class="line">     longStr: newArray(<span class="number">1000000</span>).join(<span class="string">'*'</span>),</span><br><span class="line">     someMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(someMessage);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;; </span><br><span class="line">setInterval(replaceThing, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>一旦调用 <code>replaceThing</code>，<code>theThing</code>得到一个新的对象，包括一个大数组和一个新的闭包（<code>someMethod</code>）。然后，<code>originalThing</code> 通过一个闭包被引用，赋值给 <code>unused</code> 变量（ <code>theThing</code> 被前边的 <code>replaceThing</code> 调用）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。  </p>
-<p>在这个例子中，这个闭包 <code>someMethod</code> 创建的作用域是跟 <code>unused</code> 共享的，<code>unused</code> 引用了 <code>originalThing</code> 。尽管没有用到 <code>unused</code> ，通过 <code>replaceThing</code> 作用于之外的 <code>theThing</code> 用到了 <code>someMethod</code> (例如全局)。由于 <code>someMethod</code> 和 <code>unused</code> 共享闭包作用域，引用 <code>unused</code> 却强制让 <code>originalThing</code> 保持激活状态（两个闭包共享整个作用域）。这阻止了它的回收。  </p>
+<p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
 <p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。  </p>
-<p>这个问题是被 <a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">Meteor</a> 小组发现的，而且他们有一个厉害的作者将这个问题描述的非常清楚。  </p>
-<p><strong>4.外部 DOM 引用</strong>  </p>
-<p>有些情况下开发人员在数据结构中存储 DOM 节点。假设你想快速更新表格中几行的内容。如果在字典或数组中存储对每个 DOM 行的引用，则会有两个对同一个 DOM 元素的引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问。   </p>
+<p>解决方法：</p>
+<p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
+<p><strong>4.脱离 DOM 的引用</strong>  </p>
+<p>如果把DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。   </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">     button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">     image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">     text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>) </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">     button.click();</span><br><span class="line">     <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">     <span class="comment">// Much more logic</span></span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// The button is a direct child of body.</span></span><br><span class="line">     <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// At this point, we still have a reference to #button in the global</span></span><br><span class="line">    <span class="comment">// elements dictionary. In other words, the button element is still in</span></span><br><span class="line">    <span class="comment">// memory and cannot be collected by the GC. </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在涉及 DOM 树内的内部节点或叶节点时，还有一个额外的因素需要考虑。如果你在代码中保留对表格单元格（<td>标记）的引用，并决定从 DOM 中删除该表格，并保留对该特定单元格的引用，则可能会出现严重的内存泄漏。你可能会认为垃圾回收器会释放除了那个单元之外的所有东西。但情况并非如此。由于单元格是表格的子节点，并且子节点保持对父节点的引用，所以<strong>对表格单元格的这种单引用将会把整个表格保留在内存中</strong>。   </td></p>
-<p>我们在 <a href="https://www.sessionstack.com/" target="_blank" rel="noopener">SessionStack</a> 尝试遵循这些最佳做法来编写正确处理内存分配的代码，这就是为什么：将 SessionStack 集成到生产网络应用程序中后，它会开始记录所有内容：所有 DOM 更改，用户交互，JavaScript 异常，堆栈跟踪，网络请求失败，调试消息等。</p>
-<p>使用 SessionStack，您可以将 Web 应用中的问题重现为视频，并查看用户发生的一切。所有这一切都将发生，对您的网络应用程序没有性能影响。</p>
-<p>由于用户可以重新加载页面或导航您的应用程序，因此所有观察者，拦截器，可变分配等都必须正确处理，因此不会导致任何内存泄漏或不增加网络应用程序的内存消耗。我们整合了一个免费的计划，所以你可以试试看。  </p>
-<p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd822c5c186.png" alt>   </div></p>
+<p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。  </p>
 <h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。  </p>
 <p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。  </p>
 <h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
@@ -590,7 +581,9 @@
 <li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
 <li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html" target="_blank" rel="noopener">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
 </ul>
-<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~</p>
+<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~   </p>
+<p>本人Github链接如下，欢迎各位Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
 
       
     </div>
@@ -950,7 +943,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">37.3k</span> 字
+      博客全站共： <span class="post-count">36.8k</span> 字
     </span>
 </div>
 

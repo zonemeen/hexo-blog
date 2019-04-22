@@ -156,7 +156,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd570e6f668.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd5756d59c2.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/22/5cbd7a4eae053.png">
-<meta property="og:updated_time" content="2019-04-22T08:42:18.345Z">
+<meta property="og:updated_time" content="2019-04-22T10:10:04.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之内存空间">
 <meta name="twitter:description" content="对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。">
@@ -465,7 +465,7 @@
                 
               
 
-              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：16:42:18" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
+              <time title="创建时间：2019-04-22 13:43:00 / 修改时间：18:10:04" itemprop="dateCreated datePublished" datetime="2019-04-22T13:43:00+08:00">2019-04-22</time>
             
 
             
@@ -536,7 +536,7 @@
 <p>堆(heap)是没有特别的顺序的，数据可以任意存放，多用于<strong>复杂数据类型（引用类型）</strong>分配空间，例如数组对象、object对象。   </p>
 <p>其实这样说也不太准确，因为，引用类型数据的地址是存储于栈中的，当我们想要访问引用类型的值的时候，需要先从栈中获得想要访问对象的地址，然后，再通过地址指向找出堆中的所需数据。就好比书架上的书，虽然已经按顺序放好了，但我们只要知道书的名字，就可以对应的取下来。   </p>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd5542327bb.jpg" alt>     </div></p>
-<h4 id="变量对象与栈堆内存"><a href="#变量对象与栈堆内存" class="headerlink" title="变量对象与栈堆内存"></a>变量对象与栈堆内存</h4><p>首先，我们来看一下代码：  </p>
+<h4 id="变量的存放"><a href="#变量的存放" class="headerlink" title="变量的存放"></a>变量的存放</h4><p>首先，我们来看一下代码：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原始类型都放在栈（stack）里</span></span><br><span class="line"><span class="comment">//引用类型都放在堆（heap）里</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">var</span> b = <span class="string">'lzm'</span>;</span><br><span class="line"><span class="keyword">var</span> c = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">var</span> d = &#123; <span class="attr">n</span>: <span class="number">22</span> &#125;; <span class="comment">//地址假设为0x0012ff7f，不代表实际地址</span></span><br><span class="line"><span class="keyword">var</span> e = &#123; <span class="attr">n</span>: <span class="number">22</span> &#125;; <span class="comment">//重新开辟一段内存空间，地址假设为0x0012ff8c</span></span><br><span class="line"><span class="built_in">console</span>.log(e==d); <span class="comment">//false</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(); <span class="comment">//地址假设为0x0012ff9d</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]; <span class="comment">//地址假设为0x0012ff6e</span></span><br></pre></td></tr></table></figure>
 <p>为什么console.log(e==d)的结果为false？可以用下面的内存图解释：   </p>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd55a383967.jpg" alt>    </div></p>
@@ -564,6 +564,8 @@
 <p>最后来个图总结一下：</p>
 <p><div align="center"><img src="https://i.loli.net/2019/04/22/5cbd7a4eae053.png" alt>  </div></p>
 <p>以上都是通过内存图来解释关于内存空间的知识，如有不合理的地方，希望指正一下~后续还会增加内存泄漏以及深浅拷贝的文章，敬请期待！</p>
+<p>本人Github链接如下，欢迎各位Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
 
       
     </div>
@@ -879,7 +881,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存空间管理"><span class="nav-number">1.</span> <span class="nav-text">内存空间管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈与堆"><span class="nav-number">2.</span> <span class="nav-text">栈与堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量对象与栈堆内存"><span class="nav-number">3.</span> <span class="nav-text">变量对象与栈堆内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较抠细节的面试题"><span class="nav-number">4.</span> <span class="nav-text">比较抠细节的面试题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存空间管理"><span class="nav-number">1.</span> <span class="nav-text">内存空间管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#栈与堆"><span class="nav-number">2.</span> <span class="nav-text">栈与堆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量的存放"><span class="nav-number">3.</span> <span class="nav-text">变量的存放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较抠细节的面试题"><span class="nav-number">4.</span> <span class="nav-text">比较抠细节的面试题</span></a></li></ol></div>
             
 
           </div>
@@ -927,7 +929,7 @@
     <!-- 博客字数统计 -->
     <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">37.3k</span> 字
+      博客全站共： <span class="post-count">36.8k</span> 字
     </span>
 </div>
 

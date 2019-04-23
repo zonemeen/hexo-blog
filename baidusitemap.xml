@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
   <url>
     <loc>https://luozongmin.com/2019/03/19/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</loc>
     <lastmod>2019-04-22</lastmod>

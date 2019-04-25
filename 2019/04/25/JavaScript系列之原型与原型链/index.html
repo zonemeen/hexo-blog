@@ -140,25 +140,31 @@
 
 
 
-  <meta name="description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
-<meta name="keywords" content="JavaScript">
+  <meta name="description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
+<meta name="keywords" content="JavaScript,原型,原型链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Undefined vs Null">
-<meta property="og:url" content="https://luozongmin.com/2019/04/19/Undefined vs Null/index.html">
+<meta property="og:title" content="JavaScript系列之原型与原型链">
+<meta property="og:url" content="https://luozongmin.com/2019/04/25/JavaScript系列之原型与原型链/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
+<meta property="og:description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-22T10:10:41.046Z">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc11936423fe.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc1198c45bfe.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc119e192097.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc11a331a130.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/25/5cc11a7517605.jpg">
+<meta property="og:updated_time" content="2019-04-25T02:36:02.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Undefined vs Null">
-<meta name="twitter:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
+<meta name="twitter:title" content="JavaScript系列之原型与原型链">
+<meta name="twitter:description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/25/5cc11936423fe.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/04/19/Undefined vs Null/">
+  <link rel="canonical" href="https://luozongmin.com/2019/04/25/JavaScript系列之原型与原型链/">
 
 
 
@@ -168,7 +174,7 @@
   };
 </script>
 
-  <title>Undefined vs Null | 米淇淋の个人博客</title>
+  <title>JavaScript系列之原型与原型链 | 米淇淋の个人博客</title>
   
 
 
@@ -413,7 +419,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/19/Undefined vs Null/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/25/JavaScript系列之原型与原型链/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -430,7 +436,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Undefined vs Null
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之原型与原型链
 
               
             
@@ -456,24 +462,12 @@
                 
               
 
-              <time title="创建时间：2019-04-19 10:11:15" itemprop="dateCreated datePublished" datetime="2019-04-19T10:11:15+08:00">2019-04-19</time>
+              <time title="创建时间：2019-04-25 10:14:34 / 修改时间：10:36:02" itemprop="dateCreated datePublished" datetime="2019-04-25T10:14:34+08:00">2019-04-25</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-22 18:10:41" itemprop="dateModified" datetime="2019-04-22T18:10:41+08:00">2019-04-22</time>
               
             
           </span>
@@ -525,75 +519,66 @@
       
 
       
-        <p>在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。<a id="more"></a>  </p>
-<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
-<p>本文将探讨JavaScript中<code>undefined</code>和<code>null</code>之间的相似和差异之处。  </p>
-<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在if语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>);</span><br><span class="line"><span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>);</span><br><span class="line"><span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>（2）在JavaScript中，只有六个假值，<code>null</code>和<code>undefined</code>都包含在六个假值中。   </p>
-<ul>
-<li>false</li>
-<li>0</li>
-<li>‘’ (空字符串，’’和””一样)</li>
-<li><strong>null</strong></li>
-<li><strong>undefined</strong></li>
-<li>NaN</li>
-</ul>
-<p>除了这六个值，JavaScript中的任何其他值都被认为是真值。  </p>
-<p>（3）同样在JavaScript中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。  </p>
-<ul>
-<li>Boolean</li>
-<li><strong>Null</strong></li>
-<li><strong>Undefined</strong></li>
-<li>Number</li>
-<li>String</li>
-<li>Symbol</li>
-</ul>
-<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？   </p>
-<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！  </p>
-<p>1995年JavaScript诞生之初，像Java一样，只设置了<code>null</code>作为表示”无”的值。  </p>
-<p>根据C语言的传统，<code>null</code>被设计成可以自动转为0。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="number">6</span> + <span class="literal">null</span></span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
-<p>但是，JavaScript的设计者Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。   </p>
-<p>首先，<code>null</code>像在Java里一样，被当成一个对象。但是，JavaScript的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich觉得表示”无”的值最好不是对象。  </p>
-<p>其次，JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich觉得，如果<code>null</code>自动转为0，很不容易发现错误。  </p>
-<p>因此，Brendan Eich又设计增加了一个<code>undefined</code>。  </p>
-<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong>  </p>
-<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。  </p>
-<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">undefined</span>);  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">null</span>);   <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
-<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？  </p>
-<p>原因解释：这是JS一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。   </p>
-<p><strong>（2）转为数值区别</strong>  </p>
-<p>JavaScript的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1= <span class="number">5</span> + <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a1)  <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a2= <span class="number">5</span> + <span class="literal">undefined</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a2)  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-<p><strong>（3）null !== undefined</strong>   </p>
-<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript规范规定<code>null</code>不严格等于<code>undefined</code>。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> !== <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span>  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>在JavaScript中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。   </p>
-<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。  </p>
-<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。  </p>
-<p><strong>null表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
-<p>（1） 利用document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回null。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="built_in">document</span>.getElementById(<span class="string">'notExistElement'</span>))  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>（2） 作为对象原型链的终点。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype)  <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-<p><strong>undefined表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：  </p>
-<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数定义了形参 a </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(a); <span class="comment">// undefined </span></span><br><span class="line">&#125;  </span><br><span class="line">f(); <span class="comment">//未传递实参</span></span><br></pre></td></tr></table></figure>
-<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  a = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">a.p <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = f()</span><br><span class="line">a <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。 </p>
-<p>最后引用玉伯大大对null和undefined的解释：  </p>
-<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。   </p>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+        <p>JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。<a id="more"></a>   </p>
+<p>所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   </p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  </p>
+<p>构造函数就是一个普通的函数，创建方式和普通函数没有区别，<strong>不同的是构造函数习惯上首字母大写</strong>。另外就是调用方式的不同，普通函数是直接调用，<strong>而构造函数需要使用new关键字来调用</strong>。我们先使用构造函数创建一个对象：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog()</span><br><span class="line"><span class="built_in">console</span>.log(dog.name)     <span class="comment">// 阿黄</span></span><br></pre></td></tr></table></figure>
+<p>上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。  </p>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p><strong>prototype</strong>  </p>
+<p>每个函数都有一个特殊的属性叫作<code>原型（prototype）</code>，正如下面代码所展示的。 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype)</span><br></pre></td></tr></table></figure>
+<p>那这个构造函数的 <code>prototype</code> 属性指向的是什么呢？是这个函数的原型吗？  </p>
+<p>打开 chrome 浏览器的开发者工具，在 console 栏输入上面的代码，你可以看到 <code>Dog.prototype</code> 的值： </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/25/5cc11936423fe.jpg" alt>    </div></p>
+<p>其实，函数的 <code>prototype</code> 属性指向了一个对象，这个对象正是调用该构造函数而创建的<strong>实例</strong>的原型。   </p>
+<p>那什么是原型呢？你可以这样理解：每一个JavaScript对象(<code>null</code>除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型”继承”属性。  </p>
+<p>让我们用一张图来表示构造函数和实例原型之间的关系：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/25/5cc1198c45bfe.jpg" alt>     </div></p>
+<p>那么我们该怎么表示实例与实例原型，也就是 <code>person</code> 和 <code>Person.prototype</code> 之间的关系呢，接下来就应该讲到第二个属性：  </p>
+<p><strong><strong>proto</strong></strong>  </p>
+<p>这是每一个JavaScript对象(除了 <code>null</code> )都具有的一个属性，叫<code>__proto__</code>，这个属性会指向该对象的原型。  </p>
+<p>为了证明这一点,我们可以在chrome中输入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__)  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(dog.__proto__ === Dog.prototype)   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>于是我们更新下关系图： </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/25/5cc119e192097.jpg" alt>    </div></p>
+<p>既然实例对象和构造函数都可以指向原型，那么原型是否有属性指向构造函数或者实例呢？  </p>
+<p><strong>constructor</strong>  </p>
+<p>指向实例倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：<code>constructor</code>，每个原型都有一个 <code>constructor</code> 属性指向关联的构造函数。  </p>
+<p>为了验证这一点，我们在chrome中输入：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype.constructor === Dog)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>所以再更新下关系图：  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/25/5cc11a331a130.jpg" alt>     </div></p>
+<p>综上我们已经得出：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dog.__proto__ == Dog.prototype) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype.constructor == Dog) <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>在上文我们理解了原型，原型链肯定是与原型有关了，是一个个原型链接起来的么？我们先通过下面的图来观察一下。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/25/5cc11a7517605.jpg" alt>      </div></p>
+<p>解析： </p>
+<p><strong>obj.prop1</strong>：假设我们现在有一个对象，就称作<code>obj</code>，而这个对象包含一个属性<code>（property）</code>，我们称作<code>prop1</code>，现在我们可以使用<code>obj.prop1</code>来读取这个属性的值，就可以直接读取到<code>prop1</code>的属性值了。  </p>
+<p><strong>obj.prop2</strong>：JavaScript中会有一些预设的属性和方法，所有的对象和函数都包含<code>prototype</code>这个属性，假设我们把<code>prototype</code>叫做<code>proto</code>，这时候如果我们使用<code>obj.prop2</code>的时候，JavaScript引擎会先在<code>obj</code>这个对象的属性里去寻找有没有叫作<code>prop2</code>的属性，<strong>如果它找不到，这时候它就会再进一步往该对象的<code>proto</code>里面去寻找</strong>。所以，虽然我们输入<code>obj.prop2</code>的时候会得到回传值，但实际上这不是<code>obj</code>里面直接的属性名称，而是在<code>obj</code>的<code>proto</code>里面找到的属性名称（即，<code>obj.proto.prop2</code>，但我们不需要这样打）。  </p>
+<p><strong>obj.prop3</strong>：同样地，每一个对象里面都包含一个<code>prototype</code>，包括物件<code>proto</code>本身也不例外，所以，如果输入<code>obj.prop3</code>时，JavaScript会先在<code>obj</code>这个对象里去寻找有没有<code>prop3</code>这个属性名称，找不到时会再往<code>obj</code>的<code>proto</code>去寻找，<strong>如果还是找不到时，就再往<code>proto</code>这个对象里面的<code>proto</code>找下去</strong>，最后找到后回传属性值给我们（<code>obj.proto.proto.prop3</code>）。  </p>
+<p>虽然乍看之下，<code>prop3</code>很像是在对象<code>obj</code>里面的属性，但实际上它是在<code>obj → prop → prop</code>的对象里面，而这样从对象本身往<code>proto</code>寻找下去的链我们就称作「原型链（prototype chain）」。这样一直往下找会找到什么时候呢？它会直到某个对象的原型为<code>null</code>为止（也就是不再有原型指向）。  </p>
+<h4 id="举个例子来帮助理解原型链"><a href="#举个例子来帮助理解原型链" class="headerlink" title="举个例子来帮助理解原型链"></a>举个例子来帮助理解原型链</h4><p>让我们实际来看个例子帮助我们了解prototype chain这个概念，千万这个例子只是单纯为了用来说明prototype chain的概念，实际上千万不要使用这样的方式编程！ </p>
+<p>首先，我们先建立一个对象<code>person</code> 和一个对象<code>john</code>：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person =  &#123; </span><br><span class="line">  firstName :  <span class="string">'Default'</span> , </span><br><span class="line">  lastName :  <span class="string">'Default'</span> , </span><br><span class="line">  getFullName :  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">  &#125; , </span><br><span class="line">&#125; ;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john =  &#123; </span><br><span class="line">  firstName :  <span class="string">'John'</span> , </span><br><span class="line">  lastName :  <span class="string">'Doe'</span> , </span><br><span class="line">&#125; ;</span><br></pre></td></tr></table></figure>
+<p>接着，我们知道<strong>所有的对象里面都会包含原型（prototype）这个对象，在JavaScript中这个对象的名称为<strong>proto</strong></strong>。如同上述原型链（prototype chain）的概念，如果在原本的对象中找不到指定的属性名称或方法时，就会进一步到<code>__proto__</code>这里面来找。  </p>
+<p>为了示范，我们来对<code>__proto__</code>做一些事： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//千万不要照着下面这样做，这么做只是为了示范 </span></span><br><span class="line">john . __proto__ = person ;</span><br></pre></td></tr></table></figure>
+<p>如此，<code>john</code>这个对象就继承了<code>person</code>对象。在这种情况下，如果我们想要呼叫某个属性或方法，但在原本<code>john</code>这个对象中找不到这个属性名称或方法时，JavaScript引擎就会到<code>__proto__</code>里面去找，所以当接着执行如下的代码时，并不会报错： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span> . log ( john . getFullName ( ) )         <span class="comment">// John Doe;</span></span><br></pre></td></tr></table></figure>
+<p>我们可以得到”John Doe”的结果。原本在<code>john</code>的这个对象中，是没有<code>getFullName()</code>这个方法的，但由于我让<code>__proto__</code>里面继承了<code>person</code>这个对象，所以当JavaScript引擎在<code>john</code>对象里面找不到<code>getFullName()</code>这个方法时，它便会到<code>__proto__</code>里面去找，最后它找到了，于是它回传”John Doe”的结果。  </p>
+<p>如果我是执行：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span> . log ( john . firstName ) ;         <span class="comment">// John</span></span><br></pre></td></tr></table></figure>
+<p>我们会得到的是John而不是’Default’，因为JavaScript引擎在寻找<code>john.firstName</code>这个属性时，在<code>john</code>这个对象里就可以找到了，因此它不会在往<code>__proto__</code>里面找。<strong>这也就是刚刚在上面所的原型链（prototype chain）的概念，一旦它在上层的部分找到该属性或方法时，就不会在往下层的prototype去寻找</strong>。  </p>
+<p>在了解了prototype chain这样的概念后，让我们接着看下面这段代码：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jane = &#123; </span><br><span class="line">  firstName :  <span class="string">'Jane'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jane . __proto__ = person ; </span><br><span class="line"><span class="built_in">console</span> . log ( jane . getFullName ( ) ) ;</span><br></pre></td></tr></table></figure>
+<p>现在，你可以理解到会输出什么结果吗？</p>
+<p>答案是”Jane Default” 。</p>
+<p>因为在<code>jane</code>这个对象里只有<code>firstName</code>这个属性，所以当JavaScript引擎要寻找<code>getFullName()</code>这个方法和<code>lastName</code>这个属性时，它都会去找<code>__proto__</code>里面，而这里面找到的就是一开始建立的<code>person</code>这个对象的内容。</p>
+<p>全代码如下：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person =  &#123; </span><br><span class="line">  firstName : <span class="string">'Default'</span> , </span><br><span class="line">  lastName : <span class="string">'Default'</span> , </span><br><span class="line">  getFullName :  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john =  &#123; </span><br><span class="line">  firstName : <span class="string">'John'</span> , </span><br><span class="line">  lastName : <span class="string">'Doe'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//千万不要照着下面这样做，这么做只是为了示范 </span></span><br><span class="line">john . __proto__ = person ; </span><br><span class="line"><span class="built_in">console</span> . log ( john . getFullName ( ) ) ;     <span class="comment">// John Doe </span></span><br><span class="line"><span class="built_in">console</span> . log ( john . firstName ) ;         <span class="comment">// John</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jane = &#123; </span><br><span class="line">  firstName :  <span class="string">'Jane'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jane . __proto__ = person ; </span><br><span class="line"><span class="built_in">console</span> . log ( jane . getFullName ( ) ) ;</span><br></pre></td></tr></table></figure>
+<p>以上就是目前能总结的全部了，肯定还是有缺陷的地方，后续还会修改完善的。  </p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
     </div>
@@ -619,6 +604,10 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
+            <a href="/tags/原型/" rel="tag"><i class="fa fa-tag"></i> 原型</a>
+          
+            <a href="/tags/原型链/" rel="tag"><i class="fa fa-tag"></i> 原型链</a>
+          
         </div>
       
 
@@ -630,8 +619,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/18/JavaScript系列之类型转换/" rel="next" title="JavaScript系列之类型转换">
-                <i class="fa fa-chevron-left"></i> JavaScript系列之类型转换
+              <a href="/2019/04/22/JavaScript系列之内存泄漏/" rel="next" title="JavaScript系列之内存泄漏">
+                <i class="fa fa-chevron-left"></i> JavaScript系列之内存泄漏
               </a>
             
           </div>
@@ -639,10 +628,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/20/学会如何学习（三）/" rel="prev" title="学会如何学习（三）">
-                学会如何学习（三） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -909,7 +894,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#相似性"><span class="nav-number">1.</span> <span class="nav-text">相似性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#历史原因"><span class="nav-number">2.</span> <span class="nav-text">历史原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#差异性"><span class="nav-number">3.</span> <span class="nav-text">差异性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实际用法"><span class="nav-number">4.</span> <span class="nav-text">实际用法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#构造函数"><span class="nav-number">1.</span> <span class="nav-text">构造函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型"><span class="nav-number">2.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原型链"><span class="nav-number">3.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#举个例子来帮助理解原型链"><span class="nav-number">4.</span> <span class="nav-text">举个例子来帮助理解原型链</span></a></li></ol></div>
             
 
           </div>

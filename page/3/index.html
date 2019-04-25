@@ -140,25 +140,20 @@
 
 
 
-  <meta name="description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Undefined vs Null">
-<meta property="og:url" content="https://luozongmin.com/2019/04/19/Undefined vs Null/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="米淇淋の个人博客">
+<meta property="og:url" content="https://luozongmin.com/page/3/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-22T10:10:41.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Undefined vs Null">
-<meta name="twitter:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
+<meta name="twitter:title" content="米淇淋の个人博客">
 
 
 
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/04/19/Undefined vs Null/">
+  <link rel="canonical" href="https://luozongmin.com/page/3/">
 
 
 
@@ -168,7 +163,7 @@
   };
 </script>
 
-  <title>Undefined vs Null | 米淇淋の个人博客</title>
+  <title>米淇淋の个人博客</title>
   
 
 
@@ -216,7 +211,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -396,9 +392,9 @@
           
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -413,7 +409,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/19/Undefined vs Null/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/03/19/HTTP入门笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="miqilin21">
@@ -430,8 +426,10 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Undefined vs Null
-
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/19/HTTP入门笔记/" class="post-title-link" itemprop="url">HTTP入门笔记</a>
               
             
           </h1>
@@ -456,7 +454,7 @@
                 
               
 
-              <time title="创建时间：2019-04-19 10:11:15" itemprop="dateCreated datePublished" datetime="2019-04-19T10:11:15+08:00">2019-04-19</time>
+              <time title="创建时间：2019-03-19 09:02:45" itemprop="dateCreated datePublished" datetime="2019-03-19T09:02:45+08:00">2019-03-19</time>
             
 
             
@@ -473,7 +471,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-22 18:10:41" itemprop="dateModified" datetime="2019-04-22T18:10:41+08:00">2019-04-22</time>
+                <time title="修改时间：2019-04-22 18:12:04" itemprop="dateModified" datetime="2019-04-22T18:12:04+08:00">2019-04-22</time>
               
             
           </span>
@@ -490,7 +488,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/HTTP/" itemprop="url" rel="index"><span itemprop="name">HTTP</span></a></span>
 
                 
                 
@@ -525,78 +523,21 @@
       
 
       
-        <p>在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。<a id="more"></a>  </p>
-<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
-<p>本文将探讨JavaScript中<code>undefined</code>和<code>null</code>之间的相似和差异之处。  </p>
-<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在if语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>);</span><br><span class="line"><span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>);</span><br><span class="line"><span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>（2）在JavaScript中，只有六个假值，<code>null</code>和<code>undefined</code>都包含在六个假值中。   </p>
-<ul>
-<li>false</li>
-<li>0</li>
-<li>‘’ (空字符串，’’和””一样)</li>
-<li><strong>null</strong></li>
-<li><strong>undefined</strong></li>
-<li>NaN</li>
-</ul>
-<p>除了这六个值，JavaScript中的任何其他值都被认为是真值。  </p>
-<p>（3）同样在JavaScript中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。  </p>
-<ul>
-<li>Boolean</li>
-<li><strong>Null</strong></li>
-<li><strong>Undefined</strong></li>
-<li>Number</li>
-<li>String</li>
-<li>Symbol</li>
-</ul>
-<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？   </p>
-<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！  </p>
-<p>1995年JavaScript诞生之初，像Java一样，只设置了<code>null</code>作为表示”无”的值。  </p>
-<p>根据C语言的传统，<code>null</code>被设计成可以自动转为0。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="literal">null</span>)</span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"></span><br><span class="line"><span class="number">6</span> + <span class="literal">null</span></span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
-<p>但是，JavaScript的设计者Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。   </p>
-<p>首先，<code>null</code>像在Java里一样，被当成一个对象。但是，JavaScript的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich觉得表示”无”的值最好不是对象。  </p>
-<p>其次，JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich觉得，如果<code>null</code>自动转为0，很不容易发现错误。  </p>
-<p>因此，Brendan Eich又设计增加了一个<code>undefined</code>。  </p>
-<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong>  </p>
-<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。  </p>
-<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">undefined</span>);  <span class="comment">// undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">null</span>);   <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
-<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？  </p>
-<p>原因解释：这是JS一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。   </p>
-<p><strong>（2）转为数值区别</strong>  </p>
-<p>JavaScript的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a1= <span class="number">5</span> + <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a1)  <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a2= <span class="number">5</span> + <span class="literal">undefined</span>;</span><br><span class="line"><span class="built_in">console</span>.log(a2)  <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
-<p><strong>（3）null !== undefined</strong>   </p>
-<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript规范规定<code>null</code>不严格等于<code>undefined</code>。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> !== <span class="literal">undefined</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> === <span class="literal">undefined</span>  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span> == <span class="literal">undefined</span>  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>在JavaScript中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。   </p>
-<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。  </p>
-<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。  </p>
-<p><strong>null表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
-<p>（1） 利用document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回null。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span> == <span class="built_in">document</span>.getElementById(<span class="string">'notExistElement'</span>))  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>（2） 作为对象原型链的终点。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.getPrototypeOf(<span class="built_in">Object</span>.prototype)  <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
-<p><strong>undefined表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：  </p>
-<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a</span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数定义了形参 a </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(a); <span class="comment">// undefined </span></span><br><span class="line">&#125;  </span><br><span class="line">f(); <span class="comment">//未传递实参</span></span><br></pre></td></tr></table></figure>
-<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span>  a = <span class="keyword">new</span> <span class="built_in">Object</span>()</span><br><span class="line">a.p <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = f()</span><br><span class="line">a <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。 </p>
-<p>最后引用玉伯大大对null和undefined的解释：  </p>
-<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。   </p>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
-
+        
+          <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。   </p>
+<p>本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/19/HTTP入门笔记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
       
-    </div>
+    </p></div>
 
     
 
@@ -615,40 +556,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/04/18/JavaScript系列之类型转换/" rel="next" title="JavaScript系列之类型转换">
-                <i class="fa fa-chevron-left"></i> JavaScript系列之类型转换
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/20/学会如何学习（三）/" rel="prev" title="学会如何学习（三）">
-                学会如何学习（三） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -658,15 +573,18 @@
   </article>
 
 
-  </div>
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
           
-
-  
-
-
 
         </div>
         
@@ -686,17 +604,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -899,23 +808,6 @@
       </div>
 
       
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#相似性"><span class="nav-number">1.</span> <span class="nav-text">相似性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#历史原因"><span class="nav-number">2.</span> <span class="nav-text">历史原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#差异性"><span class="nav-number">3.</span> <span class="nav-text">差异性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实际用法"><span class="nav-number">4.</span> <span class="nav-text">实际用法</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
-      
 
       
 
@@ -1053,10 +945,6 @@
 
 
   
-  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
-<script src="/js/src/post-details.js?v=7.0.1"></script>
-
-
 
   
 
@@ -1072,8 +960,6 @@
 
   
 
-
-  
 
 
   

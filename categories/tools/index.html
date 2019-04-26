@@ -962,7 +962,7 @@
 
 <script>
   var GUEST = ['nick', 'mail', 'link'];
-  var guest = '';
+  var guest = 'nick,mail';
   guest = guest.split(',').filter(function(item) {
     return GUEST.indexOf(item) > -1;
   });
@@ -972,7 +972,7 @@
     notify: false,
     appId: 'yEidYvc3diz2rUpg1LnWzruJ-gzGzoHsz',
     appKey: 'fAr8biwMIjM4j28F3Pg9Mmf5',
-    placeholder: 'Just go go',
+    placeholder: '✍️如果您希望得到作者的回复，请填写上方您的E-mail地址以便回复',
     avatar: 'mm',
     meta: guest,
     pageSize: '10' || 10,

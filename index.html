@@ -526,13 +526,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/25/JavaScript系列之原型与原型链/" class="leancloud_visitors" data-flag-title="JavaScript系列之原型与原型链">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -722,13 +715,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/22/JavaScript系列之内存泄漏/" class="leancloud_visitors" data-flag-title="JavaScript系列之内存泄漏">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -920,13 +906,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/22/JavaScript系列之内存空间/" class="leancloud_visitors" data-flag-title="JavaScript系列之内存空间">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1117,13 +1096,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/20/学会如何学习（三）/" class="leancloud_visitors" data-flag-title="学会如何学习（三）">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -1327,13 +1299,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/19/Undefined vs Null/" class="leancloud_visitors" data-flag-title="Undefined vs Null">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1535,13 +1500,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/18/JavaScript系列之类型转换/" class="leancloud_visitors" data-flag-title="JavaScript系列之类型转换">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -1745,13 +1703,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/16/一些好用的工具、网站/" class="leancloud_visitors" data-flag-title="一些好用的工具、网站">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1953,13 +1904,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/13/JavaScript系列之类型判断/" class="leancloud_visitors" data-flag-title="JavaScript系列之类型判断">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -2163,13 +2107,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/12/JavaScript系列之数据类型/" class="leancloud_visitors" data-flag-title="JavaScript系列之数据类型">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -2371,13 +2308,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/09/学会如何学习（二）/" class="leancloud_visitors" data-flag-title="学会如何学习（二）">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -3302,90 +3232,6 @@
 
   
 
-  
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("yEidYvc3diz2rUpg1LnWzruJ-gzGzoHsz", "fAr8biwMIjM4j28F3Pg9Mmf5");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
-  
 </body>
 </html>
 <!-- 页面点击小红心 -->

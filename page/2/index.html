@@ -538,13 +538,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/04/03/Hexo搭建博客中遇到的一些“事”/" class="leancloud_visitors" data-flag-title="Hexo搭建博客中遇到的一些" 事"">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -748,13 +741,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/30/学会如何学习（一）/" class="leancloud_visitors" data-flag-title="学会如何学习（一）">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -944,13 +930,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/29/Git命令拓展/" class="leancloud_visitors" data-flag-title="Git命令拓展">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -1155,13 +1134,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/21/使用Hexo+GitHub搭建个人博客/" class="leancloud_visitors" data-flag-title="使用Hexo+GitHub搭建个人博客">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1364,13 +1336,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/20/CSS布局—三栏布局/" class="leancloud_visitors" data-flag-title="CSS笔记—三栏布局">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1554,13 +1519,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/20/CSS布局—左右布局/" class="leancloud_visitors" data-flag-title>
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -1772,13 +1730,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/20/CSS布局—居中布局/" class="leancloud_visitors" data-flag-title="CSS笔记—居中布局">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -1980,13 +1931,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/19/如何快速搭建静态资源服务器/" class="leancloud_visitors" data-flag-title="如何快速搭建静态资源服务器">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -2190,13 +2134,6 @@
           
 
           
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/19/HTML常用标签/" class="leancloud_visitors" data-flag-title="HTML常用标签">
-              &nbsp;阅读次数
-          </span>
-          
         </div>
       </header>
     
@@ -2398,13 +2335,6 @@
 
           
 
-          
-
-          
-          &nbsp; | &nbsp;
-          <span id="/2019/03/19/Git及Github操作手册/" class="leancloud_visitors" data-flag-title="Git/GitHub操作手册">
-              &nbsp;阅读次数
-          </span>
           
         </div>
       </header>
@@ -3329,90 +3259,6 @@
 
   
 
-  
-  <!-- custom analytics part create by xiamo -->
-<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("yEidYvc3diz2rUpg1LnWzruJ-gzGzoHsz", "fAr8biwMIjM4j28F3Pg9Mmf5");</script>
-<script>
-function showTime(Counter) {
-	var query = new AV.Query(Counter);
-	$(".leancloud_visitors").each(function() {
-		var url = $(this).attr("id").trim();
-		query.equalTo("url", url);
-		query.find({
-			success: function(results) {
-				if (results.length == 0) {
-					var content = '0 ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-					return;
-				}
-				for (var i = 0; i < results.length; i++) {
-					var object = results[i];
-					var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
-					$(document.getElementById(url)).text(content);
-				}
-			},
-			error: function(object, error) {
-				console.log("Error: " + error.code + " " + error.message);
-			}
-		});
-
-	});
-}
-
-function addCount(Counter) {
-	var Counter = AV.Object.extend("Counter");
-	url = $(".leancloud_visitors").attr('id').trim();
-	title = $(".leancloud_visitors").attr('data-flag-title').trim();
-	var query = new AV.Query(Counter);
-	query.equalTo("url", url);
-	query.find({
-		success: function(results) {
-			if (results.length > 0) {
-				var counter = results[0];
-				counter.fetchWhenSave(true);
-				counter.increment("time");
-				counter.save(null, {
-					success: function(counter) {
-						var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(counter, error) {
-						console.log('Failed to save Visitor num, with error message: ' + error.message);
-					}
-				});
-			} else {
-				var newcounter = new Counter();
-				newcounter.set("title", title);
-				newcounter.set("url", url);
-				newcounter.set("time", 1);
-				newcounter.save(null, {
-					success: function(newcounter) {
-					    console.log("newcounter.get('time')="+newcounter.get('time'));
-						var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
-						$(document.getElementById(url)).text(content);
-					},
-					error: function(newcounter, error) {
-						console.log('Failed to create');
-					}
-				});
-			}
-		},
-		error: function(error) {
-			console.log('Error:' + error.code + " " + error.message);
-		}
-	});
-}
-$(function() {
-	var Counter = AV.Object.extend("Counter");
-	if ($('.leancloud_visitors').length == 1) {
-		addCount(Counter);
-	} else if ($('.post-title-link').length > 1) {
-		showTime(Counter);
-	}
-}); 
-</script>
-  
 </body>
 </html>
 <!-- 页面点击小红心 -->

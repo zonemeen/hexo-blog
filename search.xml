@@ -3,14 +3,13 @@
   <entry>
     <title><![CDATA[JavaScript中任何值的prototype到最后都是Object]]></title>
     <url>%2F2019%2F04%2F27%2FJavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject%2F</url>
-    <content type="text"><![CDATA[这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！ 什么意思呢？ 假设我们现在分别建立对象、函数和数组，直接上代码： 123456789101112131415161718192021// Object var a = &#123; name : 'miqilin' &#125;// function var b = function ( ) &#123; console . log ( 'Hello' ) ; &#125;// Array var c = [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d = 'This is string' ;// number var e = 2 ;// boolean var f = true ; 接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的prototype。 对象（object）我们可以看到a这个对象本身的prototype也是一个对象，在下去就没了（null），也就是Object → Object → null的过程。 而a.__proto__就是对象的原型，打开来看会发现里面有许多内置的方法。 如果我在console中输入a.，则会出现对于对象而言内置的方法： 由于a.__proto__仍然是一个对象，所以如果我输入a.__proto__.的话，会得到除了name一样对于对象可以使用的方法： 函数（function）接着我们来看看函数，根据上面同样的方法得出是function → function → object → null的过程，所以最后还是结束在object。 如果我们想要看函数有哪些内置的方法可以用，我们可以输入b.或b.__proto__.就可以看到了，这里我们就可以看到我们常用的apply , bind ,和call。 数组（Array）对于数组的话则是array → array → object → null的过程。 如果我们要看数组有哪些方法可以用，一样可以透过c.或c.__proto__.来检视： 同样的方法也可以用来检视字符串、数字和Boolean值，有兴趣的通过chrome 来试试看吧！ 如果觉得文章对你有些许帮助，欢迎在我的GitHub博客点赞和关注，感激不尽！]]></content>
+    <content type="text"><![CDATA[这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！ 什么意思呢？ 假设我们现在分别建立对象、函数和数组，直接上代码： 123456789101112131415161718192021// Object var a = &#123; name : 'miqilin' &#125;// function var b = function ( ) &#123; console . log ( 'Hello' ) ; &#125;// Array var c = [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d = 'This is string' ;// number var e = 2 ;// boolean var f = true ; 接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的prototype。 对象（object）我们可以看到a这个对象本身的prototype也是一个对象，在下去就没了（null），也就是Object → Object → null的过程。 而a.__proto__就是对象的原型，打开来看会发现里面有许多内置的方法。 如果我在console中输入a.，则会出现对于对象而言内置的方法： 由于a.__proto__仍然是一个对象，所以如果我输入a.__proto__.的话，会得到除了name一样对于对象可以使用的方法： 函数（function）接着我们来看看函数，根据上面同样的方法得出是function → function → object → null的过程，所以最后还是结束在object。 如果我们想要看函数有哪些内置的方法可以用，我们可以输入b.或b.__proto__.就可以看到了，这里我们就可以看到我们常用的apply , bind ,和call。 数组（Array）对于数组的话则是array → array → object → null的过程。 如果我们要看数组有哪些方法可以用，一样可以透过c.或c.__proto__.来检视： 同样的方法也可以用来检视字符串、数字和Boolean值，有兴趣的通过chrome 来试试看吧！ 如果觉得文章对你有些许帮助，欢迎在我的GitHub博客点赞和关注，感激不尽！]]></content>
       <categories>
         <category>JavaScript</category>
       </categories>
       <tags>
         <tag>JavaScript</tag>
         <tag>原型</tag>
-        <tag>原型链</tag>
       </tags>
   </entry>
   <entry>

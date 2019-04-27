@@ -142,13 +142,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="米淇淋の个人博客">
-<meta property="og:url" content="https://luozongmin.com/archives/2019/index.html">
+  <meta name="description" content="这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！">
+<meta name="keywords" content="JavaScript,原型,原型链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中任何值的prototype到最后都是Object">
+<meta property="og:url" content="https://luozongmin.com/2019/04/27/JavaScript中任何值的prototype到最后都是Object/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
+<meta property="og:description" content="这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc4066980328.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc406904ba62.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc406b6140d6.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc406e69789c.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc4073f301dc.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc4077450aff.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc407ac2642f.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/27/5cc407deef58b.jpg">
+<meta property="og:updated_time" content="2019-04-27T07:43:14.146Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="米淇淋の个人博客">
+<meta name="twitter:title" content="JavaScript中任何值的prototype到最后都是Object">
+<meta name="twitter:description" content="这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/27/5cc4066980328.jpg">
 
 
 
@@ -157,7 +171,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/archives/2019/">
+  <link rel="canonical" href="https://luozongmin.com/2019/04/27/JavaScript中任何值的prototype到最后都是Object/">
 
 
 
@@ -167,7 +181,7 @@
   };
 </script>
 
-  <title>归档 | 米淇淋の个人博客</title>
+  <title>JavaScript中任何值的prototype到最后都是Object | 米淇淋の个人博客</title>
   
 
 
@@ -216,7 +230,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -275,7 +289,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -406,423 +420,238 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/27/JavaScript中任何值的prototype到最后都是Object/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="miqilin">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米淇淋の个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">JavaScript中任何值的prototype到最后都是Object
+
+              
+            
+          </h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-27 15:32:00 / 修改时间：15:43:14" itemprop="dateCreated datePublished" datetime="2019-04-27T15:32:00+08:00">2019-04-27</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 22 篇日志。 继续努力。
-      </span>
-      
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/27/JavaScript中任何值的prototype到最后都是Object/" itemprop="url">
+          
             
-              <span itemprop="name">JavaScript中任何值的prototype到最后都是Object</span>
             
-          </a>
-        
-      </h2>
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/04/27/JavaScript中任何值的prototype到最后都是Object/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/27/JavaScript中任何值的prototype到最后都是Object/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T15:32:00+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
+          
+          
 
-    </header>
-  </article>
+          
 
+          
 
+          
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/25/JavaScript系列之原型与原型链/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之原型与原型链</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-25T10:14:34+08:00" content="2019-04-25">
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/22/JavaScript系列之内存泄漏/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之内存泄漏</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T16:41:35+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>这篇笔记延伸上一篇所提到的<a href="https://luozongmin.com/2019/04/25/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型（prototype）</a>的概念，说明了在JavaScript当中，所有的类型（字串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！  <a id="more"></a>   </p>
+<p>什么意思呢？</p>
+<p>假设我们现在分别建立对象、函数和数组，直接上代码：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object </span></span><br><span class="line"><span class="keyword">var</span> a =  &#123; </span><br><span class="line">  name : <span class="string">'miqilin'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// function </span></span><br><span class="line"><span class="keyword">var</span>  b  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span> . log ( <span class="string">'Hello'</span> ) ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Array </span></span><br><span class="line"><span class="keyword">var</span> c =  [ <span class="string">'A'</span> , <span class="string">'r'</span> , <span class="string">'r'</span> , <span class="string">'a'</span> , <span class="string">'y'</span>] ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// string </span></span><br><span class="line"><span class="keyword">var</span> d =  <span class="string">'This is string'</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// number </span></span><br><span class="line"><span class="keyword">var</span> e =  <span class="number">2</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// boolean </span></span><br><span class="line"><span class="keyword">var</span> f =  <span class="literal">true</span> ;</span><br></pre></td></tr></table></figure>
+<p>接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的<code>prototype</code>。  </p>
+<h4 id="对象（object）"><a href="#对象（object）" class="headerlink" title="对象（object）"></a>对象（object）</h4><p>我们可以看到a这个对象本身的<code>prototype</code>也是一个对象，在下去就没了（<code>null</code>），也就是<strong>Object → Object → null的过程</strong>。 </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc4066980328.jpg" alt>    </div></p>
+<p>而<code>a.__proto__</code>就是对象的原型，打开来看会发现里面有许多内置的方法。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc406904ba62.jpg" alt>   </div></p>
+<p>如果我在console中输入<code>a.</code>，则会出现对于对象而言内置的方法： </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc406b6140d6.jpg" alt>   </div></p>
+<p>由于<code>a.__proto__</code>仍然是一个对象，所以如果我输入<code>a.__proto__.</code>的话，会得到除了<code>name</code>一样对于对象可以使用的方法：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc406e69789c.jpg" alt>   </div></p>
+<h4 id="函数（function）"><a href="#函数（function）" class="headerlink" title="函数（function）"></a>函数（function）</h4><p>接着我们来看看函数，根据上面同样的方法得出是<strong>function → function → object → null</strong>的过程，所以最后还是结束在<code>object</code>。 </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc4073f301dc.jpg" alt>    </div></p>
+<p>如果我们想要看函数有哪些内置的方法可以用，我们可以输入<code>b.</code>或<code>b.__proto__.</code>就可以看到了，这里我们就可以看到我们常用的<code>apply</code> , <code>bind</code> ,和<code>call</code>。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc4077450aff.jpg" alt>   </div></p>
+<h4 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h4><p>对于数组的话则是<strong>array → array → object → null</strong>的过程。  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc407ac2642f.jpg" alt>   </div></p>
+<p>如果我们要看数组有哪些方法可以用，一样可以透过<code>c.</code>或<code>c.__proto__.</code>来检视： </p>
+<p><div align="center"><img src="https://i.loli.net/2019/04/27/5cc407deef58b.jpg" alt>    </div></p>
+<p>同样的方法也可以用来检视字符串、数字和Boolean值，有兴趣的通过chrome 来试试看吧！  </p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/22/JavaScript系列之内存空间/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之内存空间</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T13:43:00+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/20/学会如何学习（三）/" itemprop="url">
-            
-              <span itemprop="name">学会如何学习（三）</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-20T10:17:19+08:00" content="2019-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/19/Undefined vs Null/" itemprop="url">
-            
-              <span itemprop="name">Undefined vs Null</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-19T10:11:15+08:00" content="2019-04-19">
-          04-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/JavaScript系列之类型转换/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之类型转换</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T17:17:22+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/16/一些好用的工具、网站/" itemprop="url">
-            
-              <span itemprop="name">一些好用的工具、网站</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-16T09:51:32+08:00" content="2019-04-16">
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/13/JavaScript系列之类型判断/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之类型判断</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-13T12:52:19+08:00" content="2019-04-13">
-          04-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/12/JavaScript系列之数据类型/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之数据类型</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-12T13:43:04+08:00" content="2019-04-12">
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+     
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/原型/" rel="tag"><i class="fa fa-tag"></i> 原型</a>
+          
+            <a href="/tags/原型链/" rel="tag"><i class="fa fa-tag"></i> 原型链</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/25/JavaScript系列之原型与原型链/" rel="next" title="JavaScript系列之原型与原型链">
+                <i class="fa fa-chevron-left"></i> JavaScript系列之原型与原型链
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><a class="extend next" rel="next" href="/archives/2019/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -842,8 +671,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1053,6 +891,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象（object）"><span class="nav-number">1.</span> <span class="nav-text">对象（object）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数（function）"><span class="nav-number">2.</span> <span class="nav-text">函数（function）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组（Array）"><span class="nav-number">3.</span> <span class="nav-text">数组（Array）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -1194,6 +1049,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -1246,6 +1105,8 @@
 
 
 
+
+  
 
 
   

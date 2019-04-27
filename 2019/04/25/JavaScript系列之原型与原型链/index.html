@@ -153,7 +153,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/04/25/5cc119e192097.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/25/5cc11a331a130.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/04/25/5cc11a7517605.jpg">
-<meta property="og:updated_time" content="2019-04-25T02:36:02.466Z">
+<meta property="og:updated_time" content="2019-04-27T00:30:06.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之原型与原型链">
 <meta name="twitter:description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
@@ -469,12 +469,24 @@
                 
               
 
-              <time title="创建时间：2019-04-25 10:14:34 / 修改时间：10:36:02" itemprop="dateCreated datePublished" datetime="2019-04-25T10:14:34+08:00">2019-04-25</time>
+              <time title="创建时间：2019-04-25 10:14:34" itemprop="dateCreated datePublished" datetime="2019-04-25T10:14:34+08:00">2019-04-25</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-27 08:30:06" itemprop="dateModified" datetime="2019-04-27T08:30:06+08:00">2019-04-27</time>
               
             
           </span>
@@ -575,7 +587,7 @@
 <p>解析： </p>
 <p><strong>obj.prop1</strong>：假设我们现在有一个对象，就称作<code>obj</code>，而这个对象包含一个属性<code>（property）</code>，我们称作<code>prop1</code>，现在我们可以使用<code>obj.prop1</code>来读取这个属性的值，就可以直接读取到<code>prop1</code>的属性值了。  </p>
 <p><strong>obj.prop2</strong>：JavaScript中会有一些预设的属性和方法，所有的对象和函数都包含<code>prototype</code>这个属性，假设我们把<code>prototype</code>叫做<code>proto</code>，这时候如果我们使用<code>obj.prop2</code>的时候，JavaScript引擎会先在<code>obj</code>这个对象的属性里去寻找有没有叫作<code>prop2</code>的属性，<strong>如果它找不到，这时候它就会再进一步往该对象的<code>proto</code>里面去寻找</strong>。所以，虽然我们输入<code>obj.prop2</code>的时候会得到回传值，但实际上这不是<code>obj</code>里面直接的属性名称，而是在<code>obj</code>的<code>proto</code>里面找到的属性名称（即，<code>obj.proto.prop2</code>，但我们不需要这样打）。  </p>
-<p><strong>obj.prop3</strong>：同样地，每一个对象里面都包含一个<code>prototype</code>，包括物件<code>proto</code>本身也不例外，所以，如果输入<code>obj.prop3</code>时，JavaScript会先在<code>obj</code>这个对象里去寻找有没有<code>prop3</code>这个属性名称，找不到时会再往<code>obj</code>的<code>proto</code>去寻找，<strong>如果还是找不到时，就再往<code>proto</code>这个对象里面的<code>proto</code>找下去</strong>，最后找到后回传属性值给我们（<code>obj.proto.proto.prop3</code>）。  </p>
+<p><strong>obj.prop3</strong>：同样地，每一个对象里面都包含一个<code>prototype</code>，包括对象<code>proto</code>本身也不例外，所以，如果输入<code>obj.prop3</code>时，JavaScript会先在<code>obj</code>这个对象里去寻找有没有<code>prop3</code>这个属性名称，找不到时会再往<code>obj</code>的<code>proto</code>去寻找，<strong>如果还是找不到时，就再往<code>proto</code>这个对象里面的<code>proto</code>找下去</strong>，最后找到后回传属性值给我们（<code>obj.proto.proto.prop3</code>）。  </p>
 <p>虽然乍看之下，<code>prop3</code>很像是在对象<code>obj</code>里面的属性，但实际上它是在<code>obj → prop → prop</code>的对象里面，而这样从对象本身往<code>proto</code>寻找下去的链我们就称作「原型链（prototype chain）」。这样一直往下找会找到什么时候呢？它会直到某个对象的原型为<code>null</code>为止（也就是不再有原型指向）。  </p>
 <h4 id="举个例子来帮助理解原型链"><a href="#举个例子来帮助理解原型链" class="headerlink" title="举个例子来帮助理解原型链"></a>举个例子来帮助理解原型链</h4><p>让我们实际来看个例子帮助我们了解prototype chain这个概念，千万这个例子只是单纯为了用来说明prototype chain的概念，实际上千万不要使用这样的方式编程！ </p>
 <p>首先，我们先建立一个对象<code>person</code> 和一个对象<code>john</code>：  </p>

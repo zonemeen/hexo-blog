@@ -142,24 +142,20 @@
 
 
 
-  <meta name="description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
-<meta name="keywords" content="GitHub,Hexo">
+  <meta name="description" content="在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。">
+<meta name="keywords" content="JavaScript,Object,对象">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo+GitHub搭建个人博客">
-<meta property="og:url" content="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/index.html">
+<meta property="og:title" content="谈谈JavaScript中创建对象(Object)">
+<meta property="og:url" content="https://luozongmin.com/2019/05/07/谈谈JavaScript中对象建立(Object)/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
+<meta property="og:description" content="在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9367e206fed.png">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c936816aebad.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c93686920362.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9368cb42ac7.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9368f2e97e0.png">
-<meta property="og:updated_time" content="2019-04-22T10:11:08.347Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg">
+<meta property="og:updated_time" content="2019-05-07T11:21:23.764Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo+GitHub搭建个人博客">
-<meta name="twitter:description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/21/5c9367e206fed.png">
+<meta name="twitter:title" content="谈谈JavaScript中创建对象(Object)">
+<meta name="twitter:description" content="在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg">
 
 
 
@@ -168,7 +164,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/">
+  <link rel="canonical" href="https://luozongmin.com/2019/05/07/谈谈JavaScript中对象建立(Object)/">
 
 
 
@@ -178,7 +174,7 @@
   };
 </script>
 
-  <title>使用Hexo+GitHub搭建个人博客 | 米淇淋の个人博客</title>
+  <title>谈谈JavaScript中创建对象(Object) | 米淇淋の个人博客</title>
   
 
 
@@ -437,7 +433,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/07/谈谈JavaScript中对象建立(Object)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -454,7 +450,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Hexo+GitHub搭建个人博客
+          <h1 class="post-title" itemprop="name headline">谈谈JavaScript中创建对象(Object)
 
               
             
@@ -480,24 +476,12 @@
                 
               
 
-              <time title="创建时间：2019-03-21 18:25:10" itemprop="dateCreated datePublished" datetime="2019-03-21T18:25:10+08:00">2019-03-21</time>
+              <time title="创建时间：2019-05-07 19:04:11 / 修改时间：19:21:23" itemprop="dateCreated datePublished" datetime="2019-05-07T19:04:11+08:00">2019-05-07</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-22 18:11:08" itemprop="dateModified" datetime="2019-04-22T18:11:08+08:00">2019-04-22</time>
               
             
           </span>
@@ -514,7 +498,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -533,8 +517,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/03/21/使用Hexo+GitHub搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/21/使用Hexo+GitHub搭建个人博客/" itemprop="commentCount"></span>
+                <a href="/2019/05/07/谈谈JavaScript中对象建立(Object)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/07/谈谈JavaScript中对象建立(Object)/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -561,52 +545,46 @@
       
 
       
-        <p>hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多<a id="more"></a>，所以就用它啦~     </p>
-<p>下面一步一步地说怎么用hexo+github搭建一个个人博客。</p>
-<p><strong><em>说明：本文只针对Windows平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装node.js和git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad" target="_blank" rel="noopener">这篇文章</a>，并同时申请Github账号，使用的开发工具为VScode。</p>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>1、首先新建一个文件夹如myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中Git Bash Here在<strong>Git命令行中打开</strong>。  </p>
-<p>2、执行以下命令安装Hexo及生成第一篇博客文章：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli   //安装hexo</span><br><span class="line">$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作</span><br><span class="line">$ hexo generate            //生成静态页面</span><br><span class="line">$ hexo server              //启动本地服务器，进行博客文章预览</span><br></pre></td></tr></table></figure></p>
-<p>Hexo会默认生成第一篇博客《Hello World》，在浏览器下打开localhost://4000你将会看到：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c9367e206fed.png" alt>    </div></p>
-<p>myBlog源文件夹整体目录预览：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c936816aebad.jpg" alt>     </div></p>
-<p>其中_config.yml和package.json为项目的配置文件，themes存放了我们博客的主题，source-&gt;_post为我们的博客目录，public为执行hexo generate后生成的静态页面。</p>
-<h4 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h4><p>1、在你的Github中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。" target="_blank" rel="noopener">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a>    </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c93686920362.jpg" alt> </div></p>
-<p>2、将myBlog目录中的_config.yml文件在VScode中打开，编辑网站配置：</p>
-<ul>
-<li>把第 6 行的 title 改成你想要的名字</li>
-<li>把第 10 行的 author 改成你想取大名</li>
-<li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>: 开头）<br><div align="center"><img src="https://i.loli.net/2019/03/21/5c9368cb42ac7.jpg" alt>     </div></li>
-</ul>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c9368f2e97e0.png" alt>     </div></p>
-<p>3、修改完成配置后在myBlog目录下执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save    //安装 git 部署插件</span><br><span class="line">$ hexo deploy                             //将本地博客代码部署到Github上</span><br></pre></td></tr></table></figure></p>
-<p>4、进入「你的用户名.<a href="http://github.io」对应的" target="_blank" rel="noopener">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
-<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开Hexo目录下的source文件夹，所有的文章都会以md形式保存在_post文件夹中，只要在_post文件夹中新建md类型的文档，就相当于在本地添加了新文章</p>
-<p>2、利用来VScode编辑新文章</p>
-<p>3、<code>hexo generate</code></p>
-<p>4、<code>hexo deploy</code></p>
-<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
-<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
-<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:iissnan/hexo-theme-next.git</p>
-<p>4、<code>cd themes</code></p>
-<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
-<p>6、<code>cd ..</code></p>
-<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
-<p>8、<code>hexo generate</code></p>
-<p>9、<code>hexo deploy</code></p>
-<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。  </p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
-<p>2、_config.yml中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
-<p>3、想要删除博客的话，直接删除source-&gt;_posts-&gt;对应的博客文章，然后再次执行hexo generate、hexo deploy即可；</p>
-<p>4、在_config.yml中修改language为zh-CN，即可将博客中英文转换为中文；</p>
-<p>5、常用命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"postName"</span>      //新建文章 </span><br><span class="line">hexo new page <span class="string">"pageName"</span> //新建页面 </span><br><span class="line">hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。</span><br><span class="line">hexo generate           //生成静态文件 </span><br><span class="line">hexo deploy             //部署到Giihub </span><br><span class="line">hexo server             //启动本地服务器 </span><br><span class="line">hexo <span class="built_in">help</span>               //查询帮助</span><br></pre></td></tr></table></figure></p>
-<p>6、md文件需要用到<a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">markdown语法</a>。  </p>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+        <p>在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。<a id="more"></a>   </p>
+<h4 id="对象（Object）是什么？"><a href="#对象（Object）是什么？" class="headerlink" title="对象（Object）是什么？"></a>对象（Object）是什么？</h4><p>在开始介绍如何创建对象前，我们要知道对象是什么。<strong>对象（<code>Object</code>）</strong>简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？  </p>
+<p>第一种是原生的值（<code>primitive</code>），像是布尔值（<code>Boolean</code>）、数值（<code>Number</code>）或是字符串（<code>String</code>），而在对象当中，我们把这类的值称为属性（<code>Property</code>）。  </p>
+<p>第二种可以放入的值是对象（<code>Object</code>），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（<code>Property</code>）。  </p>
+<p>第三种放入的值可以是函数（<code>function</code>），在对象的情况下，我们会把这种函数称做方法（<code>method</code>）。在对象中的每一个<code>Property</code>或是<code>Method</code>都会占据电脑当中一个记忆体的位置，在需要使用到的时候，把它们调取出来。  </p>
+<p>接下来我将介绍三种创建JavaScript里的对象及如何调用的方法：  </p>
+<h4 id="方法一：使用"><a href="#方法一：使用" class="headerlink" title="方法一：使用 [ ]"></a>方法一：使用 [ ]</h4><p><strong>创建对象</strong>  </p>
+<p>创建对象的第一个方法是使用<code>[ ]</code>，<code>[ ]</code>在JavaScript中被称做Computed Member Access：  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg" alt>    </div></p>
+<p>让我们看一下底下的例子：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person[<span class="string">"firstname"</span>] = <span class="string">"Jay"</span>;</span><br><span class="line">person[<span class="string">"lastname"</span>] = <span class="string">"Chou"</span>;</span><br></pre></td></tr></table></figure>
+<p>这是利用<code>[ ]</code>创建对象的方法，首先我们创建一个对象，叫做<code>person</code>，接着开始给它「名称-值」配对，例如，<code>firstname</code>是属性的名称，<code>Jay</code>则是它的值；<code>lastname</code>也是属性名称，<code>Chou</code>则是它的值。通过这种方法，我们就可以创建对象里面的各种「名称-值」配对。  </p>
+<p><strong>调用对象</strong>   </p>
+<p>紧接上面的例子，我们也同样可以利用<code>[ ]</code>来调用已经建立好的对象，<code>[ ]</code>里面如果放的是字符串而不是变量，注意要记得加上引号’像是这样：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="built_in">console</span>.log(person[<span class="string">"firstname"</span>]);  <span class="comment">// Jay</span></span><br></pre></td></tr></table></figure>
+<p>另外，如果是通过<code>[ ]</code>来调用对象的话，还有一个特别的地方，就是<code>[ ]</code>内可以放变量，像是这样（当<code>[ ]</code>里面放的是变量时不用加引号<code>&quot;</code>），一样可以调用到对象的值，这个是用种方法二（<code>.</code>）做不到的：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="keyword">var</span> id = <span class="string">"lastname"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person[id]);  <span class="comment">// Chou</span></span><br></pre></td></tr></table></figure>
+<h4 id="方法二：使用点符号"><a href="#方法二：使用点符号" class="headerlink" title="方法二：使用点符号 ."></a>方法二：使用点符号 .</h4><p><strong>创建对象</strong>  </p>
+<p>第二种创建对象的方法是使用英文的句点 <code>.</code>，在JavaScript中被称做Member Access，创建的方法如下：我们在刚刚创建的<code>person</code>这个对象里面，再创建一个对象属性，名称为<code>address</code>。其实，我觉得可以把.翻译成中文的「的」，所以这里的意思就是，在<code>person</code>的里面创建一个名称为<code>address</code>的对象；在<code>person</code>的<code>address</code>的<code>country</code>，创建一个值为<code>&quot;China&quot;</code>，以此类推…。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line">person.address = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.address.country = <span class="string">"China"</span>;</span><br><span class="line">person.address.city = <span class="string">"Hangzhou"</span>;</span><br><span class="line">person.address.location = <span class="string">"Xihu"</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>调用对象</strong>  </p>
+<p>同样的方法也可以用来调用出该对象的值：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="built_in">console</span>.log(person.address);  <span class="comment">//&#123;country: "China", city: "Hangzhou", location: "Xihu"&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(person.address.country);  <span class="comment">// China</span></span><br><span class="line"><span class="built_in">console</span>.log(person[<span class="string">"address"</span>][<span class="string">"location"</span>]);  <span class="comment">// Xihu</span></span><br></pre></td></tr></table></figure>
+<p>从上面可以看出，<code>.</code> 和<code>[ ]</code>是可以交替使用的。  </p>
+<h4 id="方法三：使用"><a href="#方法三：使用" class="headerlink" title="方法三：使用{ }"></a>方法三：使用{ }</h4><p><strong>创建对象</strong>  </p>
+<p>其实还有在创建对象上有更快的做法，我们可以直接使用<code>{ }</code>，我们可以把上面的代码，改成这样：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    firstname: <span class="string">"Jay"</span>,</span><br><span class="line">    lastname: <span class="string">"Chou"</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        country: <span class="string">"China"</span>,</span><br><span class="line">        city: <span class="string">"Hangzhou"</span>,</span><br><span class="line">        location: <span class="string">"Xihu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这种方式，可以得到与方法二一模一样的结果，调用方法也一致。  </p>
+<p><strong>搭配函数使用对象</strong>  </p>
+<p>在我们创建好对象后，我们可以搭配函数(<code>function</code>)来使用对象，例如，我先把刚刚创建的对象<code>person</code>，改成叫做<code>jaychou</code>。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jaychou = &#123;</span><br><span class="line">    firstname: <span class="string">"Jay"</span>,</span><br><span class="line">    lastname: <span class="string">"Chou"</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        country: <span class="string">"China"</span>,</span><br><span class="line">        city: <span class="string">"Hangzhou"</span>,</span><br><span class="line">        location: <span class="string">"Xihu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着创建一个名称为<code>SayHI</code>的函数，并且带入我们的对象：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SayHI</span>(<span class="params">people</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"HI"</span> + people.lastname);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SayHI(jaychou);  <span class="comment">// HI Chou</span></span><br></pre></td></tr></table></figure>
+<p><strong>直接在函数参数的地方创建对象</strong>  </p>
+<p>我们也可以直接在调用函数的同时创建对象，像是这样子：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SayHI(&#123;<span class="attr">firstname</span>: <span class="string">"Jony"</span>, <span class="attr">lastname</span>: <span class="string">"J"</span>&#125;);  <span class="comment">// HI J</span></span><br></pre></td></tr></table></figure>
+<p>一开始看到这样的写法可能会觉得很奇怪，但其实这种方式和我们直接在函数的参数里面输入字符串或数值是一样的意思，只是这里是创建一个对象。我们把这种直接在函数的参数中创建对象的方法称做”creating object on the fly”（即动态创建对象）。  </p>
+<h4 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h4><p>其实使用<code>new Object</code>不是创建对象最好的方式，这点会在之后的文章再作说明。另外，虽然使用<code>[ ]</code>和<code>.</code>都可以拿来创建对象和调用对象，但还是建议尽量使用点符号.作为创建对象和调用对象的方法，这样比较干净简洁，在debug的时候也比较容易。  </p>
+<p>还有不论你使用的是<code>new Object</code>、”<code>.</code>“、或者直接用”<code>{ }</code>“来创建对象，其实在JavaScript转译之后，本质上做的都是同样的事。它都会将这个对象建立在记忆体中，并创建该对象的属性（<code>property</code>）和方法（<code>method</code>）在记忆体中。   </p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
     </div>
@@ -630,9 +608,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            <a href="/tags/Object/" rel="tag"><i class="fa fa-tag"></i> Object</a>
+          
+            <a href="/tags/对象/" rel="tag"><i class="fa fa-tag"></i> 对象</a>
           
         </div>
       
@@ -645,8 +625,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/20/CSS布局—三栏布局/" rel="next" title="CSS笔记—三栏布局">
-                <i class="fa fa-chevron-left"></i> CSS笔记—三栏布局
+              <a href="/2019/05/06/分享7个有用的JavaScript技巧/" rel="next" title="【译】分享7个好用的JavaScript技巧">
+                <i class="fa fa-chevron-left"></i> 【译】分享7个好用的JavaScript技巧
               </a>
             
           </div>
@@ -654,10 +634,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/29/Git命令拓展/" rel="prev" title="Git命令拓展">
-                Git命令拓展 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -941,7 +917,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联Github"><span class="nav-number">3.</span> <span class="nav-text">关联Github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加新文章"><span class="nav-number">4.</span> <span class="nav-text">添加新文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更换主题"><span class="nav-number">5.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips"><span class="nav-number">6.</span> <span class="nav-text">tips</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#对象（Object）是什么？"><span class="nav-number">1.</span> <span class="nav-text">对象（Object）是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一：使用"><span class="nav-number">2.</span> <span class="nav-text">方法一：使用 [ ]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二：使用点符号"><span class="nav-number">3.</span> <span class="nav-text">方法二：使用点符号 .</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法三：使用"><span class="nav-number">4.</span> <span class="nav-text">方法三：使用{ }</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他说明"><span class="nav-number">5.</span> <span class="nav-text">其他说明</span></a></li></ol></div>
             
 
           </div>

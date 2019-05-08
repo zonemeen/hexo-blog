@@ -150,7 +150,7 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-22T10:10:41.046Z">
+<meta property="og:updated_time" content="2019-05-07T11:57:13.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Undefined vs Null">
 <meta name="twitter:description" content="在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。">
@@ -491,7 +491,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-22 18:10:41" itemprop="dateModified" datetime="2019-04-22T18:10:41+08:00">2019-04-22</time>
+                <time title="修改时间：2019-05-07 19:57:13" itemprop="dateModified" datetime="2019-05-07T19:57:13+08:00">2019-05-07</time>
               
             
           </span>
@@ -560,7 +560,7 @@
 <p>本文将探讨JavaScript中<code>undefined</code>和<code>null</code>之间的相似和差异之处。  </p>
 <h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在if语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!<span class="literal">undefined</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'undefined is false'</span>);</span><br><span class="line"><span class="comment">// undefined is false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="literal">null</span>) </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'null is false'</span>);</span><br><span class="line"><span class="comment">// null is false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">undefined</span> == <span class="literal">null</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p>（2）在JavaScript中，只有六个假值，<code>null</code>和<code>undefined</code>都包含在六个假值中。   </p>
+<p>（2）在JavaScript中，只有六个falsy值，<code>null</code>和<code>undefined</code>都包含在六个falsy值中，当进行逻辑判断时所有的Falsy值均为false。   </p>
 <ul>
 <li>false</li>
 <li>0</li>
@@ -569,7 +569,7 @@
 <li><strong>undefined</strong></li>
 <li>NaN</li>
 </ul>
-<p>除了这六个值，JavaScript中的任何其他值都被认为是真值。  </p>
+<p>除了这六个值，JavaScript中的任何其他值都被认为是truthy值，当进行逻辑判断时均为true。  </p>
 <p>（3）同样在JavaScript中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。  </p>
 <ul>
 <li>Boolean</li>

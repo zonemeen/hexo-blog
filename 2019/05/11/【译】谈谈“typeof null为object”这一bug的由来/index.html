@@ -150,7 +150,7 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-11T02:52:20.501Z">
+<meta property="og:updated_time" content="2019-05-11T02:54:52.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【译】谈谈“typeof null为object”这一bug的由来">
 <meta name="twitter:description" content="很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。">
@@ -474,7 +474,7 @@
                 
               
 
-              <time title="创建时间：2019-05-11 10:36:21 / 修改时间：10:52:20" itemprop="dateCreated datePublished" datetime="2019-05-11T10:36:21+08:00">2019-05-11</time>
+              <time title="创建时间：2019-05-11 10:36:21 / 修改时间：10:54:52" itemprop="dateCreated datePublished" datetime="2019-05-11T10:36:21+08:00">2019-05-11</time>
             
 
             
@@ -547,7 +547,7 @@
 <blockquote>
 <p>原文链接：<a href="http://www.2ality.com/2013/10/typeof-null.html" target="_blank" rel="noopener">http://www.2ality.com/2013/10/typeof-null.html</a></p>
 </blockquote>
-<p>更新于2013-11-05：我看了下C语言关于<code>typeof</code>的规范，它对于<code>typeof null</code>为何结果是’<code>object</code>’有更好的解释。  </p>
+<p>我看了下C语言关于<code>typeof</code>的规范，它对于<code>typeof null</code>为何结果是’<code>object</code>’有更好的解释。  </p>
 <p>在JavaScript中，<code>typeof null</code>的结果是’<code>Object</code>‘，它错误地暗示<code>null</code>是一个对象，实际上它是一个原始值。我在<a href="https://luozongmin.com/2019/05/09/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/">上一篇文章</a>也提到了这是JS的一大bug，不幸的是这并不能解决，因为这将破坏现有规范，接下来解释下这个bug的历史。  </p>
 <p>“<code>typeof null</code>”的错误从JavaScripts第一个版本开始就已经存在了。在这个版本，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：   </p>
 <ul>

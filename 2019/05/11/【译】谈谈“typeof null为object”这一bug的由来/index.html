@@ -142,24 +142,18 @@
 
 
 
-  <meta name="description" content="Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。">
-<meta name="keywords" content="Git,GitHub">
+  <meta name="description" content="很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。">
+<meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git&#x2F;GitHub操作手册">
-<meta property="og:url" content="https://luozongmin.com/2019/03/19/Git及Github操作手册/index.html">
+<meta property="og:title" content="【译】谈谈“typeof null为object”这一bug的由来">
+<meta property="og:url" content="https://luozongmin.com/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。">
+<meta property="og:description" content="很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c9089075b177.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c908a8d81699.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c908b6c134aa.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c908bd8b3f80.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c908c02da1c5.jpg">
-<meta property="og:updated_time" content="2019-04-22T10:18:35.847Z">
+<meta property="og:updated_time" content="2019-05-11T02:52:20.501Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git&#x2F;GitHub操作手册">
-<meta name="twitter:description" content="Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/19/5c9089075b177.jpg">
+<meta name="twitter:title" content="【译】谈谈“typeof null为object”这一bug的由来">
+<meta name="twitter:description" content="很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。">
 
 
 
@@ -168,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/03/19/Git及Github操作手册/">
+  <link rel="canonical" href="https://luozongmin.com/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/">
 
 
 
@@ -178,7 +172,7 @@
   };
 </script>
 
-  <title>Git/GitHub操作手册 | 米淇淋の个人博客</title>
+  <title>【译】谈谈“typeof null为object”这一bug的由来 | 米淇淋の个人博客</title>
   
 
 
@@ -437,7 +431,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/03/19/Git及Github操作手册/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -454,7 +448,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Git/GitHub操作手册
+          <h1 class="post-title" itemprop="name headline">【译】谈谈“typeof null为object”这一bug的由来
 
               
             
@@ -480,24 +474,12 @@
                 
               
 
-              <time title="创建时间：2019-03-19 14:11:43" itemprop="dateCreated datePublished" datetime="2019-03-19T14:11:43+08:00">2019-03-19</time>
+              <time title="创建时间：2019-05-11 10:36:21 / 修改时间：10:52:20" itemprop="dateCreated datePublished" datetime="2019-05-11T10:36:21+08:00">2019-05-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-22 18:18:35" itemprop="dateModified" datetime="2019-04-22T18:18:35+08:00">2019-04-22</time>
               
             
           </span>
@@ -514,7 +496,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -533,8 +515,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/03/19/Git及Github操作手册/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/19/Git及Github操作手册/" itemprop="commentCount"></span>
+                <a href="/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -561,54 +543,42 @@
       
 
       
-        <p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 <a id="more"></a>  </p>
-<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  </p>
-<p>由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     </p>
-<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c9089075b177.jpg" alt>     </div></p>
-<p>1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init    // 在当前目录新建一个Git代码库</span><br></pre></td></tr></table></figure></p>
-<p>这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> <span class="string">"# myblog"</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="string">'myBlog'</span>；如果目录下已经有文件，请省略这一步</span><br><span class="line">$ git add README.md                //将README.md文件提交到问题暂存区</span><br><span class="line">$ git commit -m <span class="string">"first commit"</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="string">'first commit'</span></span><br><span class="line">$ git status -sb      //显示当前所有文件的状态</span><br><span class="line">```    </span><br><span class="line">这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。   </span><br><span class="line"></span><br><span class="line">2、登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。    </span><br><span class="line">&lt;div align=center&gt;![](https://i.loli.net/2019/03/19/5c9089bb5e271.jpg)     </span><br><span class="line"></span><br><span class="line">在Repository name填入blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库。    </span><br><span class="line"></span><br><span class="line">3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:     </span><br><span class="line">&lt;div align=center&gt;![](https://i.loli.net/2019/03/19/5c9089f6b1548.jpg)    </span><br><span class="line"></span><br><span class="line">4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用HTTPS 地址，因为使用HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放http端口的公司内部就无法使用SSH协议而只能用HTTPS 。    </span><br><span class="line"></span><br><span class="line">5、目前，在GitHub上的这个blog仓库还是空的，GitHub告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。     </span><br><span class="line">现在，我们根据GitHub的提示，在本地的blog仓库下运行命令：    </span><br><span class="line">```bash</span><br><span class="line">$ git remote add origin git@github.com:miqilin21/blog.git</span><br></pre></td></tr></table></figure></p>
-<p>6、下一步，就可以把本地库的所有内容推送到远程库上：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure></p>
-<p>把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。   </p>
-<p>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
-<p>推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一模一样:      </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c908a8d81699.jpg" alt>    </div></p>
-<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code>    </p>
-<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用git的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push   //将本地仓库修改内容同步到远程仓库</span><br></pre></td></tr></table></figure></p>
-<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git pull      //将远程库修改的内容下载到本地库</span><br></pre></td></tr></table></figure></p>
-<p>最后把本地master分支的最新修改<code>$ git push</code>推送至GitHub，现在，你就拥有了真正的分布式版本库！    </p>
-<h4 id="从远程库clone"><a href="#从远程库clone" class="headerlink" title="从远程库clone"></a>从远程库clone</h4><p>上面已经讲了     </p>
-<ul>
-<li>在本地创建仓库</li>
-</ul>
-<ul>
-<li>将本地仓库上传到 GitHub    </li>
-</ul>
-<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。   </p>
-<p>1、在GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：    </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c908b6c134aa.jpg" alt>   </div></p>
-<p>请按图中所示，一模一样的操作，然后点击创建按钮。    </p>
-<p>2、这样一来，这个仓库就会自动生成三个文件：    </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c908bd8b3f80.jpg" alt>    </div></p>
-<p>3、现在，远程库已经准备好了，下一步是用命令git clone克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：   </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c908c02da1c5.jpg" alt>   </div></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。    </p>
-<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:miqilin21/git-demo.git</span><br></pre></td></tr></table></figure></p>
-<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！    </p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：    </p>
-<p>1、在本地创建仓库    </p>
-<p>2、将本地仓库上传到 GitHub </p>
-<p>3、GitHub 上的仓库克隆下载到本地    </p>
-<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。    </p>
-<p>我们最后再回顾一遍已经学到的命令：    </p>
+        <p>很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。<a id="more"></a>     </p>
 <blockquote>
-<p>git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+<p>原文链接：<a href="http://www.2ality.com/2013/10/typeof-null.html" target="_blank" rel="noopener">http://www.2ality.com/2013/10/typeof-null.html</a></p>
 </blockquote>
-<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">常用Git命令清单</a><br><a href="http://www.runoob.com/git/git-install-setup.html" target="_blank" rel="noopener">Git菜鸟教程</a><br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" target="_blank" rel="noopener">廖雪峰的Git教程</a>  </p>
-</blockquote>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+<p>更新于2013-11-05：我看了下C语言关于<code>typeof</code>的规范，它对于<code>typeof null</code>为何结果是’<code>object</code>’有更好的解释。  </p>
+<p>在JavaScript中，<code>typeof null</code>的结果是’<code>Object</code>‘，它错误地暗示<code>null</code>是一个对象，实际上它是一个原始值。我在<a href="https://luozongmin.com/2019/05/09/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/">上一篇文章</a>也提到了这是JS的一大bug，不幸的是这并不能解决，因为这将破坏现有规范，接下来解释下这个bug的历史。  </p>
+<p>“<code>typeof null</code>”的错误从JavaScripts第一个版本开始就已经存在了。在这个版本，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：   </p>
+<ul>
+<li>000: <code>object</code>. 数据是对象的引用。</li>
+<li>1: <code>int</code>. 数据是31位有符号整数。</li>
+<li>010: <code>double</code>. 数据是对双浮点数的引用。</li>
+<li>100: <code>string</code>. 数据是对字符串的引用。</li>
+<li>110: <code>boolean</code>. 数据是布尔值。</li>
+</ul>
+<p>也就是说，最低位是1，然后类型标签只有1位长，即<code>int</code>型。 或者最低位为0，那么类型标签的长度为3位，为其余4种类型提供了两个附加位。  </p>
+<p>但有2个值是特殊的：  </p>
+<ul>
+<li><code>undefined</code>（JSVAL_VOID）是整数−2^30（整数范围之外的数字）。</li>
+<li><code>null</code>(JSVAL_NULL) 为机器码NULL的空指针，或者说：为0的object类型标签。   </li>
+</ul>
+<p>现在应该明白为什么<code>typeof</code>认为<code>null</code>是一个对象：它检测一个他的类型标签并且返回”<code>object</code>”。 以下是<code>typeof</code>的引擎代码：  </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">JS_PUBLIC_API(JSType)</span><br><span class="line">   JS_TypeOfValue(JSContext *cx, jsval v)</span><br><span class="line">   &#123;</span><br><span class="line">       JSType type = JSTYPE_VOID;</span><br><span class="line">       JSObject *obj;</span><br><span class="line">       JSObjectOps *ops;</span><br><span class="line">       JSClass *clasp;</span><br><span class="line"></span><br><span class="line">       CHECK_REQUEST(cx);</span><br><span class="line">       <span class="keyword">if</span> (JSVAL_IS_VOID(v)) &#123;  <span class="comment">// (1)</span></span><br><span class="line">           type = JSTYPE_VOID;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_OBJECT(v)) &#123;  <span class="comment">// (2)</span></span><br><span class="line">           obj = JSVAL_TO_OBJECT(v);</span><br><span class="line">           <span class="keyword">if</span> (obj &amp;&amp;</span><br><span class="line">               (ops = obj-&gt;<span class="built_in">map</span>-&gt;ops,</span><br><span class="line">                ops == &amp;js_ObjectOps</span><br><span class="line">                ? (clasp = OBJ_GET_CLASS(cx, obj),</span><br><span class="line">                   clasp-&gt;call || clasp == &amp;js_FunctionClass) <span class="comment">// (3,4)</span></span><br><span class="line">                : ops-&gt;call != <span class="number">0</span>)) &#123;  <span class="comment">// (3)</span></span><br><span class="line">               type = JSTYPE_FUNCTION;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               type = JSTYPE_OBJECT;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_NUMBER(v)) &#123;</span><br><span class="line">           type = JSTYPE_NUMBER;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_STRING(v)) &#123;</span><br><span class="line">           type = JSTYPE_STRING;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_BOOLEAN(v)) &#123;</span><br><span class="line">           type = JSTYPE_BOOLEAN;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> type;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码执行的步骤如下：  </p>
+<ul>
+<li>（1）引擎首先检测值是否是<code>undefined</code>(VOID)，它通过<code>==</code>做了这样的比较：  </li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>下一个（2）是检测该值是否具有<code>object type</code>。如果它可使用<code>call</code>被调用（3）或其存在内部属性<code>[[Class]]</code>标记为函数（4），则v是函数。 否则，它是一个对象。 这是由<code>typeof null</code>生成的结果。  </p>
+</li>
+<li><p>后续检查是针对<code>number</code>，<code>string</code>和<code>boolean</code>，甚至没有明确检查<code>null</code>。这可以由以下C语言宏执行。  </p>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`</span></span><br></pre></td></tr></table></figure>
+<p>这看似是一个非常明显的bug，但不要忘记，第一个版本的JavaScript完成只用了极少的时间，具体可以看看<a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" target="_blank" rel="noopener">JavaScript的诞生</a>。   </p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
     </div>
@@ -632,9 +602,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag"><i class="fa fa-tag"></i> Git</a>
-          
-            <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
         </div>
       
@@ -647,8 +615,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/19/HTTP入门笔记/" rel="next" title="HTTP入门笔记">
-                <i class="fa fa-chevron-left"></i> HTTP入门笔记
+              <a href="/2019/05/09/JS中一切都是对象吗？看这一篇就知道了/" rel="next" title="JS中一切都是对象吗？看这一篇就知道了">
+                <i class="fa fa-chevron-left"></i> JS中一切都是对象吗？看这一篇就知道了
               </a>
             
           </div>
@@ -656,10 +624,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/19/HTML常用标签/" rel="prev" title="HTML常用标签">
-                HTML常用标签 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -707,17 +671,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -932,23 +887,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH-Keys"><span class="nav-number">1.</span> <span class="nav-text">SSH Keys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加远程库"><span class="nav-number">2.</span> <span class="nav-text">添加远程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#从远程库clone"><span class="nav-number">3.</span> <span class="nav-text">从远程库clone</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他学习资源"><span class="nav-number">5.</span> <span class="nav-text">其他学习资源</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       

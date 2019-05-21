@@ -142,20 +142,24 @@
 
 
 
-  <meta name="description" content="就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！">
-<meta name="keywords" content="JavaScript,编程技巧">
+  <meta name="description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
+<meta name="keywords" content="JavaScript,BOM,DOM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【译】分享7个好用的JavaScript技巧">
-<meta property="og:url" content="https://luozongmin.com/2019/05/06/分享7个有用的JavaScript技巧/index.html">
+<meta property="og:title" content="谈谈浏览器里的JavaScript">
+<meta property="og:url" content="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！">
+<meta property="og:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/05/06/5ccf842fdb6ef.jpg">
-<meta property="og:updated_time" content="2019-05-07T01:20:32.515Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a3d7e301684230.png">
+<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce39e9290cf274024.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a08ea90db11007.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png">
+<meta property="og:updated_time" content="2019-05-21T07:14:28.728Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="【译】分享7个好用的JavaScript技巧">
-<meta name="twitter:description" content="就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！">
-<meta name="twitter:image" content="https://i.loli.net/2019/05/06/5ccf842fdb6ef.jpg">
+<meta name="twitter:title" content="谈谈浏览器里的JavaScript">
+<meta name="twitter:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg">
 
 
 
@@ -164,7 +168,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/05/06/分享7个有用的JavaScript技巧/">
+  <link rel="canonical" href="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/">
 
 
 
@@ -174,7 +178,7 @@
   };
 </script>
 
-  <title>【译】分享7个好用的JavaScript技巧 | 米淇淋の个人博客</title>
+  <title>谈谈浏览器里的JavaScript | 米淇淋の个人博客</title>
   
 
 
@@ -433,7 +437,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/06/分享7个有用的JavaScript技巧/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -450,7 +454,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">【译】分享7个好用的JavaScript技巧
+          <h1 class="post-title" itemprop="name headline">谈谈浏览器里的JavaScript
 
               
             
@@ -476,24 +480,12 @@
                 
               
 
-              <time title="创建时间：2019-05-06 08:45:36" itemprop="dateCreated datePublished" datetime="2019-05-06T08:45:36+08:00">2019-05-06</time>
+              <time title="创建时间：2019-05-21 10:39:02 / 修改时间：15:14:28" itemprop="dateCreated datePublished" datetime="2019-05-21T10:39:02+08:00">2019-05-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-07 09:20:32" itemprop="dateModified" datetime="2019-05-07T09:20:32+08:00">2019-05-07</time>
               
             
           </span>
@@ -529,8 +521,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/05/06/分享7个有用的JavaScript技巧/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/06/分享7个有用的JavaScript技巧/" itemprop="commentCount"></span>
+                <a href="/2019/05/21/聊一聊浏览器里的JavaScript/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/21/聊一聊浏览器里的JavaScript/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -557,31 +549,82 @@
       
 
       
-        <p>就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！<a id="more"></a>   </p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/06/5ccf842fdb6ef.jpg" alt>    </div></p>
-<p>原文链接：<a href="https://davidwalsh.name/javascript-tricks#comments" target="_blank" rel="noopener">https://davidwalsh.name/javascript-tricks#comments</a>   </p>
-<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><p>数组去重可能比您想象的更容易：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> j = [...new <span class="built_in">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>])]</span><br><span class="line">&gt;&gt; [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
-<p>很简单有木有！ </p>
-<h4 id="过滤掉falsy值"><a href="#过滤掉falsy值" class="headerlink" title="过滤掉falsy值"></a>过滤掉falsy值</h4><p>是否需要从数组中过滤出falsy值（<code>0</code>，<code>undefined</code>，<code>null</code>，<code>false</code>等）？ 你可能不知道还有这个技巧：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> res = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="literal">undefined</span>,<span class="literal">null</span>,<span class="literal">false</span>,<span class="string">''</span>].filter(<span class="built_in">Boolean</span>);</span><br><span class="line">&gt;&gt; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span></span><br></pre></td></tr></table></figure>
-<h4 id="创建空对象"><a href="#创建空对象" class="headerlink" title="创建空对象"></a>创建空对象</h4><p>您可以使用<code>{ }</code>创建一个看似空的对象，但该对象仍然具有<code>__proto__</code>和通常的<code>hasOwnProperty</code>以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dict = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// dict.__proto__ === "undefined"</span></span><br><span class="line"><span class="comment">// No object properties exist until you add them</span></span><br></pre></td></tr></table></figure>
-<p>这种方式创建的对象就很纯粹，没有任何属性和对象，非常干净。</p>
-<h4 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h4><p>在JavaScript中合并多个对象的需求已经存在，尤其是当我们开始使用选项创建类和小部件时：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> person = &#123; <span class="attr">name</span>: <span class="string">'David Walsh'</span>, <span class="attr">gender</span>: <span class="string">'Male'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> tools = &#123; <span class="attr">computer</span>: <span class="string">'Mac'</span>, <span class="attr">editor</span>: <span class="string">'Atom'</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> attributes = &#123; <span class="attr">handsomeness</span>: <span class="string">'Extreme'</span>, <span class="attr">hair</span>: <span class="string">'Brown'</span>, <span class="attr">eyes</span>: <span class="string">'Blue'</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> summary = &#123;...person, ...tools, ...attributes&#125;;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Object &#123;</span></span><br><span class="line"><span class="comment">  "computer": "Mac",</span></span><br><span class="line"><span class="comment">  "editor": "Atom",</span></span><br><span class="line"><span class="comment">  "eyes": "Blue",</span></span><br><span class="line"><span class="comment">  "gender": "Male",</span></span><br><span class="line"><span class="comment">  "hair": "Brown",</span></span><br><span class="line"><span class="comment">  "handsomeness": "Extreme",</span></span><br><span class="line"><span class="comment">  "name": "David Walsh",</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p>这三个点<code>(...)</code>使任务变得更加容易！   </p>
-<h4 id="Require函数参数"><a href="#Require函数参数" class="headerlink" title="Require函数参数"></a>Require函数参数</h4><p>能够为函数参数设置默认值是JavaScript的一个很棒的补充，但是请查看这个技巧，要求为给定的参数传递值：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isRequired = <span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'param is required'</span>); &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> hello = <span class="function">(<span class="params">name = isRequired(</span>)) =&gt;</span> &#123; <span class="built_in">console</span>.log(<span class="string">`hello <span class="subst">$&#123;name&#125;</span>`</span>) &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// This will throw an error because no name is provided</span></span><br><span class="line">hello();</span><br><span class="line"></span><br><span class="line"><span class="comment">// This will also throw an error</span></span><br><span class="line">hello(<span class="literal">undefined</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// These are good!</span></span><br><span class="line">hello(<span class="literal">null</span>);</span><br><span class="line">hello(<span class="string">'David'</span>);</span><br></pre></td></tr></table></figure>
-<h4 id="解构添加别名"><a href="#解构添加别名" class="headerlink" title="解构添加别名"></a>解构添加别名</h4><p>解构是JavaScript的一个非常受欢迎的补充，但有时我们更喜欢用其他名称来引用这些属性，所以我们可以利用别名：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">x</span>: <span class="number">1</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Grabs obj.x as &#123; x &#125;</span></span><br><span class="line"><span class="keyword">const</span> &#123; x &#125; = obj;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Grabs obj.x as &#123; otherName &#125;</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">x</span>: otherName &#125; = obj;</span><br></pre></td></tr></table></figure>
-<p>有助于避免与现有变量的命名冲突！   </p>
-<h4 id="获取查询字符串参数"><a href="#获取查询字符串参数" class="headerlink" title="获取查询字符串参数"></a>获取查询字符串参数</h4><p>获取url里面的参数值或者追加查询字符串，在这之前，我们一般通过正则表达式来获取查询字符串值，然而现在有一个新的api，具体详情可以查看<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams" target="_blank" rel="noopener">这里</a>，可以让我们以很简单的方式去处理url。  </p>
-<p>比如现在我们有这样一个url，”?post=1234&amp;action=edit”，我们可以利用下面的技巧来处理这个url。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Assuming "?post=1234&amp;action=edit"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> urlParams = <span class="keyword">new</span> URLSearchParams(<span class="built_in">window</span>.location.search);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(urlParams.has(<span class="string">'post'</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(urlParams.get(<span class="string">'action'</span>)); <span class="comment">// "edit"</span></span><br><span class="line"><span class="built_in">console</span>.log(urlParams.getAll(<span class="string">'action'</span>)); <span class="comment">// ["edit"]</span></span><br><span class="line"><span class="built_in">console</span>.log(urlParams.toString()); <span class="comment">// "?post=1234&amp;action=edit"</span></span><br><span class="line"><span class="built_in">console</span>.log(urlParams.append(<span class="string">'active'</span>, <span class="string">'1'</span>)); <span class="comment">// "?post=1234&amp;action=edit&amp;active=1"</span></span><br></pre></td></tr></table></figure>
-<p>比我们过去用的容易多了！   </p>
-<p>多年来JavaScript已经发生了很大的变化，但是我最喜欢的JavaScript部分是我们所看到的语言改进的速度。 尽管JavaScript的动态不断变化，我们仍然需要采用一些不错的技巧; 将这些技巧保存在工具箱中，以便在需要时使用！   </p>
-<p>那你最喜欢的JavaScript技巧是什么？   </p>
+        <p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」<a id="more"></a>，其中： </p>
+<ul>
+<li>HTML 负责资料与结构</li>
+<li>CSS 负责样式与呈现</li>
+<li>JavaScript 负责行为与互动</li>
+</ul>
+<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg" alt>   </div></p>
+<p>那么，如果你跟我在学JavaScript的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…  </p>
+<p><strong>我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！</strong>   </p>
+<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a3d7e301684230.png" alt>   </div></p>
+<p>那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  </p>
+<h3 id="浏览器里的JavaScript"><a href="#浏览器里的JavaScript" class="headerlink" title="浏览器里的JavaScript"></a>浏览器里的JavaScript</h3><p>严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  </p>
+<p>事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  </p>
+<p>所以广泛来说，在浏览器上的JavaScript 实际上包含了以下三部分：  </p>
+<ul>
+<li><strong>JavaScript核心</strong> (以ECMAScript标准为基础)</li>
+<li><strong>BOM</strong> (Browser Object Model，浏览器对象模型)</li>
+<li><strong>DOM</strong> (Document Object Model，文件对象模型)  </li>
+</ul>
+<p>由于BOM与DOM是由浏览器执行环境所提供；所以换句话说，在node环境下的JavaScript就不会有这两个部分。  </p>
+<p>前端开发者就是可以通过JavaScript 去调用BOM 与DOM 提供的API，进一步通过它们去控制浏览器的行为与网页的内容。  </p>
+<p>那么接下来就来具体介绍一下BOM与DOM吧。  </p>
+<h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。  </p>
+<p>在早期没有制定标准规范的时候，各家浏览器厂商几乎各自在自家浏览器上实作功能，非常混乱。直到后来W3C 把各家浏览器都有实作的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了HTML5 的标准中，这也就是我们现在看到的BOM API的实作。  </p>
+<p>BOM 有时也有人非正式地称它为Level 0 DOM。因为它在DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以Level 0 DOM与BOM两者实际上指的是同一个东西。</p>
+<h3 id="BOM的核心window对象"><a href="#BOM的核心window对象" class="headerlink" title="BOM的核心window对象"></a>BOM的核心window对象</h3><p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce39e9290cf274024.jpg" alt>   </div></p>
+<p>从上图可以看出BOM的核心是<code>window</code>对象。 </p>
+<p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。  </p>
+<p>在浏览器里的<code>window</code>对象会扮演着两种角色：  </p>
+<ul>
+<li>ECMAScript 标准里的<strong>全局对象</strong> (Global Object)</li>
+<li>JavaScript 用来与浏览器沟通的窗口</li>
+</ul>
+<p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过window.xxx的方式取得它们。比如：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);     <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>但若是直接通过指定<code>window</code>对象的属性则可以：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);        <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？  </p>
+<h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：  </p>
+<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a08ea90db11007.jpg" alt>   </div></p>
+<p>(alert on Chrome)</p>
+<p>我想不管是不是刚接触JavaScript的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="string">"message"</span>);</span><br></pre></td></tr></table></figure>
+<p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。  </p>
+<p>一行代码就可以生成一个对话框，很神奇吧？  </p>
+<p>而这就是浏览器环境的BOM提供给JavaScript控制的功能之一。  </p>
+<p>类似的对话框还有用来提供<strong>确定/取消</strong>的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" target="_blank" rel="noopener">window.confirm()</a>，以及开放式问答的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" target="_blank" rel="noopener">window.prompt()</a>对话框。  </p>
+<p>当然BOM 提供的API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。  </p>
+<h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将HTML文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为DOM Tree。 </p>
+<p>简单来说，我们把HTML每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的HTML如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;米淇淋的个人博客&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;这是主题&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;这是一个&lt;i&gt;简单&lt;/i</span>&gt;的段落&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
+<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png" alt>  </div></p>
+<p>在最根部的地方，就是<code>document</code>，就是BOM图中<code>window</code>下面的那个。</p>
+<p>往下可以延伸出一个个的HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
+<p>而DOM API 就是定义了让JavaScript 可以存取、改变HTML 结构、样式和内容的方法，甚至是对节点绑定的事件。</p>
+<p>JavaScript 就是通过DOM 提供的API 来对HTML 做存取与操作。 </p>
+<h3 id="DOM-与-BOM-的区别"><a href="#DOM-与-BOM-的区别" class="headerlink" title="DOM 与 BOM 的区别"></a>DOM 与 BOM 的区别</h3><p>前面介绍BOM时，我们已经知道DOM的<code>document</code>其实也就是<code>window</code>对象的子对象之一。 </p>
+<p>而 DOM 与 BOM 最大的区别在于：</p>
+<ul>
+<li>BOM: JavaScript 与<strong>浏览器</strong>沟通的窗口，不涉及网页内容。</li>
+<li>DOM: JavaScript 用来控制<strong>网页</strong>的节点与内容的标准。</li>
+</ul>
+<p>BOM完全依赖于浏览器厂商实作本身无标准规范，而DOM有着W3C 所制定的标准来规范。</p>
+<p>想要通过DOM API 取得节点，JavaScript 可以这样写： </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据传入的值，找到 DOM 中 id 为 'xxx' 的元素。</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'xxx'</span>); </span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'xxx'</span>);</span><br></pre></td></tr></table></figure>
+<p>而透过DOM API选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
+<p>假设有一个HTML 节点：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"greet"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">'#greet'</span>).textContent = <span class="string">'Hello World!'</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output" target="_blank" rel="noopener">JS Bin on jsbin.com</a></p>
+<p>看到这里，恭喜你已经可以通过JavaScript 在网页上输出”Hello World!” 啦！</p>
+<p>在后续的内容中，我们会继续来介绍各种操作网页的DOM/BOM API。</p>
+<p>毕竟对前端工程师来说，搞懂<strong>怎么与浏览器打交道、怎么操作网页内容</strong>，就是做好WebUI最重要的基础。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
@@ -608,7 +651,9 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/编程技巧/" rel="tag"><i class="fa fa-tag"></i> 编程技巧</a>
+            <a href="/tags/BOM/" rel="tag"><i class="fa fa-tag"></i> BOM</a>
+          
+            <a href="/tags/DOM/" rel="tag"><i class="fa fa-tag"></i> DOM</a>
           
         </div>
       
@@ -621,8 +666,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/27/JavaScript中任何值的prototype到最后都是Object/" rel="next" title="JavaScript中任何值的prototype到最后都是Object">
-                <i class="fa fa-chevron-left"></i> JavaScript中任何值的prototype到最后都是Object
+              <a href="/2019/05/14/浅谈数组常见遍历方法/" rel="next" title="浅谈数组常见遍历方法">
+                <i class="fa fa-chevron-left"></i> 浅谈数组常见遍历方法
               </a>
             
           </div>
@@ -630,10 +675,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/07/谈谈JavaScript中对象建立(Object)/" rel="prev" title="谈谈JavaScript中创建对象(Object)">
-                谈谈JavaScript中创建对象(Object) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -923,7 +964,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数组去重"><span class="nav-number">1.</span> <span class="nav-text">数组去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#过滤掉falsy值"><span class="nav-number">2.</span> <span class="nav-text">过滤掉falsy值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建空对象"><span class="nav-number">3.</span> <span class="nav-text">创建空对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合并对象"><span class="nav-number">4.</span> <span class="nav-text">合并对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Require函数参数"><span class="nav-number">5.</span> <span class="nav-text">Require函数参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解构添加别名"><span class="nav-number">6.</span> <span class="nav-text">解构添加别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取查询字符串参数"><span class="nav-number">7.</span> <span class="nav-text">获取查询字符串参数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器里的JavaScript"><span class="nav-number">1.</span> <span class="nav-text">浏览器里的JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM-是什么"><span class="nav-number">2.</span> <span class="nav-text">BOM 是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM的核心window对象"><span class="nav-number">3.</span> <span class="nav-text">BOM的核心window对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器内建的对话框"><span class="nav-number">4.</span> <span class="nav-text">浏览器内建的对话框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-是什么"><span class="nav-number">5.</span> <span class="nav-text">DOM 是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-与-BOM-的区别"><span class="nav-number">6.</span> <span class="nav-text">DOM 与 BOM 的区别</span></a></li></ol></div>
             
 
           </div>

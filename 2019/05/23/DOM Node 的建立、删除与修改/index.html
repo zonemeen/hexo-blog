@@ -142,18 +142,23 @@
 
 
 
-  <meta name="description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。">
-<meta name="keywords" content="JavaScript,内存">
+  <meta name="description" content="在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我们将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。">
+<meta name="keywords" content="JavaScript,DOM,API">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript系列之内存泄漏">
-<meta property="og:url" content="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/index.html">
+<meta property="og:title" content="DOM Node 的建立、删除与修改">
+<meta property="og:url" content="https://luozongmin.com/2019/05/23/DOM Node 的建立、删除与修改/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。">
+<meta property="og:description" content="在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我们将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-28T03:45:13.241Z">
+<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce675b15078d16445.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce676068c67036247.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce676cd3902a72000.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce6770e730b171252.jpg">
+<meta property="og:updated_time" content="2019-05-23T10:35:53.794Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript系列之内存泄漏">
-<meta name="twitter:description" content="在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。">
+<meta name="twitter:title" content="DOM Node 的建立、删除与修改">
+<meta name="twitter:description" content="在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我们将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。">
+<meta name="twitter:image" content="https://i.loli.net/2019/05/23/5ce675b15078d16445.jpg">
 
 
 
@@ -162,7 +167,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/">
+  <link rel="canonical" href="https://luozongmin.com/2019/05/23/DOM Node 的建立、删除与修改/">
 
 
 
@@ -172,7 +177,7 @@
   };
 </script>
 
-  <title>JavaScript系列之内存泄漏 | 米淇淋の个人博客</title>
+  <title>DOM Node 的建立、删除与修改 | 米淇淋の个人博客</title>
   
 
 
@@ -431,7 +436,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/04/22/JavaScript系列之内存泄漏/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/23/DOM Node 的建立、删除与修改/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -448,7 +453,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript系列之内存泄漏
+          <h1 class="post-title" itemprop="name headline">DOM Node 的建立、删除与修改
 
               
             
@@ -474,24 +479,12 @@
                 
               
 
-              <time title="创建时间：2019-04-22 16:41:35" itemprop="dateCreated datePublished" datetime="2019-04-22T16:41:35+08:00">2019-04-22</time>
+              <time title="创建时间：2019-05-23 18:16:51 / 修改时间：18:35:53" itemprop="dateCreated datePublished" datetime="2019-05-23T18:16:51+08:00">2019-05-23</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-28 11:45:13" itemprop="dateModified" datetime="2019-04-28T11:45:13+08:00">2019-04-28</time>
               
             
           </span>
@@ -527,8 +520,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/04/22/JavaScript系列之内存泄漏/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/22/JavaScript系列之内存泄漏/" itemprop="commentCount"></span>
+                <a href="/2019/05/23/DOM Node 的建立、删除与修改/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/23/DOM Node 的建立、删除与修改/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -555,77 +548,54 @@
       
 
       
-        <p>在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。<a id="more"></a>   </p>
-<p>而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着<code>malloc()</code> 和 <code>free()</code> 这种低级内存管理语言也有可能出现泄露内存的情况。  </p>
-<p>这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   </p>
-<h4 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h4><p>现在各大浏览器通常采用的垃圾回收有两种方法：<strong>标记清除（mark and sweep）</strong>、<strong>引用计数(reference counting)</strong>。  </p>
-<p><strong>1、标记清除</strong> </p>
-<p>这是javascript中最常用的垃圾回收方式。  </p>
-<p>工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   </p>
-<p>工作流程：  </p>
-<ol>
-<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。</li>
-<li>去掉环境中的变量以及被环境中的变量引用的变量的标记。</li>
-<li>之后再被加上标记的变量将被视为准备删除的变量。</li>
-<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间。  </li>
-</ol>
-<p><strong>2、引用计数</strong>  </p>
-<p>工作原理：跟踪记录每个值被引用的次数。   </p>
-<p>工作流程：   </p>
-<ol>
-<li>将一个引用类型的值赋值给这个声明了的变量，这个引用类型值的引用次数就是1。</li>
-<li>同一个值又被赋值给另一个变量，这个引用类型值的引用次数加1。</li>
-<li>当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减1</li>
-<li>当引用次数变成0时，就表示这个值不再用到了。</li>
-<li>当垃圾收集器下一次运行时，它就会释放引用次数是0的值所占的内存。   </li>
-</ol>
-<p>但如果一个值不再需要了，引用数却不为0，垃圾回收机制无法释放这块内存，会导致内存泄漏。  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello miqilin'</span>);</span><br></pre></td></tr></table></figure>
-<p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。  </p>
-<p>如果增加一行代码，解除arr对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hello miqilin'</span>);</span><br><span class="line">arr = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
-<p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了0，内存就可以释放出来了。  </p>
-<p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。  </p>
-<p>接下来，我将介绍四种常见的JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a>  </p>
-<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong> </p>
-<p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     bar = <span class="string">"this is a hidden global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>函数<code>foo</code>内部使用<code>var</code>声明，实际上JS会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">arg</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">window</span>.bar = <span class="string">"this is an explicit global variable"</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。 </p>
-<p>另一种可以创建偶然全局变量的情况是<code>this</code>：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">this</span>.variable = <span class="string">"potential accidental global"</span>; </span><br><span class="line">&#125;  </span><br><span class="line"><span class="comment">// Foo called on its own, this points to the global object (window)</span></span><br><span class="line"><span class="comment">// rather than being undefined. </span></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
-<p><strong>解决方法：</strong></p>
-<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。   </p>
-<p><strong>2.被遗忘的计时器或回调函数</strong> </p>
-<p>在JavaScript中使用<code>setInterval</code>非常常见。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> someResource = getData(); </span><br><span class="line">setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(<span class="string">'Node'</span>);     </span><br><span class="line">     <span class="keyword">if</span>(node) &#123;</span><br><span class="line">         <span class="comment">// Do stuff with node and someResource.</span></span><br><span class="line">         node.innerHTML = <span class="built_in">JSON</span>.stringify(someResource));</span><br><span class="line">     &#125; &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> element = <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>);  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">onClick</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">     element.innerHtml = <span class="string">'text'</span>; </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">element.addEventListener(<span class="string">'click'</span>, onClick); <span class="comment">// Do stuff </span></span><br><span class="line">element.removeEventListener(<span class="string">'click'</span>, onClick); </span><br><span class="line">element.parentNode.removeChild(element); </span><br><span class="line"></span><br><span class="line"><span class="comment">// Now when element goes out of scope,</span></span><br><span class="line"><span class="comment">// both element and onClick will be collected even in old browsers that don't</span></span><br><span class="line"><span class="comment">// handle cycles well.</span></span><br></pre></td></tr></table></figure>
-<p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。 </p>
-<p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
-<p>诸如jQuery之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定API时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版Internet Explorer）下运行也是如此。  </p>
-<p><strong>3.闭包</strong></p>
-<p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theThing = <span class="literal">null</span>; </span><br><span class="line"><span class="keyword">var</span> replaceThing = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="keyword">var</span> originalThing = theThing;   </span><br><span class="line">   <span class="keyword">var</span> unused = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">if</span> (originalThing)</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">"hi"</span>);   </span><br><span class="line">&#125;;   </span><br><span class="line">   theThing = &#123;</span><br><span class="line">     longStr: newArray(<span class="number">1000000</span>).join(<span class="string">'*'</span>),</span><br><span class="line">     someMethod: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(someMessage);</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> &#125;; </span><br><span class="line">setInterval(replaceThing, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
-<p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
-<p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。  </p>
-<p>解决方法：</p>
-<p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
-<p><strong>4.脱离 DOM 的引用</strong>  </p>
-<p>如果把DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。   </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elements = &#123;</span><br><span class="line">     button: <span class="built_in">document</span>.getElementById(<span class="string">'button'</span>),</span><br><span class="line">     image: <span class="built_in">document</span>.getElementById(<span class="string">'image'</span>),</span><br><span class="line">     text: <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>) </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">doStuff</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     image.src = <span class="string">'http://some.url/image'</span>;</span><br><span class="line">     button.click();</span><br><span class="line">     <span class="built_in">console</span>.log(text.innerHTML);</span><br><span class="line">     <span class="comment">// Much more logic</span></span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeButton</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// The button is a direct child of body.</span></span><br><span class="line">     <span class="built_in">document</span>.body.removeChild(<span class="built_in">document</span>.getElementById(<span class="string">'button'</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// At this point, we still have a reference to #button in the global</span></span><br><span class="line">    <span class="comment">// elements dictionary. In other words, the button element is still in</span></span><br><span class="line">    <span class="comment">// memory and cannot be collected by the GC. </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。  </p>
-<h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。  </p>
-<p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。  </p>
-<h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
-<li><a href="http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf" target="_blank" rel="noopener">http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf</a></li>
-<li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
-<li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html" target="_blank" rel="noopener">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
-</ul>
-<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~   </p>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+        <p>在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我们将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。<a id="more"></a></p>
+<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newDiv = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br></pre></td></tr></table></figure>
+<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
+<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">newDiv.id = <span class="string">"myNewDiv"</span>; </span><br><span class="line">newDiv.className = <span class="string">"box"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了HTML元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
+<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的TextNode在被加入至某个节点前，我们是看不到它的。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newDiv = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立 textNode 文字节点</span></span><br><span class="line"><span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv </span></span><br><span class="line">newDiv.appendChild(textNode);</span><br></pre></td></tr></table></figure>
+<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在DOM规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
+<p>例如，一开始我们有一个HTML 的容器元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取得外层容器 myList</span></span><br><span class="line"><span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span></span><br><span class="line"><span class="keyword">var</span> fragment = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++)&#123;</span><br><span class="line">  <span class="comment">// 生成新的 li，加入文字后置入 fragment 中。</span></span><br><span class="line">  <span class="keyword">let</span> li = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</span><br><span class="line">  li.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">"Item "</span> + (i+<span class="number">1</span>)));</span><br><span class="line">  fragment.appendChild(li);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 最后将组合完成的 fragment 放进 ul 容器</span></span><br><span class="line">ul.appendChild(fragment);</span><br></pre></td></tr></table></figure>
+<p>通过操作<code>DocumentFragment</code>与直接操作DOM最关键的区别在于<code>DocumentFragment</code>不是真实的DOM结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
+<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是HTML的标签。</p>
+<p>我们只要将对应的HTML 字符串传入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;h1&gt;Hello World!&lt;/h1&gt;"</span>);</span><br></pre></td></tr></table></figure>
+<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部js资源也是可以的，但要注意的是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误 </span></span><br><span class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;script type=\"text\javascript\" src=\"file.js\"&gt;"</span> + <span class="string">"&lt;/script&gt;"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了 </span></span><br><span class="line"><span class="built_in">document</span>.write(<span class="string">"&lt;script type=\"text\javascript\" src=\"file.js\"&gt;"</span> + <span class="string">"&lt;\/script&gt;"</span>);</span><br></pre></td></tr></table></figure>
+<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   </span><br><span class="line">  <span class="built_in">document</span>.write(<span class="string">"Hello world!"</span>); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。  </p>
+<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立DOM节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
+<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的DOM 节点，置入到我们所需要指定的位置上。</p>
+<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce675b15078d16445.jpg" alt>  </div></p>
+<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 取得容器</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> myList = <span class="built_in">document</span>.getElementById(<span class="string">'myList'</span>);</span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立新的 &lt;li&gt; 元素</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> newList = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立 textNode 文字节点</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 通过 appendChild 将 textNode 加入至 newList</span></span></span><br><span class="line"><span class="undefined">  newList.appendChild(textNode);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 通过 appendChild 将 newList 加入至 myList</span></span></span><br><span class="line"><span class="undefined">  myList.appendChild(newList);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce676068c67036247.jpg" alt>  </div></p>
+<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 取得容器</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> myList  = <span class="built_in">document</span>.getElementById(<span class="string">'myList'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="xml">  // 取得 "<span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span>" 的元素</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> refNode = <span class="built_in">document</span>.querySelectorAll(<span class="string">'li'</span>)[<span class="number">1</span>];</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立 li 元素节点</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> newNode = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立 textNode 文字节点</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>);</span></span><br><span class="line"><span class="undefined">  newNode.appendChild(textNode);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 将新节点 newNode 插入 refNode 的前方</span></span></span><br><span class="line"><span class="undefined">  myList.insertBefore(newNode, refNode);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce676cd3902a72000.jpg" alt>  </div></p>
+<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 取得容器</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> myList  = <span class="built_in">document</span>.getElementById(<span class="string">'myList'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="xml">  // 取得 "<span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span>" 的元素</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> oldNode = <span class="built_in">document</span>.querySelectorAll(<span class="string">'li'</span>)[<span class="number">1</span>];</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立 li 元素节点</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> newNode = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 建立 textNode 文字节点</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> textNode = <span class="built_in">document</span>.createTextNode(<span class="string">"Hello world!"</span>);</span></span><br><span class="line"><span class="undefined">  newNode.appendChild(textNode);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 将原有的 oldNode 替换成新节点 newNode</span></span></span><br><span class="line"><span class="undefined">  myList.replaceChild(newNode, oldNode);</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span></span><br></pre></td></tr></table></figure>
+<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce6770e730b171252.jpg" alt>  </div></p>
+<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>Item3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 取得容器</span></span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> myList  = <span class="built_in">document</span>.getElementById(<span class="string">'myList'</span>);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="xml">  // 取得 "<span class="tag">&lt;<span class="name">li</span>&gt;</span>Item2<span class="tag">&lt;/<span class="name">li</span>&gt;</span>" 的元素</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> removeNode = <span class="built_in">document</span>.querySelectorAll(<span class="string">'li'</span>)[<span class="number">1</span>];</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="comment">// 将 myList 下的 removeNode 节点移除</span></span></span><br><span class="line"><span class="undefined">  myList.removeChild(removeNode);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>相信看完今天的分享，已经有能力可以通过DOM 提供的API 来进行节点的新增、修改以及删除了吧。</p>
+<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
+<p>刚好呼应阿基米德的一句众所周知的名言：</p>
+<blockquote>
+<p>「给我一个支点，我就能撬动整个地球。」</p>
+</blockquote>
+<p>那么有了DOM API 的帮助后， JavaScript 也可以说：</p>
+<blockquote>
+<p>「给我一个节点，我就能建立整个网页世界。」</p>
+</blockquote>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
     </div>
@@ -651,7 +621,9 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/内存/" rel="tag"><i class="fa fa-tag"></i> 内存</a>
+            <a href="/tags/DOM/" rel="tag"><i class="fa fa-tag"></i> DOM</a>
+          
+            <a href="/tags/API/" rel="tag"><i class="fa fa-tag"></i> API</a>
           
         </div>
       
@@ -664,8 +636,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/04/22/JavaScript系列之内存空间/" rel="next" title="JavaScript系列之内存空间">
-                <i class="fa fa-chevron-left"></i> JavaScript系列之内存空间
+              <a href="/2019/05/23/通过DOM API 查找节点/" rel="next" title="通过DOM API 查找节点">
+                <i class="fa fa-chevron-left"></i> 通过DOM API 查找节点
               </a>
             
           </div>
@@ -673,10 +645,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/25/JavaScript系列之原型与原型链/" rel="prev" title="JavaScript系列之原型与原型链">
-                JavaScript系列之原型与原型链 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -968,7 +936,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收机制"><span class="nav-number">1.</span> <span class="nav-text">垃圾回收机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四种常见的-JavaScript-内存泄漏"><span class="nav-number">2.</span> <span class="nav-text">四种常见的 JavaScript 内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#避免内存泄漏"><span class="nav-number">3.</span> <span class="nav-text">避免内存泄漏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Resources"><span class="nav-number">4.</span> <span class="nav-text">Resources</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-节点的新增"><span class="nav-number">1.</span> <span class="nav-text">DOM 节点的新增</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#document-createElement-tagName"><span class="nav-number">1.1.</span> <span class="nav-text">document.createElement(tagName)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#document-createTextNode"><span class="nav-number">1.2.</span> <span class="nav-text">document.createTextNode()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#document-createDocumentFragment"><span class="nav-number">1.3.</span> <span class="nav-text">document.createDocumentFragment()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#document-write"><span class="nav-number">1.4.</span> <span class="nav-text">document.write()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-节点的修改与删除"><span class="nav-number">2.</span> <span class="nav-text">DOM 节点的修改与删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#NODE-appendChild-childNode"><span class="nav-number">2.1.</span> <span class="nav-text">NODE.appendChild(childNode)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NODE-insertBefore-newNode-refNode"><span class="nav-number">2.2.</span> <span class="nav-text">NODE.insertBefore(newNode, refNode)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NODE-replaceChild-newChildNode-oldChildNode"><span class="nav-number">2.3.</span> <span class="nav-text">NODE.replaceChild(newChildNode, oldChildNode)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NODE-removeChild-childNode"><span class="nav-number">2.4.</span> <span class="nav-text">NODE.removeChild(childNode)</span></a></li></ol></li></ol></div>
             
 
           </div>

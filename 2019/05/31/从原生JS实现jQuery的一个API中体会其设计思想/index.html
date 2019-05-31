@@ -142,24 +142,18 @@
 
 
 
-  <meta name="description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
-<meta name="keywords" content="GitHub,Hexo">
+  <meta name="description" content="根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？">
+<meta name="keywords" content="JavaScript,jQuery">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo+GitHub搭建个人博客">
-<meta property="og:url" content="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/index.html">
+<meta property="og:title" content="从原生JS实现jQuery的一个API中体会其设计思想">
+<meta property="og:url" content="https://luozongmin.com/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
+<meta property="og:description" content="根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9367e206fed.png">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c936816aebad.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c93686920362.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9368cb42ac7.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/21/5c9368f2e97e0.png">
-<meta property="og:updated_time" content="2019-04-22T10:11:08.347Z">
+<meta property="og:updated_time" content="2019-05-31T14:24:00.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hexo+GitHub搭建个人博客">
-<meta name="twitter:description" content="hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/21/5c9367e206fed.png">
+<meta name="twitter:title" content="从原生JS实现jQuery的一个API中体会其设计思想">
+<meta name="twitter:description" content="根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？">
 
 
 
@@ -168,7 +162,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/">
+  <link rel="canonical" href="https://luozongmin.com/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/">
 
 
 
@@ -178,7 +172,7 @@
   };
 </script>
 
-  <title>使用Hexo+GitHub搭建个人博客 | 米淇淋の个人博客</title>
+  <title>从原生JS实现jQuery的一个API中体会其设计思想 | 米淇淋の个人博客</title>
   
 
 
@@ -437,7 +431,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/03/21/使用Hexo+GitHub搭建个人博客/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -454,7 +448,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">使用Hexo+GitHub搭建个人博客
+          <h1 class="post-title" itemprop="name headline">从原生JS实现jQuery的一个API中体会其设计思想
 
               
             
@@ -480,24 +474,12 @@
                 
               
 
-              <time title="创建时间：2019-03-21 18:25:10" itemprop="dateCreated datePublished" datetime="2019-03-21T18:25:10+08:00">2019-03-21</time>
+              <time title="创建时间：2019-05-31 22:16:34 / 修改时间：22:24:00" itemprop="dateCreated datePublished" datetime="2019-05-31T22:16:34+08:00">2019-05-31</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-22 18:11:08" itemprop="dateModified" datetime="2019-04-22T18:11:08+08:00">2019-04-22</time>
               
             
           </span>
@@ -514,7 +496,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tools/" itemprop="url" rel="index"><span itemprop="name">tools</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
                 
                 
@@ -533,8 +515,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/03/21/使用Hexo+GitHub搭建个人博客/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/21/使用Hexo+GitHub搭建个人博客/" itemprop="commentCount"></span>
+                <a href="/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -561,52 +543,27 @@
       
 
       
-        <p>hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多<a id="more"></a>，所以就用它啦~     </p>
-<p>下面一步一步地说怎么用hexo+github搭建一个个人博客。</p>
-<p><strong><em>说明：本文只针对Windows平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装node.js和git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad" target="_blank" rel="noopener">这篇文章</a>，并同时申请Github账号，使用的开发工具为VScode。</p>
-<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h4><p>1、首先新建一个文件夹如myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中Git Bash Here在<strong>Git命令行中打开</strong>。  </p>
-<p>2、执行以下命令安装Hexo及生成第一篇博客文章：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli   //安装hexo</span><br><span class="line">$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作</span><br><span class="line">$ hexo generate            //生成静态页面</span><br><span class="line">$ hexo server              //启动本地服务器，进行博客文章预览</span><br></pre></td></tr></table></figure></p>
-<p>Hexo会默认生成第一篇博客《Hello World》，在浏览器下打开localhost://4000你将会看到：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c9367e206fed.png" alt>    </div></p>
-<p>myBlog源文件夹整体目录预览：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c936816aebad.jpg" alt>     </div></p>
-<p>其中_config.yml和package.json为项目的配置文件，themes存放了我们博客的主题，source-&gt;_post为我们的博客目录，public为执行hexo generate后生成的静态页面。</p>
-<h4 id="关联Github"><a href="#关联Github" class="headerlink" title="关联Github"></a>关联Github</h4><p>1、在你的Github中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。" target="_blank" rel="noopener">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a>    </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c93686920362.jpg" alt> </div></p>
-<p>2、将myBlog目录中的_config.yml文件在VScode中打开，编辑网站配置：</p>
-<ul>
-<li>把第 6 行的 title 改成你想要的名字</li>
-<li>把第 10 行的 author 改成你想取大名</li>
-<li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>: 开头）<br><div align="center"><img src="https://i.loli.net/2019/03/21/5c9368cb42ac7.jpg" alt>     </div></li>
-</ul>
-<p><div align="center"><img src="https://i.loli.net/2019/03/21/5c9368f2e97e0.png" alt>     </div></p>
-<p>3、修改完成配置后在myBlog目录下执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save    //安装 git 部署插件</span><br><span class="line">$ hexo deploy                             //将本地博客代码部署到Github上</span><br></pre></td></tr></table></figure></p>
-<p>4、进入「你的用户名.<a href="http://github.io」对应的" target="_blank" rel="noopener">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
-<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开Hexo目录下的source文件夹，所有的文章都会以md形式保存在_post文件夹中，只要在_post文件夹中新建md类型的文档，就相当于在本地添加了新文章</p>
-<p>2、利用来VScode编辑新文章</p>
-<p>3、<code>hexo generate</code></p>
-<p>4、<code>hexo deploy</code></p>
-<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
-<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes" target="_blank" rel="noopener">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
-<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:iissnan/hexo-theme-next.git</p>
-<p>4、<code>cd themes</code></p>
-<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
-<p>6、<code>cd ..</code></p>
-<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
-<p>8、<code>hexo generate</code></p>
-<p>9、<code>hexo deploy</code></p>
-<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。  </p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
-<p>2、_config.yml中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
-<p>3、想要删除博客的话，直接删除source-&gt;_posts-&gt;对应的博客文章，然后再次执行hexo generate、hexo deploy即可；</p>
-<p>4、在_config.yml中修改language为zh-CN，即可将博客中英文转换为中文；</p>
-<p>5、常用命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">"postName"</span>      //新建文章 </span><br><span class="line">hexo new page <span class="string">"pageName"</span> //新建页面 </span><br><span class="line">hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。</span><br><span class="line">hexo generate           //生成静态文件 </span><br><span class="line">hexo deploy             //部署到Giihub </span><br><span class="line">hexo server             //启动本地服务器 </span><br><span class="line">hexo <span class="built_in">help</span>               //查询帮助</span><br></pre></td></tr></table></figure></p>
-<p>6、md文件需要用到<a href="https://www.appinn.com/markdown/" target="_blank" rel="noopener">markdown语法</a>。  </p>
-<p>本人Github链接如下，欢迎各位Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+        <p>根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？<a id="more"></a>读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。</p>
+<h3 id="封装函数"><a href="#封装函数" class="headerlink" title="封装函数"></a>封装函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">classes</span>)</span>&#123;&#125; <span class="comment">//可将所有输入的标签的class添加一个类</span></span><br></pre></td></tr></table></figure>
+<h3 id="实现这个函数"><a href="#实现这个函数" class="headerlink" title="实现这个函数"></a>实现这个函数</h3><p>函数<code>addClass()</code>是输入一个类名，给选中的所有标签添加一个类，所以要用到<code>classList.add()</code>，具体实现如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">node, classes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">    allTag[i].classList.add(classes)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>在全局变量中创建一个对象，用来储存封装后的函数，这就是命名空间（名字前面统一加一个前缀）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = &#123;&#125;</span><br><span class="line">jQuery.addClass = addClass</span><br><span class="line"></span><br><span class="line">jQuery.addClass(<span class="string">'div'</span>, <span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+<p>整理之后</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = &#123;&#125;</span><br><span class="line">jQuery.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">node, classes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">    allTag[i].classList.add(classes)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jQuery.addClass(<span class="string">'div'</span>, <span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="将node放到前面"><a href="#将node放到前面" class="headerlink" title="将node放到前面"></a>将node放到前面</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.addClass(classes)</span><br></pre></td></tr></table></figure>
+<p>方法一：扩展 Node 接口，直接在 <code>Node.prototype</code> 上加函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Node.prototype.addClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>方法二：新的接口 <code>BetterNode</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    element: node,</span><br><span class="line">    addClass: <span class="function"><span class="keyword">function</span>(<span class="params">classes</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">        allTag[i].classList.add(classes)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> node2 = jQuery(<span class="string">'div'</span>)</span><br><span class="line">node2.addClass(<span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+<p>第二种叫做「无侵入」。</p>
+<h3 id="进一步完善"><a href="#进一步完善" class="headerlink" title="进一步完善"></a>进一步完善</h3><p>给个缩写并且使其可以是节点或者选择器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodeOrSelector</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes = &#123;&#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;temp.length;i++)&#123;</span><br><span class="line">      nodes[i]=temp[i]</span><br><span class="line">    &#125;</span><br><span class="line">    nodes.length = temp.length</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nodeOrSelector <span class="keyword">instanceof</span> Node)&#123;</span><br><span class="line">    nodes = &#123;</span><br><span class="line">      <span class="number">0</span>:nodeOrSelector,</span><br><span class="line">      length:<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  nodes.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">classes</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nodes.length;i++)&#123;</span><br><span class="line">      nodes[i].classList.add(classes)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $div = $(<span class="string">'div'</span>)</span><br><span class="line">$div.addClass(<span class="string">'red'</span>) <span class="comment">// 可将所有 div 的 class 添加一个 red</span></span><br></pre></td></tr></table></figure>
+<h3 id="封装ajax"><a href="#封装ajax" class="headerlink" title="封装ajax"></a>封装ajax</h3><p>按照jQuery的设计思路封装一个ajax函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">url, method, body, success, fail</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> request = XMLHttpResquest()</span><br><span class="line">    request.open(method, url)</span><br><span class="line">    request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                success.call(<span class="literal">undefined</span>, request.responseText)</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request.status &gt;= <span class="number">400</span>) &#123;</span><br><span class="line">                fail.call(<span class="literal">undefined</span>, request)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    request.send(body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>升级改进一下满足promise规则</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    url,</span></span></span><br><span class="line"><span class="function"><span class="params">    method,</span></span></span><br><span class="line"><span class="function"><span class="params">    body,</span></span></span><br><span class="line"><span class="function"><span class="params">    headers</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> request = XMLHttpResquest()</span><br><span class="line">        request.open(method, url)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> headers) &#123;</span><br><span class="line">            <span class="keyword">let</span> value = headers[key]</span><br><span class="line">            request.setRequestHeader(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">        request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                    success.call(<span class="literal">undefined</span>, request.responseText)</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request.status &gt;= <span class="number">400</span>) &#123;</span><br><span class="line">                    fail.call(<span class="literal">undefined</span>, request)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        request.send(body)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
     </div>
@@ -630,9 +587,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/GitHub/" rel="tag"><i class="fa fa-tag"></i> GitHub</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            <a href="/tags/jQuery/" rel="tag"><i class="fa fa-tag"></i> jQuery</a>
           
         </div>
       
@@ -645,8 +602,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/20/CSS布局—三栏布局/" rel="next" title="CSS笔记—三栏布局">
-                <i class="fa fa-chevron-left"></i> CSS笔记—三栏布局
+              <a href="/2019/05/23/DOM Node 的建立、删除与修改/" rel="next" title="DOM Node 的建立、删除与修改">
+                <i class="fa fa-chevron-left"></i> DOM Node 的建立、删除与修改
               </a>
             
           </div>
@@ -654,10 +611,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/29/Git命令拓展/" rel="prev" title="Git命令拓展">
-                Git命令拓展 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -951,7 +904,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关联Github"><span class="nav-number">3.</span> <span class="nav-text">关联Github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加新文章"><span class="nav-number">4.</span> <span class="nav-text">添加新文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更换主题"><span class="nav-number">5.</span> <span class="nav-text">更换主题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips"><span class="nav-number">6.</span> <span class="nav-text">tips</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装函数"><span class="nav-number">1.</span> <span class="nav-text">封装函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现这个函数"><span class="nav-number">2.</span> <span class="nav-text">实现这个函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命名空间"><span class="nav-number">3.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将node放到前面"><span class="nav-number">4.</span> <span class="nav-text">将node放到前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步完善"><span class="nav-number">5.</span> <span class="nav-text">进一步完善</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封装ajax"><span class="nav-number">6.</span> <span class="nav-text">封装ajax</span></a></li></ol></div>
             
 
           </div>

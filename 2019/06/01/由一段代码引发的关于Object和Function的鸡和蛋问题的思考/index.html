@@ -158,7 +158,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/06/01/5cf250e46cfd584379.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/01/5cf251280f71896185.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/01/5cf2519c6224623985.jpg">
-<meta property="og:updated_time" content="2019-06-01T10:25:03.176Z">
+<meta property="og:updated_time" content="2019-06-01T10:29:41.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="由一段代码引发的关于Object和Function的鸡和蛋问题的思考">
 <meta name="twitter:description" content="作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。">
@@ -483,7 +483,7 @@
                 
               
 
-              <time title="创建时间：2019-06-01 18:06:56 / 修改时间：18:25:03" itemprop="dateCreated datePublished" datetime="2019-06-01T18:06:56+08:00">2019-06-01</time>
+              <time title="创建时间：2019-06-01 18:06:56 / 修改时间：18:29:41" itemprop="dateCreated datePublished" datetime="2019-06-01T18:06:56+08:00">2019-06-01</time>
             
 
             
@@ -552,7 +552,7 @@
       
 
       
-        <p>作为一名前端开发者，我们都知道JS是单继承的，而<code>Object.prototype</code>是原型链的顶端，所有对象从它继承了包括<code>toString()</code>、<code>valueOf()</code>等等公共属性。<a id="more"></a> </p>
+        <p>作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。<a id="more"></a> </p>
 <h3 id="鸡和蛋问题的由来"><a href="#鸡和蛋问题的由来" class="headerlink" title="鸡和蛋问题的由来"></a>鸡和蛋问题的由来</h3><p>首先<code>Object</code>和<code>Function</code>都是构造函数，而所有的构造函数都是<code>Function</code>的实例对象。 因此<code>Object</code>是<code>Function</code>的实例对象；而<code>Function.prototype</code>是<code>Object</code>的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>那么<code>Object</code>和<code>Function</code>，谁是鸡谁是蛋呢？</p>

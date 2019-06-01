@@ -142,13 +142,27 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="米淇淋の个人博客">
-<meta property="og:url" content="https://luozongmin.com/archives/2019/page/2/index.html">
+  <meta name="description" content="作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。">
+<meta name="keywords" content="JavaScript,Object,Function">
+<meta property="og:type" content="article">
+<meta property="og:title" content="由一段代码引发的关于Object和Function的鸡和蛋问题的思考">
+<meta property="og:url" content="https://luozongmin.com/2019/06/01/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
+<meta property="og:description" content="作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf24f302c9d123264.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf24f7a5a7ed57066.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf24fdc6d63328220.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf2501b47b9617663.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf25081238f811717.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf250e46cfd584379.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf251280f71896185.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/01/5cf2519c6224623985.jpg">
+<meta property="og:updated_time" content="2019-06-01T10:25:03.176Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="米淇淋の个人博客">
+<meta name="twitter:title" content="由一段代码引发的关于Object和Function的鸡和蛋问题的思考">
+<meta name="twitter:description" content="作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/01/5cf24f302c9d123264.jpg">
 
 
 
@@ -157,7 +171,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/archives/2019/page/2/">
+  <link rel="canonical" href="https://luozongmin.com/2019/06/01/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
 
 
 
@@ -167,7 +181,7 @@
   };
 </script>
 
-  <title>归档 | 米淇淋の个人博客</title>
+  <title>由一段代码引发的关于Object和Function的鸡和蛋问题的思考 | 米淇淋の个人博客</title>
   
 
 
@@ -216,7 +230,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -275,7 +289,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -406,422 +420,257 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        还行! 目前共计 32 篇日志。 继续努力。
-      </span>
-      
+  
 
-      
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/06/01/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="米淇淋">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米淇淋の个人博客">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">由一段代码引发的关于Object和Function的鸡和蛋问题的思考
+
+              
+            
+          </h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-01 18:06:56 / 修改时间：18:25:03" itemprop="dateCreated datePublished" datetime="2019-06-01T18:06:56+08:00">2019-06-01</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/27/JavaScript中任何值的prototype到最后都是Object/" itemprop="url">
+            <span class="post-category">
             
-              <span itemprop="name">JavaScript中任何值的prototype到最后都是Object</span>
+              <span class="post-meta-divider">|</span>
             
-          </a>
-        
-      </h2>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-27T15:32:00+08:00" content="2019-04-27">
-          04-27
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/01/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/01/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
 
+          
+          
 
+          
+
+          
+
+          
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/25/JavaScript系列之原型与原型链/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之原型与原型链</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-25T10:14:34+08:00" content="2019-04-25">
-          04-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/22/JavaScript系列之内存泄漏/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之内存泄漏</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T16:41:35+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>作为一名前端开发者，我们都知道JS是单继承的，而<code>Object.prototype</code>是原型链的顶端，所有对象从它继承了包括<code>toString()</code>、<code>valueOf()</code>等等公共属性。<a id="more"></a> </p>
+<h3 id="鸡和蛋问题的由来"><a href="#鸡和蛋问题的由来" class="headerlink" title="鸡和蛋问题的由来"></a>鸡和蛋问题的由来</h3><p>首先<code>Object</code>和<code>Function</code>都是构造函数，而所有的构造函数都是<code>Function</code>的实例对象。 因此<code>Object</code>是<code>Function</code>的实例对象；而<code>Function.prototype</code>是<code>Object</code>的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.__proto__ === <span class="built_in">Object</span>.prototype  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>那么<code>Object</code>和<code>Function</code>，谁是鸡谁是蛋呢？</p>
+<p>接下来就来深入探究下上面这段代码所引起的鸡生蛋蛋生鸡问题，从下面这张原型/原型链经典图入手，在这个过程中深入了解 <code>Object.prototype</code>、<code>Function.prototype</code>、<code>function Object()</code> 、<code>function Function()</code> 之间的关系，这个过程可能有点烧脑，毕竟是JS的一大玄学嘛。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf24f302c9d123264.jpg" alt>  </div></p>
+<h3 id="Object-prototype"><a href="#Object-prototype" class="headerlink" title="Object.prototype"></a>Object.prototype</h3><p>原型链的尽头就是<code>Object.prototype</code>（不考虑 <code>null</code> 的情况下）。<strong>所有对象均从</strong><code>Object.prototype</code><strong>继承toString() 等公共属性</strong>。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf24f7a5a7ed57066.jpg" alt>   </div></p>
+<p><code>Object.prototype</code> 表示 <code>Object</code> 的原型对象，实际上<code>Object.prototype</code> 并不是通过<code>Object</code>函数创建的，为什么呢？看如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'川普'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog();</span><br><span class="line">dog.__proto__ === Dog.prototype;  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>实例对象的<code>__proto__</code>会指向构造函数的<code>prototype</code>，即<code>dog.__proto__</code>指向 <code>Dog.prototype</code>，但是<code>Object.prototype.__proto__</code>又是 <code>null</code>，所以 <code>Object.prototype</code> 并不是通过 <code>Object</code> 函数创建的，那它如何生成的？其实 <code>Object.prototype</code> 是浏览器底层根据 ECMAScript 规范创造的一个对象，所以在经典图里面只是看起来<code>Object.prototype</code> 是通过 <code>Object</code> 函数创建的，实际上并不是。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf24fdc6d63328220.jpg" alt>  </div></p>
+<h3 id="Function-prototype"><a href="#Function-prototype" class="headerlink" title="Function.prototype"></a>Function.prototype</h3><p><code>Function.prototype</code>和<code>Function.__proto__</code>为<strong>同一对象</strong>。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf2501b47b9617663.jpg" alt>  </div></p>
+<p>这也意味着：<strong><code>Object</code>/<code>Array</code>等等构造函数本质上和<code>Function</code>一样，均继承于<code>Function.prototype</code>，从经典图上来看都是通过<code>new Function</code>构造出来的</strong>。</p>
+<p>当然，<code>Function.prototype</code> 对象是一个函数（对象），其<code>__proto__</code>属性指向 <code>Object.prototype</code>，即<code>Function.prototype</code>会直接继承root（<code>Object.prototype</code>）。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf25081238f811717.jpg" alt> </div></p>
+<p>通过这点我们可以弄清<strong>继承的原型链</strong>：<code>Function|Object|Array...---&gt;Function.prototype---&gt;Object.prototype(root)</code>。如下图所示：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf250e46cfd584379.jpg" alt> </div></p>
+<h3 id="function-Object"><a href="#function-Object" class="headerlink" title="function Object()"></a>function Object()</h3><p><code>Object</code> 作为构造函数时，其<code>__proto__</code>属性指向 <code>Function.prototype</code>，即:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>从经典图来看：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf251280f71896185.jpg" alt>   </div></p>
+<p>使用 <code>new Object()</code> 创建实例对象o1时，实例对象o1的 <code>__proto__</code>属性指向构造函数的 <code>prototype</code> 属性，对应上图就是 <code>Object.prototype</code>，即<code>o1.__proto__ === Object.prototype</code>结果为<code>true</code>。</p>
+<p><code>Function.prototype</code>指向的对象，它的<code>__proto__</code>会指向<code>Object.prototype</code>，因为<code>Function.prototype</code>指向的对象也是一个普通的被<code>Object</code>创建的对象，所以也遵循基本的规则。</p>
+<h3 id="function-Function"><a href="#function-Function" class="headerlink" title="function Function()"></a>function Function()</h3><p><code>Function</code>也是一个函数对象，也有<code>__proto__</code>属性，既然是函数，那么它一定是被<code>Function</code>创建，所以<code>Function</code>是被自身创建的，所以它的<code>__proto__</code>指向了自身的<code>Prototype</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p><div align="center"><img src="https://i.loli.net/2019/06/01/5cf2519c6224623985.jpg" alt>  </div></p>
+<p>到这里就有点烧脑了吧，我们再看下鸡生蛋蛋生鸡问题。</p>
+<h3 id="Function-amp-Object-鸡和蛋问题"><a href="#Function-amp-Object-鸡和蛋问题" class="headerlink" title="Function &amp; Object 鸡和蛋问题"></a>Function &amp; Object 鸡和蛋问题</h3><p>由上面可知，<code>Object</code>构造函数继承了<code>Function.prototype</code>，同时<code>Function</code>构造函数继承了<code>Object.prototype</code>，这里就产生了<strong>鸡和蛋</strong>的问题。为什么会出现这种问题呢？必须首先更深入一层去理解<code>Function.prototype</code>这个对象，因为它是导致<code>Function instanceof Object</code>和<code>Object instanceof Function</code>都为<code>true</code>的原因。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object instanceof Function 	即</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function instanceof Object 	即</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__.__proto__ === <span class="built_in">Object</span>.prototype   <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Object instanceof Object 		即 			</span></span><br><span class="line"><span class="built_in">Object</span>.__proto__.__proto__ === <span class="built_in">Object</span>.prototype   <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Function instanceof Function 即	</span></span><br><span class="line"><span class="built_in">Function</span>.__proto__ === <span class="built_in">Function</span>.prototype   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>根据JS规范，<code>Function.prototype</code>又是个不同于一般函数（对象）的函数（对象），其中：</p>
+<ol>
+<li><code>Function.prototype</code>像普通函数一样可以调用，但总是返回<code>undefined</code>。</li>
+<li>普通函数实际上是<code>Function</code>的实例，即普通函数继承于<code>Function.prototype</code>。即<code>func.__proto__ === Function.prototype</code>。</li>
+<li><code>Function.prototype</code>继承于<code>Object.prototype</code>，并且没有<code>prototype</code>这个属性。</li>
+<li>所以，<code>Function.prototype</code>其实是个另类的函数，可以独立于/先于<code>Function</code>产生。</li>
+</ol>
+<p>而<code>Object</code>本身是个（构造）函数，是<code>Function</code>的实例，即<code>Object.__proto__</code>就是<code>Function.prototype</code>。</p>
+<p><strong>总结：先有<code>Object.prototype</code>（原型链顶端），<code>Function.prototype</code>继承<code>Object.prototype</code>而产生，最后，<code>Function</code>和<code>Object</code>和其它构造函数继承<code>Function.prototype</code>而产生</strong>。</p>
+<p>看到这里估计也都看烦了，是不是还是有点混乱呀？乱也很正常。那这篇文章就先让它乱着，下一篇我们将请另一个老朋友来帮忙，把它彻底理清楚，这位老朋友就是——<code>instanceof</code>，那就且听请下回分解咯。</p>
+<p>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/22/JavaScript系列之内存空间/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之内存空间</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-22T13:43:00+08:00" content="2019-04-22">
-          04-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/20/学会如何学习（三）/" itemprop="url">
-            
-              <span itemprop="name">学会如何学习（三）</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-20T10:17:19+08:00" content="2019-04-20">
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/19/Undefined vs Null/" itemprop="url">
-            
-              <span itemprop="name">Undefined vs Null</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-19T10:11:15+08:00" content="2019-04-19">
-          04-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/18/JavaScript系列之类型转换/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之类型转换</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-18T17:17:22+08:00" content="2019-04-18">
-          04-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/16/一些好用的工具、网站/" itemprop="url">
-            
-              <span itemprop="name">一些好用的工具、网站</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-16T09:51:32+08:00" content="2019-04-16">
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/13/JavaScript系列之类型判断/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之类型判断</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-13T12:52:19+08:00" content="2019-04-13">
-          04-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/04/12/JavaScript系列之数据类型/" itemprop="url">
-            
-              <span itemprop="name">JavaScript系列之数据类型</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-12T13:43:04+08:00" content="2019-04-12">
-          04-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+     
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/Object/" rel="tag"><i class="fa fa-tag"></i> Object</a>
+          
+            <a href="/tags/Function/" rel="tag"><i class="fa fa-tag"></i> Function</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/31/从原生JS实现jQuery的一个API中体会其设计思想/" rel="next" title="从原生JS实现jQuery的一个API中体会其设计思想">
+                <i class="fa fa-chevron-left"></i> 从原生JS实现jQuery的一个API中体会其设计思想
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2019/page/3/">3</a><a class="page-number" href="/archives/2019/page/4/">4</a><a class="extend next" rel="next" href="/archives/2019/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
 
         </div>
         
@@ -841,8 +690,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1070,6 +928,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#鸡和蛋问题的由来"><span class="nav-number">1.</span> <span class="nav-text">鸡和蛋问题的由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype"><span class="nav-number">2.</span> <span class="nav-text">Object.prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function-prototype"><span class="nav-number">3.</span> <span class="nav-text">Function.prototype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-Object"><span class="nav-number">4.</span> <span class="nav-text">function Object()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-Function"><span class="nav-number">5.</span> <span class="nav-text">function Function()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Function-amp-Object-鸡和蛋问题"><span class="nav-number">6.</span> <span class="nav-text">Function &amp; Object 鸡和蛋问题</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -1211,6 +1086,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -1263,6 +1142,8 @@
 
 
 
+
+  
 
 
   

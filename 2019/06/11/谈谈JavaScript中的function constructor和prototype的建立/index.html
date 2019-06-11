@@ -142,24 +142,24 @@
 
 
 
-  <meta name="description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
-<meta name="keywords" content="JavaScript,BOM,DOM">
+  <meta name="description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
+<meta name="keywords" content="JavaScript,constructor,prototype">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈浏览器里的JavaScript">
-<meta property="og:url" content="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/index.html">
+<meta property="og:title" content="谈谈JavaScript中的function constructor和prototype的建立">
+<meta property="og:url" content="https://luozongmin.com/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
+<meta property="og:description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a3d7e301684230.png">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce39e9290cf274024.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a08ea90db11007.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png">
-<meta property="og:updated_time" content="2019-05-22T02:18:13.361Z">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb5f2d5e0216997.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6502b6c976855.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6d8eed7f56333.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb72f3052918344.png">
+<meta property="og:updated_time" content="2019-06-11T14:17:34.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈谈浏览器里的JavaScript">
-<meta name="twitter:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
-<meta name="twitter:image" content="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg">
+<meta name="twitter:title" content="谈谈JavaScript中的function constructor和prototype的建立">
+<meta name="twitter:description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg">
 
 
 
@@ -168,7 +168,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/">
+  <link rel="canonical" href="https://luozongmin.com/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/">
 
 
 
@@ -178,7 +178,7 @@
   };
 </script>
 
-  <title>谈谈浏览器里的JavaScript | 米淇淋の个人博客</title>
+  <title>谈谈JavaScript中的function constructor和prototype的建立 | 米淇淋の个人博客</title>
   
 
 
@@ -437,7 +437,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/05/21/聊一聊浏览器里的JavaScript/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -454,7 +454,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">谈谈浏览器里的JavaScript
+          <h1 class="post-title" itemprop="name headline">谈谈JavaScript中的function constructor和prototype的建立
 
               
             
@@ -480,24 +480,12 @@
                 
               
 
-              <time title="创建时间：2019-05-21 10:39:02" itemprop="dateCreated datePublished" datetime="2019-05-21T10:39:02+08:00">2019-05-21</time>
+              <time title="创建时间：2019-06-11 22:03:26 / 修改时间：22:17:34" itemprop="dateCreated datePublished" datetime="2019-06-11T22:03:26+08:00">2019-06-11</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-22 10:18:13" itemprop="dateModified" datetime="2019-05-22T10:18:13+08:00">2019-05-22</time>
               
             
           </span>
@@ -533,8 +521,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/05/21/聊一聊浏览器里的JavaScript/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/21/聊一聊浏览器里的JavaScript/" itemprop="commentCount"></span>
+                <a href="/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -561,82 +549,44 @@
       
 
       
-        <p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」<a id="more"></a>，其中： </p>
-<ul>
-<li>HTML 负责资料与结构</li>
-<li>CSS 负责样式与呈现</li>
-<li>JavaScript 负责行为与互动</li>
-</ul>
-<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce39b50e57fa29022.jpg" alt>   </div></p>
-<p>那么，如果你跟我在学JavaScript的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…  </p>
-<p><strong>我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！</strong>   </p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a3d7e301684230.png" alt>   </div></p>
-<p>那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  </p>
-<h3 id="浏览器里的JavaScript"><a href="#浏览器里的JavaScript" class="headerlink" title="浏览器里的JavaScript"></a>浏览器里的JavaScript</h3><p>严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  </p>
-<p>事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  </p>
-<p>所以广泛来说，在浏览器上的JavaScript 实际上包含了以下三部分：  </p>
-<ul>
-<li><strong>JavaScript核心</strong> (以ECMAScript标准为基础)</li>
-<li><strong>BOM</strong> (Browser Object Model，浏览器对象模型)</li>
-<li><strong>DOM</strong> (Document Object Model，文件对象模型)  </li>
-</ul>
-<p>由于BOM与DOM是由浏览器执行环境所提供；所以换句话说，在node环境下的JavaScript就不会有这两个部分。  </p>
-<p>前端开发者就是可以通过JavaScript 去调用BOM 与DOM 提供的API，进一步通过它们去控制浏览器的行为与网页的内容。  </p>
-<p>那么接下来就来具体介绍一下BOM与DOM吧。  </p>
-<h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。  </p>
-<p>在早期没有制定标准规范的时候，各家浏览器厂商几乎在自家浏览器上都有各自的功能，非常混乱。直到后来W3C 把各家浏览器都有的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了HTML5 的标准中，这也就是我们现在看到的BOM API。  </p>
-<p>BOM 有时也有人非正式地称它为Level 0 DOM。因为它在DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以Level 0 DOM与BOM两者实际上指的是同一个东西。</p>
-<h3 id="BOM的核心window对象"><a href="#BOM的核心window对象" class="headerlink" title="BOM的核心window对象"></a>BOM的核心window对象</h3><p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce39e9290cf274024.jpg" alt>   </div></p>
-<p>从上图可以看出BOM的核心是<code>window</code>对象。 </p>
-<p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。  </p>
-<p>在浏览器里的<code>window</code>对象会扮演着两种角色：  </p>
-<ul>
-<li>ECMAScript 标准里的<strong>全局对象</strong> (Global Object)</li>
-<li>JavaScript 用来与浏览器沟通的窗口</li>
-</ul>
-<p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过window.xxx的方式取得它们。比如：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除： </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);     <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
-<p>但若是直接通过指定<code>window</code>对象的属性则可以：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);        <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？  </p>
-<h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：  </p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a08ea90db11007.jpg" alt>   </div></p>
-<p>(alert on Chrome)</p>
-<p>我想不管是不是刚接触JavaScript的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：  </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="string">"message"</span>);</span><br></pre></td></tr></table></figure>
-<p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。  </p>
-<p>一行代码就可以生成一个对话框，很神奇吧？  </p>
-<p>而这就是浏览器环境的BOM提供给JavaScript控制的功能之一。  </p>
-<p>类似的对话框还有用来提供<strong>确定/取消</strong>的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" target="_blank" rel="noopener">window.confirm()</a>，以及开放式问答的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" target="_blank" rel="noopener">window.prompt()</a>对话框。  </p>
-<p>当然BOM 提供的API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。  </p>
-<h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将HTML文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为DOM Tree。 </p>
-<p>简单来说，我们把HTML每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的HTML如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;米淇淋的个人博客&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;这是主题&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;这是一个&lt;i&gt;简单&lt;/i</span>&gt;的段落&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
-<p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png" alt>  </div></p>
-<p>在最根部的地方，就是<code>document</code>，就是BOM图中<code>window</code>下面的那个。</p>
-<p>往下可以延伸出一个个的HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
-<p>而DOM API 就是定义了让JavaScript 可以存取、改变HTML 结构、样式和内容的方法，甚至是对节点绑定的事件。</p>
-<p>JavaScript 就是通过DOM 提供的API 来对HTML 做存取与操作。 </p>
-<h3 id="DOM-与-BOM-的区别"><a href="#DOM-与-BOM-的区别" class="headerlink" title="DOM 与 BOM 的区别"></a>DOM 与 BOM 的区别</h3><p>前面介绍BOM时，我们已经知道DOM的<code>document</code>其实也就是<code>window</code>对象的子对象之一。 </p>
-<p>而 DOM 与 BOM 最大的区别在于：</p>
-<ul>
-<li>BOM: JavaScript 与<strong>浏览器</strong>沟通的窗口，不涉及网页内容。</li>
-<li>DOM: JavaScript 用来控制<strong>网页</strong>的节点与内容的标准。</li>
-</ul>
-<p>BOM完全依赖于浏览器厂商实作本身无标准规范，而DOM有着W3C 所制定的标准来规范。</p>
-<p>想要通过DOM API 取得节点，JavaScript 可以这样写： </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据传入的值，找到 DOM 中 id 为 'xxx' 的元素。</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'xxx'</span>); </span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'xxx'</span>);</span><br></pre></td></tr></table></figure>
-<p>而透过DOM API选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
-<p>假设有一个HTML 节点：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"greet"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">'#greet'</span>).textContent = <span class="string">'Hello World!'</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output" target="_blank" rel="noopener">JS Bin on jsbin.com</a></p>
-<p>看到这里，恭喜你已经可以通过JavaScript 在网页上输出”Hello World!” 啦！</p>
-<p>在后续的内容中，我们会继续来介绍各种操作网页的DOM/BOM API。</p>
-<p>毕竟对前端工程师来说，搞懂<strong>怎么与浏览器打交道、怎么操作网页内容</strong>，就是做好WebUI最重要的基础。</p>
+        <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">上一篇文章</a>中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。<a id="more"></a></p>
+<p>在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实function这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
+<p>除非你是把function当做function constructor来使用，否则这个属性就没有特别的用途；但如果你是把它当做function constructor，通过<code>new</code>这个关键字来执行这个function的话，它就有特别的意义了。</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg" alt></div></p>
+<p>要进入这个function的<code>prototype</code>属性只要直接通过 <code>.prototype</code> 就可以了。</p>
+<p>然而，有一点很容易令人困惑的地方，我们会以为如果我使用 <code>.prototype</code> 时，就可以直接进入该函数的原型，但实际上并不是这样的！</p>
+<p><strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个function constructor所建立出来的对象的<code>prototype</code></strong>，听起来有点混乱吧…没关系，让我们来看一些代码来帮助我们理解这一概念。</p>
+<h3 id="说明函数中的prototype-属性"><a href="#说明函数中的prototype-属性" class="headerlink" title="说明函数中的prototype 属性"></a>说明函数中的prototype 属性</h3><p><strong>1.function 中的prototype 属性一开始是空对象</strong></p>
+<p>我们先执行上篇文章最后所写的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="keyword">var</span> person2 =  <span class="keyword">new</span>  Person ( <span class="string">'Jane'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person2 ) ;</span><br></pre></td></tr></table></figure>
+<p>到Google Chrome的console视窗中，我们输入 <code>Person.prototype</code>得到的结果会得到一个空对象，如下图：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb5f2d5e0216997.jpg" alt></div></p>
+<p><strong>2.通过function constructor 所建立的对象会继承该function 中prototype 的内容</strong></p>
+<p>接着，让我们在<code>Person.prototype</code>里面增加一个<code>getFullName</code>的函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person . prototype . getFullName  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="keyword">var</span> person2 =  <span class="keyword">new</span>  Person ( <span class="string">'Jane'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person2 ) ;</span><br></pre></td></tr></table></figure>
+<p>在上面代码的第6 - 8行中，我们为<code>Person.prototype</code>添加了一个函数，所以当我们在Google Chrome的console视窗中调用<code>Person.prototype</code>时，会多了这个函数在内：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb6502b6c976855.jpg" alt></div></p>
+<p>刚刚，我们有提到很重要的一句话，「<strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个function constructor所建立出来的对象的<code>prototype</code></strong>」。</p>
+<p>这句话的意思其实是说<code>Person.prototype</code>并不是<code>Person.__proto__</code>，但是所有通过<code>Person</code>这个function constructor所建立的对象，在该实例对象的<code>__proto__</code>中，会包含有<code>Person.prototype</code>的内容。</p>
+<p>也就是说，当我们使用<code>new</code>这个运算符来执行function constructor时，它会先建立一个空对象，同时将该构造函数中<code>prototype</code>这个属性的内容（<code>Person.prototype</code>），设置到该实例对象的<code>prototype</code>中，即 <code>person1.__proto__ === Person.prototype</code>的结果为<code>true</code>。</p>
+<p>因此，当我们在Google Chrome的console中输入<code>person1.__proto__</code>时，我们就可以看到刚刚在<code>Person.prototype</code>所建立的函数<code>getFullName</code>已经继承在里面了：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb6d8eed7f56333.jpg" alt></div></p>
+<h3 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h3><p>由于<code>Person.prototype</code>中的方法已经被继承到由<code>Person</code>这个function constructor所建立的实例对象<code>person1</code>中，所以这时侯，我们就可以顺利的使用 <code>person1.getFullName</code> 这个方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person . prototype . getFullName  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1.getFullName() ) ;</span><br></pre></td></tr></table></figure>
+<p>可以正确的执行<code>getFullName</code>这个函数并得到如下的结果：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb72f3052918344.png" alt></div></p>
+<h3 id="通过function-constructor与Prototype-的实用处"><a href="#通过function-constructor与Prototype-的实用处" class="headerlink" title="通过function constructor与Prototype 的实用处"></a>通过function constructor与Prototype 的实用处</h3><p>通过这样的方法，我们可以让所有根据这个函数构造器（function constructor）所建立的对象都包含有某些我们想要使用的方法。如果我们有1000个对象是根据这个函数构造器所建立的，那么我们只需要使用 <code>.prototype</code>这样的方法，就可以让这1000个物件都可以使用到我们想要执行的某个<code>method</code>，这样减少了代码的复用。</p>
+<p>有的人可能会好奇问，为什么我们不把<code>getFullName</code>这个方法直接写在函数构造式当中呢？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">  <span class="keyword">this</span> . getFullName  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Person . prototype . getFullName  =  function ( )  &#123; </span></span><br><span class="line"><span class="comment">  return  this . firstName +  ' '  +  this . lastName ; </span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意！我们不该把方法放在function constructor 中。</p>
+</blockquote>
+<p>把方法放在函数构造式中这么做虽然仍然可以正确执行并得到结果，但是这么做会有个问题，如果我们是把这个方法直接写在函数构造式中，那么每一个对象都会包含有这个方法，如果我们有1000 个对象根据这个函数构造式所建立，那么这1000 个对象都会包含这个方法在内，如此将会占据相当多的内存；但如果是建立在<code>prototype</code> 中，我们只会有一个这样的方法。</p>
+<p>所以，为了性能上的考量，通常会把方法（<code>method</code>）放在构造函数的<code>prototype</code> 中，因为它们可以是通用的；把属性（<code>property</code>）放在构造函数当中，因为每一个对象可能都会有不同的属性内容，如此将能有效减少内存的问题。</p>
+<p>最后，如果感觉当前缺少你要用的方法，可以自己通过这一方法去创建。</p>
+<p>例如在json2.js源码中，为<code>Date</code>、<code>String</code>、<code>Number</code>、<code>Boolean</code>方法添加一个<code>toJSON</code>的属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Date</span>.prototype.toJSON !== <span class="string">'function'</span>) &#123;</span><br><span class="line">  <span class="built_in">Date</span>.prototype.toJSON = <span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">isFinite</span>(<span class="keyword">this</span>.valueOf()) ?</span><br><span class="line">        <span class="keyword">this</span>.getUTCFullYear() + <span class="string">'-'</span> +</span><br><span class="line">      f(<span class="keyword">this</span>.getUTCMonth() + <span class="number">1</span>) + <span class="string">'-'</span> +</span><br><span class="line">      f(<span class="keyword">this</span>.getUTCDate()) + <span class="string">'T'</span> +</span><br><span class="line">      f(<span class="keyword">this</span>.getUTCHours()) + <span class="string">':'</span> +</span><br><span class="line">      f(<span class="keyword">this</span>.getUTCMinutes()) + <span class="string">':'</span> +</span><br><span class="line">      f(<span class="keyword">this</span>.getUTCSeconds()) + <span class="string">'Z'</span> : <span class="literal">null</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span>.prototype.toJSON = </span><br><span class="line">  <span class="built_in">Number</span>.prototype.toJSON = </span><br><span class="line">  <span class="built_in">Boolean</span>.prototype.toJSON = <span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.valueOf();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果你要添加内置方法的原型属性，最好做一步判断，如果该属性不存在，则添加。如果本来就存在，就没必要再添加了。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
@@ -663,9 +613,9 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/BOM/" rel="tag"><i class="fa fa-tag"></i> BOM</a>
+            <a href="/tags/constructor/" rel="tag"><i class="fa fa-tag"></i> constructor</a>
           
-            <a href="/tags/DOM/" rel="tag"><i class="fa fa-tag"></i> DOM</a>
+            <a href="/tags/prototype/" rel="tag"><i class="fa fa-tag"></i> prototype</a>
           
         </div>
       
@@ -678,8 +628,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/14/浅谈数组常见遍历方法/" rel="next" title="浅谈数组常见遍历方法">
-                <i class="fa fa-chevron-left"></i> 浅谈数组常见遍历方法
+              <a href="/2019/06/11/谈谈JavaScript中的function constructor和new关键字/" rel="next" title="谈谈JavaScript中的function constructor和new关键字">
+                <i class="fa fa-chevron-left"></i> 谈谈JavaScript中的function constructor和new关键字
               </a>
             
           </div>
@@ -687,10 +637,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/23/通过DOM API 查找节点/" rel="prev" title="通过DOM API 查找节点">
-                通过DOM API 查找节点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -994,7 +940,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器里的JavaScript"><span class="nav-number">1.</span> <span class="nav-text">浏览器里的JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM-是什么"><span class="nav-number">2.</span> <span class="nav-text">BOM 是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BOM的核心window对象"><span class="nav-number">3.</span> <span class="nav-text">BOM的核心window对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器内建的对话框"><span class="nav-number">4.</span> <span class="nav-text">浏览器内建的对话框</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-是什么"><span class="nav-number">5.</span> <span class="nav-text">DOM 是什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM-与-BOM-的区别"><span class="nav-number">6.</span> <span class="nav-text">DOM 与 BOM 的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#说明函数中的prototype-属性"><span class="nav-number">1.</span> <span class="nav-text">说明函数中的prototype 属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际运用"><span class="nav-number">2.</span> <span class="nav-text">实际运用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过function-constructor与Prototype-的实用处"><span class="nav-number">3.</span> <span class="nav-text">通过function constructor与Prototype 的实用处</span></a></li></ol></div>
             
 
           </div>

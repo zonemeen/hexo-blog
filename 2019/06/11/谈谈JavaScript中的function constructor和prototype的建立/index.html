@@ -155,7 +155,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6502b6c976855.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6d8eed7f56333.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb72f3052918344.png">
-<meta property="og:updated_time" content="2019-06-11T14:17:34.838Z">
+<meta property="og:updated_time" content="2019-06-11T14:27:49.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈JavaScript中的function constructor和prototype的建立">
 <meta name="twitter:description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
@@ -480,7 +480,7 @@
                 
               
 
-              <time title="创建时间：2019-06-11 22:03:26 / 修改时间：22:17:34" itemprop="dateCreated datePublished" datetime="2019-06-11T22:03:26+08:00">2019-06-11</time>
+              <time title="创建时间：2019-06-11 22:03:26 / 修改时间：22:27:49" itemprop="dateCreated datePublished" datetime="2019-06-11T22:03:26+08:00">2019-06-11</time>
             
 
             
@@ -550,12 +550,12 @@
 
       
         <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">上一篇文章</a>中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。<a id="more"></a></p>
-<p>在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实function这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
-<p>除非你是把function当做function constructor来使用，否则这个属性就没有特别的用途；但如果你是把它当做function constructor，通过<code>new</code>这个关键字来执行这个function的话，它就有特别的意义了。</p>
+<p>在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实<code>function</code>这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
+<p>除非你是把<code>function</code>当做<code>function constructor</code>来使用，否则这个属性就没有特别的用途；但如果你是把它当做<code>function constructor</code>，通过<code>new</code>这个关键字来执行这个<code>function</code>的话，它就有特别的意义了。</p>
 <p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg" alt></div></p>
-<p>要进入这个function的<code>prototype</code>属性只要直接通过 <code>.prototype</code> 就可以了。</p>
+<p>要进入这个<code>function</code>的<code>prototype</code>属性只要直接通过 <code>.prototype</code> 就可以了。</p>
 <p>然而，有一点很容易令人困惑的地方，我们会以为如果我使用 <code>.prototype</code> 时，就可以直接进入该函数的原型，但实际上并不是这样的！</p>
-<p><strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个function constructor所建立出来的对象的<code>prototype</code></strong>，听起来有点混乱吧…没关系，让我们来看一些代码来帮助我们理解这一概念。</p>
+<p><strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个<code>function constructor</code>所建立出来的对象的<code>prototype</code></strong>，听起来有点混乱吧…没关系，让我们来看一些代码来帮助我们理解这一概念。</p>
 <h3 id="说明函数中的prototype-属性"><a href="#说明函数中的prototype-属性" class="headerlink" title="说明函数中的prototype 属性"></a>说明函数中的prototype 属性</h3><p><strong>1.function 中的prototype 属性一开始是空对象</strong></p>
 <p>我们先执行上篇文章最后所写的代码：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="keyword">var</span> person2 =  <span class="keyword">new</span>  Person ( <span class="string">'Jane'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person2 ) ;</span><br></pre></td></tr></table></figure>
@@ -567,19 +567,19 @@
 <p>在上面代码的第6 - 8行中，我们为<code>Person.prototype</code>添加了一个函数，所以当我们在Google Chrome的console视窗中调用<code>Person.prototype</code>时，会多了这个函数在内：</p>
 <p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb6502b6c976855.jpg" alt></div></p>
 <p>刚刚，我们有提到很重要的一句话，「<strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个function constructor所建立出来的对象的<code>prototype</code></strong>」。</p>
-<p>这句话的意思其实是说<code>Person.prototype</code>并不是<code>Person.__proto__</code>，但是所有通过<code>Person</code>这个function constructor所建立的对象，在该实例对象的<code>__proto__</code>中，会包含有<code>Person.prototype</code>的内容。</p>
-<p>也就是说，当我们使用<code>new</code>这个运算符来执行function constructor时，它会先建立一个空对象，同时将该构造函数中<code>prototype</code>这个属性的内容（<code>Person.prototype</code>），设置到该实例对象的<code>prototype</code>中，即 <code>person1.__proto__ === Person.prototype</code>的结果为<code>true</code>。</p>
+<p>这句话的意思其实是说<code>Person.prototype</code>并不是<code>Person.__proto__</code>，但是所有通过<code>Person</code>这个<code>function constructor</code>所建立的对象，在该实例对象的<code>__proto__</code>中，会包含有<code>Person.prototype</code>的内容。</p>
+<p>也就是说，当我们使用<code>new</code>这个运算符来执行<code>function constructor</code>时，它会先建立一个空对象，同时将该构造函数中<code>prototype</code>这个属性的内容（<code>Person.prototype</code>），设置到该实例对象的<code>prototype</code>中，即 <code>person1.__proto__ === Person.prototype</code>的结果为<code>true</code>。</p>
 <p>因此，当我们在Google Chrome的console中输入<code>person1.__proto__</code>时，我们就可以看到刚刚在<code>Person.prototype</code>所建立的函数<code>getFullName</code>已经继承在里面了：</p>
 <p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb6d8eed7f56333.jpg" alt></div></p>
-<h3 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h3><p>由于<code>Person.prototype</code>中的方法已经被继承到由<code>Person</code>这个function constructor所建立的实例对象<code>person1</code>中，所以这时侯，我们就可以顺利的使用 <code>person1.getFullName</code> 这个方法：</p>
+<h3 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h3><p>由于<code>Person.prototype</code>中的方法已经被继承到由<code>Person</code>这个<code>function constructor</code>所建立的实例对象<code>person1</code>中，所以这时侯，我们就可以顺利的使用 <code>person1.getFullName</code> 这个方法：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person . prototype . getFullName  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1.getFullName() ) ;</span><br></pre></td></tr></table></figure>
 <p>可以正确的执行<code>getFullName</code>这个函数并得到如下的结果：</p>
 <p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb72f3052918344.png" alt></div></p>
-<h3 id="通过function-constructor与Prototype-的实用处"><a href="#通过function-constructor与Prototype-的实用处" class="headerlink" title="通过function constructor与Prototype 的实用处"></a>通过function constructor与Prototype 的实用处</h3><p>通过这样的方法，我们可以让所有根据这个函数构造器（function constructor）所建立的对象都包含有某些我们想要使用的方法。如果我们有1000个对象是根据这个函数构造器所建立的，那么我们只需要使用 <code>.prototype</code>这样的方法，就可以让这1000个物件都可以使用到我们想要执行的某个<code>method</code>，这样减少了代码的复用。</p>
+<h3 id="通过function-constructor与Prototype-的实用处"><a href="#通过function-constructor与Prototype-的实用处" class="headerlink" title="通过function constructor与Prototype 的实用处"></a>通过function constructor与Prototype 的实用处</h3><p>通过这样的方法，我们可以让所有根据这个函数构造器（<code>function constructor</code>）所建立的对象都包含有某些我们想要使用的方法。如果我们有1000个对象是根据这个函数构造器所建立的，那么我们只需要使用 <code>.prototype</code>这样的方法，就可以让这1000个物件都可以使用到我们想要执行的某个<code>method</code>，这样减少了代码的复用。</p>
 <p>有的人可能会好奇问，为什么我们不把<code>getFullName</code>这个方法直接写在函数构造式当中呢？</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">  <span class="keyword">this</span> . getFullName  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>)  </span>&#123; </span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Person . prototype . getFullName  =  function ( )  &#123; </span></span><br><span class="line"><span class="comment">  return  this . firstName +  ' '  +  this . lastName ; </span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意！我们不该把方法放在function constructor 中。</p>
+<p>注意！我们不该把方法放在<code>function constructor</code> 中。</p>
 </blockquote>
 <p>把方法放在函数构造式中这么做虽然仍然可以正确执行并得到结果，但是这么做会有个问题，如果我们是把这个方法直接写在函数构造式中，那么每一个对象都会包含有这个方法，如果我们有1000 个对象根据这个函数构造式所建立，那么这1000 个对象都会包含这个方法在内，如此将会占据相当多的内存；但如果是建立在<code>prototype</code> 中，我们只会有一个这样的方法。</p>
 <p>所以，为了性能上的考量，通常会把方法（<code>method</code>）放在构造函数的<code>prototype</code> 中，因为它们可以是通用的；把属性（<code>property</code>）放在构造函数当中，因为每一个对象可能都会有不同的属性内容，如此将能有效减少内存的问题。</p>
@@ -637,6 +637,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/13/JavaScript系列之执行上下文和执行栈/" rel="prev" title="JavaScript系列之执行上下文和执行栈">
+                JavaScript系列之执行上下文和执行栈 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -711,7 +715,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">37</span>
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -821,7 +825,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -991,7 +999,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">61.6k</span> 字
+      博客全站共： <span class="post-count">64k</span> 字
     </span>
 </div> --> 
 

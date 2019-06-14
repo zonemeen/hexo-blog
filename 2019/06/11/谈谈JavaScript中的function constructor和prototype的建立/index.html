@@ -142,23 +142,23 @@
 
 
 
-  <meta name="description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
+  <meta name="description" content="在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
 <meta name="keywords" content="JavaScript,constructor,prototype">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谈谈JavaScript中的function constructor和prototype的建立">
 <meta property="og:url" content="https://luozongmin.com/2019/06/11/谈谈JavaScript中的function constructor和prototype的建立/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
+<meta property="og:description" content="在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb5f2d5e0216997.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6502b6c976855.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb6d8eed7f56333.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/11/5cffb72f3052918344.png">
-<meta property="og:updated_time" content="2019-06-11T14:27:49.551Z">
+<meta property="og:updated_time" content="2019-06-14T08:00:11.184Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈JavaScript中的function constructor和prototype的建立">
-<meta name="twitter:description" content="在上一篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
+<meta name="twitter:description" content="在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。">
 <meta name="twitter:image" content="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg">
 
 
@@ -480,12 +480,24 @@
                 
               
 
-              <time title="创建时间：2019-06-11 22:03:26 / 修改时间：22:27:49" itemprop="dateCreated datePublished" datetime="2019-06-11T22:03:26+08:00">2019-06-11</time>
+              <time title="创建时间：2019-06-11 22:03:26" itemprop="dateCreated datePublished" datetime="2019-06-11T22:03:26+08:00">2019-06-11</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-14 16:00:11" itemprop="dateModified" datetime="2019-06-14T16:00:11+08:00">2019-06-14</time>
               
             
           </span>
@@ -549,7 +561,7 @@
       
 
       
-        <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">上一篇文章</a>中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。<a id="more"></a></p>
+        <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">《谈谈JavaScript中的function constructor和new关键字》这篇文章</a>中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。<a id="more"></a></p>
 <p>在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实<code>function</code>这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
 <p>除非你是把<code>function</code>当做<code>function constructor</code>来使用，否则这个属性就没有特别的用途；但如果你是把它当做<code>function constructor</code>，通过<code>new</code>这个关键字来执行这个<code>function</code>的话，它就有特别的意义了。</p>
 <p><div align="center"><img src="https://i.loli.net/2019/06/11/5cffb547aa38565186.jpg" alt></div></p>
@@ -999,7 +1011,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">64k</span> 字
+      博客全站共： <span class="post-count">64.1k</span> 字
     </span>
 </div> --> 
 

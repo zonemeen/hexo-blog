@@ -142,24 +142,21 @@
 
 
 
-  <meta name="description" content="这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。">
-<meta name="keywords" content="JavaScript,原型,原型链,继承">
+  <meta name="description" content="JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。">
+<meta name="keywords" content="JavaScript,变量对象">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JavaScript系列之对象的继承">
-<meta property="og:url" content="https://luozongmin.com/2019/06/10/JavaScript系列之对象的继承/index.html">
+<meta property="og:title" content="JavaScript系列之变量对象">
+<meta property="og:url" content="https://luozongmin.com/2019/06/19/JavaScript系列之变量对象/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
-<meta property="og:description" content="这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。">
+<meta property="og:description" content="JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe1ea14475a15215.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe1ee80044039818.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe1f2b20a5e85506.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe1fb8c70bc97843.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/06/10/5cfe1ff855e5b16244.jpg">
-<meta property="og:updated_time" content="2019-06-10T09:17:37.375Z">
+<meta property="og:image" content="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/06/19/5d0a1b16a791265699.jpg">
+<meta property="og:updated_time" content="2019-06-19T11:28:45.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JavaScript系列之对象的继承">
-<meta name="twitter:description" content="这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。">
-<meta name="twitter:image" content="https://i.loli.net/2019/06/10/5cfe1ea14475a15215.jpg">
+<meta name="twitter:title" content="JavaScript系列之变量对象">
+<meta name="twitter:description" content="JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。">
+<meta name="twitter:image" content="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg">
 
 
 
@@ -168,7 +165,7 @@
 
 
 
-  <link rel="canonical" href="https://luozongmin.com/2019/06/10/JavaScript系列之对象的继承/">
+  <link rel="canonical" href="https://luozongmin.com/2019/06/19/JavaScript系列之变量对象/">
 
 
 
@@ -178,7 +175,7 @@
   };
 </script>
 
-  <title>JavaScript系列之对象的继承 | 米淇淋の个人博客</title>
+  <title>JavaScript系列之变量对象 | 米淇淋の个人博客</title>
   
 
 
@@ -437,7 +434,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/06/10/JavaScript系列之对象的继承/">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/06/19/JavaScript系列之变量对象/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="米淇淋">
@@ -454,7 +451,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">JavaScript系列之对象的继承
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之变量对象
 
               
             
@@ -480,7 +477,7 @@
                 
               
 
-              <time title="创建时间：2019-06-10 17:04:17 / 修改时间：17:17:37" itemprop="dateCreated datePublished" datetime="2019-06-10T17:04:17+08:00">2019-06-10</time>
+              <time title="创建时间：2019-06-19 19:15:13 / 修改时间：19:28:45" itemprop="dateCreated datePublished" datetime="2019-06-19T19:15:13+08:00">2019-06-19</time>
             
 
             
@@ -536,41 +533,57 @@
       
 
       
-        <p>这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。<a id="more"></a></p>
-<p>而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（<code>prototype</code>）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。</p>
-<h3 id="复习原型-原型链"><a href="#复习原型-原型链" class="headerlink" title="复习原型/原型链"></a>复习原型/原型链</h3><p>JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。</p>
-<p>其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：</p>
-<ul>
-<li>所有对象都有一个属性 <code>__proto__</code> 指向一个对象，也就是原型</li>
-<li>每个对象的原型都可以通过 <code>constructor</code> 找到构造函数，构造函数也可以通过 <code>prototype</code> 找到原型</li>
-<li>所有函数都可以通过 <code>__proto__</code> 找到 <code>Function</code> 对象</li>
-<li>所有对象都可以通过 <code>__proto__</code> 找到 <code>Object</code> 对象</li>
-<li>对象之间通过 <code>__proto__</code> 连接起来，这样称之为原型链。当前对象上不存在的属性可以通过原型链一层层往上查找，直到顶层 <code>Object</code> 对象，顶层 <code>Object</code> 对象最终指向<code>null</code></li>
-</ul>
-<p>我觉得原型中最重要的内容其实就这些了，没必要看太多关于原型的文章，到头来只是会越来越糊涂，如果硬要推荐原型参阅资料的话，《JavaScript高级程序设计》这本书，当之无愧！</p>
-<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过上面的介绍，我们知道JavaScript中的继承是通过原型/原型链来体现的，先看几行代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line">f1.a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">Foo.prototype.a = <span class="number">100</span>;</span><br><span class="line">Foo.prototype.b = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f1.a);  <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.b);  <span class="comment">// 200</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.c);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
-<p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p>
-<p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p>
-<p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/10/5cfe1ea14475a15215.jpg" alt></div></p>
-<p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p>
-<p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/10/5cfe1ee80044039818.jpg" alt></div></p>
-<p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p>
-<p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p>
-<p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/10/5cfe1f2b20a5e85506.jpg" alt></div></p>
-<p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p>
-<p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p>
-<p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p>
-<p>这里再说一个函数的例子来加深理解吧。</p>
-<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/10/5cfe1fb8c70bc97843.jpg" alt></div></p>
-<p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p>
-<p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/10/5cfe1ff855e5b16244.jpg" alt></div></p>
-<p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p>
+        <p>JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/">《JavaScript系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。<a id="more"></a></p>
+<p>上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：</p>
+<p><div align="center"><img src="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg" alt></div></p>
+<p>详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下<strong>变量对象</strong>。</p>
+<h3 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h3><p>变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的<strong>变量</strong>和<strong>函数声明</strong>，先来看一段代码示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span>;     </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(a);     <span class="comment">// 10</span></span><br><span class="line">    <span class="built_in">console</span>.log(b);   <span class="comment">// function b()&#123;&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(c);   <span class="comment">// Uncaught ReferenceError: c is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由JavaScript引擎处理。</p>
+<p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p>
+<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象。而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以浏览器中为例，全局对象为window</span></span><br><span class="line"><span class="comment">// 全局上下文创建阶段</span></span><br><span class="line"><span class="comment">// VO 为变量对象（Variable Object）的缩写</span></span><br><span class="line">windowEC = &#123;</span><br><span class="line">    VO: Window,</span><br><span class="line">    scopeChain: &#123;&#125;,</span><br><span class="line">    <span class="keyword">this</span>: Window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p>
+<h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p>
+<p>这时变量对象的<strong>创建阶段</strong>会包括：</p>
+<ol>
+<li><strong>创建<code>arguments</code>对象</strong>。检查当前上下文中的参数，建立该对象下的属性与属性值。</li>
+<li><strong>检查当前上下文的函数声明，也就是使用function关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
+<li><strong>检查当前上下文中的变量声明</strong>（<code>var</code> 声明的变量），默认为 <code>undefined</code>；如果变量名称跟已经声明的形式参数或函数相同，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过变量声明，原属性值不会被修改。</li>
+</ol>
+<p><div align="center"><img src="https://i.loli.net/2019/06/19/5d0a1b16a791265699.jpg" alt></div></p>
+<p>对于第3点中的“跳过”一词想必大家会有一丝疑问？底下例子中既然按照上面的规则，变量声明的<code>foo</code>遇到函数声明的<code>foo</code>会跳过，可是为什么最后<code>foo</code>的输出结果仍然是被覆盖了？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'I am function foo'</span>) &#125;</span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>理由其实很简单，因为上面的三条规则仅仅适用于变量对象的<strong>创建过程</strong>，也就是执行上下文的创建过程。而<code>foo = 10</code>是在执行上下文的<strong>执行过程</strong>中运行的，输出结果自然会是10。对比下例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// ƒ foo() &#123; console.log('I am function foo') &#125;</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'I am function foo'</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>为啥又是不一样的结果呢？其实它的执行顺序为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先将所有函数声明放入变量对象中，函数声明变量提升</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="string">'I am function foo'</span>) &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过变量声明默认undefined的赋值</span></span><br><span class="line"><span class="comment">// var foo = undefined;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 然后开始执行阶段代码的执行</span></span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// ƒ foo() &#123; console.log('I am function foo') &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在执行上下文的执行过程中运行</span></span><br><span class="line">foo = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(foo); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
+<p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，<strong><code>function</code>声明会比<code>var</code>声明优先级更高一点</strong>。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    <span class="built_in">console</span>.log(foo());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 结果为：</span></span><br><span class="line"><span class="comment">undefined</span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>根据上述的规则，理解变量提升后可以将执行顺序理解为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> a;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    <span class="built_in">console</span>.log(foo());</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();</span><br></pre></td></tr></table></figure>
+<p>这样是不是一目了然了呢？</p>
+<p>当然还需要注意的是，函数未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象（VO）转变为了活动对象（AO），然后开始进行执行阶段的操作。</p>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>当前进入执行阶段，变量对象（VO）激活成活动对象（AO），里面的属性都能被访问了，函数会顺序执行代码，改变变量对象的属性值，此阶段的执行上下文代码会分成两个阶段进行处理：</p>
+<ol>
+<li>进入执行上下文</li>
+<li>执行代码</li>
+</ol>
+<h4 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h4><p>当进入执行上下文时，这时候还没有执行代码。让我们看一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> c = <span class="number">10</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">var</span> e = <span class="function"><span class="keyword">function</span> <span class="title">_e</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> <span class="title">x</span>(<span class="params"></span>) </span>&#123;&#125;);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">foo(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p>当进入带有参数10的<code>foo</code>函数上下文时，AO表现为如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">10</span>,</span><br><span class="line">        <span class="number">1</span>: <span class="literal">undefined</span>,</span><br><span class="line">        length: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    a: <span class="number">10</span>,</span><br><span class="line">    b: <span class="literal">undefined</span>,</span><br><span class="line">    c: <span class="literal">undefined</span>,</span><br><span class="line">    d: &lt;function reference to d&gt;,</span><br><span class="line">    e: undefined,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>x</code> 是函数表达式，所以不在变量对象当中，<code>e</code> 变量引用的值也是函数表达式，所以变量 <code>e</code> 本身是声明，所以在变量对象当中。</p>
+<h4 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h4><p>这个阶段会按顺序执行代码，修改变量对象的属性值，紧接上面的例子，执行完成后AO如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">AO = &#123;</span><br><span class="line">    <span class="built_in">arguments</span>: &#123;</span><br><span class="line">        <span class="number">0</span>: <span class="number">10</span>,</span><br><span class="line">        <span class="number">1</span>: <span class="literal">undefined</span>,</span><br><span class="line">        length: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    a: <span class="number">10</span>,</span><br><span class="line">    b: <span class="literal">undefined</span>,</span><br><span class="line">    c: <span class="number">10</span>,</span><br><span class="line">    d: &lt;reference to function declaration d&gt;,</span><br><span class="line">    e: &lt;reference to Function expression to _e&gt;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里变量对象的创建过程就介绍完了，让我们简短地总结一下：</p>
+<ol>
+<li>全局上下文的变量对象初始化是全局对象</li>
+<li>函数上下文的变量对象初始化只包括 <code>Arguments</code> 对象</li>
+<li>在进入执行上下文时会依次给变量对象<strong>添加形参</strong>、<strong>函数声明</strong>、<strong>变量声明</strong>等初始的属性值</li>
+<li>函数未进入执行阶段之前，变量对象中的属性都不能访问</li>
+<li>在执行代码阶段，会再次修改变量对象的属性值，并赋予该有的属性值</li>
+</ol>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
@@ -597,11 +610,7 @@
           
             <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/原型/" rel="tag"><i class="fa fa-tag"></i> 原型</a>
-          
-            <a href="/tags/原型链/" rel="tag"><i class="fa fa-tag"></i> 原型链</a>
-          
-            <a href="/tags/继承/" rel="tag"><i class="fa fa-tag"></i> 继承</a>
+            <a href="/tags/变量对象/" rel="tag"><i class="fa fa-tag"></i> 变量对象</a>
           
         </div>
       
@@ -614,8 +623,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/05/从instanceof身上深入理解原型原型链/" rel="next" title="从instanceof身上深入理解原型/原型链">
-                <i class="fa fa-chevron-left"></i> 从instanceof身上深入理解原型/原型链
+              <a href="/2019/06/13/JavaScript系列之执行上下文和执行栈/" rel="next" title="JavaScript系列之执行上下文和执行栈">
+                <i class="fa fa-chevron-left"></i> JavaScript系列之执行上下文和执行栈
               </a>
             
           </div>
@@ -623,10 +632,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/11/谈谈JavaScript中的function constructor和new关键字/" rel="prev" title="谈谈JavaScript中的function constructor和new关键字">
-                谈谈JavaScript中的function constructor和new关键字 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -932,7 +937,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#复习原型-原型链"><span class="nav-number">1.</span> <span class="nav-text">复习原型/原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">2.</span> <span class="nav-text">继承</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量对象"><span class="nav-number">1.</span> <span class="nav-text">变量对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全局上下文"><span class="nav-number">2.</span> <span class="nav-text">全局上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数上下文"><span class="nav-number">3.</span> <span class="nav-text">函数上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行阶段"><span class="nav-number">4.</span> <span class="nav-text">执行阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#进入执行上下文"><span class="nav-number">4.1.</span> <span class="nav-text">进入执行上下文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行代码"><span class="nav-number">4.2.</span> <span class="nav-text">执行代码</span></a></li></ol></li></ol></div>
             
 
           </div>

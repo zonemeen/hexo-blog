@@ -152,7 +152,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/06/19/5d0a1b16a791265699.jpg">
-<meta property="og:updated_time" content="2019-06-19T11:28:45.722Z">
+<meta property="og:updated_time" content="2019-06-27T12:56:15.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之变量对象">
 <meta name="twitter:description" content="JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。">
@@ -477,12 +477,24 @@
                 
               
 
-              <time title="创建时间：2019-06-19 19:15:13 / 修改时间：19:28:45" itemprop="dateCreated datePublished" datetime="2019-06-19T19:15:13+08:00">2019-06-19</time>
+              <time title="创建时间：2019-06-19 19:15:13" itemprop="dateCreated datePublished" datetime="2019-06-19T19:15:13+08:00">2019-06-19</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-27 20:56:15" itemprop="dateModified" datetime="2019-06-27T20:56:15+08:00">2019-06-27</time>
               
             
           </span>
@@ -541,7 +553,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span>;     </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br><span class="line">    <span class="built_in">console</span>.log(a);     <span class="comment">// 10</span></span><br><span class="line">    <span class="built_in">console</span>.log(b);   <span class="comment">// function b()&#123;&#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(c);   <span class="comment">// Uncaught ReferenceError: c is not defined</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
 <p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由JavaScript引擎处理。</p>
 <p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p>
-<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象。而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
+<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以浏览器中为例，全局对象为window</span></span><br><span class="line"><span class="comment">// 全局上下文创建阶段</span></span><br><span class="line"><span class="comment">// VO 为变量对象（Variable Object）的缩写</span></span><br><span class="line">windowEC = &#123;</span><br><span class="line">    VO: Window,</span><br><span class="line">    scopeChain: &#123;&#125;,</span><br><span class="line">    <span class="keyword">this</span>: Window</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p>
 <h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p>

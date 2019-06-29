@@ -150,13 +150,13 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在上一篇《JavaScript系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/06/28/5d1603d7ae57239690.jpg">
-<meta property="og:updated_time" content="2019-06-28T12:12:56.138Z">
+<meta property="og:image" content="https://luozongmin.com/images/scopechain-1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/scopechain-2.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:49:51.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之作用域和作用域链">
 <meta name="twitter:description" content="在上一篇《JavaScript系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。">
-<meta name="twitter:image" content="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/scopechain-1.jpg">
 
 
 
@@ -477,12 +477,24 @@
                 
               
 
-              <time title="创建时间：2019-06-28 19:53:24 / 修改时间：20:12:56" itemprop="dateCreated datePublished" datetime="2019-06-28T19:53:24+08:00">2019-06-28</time>
+              <time title="创建时间：2019-06-28 19:53:24" itemprop="dateCreated datePublished" datetime="2019-06-28T19:53:24+08:00">2019-06-28</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-29 15:49:51" itemprop="dateModified" datetime="2019-06-29T15:49:51+08:00">2019-06-29</time>
               
             
           </span>
@@ -536,7 +548,7 @@
         <p>在上一篇<a href="https://zhuanlan.zhihu.com/p/69142071" target="_blank" rel="noopener">《JavaScript系列之变量对象》</a>中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。<a id="more"></a></p>
 <p>此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。</p>
 <p>先来回顾一下关于执行上下文的三个阶段生命周期：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/19/5d0a19dd705b593564.jpg" alt></div></p>
+<p><img src="/images/scopechain-1.jpg" alt></p>
 <p>本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——<strong>作用域链</strong>。</p>
 <h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？</p>
 <p>作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</p>
@@ -597,7 +609,7 @@
 <p>1.执行<code>a()</code>会得到2的结果：之所以会有这样的结果，是因为当我们执行<code>function a</code>里面的<code>function b</code>时，因为在<code>function b</code>里面它找不到<code>myVar</code>这个变量，因此它开始往它的外层去搜寻，而这时候它的父级作用域是<code>function a</code>，在<code>function a</code>里面它便找到了<code>myVar = 2</code>，因此它就不再往外部环境 (<code>myVar = 1</code>)去找了，直接返回了2这样的结果。</p>
 <p>2.<code>b()</code>会得到<code>b is not defined</code>的结果：之所以<code>b</code>会是<code>not defined</code>（记得是<code>not defined</code>不是<code>undefined</code>哦！)，是因为这时候在最外层的全局上下文（<code>global execution context</code>）中，找不到<code>function b</code>。</p>
 <p>而从<code>b() --&gt; a() --&gt; global execution context</code>这样的链，就称为<strong>作用域链（Scope Chain）</strong>：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/06/28/5d1603d7ae57239690.jpg" alt></div></p>
+<p><img src="/images/scopechain-2.jpg" alt></p>
 <p>如果我们把<code>function a</code>里面对于<code>myVar</code>的声明拿掉的话，它才会继续往外层搜寻<code>myVar</code>，直到找到全局作用域中的声明<code>myVar = 1</code>，这时候才会返回1的结果。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(myVar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//var myVar = 2;</span></span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myVar = <span class="number">1</span>;</span><br><span class="line">a(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 <p>如果我们更进一步的把全局作用域中，对于<code>myVar</code>的声明也拿掉，那么现在在全局作用域中也找不到<code>myVar</code>这个变量了，也就是说，在这整个作用域链中都找不到<code>myVar</code>，因此可想而知，最后的结果是<code>not defined</code>。</p>

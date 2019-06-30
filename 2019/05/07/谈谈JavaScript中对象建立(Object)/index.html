@@ -150,12 +150,12 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg">
-<meta property="og:updated_time" content="2019-05-11T05:46:23.657Z">
+<meta property="og:image" content="https://luozongmin.com/images/object-2.jpg">
+<meta property="og:updated_time" content="2019-06-30T06:09:40.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈JavaScript中创建对象(Object)">
 <meta name="twitter:description" content="在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。">
-<meta name="twitter:image" content="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/object-2.jpg">
 
 
 
@@ -493,7 +493,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-11 13:46:23" itemprop="dateModified" datetime="2019-05-11T13:46:23+08:00">2019-05-11</time>
+                <time title="修改时间：2019-06-30 14:09:40" itemprop="dateModified" datetime="2019-06-30T14:09:40+08:00">2019-06-30</time>
               
             
           </span>
@@ -552,7 +552,7 @@
 <p>接下来我将介绍三种创建JavaScript里的对象及如何调用的方法：  </p>
 <h4 id="方法一：使用"><a href="#方法一：使用" class="headerlink" title="方法一：使用 [ ]"></a>方法一：使用 [ ]</h4><p><strong>创建对象</strong>  </p>
 <p>创建对象的第一个方法是使用<code>[ ]</code>，<code>[ ]</code>在JavaScript中被称做Computed Member Access：  </p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/07/5cd167337c2e4.jpg" alt>    </div></p>
+<p><img src="/images/object-2.jpg" alt>    </p>
 <p>让我们看一下底下的例子：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person[<span class="string">"firstname"</span>] = <span class="string">"Jay"</span>;</span><br><span class="line">person[<span class="string">"lastname"</span>] = <span class="string">"Chou"</span>;</span><br></pre></td></tr></table></figure>
 <p>这是利用<code>[ ]</code>创建对象的方法，首先我们创建一个对象，叫做<code>person</code>，接着开始给它「名称-值」配对，例如，<code>firstname</code>是属性的名称，<code>Jay</code>则是它的值；<code>lastname</code>也是属性名称，<code>Chou</code>则是它的值。通过这种方法，我们就可以创建对象里面的各种「名称-值」配对。  </p>

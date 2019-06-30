@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://luozongmin.com/2019/05/09/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/</loc>
+    <lastmod>2019-06-30</lastmod>
+  </url>  <url>
+    <loc>https://luozongmin.com/2019/05/14/%E6%B5%85%E8%B0%88%E6%95%B0%E7%BB%84%E5%B8%B8%E8%A7%81%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2019-06-30</lastmod>
+  </url>  <url>
     <loc>https://luozongmin.com/2019/05/21/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/</loc>
     <lastmod>2019-06-30</lastmod>
   </url>  <url>
@@ -40,17 +46,11 @@
     <loc>https://luozongmin.com/2019/05/31/%E4%BB%8E%E5%8E%9F%E7%94%9FJS%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84%E4%B8%80%E4%B8%AAAPI%E4%B8%AD%E4%BD%93%E4%BC%9A%E5%85%B6%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</loc>
     <lastmod>2019-05-31</lastmod>
   </url>  <url>
-    <loc>https://luozongmin.com/2019/05/14/%E6%B5%85%E8%B0%88%E6%95%B0%E7%BB%84%E5%B8%B8%E8%A7%81%E9%81%8D%E5%8E%86%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2019-05-15</lastmod>
-  </url>  <url>
     <loc>https://luozongmin.com/2019/05/07/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E5%AF%B9%E8%B1%A1%E5%BB%BA%E7%AB%8B(Object)/</loc>
     <lastmod>2019-05-11</lastmod>
   </url>  <url>
     <loc>https://luozongmin.com/2019/05/11/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/</loc>
     <lastmod>2019-05-11</lastmod>
-  </url>  <url>
-    <loc>https://luozongmin.com/2019/05/09/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/</loc>
-    <lastmod>2019-05-09</lastmod>
   </url>  <url>
     <loc>https://luozongmin.com/2019/04/19/Undefined%20vs%20Null/</loc>
     <lastmod>2019-05-07</lastmod>

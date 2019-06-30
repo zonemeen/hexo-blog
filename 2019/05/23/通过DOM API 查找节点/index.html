@@ -150,18 +150,18 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在上一篇的分享当中，我们简单介绍了BOM 与DOM，也了解到JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce6382c0eb0940681.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce6386188a1c10709.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce6389d439b034146.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce638c00d38e27189.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce642a1d157081406.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/05/23/5ce643508fd8288468.jpg">
-<meta property="og:updated_time" content="2019-05-23T07:50:15.457Z">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-5.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-6.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/domapi-7.jpg">
+<meta property="og:updated_time" content="2019-06-30T05:41:37.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="通过DOM API 查找节点">
 <meta name="twitter:description" content="在上一篇的分享当中，我们简单介绍了BOM 与DOM，也了解到JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。">
-<meta name="twitter:image" content="https://i.loli.net/2019/05/23/5ce6382c0eb0940681.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/domapi-1.jpg">
 
 
 
@@ -482,12 +482,24 @@
                 
               
 
-              <time title="创建时间：2019-05-23 13:59:30 / 修改时间：15:50:15" itemprop="dateCreated datePublished" datetime="2019-05-23T13:59:30+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 13:59:30" itemprop="dateCreated datePublished" datetime="2019-05-23T13:59:30+08:00">2019-05-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-30 13:41:37" itemprop="dateModified" datetime="2019-06-30T13:41:37+08:00">2019-06-30</time>
               
             
           </span>
@@ -551,14 +563,14 @@
 <p>还有人会说为什么放在<code>&lt;head&gt; ... &lt;/head&gt;</code>里面的JavaScript没有作用？我觉得这说的有出入，这里我们简单来讲一下问题所在。</p>
 <p>那么我们来试试上一篇介绍过的，先以<code>document.querySelector</code>取得<code>id=&quot;hello&quot;</code>的节点，然后通过<code>textContent</code>来修改内容。</p>
 <p>先来试试把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前。在jsbin里面马上执行看看，看起来似乎很ok呢！</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce6382c0eb0940681.jpg" alt>    </div></p>
+<p><img src="/images/domapi-1.jpg" alt>    </p>
 <p>接着，我们试着把<code>&lt;script&gt;</code>标签移到<code>&lt;head&gt; ... &lt;/head&gt;</code>之间：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce6386188a1c10709.jpg" alt>    </div></p>
+<p><img src="/images/domapi-2.jpg" alt>    </p>
 <p>咦？怎么什么都没有呢？而且也没有错误信息，JavaScript真的如大家说的一样，很垃圾吗？</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce6389d439b034146.jpg" alt>   </div></p>
+<p><img src="/images/domapi-3.jpg" alt>   </p>
 <p>冷静一下，容我解释一下。</p>
 <p>前面说过，当一个网页被载入到浏览器时，浏览器会先分析这个HTML 文档，由上而下依序来读取解析：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce638c00d38e27189.jpg" alt>   </div></p>
+<p><img src="/images/domapi-4.jpg" alt>   </p>
 <p>所以上面jsbin例子中，当浏览器在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间遇到<code>&lt;script&gt;</code>标签时，就会暂停解析网页，并且<strong>立即</strong>执行<code>&lt;script&gt;</code>里的内容，直到script执行完毕后再继续解析网页。</p>
 <p>当<code>&lt;head&gt; ... &lt;/head&gt;</code>里的<code>&lt;script&gt;</code>想要尝试去寻找<code>&lt;div id=&quot;hello&quot;&gt;</code>这个标签，但因为还没解析到网页本体，所以也无从取得。</p>
 <p>不是浏览器坏掉，也不是JavaScript太渣，而是因为我们<strong>不理解浏览器执行的原理所造成的误会</strong>。</p>
@@ -575,12 +587,12 @@
 <p>那么，当我们把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>结束之前，由于DOM已经解析完成，所以<code>document.querySelector</code>就可以顺利取得<code>id=&quot;hello&quot;</code>的节点，并且把<code>&#39;HELLO&#39;</code>的字串放在网页里啦！</p>
 <p>这样说起来，<code>&lt;script&gt;</code>标签是不是就不适合放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间呢？</p>
 <p>也不能这么说，这点认真要讲的话之后或许可以用一整篇来说明这个。</p>
-<h3 id="DOM-节点的选取"><a href="#DOM-节点的选取" class="headerlink" title="DOM 节点的选取"></a>DOM 节点的选取</h3><p><div align="center"><img src="https://i.loli.net/2019/05/21/5ce3a15f033f036573.png" alt>  </div></p>
+<h3 id="DOM-节点的选取"><a href="#DOM-节点的选取" class="headerlink" title="DOM 节点的选取"></a>DOM 节点的选取</h3><p><img src="/images/domapi-5.jpg" alt>  </p>
 <p>上一篇文章说过，<code>document对象</code>是DOM tree的根节点，所以当我们要存取HTML时，都从<code>document</code>对象开始。而DOM的节点类型除了<strong>HTML元素节点</strong>(element nodes)外，还有<strong>文字节点</strong>(text nodes)、<strong>注释节点</strong>(comment nodes)等。</p>
 <p>而常见的DOM 选取方法有下列这些：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据传入的值，找到 DOM 中 id 为 'xxx' 的元素。</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 class 名称，返回所有符合条件的节点集合</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的节点集合</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'xxx'</span>); </span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'xxx'</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="DOM-节点的类型"><a href="#DOM-节点的类型" class="headerlink" title="DOM 节点的类型"></a>DOM 节点的类型</h3><p>DOM 常用的节点类型有下面几种：</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce642a1d157081406.jpg" alt>  </div></p>
+<p><img src="/images/domapi-6.jpg" alt>  </p>
 <p>可以通过节点类型常数或是对应数值来判断：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.nodeType === Node.DOCUMENT_NODE;   <span class="comment">//true</span></span><br><span class="line"><span class="built_in">document</span>.nodeType === <span class="number">9</span>;   <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 <p>其他不常用或是已经废弃的部分可以参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType" target="_blank" rel="noopener">MDN Node.nodeType</a>一节。</p>
@@ -590,7 +602,7 @@
 <li><strong>兄弟关系</strong>：有同一个「父节点」的节点，那么他们彼此之间就是「兄弟节点」(Siblings node)。</li>
 </ul>
 <p>而隔层的节点基本上没有直接关系。</p>
-<p><div align="center"><img src="https://i.loli.net/2019/05/23/5ce643508fd8288468.jpg" alt>  </div></p>
+<p><img src="/images/domapi-7.jpg" alt>  </p>
 <p>上图中水平方向的邻层节点为父子关系，垂直方向的同层节点为兄弟关系。</p>
 <p><strong>Node.childNodes</strong></p>
 <p>所有的DOM节点对象都有<code>childNodes</code>属性，且此种属性无法修改。  </p>

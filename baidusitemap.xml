@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://luozongmin.com/2019/05/23/%E9%80%9A%E8%BF%87DOM%20API%20%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9/</loc>
+    <lastmod>2019-06-30</lastmod>
+  </url>  <url>
     <loc>https://luozongmin.com/2019/05/23/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/</loc>
     <lastmod>2019-06-30</lastmod>
   </url>  <url>
@@ -33,9 +36,6 @@
   </url>  <url>
     <loc>https://luozongmin.com/2019/05/31/%E4%BB%8E%E5%8E%9F%E7%94%9FJS%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84%E4%B8%80%E4%B8%AAAPI%E4%B8%AD%E4%BD%93%E4%BC%9A%E5%85%B6%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</loc>
     <lastmod>2019-05-31</lastmod>
-  </url>  <url>
-    <loc>https://luozongmin.com/2019/05/23/%E9%80%9A%E8%BF%87DOM%20API%20%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9/</loc>
-    <lastmod>2019-05-23</lastmod>
   </url>  <url>
     <loc>https://luozongmin.com/2019/05/21/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/</loc>
     <lastmod>2019-05-22</lastmod>

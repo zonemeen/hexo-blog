@@ -150,15 +150,15 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。    本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c904704ccfff.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c904b004d435.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c90744268350.jpg">
-<meta property="og:image" content="https://i.loli.net/2019/03/19/5c9074fb6cad1.jpg">
-<meta property="og:updated_time" content="2019-04-22T10:12:04.361Z">
+<meta property="og:image" content="https://luozongmin.com/images/http-1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-4.jpg">
+<meta property="og:updated_time" content="2019-06-30T07:50:48.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP入门笔记">
 <meta name="twitter:description" content="HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。    本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/19/5c904704ccfff.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/http-1.jpg">
 
 
 
@@ -496,7 +496,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-22 18:12:04" itemprop="dateModified" datetime="2019-04-22T18:12:04+08:00">2019-04-22</time>
+                <time title="修改时间：2019-06-30 15:50:48" itemprop="dateModified" datetime="2019-06-30T15:50:48+08:00">2019-06-30</time>
               
             
           </span>
@@ -550,8 +550,7 @@
         <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。   </p>
 <p>本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。   <a id="more"></a> </p>
 <h4 id="什么是HTTP"><a href="#什么是HTTP" class="headerlink" title="什么是HTTP?"></a><strong>什么是HTTP?</strong></h4><p>HTTP代表超文本传输协议。 这是互联网中数据通信的基础， 数据通信以客户端发送的请求开始，并以从Web服务器接收的响应结束，而HTTP的作用就是指导浏览器和服务器如何进行沟通。   </p>
-<p>HTTP通信过程简图：   </p>
-<p><div align="center"><img src="https://i.loli.net/2019/03/19/5c904704ccfff.jpg" alt="HTTP通信过程">     </div></p>
+<p>HTTP通信过程简图：<br><img src="/images/http-1.jpg" alt>     </p>
 <ul>
 <li>客户端（通常为浏览器）负责发起请求</li>
 </ul>
@@ -625,7 +624,7 @@
 </li>
 </ul>
 <ul>
-<li>状态码列表<br><div align="center"><img src="https://i.loli.net/2019/03/19/5c904b004d435.jpg" alt><br><div align="center"><img src="https://i.loli.net/2019/03/19/5c90744268350.jpg" alt>     </div></div></li>
+<li>状态码列表<br><img src="/images/http-2.jpg" alt><br><img src="/images/http-3.jpg" alt>     </li>
 </ul>
 <h4 id="如何在Chrome上检查HTTP请求和响应？"><a href="#如何在Chrome上检查HTTP请求和响应？" class="headerlink" title="如何在Chrome上检查HTTP请求和响应？"></a><strong>如何在Chrome上检查HTTP请求和响应？</strong></h4><p>将Google Chrome视为常用浏览器，在其他浏览器中查看详细信息的过程仍然相同。   </p>
 <ol>
@@ -633,7 +632,7 @@
 <li>您也可以通过右键单击页面打开开发人员控制台，然后选择“检查”选项。</li>
 <li>转到“Network”选项，然后重新加载页面。 现在，您将看到页面上每个组件的加载时间。</li>
 <li>点击“Show Overview”图标以删除时间线，以便您可以清楚地查看其他详细信息。</li>
-<li>单击左侧栏上的页面URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><div align="center"><img src="https://i.loli.net/2019/03/19/5c9074fb6cad1.jpg" alt>    </div></li>
+<li>单击左侧栏上的页面URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><img src="/images/http-4.jpg" alt>    </li>
 </ol>
 <p>您可以在上面的部分中详细了解请求和响应的详细信息。 “Headers”选项将显示所选项目的请求和响应的HTTP标头信息的详细信息。    </p>
 <h4 id="HTTP-标头检查工具"><a href="#HTTP-标头检查工具" class="headerlink" title="HTTP 标头检查工具"></a><strong>HTTP 标头检查工具</strong></h4><p>与Chrome类似，还有许多其他免费工具可用于检查HTTP标头中收到的响应代码。 例如，转到此HTTP标头检查工具，输入您要检查的任何URL，然后单击“提交”按钮。   </p>

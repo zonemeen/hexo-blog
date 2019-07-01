@@ -155,7 +155,7 @@
 <meta property="og:image" content="https://luozongmin.com/images/new-3.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/new-4.png">
 <meta property="og:image" content="https://luozongmin.com/images/new-5.png">
-<meta property="og:updated_time" content="2019-06-30T05:05:07.546Z">
+<meta property="og:updated_time" content="2019-07-01T07:26:10.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈JavaScript中的function constructor和new关键字">
 <meta name="twitter:description" content="您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？">
@@ -497,7 +497,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 13:05:07" itemprop="dateModified" datetime="2019-06-30T13:05:07+08:00">2019-06-30</time>
+                <time title="修改时间：2019-07-01 15:26:10" itemprop="dateModified" datetime="2019-07-01T15:26:10+08:00">2019-07-01</time>
               
             
           </span>
@@ -560,7 +560,7 @@
 <li>创建一个空对象，作为将要返回的对象实例。</li>
 <li>将这个空对象的原型，指向构造函数的<code>prototype</code>属性。</li>
 <li>将这个空对象赋值给函数内部的<code>this</code>关键字。</li>
-<li>开始执行构造函数内部的代码。</li>
+<li>如果函数没有return其他对象，那么<code>new</code>表达式中的函数调用会自动返回这个新对象。</li>
 </ol>
 <p>也就是说，当我们使用<code>new</code>这个关键字时，实际上会先有一个空的对象被建立。</p>
 <p>接着<code>People</code>这个构造函数会被执行，这个空对象的原型，指向了<code>People.prototype</code>。</p>
@@ -579,6 +579,17 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName =  <span class="string">'Jay'</span> ; </span><br><span class="line">  <span class="keyword">this</span> . lastName =  <span class="string">'Chou'</span> ; </span><br><span class="line">  <span class="keyword">return</span>   &#123; <span class="string">"RETURN"</span> : <span class="string">"原本this的内容就不会被返回"</span> &#125; ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  <span class="keyword">new</span>  Person ( ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person ) ;</span><br></pre></td></tr></table></figure>
 <p>构造函数的内部若<code>return</code>其他对象，<code>new</code>命令会返回<code>return</code>语句指定的对象，将原新对象内容覆盖掉；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。返回的结果如下：</p>
 <p><img src="/images/new-4.png" alt></p>
+<h3 id="手写一个new实现"><a href="#手写一个new实现" class="headerlink" title="手写一个new实现"></a>手写一个new实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 创建一个空的对象</span></span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(),</span><br><span class="line">	<span class="comment">// 获得构造函数，arguments中去除第一个参数</span></span><br><span class="line">    Con = [].shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">	<span class="comment">// 链接到原型，obj 可以访问到构造函数原型中的属性</span></span><br><span class="line">    obj.__proto__ = Con.prototype;</span><br><span class="line">	<span class="comment">// 绑定 this 实现继承，obj 可以访问到构造函数中的属性</span></span><br><span class="line">    <span class="keyword">var</span> ret = Con.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">	<span class="comment">// 优先返回构造函数返回的对象</span></span><br><span class="line">	<span class="keyword">return</span> ret <span class="keyword">instanceof</span> <span class="built_in">Object</span> ? ret : obj;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>使用这个手写的new</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用内置函数new</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(...)</span><br><span class="line">                        </span><br><span class="line"><span class="comment">// 使用手写的new，即create</span></span><br><span class="line"><span class="keyword">var</span> person = create(Person, ...)</span><br></pre></td></tr></table></figure>
+<p>代码原理解析：</p>
+<ol>
+<li>用<code>new Object()</code> 的方式新建了一个对象<code>obj</code></li>
+<li>取出第一个参数，就是我们要传入的构造函数。此外因为 <code>shift</code> 会修改原数组，所以 <code>arguments</code> 会被去除第一个参数</li>
+<li>将 <code>obj</code> 的原型指向构造函数，这样<code>obj</code>就可以访问到构造函数原型中的属性</li>
+<li>使用 <code>apply</code>，改变构造函数 <code>this</code> 的指向到新建的对象，这样 <code>obj</code> 就可以访问到构造函数中的属性</li>
+<li>返回 <code>obj</code></li>
+</ol>
 <h3 id="function-constructor-的实际应用"><a href="#function-constructor-的实际应用" class="headerlink" title="function constructor 的实际应用"></a>function constructor 的实际应用</h3><p>由上面的方法，我们可以通过<code>function</code>的方式来建立一个新的对象，如果我们想要<strong>建立出同属性名称但不同属性值的对象内容，我们可以把对象的属性值变成参数</strong>，如此就能通过此<code>function constructor</code>建立出许多不同的对象：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="keyword">var</span> person2 =  <span class="keyword">new</span>  Person ( <span class="string">'Jane'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person2 ) ;</span><br></pre></td></tr></table></figure>
 <p>如此，我们就可以通过同一个构造函数建立出很多不同的对象：</p>
@@ -963,7 +974,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#谈谈function-constructor"><span class="nav-number">1.</span> <span class="nav-text">谈谈function constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步来看new-让这个过程发生了什么"><span class="nav-number">2.</span> <span class="nav-text">进一步来看new 让这个过程发生了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过new-会帮我们建立一个空的对象"><span class="nav-number">3.</span> <span class="nav-text">通过new 会帮我们建立一个空的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的最后若return其他对象，则原新对象内容会被覆盖"><span class="nav-number">4.</span> <span class="nav-text">函数的最后若return其他对象，则原新对象内容会被覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-constructor-的实际应用"><span class="nav-number">5.</span> <span class="nav-text">function constructor 的实际应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意！如果我们忘了加上new关键字"><span class="nav-number">6.</span> <span class="nav-text">注意！如果我们忘了加上new关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#谈谈function-constructor"><span class="nav-number">1.</span> <span class="nav-text">谈谈function constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进一步来看new-让这个过程发生了什么"><span class="nav-number">2.</span> <span class="nav-text">进一步来看new 让这个过程发生了什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过new-会帮我们建立一个空的对象"><span class="nav-number">3.</span> <span class="nav-text">通过new 会帮我们建立一个空的对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的最后若return其他对象，则原新对象内容会被覆盖"><span class="nav-number">4.</span> <span class="nav-text">函数的最后若return其他对象，则原新对象内容会被覆盖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手写一个new实现"><span class="nav-number">5.</span> <span class="nav-text">手写一个new实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#function-constructor-的实际应用"><span class="nav-number">6.</span> <span class="nav-text">function constructor 的实际应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意！如果我们忘了加上new关键字"><span class="nav-number">7.</span> <span class="nav-text">注意！如果我们忘了加上new关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">8.</span> <span class="nav-text">小结</span></a></li></ol></div>
             
 
           </div>
@@ -1014,7 +1025,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">72.5k</span> 字
+      博客全站共： <span class="post-count">72.8k</span> 字
     </span>
 </div> --> 
 

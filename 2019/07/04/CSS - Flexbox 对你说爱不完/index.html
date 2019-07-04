@@ -145,7 +145,7 @@
   <meta name="description" content="Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。">
 <meta name="keywords" content="CSS,布局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CSS - Flexbox 对你说爱不完">
+<meta property="og:title" content="CSS Flexbox 对你说爱不完">
 <meta property="og:url" content="https://luozongmin.com/2019/07/04/CSS - Flexbox 对你说爱不完/index.html">
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。">
@@ -176,9 +176,9 @@
 <meta property="og:image" content="https://luozongmin.com/images/flex-24.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/flex-25.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/flex-26.jpg">
-<meta property="og:updated_time" content="2019-07-04T07:37:13.734Z">
+<meta property="og:updated_time" content="2019-07-04T07:46:55.781Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS - Flexbox 对你说爱不完">
+<meta name="twitter:title" content="CSS Flexbox 对你说爱不完">
 <meta name="twitter:description" content="Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。">
 <meta name="twitter:image" content="https://luozongmin.com/images/flex-1.jpg">
 
@@ -199,7 +199,7 @@
   };
 </script>
 
-  <title>CSS - Flexbox 对你说爱不完 | 米淇淋の个人博客</title>
+  <title>CSS Flexbox 对你说爱不完 | 米淇淋の个人博客</title>
   
 
 
@@ -475,7 +475,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CSS - Flexbox 对你说爱不完
+          <h1 class="post-title" itemprop="name headline">CSS Flexbox 对你说爱不完
 
               
             
@@ -501,7 +501,7 @@
                 
               
 
-              <time title="创建时间：2019-07-04 14:59:08 / 修改时间：15:37:13" itemprop="dateCreated datePublished" datetime="2019-07-04T14:59:08+08:00">2019-07-04</time>
+              <time title="创建时间：2019-07-04 14:59:08 / 修改时间：15:46:55" itemprop="dateCreated datePublished" datetime="2019-07-04T14:59:08+08:00">2019-07-04</time>
             
 
             
@@ -730,7 +730,7 @@
 <p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自flex容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
 <p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
 <h3 id="从垂直居中看出flex的强大"><a href="#从垂直居中看出flex的强大" class="headerlink" title="从垂直居中看出flex的强大"></a>从垂直居中看出flex的强大</h3><p>以往让元素垂直居中并不容易，直到CSS3的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用flex，让垂直居中变得异常简单</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“wrapper”</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“div”</span>&gt;</span></span><br><span class="line">        1</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“wrapper”</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“div”</span>&gt;</span></span><br><span class="line">        flexbox 对你说爱不完</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>几行简单代码，即可让div垂直居中</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里最重要的就是包裹元素的三个关键属性:</p>

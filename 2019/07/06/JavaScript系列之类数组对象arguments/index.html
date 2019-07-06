@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="CtVND81iIkKFLNfCegB6JHii589pMrwZI_nCGEnggIk">
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="8plPacPx3d">
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。">
+<meta name="keywords" content="JavaScript,arguments">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript系列之类数组对象arguments">
+<meta property="og:url" content="https://luozongmin.com/2019/07/06/JavaScript系列之类数组对象arguments/index.html">
+<meta property="og:site_name" content="米淇淋の个人博客">
+<meta property="og:description" content="之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://luozongmin.com/images/arguments-1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/arguments-2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/arguments-3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/arguments-4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/arguments-5.jpg">
+<meta property="og:updated_time" content="2019-07-06T15:36:54.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript系列之类数组对象arguments">
+<meta name="twitter:description" content="之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。">
+<meta name="twitter:image" content="https://luozongmin.com/images/arguments-1.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="米淇淋の个人博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://luozongmin.com/2019/07/06/JavaScript系列之类数组对象arguments/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript系列之类数组对象arguments | 米淇淋の个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">米淇淋の个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay hungry. Stay young.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/miqilin21" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/07/06/JavaScript系列之类数组对象arguments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="米淇淋">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米淇淋の个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之类数组对象arguments
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-06 23:15:18 / 修改时间：23:36:54" itemprop="dateCreated datePublished" datetime="2019-07-06T23:15:18+08:00">2019-07-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991" target="_blank" rel="noopener">《JavaScript系列之this是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。<a id="more"></a></p>
+<p>那arguments到底是什么呢？下面我将尽可能地用简洁明了的言语来描述 arguments。</p>
+<h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”phone”、”food”、”job”，就是我们在执行函式的时候可以任意填入的参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyFavorite();</span><br></pre></td></tr></table></figure>
+<p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
+<p>一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在于，即使你没有给它任何参数值就加以执行，也不会报错，而是会返回<code>undefined</code>。</p>
+<p><img src="/images/arguments-1.jpg" alt></p>
+<p>为什么会得到”<code>undefined</code>“呢？</p>
+<p>之所以会这样是因为当JavaScript在执行这个函数的时候，由于提升机制，它会先把我们的参数(<code>house</code>, <code>car</code>, <code>money</code>)存到内存中了，并且赋予它的值是<code>undefined</code>。</p>
+<p>参数值会由左至右读取，如果我依序执行这样的代码就理解了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyFavorite();</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>, <span class="string">"一亿元"</span>);</span><br></pre></td></tr></table></figure>
+<p>会分别读到以下的结果，表示JavaScript会由左至右来读取参数值，而且即使某些参数值有缺值的情况，JavaScript还是可以正常执行。</p>
+<p><img src="/images/arguments-2.jpg" alt></p>
+<h3 id="设置函数中参数的预设值"><a href="#设置函数中参数的预设值" class="headerlink" title="设置函数中参数的预设值"></a>设置函数中参数的预设值</h3><p>由于目前的几款浏览器使用的JavaScript版本都尚不支持直接在参数的地方设置预设值（ES6的将可以），所以很多的框架都还不会用这种方式设置预设值。</p>
+<p><strong>方法一：在ES6的JavaScript中，可以直接通过这种方式设置参数预设值：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money = <span class="string">'一亿元'</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>方法二：利用强制转换的概念设置预设值</strong></p>
+<p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的预设值，利用简单的”=”和”||”就可以达到参数预设值的效果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    money = money || <span class="string">'一亿元'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到预设值为”一亿元”：</p>
+<p><img src="/images/arguments-3.jpg" alt></p>
+<h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>了解了parameters的概念后，让我们回来谈谈arguments，MDN将它叫做类数组对象，那么什么是类数组对象呢？</p>
+<p>所谓的类数组对象:</p>
+<blockquote>
+<p>就是拥有一个 <code>length</code> 属性和若干索引属性的对象</p>
+</blockquote>
+<p>举个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array = [<span class="string">'house'</span>, <span class="string">'car'</span>, <span class="string">'money'</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arrayLike = &#123;</span><br><span class="line">    <span class="number">0</span>: <span class="string">'house'</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">'car'</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">'money'</span>,</span><br><span class="line">    length: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//读取</span></span><br><span class="line"><span class="built_in">console</span>.log(array[<span class="number">0</span>]); <span class="comment">// house</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike[<span class="number">0</span>]); <span class="comment">// house</span></span><br><span class="line"></span><br><span class="line">array[<span class="number">0</span>] = <span class="string">'new house'</span>;</span><br><span class="line">arrayLike[<span class="number">0</span>] = <span class="string">'new house'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//长度</span></span><br><span class="line"><span class="built_in">console</span>.log(array.length); <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.length); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = array.length; i &lt; len; i++) &#123;</span><br><span class="line">   ……</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = arrayLike.length; i &lt; len; i++) &#123;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面我们可以看得出来，类数组对象与数组在读取、获取长度、遍历三个方面一样，都能取到，那为什么还叫做类数组对象呢？</p>
+<p>因为类数组对象不可以使用数组的方法，比如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayLike.push(<span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
+<p>然而上述代码会报错: arrayLike.push is not a function，所以终归还是类数组呐……</p>
+<h3 id="调用数组方法"><a href="#调用数组方法" class="headerlink" title="调用数组方法"></a>调用数组方法</h3><p>如果类数组想用数组的方法怎么办呢？</p>
+<p>直接调用是不可取的，那我们可以通过 <code>Function.call</code> 的方法进行间接调用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayLike = &#123;<span class="number">0</span>: <span class="string">'house'</span>, <span class="number">1</span>: <span class="string">'car'</span>, <span class="number">2</span>: <span class="string">'money'</span>, <span class="attr">length</span>: <span class="number">3</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.join.call(arrayLike, <span class="string">'&amp;'</span>)); <span class="comment">// house&amp;car&amp;money</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(arrayLike, <span class="number">0</span>)); <span class="comment">// ["house", "car", "money"] </span></span><br><span class="line"><span class="comment">// slice可以做到类数组转数组</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.map.call(arrayLike, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> item.toUpperCase();</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// ["HOUSE", "CAR", "MONEY"]</span></span><br></pre></td></tr></table></figure>
+<p>在上面已经提到了一种类数组转数组的方法，再补充三个：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayLike = &#123;<span class="number">0</span>: <span class="string">'house'</span>, <span class="number">1</span>: <span class="string">'car'</span>, <span class="number">2</span>: <span class="string">'money'</span>, <span class="attr">length</span>: <span class="number">3</span> &#125;</span><br><span class="line"><span class="comment">// 1. slice</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.slice.call(arrayLike)); <span class="comment">// ["house", "car", "money"] </span></span><br><span class="line"><span class="comment">// 2. splice</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.splice.call(arrayLike, <span class="number">0</span>)); <span class="comment">// ["house", "car", "money"] </span></span><br><span class="line"><span class="comment">// 3. ES6 Array.from</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(arrayLike)); <span class="comment">// ["house", "car", "money"] </span></span><br><span class="line"><span class="comment">// 4. apply</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.prototype.concat.apply([], arrayLike));</span><br></pre></td></tr></table></figure>
+<p>接下来重点讲讲 Arguments 这个类数组对象。</p>
+<h3 id="arguments对象"><a href="#arguments对象" class="headerlink" title="arguments对象"></a>arguments对象</h3><p>arguments比起this来说，要容易理解的多，arguments对象只定义在函数体中，包括了函数的参数和其他属性。</p>
+<p>同样地通过上面的例子加以理解，我们直接在函数中去打印出”arguments”这个关键字：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    money = money || <span class="string">'一亿元'</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyFavorite();</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>, <span class="string">"一亿元"</span>);</span><br></pre></td></tr></table></figure>
+<p>打印结果如下：</p>
+<p><img src="/images/arguments-4.jpg" alt></p>
+<p>我们可以看到除了类数组的索引属性和<code>length</code>属性之外，还有一个<code>callee</code>属性，而且我们可以看到arguments对象的<code>__ proto __</code>是指向<code>object</code>的，这也说明了他是个类数组对象，而不是一个数组。下面我们进行一一介绍。</p>
+<h4 id="length属性"><a href="#length属性" class="headerlink" title="length属性"></a>length属性</h4><p><code>arguments.length</code>为函数实参个数，举个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">house, car, money</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"实参的长度为："</span> + <span class="built_in">arguments</span>.length)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"形参的长度为："</span> + foo.length)</span><br><span class="line"></span><br><span class="line">foo(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 形参的长度为：3</span></span><br><span class="line"><span class="comment">// 实参的长度为：1</span></span><br></pre></td></tr></table></figure>
+<h4 id="callee属性"><a href="#callee属性" class="headerlink" title="callee属性"></a>callee属性</h4><p>每个参数实例都有一个<code>callee</code>属性，通过它可以调用函数自身。 ES5的严格模式不允许访问<code>arguments.callee</code>。</p>
+<p>讲个闭包经典面试题使用 <code>callee</code> 的解决方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">    (data[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="built_in">arguments</span>.callee.i) </span><br><span class="line">    &#125;).i = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data[<span class="number">0</span>]();</span><br><span class="line">data[<span class="number">1</span>]();</span><br><span class="line">data[<span class="number">2</span>]();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0</span></span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<h3 id="最后来看看展开运算符spread-…"><a href="#最后来看看展开运算符spread-…" class="headerlink" title="最后来看看展开运算符spread(…)"></a>最后来看看展开运算符spread(…)</h3><p>除了arguments这个关键字，在新版ES6的JavaScript中另外提供了一个展开运算符(spread)，它就是「<code>...</code>」三个点，这个<code>...</code>有什么用呢？</p>
+<p>根据<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">MDN</a>对于展开运算符spread的描述如下：</p>
+<blockquote>
+<p>The spread operator allows an expression to be expanded in places where multiple arguments (for function calls) or multiple elements (for array literals) or multiple variables (for destructuring assignment) are expected.</p>
+</blockquote>
+<p>简单来说，就是它可以把函数中许多的参数(arguments)或数组中许多的元素(elements)形成一个新的变量。</p>
+<p>举例来说：</p>
+<p>在函数的部分，在参数的地方我们用”<code>...other</code>“，<code>other</code>是你想要储存成的数组变量名称，可以自己取。</p>
+<p>在执行函数的地方，原本我们只有三个参数(<code>house</code>, <code>car</code>, <code>money</code>)，也只能填写三个参数；但使用了展开运算符”<code>...</code>“后，我们在执行函数的地方就可以带入不只三个参数（例如，我在最后面又加了”老婆”和”孩子”），这些多的参数值最后都会被放到<code>other</code>这个数组当中。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money, ...other</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(other);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'What my favorite are'</span> + house + <span class="string">','</span> + car + <span class="string">','</span> + money + <span class="string">','</span> + other);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>, <span class="string">"一亿"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>, <span class="string">"一亿"</span>, <span class="string">"老婆"</span>, <span class="string">"孩子"</span>);</span><br></pre></td></tr></table></figure>
+<p>结果就会长的像这样子：</p>
+<p><img src="/images/arguments-5.jpg" alt></p>
+<p>展开运算符还有其他的使用方式，像是把数组元素做连接等等，使用灵活的话相当方便，如果有需要的话，可以参考引1。</p>
+<p>引1：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">Microsoft Developer Netword：展开运算符(…)</a></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><strong>1.利用arguments实现方法的重载</strong></p>
+<p>下面我们利用arguments对象来实现一个参数相加的函数，不论传入多少参数都行，将传入的参数相加后返回。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> len = <span class="built_in">arguments</span>.length,</span><br><span class="line">        sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(;len--;)&#123;</span><br><span class="line">        sum += <span class="built_in">arguments</span>[len];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log( add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) );   <span class="comment">//6</span></span><br><span class="line"><span class="built_in">console</span>.log( add(<span class="number">1</span>,<span class="number">3</span>) );     <span class="comment">//4</span></span><br><span class="line"><span class="built_in">console</span>.log( add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>) );   <span class="comment">//17</span></span><br></pre></td></tr></table></figure>
+<p>由于JS是一种弱类型的语言，没有重载机制，当我们重写函数时，会将原来的函数直接覆盖，这里我们能利用arguments，来判断传入的实参类型与数量进行不同的操作，然后返回不同的数值。</p>
+<p><strong>2.利用arguments.callee实现递归</strong></p>
+<p>先来看看平常我们是怎么实现递归的，这是一个结算阶乘的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">num</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">if</span>(num&lt;=<span class="number">1</span>) &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125;<span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> num * foo(num<span class="number">-1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是当这个函数变成了一个匿名函数时，我们就可以利用<code>callee</code>来递归这个函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">num</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">if</span>(num&lt;=<span class="number">1</span>) &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; </span><br><span class="line">    &#125;<span class="keyword">else</span> &#123; </span><br><span class="line">        <span class="keyword">return</span> num * <span class="built_in">arguments</span>.callee(num<span class="number">-1</span>); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法虽然好用，但是有一点值得注意，ECMAScript4中为了限制JS的灵活度，让JS变得严格，新增了严格模式，在严格模式中我们被禁止不使用<code>var</code>来直接声明一个全局变量，当然这不是重点，重点是<code>arguments.callee</code>这个属性也被禁止了。不过这都不是事儿，ES6为我们新增了很多好用的变量声明方式和新的语法糖，作为一个时髦的前端，我们赶紧学习一些ES6的新语法吧。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+     
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/arguments/" rel="tag"><i class="fa fa-tag"></i> arguments</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/04/CSS Flexbox 对你说爱不完/" rel="next" title="Flexbox 对你说爱不完">
+                <i class="fa fa-chevron-left"></i> Flexbox 对你说爱不完
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="米淇淋">
+            
+              <p class="site-author-name" itemprop="name">米淇淋</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/miqilin21" title="GitHub &rarr; https://github.com/miqilin21" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/miqilin18@gmail.com" title="E-Mail &rarr; miqilin18@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/mi-qi-lin-60-52/activities" title="Zhihu &rarr; https://www.zhihu.com/people/mi-qi-lin-60-52/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://juejin.im/user/5cbe712ae51d456e88333976" title="Juejin &rarr; https://juejin.im/user/5cbe712ae51d456e88333976" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>Juejin</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com" title="http://www.ruanyifeng.com" rel="noopener" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.zhangxinxu.com/" title="http://www.zhangxinxu.com/" rel="noopener" target="_blank">张鑫旭</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.alloyteam.com/nav/" title="http://www.alloyteam.com/nav/" rel="noopener" target="_blank">Web前端导航</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://frontendmasters.com/" title="http://frontendmasters.com/" rel="noopener" target="_blank">Frontend Masters</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是参数-parameters"><span class="nav-number">1.</span> <span class="nav-text">什么是参数(parameters)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置函数中参数的预设值"><span class="nav-number">2.</span> <span class="nav-text">设置函数中参数的预设值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数组对象"><span class="nav-number">3.</span> <span class="nav-text">类数组对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用数组方法"><span class="nav-number">4.</span> <span class="nav-text">调用数组方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments对象"><span class="nav-number">5.</span> <span class="nav-text">arguments对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#length属性"><span class="nav-number">5.1.</span> <span class="nav-text">length属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#callee属性"><span class="nav-number">5.2.</span> <span class="nav-text">callee属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后来看看展开运算符spread-…"><span class="nav-number">6.</span> <span class="nav-text">最后来看看展开运算符spread(…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">7.</span> <span class="nav-text">应用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">米淇淋</span>
+
+
+<!-- 新增访客统计代码--> 
+
+<!-- <div class="busuanzi-count">
+    <script async="" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!--<span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div> -->
+   
+    <!--<span class="site-uv">
+      <i class="fa fa-eye"></i>
+      总访问量： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span> --> 
+    <br>
+
+    
+    <span class="site-uv">Stay hungry. Stay young.</span> 
+    
+   
+    <!-- 博客字数统计 -->
+    <!-- <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      博客全站共： <span class="post-count">80.4k</span> 字
+    </span>
+</div> --> 
+
+
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/src/clicklove.js"></script> -->

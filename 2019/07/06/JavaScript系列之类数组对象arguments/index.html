@@ -155,7 +155,7 @@
 <meta property="og:image" content="https://luozongmin.com/images/arguments-3.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/arguments-4.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/arguments-5.jpg">
-<meta property="og:updated_time" content="2019-07-06T15:36:54.052Z">
+<meta property="og:updated_time" content="2019-07-08T03:30:04.380Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之类数组对象arguments">
 <meta name="twitter:description" content="之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。">
@@ -480,12 +480,24 @@
                 
               
 
-              <time title="创建时间：2019-07-06 23:15:18 / 修改时间：23:36:54" itemprop="dateCreated datePublished" datetime="2019-07-06T23:15:18+08:00">2019-07-06</time>
+              <time title="创建时间：2019-07-06 23:15:18" itemprop="dateCreated datePublished" datetime="2019-07-06T23:15:18+08:00">2019-07-06</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-08 11:30:04" itemprop="dateModified" datetime="2019-07-08T11:30:04+08:00">2019-07-08</time>
               
             
           </span>
@@ -538,7 +550,7 @@
       
         <p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991" target="_blank" rel="noopener">《JavaScript系列之this是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。<a id="more"></a></p>
 <p>那arguments到底是什么呢？下面我将尽可能地用简洁明了的言语来描述 arguments。</p>
-<h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”phone”、”food”、”job”，就是我们在执行函式的时候可以任意填入的参数。</p>
+<h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyFavorite();</span><br></pre></td></tr></table></figure>
 <p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
 <p>一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在于，即使你没有给它任何参数值就加以执行，也不会报错，而是会返回<code>undefined</code>。</p>

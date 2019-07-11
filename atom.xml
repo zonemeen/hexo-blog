@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://luozongmin.com/"/>
-  <updated>2019-07-11T00:37:38.348Z</updated>
+  <updated>2019-07-11T07:16:29.294Z</updated>
   <id>https://luozongmin.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript事件三部曲之事件机制的原理</title>
+    <link href="https://luozongmin.com/2019/07/11/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86/"/>
+    <id>https://luozongmin.com/2019/07/11/JavaScript事件三部曲之事件机制的原理/</id>
+    <published>2019-07-11T06:56:16.556Z</published>
+    <updated>2019-07-11T07:16:29.294Z</updated>
+    
+    <content type="html"><![CDATA[<p>JavaScript 是一个事件驱动(Event-driven) 的语言，当浏览器载入网页开始读取后，虽然马上会读取JavaScript 事件相关的代码，但是必须要等到「事件」被触发(如使用者点击、按下键盘等)后，才会再进行对应代码段的执行。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;JavaScript 是一个事件驱动(Event-driven) 的语言，当浏览器载入网页开始读取后，虽然马上会读取JavaScript 事件相关的代码，但是必须要等到「事件」被触发(如使用者点击、按下键盘等)后，才会再进行对应代码段的执行。&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+    
+    
+      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+    
+      <category term="事件" scheme="https://luozongmin.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+    
+      <category term="event" scheme="https://luozongmin.com/tags/event/"/>
+    
+  </entry>
   
   <entry>
     <title>JavaScript系列之类数组对象arguments</title>
@@ -489,28 +519,6 @@
       <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
     
       <category term="数组" scheme="https://luozongmin.com/tags/%E6%95%B0%E7%BB%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>【译】谈谈“typeof null为object”这一bug的由来</title>
-    <link href="https://luozongmin.com/2019/05/11/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/"/>
-    <id>https://luozongmin.com/2019/05/11/【译】谈谈“typeof null为object”这一bug的由来/</id>
-    <published>2019-05-11T02:36:21.915Z</published>
-    <updated>2019-05-11T02:54:52.027Z</updated>
-    
-    <content type="html"><![CDATA[<p>很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。<a id="more"></a>     </p><blockquote><p>原文链接：<a href="http://www.2ality.com/2013/10/typeof-null.html" target="_blank" rel="noopener">http://www.2ality.com/2013/10/typeof-null.html</a></p></blockquote><p>我看了下C语言关于<code>typeof</code>的规范，它对于<code>typeof null</code>为何结果是’<code>object</code>’有更好的解释。  </p><p>在JavaScript中，<code>typeof null</code>的结果是’<code>Object</code>‘，它错误地暗示<code>null</code>是一个对象，实际上它是一个原始值。我在<a href="https://luozongmin.com/2019/05/09/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/">上一篇文章</a>也提到了这是JS的一大bug，不幸的是这并不能解决，因为这将破坏现有规范，接下来解释下这个bug的历史。  </p><p>“<code>typeof null</code>”的错误从JavaScripts第一个版本开始就已经存在了。在这个版本，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：   </p><ul><li>000: <code>object</code>. 数据是对象的引用。</li><li>1: <code>int</code>. 数据是31位有符号整数。</li><li>010: <code>double</code>. 数据是对双浮点数的引用。</li><li>100: <code>string</code>. 数据是对字符串的引用。</li><li>110: <code>boolean</code>. 数据是布尔值。</li></ul><p>也就是说，最低位是1，然后类型标签只有1位长，即<code>int</code>型。 或者最低位为0，那么类型标签的长度为3位，为其余4种类型提供了两个附加位。  </p><p>但有2个值是特殊的：  </p><ul><li><code>undefined</code>（JSVAL_VOID）是整数−2^30（整数范围之外的数字）。</li><li><code>null</code>(JSVAL_NULL) 为机器码NULL的空指针，或者说：为0的object类型标签。   </li></ul><p>现在应该明白为什么<code>typeof</code>认为<code>null</code>是一个对象：它检测一个他的类型标签并且返回”<code>object</code>”。 以下是<code>typeof</code>的引擎代码：  </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">JS_PUBLIC_API(JSType)</span><br><span class="line">   JS_TypeOfValue(JSContext *cx, jsval v)</span><br><span class="line">   &#123;</span><br><span class="line">       JSType type = JSTYPE_VOID;</span><br><span class="line">       JSObject *obj;</span><br><span class="line">       JSObjectOps *ops;</span><br><span class="line">       JSClass *clasp;</span><br><span class="line"></span><br><span class="line">       CHECK_REQUEST(cx);</span><br><span class="line">       <span class="keyword">if</span> (JSVAL_IS_VOID(v)) &#123;  <span class="comment">// (1)</span></span><br><span class="line">           type = JSTYPE_VOID;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_OBJECT(v)) &#123;  <span class="comment">// (2)</span></span><br><span class="line">           obj = JSVAL_TO_OBJECT(v);</span><br><span class="line">           <span class="keyword">if</span> (obj &amp;&amp;</span><br><span class="line">               (ops = obj-&gt;<span class="built_in">map</span>-&gt;ops,</span><br><span class="line">                ops == &amp;js_ObjectOps</span><br><span class="line">                ? (clasp = OBJ_GET_CLASS(cx, obj),</span><br><span class="line">                   clasp-&gt;call || clasp == &amp;js_FunctionClass) <span class="comment">// (3,4)</span></span><br><span class="line">                : ops-&gt;call != <span class="number">0</span>)) &#123;  <span class="comment">// (3)</span></span><br><span class="line">               type = JSTYPE_FUNCTION;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               type = JSTYPE_OBJECT;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_NUMBER(v)) &#123;</span><br><span class="line">           type = JSTYPE_NUMBER;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_STRING(v)) &#123;</span><br><span class="line">           type = JSTYPE_STRING;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_BOOLEAN(v)) &#123;</span><br><span class="line">           type = JSTYPE_BOOLEAN;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> type;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure><p>上述代码执行的步骤如下：  </p><ul><li>（1）引擎首先检测值是否是<code>undefined</code>(VOID)，它通过<code>==</code>做了这样的比较：  </li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span></span><br></pre></td></tr></table></figure><ul><li><p>下一个（2）是检测该值是否具有<code>object type</code>。如果它可使用<code>call</code>被调用（3）或其存在内部属性<code>[[Class]]</code>标记为函数（4），则v是函数。 否则，它是一个对象。 这是由<code>typeof null</code>生成的结果。  </p></li><li><p>后续检查是针对<code>number</code>，<code>string</code>和<code>boolean</code>，甚至没有明确检查<code>null</code>。这可以由以下C语言宏执行。  </p></li></ul><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`</span></span><br></pre></td></tr></table></figure><p>这看似是一个非常明显的bug，但不要忘记，第一个版本的JavaScript完成只用了极少的时间，具体可以看看<a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" target="_blank" rel="noopener">JavaScript的诞生</a>。   </p><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。
-    
-    </summary>
-    
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
-    
-    
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
     
   </entry>
   

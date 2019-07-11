@@ -157,8 +157,9 @@
 <meta property="og:image" content="https://luozongmin.com/images/neicun-5.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/neicun-6.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/neicun-7.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/neicun-9.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/neicun-8.png">
-<meta property="og:updated_time" content="2019-06-30T06:44:23.001Z">
+<meta property="og:updated_time" content="2019-07-11T07:14:00.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之内存空间">
 <meta name="twitter:description" content="对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。">
@@ -500,7 +501,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 14:44:23" itemprop="dateModified" datetime="2019-06-30T14:44:23+08:00">2019-06-30</time>
+                <time title="修改时间：2019-07-11 15:14:00" itemprop="dateModified" datetime="2019-07-11T15:14:00+08:00">2019-07-11</time>
               
             
           </span>
@@ -590,6 +591,14 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">name</span>: <span class="string">'a'</span>&#125; </span><br><span class="line"><span class="keyword">var</span> b = a </span><br><span class="line">b = <span class="literal">null</span> </span><br><span class="line">请问现在 a 是什么？</span><br></pre></td></tr></table></figure>
 <p><img src="/images/neicun-7.jpg" alt>    </p>
 <p>上图中可以看出，答案为：{name: “a”}。因为<code>null</code>为基本类型，存在栈内存当中。因此栈内存中的变量b由之前指向对象的一个地址转变为<code>null</code>，变量a的地址还是指向原先的对象。  </p>
+<p><strong>第五题：</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;<span class="attr">n</span>: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> b = a;</span><br><span class="line">a.x = a = &#123;<span class="attr">n</span>: <span class="number">2</span>&#125;;</span><br><span class="line"></span><br><span class="line">a.x 	<span class="comment">// 这时 a.x 的值是多少</span></span><br><span class="line">b.x 	<span class="comment">// 这时 b.x 的值是多少</span></span><br></pre></td></tr></table></figure>
+<p>答案是：<code>a.x</code> –&gt; <code>undefined</code>；<code>b.x</code> –&gt; <code>{n: 2}</code>。这道题的关键在于：</p>
+<ol>
+<li>优先级。<code>.</code>的优先级高于<code>=</code>，所以先执行<code>a.x</code>，堆内存中的<code>{n: 1}</code>就会变成<code>{n: 1, x: undefined}</code>，改变之后相应的<code>b.x</code>也变化了，因为指向的是同一个对象。</li>
+<li>赋值操作是从右到左，所以先执行<code>a = {n: 2}</code>，<code>a</code>的引用就被改变了，然后这个返回值又赋值给了<code>a.x</code>，需要注意的是这时候<code>a.x</code>是第一步中的<code>{n: 1, x: undefined}</code>那个对象，其实就是<code>b.x</code>，相当于<code>b.x = {n: 2}</code></li>
+</ol>
+<p><img src="/images/neicun-9.jpg" alt></p>
 <p>最后来个图总结一下：</p>
 <p><img src="/images/neicun-8.png" alt>  </p>
 <p>以上都是通过内存图来解释关于内存空间的知识，如有不合理的地方，希望指正一下~后续还会增加内存泄漏以及深浅拷贝的文章，敬请期待！</p>
@@ -716,7 +725,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -848,7 +857,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1018,7 +1031,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">80.4k</span> 字
+      博客全站共： <span class="post-count">80.6k</span> 字
     </span>
 </div> --> 
 

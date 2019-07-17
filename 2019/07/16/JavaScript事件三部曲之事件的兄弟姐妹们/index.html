@@ -154,8 +154,8 @@
 <meta property="og:image" content="https://luozongmin.com/images/shijian-8.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/shijian-9.gif">
 <meta property="og:image" content="https://luozongmin.com/images/shijian-10.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-1%60.jpg">
-<meta property="og:updated_time" content="2019-07-16T12:35:39.327Z">
+<meta property="og:image" content="https://luozongmin.com/images/shijian-11.jpg">
+<meta property="og:updated_time" content="2019-07-17T00:46:51.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件三部曲之事件的兄弟姐妹们">
 <meta name="twitter:description" content="在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。">
@@ -480,12 +480,24 @@
                 
               
 
-              <time title="创建时间：2019-07-16 20:14:01 / 修改时间：20:35:39" itemprop="dateCreated datePublished" datetime="2019-07-16T20:14:01+08:00">2019-07-16</time>
+              <time title="创建时间：2019-07-16 20:14:01" itemprop="dateCreated datePublished" datetime="2019-07-16T20:14:01+08:00">2019-07-16</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-17 08:46:51" itemprop="dateModified" datetime="2019-07-17T08:46:51+08:00">2019-07-17</time>
               
             
           </span>
@@ -638,7 +650,7 @@
 <li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
 </ul>
 <p>执行的时候像这样：</p>
-<p><img src="/images/shijian-1`.jpg" alt></p>
+<p><img src="/images/shijian-11.jpg" alt></p>
 <p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
 <h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> Event(<span class="string">'build'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听事件</span></span><br><span class="line">elem.addEventListener(<span class="string">'build'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; ... &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发事件</span></span><br><span class="line">elem.dispatchEvent(event);</span><br></pre></td></tr></table></figure>

@@ -150,7 +150,7 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="相信很多初学者在学习JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-03T00:44:14.998Z">
+<meta property="og:updated_time" content="2019-07-18T05:05:39.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之闭包">
 <meta name="twitter:description" content="相信很多初学者在学习JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。">
@@ -491,7 +491,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 08:44:14" itemprop="dateModified" datetime="2019-07-03T08:44:14+08:00">2019-07-03</time>
+                <time title="修改时间：2019-07-18 13:05:39" itemprop="dateModified" datetime="2019-07-18T13:05:39+08:00">2019-07-18</time>
               
             
           </span>
@@ -603,6 +603,7 @@
 <p>简单来说，通过<code>let</code>可以帮我们把所定义的变量缩限在块级作用域中，也就是变量的作用域只有在<code>{ }</code>内，来避免 <code>i</code> 这个变量跑到全局变量被重复覆盖。</p>
 <p>另外我们可以通过闭包的方式来修改:</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; buttons.length; i++) &#123;</span><br><span class="line">    (<span class="function"><span class="keyword">function</span> (<span class="params">j</span>) </span>&#123;</span><br><span class="line">        buttons[j].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'第'</span> + (j + <span class="number">1</span>) + <span class="string">'个'</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这其实也是「立即执行函数表达式 (Immediately Invoked Function Expression, IIFE)」的概念，后续会有专门的文章进行介绍。</p>
 <p>希望看完这篇文章后，你能对于闭包有更清楚的认识。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
@@ -1032,7 +1033,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">87.8k</span> 字
+      博客全站共： <span class="post-count">87.9k</span> 字
     </span>
 </div> --> 
 

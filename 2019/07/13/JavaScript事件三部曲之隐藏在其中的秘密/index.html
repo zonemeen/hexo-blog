@@ -152,7 +152,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://luozongmin.com/images/shijian-5.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/shijian-6.gif">
-<meta property="og:updated_time" content="2019-07-16T00:37:13.847Z">
+<meta property="og:updated_time" content="2019-08-09T04:29:09.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件三部曲之隐藏在其中的&quot;秘密&quot;">
 <meta name="twitter:description" content="上篇文章我们提到，注册事件的方法addEventListener()内有三个参数，分别是「事件名称」、「事件的处理程序」，以及「捕获」或「冒泡」的机制切换。">
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-16 08:37:13" itemprop="dateModified" datetime="2019-07-16T08:37:13+08:00">2019-07-16</time>
+                <time title="修改时间：2019-08-09 12:29:09" itemprop="dateModified" datetime="2019-08-09T12:29:09+08:00">2019-08-09</time>
               
             
           </span>
@@ -556,7 +556,7 @@
 <p>比如，有一个通往baidu的链接<code>&lt;a&gt;</code>:</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">"link"</span> <span class="attr">href</span>=<span class="string">"https://www.baidu.com"</span>&gt;</span>百度<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>假设今天点击这个link时，我希望浏览器执行<code>console.log(&#39;米淇淋你好帅!&#39;)</code>;那么根据先前所说，我可以先注册<code>click</code>事件：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> link = <span class="built_in">document</span>.querySelector(<span class="string">'#link'</span>);</span><br><span class="line"></span><br><span class="line">link.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'米淇淋你好帅!'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> link = <span class="built_in">document</span>.querySelector(<span class="string">'#link'</span>);</span><br><span class="line"></span><br><span class="line">link.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'米淇淋你好coll!'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>结果你却发现，即便我们在<code>&lt;a&gt;</code>中去注册了<code>click</code>事件，但是当我点击这个link的时候，浏览器开始会console.log出”米淇淋你好帅!”，但最后baidu的网页依旧会覆盖我想要的内容。</p>
 <p>可是我希望执行的是<code>console.log(&#39;米淇淋你好帅!&#39;)</code>;而不是直接把我带偏了去到baidu的网站，那么我们该怎么做，才能避免呢？</p>
 <p>这时候如果<strong>调用<code>event.preventDefault()</code>方法，默认事件行为将不再触发</strong>：</p>

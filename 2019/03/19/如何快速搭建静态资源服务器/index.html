@@ -159,7 +159,7 @@
 <meta property="og:image" content="https://luozongmin.com/images/http-server-7.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/http-server-8.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/http-server-9.jpg">
-<meta property="og:updated_time" content="2019-06-30T07:45:17.283Z">
+<meta property="og:updated_time" content="2019-08-27T07:48:43.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速搭建静态资源服务器">
 <meta name="twitter:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 15:45:17" itemprop="dateModified" datetime="2019-06-30T15:45:17+08:00">2019-06-30</time>
+                <time title="修改时间：2019-08-27 15:48:43" itemprop="dateModified" datetime="2019-08-27T15:48:43+08:00">2019-08-27</time>
               
             
           </span>
@@ -569,8 +569,10 @@
 <p>①接下来第一步，先创建一个空目录：<br><img src="/images/http-server-4.jpg" alt>     </p>
 <p>②利用命令行工具进入这个目录，这里用的是Git Bash。右击鼠标，点击Git Bash here，即可用Git Bash打开这个目录：<br><img src="/images/http-server-5.jpg" alt>    </p>
 <p>③运行以下命令安装http-server：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g http-server</span><br></pre></td></tr></table></figure></p>
+<p>这将http-server全局安装，以便它可以从命令行运行。</p>
 <p><img src="/images/http-server-6.jpg" alt>    </p>
-<p>④启动HTTP-Server，输入命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ http-server -c-1</span><br></pre></td></tr></table></figure></p>
+<p>④使用HTTP-Server，命令行进入当前文件夹，输入以下命令即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ http-server</span><br></pre></td></tr></table></figure></p>
+<p>若要禁用缓存，请使用如下命令运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http-server -c-1</span><br></pre></td></tr></table></figure></p>
 <p><img src="/images/http-server-7.jpg" alt>    </p>
 <p>到此您的HTTP服务器就已经启动了，它正在端口8080上监听，您可以通过访问以下链接进行检查，3个地址在电脑端打开的是同一份东西：</p>
 <ul>
@@ -579,7 +581,7 @@
 <li>localhost:8080/ （较为常用）    </li>
 </ul>
 <p>⑤在该目录中创建一个HTML文件，您可以通过此HTTP地址访问它：<br><img src="/images/http-server-8.jpg" alt><br><img src="/images/http-server-9.jpg" alt>    </p>
-<p>⑥这里Windows 用户需要注意了，如果你发现你修改了源代码，页面却无法更新，说明http-server 的缓存还未消除，那么可以这样做：  </p>
+<p>⑥这里Windows 用户需要注意了，如果你发现你修改了源代码，页面却无法更新，说明 http-server 的缓存还未消除，那么可以这样做：  </p>
 <ol>
 <li>打开 Chrome 开发者工具</li>
 <li>点击 Network</li>

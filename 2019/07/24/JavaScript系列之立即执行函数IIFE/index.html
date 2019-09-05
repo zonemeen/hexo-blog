@@ -163,7 +163,7 @@
 <meta property="og:image" content="https://luozongmin.com/images/IIFE-11.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/IIFE-12.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/IIFE-13.jpg">
-<meta property="og:updated_time" content="2019-07-24T01:37:02.014Z">
+<meta property="og:updated_time" content="2019-09-05T05:05:40.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之立即执行函数IIFE">
 <meta name="twitter:description" content="在之前的文章当中，我们已经介绍了函数的参数，arguments对象以及回调函数，那么今天的分享中，我们继续来看看函数在JavaScript的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。">
@@ -479,12 +479,24 @@
                 
               
 
-              <time title="创建时间：2019-07-24 09:19:51 / 修改时间：09:37:02" itemprop="dateCreated datePublished" datetime="2019-07-24T09:19:51+08:00">2019-07-24</time>
+              <time title="创建时间：2019-07-24 09:19:51" itemprop="dateCreated datePublished" datetime="2019-07-24T09:19:51+08:00">2019-07-24</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-05 13:05:40" itemprop="dateModified" datetime="2019-09-05T13:05:40+08:00">2019-09-05</time>
               
             
           </span>
@@ -606,9 +618,10 @@
 <p>所以我们稍微修改一下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ ) &#123;</span><br><span class="line"></span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">x</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 将原来的 1000 改成 1000 * x</span></span><br><span class="line">    <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(x);</span><br><span class="line">    &#125;, <span class="number">1000</span> * x);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>像这样，就可以依序打印出我们想要的结果喽！</p>
-<p>[注] ES6以后新增了<code>let</code>与<code>const</code>，且改以<code>{ }</code>作为它的作用域。</p>
+<p>[注] ES6以后新增了<code>let</code>与<code>const</code>，且改以<code>{ }</code>作为它的块级作用域。</p>
 <p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>( <span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++ ) &#123;</span><br><span class="line">  <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, <span class="number">1000</span>*(i+<span class="number">1</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       
@@ -1041,7 +1054,7 @@
     <!-- 博客字数统计 -->
     <!-- <span class="site-pv">
       <i class="fa fa-pencil"></i>
-      博客全站共： <span class="post-count">93.4k</span> 字
+      博客全站共： <span class="post-count">93.5k</span> 字
     </span>
 </div> --> 
 

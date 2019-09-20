@@ -155,7 +155,7 @@
 <meta property="og:image" content="https://luozongmin.com/images/arguments-3.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/arguments-4.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/arguments-5.jpg">
-<meta property="og:updated_time" content="2019-07-11T00:37:38.348Z">
+<meta property="og:updated_time" content="2019-09-20T03:38:14.831Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之类数组对象arguments">
 <meta name="twitter:description" content="之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。">
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-11 08:37:38" itemprop="dateModified" datetime="2019-07-11T08:37:38+08:00">2019-07-11</time>
+                <time title="修改时间：2019-09-20 11:38:14" itemprop="dateModified" datetime="2019-09-20T11:38:14+08:00">2019-09-20</time>
               
             
           </span>
@@ -540,7 +540,7 @@
 
       
         <p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991" target="_blank" rel="noopener">《JavaScript系列之this是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。<a id="more"></a></p>
-<p>那<code>arguments</code>到底是什么呢？下面我将尽可能地用简洁明了的言语来描述 <code>arguments</code>。</p>
+<p>那<code>arguments</code>到底是什么呢？下面就由我来简洁地介绍一下 <code>arguments</code>吧。</p>
 <h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解<code>arguments</code>之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">MyFavorite();</span><br></pre></td></tr></table></figure>
 <p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
@@ -552,13 +552,13 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MyFavorite();</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>);</span><br><span class="line">MyFavorite(<span class="string">"别墅"</span>, <span class="string">"法拉利"</span>, <span class="string">"一亿元"</span>);</span><br></pre></td></tr></table></figure>
 <p>会分别读到以下的结果，表示JavaScript会由左至右来读取参数值，而且即使某些参数值有缺值的情况，JavaScript还是可以正常执行。</p>
 <p><img src="/images/arguments-2.jpg" alt></p>
-<h3 id="设置函数中参数的预设值"><a href="#设置函数中参数的预设值" class="headerlink" title="设置函数中参数的预设值"></a>设置函数中参数的预设值</h3><p>由于目前的几款浏览器使用的JavaScript版本都尚不支持直接在参数的地方设置预设值（ES6的将可以），所以很多的框架都还不会用这种方式设置预设值。</p>
-<p><strong>方法一：在ES6的JavaScript中，可以直接通过这种方式设置参数预设值：</strong></p>
+<h3 id="设置函数中参数的默认值"><a href="#设置函数中参数的默认值" class="headerlink" title="设置函数中参数的默认值"></a>设置函数中参数的默认值</h3><p>由于目前的几款浏览器使用的JavaScript版本都尚不支持直接在参数的地方设置默认值（ES6的将可以），所以很多的框架都还不会用这种方式设置默认值。</p>
+<p><strong>方法一：在ES6的JavaScript中，可以直接通过这种方式设置参数默认值：</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money = <span class="string">'一亿元'</span></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法二：利用强制转换的概念设置预设值</strong></p>
-<p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的预设值，利用简单的”=”和”||”就可以达到参数预设值的效果：</p>
+<p><strong>方法二：利用强制转换的概念设置默认值</strong></p>
+<p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的默认值，利用简单的”=”和”||”就可以达到参数默认值的效果：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyFavorite</span>(<span class="params">house, car, money</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    money = money || <span class="string">'一亿元'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(house);</span><br><span class="line">    <span class="built_in">console</span>.log(car);</span><br><span class="line">    <span class="built_in">console</span>.log(money);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"----------------"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到预设值为”一亿元”：</p>
+<p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到默认值为”一亿元”：</p>
 <p><img src="/images/arguments-3.jpg" alt></p>
 <h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>了解了<code>parameters</code>的概念后，让我们回来谈谈<code>arguments</code>，MDN将它叫做类数组对象，那么什么是类数组对象呢？</p>
 <p>所谓的类数组对象:</p>
@@ -993,7 +993,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是参数-parameters"><span class="nav-number">1.</span> <span class="nav-text">什么是参数(parameters)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置函数中参数的预设值"><span class="nav-number">2.</span> <span class="nav-text">设置函数中参数的预设值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数组对象"><span class="nav-number">3.</span> <span class="nav-text">类数组对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用数组方法"><span class="nav-number">4.</span> <span class="nav-text">调用数组方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments对象"><span class="nav-number">5.</span> <span class="nav-text">arguments对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#length属性"><span class="nav-number">5.1.</span> <span class="nav-text">length属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#callee属性"><span class="nav-number">5.2.</span> <span class="nav-text">callee属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后来看看展开运算符spread-…"><span class="nav-number">6.</span> <span class="nav-text">最后来看看展开运算符spread(…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">7.</span> <span class="nav-text">应用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是参数-parameters"><span class="nav-number">1.</span> <span class="nav-text">什么是参数(parameters)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置函数中参数的默认值"><span class="nav-number">2.</span> <span class="nav-text">设置函数中参数的默认值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数组对象"><span class="nav-number">3.</span> <span class="nav-text">类数组对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用数组方法"><span class="nav-number">4.</span> <span class="nav-text">调用数组方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments对象"><span class="nav-number">5.</span> <span class="nav-text">arguments对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#length属性"><span class="nav-number">5.1.</span> <span class="nav-text">length属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#callee属性"><span class="nav-number">5.2.</span> <span class="nav-text">callee属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最后来看看展开运算符spread-…"><span class="nav-number">6.</span> <span class="nav-text">最后来看看展开运算符spread(…)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">7.</span> <span class="nav-text">应用</span></a></li></ol></div>
             
 
           </div>

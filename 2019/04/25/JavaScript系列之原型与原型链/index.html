@@ -150,17 +150,17 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-2.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-3.png">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-4.png">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-5.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/prototype-6.png">
-<meta property="og:updated_time" content="2019-06-30T06:39:25.241Z">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/3.png">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/4.png">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/5.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/prototype/6.png">
+<meta property="og:updated_time" content="2019-09-27T06:07:42.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之原型与原型链">
 <meta name="twitter:description" content="JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。">
-<meta name="twitter:image" content="https://luozongmin.com/images/prototype-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/prototype/1.jpg">
 
 
 
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 14:39:25" itemprop="dateModified" datetime="2019-06-30T14:39:25+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 14:07:42" itemprop="dateModified" datetime="2019-09-27T14:07:42+08:00">2019-09-27</time>
               
             
           </span>
@@ -551,29 +551,29 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype)</span><br></pre></td></tr></table></figure>
 <p>那这个构造函数的 <code>prototype</code> 属性指向的是什么呢？是这个函数的原型吗？  </p>
 <p>打开 chrome 浏览器的开发者工具，在 console 栏输入上面的代码，你可以看到 <code>Dog.prototype</code> 的值： </p>
-<p><img src="/images/prototype-1.jpg" alt>    </p>
+<p><img src="/images/prototype/1.jpg" alt>    </p>
 <p>其实，函数的 <code>prototype</code> 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的<strong>原型</strong>。   </p>
 <p>那什么是<strong>原型</strong>呢？你可以这样理解：每一个JavaScript对象(<code>null</code>除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型”继承”属性。  </p>
 <p>让我们用一张图来表示构造函数和实例原型之间的关系：</p>
-<p><img src="/images/prototype-2.jpg" alt>     </p>
+<p><img src="/images/prototype/2.jpg" alt>     </p>
 <p>那么我们该怎么表示实例与实例原型，也就是 <code>dog</code> 和 <code>Dog.prototype</code> 之间的关系呢，接下来就应该讲到第二个属性：  </p>
 <p><strong><strong>proto</strong></strong>  </p>
 <p>上面可以看到 Dog 原型（<code>Dog.prototype</code>）上有<code>__proto__</code>属性，这是一个访问器属性（即 getter 函数和 setter 函数），通过它可以访问到对象的内部<code>[[Prototype]]</code>(一个对象或<code>null</code>)。  </p>
 <p>为了证明这一点,我们可以在chrome中输入：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__)  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(dog.__proto__ === Dog.prototype)   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>这里用<code>dog.__proto__</code>获取对象的原型，<code>__proto__</code>是每个实例上都有的属性，<code>prototype</code>是构造函数的属性，这两个并不一样，但<code>dog.__proto__</code>和<code>Dog.prototype</code>指向同一个对象。于是我们更新下关系图： </p>
-<p><img src="/images/prototype-3.png" alt>    </p>
+<p><img src="/images/prototype/3.png" alt>    </p>
 <p>既然实例对象和构造函数都可以指向原型，那么原型是否有属性指向构造函数或者实例呢？  </p>
 <p><strong>constructor</strong>  </p>
 <p>指向实例对象倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：<code>constructor</code>，每个原型都有一个 <code>constructor</code> 属性指向关联的构造函数。  </p>
 <p>为了验证这一点，我们在chrome中输入：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype.constructor === Dog)    <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>所以再更新下关系图：  </p>
-<p><img src="/images/prototype-4.png" alt>     </p>
+<p><img src="/images/prototype/4.png" alt>     </p>
 <p>综上我们已经得出：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dog</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = <span class="string">'阿黄'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> dog = <span class="keyword">new</span> Dog()</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(dog.__proto__ == Dog.prototype) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(Dog.prototype.constructor == Dog) <span class="comment">// true</span></span><br><span class="line"><span class="comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>在上文我们理解了原型，从字面意思看原型链肯定是与原型有关了，是一个个原型链接起来的么？我们先通过下面的图来观察一下。  </p>
-<p><img src="/images/prototype-5.jpg" alt>      </p>
+<p><img src="/images/prototype/5.jpg" alt>      </p>
 <p>解析： </p>
 <p><strong>obj.prop1</strong>：假设我们现在有一个对象，就称作<code>obj</code>，而这个对象包含一个属性<code>（property）</code>，我们称作<code>prop1</code>，现在我们可以使用<code>obj.prop1</code>来读取这个属性的值，就可以直接读取到<code>prop1</code>的属性值了。  </p>
 <p><strong>obj.prop2</strong>：JavaScript中会有一些预设的属性和方法，所有的对象和函数都包含<code>prototype</code>这个属性，假设我们把<code>prototype</code>叫做<code>proto</code>，这时候如果我们使用<code>obj.prop2</code>的时候，JavaScript引擎会先在<code>obj</code>这个对象的属性里去寻找有没有叫作<code>prop2</code>的属性，<strong>如果它找不到，这时候它就会再进一步往该对象的<code>proto</code>里面去寻找</strong>。所以，虽然我们输入<code>obj.prop2</code>的时候会得到回传值，但实际上这不是<code>obj</code>里面直接的属性名称，而是在<code>obj</code>的<code>proto</code>里面找到的属性名称（即，<code>obj.proto.prop2</code>，但我们不需要这样打）。  </p>
@@ -600,7 +600,7 @@
 <p>全代码如下：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person =  &#123; </span><br><span class="line">  firstName : <span class="string">'Default'</span> , </span><br><span class="line">  lastName : <span class="string">'Default'</span> , </span><br><span class="line">  getFullName :  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span>  <span class="keyword">this</span> . firstName +  <span class="string">' '</span>  +  <span class="keyword">this</span> . lastName ; </span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jay =  &#123; </span><br><span class="line">  firstName : <span class="string">'Jay'</span> , </span><br><span class="line">  lastName : <span class="string">'Chou'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//千万不要照着下面这样做，这么做只是为了示范 </span></span><br><span class="line">jay . __proto__ = person ; </span><br><span class="line"><span class="built_in">console</span> . log ( jay . getFullName ( ) ) ;     <span class="comment">// Jay Chou</span></span><br><span class="line"><span class="built_in">console</span> . log ( jay . firstName ) ;         <span class="comment">// Jay</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jane = &#123; </span><br><span class="line">  firstName :  <span class="string">'Jane'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jane . __proto__ = person ; </span><br><span class="line"><span class="built_in">console</span> . log ( jane . getFullName ( ) ) ;</span><br></pre></td></tr></table></figure>
 <p>以上就是目前能总结的全部了，肯定还是有缺陷的地方，后续还会修改完善的。最后再看底下这张图，是否有了更深入的理解呢？</p>
-<p><img src="/images/prototype-6.png" alt> </p>
+<p><img src="/images/prototype/6.png" alt> </p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
       

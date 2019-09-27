@@ -150,19 +150,19 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/object-3.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-4.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-5.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-6.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-7.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-8.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-9.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object-10.jpg">
-<meta property="og:updated_time" content="2019-06-30T06:14:35.969Z">
+<meta property="og:image" content="https://luozongmin.com/images/object/3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/5.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/6.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/7.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/8.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/9.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object/10.jpg">
+<meta property="og:updated_time" content="2019-09-27T06:05:40.100Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中任何值的prototype到最后都是Object">
 <meta name="twitter:description" content="这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！">
-<meta name="twitter:image" content="https://luozongmin.com/images/object-3.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/object/3.jpg">
 
 
 
@@ -491,7 +491,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 14:14:35" itemprop="dateModified" datetime="2019-06-30T14:14:35+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 14:05:40" itemprop="dateModified" datetime="2019-09-27T14:05:40+08:00">2019-09-27</time>
               
             
           </span>
@@ -548,21 +548,21 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object </span></span><br><span class="line"><span class="keyword">var</span> a =  &#123; </span><br><span class="line">  name : <span class="string">'miqilin'</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// function </span></span><br><span class="line"><span class="keyword">var</span>  b  =  <span class="function"><span class="keyword">function</span> (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span> . log ( <span class="string">'Hello'</span> ) ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Array </span></span><br><span class="line"><span class="keyword">var</span> c =  [ <span class="string">'A'</span> , <span class="string">'r'</span> , <span class="string">'r'</span> , <span class="string">'a'</span> , <span class="string">'y'</span>] ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// string </span></span><br><span class="line"><span class="keyword">var</span> d =  <span class="string">'This is string'</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// number </span></span><br><span class="line"><span class="keyword">var</span> e =  <span class="number">2</span> ;</span><br><span class="line"></span><br><span class="line"><span class="comment">// boolean </span></span><br><span class="line"><span class="keyword">var</span> f =  <span class="literal">true</span> ;</span><br></pre></td></tr></table></figure>
 <p>接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的<code>prototype</code>。  </p>
 <h4 id="对象（object）"><a href="#对象（object）" class="headerlink" title="对象（object）"></a>对象（object）</h4><p>我们可以看到a这个对象本身的<code>prototype</code>也是一个对象，在下去就没了（<code>null</code>），也就是<strong>Object → Object → null的过程</strong>。 </p>
-<p><img src="/images/object-3.jpg" alt>    </p>
+<p><img src="/images/object/3.jpg" alt>    </p>
 <p>而<code>a.__proto__</code>就是对象的原型，打开来看会发现里面有许多内置的方法。  </p>
-<p><img src="/images/object-4.jpg" alt>   </p>
+<p><img src="/images/object/4.jpg" alt>   </p>
 <p>如果我在console中输入<code>a.</code>，则会出现对于对象而言内置的方法： </p>
-<p><img src="/images/object-5.jpg" alt>   </p>
+<p><img src="/images/object/5.jpg" alt>   </p>
 <p>由于<code>a.__proto__</code>仍然是一个对象，所以如果我输入<code>a.__proto__.</code>的话，会得到除了<code>name</code>一样对于对象可以使用的方法：</p>
-<p><img src="/images/object-6.jpg" alt>   </p>
+<p><img src="/images/object/6.jpg" alt>   </p>
 <h4 id="函数（function）"><a href="#函数（function）" class="headerlink" title="函数（function）"></a>函数（function）</h4><p>接着我们来看看函数，根据上面同样的方法得出是<strong>function → function → object → null</strong>的过程，所以最后还是结束在<code>object</code>。 </p>
-<p><img src="/images/object-7.jpg" alt>    </p>
+<p><img src="/images/object/7.jpg" alt>    </p>
 <p>如果我们想要看函数有哪些内置的方法可以用，我们可以输入<code>b.</code>或<code>b.__proto__.</code>就可以看到了，这里我们就可以看到我们常用的<code>apply</code> , <code>bind</code> ,和<code>call</code>。  </p>
-<p><img src="/images/object-8.jpg" alt>   </p>
+<p><img src="/images/object/8.jpg" alt>   </p>
 <h4 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h4><p>对于数组的话则是<strong>array → array → object → null</strong>的过程。  </p>
-<p><img src="/images/object-9.jpg" alt>   </p>
+<p><img src="/images/object/9.jpg" alt>   </p>
 <p>如果我们要看数组有哪些方法可以用，一样可以透过<code>c.</code>或<code>c.__proto__.</code>来检视： </p>
-<p><img src="/images/object-10.jpg" alt>    </p>
+<p><img src="/images/object/10.jpg" alt>    </p>
 <p>同样的方法也可以用来检视字符串、数字和Boolean值，有兴趣的通过chrome 来试试看吧！  </p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 

@@ -150,16 +150,16 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/new-1.png">
-<meta property="og:image" content="https://luozongmin.com/images/new-2.png">
-<meta property="og:image" content="https://luozongmin.com/images/new-3.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/new-4.png">
-<meta property="og:image" content="https://luozongmin.com/images/new-5.png">
-<meta property="og:updated_time" content="2019-07-19T01:29:18.986Z">
+<meta property="og:image" content="https://luozongmin.com/images/new/1.png">
+<meta property="og:image" content="https://luozongmin.com/images/new/2.png">
+<meta property="og:image" content="https://luozongmin.com/images/new/3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/new/4.png">
+<meta property="og:image" content="https://luozongmin.com/images/new/5.png">
+<meta property="og:updated_time" content="2019-09-27T05:38:40.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈JavaScript中的函数构造式和new关键字">
 <meta name="twitter:description" content="您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？">
-<meta name="twitter:image" content="https://luozongmin.com/images/new-1.png">
+<meta name="twitter:image" content="https://luozongmin.com/images/new/1.png">
 
 
 
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-19 09:29:18" itemprop="dateModified" datetime="2019-07-19T09:29:18+08:00">2019-07-19</time>
+                <time title="修改时间：2019-09-27 13:38:40" itemprop="dateModified" datetime="2019-09-27T13:38:40+08:00">2019-09-27</time>
               
             
           </span>
@@ -545,7 +545,7 @@
 <p>而 <code>constructor</code> 的用法就是 <code>function</code> 搭配<code>new</code>关键字：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName =  <span class="string">'Jay'</span> ; </span><br><span class="line">  <span class="keyword">this</span> . lastName =  <span class="string">'Chou'</span> ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  <span class="keyword">new</span>  Person ( ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person ) ;</span><br></pre></td></tr></table></figure>
 <p>接着我们把<code>person</code>呼叫出来看，会得到如下的结果，<strong>通过<code>new</code>它会帮我们建立一个对象</strong>，然后里面有<code>Person</code>这个<code>function</code>里面的内容，并且变成了属性名称和属性值：</p>
-<p><img src="/images/new-1.png" alt></p>
+<p><img src="/images/new/1.png" alt></p>
 <h3 id="进一步来看new-让这个过程发生了什么"><a href="#进一步来看new-让这个过程发生了什么" class="headerlink" title="进一步来看new 让这个过程发生了什么"></a>进一步来看new 让这个过程发生了什么</h3><p>当使用<code>new</code>命令时，它后面的函数依次执行下面的4个步骤：</p>
 <ol>
 <li>创建一个空对象，作为将要返回的对象实例。</li>
@@ -561,15 +561,15 @@
 <p>接着让我们通过一段代码来更清楚的了解这个执行的过程：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName =  <span class="string">'Jay'</span> ; </span><br><span class="line">  <span class="keyword">this</span> . lastName =  <span class="string">'Chou'</span> ; </span><br><span class="line">  <span class="built_in">console</span> . log ( <span class="string">'这个函数有被执行'</span> ) ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  <span class="keyword">new</span>  Person ( ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person ) ;</span><br></pre></td></tr></table></figure>
 <p>这时候在chrome 中呼叫出来的结果如下，说明了当我们使用<code>new</code> 在构造对象的时候<code>People</code> 这个<code>function</code> 确实有被执行：</p>
-<p><img src="/images/new-2.png" alt></p>
+<p><img src="/images/new/2.png" alt></p>
 <h3 id="通过new-会帮我们建立一个空的对象"><a href="#通过new-会帮我们建立一个空的对象" class="headerlink" title="通过new 会帮我们建立一个空的对象"></a>通过new 会帮我们建立一个空的对象</h3><p>现在我把我们上面的代码改成这样：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span> (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="built_in">console</span> . log ( <span class="keyword">this</span> ) ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  <span class="keyword">new</span>  Person ( ) ; </span><br><span class="line"><span class="comment">// console.log(person);</span></span><br></pre></td></tr></table></figure>
 <p>这时候代码返回的结果如下，表示的确在执行这段代码的过程中帮我们建立了一个新的空对象：</p>
-<p><img src="/images/new-3.jpg" alt></p>
+<p><img src="/images/new/3.jpg" alt></p>
 <h3 id="函数的最后若return其他对象，则原新对象内容会被覆盖"><a href="#函数的最后若return其他对象，则原新对象内容会被覆盖" class="headerlink" title="函数的最后若return其他对象，则原新对象内容会被覆盖"></a>函数的最后若return其他对象，则原新对象内容会被覆盖</h3><p>现在，让我们把原本的代码稍微做如下修改：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName =  <span class="string">'Jay'</span> ; </span><br><span class="line">  <span class="keyword">this</span> . lastName =  <span class="string">'Chou'</span> ; </span><br><span class="line">  <span class="keyword">return</span>   &#123; <span class="string">"RETURN"</span> : <span class="string">"原本this的内容就不会被返回"</span> &#125; ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  <span class="keyword">new</span>  Person ( ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person ) ;</span><br></pre></td></tr></table></figure>
 <p>构造函数的内部若<code>return</code>其他对象，<code>new</code>命令会返回<code>return</code>语句指定的对象，将原新对象内容覆盖掉；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。返回的结果如下：</p>
-<p><img src="/images/new-4.png" alt></p>
+<p><img src="/images/new/4.png" alt></p>
 <h3 id="手写一个new实现"><a href="#手写一个new实现" class="headerlink" title="手写一个new实现"></a>手写一个new实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="comment">// 创建一个空的对象</span></span><br><span class="line">    <span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>(),</span><br><span class="line">	<span class="comment">// 获得构造函数，arguments中去除第一个参数</span></span><br><span class="line">    Con = [].shift.call(<span class="built_in">arguments</span>);</span><br><span class="line">	<span class="comment">// 链接到原型，obj 可以访问到构造函数原型中的属性</span></span><br><span class="line">    obj.__proto__ = Con.prototype;</span><br><span class="line">	<span class="comment">// 绑定 this 实现继承，obj 可以访问到构造函数中的属性</span></span><br><span class="line">    <span class="keyword">var</span> ret = Con.apply(obj, <span class="built_in">arguments</span>);</span><br><span class="line">	<span class="comment">// 优先返回构造函数返回的对象</span></span><br><span class="line">	<span class="keyword">return</span> ret <span class="keyword">instanceof</span> <span class="built_in">Object</span> ? ret : obj;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>使用这个手写的new</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用内置函数new</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(...)</span><br><span class="line">                        </span><br><span class="line"><span class="comment">// 使用手写的new，即create</span></span><br><span class="line"><span class="keyword">var</span> person = create(Person, ...)</span><br></pre></td></tr></table></figure>
@@ -584,7 +584,7 @@
 <h3 id="function-constructor-的实际应用"><a href="#function-constructor-的实际应用" class="headerlink" title="function constructor 的实际应用"></a>function constructor 的实际应用</h3><p>由上面的方法，我们可以通过<code>function</code>的方式来建立一个新的对象，如果我们想要<strong>建立出同属性名称但不同属性值的对象内容，我们可以把对象的属性值变成参数</strong>，如此就能通过此<code>function constructor</code>建立出许多不同的对象：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> firstName , lastName </span>)  </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName = firstName ; </span><br><span class="line">  <span class="keyword">this</span> . lastName = lastName ; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person1 =  <span class="keyword">new</span>  Person ( <span class="string">'Jay'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person1 ) ; </span><br><span class="line"><span class="keyword">var</span> person2 =  <span class="keyword">new</span>  Person ( <span class="string">'Jane'</span> ,  <span class="string">'chou'</span> ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person2 ) ;</span><br></pre></td></tr></table></figure>
 <p>如此，我们就可以通过同一个构造函数建立出很多不同的对象：</p>
-<p><img src="/images/new-5.png" alt></p>
+<p><img src="/images/new/5.png" alt></p>
 <p>此外，我们会把根据<strong>构造器（<code>constructor</code>）所建立出来的对象称作是实例（<code>instance</code>）</strong>，这在之前的文章里也有提过。</p>
 <h3 id="注意！如果我们忘了加上new关键字"><a href="#注意！如果我们忘了加上new关键字" class="headerlink" title="注意！如果我们忘了加上new关键字"></a>注意！如果我们忘了加上new关键字</h3><p>这里有一个地方我们需要非常留意，如果你在撰写代码的过程当中，忘记加上<code>new</code>这个关键字的话，比如：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Person</span>  (<span class="params"> </span>) </span>&#123; </span><br><span class="line">  <span class="keyword">this</span> . firstName =  <span class="string">'Jay'</span> ; </span><br><span class="line">  <span class="keyword">this</span> . lastName =  <span class="string">'Chou'</span> ;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person =  Person ( ) ; </span><br><span class="line"><span class="built_in">console</span> . log ( person ) ;</span><br></pre></td></tr></table></figure>

@@ -150,14 +150,14 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！     搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/hexobug-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/hexobug-2.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/hexobug-3.jpg">
-<meta property="og:updated_time" content="2019-06-30T07:09:08.402Z">
+<meta property="og:image" content="https://luozongmin.com/images/hexobug/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/hexobug/2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/hexobug/3.jpg">
+<meta property="og:updated_time" content="2019-09-27T06:17:58.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo搭建博客中遇到的一些&quot;事&quot;">
 <meta name="twitter:description" content="我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！     搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。">
-<meta name="twitter:image" content="https://luozongmin.com/images/hexobug-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/hexobug/1.jpg">
 
 
 
@@ -486,7 +486,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 15:09:08" itemprop="dateModified" datetime="2019-06-30T15:09:08+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 14:17:58" itemprop="dateModified" datetime="2019-09-27T14:17:58+08:00">2019-09-27</time>
               
             
           </span>
@@ -541,9 +541,9 @@
 <p>搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。<a id="more"></a>   </p>
 <h4 id="仓库的名字"><a href="#仓库的名字" class="headerlink" title="仓库的名字"></a>仓库的名字</h4><p>仓库的名字的正确格式应该是<code>github用户名.github.io</code>，比如说，如果你的github用户名是test，那么你就应该新建<code>test.github.io</code>的仓库（必须是你的github用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。    </p>
 <h4 id="首页文章内容部分展示"><a href="#首页文章内容部分展示" class="headerlink" title="首页文章内容部分展示"></a>首页文章内容部分展示</h4><p>我用的是next主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的Mrakdown文件内容文字后面添加<code>&lt;!--more--&gt;</code>即可。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: HTML、CSS、JS中unicode字符的处理 </span><br><span class="line">---</span><br><span class="line"># 前言</span><br><span class="line">使用github pages服务搭建博客的好处有：</span><br><span class="line">1. 全是静态文件，访问速度快；</span><br><span class="line">2. 免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</span><br><span class="line">3. 可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</span><br><span class="line">&lt;!--more--&gt;</span><br><span class="line">4. 数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</span><br><span class="line">5. 博客内容可以轻松打包、转移、发布到其它平台；</span><br><span class="line">6. 等等；</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/hexobug-1.jpg" alt>   </p>
+<p><img src="/images/hexobug/1.jpg" alt>   </p>
 <h4 id="GitHub-Pages绑定域名后每次hexo-d都会失效"><a href="#GitHub-Pages绑定域名后每次hexo-d都会失效" class="headerlink" title="GitHub Pages绑定域名后每次hexo d都会失效"></a>GitHub Pages绑定域名后每次hexo d都会失效</h4><p>在GitHub Pages绑定域名之后，发现每次<code>hexo d</code>后，域名网址都会报错404，又要重新部署，就有点太麻烦了。  </p>
-<p><img src="/images/hexobug-2.jpg" alt>   </p>
+<p><img src="/images/hexobug/2.jpg" alt>   </p>
 <p>搞了很久还是不行，后面在网上和群里问出，到这里域名绑定并没有结束，还差关键一步：    </p>
 <p>具体就是在Hexo目录里的source文件下添加一个名为<code>CNAME</code>的文件，注意<strong>这个文件是没有后缀的，千万不要设置成.txt文本文件</strong>，文件的内容就是域名，格式如：   </p>
 <pre><code>luozongmin.com
@@ -552,7 +552,7 @@
 <pre><code class="bash">$ hexo new page categories 
 </code></pre>
 <p><strong>注意！！！</strong>categories中千万别加””(双引号)，不然会导致部署完后网站中不显示具体分类：    </p>
-<p><img src="/images/hexobug-3.jpg" alt>      </p>
+<p><img src="/images/hexobug/3.jpg" alt>      </p>
 <p>之后在编辑刚新建的页面中，将页面的类型设置为<code>categories</code>； 最后编辑主题的<code>_config.yml</code>，将<code>menu</code>中的<code>categories: /categories</code>注释去掉即可。    </p>
 <h4 id="Busuanzi-统计浏览量失效"><a href="#Busuanzi-统计浏览量失效" class="headerlink" title="Busuanzi 统计浏览量失效"></a>Busuanzi 统计浏览量失效</h4><p>由于busuanzi(不蒜子)的网址更新，导致了使用Hexo Next主题时统计浏览量时失效。   </p>
 <p>解决方法:    </p>

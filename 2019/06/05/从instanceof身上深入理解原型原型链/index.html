@@ -150,13 +150,13 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/instanceof-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-5.jpg">
-<meta property="og:updated_time" content="2019-06-30T05:15:21.743Z">
+<meta property="og:image" content="https://luozongmin.com/images/instanceof/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/5.jpg">
+<meta property="og:updated_time" content="2019-09-27T05:52:11.042Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从instanceof身上深入理解原型&#x2F;原型链">
 <meta name="twitter:description" content="今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。">
-<meta name="twitter:image" content="https://luozongmin.com/images/instanceof-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/instanceof/1.jpg">
 
 
 
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 13:15:21" itemprop="dateModified" datetime="2019-06-30T13:15:21+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 13:52:11" itemprop="dateModified" datetime="2019-09-27T13:52:11+08:00">2019-09-27</time>
               
             
           </span>
@@ -542,7 +542,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f1 <span class="keyword">instanceof</span> Foo);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(f1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，对象<code>f1</code>是构造函数<code>Foo</code>的实例，所以返回<code>true</code>，但是“f1 instanceof Object”为什么也是<code>true</code>呢？</p>
 <p>至于为什么等会再解释，先把<code>instanceof</code>判断的规则告诉大家。根据以上代码看下图：</p>
-<p><img src="/images/instanceof-1.jpg" alt>  </p>
+<p><img src="/images/instanceof/1.jpg" alt>  </p>
 <p><code>instanceof</code>运算符的左边是实例对象，右边是构造函数，左边变量暂称为A，右边变量暂称为B。它会检查右边构造函数的原型对象（prototype），是否在左边对象的原型链上。</p>
 <p>通俗一点来讲，<code>instanceof</code>的判断规则是：<strong><code>instanceof</code>会检查整个原型链，将沿着A的<code>__proto__</code>这条线来一直找，同时沿着B的<code>prototype</code>这条线来一直找，直到能找到同一个引用，即同一个对象，那么就返回<code>true</code>。如果找到终点还未重合，则返回<code>false</code></strong>。即上图中的 <code>f1</code>–&gt;<code>__proto__</code> 和 <code>Foo</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Foo)</code>为<code>true</code>。</p>
 <p>按照以上规则，重新来看看“ f1 instanceof Object ”这句代码为什么是<code>true</code>？ 根据上图很容易就能看出来， f1–&gt;<code>__proto__</code>–&gt;<code>__proto__</code> 和<code>Object</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Object)</code>为<code>true</code>。</p>
@@ -553,7 +553,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"><span class="keyword">typeof</span> obj <span class="comment">// "object"</span></span><br><span class="line"><span class="built_in">Object</span>.create(<span class="literal">null</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p>
 <p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p>
-<p><img src="/images/jicheng-5.jpg" alt>  </p>
+<p><img src="/images/inherit/5.jpg" alt>  </p>
 <p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p>
 <p>那么问题又出来了。<code>instanceof</code>这样设计，到底有什么用？到底<code>instanceof</code>想表达什么呢？</p>
 <p>这就要重点讲讲继承了，即<code>instanceof</code>表示的就是一种继承关系，或者原型链的结构，请看后续文章介绍。</p>

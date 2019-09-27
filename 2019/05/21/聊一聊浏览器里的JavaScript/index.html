@@ -150,16 +150,16 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/dom-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/dom-2.png">
-<meta property="og:image" content="https://luozongmin.com/images/dom-3.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/dom-4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/dom/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/dom/2.png">
+<meta property="og:image" content="https://luozongmin.com/images/dom/3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/dom/4.jpg">
 <meta property="og:image" content="https://luozongmin.com/images/domapi-5.jpg">
-<meta property="og:updated_time" content="2019-06-30T05:49:26.930Z">
+<meta property="og:updated_time" content="2019-09-27T05:59:02.685Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="谈谈浏览器里的JavaScript">
 <meta name="twitter:description" content="在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」">
-<meta name="twitter:image" content="https://luozongmin.com/images/dom-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/dom/1.jpg">
 
 
 
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 13:49:26" itemprop="dateModified" datetime="2019-06-30T13:49:26+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 13:59:02" itemprop="dateModified" datetime="2019-09-27T13:59:02+08:00">2019-09-27</time>
               
             
           </span>
@@ -545,10 +545,10 @@
 <li>CSS 负责样式与呈现</li>
 <li>JavaScript 负责行为与互动</li>
 </ul>
-<p><img src="/images/dom-1.jpg" alt>   </p>
+<p><img src="/images/dom/1.jpg" alt>   </p>
 <p>那么，如果你跟我在学JavaScript的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…  </p>
 <p><strong>我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！</strong>   </p>
-<p><img src="/images/dom-2.png" alt>   </p>
+<p><img src="/images/dom/2.png" alt>   </p>
 <p>那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  </p>
 <h3 id="浏览器里的JavaScript"><a href="#浏览器里的JavaScript" class="headerlink" title="浏览器里的JavaScript"></a>浏览器里的JavaScript</h3><p>严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  </p>
 <p>事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  </p>
@@ -564,7 +564,7 @@
 <h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。  </p>
 <p>在早期没有制定标准规范的时候，各家浏览器厂商几乎在自家浏览器上都有各自的功能，非常混乱。直到后来W3C 把各家浏览器都有的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了HTML5 的标准中，这也就是我们现在看到的BOM API。  </p>
 <p>BOM 有时也有人非正式地称它为Level 0 DOM。因为它在DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以Level 0 DOM与BOM两者实际上指的是同一个东西。</p>
-<h3 id="BOM的核心window对象"><a href="#BOM的核心window对象" class="headerlink" title="BOM的核心window对象"></a>BOM的核心window对象</h3><p><img src="/images/dom-3.jpg" alt>   </p>
+<h3 id="BOM的核心window对象"><a href="#BOM的核心window对象" class="headerlink" title="BOM的核心window对象"></a>BOM的核心window对象</h3><p><img src="/images/dom/3.jpg" alt>   </p>
 <p>从上图可以看出BOM的核心是<code>window</code>对象。 </p>
 <p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。  </p>
 <p>在浏览器里的<code>window</code>对象会扮演着两种角色：  </p>
@@ -580,7 +580,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);        <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 <p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？  </p>
 <h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：  </p>
-<p><img src="/images/dom-4.jpg" alt>   </p>
+<p><img src="/images/dom/4.jpg" alt>   </p>
 <p>(alert on Chrome)</p>
 <p>我想不管是不是刚接触JavaScript的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：  </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="string">"message"</span>);</span><br></pre></td></tr></table></figure>

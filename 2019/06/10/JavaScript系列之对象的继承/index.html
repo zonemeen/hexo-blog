@@ -150,16 +150,16 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-2.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-3.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-4.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jicheng-5.jpg">
-<meta property="og:updated_time" content="2019-06-30T05:10:33.274Z">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/inherit/5.jpg">
+<meta property="og:updated_time" content="2019-09-27T05:50:30.598Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之对象的继承">
 <meta name="twitter:description" content="这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。">
-<meta name="twitter:image" content="https://luozongmin.com/images/jicheng-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/inherit/1.jpg">
 
 
 
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-30 13:10:33" itemprop="dateModified" datetime="2019-06-30T13:10:33+08:00">2019-06-30</time>
+                <time title="修改时间：2019-09-27 13:50:30" itemprop="dateModified" datetime="2019-09-27T13:50:30+08:00">2019-09-27</time>
               
             
           </span>
@@ -556,23 +556,23 @@
 <p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p>
 <p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p>
 <p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p>
-<p><img src="/images/jicheng-1.jpg" alt></p>
+<p><img src="/images/inherit/1.jpg" alt></p>
 <p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p>
 <p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p>
-<p><img src="/images/jicheng-2.jpg" alt></p>
+<p><img src="/images/inherit/2.jpg" alt></p>
 <p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p>
 <p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p>
 <p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p>
-<p><img src="/images/jicheng-3.jpg" alt></p>
+<p><img src="/images/inherit/3.jpg" alt></p>
 <p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p>
 <p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p>
 <p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p>
 <p>这里再说一个函数的例子来加深理解吧。</p>
 <p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p>
-<p><img src="/images/jicheng-4.jpg" alt></p>
+<p><img src="/images/inherit/4.jpg" alt></p>
 <p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p>
 <p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p>
-<p><img src="/images/jicheng-5.jpg" alt></p>
+<p><img src="/images/inherit/5.jpg" alt></p>
 <p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 

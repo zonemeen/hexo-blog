@@ -150,20 +150,20 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-2.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-3.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-4.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-5.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-6.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-7.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-8.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/http-server-9.jpg">
-<meta property="og:updated_time" content="2019-08-27T07:55:18.345Z">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/3.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/4.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/5.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/6.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/7.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/8.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/http-server/9.jpg">
+<meta property="og:updated_time" content="2019-09-27T06:24:46.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何快速搭建静态资源服务器">
 <meta name="twitter:description" content="在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。">
-<meta name="twitter:image" content="https://luozongmin.com/images/http-server-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/http-server/1.jpg">
 
 
 
@@ -492,7 +492,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-27 15:55:18" itemprop="dateModified" datetime="2019-08-27T15:55:18+08:00">2019-08-27</time>
+                <time title="修改时间：2019-09-27 14:24:46" itemprop="dateModified" datetime="2019-09-27T14:24:46+08:00">2019-09-27</time>
               
             
           </span>
@@ -543,15 +543,15 @@
       
 
       
-        <p>在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。<a id="more"></a>以前的时候，都是使用php的本地环境，也算比较方便，但是自从学了nodejs，发现创建http-server更方便。<br><img src="/images/http-server-1.jpg" alt>  </p>
+        <p>在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。<a id="more"></a>以前的时候，都是使用php的本地环境，也算比较方便，但是自从学了nodejs，发现创建http-server更方便。<br><img src="/images/http-server/1.jpg" alt>  </p>
 <h3 id="本文的目的"><a href="#本文的目的" class="headerlink" title="本文的目的"></a>本文的目的</h3><p>在这篇文章中，我将向您展示如何使用NodeJS创建一个非常简单的HTTP服务器。您可以通过http访问目录中的静态资源，如HTML，Javascript，CSS等，比如：  </p>
 <ul>
 <li><a href="http://localhost:8080/hello.html" target="_blank" rel="noopener">http://localhost:8080/hello.html</a></li>
 <li><a href="http://localhost:8080/abc.js" target="_blank" rel="noopener">http://localhost:8080/abc.js</a>   </li>
 </ul>
-<p>而不是通过默认的file:///来访问<br><img src="/images/http-server-2.jpg" alt>    </p>
+<p>而不是通过默认的file:///来访问<br><img src="/images/http-server/2.jpg" alt>    </p>
 <p>那问题是为什么只有需要一个HTTP才能访问静态资源呢？ </p>
-<p>是因为HTML文件含有Javascript文件时，如果通过默认的file://地址来访问此文件的话，浏览器会阻止本地Javascript文件的一些操作，此时就需要安装HTTP-Server来解决这个问题。<br><img src="/images/http-server-3.jpg" alt>    </p>
+<p>是因为HTML文件含有Javascript文件时，如果通过默认的file://地址来访问此文件的话，浏览器会阻止本地Javascript文件的一些操作，此时就需要安装HTTP-Server来解决这个问题。<br><img src="/images/http-server/3.jpg" alt>    </p>
 <p>报错信息：  </p>
 <ul>
 <li>Failed to load file:///E:/webexamples/reactjs/hello-reactjs/person.jsx:</li>
@@ -566,21 +566,21 @@
 <li><p>npm 的配置被存储在 ~/.npmrc，你可以随时改。    </p>
 </li>
 </ul>
-<p>①接下来第一步，先创建一个空目录：<br><img src="/images/http-server-4.jpg" alt>     </p>
-<p>②利用命令行工具进入这个目录，这里用的是Git Bash。右击鼠标，点击Git Bash here，即可用Git Bash打开这个目录：<br><img src="/images/http-server-5.jpg" alt>    </p>
+<p>①接下来第一步，先创建一个空目录：<br><img src="/images/http-server/4.jpg" alt>     </p>
+<p>②利用命令行工具进入这个目录，这里用的是Git Bash。右击鼠标，点击Git Bash here，即可用Git Bash打开这个目录：<br><img src="/images/http-server/5.jpg" alt>    </p>
 <p>③运行以下命令安装http-server：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g http-server</span><br></pre></td></tr></table></figure></p>
 <p>这将http-server全局安装，以便它可以从命令行运行。</p>
-<p><img src="/images/http-server-6.jpg" alt>    </p>
+<p><img src="/images/http-server/6.jpg" alt>    </p>
 <p>④使用HTTP-Server，命令行进入当前文件夹，输入以下命令即可：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ http-server</span><br></pre></td></tr></table></figure></p>
 <p>若要禁用缓存，请使用如下命令运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http-server -c-1</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/http-server-7.jpg" alt>    </p>
+<p><img src="/images/http-server/7.jpg" alt>    </p>
 <p>到此您的HTTP服务器就已经启动了，它正在端口8080上监听，您可以通过访问以下链接进行检查，3个地址在电脑端打开的是同一份东西：</p>
 <ol>
 <li><a href="http://192.168.1.116:8080/" target="_blank" rel="noopener">http://192.168.1.116:8080/</a> （只有这个地址能在手机中预览）</li>
 <li><a href="http://127.0.0.1:8080/" target="_blank" rel="noopener">http://127.0.0.1:8080/</a> （2和3性质是一样的）</li>
 <li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> （较为常用）    </li>
 </ol>
-<p>⑤在该目录中创建一个HTML文件，您可以通过此HTTP地址访问它：<br><img src="/images/http-server-8.jpg" alt><br><img src="/images/http-server-9.jpg" alt>    </p>
+<p>⑤在该目录中创建一个HTML文件，您可以通过此HTTP地址访问它：<br><img src="/images/http-server/8.jpg" alt><br><img src="/images/http-server/9.jpg" alt>    </p>
 <p>⑥这里Windows 用户需要注意了，如果你发现你修改了源代码，页面却无法更新，说明 http-server 的缓存还未消除，那么可以这样做：  </p>
 <ol>
 <li>打开 Chrome 开发者工具</li>

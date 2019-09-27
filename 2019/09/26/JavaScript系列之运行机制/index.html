@@ -150,13 +150,13 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="有了一定JavaScript基础的朋友们一定知道，JS里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的JavaScript系列文章里，我就总结了JS前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解JS执行顺序及机制，来更好地理顺代码中的一些异步操作。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/jizhi/1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/jizhi/2.jpg">
-<meta property="og:updated_time" content="2019-09-27T01:57:30.753Z">
+<meta property="og:image" content="https://luozongmin.com/images/eventloop/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/eventloop/2.jpg">
+<meta property="og:updated_time" content="2019-09-27T05:07:46.118Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之运行机制（Event Loop）">
 <meta name="twitter:description" content="有了一定JavaScript基础的朋友们一定知道，JS里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的JavaScript系列文章里，我就总结了JS前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解JS执行顺序及机制，来更好地理顺代码中的一些异步操作。">
-<meta name="twitter:image" content="https://luozongmin.com/images/jizhi/1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/eventloop/1.jpg">
 
 
 
@@ -485,7 +485,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-27 09:57:30" itemprop="dateModified" datetime="2019-09-27T09:57:30+08:00">2019-09-27</time>
+                <time title="修改时间：2019-09-27 13:07:46" itemprop="dateModified" datetime="2019-09-27T13:07:46+08:00">2019-09-27</time>
               
             
           </span>
@@ -576,7 +576,7 @@
 <p>这种形式的发起函数和回调函数就是分离的。</p>
 <h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>上面提到了异步任务完成后，会通知主线程，以 <code>callback</code> 的方式获取结果或者执行回调。但是如果当前的主线程是忙碌的，异步任务的信号无法接收到怎么办呢？所以还需要一个地方保存这些 <code>callback</code>，也就是<strong>任务队列（task queue）</strong>。</p>
 <p>那么这里就要具体提提JavaScript 异步执行的<strong>运行机制</strong>了，先用一张图来表现整个过程：</p>
-<p><img src="/images/jizhi/1.jpg" alt></p>
+<p><img src="/images/eventloop/1.jpg" alt></p>
 <p>上图的完整过程就是：所有同步任务都在主线程上执行，形成一个执行栈，当执行栈遇到异步任务时（浏览器通常是调用 WebAPIs，常见的有 <code>XMLHttpRequest</code>，<code>setTimeout</code>，事件回调等），不会等待，而是继续执行往下执行。而异步任务就会以各种方式，把 <code>callback</code> 加入任务队列中。一旦执行栈中的所有同步任务执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个 <code>callback</code> 任务放入到栈中执行。结束后栈内被清空，还会再去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作，而这种循环的机制，就称之为<strong>事件循环</strong>（Event Loop）。</p>
 <h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop(事件循环)"></a>Event Loop(事件循环)</h3><p>事件循环可不是像上面一样一句两句就能讲清的，并且暂时不讨论node.js的Event Loop执行机制，以下关于浏览器的Event Loop执行机制，那在完全了解 Event Loop 之前，还需了解一下宏任务与微任务，因为任务队列又分为<code>macro-task</code>（宏任务）与<code>micro-task</code>（微任务），在 ES2015 中 <code>macro-task</code> 即指 Task，而 <code>micro-task</code> 则是指代 Job。</p>
 <ul>
@@ -588,7 +588,7 @@
 <p>来自不同任务源的任务会进入到不同的任务队列。其中<code>setTimeout</code>与<code>setInterval</code>同样是宏任务，它们是同源的。</p>
 <p>事件循环的顺序，决定了JavaScript代码的执行顺序。它从<code>script</code>(整体代码)开始第一次循环。之后全局上下文进入函数调用栈。直到调用栈清空(只剩全局)，然后执行所有的<code>micro-task</code>。当所有可执行的<code>micro-task</code>执行完毕之后。事件循环再次从<code>macro-task</code>开始，找到其中一个任务队列执行完毕，然后再执行所有的<code>micro-task</code>，这样一直循环下去。</p>
 <p>为了更好地理解Event Loop，借用一张图（转自<a href="https://segmentfault.com/a/1190000015042127" target="_blank" rel="noopener">《Event Loop - JS执行机制》</a>）：</p>
-<p><img src="/images/jizhi/2.jpg" alt></p>
+<p><img src="/images/eventloop/2.jpg" alt></p>
 <p>上面这么多文字表述是不是有点晦涩难懂，那我们通过2个demo例子来逐步理解<strong>事件循环</strong>的具体顺序吧：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//setTimeout1</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">    <span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="params">data</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">//setTimeout2</span></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">4</span>);</span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="built_in">Promise</span>.resolve().then(<span class="function"><span class="params">data</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">5</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1，5，2，3，4</span></span><br></pre></td></tr></table></figure>
 <p>我们来说明一下, JS引擎是如何执行这段代码的：</p>

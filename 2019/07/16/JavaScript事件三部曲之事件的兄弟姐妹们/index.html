@@ -150,16 +150,16 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-7.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-8.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-9.gif">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-10.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/shijian-11.jpg">
-<meta property="og:updated_time" content="2019-07-17T00:46:51.453Z">
+<meta property="og:image" content="https://luozongmin.com/images/event/7.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/event/8.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/event/9.gif">
+<meta property="og:image" content="https://luozongmin.com/images/event/10.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/event/11.jpg">
+<meta property="og:updated_time" content="2019-09-27T05:03:54.982Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript事件三部曲之事件的兄弟姐妹们">
 <meta name="twitter:description" content="在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。">
-<meta name="twitter:image" content="https://luozongmin.com/images/shijian-7.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/event/7.jpg">
 
 
 
@@ -488,7 +488,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-17 08:46:51" itemprop="dateModified" datetime="2019-07-17T08:46:51+08:00">2019-07-17</time>
+                <time title="修改时间：2019-09-27 13:03:54" itemprop="dateModified" datetime="2019-09-27T13:03:54+08:00">2019-09-27</time>
               
             
           </span>
@@ -551,7 +551,7 @@
 <li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
 </ul>
 <p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
-<p><img src="/images/shijian-7.jpg" alt></p>
+<p><img src="/images/event/7.jpg" alt></p>
 <ul>
 <li><code>error</code> 事件：</li>
 </ul>
@@ -568,7 +568,7 @@
 </li>
 </ul>
 <p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
-<p><img src="/images/shijian-8.jpg" alt></p>
+<p><img src="/images/event/8.jpg" alt></p>
 <p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306" target="_blank" rel="noopener">《通过DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 因 Document 结构未载入，无效</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">'hello'</span>).textContent = <span class="string">'Hello'</span>;</span></span><br><span class="line"><span class="undefined">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"hello"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>那么，改成这样：</p>
@@ -590,7 +590,7 @@
 <li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
 <li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
 </ol>
-<p><img src="/images/shijian-9.gif" alt></p>
+<p><img src="/images/event/9.gif" alt></p>
 <p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
 <h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
 <ul>
@@ -629,7 +629,7 @@
 <p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
 <p>但是，新的问题来了！</p>
 <p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
-<p><img src="/images/shijian-10.jpg" alt></p>
+<p><img src="/images/event/10.jpg" alt></p>
 <p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
 <p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
 <p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
@@ -641,7 +641,7 @@
 <li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
 </ul>
 <p>执行的时候像这样：</p>
-<p><img src="/images/shijian-11.jpg" alt></p>
+<p><img src="/images/event/11.jpg" alt></p>
 <p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
 <h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> event = <span class="keyword">new</span> Event(<span class="string">'build'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听事件</span></span><br><span class="line">elem.addEventListener(<span class="string">'build'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123; ... &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 触发事件</span></span><br><span class="line">elem.dispatchEvent(event);</span><br></pre></td></tr></table></figure>

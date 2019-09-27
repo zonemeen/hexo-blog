@@ -151,7 +151,8 @@
 <meta property="og:description" content="上一篇《JavaScript系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://luozongmin.com/images/scopechain-1.jpg">
-<meta property="og:updated_time" content="2019-07-03T00:44:03.849Z">
+<meta property="og:image" content="https://luozongmin.com/images/this/1.png">
+<meta property="og:updated_time" content="2019-09-27T02:31:46.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之this是什么">
 <meta name="twitter:description" content="上一篇《JavaScript系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。">
@@ -484,7 +485,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 08:44:03" itemprop="dateModified" datetime="2019-07-03T08:44:03+08:00">2019-07-03</time>
+                <time title="修改时间：2019-09-27 10:31:46" itemprop="dateModified" datetime="2019-09-27T10:31:46+08:00">2019-09-27</time>
               
             
           </span>
@@ -605,6 +606,8 @@
 <p>上例中，虽然存在两个箭头函数，其实<code>this</code>取决于最外层的箭头函数，由于<code>obj</code>是个对象而非函数，所以<code>this</code>指向为<code>Window</code>全局对象。</p>
 <p>同 bind 一样，箭头函数也很“顽固”，我们无法通过 <code>call</code> 和 <code>apply</code> 来改变 <code>this</code> 的指向，即传入的第一个参数被忽略。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">1</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">    x: <span class="number">2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.x)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a.call(obj)       </span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// Window 全局对象</span></span><br><span class="line"></span><br><span class="line">a.apply(obj)      </span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// Window 全局对象</span></span><br></pre></td></tr></table></figure>
+<p>文字描述有点过多可能有点干涩，那么就看底下的这张流程图吧，我觉得这个图总结的很好（转自掘金小册-<a href="https://juejin.im/book/5bdc715fe51d454e755f75ef" target="_blank" rel="noopener">前端面试之道</a>），图中的流程只针对于单个规则。</p>
+<p><img src="/images/this/1.png" alt></p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>本篇文章介绍了 <code>this</code> 指向的几种情况，不同的运行环境和调用方式都会对 <code>this</code> 产生影响。总的来说，函数 <code>this</code> 的指向取决于当前调用该函数的对象，也就是执行时的对象。在这一节中，你需要掌握：</p>
 <ul>
 <li><code>this</code> 指向全局对象的情况；</li>

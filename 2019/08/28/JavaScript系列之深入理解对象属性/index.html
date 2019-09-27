@@ -150,14 +150,14 @@
 <meta property="og:site_name" content="米淇淋の个人博客">
 <meta property="og:description" content="在《谈谈JavaScript中对象建立(Object)》这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解JavaScript的对象与其他编程语言的对象有何差异。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luozongmin.com/images/object2-1.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object2-2.jpg">
-<meta property="og:image" content="https://luozongmin.com/images/object2-3.jpg">
-<meta property="og:updated_time" content="2019-08-31T00:48:11.348Z">
+<meta property="og:image" content="https://luozongmin.com/images/object2/1.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object2/2.jpg">
+<meta property="og:image" content="https://luozongmin.com/images/object2/3.jpg">
+<meta property="og:updated_time" content="2019-09-27T02:52:43.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript系列之深入理解对象属性">
 <meta name="twitter:description" content="在《谈谈JavaScript中对象建立(Object)》这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解JavaScript的对象与其他编程语言的对象有何差异。">
-<meta name="twitter:image" content="https://luozongmin.com/images/object2-1.jpg">
+<meta name="twitter:image" content="https://luozongmin.com/images/object2/1.jpg">
 
 
 
@@ -486,7 +486,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-31 08:48:11" itemprop="dateModified" datetime="2019-08-31T08:48:11+08:00">2019-08-31</time>
+                <time title="修改时间：2019-09-27 10:52:43" itemprop="dateModified" datetime="2019-09-27T10:52:43+08:00">2019-09-27</time>
               
             
           </span>
@@ -586,10 +586,10 @@
 <p>这样的方式与直接指定对象字面属性是一样的结果。</p>
 <p>然后，我们可以用<code>Object.getOwnPropertyDescriptor()</code>来检查对象属性描述器的状态：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(person, <span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
-<p><img src="/images/object2-1.jpg" alt></p>
+<p><img src="/images/object2/1.jpg" alt></p>
 <p>可以看到在默认的情况下，<code>writable</code>、<code>enumerable</code>及<code>configurable</code>都是<code>false</code>。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person2 = &#123;</span><br><span class="line">  name: <span class="string">'mike'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(person2, <span class="string">'name'</span>));</span><br></pre></td></tr></table></figure>
-<p><img src="/images/object2-2.jpg" alt></p>
+<p><img src="/images/object2/2.jpg" alt></p>
 <p>而通过字面式创建对象建立的属性，默认值则会是<code>true</code>。</p>
 <p><code>defineProperty</code>可以针对对象一次设定多个属性描述：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  configurable: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -607,7 +607,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>: function()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'get'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name_;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>: function(name)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'set'</span>);</span><br><span class="line">    <span class="keyword">this</span>._name_ = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>像这样，我们可以分别为<code>name</code>属性去定义<code>get</code>与<code>set</code>方法，而实际上，我们是通过了另一个属性<code>_name_</code>来作为<code>name</code>属性的封装。要注意的是，如果你定义了<code>get</code>与<code>set</code>方法，表示你要自行控制属性的存取，那么就不能再去定义<code>value</code>或<code>writable</code>的属性描述。</p>
 <p>理解了ES5的对象属性描述符之后，往后我们在对对象的属性处理就可以更加灵活，像是VueJS也是通过Object.defineProperty的get与set来做到双向数据绑定的：</p>
-<p><img src="/images/object2-3.jpg" alt></p>
+<p><img src="/images/object2/3.jpg" alt></p>
 <p>每个组件实例都对应一个<strong>watcher</strong>实例，它会在组件渲染的过程中把“接触”过的数据属性记录为依赖。之后当依赖项的 <code>setter</code> 触发时，会通知 <code>watcher</code>，从而使它关联的组件重新渲染。</p>
 <p>图片来源：<a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">Vue.js: 如何追踪变化</a></p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>

@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+  <meta name="google-site-verification" content="CtVND81iIkKFLNfCegB6JHii589pMrwZI_nCGEnggIk">
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="8plPacPx3d">
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link rel="stylesheet" href="https://fonts.cat.net/css?family=Lato:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext">
+  
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.0.1" color="#222">
+
+
+  <link rel="manifest" href="/images/manifest.json">
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。">
+<meta name="keywords" content="JavaScript,数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript系列之类型判断">
+<meta property="og:url" content="https://luozongmin.com/2019/10/18/JavaScript系列之类型判断/index.html">
+<meta property="og:site_name" content="米淇淋の个人博客">
+<meta property="og:description" content="类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://luozongmin.com/images/judge/1.png">
+<meta property="og:updated_time" content="2019-09-27T06:14:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript系列之类型判断">
+<meta name="twitter:description" content="类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。">
+<meta name="twitter:image" content="https://luozongmin.com/images/judge/1.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="米淇淋の个人博客" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://luozongmin.com/2019/10/18/JavaScript系列之类型判断/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>JavaScript系列之类型判断 | 米淇淋の个人博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">米淇淋の个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Stay hungry. Stay young.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://luozongmin.com/2019/10/18/JavaScript系列之类型判断/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="米淇淋">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="米淇淋の个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript系列之类型判断
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-18 10:23:48" itemprop="dateCreated datePublished" datetime="2019-10-18T10:23:48+08:00">2019-10-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-27 14:14:46" itemprop="dateModified" datetime="2019-09-27T14:14:46+08:00">2019-09-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。<a id="more"></a>     </p>
+<p>通过本文，我将尝试概述Javascript中类型判断的几种方法（<strong>基于ES5的规范</strong>）。</p>
+<h4 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h4><p>typeof判断类型方法算是我们最最常用的了，直接上代码：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="number">3</span> <span class="comment">// "number"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="string">"abc"</span> <span class="comment">// "string"</span></span><br><span class="line"><span class="keyword">typeof</span> &#123;&#125; <span class="comment">// "object"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">true</span> <span class="comment">// "boolean"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="literal">undefined</span> <span class="comment">// "undefined"</span></span><br><span class="line"><span class="keyword">typeof</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125; <span class="comment">// "function"</span></span><br></pre></td></tr></table></figure>
+<p>以上这些类型都比较正常，直到：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span> <span class="comment">// "object"</span></span><br></pre></td></tr></table></figure>
+<p>这显然是一个错误。 这可能会在以后的ECMAScript哪个版本中修复，返回值将为“<code>null</code>”。   </p>
+<p>除此之外 <code>Object</code> 下还有很多细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。如果用 <code>typeof</code> 去检测这些类型，举其中几个例子：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> array1 = []</span><br><span class="line"><span class="keyword">var</span> array2 = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> array1); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> array2); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> date); <span class="comment">// object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> error); <span class="comment">// object</span></span><br></pre></td></tr></table></figure>
+<p>因此，<code>typeof</code>非常善于区分不同类型的原始值，并区分它们和对象，但在区分不同类型的对象（包括数组和<code>null</code>）时完全没用，那这该怎么区分？有没有更好的解决方法呢？</p>
+<h4 id="Object-prototype-toString"><a href="#Object-prototype-toString" class="headerlink" title="Object.prototype.toString"></a>Object.prototype.toString</h4><p>JS作为一门愈加成熟的语言，解决方法当然有！嘿嘿~这就是<code>Object.prototype.toString</code>！  </p>
+<p>那 <code>Object.protototype.toString</code>看起来是一长串字母，看起来比较复杂诶~为了讲清楚，在<strong>toString</strong>方法被调用时,是会执行下面的操作步骤的：  </p>
+<ol>
+<li>如果<code>this</code>的值为<code>undefined</code>,则返回”[<code>object Undefined</code>]”.</li>
+<li>如果this的值为<code>null</code>,则返回”[<code>object Null</code>]”.</li>
+<li>让O成为调用<code>ToObject(this)</code>的结果.</li>
+<li>让class成为O的内部属性<code>[[Class]]</code>的值.</li>
+<li>最后返回由 <code>&quot;[object &quot;</code>和 <code>class</code> 和 <code>&quot;]&quot;</code> 三个部分组成的字符串.    </li>
+</ol>
+<p>通过规范，我们至少了解了调用 <code>Object.prototype.toString</code> 最终会返回一个由 <code>&quot;[object &quot;</code> 和 <code>class</code> 和 <code>&quot;]&quot;</code> 组成的字符串，而 <code>class</code> 是要判断的对象的内部属性。</p>
+<p>看这些规范还是一知半解的状态吧，直接上代码直观一点：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="number">3</span>)) <span class="comment">// [object Number]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])) <span class="comment">// [object Array]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(&#123;&#125;)) <span class="comment">// [object Object]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>)) <span class="comment">// [object Null]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(date)) <span class="comment">// [object Date]</span></span><br></pre></td></tr></table></figure>
+<p>我们可以看到这个 class 值其实就是识别对象类型的关键！    </p>
+<p>因此我们可以用 <code>Object.prototype.toString</code> 方法识别出更多类型！那到底能识别多少种类型呢？那还是看代码数个数吧~嘿嘿    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> number = <span class="number">1</span>;          <span class="comment">// [object Number]</span></span><br><span class="line"><span class="keyword">var</span> string = <span class="string">'123'</span>;      <span class="comment">// [object String]</span></span><br><span class="line"><span class="keyword">var</span> bool = <span class="literal">true</span>;      <span class="comment">// [object Boolean]</span></span><br><span class="line"><span class="keyword">var</span> unde = <span class="literal">undefined</span>;     <span class="comment">// [object Undefined]</span></span><br><span class="line"><span class="keyword">var</span> nul = <span class="literal">null</span>;          <span class="comment">// [object Null]</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;         <span class="comment">// [object Object]</span></span><br><span class="line"><span class="keyword">var</span> array = [];   <span class="comment">// [object Array]</span></span><br><span class="line"><span class="keyword">var</span> date = <span class="keyword">new</span> <span class="built_in">Date</span>();   <span class="comment">// [object Date]</span></span><br><span class="line"><span class="keyword">var</span> error = <span class="keyword">new</span> <span class="built_in">Error</span>(); <span class="comment">// [object Error]</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/a/g</span>;          <span class="comment">// [object RegExp]</span></span><br><span class="line"><span class="keyword">var</span> func = <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span>&#123;&#125;; <span class="comment">// [object Function]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">checkTypes</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">arguments</span>[i]))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">checkTypes(number, string, bool, unde, nul, obj, array, date, error, reg, func)</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印出</span></span><br><span class="line">[object <span class="built_in">Number</span>]</span><br><span class="line">[object <span class="built_in">String</span>]</span><br><span class="line">[object <span class="built_in">Boolean</span>]</span><br><span class="line">[object Undefined]</span><br><span class="line">[object Null]</span><br><span class="line">[object <span class="built_in">Object</span>]</span><br><span class="line">[object <span class="built_in">Array</span>]</span><br><span class="line">[object <span class="built_in">Date</span>]</span><br><span class="line">[object <span class="built_in">Error</span>]</span><br><span class="line">[object <span class="built_in">RegExp</span>]</span><br><span class="line">[object <span class="built_in">Function</span>]</span><br></pre></td></tr></table></figure>
+<p>除了以上 11 种之外，还有3种：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">Math</span>)); <span class="comment">// [object Math]</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">JSON</span>)); <span class="comment">// [object JSON]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(<span class="built_in">arguments</span>)); </span><br><span class="line">&#125;</span><br><span class="line">a(); <span class="comment">// [object Arguments]</span></span><br></pre></td></tr></table></figure>
+<p>这里看我们至少可以识别14 种类型，而[[class]] 属性数量至少有 12 个。</p>
+<h4 id="写个类库"><a href="#写个类库" class="headerlink" title="写个类库"></a>写个类库</h4><p>利用<code>Object.prototype.toString</code>判断类型的方法来写个类库吧，此类库来自(Axis.js)[//github.com/toddmotto/axis]:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">root, factory</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 判断是否使用了模块</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) &#123;</span><br><span class="line">    <span class="comment">// 使用AMD模块</span></span><br><span class="line">    define(factory);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> exports === <span class="string">'object'</span>) &#123;</span><br><span class="line">    <span class="comment">// 使用CMD模块</span></span><br><span class="line">    <span class="built_in">module</span>.exports = factory;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 没有使用模块，放在全局下</span></span><br><span class="line">    root.axis = factory();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 严格模式</span></span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line">  <span class="keyword">var</span> exports = &#123;&#125;;</span><br><span class="line">  <span class="comment">// 将字符串转为数组</span></span><br><span class="line">  <span class="keyword">var</span> types = <span class="string">'Array Object String Date RegExp Function Boolean Number Null Undefined'</span>.split(<span class="string">' '</span>);</span><br><span class="line">  <span class="comment">// 判断类型</span></span><br><span class="line">  <span class="keyword">var</span> type = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(<span class="keyword">this</span>).slice(<span class="number">8</span>, <span class="number">-1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 遍历types，为exports对象添加isArray、isObject...等方法</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = types.length; i--;) &#123;</span><br><span class="line">    exports[<span class="string">'is'</span> + types[i]] = (<span class="function"><span class="keyword">function</span> (<span class="params">self</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">elem</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// type.call(elem)将type方法里的this指针指向elem</span></span><br><span class="line">        <span class="keyword">return</span> type.call(elem) === self;</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)(types[i]);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> exports;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>使用方法也比较简单，直接上代码：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">axis.isArray([]); <span class="comment">// true</span></span><br><span class="line">axis.isObject(&#123;&#125;); <span class="comment">// true</span></span><br><span class="line">axis.isString(<span class="string">''</span>); <span class="comment">// true</span></span><br><span class="line">axis.isDate(<span class="keyword">new</span> <span class="built_in">Date</span>()); <span class="comment">// true</span></span><br><span class="line">axis.isRegExp(<span class="regexp">/test/i</span>); <span class="comment">// true</span></span><br><span class="line">axis.isFunction(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;); <span class="comment">// true</span></span><br><span class="line">axis.isBoolean(<span class="literal">true</span>); <span class="comment">// true</span></span><br><span class="line">axis.isNumber(<span class="number">1</span>); <span class="comment">// true</span></span><br><span class="line">axis.isNull(<span class="literal">null</span>); <span class="comment">// true</span></span><br><span class="line">axis.isUndefined(); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>考虑到实际情况下并不会检测 <code>Math</code> 和 <code>JSON</code>，而且上面这种方法也检测不了这两种类型，所以去掉这两个类型的检测。同时也不能识别自定义对象类型。</p>
+<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><p>当 <code>typeof</code> 也有无解的时候，那么我们是否还有其他好的方法来判断一个变量是自定义对象类型呢？  </p>
+<p>我们知道，javascript 的所有对象都有一个 <code>constructor</code> 属性，这个属性可以帮我们判断 object 数据类型，直接上代码：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//alert(1.constructor); //报错 数字常量无 constructor 属性   </span></span><br><span class="line"><span class="keyword">var</span> num = <span class="number">1</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(num.constructor == <span class="built_in">Number</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"miqilin"</span>.constructor == <span class="built_in">String</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"miqilin"</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(str.constructor == <span class="built_in">String</span>); <span class="comment">//true   </span></span><br><span class="line"><span class="keyword">var</span> obj= <span class="literal">null</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor); <span class="comment">//报错，null 没有 constructor 属性   </span></span><br><span class="line"><span class="keyword">var</span> none = <span class="literal">undefined</span>;   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor); <span class="comment">//报错，undefined 没有 constructor 属性</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，数字型常量，<code>null</code> 和 <code>undefined</code> 都没有 <code>constructor</code> 属性。  </p>
+<p>之前以为到这就全部分析完了，看了多篇外文才知道原来还有可挖掘的东西，来看下面的代码：   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();   </span><br><span class="line">Cat.prototype.CatchMouse = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line"><span class="comment">//do some thing   </span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Cat();   </span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor == Cat); <span class="comment">//false ？？因为 Cat.prototype不在obj的原型链上   </span></span><br><span class="line"><span class="built_in">console</span>.log(obj.constructor == Animal); <span class="comment">//true 理解</span></span><br></pre></td></tr></table></figure>
+<p>原来对于<strong>原型链继承</strong>的情况，<code>constuctor</code> 也不怎么好用了。那怎么办呢？  </p>
+<h4 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h4><p>嘿嘿~原来还有一种方法可以解决这种困境，那就是 <code>instanceof</code>。<code>instanceof</code> 运算符会告诉您对象是否是某种类型的实例， 这里所谓的“类型”其实就是构造函数。直接上代码：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Cat</span>(<span class="params"></span>) </span>&#123;   </span><br><span class="line">&#125;   </span><br><span class="line">Cat.prototype = <span class="keyword">new</span> Animal();   </span><br><span class="line">Cat.prototype.CatchMouse = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;   </span><br><span class="line"><span class="comment">//do some thing   </span></span><br><span class="line">&#125;   </span><br><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> Cat();   </span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> Cat); <span class="comment">//true 毫无疑问   </span></span><br><span class="line"><span class="built_in">console</span>.log(obj <span class="keyword">instanceof</span> Animal); <span class="comment">//true 可以理解</span></span><br></pre></td></tr></table></figure>
+<p><code>instanceof</code> 适用于所有原生类型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] <span class="keyword">instanceof</span> <span class="built_in">Array</span> <span class="comment">// true</span></span><br><span class="line">/abc/ <span class="keyword">instanceof</span> <span class="built_in">RegExp</span> <span class="comment">// true</span></span><br><span class="line">(&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="keyword">instanceof</span> <span class="built_in">Function</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>但是 <code>instanceof</code> 不适用于原始类型：字符串，数字，布尔值：  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span> <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> <span class="keyword">instanceof</span> <span class="built_in">Boolean</span> <span class="comment">// false</span></span><br><span class="line"><span class="string">'abc'</span> <span class="keyword">instanceof</span> <span class="built_in">String</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>所以这里<code>constructor</code>又有点优势了，可以适用于原始类型<code>number</code>，<code>string</code>和<code>boolean</code>的判断（<code>constructor</code>小节有例子）。    </p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>虽然检查任何一种特定类型真的不是那么难，但你可能不得不在此过程中做出很多选择，势必会引起一些混乱。因此，了解所有不同的选项会有所帮助，以下是对四种方法可识别类型的简单概括：</p>
+<p><strong>typeof：</strong></p>
+<ul>
+<li>可以是标准类型（<code>Null</code> 除外）</li>
+<li>不可识别具体的对象类型（<code>Function</code> 除外）</li>
+</ul>
+<p><strong>Object.prototype.toString：</strong></p>
+<ul>
+<li>可是识别标准类型及内置对象类型（例如，<code>Object</code>, <code>Date</code>, <code>Array</code>）</li>
+<li>不能识别自定义对象类型</li>
+</ul>
+<p><strong>constructor：</strong></p>
+<ul>
+<li>可以识别标准类型（<code>Undefined</code>/<code>Null</code> 除外）</li>
+<li>可识别内置对象类型</li>
+<li>可识别自定义对象类型</li>
+</ul>
+<p><strong>instanceof：</strong></p>
+<ul>
+<li>不可判别原始类型</li>
+<li>可判别内置对象类型</li>
+<li>可判别自定义对象类型</li>
+</ul>
+<p>类型转换的<strong>图形化</strong>表示（其中红色单元格表示该判断方式不支持的类型）：  </p>
+<p><img src="/images/judge/1.png" alt>  </p>
+<p>还有更复杂的判断比如 <code>plainObject</code>、空对象、<code>Window</code>对象、类数组对象等，还未涉及，后续也会增加。 敬请关注！  </p>
+<p>本人Github链接如下，欢迎各位Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+     
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/数据类型/" rel="tag"><i class="fa fa-tag"></i> 数据类型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/18/JavaScript系列之立即执行函数IIFE/" rel="next" title="JavaScript系列之立即执行函数IIFE">
+                <i class="fa fa-chevron-left"></i> JavaScript系列之立即执行函数IIFE
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/18/JavaScript系列之类型转换/" rel="prev" title="JavaScript系列之类型转换">
+                JavaScript系列之类型转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="米淇淋">
+            
+              <p class="site-author-name" itemprop="name">米淇淋</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">53</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/miqilin21" title="GitHub &rarr; https://github.com/miqilin21" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="/miqilin18@gmail.com" title="E-Mail &rarr; miqilin18@gmail.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.zhihu.com/people/mi-qi-lin-60-52/activities" title="Zhihu &rarr; https://www.zhihu.com/people/mi-qi-lin-60-52/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://juejin.im/user/5cbe712ae51d456e88333976" title="Juejin &rarr; https://juejin.im/user/5cbe712ae51d456e88333976" rel="noopener" target="_blank"><i class="fa fa-fw fa-book"></i>Juejin</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com" title="http://www.ruanyifeng.com" rel="noopener" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.zhangxinxu.com/" title="http://www.zhangxinxu.com/" rel="noopener" target="_blank">张鑫旭</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.alloyteam.com/nav/" title="http://www.alloyteam.com/nav/" rel="noopener" target="_blank">Web前端导航</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://frontendmasters.com/" title="http://frontendmasters.com/" rel="noopener" target="_blank">Frontend Masters</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#typeof"><span class="nav-number">1.</span> <span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-prototype-toString"><span class="nav-number">2.</span> <span class="nav-text">Object.prototype.toString</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写个类库"><span class="nav-number">3.</span> <span class="nav-text">写个类库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">4.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#instanceof"><span class="nav-number">5.</span> <span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">6.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">米淇淋</span>
+
+
+<!-- 新增访客统计代码--> 
+
+<!-- <div class="busuanzi-count">
+    <script async="" src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!--<span class="site-uv">
+      <i class="fa fa-user"></i>
+      访问人数： <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 人
+    </span>
+    <div class="powered-by"></div> -->
+   
+    <!--<span class="site-uv">
+      <i class="fa fa-eye"></i>
+      总访问量： <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次
+    </span> --> 
+    <br>
+
+    
+    <span class="site-uv">Stay hungry. Stay young.</span> 
+    
+   
+    <!-- 博客字数统计 -->
+    <!-- <span class="site-pv">
+      <i class="fa fa-pencil"></i>
+      博客全站共： <span class="post-count">98k</span> 字
+    </span>
+</div> --> 
+
+
+</div>
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<!-- <script type="text/javascript" src="/js/src/clicklove.js"></script> -->

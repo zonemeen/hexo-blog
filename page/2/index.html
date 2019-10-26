@@ -133,32 +133,39 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/学会如何学习（一）/">
-        <p class="h4 index-header">学会如何学习（一）</p>
+      <a href="/2019/08/27/CSS Flexbox 对你说爱不完/">
+        <p class="h4 index-header">Flexbox 对你说爱不完</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。
+废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。
+基本概念 
+使用了flex布局，则有flex容器（flex container），子元素为项目(flex item）。
+在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start和end表示对应轴的起始位置，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴。比如将Flexbox的方向设置为row，则主轴就是横轴，而交叉轴就是纵轴；反之设置成column，则主轴就是纵轴，而交叉轴就是横轴，这个下面会具体讲。
+每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。
+这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cr</div>
         </div>
       </a>
 
       <div>
         
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-27&nbsp;&nbsp;
+        
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
+            <a href="/categories/CSS">CSS</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
+            <a href="/tags/CSS">CSS</a>&nbsp;
           
-            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
           
         
       </div>
@@ -169,89 +176,37 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/如何快速搭建静态资源服务器/">
-        <p class="h4 index-header">如何快速搭建静态资源服务器</p>
+      <a href="/2019/08/20/JavaScript系列之闭包(Closure)/">
+        <p class="h4 index-header">JavaScript系列之闭包</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">相信很多初学者在学习JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。
+在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章《JavaScript系列之变量对象》和《JavaScript系列之作用域和作用域链》，因为它们相互之间都是有关联的。
+闭包是什么？首先，先来看看MDN 对闭包的定义：
+
+闭包是指那些能够访问自由变量的函数。
+
+那什么是自由变量呢？
+
+自由变量是一个既不是函数的形参，也不是函数的局部变量的变量。
+
+由此，我们可以看出闭包共有两部分组成：
+
+闭包 = 函数 + 函数能够访问的自由变量
+
+好，如果上面三行就看得懂的话那么就不用再往下看了，Congratulations！
+…… 不过如果你是初学者的话，我想应该不会，如果仅用三言两语就把闭包讲通，那还能称为Javascript 语言的一个难点吗？
+先来举个例子：
+1234567var n = 1;function f1() &#123;    console.</div>
         </div>
       </a>
 
       <div>
         
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3">前端相关</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Node.js">Node.js</a>&nbsp;
-          
-            <a href="/tags/http-server">http-server</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/前端必备英语词汇，你了解多少呢/">
-        <p class="h4 index-header">前端必备英语词汇，你了解多少呢？</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">掌握前端开发过程中常用的英语词汇还是非常有必要的，现整理出一些前端英语词汇，希望对从事前端的你有所帮助。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3">前端相关</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD">英语术语</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/分享7个有用的JavaScript技巧/">
-        <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！...</div>
-        </div>
-      </a>
-
-      <div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-20&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -264,7 +219,7 @@
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+            <a href="/tags/%E9%97%AD%E5%8C%85">闭包</a>&nbsp;
           
         
       </div>
@@ -275,55 +230,31 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/使用Hexo+GitHub搭建个人博客/">
-        <p class="h4 index-header">使用Hexo+GitHub搭建个人博客</p>
+      <a href="/2019/08/12/JavaScript系列之this是什么/">
+        <p class="h4 index-header">JavaScript系列之this是什么</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">hexo是一个快速、简介且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">上一篇《JavaScript系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。
+再来回顾一下关于执行上下文的三个阶段生命周期：
+
+本章将专门介绍与执行上下文创建阶段直接相关的最后一个细节——this是什么？以及它的指向到底是什么。
+了解this也许你在其他面向对象的编程语言曾经看过this，也知道它会指向某个构造器(constructor)所建立的对象。但事实上在JavaScript里面，this所代表的不仅仅是那个被建立的对象。
+先来看看ECMAScript 标准规范对this 的定义：
+
+「The this keyword evaluates to the value of the ThisBinding of the current execution context.」「this 这个关键字代表的值为当前执行上下文的ThisBinding。」
+
+然后再来看看MDN 对this 的定义：
+
+「In most cases, the value of this is determined</div>
         </div>
       </a>
 
       <div>
         
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/tools">tools</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/GitHub">GitHub</a>&nbsp;
-          
-            <a href="/tags/Hexo">Hexo</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/从原生JS实现jQuery的一个API中体会其设计思想/">
-        <p class="h4 index-header">从原生JS实现jQuery的一个API中体会其设计思想</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？...</div>
-        </div>
-      </a>
-
-      <div>
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -336,7 +267,7 @@
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/jQuery">jQuery</a>&nbsp;
+            <a href="/tags/this">this</a>&nbsp;
           
         
       </div>
@@ -347,19 +278,304 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/从instanceof身上深入理解原型原型链/">
-        <p class="h4 index-header">从instanceof身上深入理解原型/原型链</p>
+      <a href="/2019/08/03/JavaScript系列之作用域和作用域链/">
+        <p class="h4 index-header">JavaScript系列之作用域和作用域链</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在上一篇《JavaScript系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。
+此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。
+先来回顾一下关于执行上下文的三个阶段生命周期：
+
+本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——作用域链。
+作用域(Scope)在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？
+作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：
+1234567function fn() &#123;    var inVariable = "inner variable";    console.log(inVariable); // inner variable&#125;fn(); console.log(inVariable); // Uncaught ReferenceError: inVariable is not defin</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-03&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/Scope">Scope</a>&nbsp;
+          
+            <a href="/tags/Scope%20Chain">Scope Chain</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/31/JavaScript系列之变量对象/">
+        <p class="h4 index-header">JavaScript系列之变量对象</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。
+上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：
+
+详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下变量对象。
+变量对象变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明，先来看一段代码示例：
+12345678910function foo()&#123;    var a = 10;         function b()&#123;&#125;    (function c()&#123;&#125;)</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-31&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1">变量对象</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/28/JavaScript系列之执行上下文和执行栈/">
+        <p class="h4 index-header">JavaScript系列之执行上下文和执行栈</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">如果你想成为一名优秀的JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。
+执行上下文和执行栈是JavaScript的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。
+执行上下文（Execution Context）当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：
+
+全局执行上下文（全局代码）：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 window 对象，this 指向这个全局对象。
+函数执行上下文（函数体）：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。
+Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中的代码，很少用而</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/Execution%20Context">Execution Context</a>&nbsp;
+          
+            <a href="/tags/Execution%20Context%20Stack">Execution Context Stack</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/24/谈谈JavaScript中的函数构造式和prototype的建立/">
+        <p class="h4 index-header">谈谈JavaScript中的函数构造式和prototype的建立</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。
+在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（Name）和该函数的内容（Code），但其实function这里面还有一个属性，这个属性就是prototype，这个属性会以空对象的型式呈现。
+除非你是把function当做function constructor来使用，否则这个属性就没有特别的用途；但如果你是把它当做function constructor，通过new这个关键字来执行这个function的话，它就有特别的意义了。
+
+要进入这个function的prototype属性只要直接通过 .prototype 就可以了。
+然而，有一点很容易令人困惑的地方，我们会以为如果我使用 .prototype 时，就可以直接进入该</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/constructor">constructor</a>&nbsp;
+          
+            <a href="/tags/prototype">prototype</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/19/谈谈JavaScript中的函数构造式和new关键字/">
+        <p class="h4 index-header">谈谈JavaScript中的函数构造式和new关键字</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？
+大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
+谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明确的区分两者，也就是说 function 可以被当作 constructor 或者当作一般函数调用。
+而 constructor 的用法就是 function 搭配new关键字：
+1234567function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  'Chou' ; &#125;var pers</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-19&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/constructor">constructor</a>&nbsp;
+          
+            <a href="/tags/new">new</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/01/贵州黔东南之行/">
+        <p class="h4 index-header">贵州黔东南之行</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">2019年6月23日下午，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。
+镇远古镇第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦😜。
+我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。
+
+
+
+河边坐落了许多充满文艺的小店和清吧。
+
+晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。
+
+
+在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。
+西江千户苗寨第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。
+
+
+在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。
+
+来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了😄。
+
+因为苗寨难得遇到断电，“幸运</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-01&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E8%B4%B5%E5%B7%9E">贵州</a>&nbsp;
+          
+            <a href="/tags/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/28/JavaScript系列之对象的继承/">
+        <p class="h4 index-header">JavaScript系列之对象的继承</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
+而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（prototype）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。
+复习原型/原型链JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。
+其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：
+
+所有对象都有一个属性 __proto__ 指向一个对象，也就是原型
+每个对象的原型都可以通过 constructor 找到构造函数，构造函数也可以通过 prototype 找到原型
+所有函数都可以通过 __proto__ 找到 Function 对象
+所有对象都可以通过</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -376,109 +592,7 @@
           
             <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
           
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/一些好用的工具、网站/">
-        <p class="h4 index-header">一些好用的工具、网站</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下13款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/tools">tools</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E5%B7%A5%E5%85%B7">工具</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/【译】谈谈“typeof null为object”这一bug的由来/">
-        <p class="h4 index-header">【译】谈谈“typeof null为object”这一bug的由来</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/【译】12个编写干净且可扩展的JavaScript技巧/">
-        <p class="h4 index-header">【译】12个编写干净且可扩展的JavaScript技巧</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">JavaScript起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+            <a href="/tags/%E7%BB%A7%E6%89%BF">继承</a>&nbsp;
           
         
       </div>

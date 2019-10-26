@@ -133,19 +133,397 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/Undefined vs Null/">
-        <p class="h4 index-header">Undefined vs Null</p>
+      <a href="/2019/06/26/从instanceof身上深入理解原型原型链/">
+        <p class="h4 index-header">从instanceof身上深入理解原型/原型链</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
+对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
+官方对instanceof运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：
+12345function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true
+上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof </div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+          
+            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/24/【译】12个编写干净且可扩展的JavaScript技巧/">
+        <p class="h4 index-header">【译】12个编写干净且可扩展的JavaScript技巧</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">JavaScript起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。
+现代Web应用程序严重依赖JavaScript，尤其是单页应用程序（SPA）。借助于React，AngularJS和Vue.js等新兴框架，Web应用程序主要使用JavaScript构建。
+扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能会遇到限制并迷失在混乱的海洋中。我想分享一些小技巧，这些技巧将帮助您以有效的方式编写干净的代码。
+本文面向任何技能水平的JavaScript开发人员。 但是，至少具有JavaScript中级知识的开发人员将从这些技巧中获益最多。
+
+原文链接：https://blog.logrocket.com/12-tips-for-writing-clean-and-scalable-javascript-3ffe30abfe20/
+
+分隔您的代码我建议保持代码库清洁和可读的最重要的事情是具有按主题分隔的特定逻辑块（通常是函数）。如果你编写一个函数，该函数应该默认只有一个目的，不应该一次做多个事情。
+此外，您应避免引起副作用，这</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/17/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
+        <p class="h4 index-header">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。
+鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：
+123456Object instanceof Function  // trueFunction instanceof Object  // trueObject.__proto__ === Function.prototype  // trueFunction.__proto__ === Function.prototype  // trueFunction.prototype.__proto__ === Object.prototype  // true
+那么Object和Function，谁是鸡谁是蛋呢？
+接下来就来深入探究下上面这段代码所引</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-17&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/Function">Function</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/14/从原生JS实现jQuery的一个API中体会其设计思想/">
+        <p class="h4 index-header">从原生JS实现jQuery的一个API中体会其设计思想</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。
+封装函数1function addClass(classes)&#123;&#125; //可将所有输入的标签的class添加一个类
+实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
+123456function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(node)  for (let i = 0; i &lt; allTag.length; i++) &#123;    allTag[i].classList.add(classes)  &#125;&#125;
+命名空间在全局变量中创建一个对象</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-14&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/jQuery">jQuery</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/11/DOM Node 的建立、删除与修改/">
+        <p class="h4 index-header">DOM Node 的建立、删除与修改</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。
+DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
+1var newDiv = document.createElement('div');
+在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChild()等方法将新元素加入至指定的位置之后才会显示。
+新建立的newDiv我们也可以同时对它指定属性，如：
+12newDiv.id = "myNewDiv"; newDiv.className = "box";
+document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有文字节点，那么document.createTextNode()就是用来建立文字节点的方法。
+用法很简单，直接在docume</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-11&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/DOM">DOM</a>&nbsp;
+          
+            <a href="/tags/API">API</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/08/通过DOM API 查找节点/">
+        <p class="h4 index-header">通过DOM API 查找节点</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在上一篇的分享当中，我们简单介绍了BOM 与DOM，也了解到JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。
+当一个网页被载入到浏览器时，浏览器会首先分析这个HTML 文档，然后会依照这份HTML 的内容解析成DOM (Document Object Model，即文件对象模型)。
+而DOM 是W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过DOM 提供的API 来操作DOM 的内容、结构与样式。
+所以说，DOM 是网页的根本，懂得控制DOM就可以控制整个网页，做出良好的互动体验。
+那么在今天的分享中，我们就继续来介绍DOM API 查找节点的方法吧。
+前言:script标签放哪里有区别吗？针对&lt;script&gt;标签放哪里，这个题目其实没有标准答案，一般你会看到有两种版本：
+
+放在&lt;head&gt; ... &lt;/head&gt;之间
+放在&lt;/body&gt;之前
+
+还有人会说为什么放在&lt;head&gt; ... &lt;/head&gt;里面的JavaScri</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/DOM">DOM</a>&nbsp;
+          
+            <a href="/tags/API">API</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/06/聊一聊浏览器里的JavaScript/">
+        <p class="h4 index-header">谈谈浏览器里的JavaScript</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」，其中： 
+
+HTML 负责资料与结构
+CSS 负责样式与呈现
+JavaScript 负责行为与互动
+
+   
+那么，如果你跟我在学JavaScript的时候也有一样的疑问：变量、类型、对象、流程控制、函数…表面上看似基础都学会了，但…  
+我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！   
+   
+那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  
+浏览器里的JavaScript严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  
+事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是浏览器提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  
+所以广泛来说，在浏览器上的JavaScript 实际上包含了以下三部分：  
+
+JavaScript核心 (以ECMA</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-06&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/DOM">DOM</a>&nbsp;
+          
+            <a href="/tags/BOM">BOM</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/03/浅谈数组常见遍历方法/">
+        <p class="h4 index-header">浅谈数组常见遍历方法</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。 
+   
+接下来都是使用底下的基础数组来实现一些方法：  
+
+累加
+比大小
+分别运算
+查找特定值等  
+
+123456789101112131415161718let people = [  &#123;    name: '马云',    money: 2000  &#125;,  &#123;    name: '马化腾',    money: 1800  &#125;,  &#123;    name: '李彦宏',    money: 1500  &#125;,  &#123;    name: '我',    money: Infinity  &#125;];
+forEach：遍历数组forEach与另外几种方法有些许不同，就是除了forEach以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是undefined(没有返回任何值)。  
+1234var forEachLoop = people.fo</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-03&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E6%95%B0%E7%BB%84">数组</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/31/【译】谈谈“typeof null为object”这一bug的由来/">
+        <p class="h4 index-header">【译】谈谈“typeof null为object”这一bug的由来</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。 
+
+原文链接：http://www.2ality.com/2013/10/typeof-null.html
+
+我看了下C语言关于typeof的规范，它对于typeof null为何结果是’object’有更好的解释。  
+在JavaScript中，typeof null的结果是’Object‘，它错误地暗示null是一个对象，实际上它是一个原始值。我在上一篇文章也提到了这是JS的一大bug，不幸的是这并不能解决，因为这将破坏现有规范，接下来解释下这个bug的历史。  
+“typeof null”的错误从JavaScripts第一个版本开始就已经存在了。在这个版本，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：   
+
+000: object. 数据是对象的引用。
+1: int. 数据是31位有符号整数。
+010: double. 数</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-31&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -167,19 +545,26 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JS中一切都是对象吗？看这一篇就知道了/">
+      <a href="/2019/05/28/JS中一切都是对象吗？看这一篇就知道了/">
         <p class="h4 index-header">JS中一切都是对象吗？看这一篇就知道了</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">当你刚开始学习JavaScript时，你是否有遇到许多书籍，教程以及那些说“JavaScript中的所有内容都是对象”的人？这算是一个JavaScript中老生常谈的话题了，虽然它并不是100％正确（JavaScript中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">当你刚开始学习JavaScript时，你是否有遇到许多书籍，教程以及那些说“JavaScript中的所有内容都是对象”的人？这算是一个JavaScript中老生常谈的话题了，虽然它并不是100％正确（JavaScript中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。
+     
+想必有点疑惑吧，那么造成这种现象的原因是什么呢？接下来就由我一一道来。  
+历史原因说起一切都是对象这种说法的由来，就要好好提一下历史因素了。  
+1995年，JavaScript诞生之年，Netscape公司（JavaScript的设计者）与Sun公司（Java语言的发明者和所有者）合作开发一种可以嵌入网页的脚本语言，将JavaScript的数据结构借鉴Java而设计，包括将值分成原始值和对象两大类。   
+Java中一切皆对象，但基本类型却不是对象，为了解决这个问题，Java让每个基本类型都对应了一个包装器类型。包装器类型将基本类型包装起来，添加了属性和方法，包装器类型即为对象，所以可以这么说Java中的一切都可以充当对象，不会说的那么绝对。  
+因此借鉴了Java数据结构的</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -193,296 +578,6 @@
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
             <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之闭包(Closure)/">
-        <p class="h4 index-header">JavaScript系列之闭包</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">相信很多初学者在学习JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E9%97%AD%E5%8C%85">闭包</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之运行机制/">
-        <p class="h4 index-header">JavaScript系列之运行机制（Event Loop）</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">有了一定JavaScript基础的朋友们一定知道，JS里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的JavaScript系列文章里，我就总结了JS前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解JS执行顺序及机制，来更好地理顺代码中的一些异步操作。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6">运行机制</a>&nbsp;
-          
-            <a href="/tags/Event%20Loop">Event Loop</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之类数组对象arguments/">
-        <p class="h4 index-header">JavaScript系列之类数组对象arguments</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/arguments">arguments</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之类型转换/">
-        <p class="h4 index-header">JavaScript系列之类型转换</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之类型判断/">
-        <p class="h4 index-header">JavaScript系列之类型判断</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之立即执行函数IIFE/">
-        <p class="h4 index-header">JavaScript系列之立即执行函数IIFE</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在之前的文章当中，我们已经介绍了函数的参数，arguments对象以及回调函数，那么在今天的分享中，我们继续来看看函数在JavaScript的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/IIFE">IIFE</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之深入理解对象属性/">
-        <p class="h4 index-header">JavaScript系列之深入理解对象属性</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在《谈谈JavaScript中对象建立(Object)》这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解JavaScript的对象与其他编程语言的对象有何差异。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之数据类型/">
-        <p class="h4 index-header">JavaScript系列之数据类型</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">JavaScript提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
           
         
       </div>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>JavaScript系列之对象的继承 ~ miqilin&#39;s blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/post.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期五, 六月 28日 2019</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。</p>
+<p>而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（<code>prototype</code>）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。</p>
+<h3 id="复习原型-原型链"><a href="#复习原型-原型链" class="headerlink" title="复习原型/原型链"></a>复习原型/原型链</h3><p>JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。</p>
+<p>其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：</p>
+<ul>
+<li>所有对象都有一个属性 <code>__proto__</code> 指向一个对象，也就是原型</li>
+<li>每个对象的原型都可以通过 <code>constructor</code> 找到构造函数，构造函数也可以通过 <code>prototype</code> 找到原型</li>
+<li>所有函数都可以通过 <code>__proto__</code> 找到 <code>Function</code> 对象</li>
+<li>所有对象都可以通过 <code>__proto__</code> 找到 <code>Object</code> 对象</li>
+<li>对象之间通过 <code>__proto__</code> 连接起来，这样称之为原型链。当前对象上不存在的属性可以通过原型链一层层往上查找，直到顶层 <code>Object</code> 对象，顶层 <code>Object</code> 对象最终指向<code>null</code></li>
+</ul>
+<p>我觉得原型中最重要的内容其实就这些了，没必要看太多关于原型的文章，到头来只是会越来越糊涂，如果硬要推荐原型参阅资料的话，《JavaScript高级程序设计》这本书，当之无愧！</p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过上面的介绍，我们知道JavaScript中的继承是通过原型/原型链来体现的，先看几行代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line">f1.a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">Foo.prototype.a = <span class="number">100</span>;</span><br><span class="line">Foo.prototype.b = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f1.a);  <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.b);  <span class="comment">// 200</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.c);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p>
+<p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p>
+<p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p>
+<p><img src="/images/inherit/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p>
+<p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p>
+<p><img src="/images/inherit/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p>
+<p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p>
+<p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p>
+<p><img src="/images/inherit/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p>
+<p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p>
+<p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p>
+<p>这里再说一个函数的例子来加深理解吧。</p>
+<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p>
+<p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif" alt></p>
+<p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p>
+<p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p>
+<p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt></p>
+<p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>
+              
+                <a class="hover-with-bg" href="/tags/%E7%BB%A7%E6%89%BF">继承</a>
+              
+              <span id="/2019/06/28/JavaScript系列之对象的继承/" class="visitors leancloud_visitors" data-flag-title="JavaScript系列之对象的继承">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>2019</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="/js/lazyload.js"></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js"></script>
+  
+  <script src="/js/post.js"></script>
+
+
+  <script src="/lib/prettify/prettify.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之对象的继承&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js"></script>
+
+
+
+
+</body>
+</html>

@@ -133,19 +133,27 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之执行上下文和执行栈/">
-        <p class="h4 index-header">JavaScript系列之执行上下文和执行栈</p>
+      <a href="/2019/05/25/谈谈JavaScript中对象建立(Object)/">
+        <p class="h4 index-header">谈谈JavaScript中创建对象(Object)</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">如果你想成为一名优秀的JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。  
+对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？  
+第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。  
+第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Property）。  
+第三种放入的值可以是函数（function），在对象的情况下，我们会把这种函数称做方法（method）。在对象中的每一个Property或是Method都会占据电脑当中一个记忆体的位置，在需要使用到的时候，把它们调取出来。  
+接下来我将介绍三种创建JavaScript里的对象及如何调用的方法：  
+方法一：使用 [ ]创建对象  
+创建对象的第一个方法是使用[ ]，[ ]在</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-25&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -158,9 +166,9 @@
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/Execution%20Context">Execution Context</a>&nbsp;
+            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
           
-            <a href="/tags/Execution%20Context%20Stack">Execution Context Stack</a>&nbsp;
+            <a href="/tags/Object">Object</a>&nbsp;
           
         
       </div>
@@ -171,19 +179,70 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之对象的继承/">
-        <p class="h4 index-header">JavaScript系列之对象的继承</p>
+      <a href="/2019/05/22/分享7个有用的JavaScript技巧/">
+        <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！
+    
+原文链接：https://davidwalsh.name/javascript-tricks#comments   
+数组去重数组去重可能比您想象的更容易：  
+12var j = [...new Set([1, 2, 3, 4, 4])]&gt;&gt; [1, 2, 3, 4]
+很简单有木有！ 
+过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，null，false等）？ 你可能不知道还有这个技巧：  
+12let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
+创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-22&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/19/JavaScript中任何值的prototype到最后都是Object/">
+        <p class="h4 index-header">JavaScript中任何值的prototype到最后都是Object</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！    
+什么意思呢？
+假设我们现在分别建立对象、函数和数组，直接上代码：  
+123456789101112131415161718192021// Object var a =  &#123;   name : 'miqilin' &#125;// function var  b  =  function ( ) &#123;   console . log ( 'Hello' ) ; &#125;// Array var c =  [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d =  'This is string' ;// number var e =  2 ;// boolean var f =  true ;
+接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的prototype。  
+对象（obj</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-19&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -198,10 +257,6 @@
           
             <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
-          
-            <a href="/tags/%E7%BB%A7%E6%89%BF">继承</a>&nbsp;
-          
         
       </div>
     </div>
@@ -211,91 +266,27 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之回调函数/">
-        <p class="h4 index-header">JavaScript系列之回调函数</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在之前的文章当中，我们已经介绍了函数的参数与arguments对象，那么今天的分享中，我们继续来看看函数在JavaScript的各种不同面貌——回调函数。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/Callback%20function">Callback function</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之变量对象/">
-        <p class="h4 index-header">JavaScript系列之变量对象</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1">变量对象</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之原型与原型链/">
+      <a href="/2019/05/18/JavaScript系列之原型与原型链/">
         <p class="h4 index-header">JavaScript系列之原型与原型链</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。   
+所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   
+构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  
+构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。我们先使用构造函数创建一个对象：  
+123456function Dog() &#123;    this.name = '阿黄'&#125;var dog = new Dog()console.log(dog.name)     // 阿黄
+上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。  
+原型prototype  
+JavaScript是一种基于</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-18&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -321,56 +312,31 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之内存空间/">
-        <p class="h4 index-header">JavaScript系列之内存空间</p>
-        
-        
-          
-          
-        
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。
-直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。...</div>
-        </div>
-      </a>
-
-      <div>
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之内存泄漏/">
+      <a href="/2019/05/16/JavaScript系列之内存泄漏/">
         <p class="h4 index-header">JavaScript系列之内存泄漏</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。   
+而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着malloc() 和 free() 这种低级内存管理语言也有可能出现泄露内存的情况。  
+这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   
+垃圾回收机制现在各大浏览器通常采用的垃圾回收有两种方法：标记清除（mark and sweep）、引用计数(reference counting)。  
+1、标记清除 
+这是javascript中最常用的垃圾回收方式。  
+工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   
+工作流程：  
+
+垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。
+去掉环境中的变量以及被环境中的变量引用的变量的标记。
+之后再被加上标记的变量将</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-16&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -394,19 +360,28 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之作用域和作用域链/">
-        <p class="h4 index-header">JavaScript系列之作用域和作用域链</p>
+      <a href="/2019/05/14/JavaScript系列之内存空间/">
+        <p class="h4 index-header">JavaScript系列之内存空间</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">在上一篇《JavaScript系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。
+直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。 
+这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。  
+内存空间管理JavaScript的内存生命周期:  
+1231. 分配你所需要的内存2. 使用分配到的内存（读、写）3. 不需要时将其释放、归还
+为了便于理解，我们使用一个简单的例子来解释这个周期。   
+123var a = 10;  // 在内存中给数值变量分配空间alert(a + 90);  // 使用分配到的内存a = null; // 使用完毕之后，释放内存空间
+在JS中，每一个数据都需要一个内存空间。内存空间又被分为两种，栈内存(stack)与堆内存(heap)。  
+栈与堆栈(stack)是有序的，主要存放一些基本类型的变量和对象的地址，每个区块按照一定次序存放（后进先出），它们都是直接按</div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-14&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -419,9 +394,7 @@
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/Scope">Scope</a>&nbsp;
-          
-            <a href="/tags/Scope%20Chain">Scope Chain</a>&nbsp;
+            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
           
         
       </div>
@@ -432,32 +405,40 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript系列之this是什么/">
-        <p class="h4 index-header">JavaScript系列之this是什么</p>
+      <a href="/2019/05/10/学会如何学习（三）/">
+        <p class="h4 index-header">学会如何学习（三）</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">上一篇《JavaScript系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~   
+拖延症的形成我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。  
+     
+这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。   
+习惯习惯可以分为四个阶段：  
+   
+第一阶段是提示 (cue) ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。   
+第二个阶段就是惯例 (routine)，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办</div>
         </div>
       </a>
 
       <div>
         
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-10&nbsp;&nbsp;
+        
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
           
-            <a href="/tags/this">this</a>&nbsp;
+            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
           
         
       </div>
@@ -468,19 +449,29 @@
     
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/10/18/JavaScript事件三部曲之隐藏在其中的秘密/">
-        <p class="h4 index-header">JavaScript事件三部曲之隐藏在其中的&#34;秘密&#34;</p>
+      <a href="/2019/05/07/Undefined vs Null/">
+        <p class="h4 index-header">Undefined vs Null</p>
         
         
           
-          
         
-        <div class="index-excerpt" style="max-height: none;">
-          <div class="index-text mb-1">上篇文章我们提到，注册事件的方法addEventListener()内有三个参数，分别是「事件名称」、「事件的处理程序」，以及「捕获」或「冒泡」的机制切换。...</div>
+        <div class="index-excerpt">
+          <div class="index-text mb-1">在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。
+在这篇文章中，我已经简略介绍了undefined和null的特性了。
+本文将探讨JavaScript中undefined和null之间的相似和差异之处。  
+相似性（1）undefined和null在if语句中，都会被自动转为false，加!转换为true，相等运算符对于两者比较是相等的。  
+12345678910if (!undefined)     console.log('undefined is false');// undefined is falseif (!null)     console.log('null is false');// null is falseundefined == null// true
+（2）在JavaScript中，只有六个falsy值，null和undefined都包含在六个falsy值中，当进行逻辑判断时所有的Falsy值均为false。   
+
+false
+0
+‘’ </div>
         </div>
       </a>
 
       <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-07&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -493,9 +484,90 @@
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E4%BA%8B%E4%BB%B6">事件</a>&nbsp;
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/29/JavaScript系列之类型转换/">
+        <p class="h4 index-header">JavaScript系列之类型转换</p>
+        
+        
           
-            <a href="/tags/event">event</a>&nbsp;
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。
+以下我将介绍将各种类型的值，分别转换成数字、字符串或者布尔值（基于ES5规范）。   
+ToNumber（1）Number()   
+使用Number函数，可以将任意类型的值转化成数值。   
+12345678910111213141516171819202122//数值Number(123)  // 123  转换后为原值//字符串Number('123')  // 123  转换为相应的数值，前提能被解析为数值 //字符串Number('123abc')   // NaN  如果不能被解析为数值，则返回 NaN//布尔值Number(true)  // 1Number(false)  // 0//undefinedNumber(undefined)  // NaN//nullNumber(null)  // 0//对象Number(&#123;a: 1&#125;) // NaNNumber([5]) /</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-29&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/26/JavaScript系列之类型判断/">
+        <p class="h4 index-header">JavaScript系列之类型判断</p>
+        
+        
+          
+        
+        <div class="index-excerpt">
+          <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。  
+通过本文，我将尝试概述Javascript中类型判断的几种方法（基于ES5的规范）。
+typeoftypeof判断类型方法算是我们最最常用的了，直接上代码：   
+123456typeof 3 // "number"typeof "abc" // "string"typeof &#123;&#125; // "object"typeof true // "boolean"typeof undefined // "undefined"typeof function()&#123;&#125; // "function"
+以上这些类型都比较正常，直到：   
+1typeof null // "object"
+这显然是一个错误。 这可能会在以后的ECMAScript哪个版本中修复，返回值将为“null”。   
+除此之外 Object 下还有很多细分的类型，比如 Arra</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
           
         
       </div>

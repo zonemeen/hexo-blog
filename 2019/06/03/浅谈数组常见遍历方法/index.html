@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>浅谈数组常见遍历方法 ~ miqilin&#39;s blog</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/post.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期一, 六月 3日 2019</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。 </p>
+<p><img src="/images/array/1.png" srcset="/img/loading.gif" alt>   </p>
+<p>接下来都是使用底下的基础数组来实现一些方法：  </p>
+<ul>
+<li>累加</li>
+<li>比大小</li>
+<li>分别运算</li>
+<li>查找特定值等  </li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> people = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'马云'</span>,</span><br><span class="line">    money: <span class="number">2000</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'马化腾'</span>,</span><br><span class="line">    money: <span class="number">1800</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'李彦宏'</span>,</span><br><span class="line">    money: <span class="number">1500</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'我'</span>,</span><br><span class="line">    money: <span class="literal">Infinity</span></span><br><span class="line">  &#125;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h3 id="forEach：遍历数组"><a href="#forEach：遍历数组" class="headerlink" title="forEach：遍历数组"></a>forEach：遍历数组</h3><p>forEach与另外几种方法有些许不同，就是除了forEach以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是<code>undefined</code>(没有返回任何值)。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> forEachLoop = people.forEach( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line">	<span class="built_in">console</span> .log(item, index, array); <span class="comment">//（对象,索引,全部数组）</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(forEachLoop); <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<p>其它的方法都会返回一个值或数组，以此来说就会传回原本的数组值。   </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mapLoop = people.map( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(mapLoop); <span class="comment">//与原本数组资料相同</span></span><br></pre></td></tr></table></figure>
+<h3 id="map：一一映射另一个数组"><a href="#map：一一映射另一个数组" class="headerlink" title="map：一一映射另一个数组"></a>map：一一映射另一个数组</h3><p>map会return返回的对象、值，作用上是用来处理数组返回新值产生一个新数组，要特别注意返回的值数量与原始数组长度相同，所以如果不给return，默认返回<code>undefined</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 没有给return 也会产生undefined</span></span><br><span class="line"><span class="keyword">var</span> mapEmpty = people.map( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(mapEmpty);     <span class="comment">// [undefined, undefined, undefined, undefined]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> everyoneAdd = people.map( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line">  item.money = item.money + <span class="number">500</span> ; <span class="comment">//每个money + 500</span></span><br><span class="line">  <span class="keyword">return</span> item;              <span class="comment">//返回对象</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(everyoneAdd);   <span class="comment">// 返回每个处理后的数值，不过记得这是传参考特性，会影响到原始的对象</span></span><br><span class="line"><span class="comment">// &#123;name: "马云", money: 2500&#125;</span></span><br><span class="line"><span class="comment">// &#123;name: "马化腾", money: 2300&#125;</span></span><br><span class="line"><span class="comment">// &#123;name: "李彦宏", money: 2000&#125;</span></span><br><span class="line"><span class="comment">// &#123;name: "我", money: Infinity&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mapMoneyThan1500 = people.map( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line"> <span class="comment">// 错误示范，长度不符合时</span></span><br><span class="line"> <span class="keyword">if</span> (item.money &gt; <span class="number">1500</span> ) &#123;</span><br><span class="line"> <span class="keyword">return</span> item;               <span class="comment">//取得大于1500</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(mapMoneyThan1500);</span><br><span class="line"><span class="comment">// [&#123;name: "马云", money: 2000&#125;, &#123;name: "马化腾", money: 1800&#125;, undefined, &#123;name: "我", money: Infinity&#125; ]</span></span><br></pre></td></tr></table></figure>
+<h3 id="filter：过滤掉数组中符合条件的元素"><a href="#filter：过滤掉数组中符合条件的元素" class="headerlink" title="filter：过滤掉数组中符合条件的元素"></a>filter：过滤掉数组中符合条件的元素</h3><p>filter() 检测数值元素，并返回符合条件所有元素的数组。 filter() 不会改变原始数组。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// filter</span></span><br><span class="line"><span class="keyword">var</span> filterEmpty = people.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(filterEmpty);    <span class="comment">// 没有给条件，会是一个空数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> filterMoneyThan1500 = people.filter(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &gt; <span class="number">1500</span>;       <span class="comment">// 取得大于1500</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(filterMoneyThan1500); <span class="comment">// 马云，马化腾，我 这三个对象</span></span><br></pre></td></tr></table></figure>
+<h3 id="find：返回符合条件的数组的第一个元素的值"><a href="#find：返回符合条件的数组的第一个元素的值" class="headerlink" title="find：返回符合条件的数组的第一个元素的值"></a>find：返回符合条件的数组的第一个元素的值</h3><p>find是用来查找数组中符合条件的对象，且<strong>仅能有一个</strong>，当返回的<code>true</code>数量超过两个以上时，那会以第一个为优先，通常会用来查找特定 id。如果没有符合条件的对象，则返回<code>undefined</code>。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findEmpty = people.find(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(findEmpty);          <span class="comment">// 没有条件，会是 undefined</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> findMoneyThan1500 = people.find(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &gt; <span class="number">1500</span>;      <span class="comment">// 取得大于1500</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(findMoneyThan1500);  <span class="comment">// 虽然满足条件的有3个，但只会返回 '马云' 这一个对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> findMe = people.find(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.name === <span class="string">'我'</span>;    <span class="comment">// 找到我</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(findMe);            <span class="comment">// 我 这一对象</span></span><br></pre></td></tr></table></figure>
+<h3 id="every：验证数组中是否每个元素都满足指定的条件"><a href="#every：验证数组中是否每个元素都满足指定的条件" class="headerlink" title="every：验证数组中是否每个元素都满足指定的条件"></a>every：验证数组中是否每个元素都满足指定的条件</h3><p>验证全部的结果，当全部的值都为 <code>true</code> 时，则最终会得到 <code>true</code>；只要其中之一为 <code>false</code>，则返回 <code>false</code>。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ans = people.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &gt; <span class="number">1800</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(ans); <span class="comment">// false: 只要有部分不符合，则为 false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ans2 = people.every(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &gt; <span class="number">500</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(ans2); <span class="comment">// true: 大家钱都超过 500</span></span><br></pre></td></tr></table></figure>
+<h3 id="some：验证数组中是否有元素满足指定的条件"><a href="#some：验证数组中是否有元素满足指定的条件" class="headerlink" title="some：验证数组中是否有元素满足指定的条件"></a>some：验证数组中是否有元素满足指定的条件</h3><p>与前者类似，但只要部分为 <code>true</code>，则返回 <code>true</code>；全部为 <code>false</code> 时返回值才会为 <code>false</code>。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ans = people.some(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &gt; <span class="number">1800</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(ans); <span class="comment">// true: 只要有部分符合，则为 true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ans2 = people.some(<span class="function"><span class="keyword">function</span>(<span class="params">item, index, array</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> item.money &lt; <span class="number">500</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(ans2); <span class="comment">// false: 大家钱都不少于 500</span></span><br></pre></td></tr></table></figure>
+<h3 id="reduce：将数组合成一个值"><a href="#reduce：将数组合成一个值" class="headerlink" title="reduce：将数组合成一个值"></a>reduce：将数组合成一个值</h3><p>reduce是其中最为特殊的，首先他返回的参数与之前的不同，它会接收到前一个返回的值供下一个对象使用，很适合用在累加与对比上，返回的可以是数字也可以是数组。</p>
+<ul>
+<li>accumulator: 前一个参数，如果是第一个数组的话，值是以另外传入或初始化的值</li>
+<li>currentValue: 当前值</li>
+<li>currentIndex: 当前索引</li>
+<li>array: 全部数组</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reduceEmpty = people.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, currentValue, currentIndex, array</span>)</span>&#123;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(reduceEmpty);                 <span class="comment">// 沒有条件，会是 undefined</span></span><br></pre></td></tr></table></figure>
+<p>可以通过与前一个相加的方式，累加数组中所有的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">people.pop(); <span class="comment">// 我的钱深不可测，先移除掉</span></span><br><span class="line"><span class="keyword">var</span> reducePlus = people.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, currentValue, currentIndex, array</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 分別是前一个返回值, 当前值, 当前索引值</span></span><br><span class="line">  <span class="built_in">console</span>.log(accumulator, currentValue, currentIndex);</span><br><span class="line">  <span class="keyword">return</span> accumulator + currentValue.money;  <span class="comment">// 与前一个值相加</span></span><br><span class="line">&#125;, <span class="number">0</span>);                                      <span class="comment">// 传入初始化值为 0</span></span><br><span class="line"><span class="built_in">console</span>.log(reducePlus);                    <span class="comment">// 总和为 5300</span></span><br></pre></td></tr></table></figure>
+<p>也可以相互对比，取出最高的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reduceBestOne = people.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">accumulator, currentValue, currentIndex, array</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'reduce'</span>, accumulator, currentValue, currentIndex)</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.max(accumulator, currentValue.money); <span class="comment">// 与前一个值比较哪个更大</span></span><br><span class="line">&#125;, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">console</span>.log(reduceBestOne);                  <span class="comment">// 最大值为 2000</span></span><br></pre></td></tr></table></figure>
+<p>reduce功能很强大，其余几种遍历方法可以用reduce方法来代替，这里只列出map被reduce代替的例子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//map方法</span></span><br><span class="line"><span class="keyword">var</span> mapMoneyDouble = people.map( <span class="function"><span class="keyword">function</span> (<span class="params"> item, index, array </span>) </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> item.money*<span class="number">2</span>;               <span class="comment">//钱翻倍</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span> .log(mapMoneyDouble); <span class="comment">// 4000, 3600, 3000, Infinity</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//reduce方法实现同样的功能</span></span><br><span class="line"><span class="keyword">var</span> reduceMoneyDouble = people.reduce( <span class="function"><span class="keyword">function</span> (<span class="params"> accumulator, currentValue, currentIndex, array </span>) </span>&#123;             <span class="comment">//钱翻倍</span></span><br><span class="line">  accumulator.push(currentValue.money*<span class="number">2</span>);                <span class="comment">//钱翻倍</span></span><br><span class="line">  <span class="keyword">return</span> accumulator</span><br><span class="line">&#125;,[]);</span><br><span class="line"><span class="built_in">console</span> .log(reduceMoneyDouble); <span class="comment">// 4000, 3600, 3000, Infinity</span></span><br></pre></td></tr></table></figure>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+              
+                <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84">数组</a>
+              
+              <span id="/2019/06/03/浅谈数组常见遍历方法/" class="visitors leancloud_visitors" data-flag-title="浅谈数组常见遍历方法">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>2019</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="/js/lazyload.js"></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js"></script>
+  
+  <script src="/js/post.js"></script>
+
+
+  <script src="/lib/prettify/prettify.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "浅谈数组常见遍历方法&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js"></script>
+
+
+
+
+</body>
+</html>

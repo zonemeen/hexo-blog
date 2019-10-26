@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>JavaScript系列之回调函数 ~ 米淇淋の个人博客</title>
+  <title>JavaScript系列之回调函数 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -133,109 +133,33 @@
 <p>先前介绍事件的时候有说过，「JavaScript 是一个事件驱动(Event-driven) 的编程语言」，而事件的概念就如同：</p>
 <p><strong>办公室电话响了(事件被触发Event fired) -&gt; 接电话(处理事件Event Handler)</strong></p>
 <p>而写成代码形式就类似：</p>
-<pre><code class="javascript">// 注：这里只是比喻，并没有电话响这个事件
-Office.addEventListener( &#39;电话响&#39;, function 接电话(){ }, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注：这里只是比喻，并没有电话响这个事件</span></span><br><span class="line">Office.addEventListener( <span class="string">'电话响'</span>, <span class="function"><span class="keyword">function</span> 接电话(<span class="params"></span>)</span>&#123; &#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>可以看到，<code>Office</code>通过<code>addEventListener</code>方法去注册了一个事件，当这个事件被触发时，它会去执行我们所指定的第二个参数，也就是某个「函数」(接电话)。</p>
 <p>换句话说，这个函数只会在满足了某个条件才会被动地去执行，我们就可以说这是一个<strong>回调函数</strong>。</p>
 <p>经历过各种「事件」的你，想必也发现了一件事，所谓的回调函数其实就是「<strong>把函数作为参数传递给另一个函数，然后通过另一个函数来调用它</strong>」。</p>
 <p>不知大家有没有听懂？那我再讲一个简单案例吧：</p>
-<pre><code class="javascript">window.setTimeout( function(){ ... }, 1000);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.setTimeout( <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; ... &#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
 <p>如果我们希望隔某段时间之后，执行某件事，就可以通过<code>window.setTimeout</code>来帮助我们完成。</p>
 <p>像是上面的范例中，<code>window.setTimeout</code>带有两个参数，第一个是要做的事情，用一个函数来代表，第二个则是时间(1/1000秒, milliseconds)。而第一个参数的函数也是回调函数的一种：「在经过了某段时间之后，才执行的函数」。</p>
 <p>当然，上面两个范例中的回调函数我们也可以把它单独抽出来定义：</p>
-<pre><code class="javascript">var handler = function 接电话() {
-};
-
-Office.addEventListener( &#39;电话响&#39;, handler, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = <span class="function"><span class="keyword">function</span> 接电话(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Office.addEventListener( <span class="string">'电话响'</span>, handler, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>这样会使你的代码看起来更清楚。</p>
 <p>除了事件以外，还有另一个会需要用到回调函数的场景，就是「<strong>控制多个函数间执行的顺序</strong>」。</p>
 <p>啥意思呢？来看个简单的例子：</p>
-<pre><code class="javascript">var funA = function(){
-  console.log(&#39;function A&#39;);
-};
-
-var funB = function(){
-  console.log(&#39;function B&#39;);
-};
-
-funA();
-funB();
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'function A'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> funB = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'function B'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">funA();</span><br><span class="line">funB();</span><br></pre></td></tr></table></figure>
 <p>因为<code>funcA</code>与<code>funcB</code>都会立即执行，并且JavaScript 的单线程模型决定了同时只能执行一个任务，其他任务都必须在后面排队等待，所以执行结果必定为：</p>
-<pre><code>function A
-function B
-</code></pre><p>但是，如果<code>funcA</code>是异步操作，<code>funcB</code>会立即执行，不会等到<code>funcA</code>结束再执行：</p>
-<pre><code class="javascript">var funA = function(){
-  window.setTimeout(function(){
-    console.log(&#39;function A&#39;);
-  }, 1000);
-};
-
-var funB = function(){
-  console.log(&#39;function B&#39;);
-};
-
-funA();
-funB();
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function A</span><br><span class="line">function B</span><br></pre></td></tr></table></figure>
+<p>但是，如果<code>funcA</code>是异步操作，<code>funcB</code>会立即执行，不会等到<code>funcA</code>结束再执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> funA = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'function A'</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> funB = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'function B'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">funA();</span><br><span class="line">funB();</span><br></pre></td></tr></table></figure>
 <p>像这种时候，为了确保先执行<code>funcA</code>，就可以通过回调函数的形式来进行处理：</p>
-<pre><code class="javascript">// 为了确保先执行 funA 再执行 funB
-// 我们在 funA 加上 callback 参数
-var funA = function(callback){
-  window.setTimeout(function(){
-    console.log(&#39;function A&#39;);
-
-    // 如果 callback 是个函数就调用它
-    if( typeof callback === &#39;function&#39; ){
-      callback();
-    }
-
-  }, 1000);
-};
-
-var funB = function(){
-  console.log(&#39;function B&#39;);
-};
-
-// 将 funB 作为参数带入 funA()
-funA( funB );
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 为了确保先执行 funA 再执行 funB</span></span><br><span class="line"><span class="comment">// 我们在 funA 加上 callback 参数</span></span><br><span class="line"><span class="keyword">var</span> funA = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">  <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'function A'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果 callback 是个函数就调用它</span></span><br><span class="line">    <span class="keyword">if</span>( <span class="keyword">typeof</span> callback === <span class="string">'function'</span> )&#123;</span><br><span class="line">      callback();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> funB = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'function B'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将 funB 作为参数带入 funA()</span></span><br><span class="line">funA( funB );</span><br></pre></td></tr></table></figure>
 <p>像这样，无论<code>funA</code>在执行的时候要等多久，<code>funB</code>都会等到<code>console.log(&#39;function A&#39;);</code>之后才执行。</p>
 <p>不过需要注意的是，我们可以将不止一个的回调函数作为参数传递给一个函数，就像我们能够传递不止一个变量一样，过多的异步编程嵌套在一起产生的多重回调函数甚至叫回调地狱，维护起来真的如名字一样会很可怕！</p>
 <p>多重回调函数就类似下面这样的形式：</p>
-<pre><code class="javascript">function async(arg, callback) {
-  console.log(&#39;参数为 &#39; + arg +&#39; , 1秒后返回结果&#39;);
-  setTimeout(function () { callback(arg * 2); }, 1000);
-}
-
-function final(value) {
-  console.log(&#39;完成: &#39;, value);
-}
-
-async(1, function (value) {
-  async(2, function (value) {
-    async(3, function (value) {
-      async(4, function (value) {
-        async(5, function (value) {
-          async(6, final);
-        });
-      });
-    });
-  });
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">async</span>(<span class="params">arg, callback</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'参数为 '</span> + arg +<span class="string">' , 1秒后返回结果'</span>);</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; callback(arg * <span class="number">2</span>); &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">final</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'完成: '</span>, value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span>(<span class="number">1</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">async</span>(<span class="number">2</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">async</span>(<span class="number">3</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">async</span>(<span class="number">4</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">async</span>(<span class="number">5</span>, <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">async</span>(<span class="number">6</span>, final);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>执行结果为：</p>
-<pre><code>参数为 1 , 1秒后返回结果
-参数为 2 , 1秒后返回结果
-参数为 3 , 1秒后返回结果
-参数为 4 , 1秒后返回结果
-参数为 5 , 1秒后返回结果
-参数为 6 , 1秒后返回结果
-完成:  12
-</code></pre><p>上面代码中，六个回调函数的嵌套，不仅写起来麻烦，容易出错，而且难以维护。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">参数为 1 , 1秒后返回结果</span><br><span class="line">参数为 2 , 1秒后返回结果</span><br><span class="line">参数为 3 , 1秒后返回结果</span><br><span class="line">参数为 4 , 1秒后返回结果</span><br><span class="line">参数为 5 , 1秒后返回结果</span><br><span class="line">参数为 6 , 1秒后返回结果</span><br><span class="line">完成:  12</span><br></pre></td></tr></table></figure>
+<p>上面代码中，六个回调函数的嵌套，不仅写起来麻烦，容易出错，而且难以维护。</p>
 <p>如果真的不幸需要写到这么多层，这点后续我们介绍到<code>Promise</code>时会再说明如何摆脱这种困境。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
@@ -353,7 +277,7 @@ async(1, function (value) {
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

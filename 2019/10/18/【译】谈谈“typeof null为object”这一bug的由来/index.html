@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>【译】谈谈“typeof null为object”这一bug的由来 ~ 米淇淋の个人博客</title>
+  <title>【译】谈谈“typeof null为object”这一bug的由来 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -149,53 +149,19 @@
 <li><code>null</code>(JSVAL_NULL) 为机器码NULL的空指针，或者说：为0的object类型标签。   </li>
 </ul>
 <p>现在应该明白为什么<code>typeof</code>认为<code>null</code>是一个对象：它检测一个他的类型标签并且返回”<code>object</code>”。 以下是<code>typeof</code>的引擎代码：  </p>
-<pre><code class="c"> JS_PUBLIC_API(JSType)
-    JS_TypeOfValue(JSContext *cx, jsval v)
-    {
-        JSType type = JSTYPE_VOID;
-        JSObject *obj;
-        JSObjectOps *ops;
-        JSClass *clasp;
-
-        CHECK_REQUEST(cx);
-        if (JSVAL_IS_VOID(v)) {  // (1)
-            type = JSTYPE_VOID;
-        } else if (JSVAL_IS_OBJECT(v)) {  // (2)
-            obj = JSVAL_TO_OBJECT(v);
-            if (obj &amp;&amp;
-                (ops = obj-&gt;map-&gt;ops,
-                 ops == &amp;js_ObjectOps
-                 ? (clasp = OBJ_GET_CLASS(cx, obj),
-                    clasp-&gt;call || clasp == &amp;js_FunctionClass) // (3,4)
-                 : ops-&gt;call != 0)) {  // (3)
-                type = JSTYPE_FUNCTION;
-            } else {
-                type = JSTYPE_OBJECT;
-            }
-        } else if (JSVAL_IS_NUMBER(v)) {
-            type = JSTYPE_NUMBER;
-        } else if (JSVAL_IS_STRING(v)) {
-            type = JSTYPE_STRING;
-        } else if (JSVAL_IS_BOOLEAN(v)) {
-            type = JSTYPE_BOOLEAN;
-        }
-        return type;
-    }
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">JS_PUBLIC_API(JSType)</span><br><span class="line">   JS_TypeOfValue(JSContext *cx, jsval v)</span><br><span class="line">   &#123;</span><br><span class="line">       JSType type = JSTYPE_VOID;</span><br><span class="line">       JSObject *obj;</span><br><span class="line">       JSObjectOps *ops;</span><br><span class="line">       JSClass *clasp;</span><br><span class="line"></span><br><span class="line">       CHECK_REQUEST(cx);</span><br><span class="line">       <span class="keyword">if</span> (JSVAL_IS_VOID(v)) &#123;  <span class="comment">// (1)</span></span><br><span class="line">           type = JSTYPE_VOID;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_OBJECT(v)) &#123;  <span class="comment">// (2)</span></span><br><span class="line">           obj = JSVAL_TO_OBJECT(v);</span><br><span class="line">           <span class="keyword">if</span> (obj &amp;&amp;</span><br><span class="line">               (ops = obj-&gt;<span class="built_in">map</span>-&gt;ops,</span><br><span class="line">                ops == &amp;js_ObjectOps</span><br><span class="line">                ? (clasp = OBJ_GET_CLASS(cx, obj),</span><br><span class="line">                   clasp-&gt;call || clasp == &amp;js_FunctionClass) <span class="comment">// (3,4)</span></span><br><span class="line">                : ops-&gt;call != <span class="number">0</span>)) &#123;  <span class="comment">// (3)</span></span><br><span class="line">               type = JSTYPE_FUNCTION;</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               type = JSTYPE_OBJECT;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_NUMBER(v)) &#123;</span><br><span class="line">           type = JSTYPE_NUMBER;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_STRING(v)) &#123;</span><br><span class="line">           type = JSTYPE_STRING;</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (JSVAL_IS_BOOLEAN(v)) &#123;</span><br><span class="line">           type = JSTYPE_BOOLEAN;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> type;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>上述代码执行的步骤如下：  </p>
 <ul>
 <li>（1）引擎首先检测值是否是<code>undefined</code>(VOID)，它通过<code>==</code>做了这样的比较：  </li>
 </ul>
-<pre><code class="c">#define JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>下一个（2）是检测该值是否具有<code>object type</code>。如果它可使用<code>call</code>被调用（3）或其存在内部属性<code>[[Class]]</code>标记为函数（4），则v是函数。 否则，它是一个对象。 这是由<code>typeof null</code>生成的结果。  </p>
 </li>
 <li><p>后续检查是针对<code>number</code>，<code>string</code>和<code>boolean</code>，甚至没有明确检查<code>null</code>。这可以由以下C语言宏执行。  </p>
 </li>
 </ul>
-<pre><code class="c">#define JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`  
-</code></pre>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`</span></span><br></pre></td></tr></table></figure>
 <p>这看似是一个非常明显的bug，但不要忘记，第一个版本的JavaScript完成只用了极少的时间，具体可以看看<a href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html" target="_blank" rel="noopener">JavaScript的诞生</a>。   </p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
@@ -311,7 +277,7 @@
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

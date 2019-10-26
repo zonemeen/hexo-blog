@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>JavaScript系列之作用域和作用域链 ~ 米淇淋の个人博客</title>
+  <title>JavaScript系列之作用域和作用域链 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -135,14 +135,7 @@
 <p>本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——<strong>作用域链</strong>。</p>
 <h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？</p>
 <p>作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</p>
-<pre><code class="javascript">function fn() {
-    var inVariable = &quot;inner variable&quot;;
-    console.log(inVariable); // inner variable
-}
-
-fn(); 
-console.log(inVariable); // Uncaught ReferenceError: inVariable is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> inVariable = <span class="string">"inner variable"</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(inVariable); <span class="comment">// inner variable</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn(); </span><br><span class="line"><span class="built_in">console</span>.log(inVariable); <span class="comment">// Uncaught ReferenceError: inVariable is not defined</span></span><br></pre></td></tr></table></figure>
 <p>从上面的代码中我们可以很直观地体会作用域的概念，变量<code>inVariable</code>在全局作用域没有声明，所以在全局作用域下直接取值会报错。所以我们可以这样理解：<strong>作用域就像一个地头蛇，我的地盘我做主，让属于自己域内的变量不会轻易外泄出去</strong>。也就是说<strong>作用域最大的用处就是隔离变量，不同作用域下同名变量不会有冲突</strong>。这几句话总比前面那句好理解多了吧。</p>
 <p>关于JavaScript 中的作用域类型，<strong>ES6 之前 JavaScript 并没有块级作用域，只有全局作用域和函数作用域</strong>。ES6的到来，为我们提供了‘块级作用域’,可通过新增命令let和const来体现：</p>
 <ul>
@@ -150,59 +143,15 @@ console.log(inVariable); // Uncaught ReferenceError: inVariable is not defined
 <li>函数作用域— 变量可以在定义它们的函数的边界内访问</li>
 <li>块级作用域—变量可以在定义它们的块中访问，块由 { 和 } 分隔</li>
 </ul>
-<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><pre><code class="javascript">const global = &#39;global scoped&#39;
-
-function fn() {
-    const global = &#39;function scoped&#39;;
-    console.log(global); // function scoped
-}
-
-fn();
-console.log(global); // global scoped
-</code></pre>
+<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> global = <span class="string">'global scoped'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> global = <span class="string">'function scoped'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(global); <span class="comment">// function scoped</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(global); <span class="comment">// global scoped</span></span><br></pre></td></tr></table></figure>
 <p>从上面例子可以看出全局作用域和函数作用域的作用范围，即使全局变量在函数内部分配了不同的值，它也只保留在同一函数的边界内，互相并不影响，我们也不会因使用相同的变量名而出错。再来看个例子加深理解：</p>
-<pre><code class="javascript">const global = &#39;global scoped&#39;
-const anotherGlobal = &#39;also global scoped&#39;
-
-function fn() {
-    const global = &#39;function scoped&#39;
-    console.log(global) // function scoped
-    const scoped = &#39;also function scoped&#39;
-
-    function inner() {
-        console.log(scoped); // also function scoped
-        console.log(anotherGlobal) // also global scoped
-    }
-
-    inner();
-}
-
-console.log(global); // global scoped
-console.log(anotherGlobal); // also global scoped
-
-fn();
-inner(); // Uncaught ReferenceError: inner is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> global = <span class="string">'global scoped'</span></span><br><span class="line"><span class="keyword">const</span> anotherGlobal = <span class="string">'also global scoped'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> global = <span class="string">'function scoped'</span></span><br><span class="line">    <span class="built_in">console</span>.log(global) <span class="comment">// function scoped</span></span><br><span class="line">    <span class="keyword">const</span> scoped = <span class="string">'also function scoped'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">inner</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(scoped); <span class="comment">// also function scoped</span></span><br><span class="line">        <span class="built_in">console</span>.log(anotherGlobal) <span class="comment">// also global scoped</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    inner();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(global); <span class="comment">// global scoped</span></span><br><span class="line"><span class="built_in">console</span>.log(anotherGlobal); <span class="comment">// also global scoped</span></span><br><span class="line"></span><br><span class="line">fn();</span><br><span class="line">inner(); <span class="comment">// Uncaught ReferenceError: inner is not defined</span></span><br></pre></td></tr></table></figure>
 <p>在这里我们可以看到 <code>inner()</code> 函数可以访问在其父函数中声明的变量—<code>fn()</code>。每当我们需要函数内部的变量时，引擎将首先在当前函数作用域内查找它。如果它没有当前函数作用域内找到它，它将继续上升，向上一级查找，直到它找到全局作用域内的变量，如果找不到变量，我们将得到一个ReferenceError。格外注意<strong>函数内层作用域可以访问外层作用域的变量，反之则不行</strong>。</p>
 <p>除了上面所讲的最外层函数外面定义的变量拥有全局作用域，全局作用域还有一种特殊的出现场合：就是<strong>所有末声明直接赋值的变量将自动声明为拥有全局作用域的变量</strong>：</p>
-<pre><code class="javascript">function fn() {
-    variable = &quot;undeclared variable&quot;;
-    var inVariable = &quot;inner variable&quot;;
-}
-
-fn();
-console.log(variable); // undeclared variable
-console.log(inVariable); // Uncaught ReferenceError: inVariable is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    variable = <span class="string">"undeclared variable"</span>;</span><br><span class="line">    <span class="keyword">var</span> inVariable = <span class="string">"inner variable"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(variable); <span class="comment">// undeclared variable</span></span><br><span class="line"><span class="built_in">console</span>.log(inVariable); <span class="comment">// Uncaught ReferenceError: inVariable is not defined</span></span><br></pre></td></tr></table></figure>
 <p>全局作用域有个弊端：如果我们写了很多行 JavaScript 代码，变量定义都没有用函数包括，那么它们就全部都在全局作用域中，这样就会污染全局命名空间，容易引起命名冲突。同时意外的全局变量还会引起内存泄漏，所以在编程时，尽量避免全局变量的使用，以便后期更快地调试。</p>
 <p>还有值得注意的是：<strong>块语句（大括号“｛｝”中间的语句），如 <code>if</code> 和 <code>switch</code> 条件语句或 <code>for</code> 和 <code>while</code> 循环语句，不像函数，它们不会创建一个新的作用域</strong>。在块语句中定义的变量将保留在它们已经存在的作用域中。比如：</p>
-<pre><code class="javascript">if (true) {
-    // &#39;if&#39; 条件语句块不会创建一个新的作用域
-    var name = &#39;miqilin&#39;; // name 依然在全局作用域中
-}
-
-console.log(name); // miqilin
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// 'if' 条件语句块不会创建一个新的作用域</span></span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">'miqilin'</span>; <span class="comment">// name 依然在全局作用域中</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(name); <span class="comment">// miqilin</span></span><br></pre></td></tr></table></figure>
 <p>JS 的初学者经常需要花点时间才能习惯变量提升，而如果不理解这种特有行为，就可能导致bug出现 。正因为如此， ES6 引入了块级作用域，让变量的生命周期更加可控。</p>
 <h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>在ES6中，我们得到了两个新的变量声明关键字 - <code>let</code>和<code>const</code>。它们和<code>var</code>之间的主要区别在于，使用ES6关键字声明的变量是块作用域，这意味着它们仅在它们定义的代码块中可用。块级作用域在如下情况被创建：</p>
 <ol>
@@ -214,115 +163,40 @@ console.log(name); // miqilin
 <li><strong>声明变量不会提升到代码块顶部</strong></li>
 </ul>
 <p><code>let</code>/<code>const</code>创建的变量不会像使用<code>var</code>声明的变量那样被提升到顶部，因此你需要手动将 <code>let</code>/<code>const</code> 声明放置到顶部，以便让变量在整个代码块内部可用。比如：</p>
-<pre><code class="javascript">cosole.log(name); // Uncaught ReferenceError: cosole is not defined
-const name = &quot;miqilin&quot;;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cosole.log(name); <span class="comment">// Uncaught ReferenceError: cosole is not defined</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">"miqilin"</span>;</span><br></pre></td></tr></table></figure>
 <p>所以确保代码没有引用错误的一种方法是确保只使用<code>let</code>和<code>const</code>进行变量声明。</p>
 <ul>
 <li><strong>禁止重复声明</strong></li>
 </ul>
 <p>如果一个标识符已经在代码块内部被定义，那么在此代码块内使用同一个标识符再进行 <code>let</code> 声明就会抛出错误。比如：</p>
-<pre><code class="javascript">var count = 10;
-let count = 20; // Uncaught SyntaxError: Identifier &#39;count&#39; has already been declared
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> count = <span class="number">20</span>; <span class="comment">// Uncaught SyntaxError: Identifier 'count' has already been declared</span></span><br></pre></td></tr></table></figure>
 <p>上面例子中<code>count</code> 变量被前后声明了两次：第一次使用 <code>var</code> ，另一次使用 <code>let</code> 。因为 <code>let</code> 不能在同一作用域内重复声明一个已有标识符，此处的 <code>let</code> 声明就会抛出错误。但如果在嵌套的作用域内使用 <code>let</code> 声明一个同名的新变量，则不会抛出错误：</p>
-<pre><code class="javascript">var count = 10;
-// 不会抛出错误
-if (condition) {
-let count = 20;
-// 其他代码
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = <span class="number">10</span>;</span><br><span class="line"><span class="comment">// 不会抛出错误</span></span><br><span class="line"><span class="keyword">if</span> (condition) &#123;</span><br><span class="line"><span class="keyword">let</span> count = <span class="number">20</span>;</span><br><span class="line"><span class="comment">// 其他代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>循环中的绑定块作用域的妙用</strong></li>
 </ul>
 <p>开发者可能最希望实现<code>for</code>循环的块级作用域了，因为可以把声明的计数器变量限制在循环内，比如：</p>
-<pre><code class="javascript">for (let i = 0; i &lt; 10; i++) {
-  // ...
-}
-console.log(i);
-// ReferenceError: i is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i);</span><br><span class="line"><span class="comment">// ReferenceError: i is not defined</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，因为用<code>let</code>声明计数器<code>i</code>，只在<code>for</code>循环体内有效，所以在循环体外引用就会报错。</p>
-<pre><code class="javascript">var a = [];
-for (var i = 0; i &lt; 10; i++) {
-  a[i] = function () {
-    console.log(i);
-  };
-}
-a[6](); // 10
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>](); <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，变量<code>i</code>是<code>var</code>命令声明的，在全局范围内都有效，所以全局只有一个变量<code>i</code>。每一次循环，变量<code>i</code>的值都会发生改变，而循环内被赋给数组<code>a</code>的函数内部的<code>console.log(i)</code>，里面的<code>i</code>指向的就是全局的<code>i</code>。也就是说，所有数组<code>a</code>的成员里面的<code>i</code>，指向的都是同一个<code>i</code>，导致运行时输出的是最后一轮的<code>i</code>的值，也就是 10。</p>
 <p>如果换使用let，声明的变量仅在块级作用域内有效，最后输出的是 6。</p>
-<pre><code class="javascript">var a = [];
-for (let i = 0; i &lt; 10; i++) {
-  a[i] = function () {
-    console.log(i);
-  };
-}
-a[6](); // 6
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>](); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，变量<code>i</code>是<code>let</code>声明的，当前的<code>i</code>只在本轮循环有效，所以每一次循环的<code>i</code>其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量i都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量i时，就在上一轮循环的基础上进行计算。</p>
 <p>另外，<code>for</code>循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
-<pre><code class="javascript">for (let i = 0; i &lt; 5; i++) {
-  let i = &#39;abc&#39;;
-  console.log(i);
-}
-// abc
-// abc
-// abc
-// abc
-// abc
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="string">'abc'</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(i);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br><span class="line"><span class="comment">// abc</span></span><br></pre></td></tr></table></figure>
 <p>上面代码正确运行，输出了 5 次abc。这表明函数内部的变量i与循环变量i不在同一个作用域，有各自单独的作用域。</p>
 <h3 id="作用域链-Scope-Chain"><a href="#作用域链-Scope-Chain" class="headerlink" title="作用域链(Scope Chain)"></a>作用域链(Scope Chain)</h3><p>上面用一大篇幅来讲解作用域，其实在里面就有涉及到作用域链的知识了。简单的来说，当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。看下面一个例子：</p>
-<pre><code class="javascript">function a() {
-
-    function b() {
-        console.log(myVar);
-    }
-
-    var myVar = 2;
-    b();
-}
-
-var myVar = 1;
-a(); // 2
-b(); // Uncaught ReferenceError: b is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(myVar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> myVar = <span class="number">2</span>;</span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myVar = <span class="number">1</span>;</span><br><span class="line">a(); <span class="comment">// 2</span></span><br><span class="line">b(); <span class="comment">// Uncaught ReferenceError: b is not defined</span></span><br></pre></td></tr></table></figure>
 <p>最后加以执行<code>a()</code>和<code>b()</code>，这时候我们会发现两件事：</p>
 <p>1.执行<code>a()</code>会得到2的结果：之所以会有这样的结果，是因为当我们执行<code>function a</code>里面的<code>function b</code>时，因为在<code>function b</code>里面它找不到<code>myVar</code>这个变量，因此它开始往它的外层去搜寻，而这时候它的父级作用域是<code>function a</code>，在<code>function a</code>里面它便找到了<code>myVar = 2</code>，因此它就不再往外部环境 (<code>myVar = 1</code>)去找了，直接返回了2这样的结果。</p>
 <p>2.<code>b()</code>会得到<code>b is not defined</code>的结果：之所以<code>b</code>会是<code>not defined</code>（记得是<code>not defined</code>不是<code>undefined</code>哦！)，是因为这时候在最外层的全局上下文（<code>global execution context</code>）中，找不到<code>function b</code>。</p>
 <p>而从<code>b() --&gt; a() --&gt; global execution context</code>这样的链，就称为<strong>作用域链（Scope Chain）</strong>：</p>
 <p><img src="/images/scopechain/2.jpg" srcset="/img/loading.gif" alt></p>
 <p>如果我们把<code>function a</code>里面对于<code>myVar</code>的声明拿掉的话，它才会继续往外层搜寻<code>myVar</code>，直到找到全局作用域中的声明<code>myVar = 1</code>，这时候才会返回1的结果。</p>
-<pre><code class="javascript">function a() {
-
-    function b() {
-        console.log(myVar);
-    }
-
-    //var myVar = 2;
-    b();
-}
-
-var myVar = 1;
-a(); // 1
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(myVar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//var myVar = 2;</span></span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myVar = <span class="number">1</span>;</span><br><span class="line">a(); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
 <p>如果我们更进一步的把全局作用域中，对于<code>myVar</code>的声明也拿掉，那么现在在全局作用域中也找不到<code>myVar</code>这个变量了，也就是说，在这整个作用域链中都找不到<code>myVar</code>，因此可想而知，最后的结果是<code>not defined</code>。</p>
-<pre><code class="javascript">function a() {
-
-    function b() {
-        console.log(myVar);
-    }
-
-    //var myVar = 2;
-    b();
-}
-
-//var myVar = 1;
-a(); // Uncaught ReferenceError: myVar is not defined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">b</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(myVar);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//var myVar = 2;</span></span><br><span class="line">    b();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//var myVar = 1;</span></span><br><span class="line">a(); <span class="comment">// Uncaught ReferenceError: myVar is not defined</span></span><br></pre></td></tr></table></figure>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
             <hr>
@@ -441,7 +315,7 @@ a(); // Uncaught ReferenceError: myVar is not defined
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>JavaScript事件三部曲之事件机制的原理 ~ 米淇淋の个人博客</title>
+  <title>JavaScript事件三部曲之事件机制的原理 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -138,35 +138,21 @@
 <p>看完上面的例子，想必大家对事件有了一定的理解了吧，接下来就深入来探讨DOM事件。</p>
 <h3 id="DOM事件级别"><a href="#DOM事件级别" class="headerlink" title="DOM事件级别"></a>DOM事件级别</h3><p>DOM有4次版本更新，与DOM版本变更，产生了3种不同的DOM事件：<strong>DOM 0级事件处理，DOM 2级事件处理和DOM 3级事件处理</strong>。由于DOM 1级中没有事件的相关内容，所以没有DOM 1级事件。</p>
 <h4 id="DOM-0级事件"><a href="#DOM-0级事件" class="headerlink" title="DOM 0级事件"></a>DOM 0级事件</h4><p>1.on-event (HTML 属性)：</p>
-<pre><code class="html">&lt;input onclick=&quot;alert(&#39;xxx&#39;)&quot;/&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">onclick</span>=<span class="string">"alert('xxx')"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 <p>需要注意的是，基于代码的使用性与维护性考量，现在已经不建议用此方式来绑定事件。</p>
 <p>on-event (非HTML 属性)：</p>
 <p>像是<code>window</code>或<code>document</code>此类没有实体元素的情况：</p>
-<pre><code class="javascript">window.onload = function(){
-  document.write(&quot;Hello world!&quot;);
-};
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">document</span>.write(<span class="string">"Hello world!"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>若是实体元素：</p>
-<pre><code class="html">// HTML
-&lt;button id=&quot;btn&quot;&gt;Click&lt;/button&gt;
-
-// JavaScript
-var btn = document.getElementById(&#39;btn&#39;);
- btn.onclick = function(){
-     alert(&#39;xxx&#39;);
- }
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// JavaScript</span><br><span class="line">var btn = document.getElementById('btn');</span><br><span class="line"> btn.onclick = function()&#123;</span><br><span class="line">     alert('xxx');</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>若想解除事件的话，则重新指定<code>on-event</code>为<code>null</code>即可：</p>
-<pre><code class="javascript"> btn.onclick = null
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.onclick = <span class="literal">null</span></span><br></pre></td></tr></table></figure>
 <p>2.同一个元素的同一种事件只能绑定一个函数，否则后面的函数会覆盖之前的函数</p>
 <p>3.不存在兼容性问题</p>
 <h4 id="DOM-2级事件"><a href="#DOM-2级事件" class="headerlink" title="DOM 2级事件"></a>DOM 2级事件</h4><p>1.Dom 2级事件是通过 <code>addEventListener</code> 绑定的事件</p>
 <p>2.同一个元素的同种事件可以绑定多个函数，按照绑定顺序执行</p>
 <p>3.解绑Dom 2级事件时，使用 <code>removeEventListener</code></p>
-<pre><code class="javascript">btn.removeEventListener( &quot;click&quot; ,a)
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">btn.removeEventListener( <span class="string">"click"</span> ,a)</span><br></pre></td></tr></table></figure>
 <p>Dom 2级事件有三个参数：第一个参数是事件名（如<code>click</code>）；第二个参数是事件处理程序函数；第三个参数如果是<code>true</code>的话表示在捕获阶段调用，为<code>false</code>的话表示在冒泡阶段调用。捕获阶段和冒泡阶段在下一节具体介绍。</p>
 <p>还有注意<code>removeEventListener()</code>:不能移除匿名添加的函数。</p>
 <h4 id="DOM-3级事件"><a href="#DOM-3级事件" class="headerlink" title="DOM 3级事件"></a>DOM 3级事件</h4><p>DOM3级事件在DOM2级事件的基础上添加了更多的事件类型，增加的类型如下：</p>
@@ -196,17 +182,7 @@ var btn = document.getElementById(&#39;btn&#39;);
 <h4 id="事件捕获-Event-Capturing"><a href="#事件捕获-Event-Capturing" class="headerlink" title="事件捕获(Event Capturing)"></a>事件捕获(Event Capturing)</h4><p><img src="/images/event/2.jpg" srcset="/img/loading.gif" alt></p>
 <p>事件捕获指的是「从启动事件的元素节点开始，逐层往下传递」，直到最下层节点，也就是<code>div</code>。</p>
 <p>假设HTML 如下：</p>
-<pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;米淇淋是个大帅哥&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-  &lt;div&gt;点我&lt;/div&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>米淇淋是个大帅哥<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>假设我们点击(click)了<code>&lt;div&gt;点我&lt;/div&gt;</code>元素，那么在「事件捕获」的机制下，触发事件的顺序会是：</p>
 <ol>
 <li><code>document</code></li>
@@ -218,17 +194,7 @@ var btn = document.getElementById(&#39;btn&#39;);
 <h4 id="事件冒泡-Event-Bubbling"><a href="#事件冒泡-Event-Bubbling" class="headerlink" title="事件冒泡(Event Bubbling)"></a>事件冒泡(Event Bubbling)</h4><p><img src="/images/event/3.jpg" srcset="/img/loading.gif" alt></p>
 <p>刚刚说过「事件捕获」机制是由上往下来传递，那么「事件冒泡」(Event Bubbling) 机制则正好相反。</p>
 <p>假设HTML 同样如下：</p>
-<pre><code class="html">&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;米淇淋是个大帅哥&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-  &lt;div&gt;点我&lt;/div&gt;
-
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>米淇淋是个大帅哥<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>假设我们点击(click)了<code>&lt;div&gt;点我&lt;/div&gt;</code>元素，那么在「事件冒泡」的机制下，触发事件的顺序会是：</p>
 <ol>
 <li><code>&lt;div&gt;点我&lt;/div&gt;</code></li>
@@ -255,130 +221,38 @@ var btn = document.getElementById(&#39;btn&#39;);
 <p>然后到达「Target phase」后再继续执行绿色的「bubble phase」，反方向由<code>&lt;td&gt;</code>一路往上传至<code>Document</code>，整个事件流到此结束。</p>
 <p>要检验事件流，我们可以通过<code>addEventListener()</code>方法来绑定<code>click</code>事件：</p>
 <p>假设HTML 如下：</p>
-<pre><code class="html">&lt;div&gt;
-  &lt;div id=&quot;parent&quot;&gt;
-    父元素
-    &lt;div id=&quot;child&quot;&gt;子元素&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"parent"</span>&gt;</span></span><br><span class="line">    父元素</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"child"</span>&gt;</span>子元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>JavaScript 代码如下：</p>
-<pre><code class="javascript">var parent = document.getElementById(&#39;parent&#39;);
-var child = document.getElementById(&#39;child&#39;);
-
-// 通过 addEventListener 指定事件的绑定
-// 第三个参数 true / false 分別代表 捕获/ 冒泡 机制
-
-parent.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Parent Capturing&#39;);
-}, true);
-
-parent.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Parent Bubbling&#39;);
-}, false);
-
-child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Capturing&#39;);
-}, true);
-
-child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Bubbling&#39;);
-}, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parent = <span class="built_in">document</span>.getElementById(<span class="string">'parent'</span>);</span><br><span class="line"><span class="keyword">var</span> child = <span class="built_in">document</span>.getElementById(<span class="string">'child'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过 addEventListener 指定事件的绑定</span></span><br><span class="line"><span class="comment">// 第三个参数 true / false 分別代表 捕获/ 冒泡 机制</span></span><br><span class="line"></span><br><span class="line">parent.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Parent Capturing'</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">parent.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Parent Bubbling'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Capturing'</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Bubbling'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>当我点击的是「子元素」的时候，通过<code>console.log</code>可以观察到事件触发的顺序为：</p>
-<pre><code class="javascript">&quot;Parent Capturing&quot;
-&quot;Child Capturing&quot;
-&quot;Child Bubbling&quot;
-&quot;Parent Bubbling&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Parent Capturing"</span></span><br><span class="line"><span class="string">"Child Capturing"</span></span><br><span class="line"><span class="string">"Child Bubbling"</span></span><br><span class="line"><span class="string">"Parent Bubbling"</span></span><br></pre></td></tr></table></figure>
 <p>而如果直接点击「父元素」，则出现：</p>
-<pre><code class="javascript">&quot;Parent Capturing&quot;
-&quot;Parent Bubbling&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Parent Capturing"</span></span><br><span class="line"><span class="string">"Parent Bubbling"</span></span><br></pre></td></tr></table></figure>
 <p>由此可知，点击子元素的时候，父层的<code>Capturing</code>会先被触发，然后再到子层内部的<code>Capturing</code>或<code>Bubbling</code>事件。最后才又回到父层的<code>Bubbling</code>结束。点击父元素的时候，不会经过子元素，子层的<code>Capturing</code>和<code>Bubbling</code>都不会触发。</p>
 <p>那么，子层中的<code>Capturing</code>或<code>Bubbling</code>谁先谁后呢？要看你代码的顺序而定：</p>
 <p>若是<code>Capturing</code>在<code>Bubbling</code>前面：</p>
-<pre><code class="javascript">child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Capturing&#39;);
-}, true);
-
-child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Bubbling&#39;);
-}, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Capturing'</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Bubbling'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>则会得到：</p>
-<pre><code class="javascript">&quot;Child Capturing&quot;
-&quot;Child Bubbling&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Child Capturing"</span></span><br><span class="line"><span class="string">"Child Bubbling"</span></span><br></pre></td></tr></table></figure>
 <p>若是将两段代码段顺序反过来的话，就会是这样了：</p>
-<pre><code class="javascript">child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Bubbling&#39;);
-}, false);
-
-child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;Child Capturing&#39;);
-}, true);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Bubbling'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">child.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Child Capturing'</span>);</span><br><span class="line">&#125;, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
 <p>则会得到：</p>
-<pre><code class="javascript">&quot;Child Bubbling&quot;
-&quot;Child Capturing&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"Child Bubbling"</span></span><br><span class="line"><span class="string">"Child Capturing"</span></span><br></pre></td></tr></table></figure>
 <h3 id="事件监听-EventTarget-addEventListener"><a href="#事件监听-EventTarget-addEventListener" class="headerlink" title="事件监听 EventTarget.addEventListener()"></a>事件监听 EventTarget.addEventListener()</h3><p><code>addEventListener()</code>基本上有三个参数，分别是「事件名称」、「事件的处理程序」(事件触发时执行的<code>function</code>)，以及一个「Boolean」值，由这个Boolean决定事件是以「捕获」还是「冒泡」机制执行，若不指定则预设为「冒泡」。</p>
-<pre><code class="html">// HTML
-&lt;button id=&quot;btn&quot;&gt;Click&lt;/button&gt;
-
-// JavaScript
-var btn = document.getElementById(&#39;btn&#39;);
-
-btn.addEventListener(&#39;click&#39;, function(){
-  console.log(&#39;HI&#39;);
-}, false);
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// HTML</span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">"btn"</span>&gt;</span>Click<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// JavaScript</span><br><span class="line">var btn = document.getElementById('btn');</span><br><span class="line"></span><br><span class="line">btn.addEventListener('click', function()&#123;</span><br><span class="line">  console.log('HI');</span><br><span class="line">&#125;, false);</span><br></pre></td></tr></table></figure>
 <p>使用这种方式来注册事件的好处是：同一个元素的同种事件可以绑定多个函数，按照绑定顺序执行。</p>
-<pre><code class="javascript">var btn = document.getElementById(&#39;btn&#39;);
-
-btn.addEventListener(&#39;click&#39;, function(){
-  console.log(&#39;HI&#39;);
-}, false);
-
-btn.addEventListener(&#39;click&#39;, function(){
-  console.log(&#39;HELLO&#39;);
-}, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'HI'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'HELLO'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>点击后<code>console</code>出现：</p>
-<pre><code class="javascript">&quot;HI&quot;
-&quot;HELLO&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"HI"</span></span><br><span class="line"><span class="string">"HELLO"</span></span><br></pre></td></tr></table></figure>
 <p>若要解除事件的监听，则是通过<code>removeEventListener()</code>来取消。</p>
 <p><code>removeEventListener()</code>的三个参数与<code>addEventListener()</code>一样，分别是「事件名称」、「事件的处理程序」以及代表「捕获」或「冒泡」机制的「Boolean」值。</p>
 <p>但是需要注意的是，由于<code>addEventListener()</code>可以同时针对某个事件绑定多个函数，所以通过<code>removeEventListener()</code>解除事件的时候，第二个参数的函数必须要与先前在<code>addEventListener()</code>绑定的函数是同一个「实体」。</p>
 <p>比如：</p>
-<pre><code class="javascript">var btn = document.getElementById(&#39;btn&#39;);
-
-btn.addEventListener(&#39;click&#39;, function(){
-  console.log(&#39;HI&#39;);
-}, false);
-
-// 移除事件，但是没用
-btn.removeEventListener(&#39;click&#39;, function(){
-  console.log(&#39;HI&#39;);
-}, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'HI'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除事件，但是没用</span></span><br><span class="line">btn.removeEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'HI'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>像上面这样，即使执行了<code>removeEventListener</code>来移除事件，但<code>click</code>时仍会出现’HI’。因为<code>addEventListener</code>与<code>removeEventListener</code>所移除的函数实际上是两个不同实体的function对象。</p>
 <p>不知道为什么这两个function是两个不同实体的朋友请参考：<a href="https://zhuanlan.zhihu.com/p/63114665" target="_blank" rel="noopener">《JavaScript系列之内存空间》</a>。简单理解就是两个function指向不同的内存地址，代表来自于不同实体。</p>
 <p>稍加改进后就能如愿移除了：</p>
-<pre><code class="javascript">var btn = document.getElementById(&#39;btn&#39;);
-
-// 把 event 函数程序拉出來
-var clickHandler = function(){
-  console.log(&#39;HI&#39;);
-};
-
-btn.addEventListener(&#39;click&#39;, clickHandler, false);
-
-// 移除 clickHandler， ok!
-btn.removeEventListener(&#39;click&#39;, clickHandler, false);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">'btn'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 把 event 函数程序拉出來</span></span><br><span class="line"><span class="keyword">var</span> clickHandler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'HI'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">btn.addEventListener(<span class="string">'click'</span>, clickHandler, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除 clickHandler， ok!</span></span><br><span class="line">btn.removeEventListener(<span class="string">'click'</span>, clickHandler, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 <p>那么以上就是今天为各位介绍JavaScript事件机制原理的部分。</p>
 <p>接下来的文章我会继续来介绍事件的种类，以及更多实际上处理「事件」时需要注意的事项。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
@@ -499,7 +373,7 @@ btn.removeEventListener(&#39;click&#39;, clickHandler, false);
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

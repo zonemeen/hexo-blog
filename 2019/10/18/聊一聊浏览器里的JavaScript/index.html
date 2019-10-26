@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>谈谈浏览器里的JavaScript ~ 米淇淋の个人博客</title>
+  <title>谈谈浏览器里的JavaScript ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -162,30 +162,17 @@
 <li>JavaScript 用来与浏览器沟通的窗口</li>
 </ul>
 <p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过window.xxx的方式取得它们。比如：  </p>
-<pre><code class="javascript">var a = 10; 
-console.log( window.a );    // 10
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
 <p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除： </p>
-<pre><code class="javascript">var a = 10; 
-console.log( window.a );    // 10
-
-console.log(delete window.a);     // false
-console.log( window.a );    // 10
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);     <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br></pre></td></tr></table></figure>
 <p>但若是直接通过指定<code>window</code>对象的属性则可以：  </p>
-<pre><code class="javascript">window.a = 10; 
-console.log( window.a );    // 10
-
-console.log(delete window.a);        // true
-console.log( window.a );    // undefined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.a = <span class="number">10</span>; </span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">delete</span> <span class="built_in">window</span>.a);        <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log( <span class="built_in">window</span>.a );    <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 <p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？  </p>
 <h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：  </p>
 <p><img src="/images/dom/4.jpg" srcset="/img/loading.gif" alt>   </p>
 <p>(alert on Chrome)</p>
 <p>我想不管是不是刚接触JavaScript的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：  </p>
-<pre><code class="javascript">window.alert(&quot;message&quot;);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.alert(<span class="string">"message"</span>);</span><br></pre></td></tr></table></figure>
 <p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。  </p>
 <p>一行代码就可以生成一个对话框，很神奇吧？  </p>
 <p>而这就是浏览器环境的BOM提供给JavaScript控制的功能之一。  </p>
@@ -193,16 +180,7 @@ console.log( window.a );    // undefined
 <p>当然BOM 提供的API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。  </p>
 <h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将HTML文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为DOM Tree。 </p>
 <p>简单来说，我们把HTML每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的HTML如下：</p>
-<pre><code class="javascript">&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;米淇淋的个人博客&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;h1&gt;这是主题&lt;/h1&gt;
-        &lt;p&gt;这是一个&lt;i&gt;简单&lt;/i&gt;的段落&lt;/p&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;html&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;title&gt;米淇淋的个人博客&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">        &lt;h1&gt;这是主题&lt;<span class="regexp">/h1&gt;</span></span><br><span class="line"><span class="regexp">        &lt;p&gt;这是一个&lt;i&gt;简单&lt;/i</span>&gt;的段落&lt;<span class="regexp">/p&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>body&gt;</span><br><span class="line">&lt;<span class="regexp">/html&gt;</span></span><br></pre></td></tr></table></figure>
 <p><img src="/images/domapi-5.jpg" srcset="/img/loading.gif" alt>  </p>
 <p>在最根部的地方，就是<code>document</code>，就是BOM图中<code>window</code>下面的那个。</p>
 <p>往下可以延伸出一个个的HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
@@ -216,28 +194,12 @@ console.log( window.a );    // undefined
 </ul>
 <p>BOM完全依赖于浏览器厂商实作本身无标准规范，而DOM有着W3C 所制定的标准来规范。</p>
 <p>想要通过DOM API 取得节点，JavaScript 可以这样写： </p>
-<pre><code class="javascript">// 根据传入的值，找到 DOM 中 id 为 &#39;xxx&#39; 的元素。
-document.getElementById(&#39;xxx&#39;);
-
-// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)
-document.getElementsByTagName(&#39;xxx&#39;);
-
-// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。
-document.getElementsByClassName(&#39;xxx&#39;);
-
-// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。
-document.querySelector(&#39;xxx&#39;); 
-document.querySelectorAll(&#39;xxx&#39;);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 根据传入的值，找到 DOM 中 id 为 'xxx' 的元素。</span></span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByTagName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span></span><br><span class="line"><span class="built_in">document</span>.getElementsByClassName(<span class="string">'xxx'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'xxx'</span>); </span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'xxx'</span>);</span><br></pre></td></tr></table></figure>
 <p>而透过DOM API选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
 <p>假设有一个HTML 节点：</p>
-<pre><code class="html">&lt;h1 id=&quot;greet&quot;&gt;&lt;/h1&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"greet"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
-<pre><code class="html">&lt;script&gt;
-    document.querySelector(&#39;#greet&#39;).textContent = &#39;Hello World!&#39;
-&lt;/script&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.querySelector(<span class="string">'#greet'</span>).textContent = <span class="string">'Hello World!'</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output" target="_blank" rel="noopener">JS Bin on jsbin.com</a></p>
 <p>看到这里，恭喜你已经可以通过JavaScript 在网页上输出”Hello World!” 啦！</p>
 <p>在后续的内容中，我们会继续来介绍各种操作网页的DOM/BOM API。</p>
@@ -360,7 +322,7 @@ document.querySelectorAll(&#39;xxx&#39;);
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>JavaScript系列之深入理解对象属性 ~ 米淇淋の个人博客</title>
+  <title>JavaScript系列之深入理解对象属性 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -144,58 +144,17 @@
 <p>但JavaScript 确实是一门面向对象的编程语言，只是它与其他语言很大不同的地方是，它的继承方法是通过”prototype” 来实现的。其余大多数的面向对象的编程语言（比如Java）是以「类」为基础的(<code>class-based</code>) ，但JavaScript 没有<code>class</code>、没有<code>extends</code> ，却可以通过「原型」(<code>prototype-based</code>) 来建立起对象之间的继承关系。</p>
 <p>PS：ES6虽然新增了<code>class</code>语法，但仍然属于<code>prototype-based</code>的继承。<code>class</code>实质上只是通过简洁的语法来建立对象和处理继承的语法糖。</p>
 <h3 id="JavaScript-自定义对象"><a href="#JavaScript-自定义对象" class="headerlink" title="JavaScript 自定义对象"></a>JavaScript 自定义对象</h3><p>先前曾介绍过，在JavaScript创建对象我们可以通过<code>new</code>关键字：</p>
-<pre><code class="javascript">var person = new Object();
-person.name = &#39;mike&#39;;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name = <span class="string">'mike'</span>;</span><br></pre></td></tr></table></figure>
 <p>或是直接用大括号<code>{ }</code>，即可创建起一个新的对象：</p>
-<pre><code class="javascript">var person = {
-  name: &#39;mike&#39;
-};
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'mike'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="理解JavaScript构造函数"><a href="#理解JavaScript构造函数" class="headerlink" title="理解JavaScript构造函数"></a>理解JavaScript构造函数</h3><p>虽然JavaScript没有<code>class</code>的语法，但如果你希望JavaScript也能像其他面向对象编程语言一样有类似<code>class</code>的语法时，可以怎么做呢？由于函数也是个对象，所以可以借用来当作「构造函数」来建立其他对象：</p>
-<pre><code class="javascript">function Person( name, age, gender ){
-  this.name = name;
-  this.age = age;
-  this.gender = gender;
-
-  this.greeting = function(){
-    console.log(&#39;Hello! My name is &#39; + this.name + &#39;.&#39;);
-  };
-}
-
-var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
-mike.greeting();      // &quot;Hello! My name is Mike.&quot;
-
-var jay = new Person( &#39;Jay&#39;, 18, &#39;male&#39;);
-jay.greeting();      // &quot;Hello! My name is Jay.&quot;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"> name, age, gender </span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">  <span class="keyword">this</span>.gender = gender;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">this</span>.greeting = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello! My name is '</span> + <span class="keyword">this</span>.name + <span class="string">'.'</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mike = <span class="keyword">new</span> Person( <span class="string">'Mike'</span>, <span class="number">28</span>, <span class="string">'male'</span>);</span><br><span class="line">mike.greeting();      <span class="comment">// "Hello! My name is Mike."</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jay = <span class="keyword">new</span> Person( <span class="string">'Jay'</span>, <span class="number">18</span>, <span class="string">'male'</span>);</span><br><span class="line">jay.greeting();      <span class="comment">// "Hello! My name is Jay."</span></span><br></pre></td></tr></table></figure>
 <p>像这样，我们建立了一个<code>Person</code>构造函数(Constructor) ，然后就可以通过<code>new</code>关键字来建立各种对应的对象。</p>
 <p>为什么JavaScript明明没有<code>class</code>却可以通过<code>new</code>一个函数来建立对象？这里简单拆解一下流程：</p>
-<pre><code class="javascript">function Person( name, age, gender ){
-  // 和上面一致，这里省略
-}
-
-var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
-
-/*
-===&gt; var mike = {};
-===&gt; Person.call(mike, &#39;Mike&#39;, 28, &#39;male&#39;);
-*/
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"> name, age, gender </span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 和上面一致，这里省略</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mike = <span class="keyword">new</span> Person( <span class="string">'Mike'</span>, <span class="number">28</span>, <span class="string">'male'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">===&gt; var mike = &#123;&#125;;</span></span><br><span class="line"><span class="comment">===&gt; Person.call(mike, 'Mike', 28, 'male');</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <p>通过<code>new Person(...)</code>这个动作，返回的对象会有<code>name</code>, <code>age</code>, <code>gender</code>以及<code>greeting</code>属性，而JavaScript会在背景执行<code>Person.call</code>方法，将<code>mike</code>作为<code>this</code>的参考对象，然后把这些属性通通新增到<code>mike</code>对象中。</p>
 <p>但是，即使是通过构造函数（Constructor）建立的对象，这个对象的属性仍然可以通过<code>.</code>来公开存取：</p>
-<pre><code class="javascript">function Person( name, age, gender ){
-  // 和上面一致，这里省略
-}
-
-var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
-console.log( mike.age );    // 32
-
-// 因为是公开属性，所以可以很无耻地开放修改
-mike.age = 18;
-
-console.log(mike.age );    // 18
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"> name, age, gender </span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 和上面一致，这里省略</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mike = <span class="keyword">new</span> Person( <span class="string">'Mike'</span>, <span class="number">28</span>, <span class="string">'male'</span>);</span><br><span class="line"><span class="built_in">console</span>.log( mike.age );    <span class="comment">// 32</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为是公开属性，所以可以很无耻地开放修改</span></span><br><span class="line">mike.age = <span class="number">18</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(mike.age );    <span class="comment">// 18</span></span><br></pre></td></tr></table></figure>
 <h3 id="属性描述符-Property-descriptor"><a href="#属性描述符-Property-descriptor" class="headerlink" title="属性描述符(Property descriptor)"></a>属性描述符(Property descriptor)</h3><p>从ES5开始，我们可以通过新的对象模型来控制对象属性的存取、删除、列举等功能。这些特殊的属性，我们将它称为「<strong>属性描述符</strong>」（Property descriptor）。</p>
 <p><strong>属性描述符</strong>一共可以分为六种：</p>
 <ol>
@@ -212,81 +171,31 @@ console.log(mike.age );    // 18
 <p>其中：<code>obj</code>-&gt;要在其上定义属性的对象；<code>prop</code>-&gt;要定义或修改的属性的名称；<code>descriptor</code>-&gt;将被定义或修改的属性描述符。</p>
 <p>下面通过实际范例来解释：</p>
 <p>一般来说，要建立一个简单对象，我们可以用这样方式：</p>
-<pre><code class="javascript">var person = {
-  name: &#39;mike&#39;
-};
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">  name: <span class="string">'mike'</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>当然，我们也可以通过<code>Object.defineProperty</code>来定义对象<code>person</code>的属性：</p>
-<pre><code class="javascript">var person = {};
-
-Object.defineProperty(person, &#39;name&#39;, {
-  value: &#39;mike&#39;
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这样的方式与直接指定对象字面属性是一样的结果。</p>
 <p>然后，我们可以用<code>Object.getOwnPropertyDescriptor()</code>来检查对象属性描述器的状态：</p>
-<pre><code class="javascript">var person = {};
-
-Object.defineProperty(person, &#39;name&#39;, {
-  value: &#39;mike&#39;
-});
-
-Object.getOwnPropertyDescriptor(person, &#39;name&#39;);
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(person, <span class="string">'name'</span>);</span><br></pre></td></tr></table></figure>
 <p><img src="/images/object2/1.jpg" srcset="/img/loading.gif" alt></p>
 <p>可以看到在默认的情况下，<code>writable</code>、<code>enumerable</code>及<code>configurable</code>都是<code>false</code>。</p>
-<pre><code class="javascript">var person2 = {
-  name: &#39;mike&#39;
-};
-
-console.log(Object.getOwnPropertyDescriptor(person2, &#39;name&#39;));
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person2 = &#123;</span><br><span class="line">  name: <span class="string">'mike'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(person2, <span class="string">'name'</span>));</span><br></pre></td></tr></table></figure>
 <p><img src="/images/object2/2.jpg" srcset="/img/loading.gif" alt></p>
 <p>而通过字面式创建对象建立的属性，默认值则会是<code>true</code>。</p>
 <p><code>defineProperty</code>可以针对对象一次设定多个属性描述：</p>
-<pre><code class="javascript">Object.defineProperty(person, &#39;name&#39;, {
-  value: &#39;mike&#39;,
-  writable: false,
-  enumerable: false,
-  configurable: false
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  configurable: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>或是分别设定：</p>
-<pre><code class="javascript">Object.defineProperty(person, &#39;name&#39;, {
-  enumerable: true
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  enumerable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>这些都是合法的做法。</p>
 <p>假设我们已经定义<code>person.name</code>属性描述<code>configurable</code>为<code>false</code>的情况：</p>
-<pre><code class="javascript">var person = {};
-
-Object.defineProperty(person, &#39;name&#39;, {
-  value: &#39;mike&#39;,
-  writable: false,
-  enumerable: false,
-  configurable: false
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  value: <span class="string">'mike'</span>,</span><br><span class="line">  writable: <span class="literal">false</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  configurable: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>那么此时，我们再去执行删除属性的行为：</p>
-<pre><code class="javascript">delete person.name;   // it will return false
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> person.name;   <span class="comment">// it will return false</span></span><br></pre></td></tr></table></figure>
 <p>虽然不会出错，但是你会发现执行结果会返回<code>false</code>，且<code>person</code>对象的<code>name</code>属性依然存在。同样地，当<code>writable</code>为<code>true</code>时，你去尝试删除属性「值」的时候，你会发现结果是无效的。</p>
 <p>要注意的是，上面这些行为，若是在「严格模式」下则会发生<code>TypeError</code>的错误。</p>
 <h3 id="属性的get-与set-方法"><a href="#属性的get-与set-方法" class="headerlink" title="属性的get 与set 方法"></a>属性的get 与set 方法</h3><p>在本文的开始，我们介绍了早期在ES5以前通过<code>this.getXXX()</code>与<code>this.setXXX()</code>来作为<code>get</code>与<code>set</code>的存取方法。</p>
 <p>而现在ES5提供了<code>Object.defineProperty()</code>之后，我们可以更直观地来处理这些方法：</p>
-<pre><code class="javascript">var person = {};
-
-Object.defineProperty(person, &#39;name&#39;, {
-  get: function(){
-    console.log(&#39;get&#39;);
-    return this._name_;
-  },
-  set: function(name){
-    console.log(&#39;set&#39;);
-    this._name_ = name;
-  }
-});
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person, <span class="string">'name'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>: function()&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'get'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._name_;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>: function(name)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'set'</span>);</span><br><span class="line">    <span class="keyword">this</span>._name_ = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>像这样，我们可以分别为<code>name</code>属性去定义<code>get</code>与<code>set</code>方法，而实际上，我们是通过了另一个属性<code>_name_</code>来作为<code>name</code>属性的封装。要注意的是，如果你定义了<code>get</code>与<code>set</code>方法，表示你要自行控制属性的存取，那么就不能再去定义<code>value</code>或<code>writable</code>的属性描述。</p>
 <p>理解了ES5的对象属性描述符之后，往后我们在对对象的属性处理就可以更加灵活，像是VueJS也是通过Object.defineProperty的get与set来做到双向数据绑定的：</p>
 <p><img src="/images/object2/3.jpg" srcset="/img/loading.gif" alt></p>
@@ -408,7 +317,7 @@ Object.defineProperty(person, &#39;name&#39;, {
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

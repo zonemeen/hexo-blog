@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>JavaScript系列之对象的继承 ~ 米淇淋の个人博客</title>
+  <title>JavaScript系列之对象的继承 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -141,18 +141,7 @@
 </ul>
 <p>我觉得原型中最重要的内容其实就这些了，没必要看太多关于原型的文章，到头来只是会越来越糊涂，如果硬要推荐原型参阅资料的话，《JavaScript高级程序设计》这本书，当之无愧！</p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过上面的介绍，我们知道JavaScript中的继承是通过原型/原型链来体现的，先看几行代码：</p>
-<pre><code class="javascript">function Foo() { }
-var f1 = new Foo();
-
-f1.a = 10;
-
-Foo.prototype.a = 100;
-Foo.prototype.b = 200;
-
-console.log(f1.a);  // 10
-console.log(f1.b);  // 200
-console.log(f1.c);  // undefined
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line">f1.a = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">Foo.prototype.a = <span class="number">100</span>;</span><br><span class="line">Foo.prototype.b = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f1.a);  <span class="comment">// 10</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.b);  <span class="comment">// 200</span></span><br><span class="line"><span class="built_in">console</span>.log(f1.c);  <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
 <p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p>
 <p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p>
 <p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p>
@@ -294,7 +283,7 @@ console.log(f1.c);  // undefined
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

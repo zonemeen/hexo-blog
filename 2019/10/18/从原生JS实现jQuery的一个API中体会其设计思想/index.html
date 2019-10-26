@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>从原生JS实现jQuery的一个API中体会其设计思想 ~ 米淇淋の个人博客</title>
+  <title>从原生JS实现jQuery的一个API中体会其设计思想 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -129,127 +129,25 @@
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
             <p>根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？<a id="more"></a>读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。</p>
-<h3 id="封装函数"><a href="#封装函数" class="headerlink" title="封装函数"></a>封装函数</h3><pre><code class="javascript">function addClass(classes){} //可将所有输入的标签的class添加一个类
-</code></pre>
+<h3 id="封装函数"><a href="#封装函数" class="headerlink" title="封装函数"></a>封装函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">classes</span>)</span>&#123;&#125; <span class="comment">//可将所有输入的标签的class添加一个类</span></span><br></pre></td></tr></table></figure>
 <h3 id="实现这个函数"><a href="#实现这个函数" class="headerlink" title="实现这个函数"></a>实现这个函数</h3><p>函数<code>addClass()</code>是输入一个类名，给选中的所有标签添加一个类，所以要用到<code>classList.add()</code>，具体实现如下:</p>
-<pre><code class="javascript">function addClass(node, classes) {
-  var allTag = document.querySelectorAll(node)
-  for (let i = 0; i &lt; allTag.length; i++) {
-    allTag[i].classList.add(classes)
-  }
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addClass</span>(<span class="params">node, classes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">    allTag[i].classList.add(classes)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><p>在全局变量中创建一个对象，用来储存封装后的函数，这就是命名空间（名字前面统一加一个前缀）</p>
-<pre><code class="javascript">window.jQuery = {}
-jQuery.addClass = addClass
-
-jQuery.addClass(&#39;div&#39;, &#39;red&#39;)
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = &#123;&#125;</span><br><span class="line">jQuery.addClass = addClass</span><br><span class="line"></span><br><span class="line">jQuery.addClass(<span class="string">'div'</span>, <span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
 <p>整理之后</p>
-<pre><code class="javascript">window.jQuery = {}
-jQuery.addClass = function(node, classes) {
-  var allTag = document.querySelectorAll(node)
-  for (let i = 0; i &lt; allTag.length; i++) {
-    allTag[i].classList.add(classes)
-  }
-}
-
-jQuery.addClass(&#39;div&#39;, &#39;red&#39;)
-</code></pre>
-<h3 id="将node放到前面"><a href="#将node放到前面" class="headerlink" title="将node放到前面"></a>将node放到前面</h3><pre><code class="javascript">node.addClass(classes)
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = &#123;&#125;</span><br><span class="line">jQuery.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">node, classes</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">    allTag[i].classList.add(classes)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">jQuery.addClass(<span class="string">'div'</span>, <span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="将node放到前面"><a href="#将node放到前面" class="headerlink" title="将node放到前面"></a>将node放到前面</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node.addClass(classes)</span><br></pre></td></tr></table></figure>
 <p>方法一：扩展 Node 接口，直接在 <code>Node.prototype</code> 上加函数</p>
-<pre><code class="javascript">Node.prototype.addClass = function(){
-   ...
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Node.prototype.addClass = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>方法二：新的接口 <code>BetterNode</code></p>
-<pre><code class="javascript">window.jQuery = function(node) {
-  return {
-    element: node,
-    addClass: function(classes) {
-      var allTag = document.querySelectorAll(node)
-      for (let i = 0; i &lt; allTag.length; i++) {
-        allTag[i].classList.add(classes)
-      }
-    }
-  }
-}
-
-let node2 = jQuery(&#39;div&#39;)
-node2.addClass(&#39;red&#39;)
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">node</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    element: node,</span><br><span class="line">    addClass: <span class="function"><span class="keyword">function</span>(<span class="params">classes</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> allTag = <span class="built_in">document</span>.querySelectorAll(node)</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; allTag.length; i++) &#123;</span><br><span class="line">        allTag[i].classList.add(classes)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> node2 = jQuery(<span class="string">'div'</span>)</span><br><span class="line">node2.addClass(<span class="string">'red'</span>)</span><br></pre></td></tr></table></figure>
 <p>第二种叫做「无侵入」。</p>
 <h3 id="进一步完善"><a href="#进一步完善" class="headerlink" title="进一步完善"></a>进一步完善</h3><p>给个缩写并且使其可以是节点或者选择器</p>
-<pre><code class="javascript">window.jQuery = function(nodeOrSelector){
-  let nodes = {}
-  if(typeof nodeOrSelector === &#39;string&#39;){
-    let temp = document.querySelectorAll(nodeOrSelector)
-    for(let i=0;i&lt;temp.length;i++){
-      nodes[i]=temp[i]
-    }
-    nodes.length = temp.length
-  }else if(nodeOrSelector instanceof Node){
-    nodes = {
-      0:nodeOrSelector,
-      length:1
-    }
-  }
-  nodes.addClass = function(classes){
-    for(let i=0;i&lt;nodes.length;i++){
-      nodes[i].classList.add(classes)
-    }
-  }
-  return nodes
-}
-window.$ = jQuery
-
-var $div = $(&#39;div&#39;)
-$div.addClass(&#39;red&#39;) // 可将所有 div 的 class 添加一个 red
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery = <span class="function"><span class="keyword">function</span>(<span class="params">nodeOrSelector</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> nodes = &#123;&#125;</span><br><span class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> nodeOrSelector === <span class="string">'string'</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> temp = <span class="built_in">document</span>.querySelectorAll(nodeOrSelector)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;temp.length;i++)&#123;</span><br><span class="line">      nodes[i]=temp[i]</span><br><span class="line">    &#125;</span><br><span class="line">    nodes.length = temp.length</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(nodeOrSelector <span class="keyword">instanceof</span> Node)&#123;</span><br><span class="line">    nodes = &#123;</span><br><span class="line">      <span class="number">0</span>:nodeOrSelector,</span><br><span class="line">      length:<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  nodes.addClass = <span class="function"><span class="keyword">function</span>(<span class="params">classes</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;nodes.length;i++)&#123;</span><br><span class="line">      nodes[i].classList.add(classes)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> nodes</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.$ = jQuery</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $div = $(<span class="string">'div'</span>)</span><br><span class="line">$div.addClass(<span class="string">'red'</span>) <span class="comment">// 可将所有 div 的 class 添加一个 red</span></span><br></pre></td></tr></table></figure>
 <h3 id="封装ajax"><a href="#封装ajax" class="headerlink" title="封装ajax"></a>封装ajax</h3><p>按照jQuery的设计思路封装一个ajax函数</p>
-<pre><code class="javascript">window.jQuery.ajax = function(url, method, body, success, fail) {
-    let request = XMLHttpResquest()
-    request.open(method, url)
-    request.onreadystatechange = () =&gt; {
-        if (request.readyState === 4) {
-            if (request.status &gt;= 200 &amp;&amp; request.status &lt; 300) {
-                success.call(undefined, request.responseText)
-            } else if (request.status &gt;= 400) {
-                fail.call(undefined, request)
-            }
-        }
-    }
-    request.send(body)
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">url, method, body, success, fail</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> request = XMLHttpResquest()</span><br><span class="line">    request.open(method, url)</span><br><span class="line">    request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                success.call(<span class="literal">undefined</span>, request.responseText)</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request.status &gt;= <span class="number">400</span>) &#123;</span><br><span class="line">                fail.call(<span class="literal">undefined</span>, request)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    request.send(body)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>升级改进一下满足promise规则</p>
-<pre><code class="javascript">window.jQuery.ajax = function({
-    url,
-    method,
-    body,
-    headers
-}) {
-    return new Promise(function(resolve, reject) {
-        let request = XMLHttpResquest()
-        request.open(method, url)
-        for (let key in headers) {
-            let value = headers[key]
-            request.setRequestHeader(key, value)
-        }
-        request.onreadystatechange = () =&gt; {
-            if (request.readyState === 4) {
-                if (request.status &gt;= 200 &amp;&amp; request.status &lt; 300) {
-                    success.call(undefined, request.responseText)
-                } else if (request.status &gt;= 400) {
-                    fail.call(undefined, request)
-                }
-            }
-        }
-        request.send(body)
-    })
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.jQuery.ajax = <span class="function"><span class="keyword">function</span>(<span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    url,</span></span></span><br><span class="line"><span class="function"><span class="params">    method,</span></span></span><br><span class="line"><span class="function"><span class="params">    body,</span></span></span><br><span class="line"><span class="function"><span class="params">    headers</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> request = XMLHttpResquest()</span><br><span class="line">        request.open(method, url)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> headers) &#123;</span><br><span class="line">            <span class="keyword">let</span> value = headers[key]</span><br><span class="line">            request.setRequestHeader(key, value)</span><br><span class="line">        &#125;</span><br><span class="line">        request.onreadystatechange = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (request.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (request.status &gt;= <span class="number">200</span> &amp;&amp; request.status &lt; <span class="number">300</span>) &#123;</span><br><span class="line">                    success.call(<span class="literal">undefined</span>, request.responseText)</span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request.status &gt;= <span class="number">400</span>) &#123;</span><br><span class="line">                    fail.call(<span class="literal">undefined</span>, request)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        request.send(body)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
 
             <hr>
@@ -366,7 +264,7 @@ $div.addClass(&#39;red&#39;) // 可将所有 div 的 class 添加一个 red
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>谈谈JavaScript中创建对象(Object) ~ 米淇淋の个人博客</title>
+  <title>谈谈JavaScript中创建对象(Object) ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -138,75 +138,32 @@
 <p>创建对象的第一个方法是使用<code>[ ]</code>，<code>[ ]</code>在JavaScript中被称做Computed Member Access：  </p>
 <p><img src="/images/object/2.jpg" srcset="/img/loading.gif" alt>    </p>
 <p>让我们看一下底下的例子：  </p>
-<pre><code class="javascript">// 创建对象
-var person = new Object();
-person[&quot;firstname&quot;] = &quot;Jay&quot;;
-person[&quot;lastname&quot;] = &quot;Chou&quot;;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person[<span class="string">"firstname"</span>] = <span class="string">"Jay"</span>;</span><br><span class="line">person[<span class="string">"lastname"</span>] = <span class="string">"Chou"</span>;</span><br></pre></td></tr></table></figure>
 <p>这是利用<code>[ ]</code>创建对象的方法，首先我们创建一个对象，叫做<code>person</code>，接着开始给它「名称-值」配对，例如，<code>firstname</code>是属性的名称，<code>Jay</code>则是它的值；<code>lastname</code>也是属性名称，<code>Chou</code>则是它的值。通过这种方法，我们就可以创建对象里面的各种「名称-值」配对。  </p>
 <p><strong>调用对象</strong>   </p>
 <p>紧接上面的例子，我们也同样可以利用<code>[ ]</code>来调用已经建立好的对象，<code>[ ]</code>里面如果放的是字符串而不是变量，注意要记得加上引号’像是这样：  </p>
-<pre><code class="javascript">// 调用对象
-console.log(person[&quot;firstname&quot;]);  // Jay
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="built_in">console</span>.log(person[<span class="string">"firstname"</span>]);  <span class="comment">// Jay</span></span><br></pre></td></tr></table></figure>
 <p>另外，如果是通过<code>[ ]</code>来调用对象的话，还有一个特别的地方，就是<code>[ ]</code>内可以放变量，像是这样（当<code>[ ]</code>里面放的是变量时不用加引号<code>&quot;</code>），一样可以调用到对象的值，这个是用种方法二（<code>.</code>）做不到的：  </p>
-<pre><code class="javascript">// 调用对象
-var id = &quot;lastname&quot;;
-console.log(person[id]);  // Chou
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="keyword">var</span> id = <span class="string">"lastname"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person[id]);  <span class="comment">// Chou</span></span><br></pre></td></tr></table></figure>
 <h4 id="方法二：使用点符号"><a href="#方法二：使用点符号" class="headerlink" title="方法二：使用点符号 ."></a>方法二：使用点符号 .</h4><p><strong>创建对象</strong>  </p>
 <p>第二种创建对象的方法是使用英文的句点 <code>.</code>，在JavaScript中被称做Member Access，创建的方法如下：我们在刚刚创建的<code>person</code>这个对象里面，再创建一个对象属性，名称为<code>address</code>。其实，我觉得可以把.翻译成中文的「的」，所以这里的意思就是，在<code>person</code>的里面创建一个名称为<code>address</code>的对象；在<code>person</code>的<code>address</code>的<code>country</code>，创建一个值为<code>&quot;China&quot;</code>，以此类推…。  </p>
-<pre><code class="javascript">// 创建对象
-person.address = new Object();
-person.address.country = &quot;China&quot;;
-person.address.city = &quot;Hangzhou&quot;;
-person.address.location = &quot;Xihu&quot;;
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line">person.address = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.address.country = <span class="string">"China"</span>;</span><br><span class="line">person.address.city = <span class="string">"Hangzhou"</span>;</span><br><span class="line">person.address.location = <span class="string">"Xihu"</span>;</span><br></pre></td></tr></table></figure>
 <p><strong>调用对象</strong>  </p>
 <p>同样的方法也可以用来调用出该对象的值：  </p>
-<pre><code class="javascript">// 调用对象
-console.log(person.address);  //{country: &quot;China&quot;, city: &quot;Hangzhou&quot;, location: &quot;Xihu&quot;}
-console.log(person.address.country);  // China
-console.log(person[&quot;address&quot;][&quot;location&quot;]);  // Xihu
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 调用对象</span></span><br><span class="line"><span class="built_in">console</span>.log(person.address);  <span class="comment">//&#123;country: "China", city: "Hangzhou", location: "Xihu"&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(person.address.country);  <span class="comment">// China</span></span><br><span class="line"><span class="built_in">console</span>.log(person[<span class="string">"address"</span>][<span class="string">"location"</span>]);  <span class="comment">// Xihu</span></span><br></pre></td></tr></table></figure>
 <p>从上面可以看出，<code>.</code> 和<code>[ ]</code>是可以交替使用的。  </p>
 <h4 id="方法三：使用"><a href="#方法三：使用" class="headerlink" title="方法三：使用{ }"></a>方法三：使用{ }</h4><p><strong>创建对象</strong>  </p>
 <p>其实还有在创建对象上有更快的做法，我们可以直接使用<code>{ }</code>，我们可以把上面的代码，改成这样：  </p>
-<pre><code class="javascript">// 创建对象
-var person = {
-    firstname: &quot;Jay&quot;,
-    lastname: &quot;Chou&quot;,
-    address: {
-        country: &quot;China&quot;,
-        city: &quot;Hangzhou&quot;,
-        location: &quot;Xihu&quot;
-    }
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象</span></span><br><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    firstname: <span class="string">"Jay"</span>,</span><br><span class="line">    lastname: <span class="string">"Chou"</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        country: <span class="string">"China"</span>,</span><br><span class="line">        city: <span class="string">"Hangzhou"</span>,</span><br><span class="line">        location: <span class="string">"Xihu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>通过这种方式，可以得到与方法二一模一样的结果，调用方法也一致。  </p>
 <p><strong>搭配函数使用对象</strong>  </p>
 <p>在我们创建好对象后，我们可以搭配函数(<code>function</code>)来使用对象，例如，我先把刚刚创建的对象<code>person</code>，改成叫做<code>jaychou</code>。  </p>
-<pre><code class="javascript">var jaychou = {
-    firstname: &quot;Jay&quot;,
-    lastname: &quot;Chou&quot;,
-    address: {
-        country: &quot;China&quot;,
-        city: &quot;Hangzhou&quot;,
-        location: &quot;Xihu&quot;
-    }
-}
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jaychou = &#123;</span><br><span class="line">    firstname: <span class="string">"Jay"</span>,</span><br><span class="line">    lastname: <span class="string">"Chou"</span>,</span><br><span class="line">    address: &#123;</span><br><span class="line">        country: <span class="string">"China"</span>,</span><br><span class="line">        city: <span class="string">"Hangzhou"</span>,</span><br><span class="line">        location: <span class="string">"Xihu"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>接着创建一个名称为<code>SayHI</code>的函数，并且带入我们的对象：  </p>
-<pre><code class="javascript">function SayHI(people) {
-    console.log(&quot;HI&quot; + people.lastname);
-}
-
-SayHI(jaychou);  // HI Chou
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">SayHI</span>(<span class="params">people</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"HI"</span> + people.lastname);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">SayHI(jaychou);  <span class="comment">// HI Chou</span></span><br></pre></td></tr></table></figure>
 <p><strong>直接在函数参数的地方创建对象</strong>  </p>
 <p>我们也可以直接在调用函数的同时创建对象，像是这样子：  </p>
-<pre><code class="javascript">SayHI({firstname: &quot;Jony&quot;, lastname: &quot;J&quot;});  // HI J
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SayHI(&#123;<span class="attr">firstname</span>: <span class="string">"Jony"</span>, <span class="attr">lastname</span>: <span class="string">"J"</span>&#125;);  <span class="comment">// HI J</span></span><br></pre></td></tr></table></figure>
 <p>一开始看到这样的写法可能会觉得很奇怪，但其实这种方式和我们直接在函数的参数里面输入字符串或数值是一样的意思，只是这里是创建一个对象。我们把这种直接在函数的参数中创建对象的方法称做”creating object on the fly”（即动态创建对象）。  </p>
 <h4 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h4><p>其实使用<code>new Object</code>不是创建对象最好的方式，这点会在之后的文章再作说明。另外，虽然使用<code>[ ]</code>和<code>.</code>都可以拿来创建对象和调用对象，但还是建议尽量使用点符号.作为创建对象和调用对象的方法，这样比较干净简洁，在debug的时候也比较容易。  </p>
 <p>还有不论你使用的是<code>new Object</code>、”<code>.</code>“、或者直接用”<code>{ }</code>“来创建对象，其实在JavaScript转译之后，本质上做的都是同样的事。它都会将这个对象建立在内存中，并创建该对象的属性（<code>property</code>）和方法（<code>method</code>）在内存中。   </p>
@@ -328,7 +285,7 @@ SayHI(jaychou);  // HI Chou
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

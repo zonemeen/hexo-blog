@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>从instanceof身上深入理解原型/原型链 ~ 米淇淋の个人博客</title>
+  <title>从instanceof身上深入理解原型/原型链 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -131,12 +131,7 @@
             <p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。<a id="more"></a></p>
 <p>对于原始类型（primitive type）的值，即<code>string</code>/<code>number</code>/<code>boolean</code>，你可以通过<code>typeof</code>判断其类型，但是<code>typeof</code>在判断到合成类型（complex type）的值的时候，返回值只有<code>object</code>/<code>function</code>，你不知道它到底是一个<code>object</code>对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。</p>
 <p>官方对<code>instanceof</code>运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：</p>
-<pre><code class="javascript">function Foo() {}
-var f1 = new Foo();
-
-console.log(f1 instanceof Foo);  // true
-console.log(f1 instanceof Object);  // true
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">var</span> f1 = <span class="keyword">new</span> Foo();</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(f1 <span class="keyword">instanceof</span> Foo);  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(f1 <span class="keyword">instanceof</span> <span class="built_in">Object</span>);  <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，对象<code>f1</code>是构造函数<code>Foo</code>的实例，所以返回<code>true</code>，但是“f1 instanceof Object”为什么也是<code>true</code>呢？</p>
 <p>至于为什么等会再解释，先把<code>instanceof</code>判断的规则告诉大家。根据以上代码看下图：</p>
 <p><img src="/images/instanceof/1.jpg" srcset="/img/loading.gif" alt>  </p>
@@ -144,17 +139,10 @@ console.log(f1 instanceof Object);  // true
 <p>通俗一点来讲，<code>instanceof</code>的判断规则是：<strong><code>instanceof</code>会检查整个原型链，将沿着A的<code>__proto__</code>这条线来一直找，同时沿着B的<code>prototype</code>这条线来一直找，直到能找到同一个引用，即同一个对象，那么就返回<code>true</code>。如果找到终点还未重合，则返回<code>false</code></strong>。即上图中的 <code>f1</code>–&gt;<code>__proto__</code> 和 <code>Foo</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Foo)</code>为<code>true</code>。</p>
 <p>按照以上规则，重新来看看“ f1 instanceof Object ”这句代码为什么是<code>true</code>？ 根据上图很容易就能看出来， f1–&gt;<code>__proto__</code>–&gt;<code>__proto__</code> 和<code>Object</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Object)</code>为<code>true</code>。</p>
 <p>通过上面的规则，可以很好地解释一些比较怪异的现象，例如：</p>
-<pre><code class="javascript">console.log(Object instanceof Function);   // true
-console.log(Function instanceof Object);   // true
-console.log(Function instanceof Function);   // true
-console.log(Object instanceof Object);   // true
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Function</span> <span class="keyword">instanceof</span> <span class="built_in">Function</span>);   <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>);   <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 <p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p>
 <p>但还有一种特殊情况，就是左边对象的原型链上，只有<code>null</code>对象。这时，<code>instanceof</code>判断会失真。</p>
-<pre><code class="javascript">var obj = Object.create(null);
-typeof obj // &quot;object&quot;
-Object.create(null) instanceof Object // false
-</code></pre>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"><span class="keyword">typeof</span> obj <span class="comment">// "object"</span></span><br><span class="line"><span class="built_in">Object</span>.create(<span class="literal">null</span>) <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p>
 <p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p>
 <p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt>  </p>
@@ -279,7 +267,7 @@ Object.create(null) instanceof Object // false
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

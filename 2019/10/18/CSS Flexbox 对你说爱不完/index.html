@@ -12,9 +12,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="description" content>
-  <meta name="author" content="米淇淋">
+  <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>Flexbox 对你说爱不完 ~ 米淇淋の个人博客</title>
+  <title>Flexbox 对你说爱不完 ~ miqilin&#39;s blog</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
 <link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -42,7 +42,7 @@
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/">&nbsp;<strong>miqilin&#39;s blog</strong>&nbsp;</a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
@@ -95,7 +95,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('/img/default.png')no-repeat center center;
+         style="background: url('/img/post.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -136,10 +136,7 @@
 <p>每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。</p>
 <p>这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cross size，这个还要取决于你主轴的方向，如果你垂直方向是主轴，那么项目的高度就是 main size。</p>
 <p>实际上，要实现 flex 布局需要先指定一个容器，任何一个容器都可以被指定为 flex 布局，这样容器内部的元素就可以使用 flex 来进行布局。语法如下：</p>
-<pre><code class="css">.container {
-    display: flex | inline-flex;       //可以有两种取值
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    display: flex | inline-flex;       //可以有两种取值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>给div这类块元素设置<code>display: flex</code>或者给span这类行内元素设<code>display: inline-flex</code>，flex布局即创建！</p>
 <p>而Flex布局相关属性正好分为两拨，一拨作用在flex容器上，还有一拨作用在flex子项上。</p>
 <p><strong>需要注意的是：当时设置 flex 布局之后，子元素的 <code>float</code>、<code>clear</code>、<code>vertical-align</code> 的属性将会失效。</strong></p>
@@ -153,10 +150,7 @@
 <li>align-content</li>
 </ol>
 <p><strong>1. flex-direction: 决定主轴的方向(即项目的排列方向)</strong></p>
-<pre><code class="css">.container {
-    flex-direction: row | row-reverse | column | column-reverse;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">flex-direction</span>: row | row-reverse | column | column-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>row</code>（默认）：主轴为水平方向，起点在左端</li>
 </ul>
@@ -175,10 +169,7 @@
 <p><img src="/images/flex/5.jpg" srcset="/img/loading.gif" alt> </p>
 <p><strong>2. flex-wrap: 决定容器内项目是否可换行</strong></p>
 <p>默认情况下，项目都排在主轴线上，使用 <code>flex-wrap</code> 可实现项目的换行。</p>
-<pre><code class="css">.container {
-    flex-wrap: nowrap | wrap | wrap-reverse;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><code>nowrap</code>（默认）：不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行</li>
 </ul>
@@ -192,16 +183,10 @@
 </ul>
 <p><img src="/images/flex/8.jpg" srcset="/img/loading.gif" alt></p>
 <p><strong>3. flex-flow: flex-direction 和 flex-wrap 的复合简写形式</strong></p>
-<pre><code class="css">.container {
-    flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>默认值为: row nowrap，这个属性其实没多大卵用，不就是两个属性的缩写嘛。</p>
 <p><strong>4. justify-content：定义项目在主轴的对齐方式</strong></p>
-<pre><code class="css">.container {
-    justify-content: flex-start | flex-end | center | space-between | space-around;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
 <ul>
 <li><code>flex-start</code>（默认）：左对齐</li>
@@ -224,10 +209,7 @@
 </ul>
 <p><img src="/images/flex/13.jpg" srcset="/img/loading.gif" alt></p>
 <p><strong>5. align-items: 定义项目在交叉轴上的对齐方式</strong></p>
-<pre><code class="css">.container {
-    align-items: stretch | flex-start | flex-end | center | baseline;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
 <ul>
 <li><code>stretch</code>（默认）：如果项目未设置高度或设为<code>auto</code>，将占满整个容器的高度</li>
@@ -252,10 +234,7 @@
 <p><img src="/images/flex/18.jpg" srcset="/img/loading.gif" alt></p>
 <p>以文字的底部为主</p>
 <p><strong>6. align-content: 定义多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用</strong></p>
-<pre><code class="css">.container {
-    align-content: stretch | flex-start | flex-end | center | space-between | space-around;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">align-content</span>: stretch | flex-start | flex-end | center | space-between | space-around;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>什么叫项目只有一根轴线呢？其实可以这么理解：</p>
 <p>当你 <code>flex-wrap</code> 设置为 <code>nowrap</code> 的时候，容器仅存在一根轴线，因为项目不会换行，就不会产生多条轴线。</p>
 <p>当你 <code>flex-wrap</code> 设置为 <code>wrap</code> 的时候，容器可能会出现多条轴线，这时候你就需要去设置多条轴线之间的对齐方式了。</p>
@@ -295,66 +274,36 @@
 <li>align-self</li>
 </ol>
 <p><strong>1. order: 定义项目在容器中的排列顺序，数值越小，排列越靠前，默认值为 0</strong></p>
-<pre><code class="css">.item {
-    order: &lt;integer&gt;;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">order</span>: &lt;integer&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/flex/25.jpg" srcset="/img/loading.gif" alt></p>
 <p><strong>2. flex-grow: 定义项目的放大比例</strong></p>
-<pre><code class="css">.item {
-    flex-grow: &lt;number&gt;;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">flex-grow</span>: &lt;number&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>默认值为 0，即如果存在剩余空间，也不放大。</p>
 <p>如果所有项目的 <code>flex-grow</code> 属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的 <code>flex-grow</code> 属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
 <p><strong>3. flex-shrink: 定义项目的缩小比例</strong></p>
-<pre><code class="css">.item {
-    flex-shrink: &lt;number&gt;;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">flex-shrink</span>: &lt;number&gt;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
 <p><img src="/images/flex/26.jpg" srcset="/img/loading.gif" alt></p>
 <p>如果所有项目的 <code>flex-shrink</code> 属性都为1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code> 属性为0，其他项目都为1，则空间不足时，前者不缩小。</p>
 <p>负值对该属性无效。</p>
 <p><strong>4. flex-basis: 定义了在分配容器剩余空间之前项目的默认大小。相当于对浏览器提前告知：浏览器兄弟，我要占据这么大的空间，提前帮我预留好</strong></p>
-<pre><code class="css">.item {
-    flex-basis: &lt;length&gt; | auto;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">    <span class="attribute">flex-basis</span>: &lt;length&gt; | auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>默认值：<code>auto</code>，即项目本来的大小, 这时候 item 项目的宽高取决于 <code>width</code> 或 <code>height</code> 的值。</p>
 <p>当主轴为水平方向的时候，同时设置 <code>width</code> 和 <code>flex-basis</code>，会忽略 <code>width</code>。flex顾名思义就是弹性的意思，因此，实际上不建议对flex项目使用 <code>width</code> 属性，因为不够弹性。</p>
 <p>当容器剩余空间不足的时候，flex子项目的实际宽度通常不是设置的 <code>flex-basis</code> 尺寸，因为flex布局剩余空间不足的时候默认会收缩，如果有3个子项目，则默认按1:1:1收缩。</p>
 <p><strong>5. flex: flex-grow, flex-shrink 和 flex-basis的复合缩写</strong></p>
-<pre><code class="css">.item{
-    flex: none | [ &lt;&#39;flex-grow&#39;&gt; &lt;&#39;flex-shrink&#39;&gt;? || &lt;&#39;flex-basis&#39;&gt; ]
-} 
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span>&#123;</span><br><span class="line">    <span class="attribute">flex</span>: none | [ &lt;<span class="string">'flex-grow'</span>&gt; &lt;<span class="string">'flex-shrink'</span>&gt;? || &lt;<span class="string">'flex-basis'</span>&gt; ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>flex 的默认值是以上三个属性值的组合。假设以上三个属性同样取默认值，则 flex 的默认值为<code>0 1 auto</code>。</p>
 <p>有关快捷值：</p>
-<pre><code class="css">flex: auto  //等同于flex:1 1 auto
-flex: none  //等同于flex:0 0 auto
-</code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flex: auto  //等同于flex:1 1 auto</span><br><span class="line">flex: none  //等同于flex:0 0 auto</span><br></pre></td></tr></table></figure>
 <p><strong>6. align-self: 控制单独某一个项目的垂直对齐方式，与align-items属性语法区别不大</strong></p>
-<pre><code class="css">.item {
-     align-self: auto | flex-start | flex-end | center | baseline | stretch;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item</span> &#123;</span><br><span class="line">     <span class="attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自flex容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
 <p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
 <h3 id="从垂直居中看出flex的强大"><a href="#从垂直居中看出flex的强大" class="headerlink" title="从垂直居中看出flex的强大"></a>从垂直居中看出flex的强大</h3><p>以往让元素垂直居中并不容易，直到CSS3的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用flex，让垂直居中变得异常简单</p>
-<pre><code class="html">&lt;div class=“wrapper”&gt;
-    &lt;div class=“div”&gt;
-        flexbox 对你说爱不完
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“wrapper”</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“div”</span>&gt;</span></span><br><span class="line">        flexbox 对你说爱不完</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>几行简单代码，即可让div垂直居中</p>
-<pre><code class="css">.wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-</code></pre>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: flex;</span><br><span class="line">    <span class="attribute">align-items</span>: center;</span><br><span class="line">    <span class="attribute">justify-content</span>: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里最重要的就是包裹元素的三个关键属性:</p>
 <ul>
 <li><code>display: flex</code> 将容器指定为flex布局，任何一个元素都可以指定</li>
@@ -483,7 +432,7 @@ flex: none  //等同于flex:0 0 auto
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

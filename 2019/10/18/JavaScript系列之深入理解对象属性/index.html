@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="米淇淋">
+  <meta name="keywords" content>
+  <title>JavaScript系列之深入理解对象属性 ~ 米淇淋の个人博客</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期五, 十月 18日 2019, 10:23 上午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>在<a href="https://zhuanlan.zhihu.com/p/64928794" target="_blank" rel="noopener">《谈谈JavaScript中对象建立(Object)》</a>这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解JavaScript的对象与其他编程语言的对象有何差异。<a id="more"></a></p>
+<p>开始介绍之前先来复习一下。</p>
+<p>之前说过，所有原始类型(Primitives) 以外的值都是对象，原始类型有以下几种：</p>
+<ul>
+<li><code>string</code></li>
+<li><code>number</code></li>
+<li><code>boolean</code></li>
+<li><code>null</code></li>
+<li><code>undefined</code></li>
+<li><code>symbol</code> (ES6 新增)</li>
+</ul>
+<p>除了上述这些以外的类型，都是对象。</p>
+<h3 id="JavaScript-真是一门面向对象的编程语言吗？"><a href="#JavaScript-真是一门面向对象的编程语言吗？" class="headerlink" title="JavaScript 真是一门面向对象的编程语言吗？"></a>JavaScript 真是一门面向对象的编程语言吗？</h3><p>在过去JS语言的发展中，这个话题已经被讨论过无数次，有人说它是，也有人说它不那么像是。就像一个使用Java或C#或者其他面向对象开发语言的开发者接触JavaScript的时候，他总会抱怨JavaScript太混乱、没有类型、结构也不好，还有很多奇奇怪怪的地方，它的对象支持也是微乎其微，因此他绝对不是一个面向对象编程的语言。</p>
+<p>但JavaScript 确实是一门面向对象的编程语言，只是它与其他语言很大不同的地方是，它的继承方法是通过”prototype” 来实现的。其余大多数的面向对象的编程语言（比如Java）是以「类」为基础的(<code>class-based</code>) ，但JavaScript 没有<code>class</code>、没有<code>extends</code> ，却可以通过「原型」(<code>prototype-based</code>) 来建立起对象之间的继承关系。</p>
+<p>PS：ES6虽然新增了<code>class</code>语法，但仍然属于<code>prototype-based</code>的继承。<code>class</code>实质上只是通过简洁的语法来建立对象和处理继承的语法糖。</p>
+<h3 id="JavaScript-自定义对象"><a href="#JavaScript-自定义对象" class="headerlink" title="JavaScript 自定义对象"></a>JavaScript 自定义对象</h3><p>先前曾介绍过，在JavaScript创建对象我们可以通过<code>new</code>关键字：</p>
+<pre><code class="javascript">var person = new Object();
+person.name = &#39;mike&#39;;
+</code></pre>
+<p>或是直接用大括号<code>{ }</code>，即可创建起一个新的对象：</p>
+<pre><code class="javascript">var person = {
+  name: &#39;mike&#39;
+};
+</code></pre>
+<h3 id="理解JavaScript构造函数"><a href="#理解JavaScript构造函数" class="headerlink" title="理解JavaScript构造函数"></a>理解JavaScript构造函数</h3><p>虽然JavaScript没有<code>class</code>的语法，但如果你希望JavaScript也能像其他面向对象编程语言一样有类似<code>class</code>的语法时，可以怎么做呢？由于函数也是个对象，所以可以借用来当作「构造函数」来建立其他对象：</p>
+<pre><code class="javascript">function Person( name, age, gender ){
+  this.name = name;
+  this.age = age;
+  this.gender = gender;
+
+  this.greeting = function(){
+    console.log(&#39;Hello! My name is &#39; + this.name + &#39;.&#39;);
+  };
+}
+
+var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
+mike.greeting();      // &quot;Hello! My name is Mike.&quot;
+
+var jay = new Person( &#39;Jay&#39;, 18, &#39;male&#39;);
+jay.greeting();      // &quot;Hello! My name is Jay.&quot;
+</code></pre>
+<p>像这样，我们建立了一个<code>Person</code>构造函数(Constructor) ，然后就可以通过<code>new</code>关键字来建立各种对应的对象。</p>
+<p>为什么JavaScript明明没有<code>class</code>却可以通过<code>new</code>一个函数来建立对象？这里简单拆解一下流程：</p>
+<pre><code class="javascript">function Person( name, age, gender ){
+  // 和上面一致，这里省略
+}
+
+var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
+
+/*
+===&gt; var mike = {};
+===&gt; Person.call(mike, &#39;Mike&#39;, 28, &#39;male&#39;);
+*/
+</code></pre>
+<p>通过<code>new Person(...)</code>这个动作，返回的对象会有<code>name</code>, <code>age</code>, <code>gender</code>以及<code>greeting</code>属性，而JavaScript会在背景执行<code>Person.call</code>方法，将<code>mike</code>作为<code>this</code>的参考对象，然后把这些属性通通新增到<code>mike</code>对象中。</p>
+<p>但是，即使是通过构造函数（Constructor）建立的对象，这个对象的属性仍然可以通过<code>.</code>来公开存取：</p>
+<pre><code class="javascript">function Person( name, age, gender ){
+  // 和上面一致，这里省略
+}
+
+var mike = new Person( &#39;Mike&#39;, 28, &#39;male&#39;);
+console.log( mike.age );    // 32
+
+// 因为是公开属性，所以可以很无耻地开放修改
+mike.age = 18;
+
+console.log(mike.age );    // 18
+</code></pre>
+<h3 id="属性描述符-Property-descriptor"><a href="#属性描述符-Property-descriptor" class="headerlink" title="属性描述符(Property descriptor)"></a>属性描述符(Property descriptor)</h3><p>从ES5开始，我们可以通过新的对象模型来控制对象属性的存取、删除、列举等功能。这些特殊的属性，我们将它称为「<strong>属性描述符</strong>」（Property descriptor）。</p>
+<p><strong>属性描述符</strong>一共可以分为六种：</p>
+<ol>
+<li><code>value</code>: 属性的值</li>
+<li><code>writable</code>:定义属性是否可以改变，如果是<code>false</code>那就是只可读属性。</li>
+<li><code>enumerable</code>:定义对象内的属性是否可以通过<code>for-in</code>语法来迭代。</li>
+<li><code>configurable</code>:定义属性是否可以被删除、或修改属性内的<code>writable</code>、<code>enumerable</code>及<code>configurable</code>设定。</li>
+<li><code>get</code>: 对象属性的getter function。</li>
+<li><code>set</code>: 对象属性的setter function。</li>
+</ol>
+<p>上述除了<code>value</code>之外的值都可以不设定，<code>writable</code>、<code>enumerable</code>及<code>configurable</code>的默认值是<code>false</code>，而<code>get</code>与<code>set</code>如果没有特别指定则是<code>undefined</code>，并且前四种属性不能和<code>get</code>与<code>set</code>混用，否则会抛出错误。</p>
+<p>这些「属性描述符」必须要通过ES5所提供的<code>Object.defineProperty()</code>来处理。</p>
+<h3 id="Object-defineProperty-与Object-getOwnPropertyDescriptor"><a href="#Object-defineProperty-与Object-getOwnPropertyDescriptor" class="headerlink" title="Object.defineProperty 与Object.getOwnPropertyDescriptor"></a>Object.defineProperty 与Object.getOwnPropertyDescriptor</h3><p>我们可以通过<code>Object.defineProperty</code>来定义对象的属性描述，用法：<code>Object.defineProperty(obj, prop, descriptor)</code>。</p>
+<p>其中：<code>obj</code>-&gt;要在其上定义属性的对象；<code>prop</code>-&gt;要定义或修改的属性的名称；<code>descriptor</code>-&gt;将被定义或修改的属性描述符。</p>
+<p>下面通过实际范例来解释：</p>
+<p>一般来说，要建立一个简单对象，我们可以用这样方式：</p>
+<pre><code class="javascript">var person = {
+  name: &#39;mike&#39;
+};
+</code></pre>
+<p>当然，我们也可以通过<code>Object.defineProperty</code>来定义对象<code>person</code>的属性：</p>
+<pre><code class="javascript">var person = {};
+
+Object.defineProperty(person, &#39;name&#39;, {
+  value: &#39;mike&#39;
+});
+</code></pre>
+<p>这样的方式与直接指定对象字面属性是一样的结果。</p>
+<p>然后，我们可以用<code>Object.getOwnPropertyDescriptor()</code>来检查对象属性描述器的状态：</p>
+<pre><code class="javascript">var person = {};
+
+Object.defineProperty(person, &#39;name&#39;, {
+  value: &#39;mike&#39;
+});
+
+Object.getOwnPropertyDescriptor(person, &#39;name&#39;);
+</code></pre>
+<p><img src="/images/object2/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>可以看到在默认的情况下，<code>writable</code>、<code>enumerable</code>及<code>configurable</code>都是<code>false</code>。</p>
+<pre><code class="javascript">var person2 = {
+  name: &#39;mike&#39;
+};
+
+console.log(Object.getOwnPropertyDescriptor(person2, &#39;name&#39;));
+</code></pre>
+<p><img src="/images/object2/2.jpg" srcset="/img/loading.gif" alt></p>
+<p>而通过字面式创建对象建立的属性，默认值则会是<code>true</code>。</p>
+<p><code>defineProperty</code>可以针对对象一次设定多个属性描述：</p>
+<pre><code class="javascript">Object.defineProperty(person, &#39;name&#39;, {
+  value: &#39;mike&#39;,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+</code></pre>
+<p>或是分别设定：</p>
+<pre><code class="javascript">Object.defineProperty(person, &#39;name&#39;, {
+  enumerable: true
+});
+</code></pre>
+<p>这些都是合法的做法。</p>
+<p>假设我们已经定义<code>person.name</code>属性描述<code>configurable</code>为<code>false</code>的情况：</p>
+<pre><code class="javascript">var person = {};
+
+Object.defineProperty(person, &#39;name&#39;, {
+  value: &#39;mike&#39;,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+</code></pre>
+<p>那么此时，我们再去执行删除属性的行为：</p>
+<pre><code class="javascript">delete person.name;   // it will return false
+</code></pre>
+<p>虽然不会出错，但是你会发现执行结果会返回<code>false</code>，且<code>person</code>对象的<code>name</code>属性依然存在。同样地，当<code>writable</code>为<code>true</code>时，你去尝试删除属性「值」的时候，你会发现结果是无效的。</p>
+<p>要注意的是，上面这些行为，若是在「严格模式」下则会发生<code>TypeError</code>的错误。</p>
+<h3 id="属性的get-与set-方法"><a href="#属性的get-与set-方法" class="headerlink" title="属性的get 与set 方法"></a>属性的get 与set 方法</h3><p>在本文的开始，我们介绍了早期在ES5以前通过<code>this.getXXX()</code>与<code>this.setXXX()</code>来作为<code>get</code>与<code>set</code>的存取方法。</p>
+<p>而现在ES5提供了<code>Object.defineProperty()</code>之后，我们可以更直观地来处理这些方法：</p>
+<pre><code class="javascript">var person = {};
+
+Object.defineProperty(person, &#39;name&#39;, {
+  get: function(){
+    console.log(&#39;get&#39;);
+    return this._name_;
+  },
+  set: function(name){
+    console.log(&#39;set&#39;);
+    this._name_ = name;
+  }
+});
+</code></pre>
+<p>像这样，我们可以分别为<code>name</code>属性去定义<code>get</code>与<code>set</code>方法，而实际上，我们是通过了另一个属性<code>_name_</code>来作为<code>name</code>属性的封装。要注意的是，如果你定义了<code>get</code>与<code>set</code>方法，表示你要自行控制属性的存取，那么就不能再去定义<code>value</code>或<code>writable</code>的属性描述。</p>
+<p>理解了ES5的对象属性描述符之后，往后我们在对对象的属性处理就可以更加灵活，像是VueJS也是通过Object.defineProperty的get与set来做到双向数据绑定的：</p>
+<p><img src="/images/object2/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>每个组件实例都对应一个<strong>watcher</strong>实例，它会在组件渲染的过程中把“接触”过的数据属性记录为依赖。之后当依赖项的 <code>setter</code> 触发时，会通知 <code>watcher</code>，从而使它关联的组件重新渲染。</p>
+<p>图片来源：<a href="https://cn.vuejs.org/v2/guide/reactivity.html" target="_blank" rel="noopener">Vue.js: 如何追踪变化</a></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+              
+                <a class="hover-with-bg" href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>
+              
+              <span id="/2019/10/18/JavaScript系列之深入理解对象属性/" class="visitors leancloud_visitors" data-flag-title="JavaScript系列之深入理解对象属性">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>2019</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="/js/lazyload.js"></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js"></script>
+  
+  <script src="/js/post.js"></script>
+
+
+  <script src="/lib/prettify/prettify.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之深入理解对象属性&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js"></script>
+
+
+
+
+</body>
+</html>

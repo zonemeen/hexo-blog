@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="米淇淋">
+  <meta name="keywords" content>
+  <title>谈谈JavaScript中的函数构造式和new关键字 ~ 米淇淋の个人博客</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期五, 十月 18日 2019, 10:23 上午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？<a id="more"></a></p>
+<p>大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。</p>
+<h3 id="谈谈function-constructor"><a href="#谈谈function-constructor" class="headerlink" title="谈谈function constructor"></a>谈谈function constructor</h3><p><code>constructor</code> 翻为构造器但为了让您之后更好地理解，会直接使用 <code>constructor</code>；在 Javascript 中任何一个函数(<code>function</code>)都可以被当作 <code>constructor</code>；Javascript 并没有明确的区分两者，也就是说 <code>function</code> 可以被当作 <code>constructor</code> 或者当作一般函数调用。</p>
+<p>而 <code>constructor</code> 的用法就是 <code>function</code> 搭配<code>new</code>关键字：</p>
+<pre><code class="javascript">function  Person  ( ) { 
+  this . firstName =  &#39;Jay&#39; ; 
+  this . lastName =  &#39;Chou&#39; ; 
+}
+
+var person =  new  Person ( ) ; 
+console . log ( person ) ;
+</code></pre>
+<p>接着我们把<code>person</code>呼叫出来看，会得到如下的结果，<strong>通过<code>new</code>它会帮我们建立一个对象</strong>，然后里面有<code>Person</code>这个<code>function</code>里面的内容，并且变成了属性名称和属性值：</p>
+<p><img src="/images/new/1.png" srcset="/img/loading.gif" alt></p>
+<h3 id="进一步来看new-让这个过程发生了什么"><a href="#进一步来看new-让这个过程发生了什么" class="headerlink" title="进一步来看new 让这个过程发生了什么"></a>进一步来看new 让这个过程发生了什么</h3><p>当使用<code>new</code>命令时，它后面的函数依次执行下面的4个步骤：</p>
+<ol>
+<li>创建一个空对象，作为将要返回的对象实例。</li>
+<li>将这个空对象的原型，指向构造函数的<code>prototype</code>属性。</li>
+<li>将这个空对象赋值给函数内部的<code>this</code>关键字。</li>
+<li>如果函数没有return其他对象，那么<code>new</code>表达式中的函数调用会自动返回这个新对象。</li>
+</ol>
+<p>也就是说，当我们使用<code>new</code>这个关键字时，实际上会先有一个空的对象被建立。</p>
+<p>接着<code>People</code>这个构造函数会被执行，这个空对象的原型，指向了<code>People.prototype</code>。</p>
+<p>我们知道当函数执行的时候，在<code>execution context</code>中会有<code>this</code>被建立，而<strong>当我们使用<code>new</code>的时候，函数里面的<code>this</code>会被指定成刚刚所建立的那个空对象</strong>。</p>
+<p>所以当执行<code>People</code>这个<code>function</code>，执行到<code>this.firstName</code>和<code>this.lastName</code>时，因为<code>this</code>现在指称的是那个空对象，所以实际上是在帮这个空对象赋予属性名称和属性值。</p>
+<p>在这样的过程中，<strong>只要这个构造函数<code>People</code> 没有指定<code>return</code>为其他对象，它就会直接返回给我们这个新建立的对象</strong>。</p>
+<p>接着让我们通过一段代码来更清楚的了解这个执行的过程：</p>
+<pre><code class="javascript">function  Person  ( ) { 
+  this . firstName =  &#39;Jay&#39; ; 
+  this . lastName =  &#39;Chou&#39; ; 
+  console . log ( &#39;这个函数有被执行&#39; ) ;
+}
+
+var person =  new  Person ( ) ; 
+console . log ( person ) ;
+</code></pre>
+<p>这时候在chrome 中呼叫出来的结果如下，说明了当我们使用<code>new</code> 在构造对象的时候<code>People</code> 这个<code>function</code> 确实有被执行：</p>
+<p><img src="/images/new/2.png" srcset="/img/loading.gif" alt></p>
+<h3 id="通过new-会帮我们建立一个空的对象"><a href="#通过new-会帮我们建立一个空的对象" class="headerlink" title="通过new 会帮我们建立一个空的对象"></a>通过new 会帮我们建立一个空的对象</h3><p>现在我把我们上面的代码改成这样：</p>
+<pre><code class="javascript">function  Person ( ) { 
+  console . log ( this ) ; 
+}
+
+var person =  new  Person ( ) ; 
+// console.log(person);
+</code></pre>
+<p>这时候代码返回的结果如下，表示的确在执行这段代码的过程中帮我们建立了一个新的空对象：</p>
+<p><img src="/images/new/3.jpg" srcset="/img/loading.gif" alt></p>
+<h3 id="函数的最后若return其他对象，则原新对象内容会被覆盖"><a href="#函数的最后若return其他对象，则原新对象内容会被覆盖" class="headerlink" title="函数的最后若return其他对象，则原新对象内容会被覆盖"></a>函数的最后若return其他对象，则原新对象内容会被覆盖</h3><p>现在，让我们把原本的代码稍微做如下修改：</p>
+<pre><code class="javascript">function  Person  ( ) { 
+  this . firstName =  &#39;Jay&#39; ; 
+  this . lastName =  &#39;Chou&#39; ; 
+  return   { &quot;RETURN&quot; : &quot;原本this的内容就不会被返回&quot; } ; 
+}
+
+var person =  new  Person ( ) ; 
+console . log ( person ) ;
+</code></pre>
+<p>构造函数的内部若<code>return</code>其他对象，<code>new</code>命令会返回<code>return</code>语句指定的对象，将原新对象内容覆盖掉；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。返回的结果如下：</p>
+<p><img src="/images/new/4.png" srcset="/img/loading.gif" alt></p>
+<h3 id="手写一个new实现"><a href="#手写一个new实现" class="headerlink" title="手写一个new实现"></a>手写一个new实现</h3><pre><code class="javascript">function create() {
+    // 创建一个空的对象
+    var obj = new Object(),
+    // 获得构造函数，arguments中去除第一个参数
+    Con = [].shift.call(arguments);
+    // 链接到原型，obj 可以访问到构造函数原型中的属性
+    obj.__proto__ = Con.prototype;
+    // 绑定 this 实现继承，obj 可以访问到构造函数中的属性
+    var ret = Con.apply(obj, arguments);
+    // 优先返回构造函数返回的对象
+    return ret instanceof Object ? ret : obj;
+};
+</code></pre>
+<p>使用这个手写的new</p>
+<pre><code class="javascript">function Person() {...}
+
+// 使用内置函数new
+var person = new Person(...)
+
+// 使用手写的new，即create
+var person = create(Person, ...)
+</code></pre>
+<p>代码原理解析：</p>
+<ol>
+<li>用<code>new Object()</code> 的方式新建了一个对象<code>obj</code></li>
+<li>取出第一个参数，就是我们要传入的构造函数。此外因为 <code>shift</code> 会修改原数组，所以 <code>arguments</code> 会被去除第一个参数</li>
+<li>将 <code>obj</code> 的原型指向构造函数，这样<code>obj</code>就可以访问到构造函数原型中的属性</li>
+<li>使用 <code>apply</code>，改变构造函数 <code>this</code> 的指向到新建的对象，这样 <code>obj</code> 就可以访问到构造函数中的属性</li>
+<li>返回 <code>obj</code></li>
+</ol>
+<h3 id="function-constructor-的实际应用"><a href="#function-constructor-的实际应用" class="headerlink" title="function constructor 的实际应用"></a>function constructor 的实际应用</h3><p>由上面的方法，我们可以通过<code>function</code>的方式来建立一个新的对象，如果我们想要<strong>建立出同属性名称但不同属性值的对象内容，我们可以把对象的属性值变成参数</strong>，如此就能通过此<code>function constructor</code>建立出许多不同的对象：</p>
+<pre><code class="javascript">function  Person  ( firstName , lastName )  { 
+  this . firstName = firstName ; 
+  this . lastName = lastName ; 
+}
+
+var person1 =  new  Person ( &#39;Jay&#39; ,  &#39;chou&#39; ) ; 
+console . log ( person1 ) ; 
+var person2 =  new  Person ( &#39;Jane&#39; ,  &#39;chou&#39; ) ; 
+console . log ( person2 ) ;
+</code></pre>
+<p>如此，我们就可以通过同一个构造函数建立出很多不同的对象：</p>
+<p><img src="/images/new/5.png" srcset="/img/loading.gif" alt></p>
+<p>此外，我们会把根据<strong>构造器（<code>constructor</code>）所建立出来的对象称作是实例（<code>instance</code>）</strong>，这在之前的文章里也有提过。</p>
+<h3 id="注意！如果我们忘了加上new关键字"><a href="#注意！如果我们忘了加上new关键字" class="headerlink" title="注意！如果我们忘了加上new关键字"></a>注意！如果我们忘了加上new关键字</h3><p>这里有一个地方我们需要非常留意，如果你在撰写代码的过程当中，忘记加上<code>new</code>这个关键字的话，比如：</p>
+<pre><code class="javascript">function  Person  ( ) { 
+  this . firstName =  &#39;Jay&#39; ; 
+  this . lastName =  &#39;Chou&#39; ;  
+}
+
+var person =  Person ( ) ; 
+console . log ( person ) ;
+</code></pre>
+<p>如此，因为JavaScript不知道你是要执行这个函数，还是要根据这个<code>function</code>去建立<code>object</code>，因次最后会返回<code>undefined</code>的结果。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>其实构造函数（function constructor）就是普通的function，只是我们可以通过这个function 来建立对象。</li>
+<li>通过在function 前面加上new 这个运算符，它会把函数中this 这个关键字建立成一个新的对象，然后如果你没有在该函数的内部指定返回出其它对象的话，它就会自动返回这个新的对象给你。</li>
+</ul>
+<p>那又是如何通过<code>function constructors</code> 来设定我们的原型（<code>prototype</code>）呢？让我们在下一篇文章来谈吧！</p>
+<p>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+              
+                <a class="hover-with-bg" href="/tags/constructor">constructor</a>
+              
+                <a class="hover-with-bg" href="/tags/new">new</a>
+              
+              <span id="/2019/10/18/谈谈JavaScript中的函数构造式和new关键字/" class="visitors leancloud_visitors" data-flag-title="谈谈JavaScript中的函数构造式和new关键字">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>2019</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="/js/lazyload.js"></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js"></script>
+  
+  <script src="/js/post.js"></script>
+
+
+  <script src="/lib/prettify/prettify.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "谈谈JavaScript中的函数构造式和new关键字&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js"></script>
+
+
+
+
+</body>
+</html>

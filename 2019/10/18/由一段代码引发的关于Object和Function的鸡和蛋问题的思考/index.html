@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content>
+  <meta name="author" content="米淇淋">
+  <meta name="keywords" content>
+  <title>由一段代码引发的关于Object和Function的鸡和蛋问题的思考 ~ 米淇淋の个人博客</title>
+
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
+<link rel="stylesheet" href="/lib/github-markdown/github-markdown.min.css">
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/github-v2.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="/lib/fancybox/jquery.fancybox.min.css">
+
+
+  
+
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">Archives</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">Categories</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">Tags</a>
+          </li>
+        
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('/img/default.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              <p class="mt-3">星期五, 十月 18日 2019, 10:23 上午</p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。<a id="more"></a> </p>
+<h3 id="鸡和蛋问题的由来"><a href="#鸡和蛋问题的由来" class="headerlink" title="鸡和蛋问题的由来"></a>鸡和蛋问题的由来</h3><p>首先<code>Object</code>和<code>Function</code>都是构造函数，而所有的构造函数都是<code>Function</code>的实例对象。 因此<code>Object</code>是<code>Function</code>的实例对象；而<code>Function.prototype</code>是<code>Object</code>的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：</p>
+<pre><code class="javascript">Object instanceof Function  // true
+Function instanceof Object  // true
+
+Object.__proto__ === Function.prototype  // true
+Function.__proto__ === Function.prototype  // true
+Function.prototype.__proto__ === Object.prototype  // true
+</code></pre>
+<p>那么<code>Object</code>和<code>Function</code>，谁是鸡谁是蛋呢？</p>
+<p>接下来就来深入探究下上面这段代码所引起的鸡生蛋蛋生鸡问题，从下面这张原型/原型链经典图入手，在这个过程中深入了解 <code>Object.prototype</code>、<code>Function.prototype</code>、<code>function Object()</code> 、<code>function Function()</code> 之间的关系，这个过程可能有点烧脑，毕竟是JS的一大玄学嘛。</p>
+<p><img src="/images/egg/1.jpg" srcset="/img/loading.gif" alt>  </p>
+<h3 id="Object-prototype"><a href="#Object-prototype" class="headerlink" title="Object.prototype"></a>Object.prototype</h3><p>原型链的尽头就是<code>Object.prototype</code>（不考虑 <code>null</code> 的情况下）。<strong>所有对象均从</strong><code>Object.prototype</code><strong>继承toString() 等公共属性</strong>。</p>
+<p><img src="/images/egg/2.jpg" srcset="/img/loading.gif" alt>   </p>
+<p><code>Object.prototype</code> 表示 <code>Object</code> 的原型对象，实际上<code>Object.prototype</code> 并不是通过<code>Object</code>函数创建的，为什么呢？看如下代码：</p>
+<pre><code class="javascript">function Dog() {
+  this.name = &#39;川普&#39;;
+}
+var dog = new Dog();
+dog.__proto__ === Dog.prototype;  // true
+</code></pre>
+<p>实例对象的<code>__proto__</code>会指向构造函数的<code>prototype</code>，即<code>dog.__proto__</code>指向 <code>Dog.prototype</code>，但是<code>Object.prototype.__proto__</code>又是 <code>null</code>，所以 <code>Object.prototype</code> 并不是通过 <code>Object</code> 函数创建的，那它如何生成的？其实 <code>Object.prototype</code> 是浏览器底层根据 ECMAScript 规范创造的一个对象，所以在经典图里面只是看起来<code>Object.prototype</code> 是通过 <code>Object</code> 函数创建的，实际上并不是。</p>
+<p><img src="/images/egg/3.jpg" srcset="/img/loading.gif" alt>  </p>
+<h3 id="Function-prototype"><a href="#Function-prototype" class="headerlink" title="Function.prototype"></a>Function.prototype</h3><p><code>Function.prototype</code>和<code>Function.__proto__</code>为<strong>同一对象</strong>。</p>
+<p><img src="/images/egg/4.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>这也意味着：<strong><code>Object</code>/<code>Array</code>等等构造函数本质上和<code>Function</code>一样，均继承于<code>Function.prototype</code>，从经典图上来看都是通过<code>new Function</code>构造出来的</strong>。</p>
+<p>当然，<code>Function.prototype</code> 对象是一个函数（对象），其<code>__proto__</code>属性指向 <code>Object.prototype</code>，即<code>Function.prototype</code>会直接继承root（<code>Object.prototype</code>）。</p>
+<p><img src="/images/egg/5.jpg" srcset="/img/loading.gif" alt> </p>
+<p>通过这点我们可以弄清<strong>继承的原型链</strong>：<code>Function|Object|Array...---&gt;Function.prototype---&gt;Object.prototype(root)</code>。如下图所示：</p>
+<p><img src="/images/egg/6.jpg" srcset="/img/loading.gif" alt> </p>
+<h3 id="function-Object"><a href="#function-Object" class="headerlink" title="function Object()"></a>function Object()</h3><p><code>Object</code> 作为构造函数时，其<code>__proto__</code>属性指向 <code>Function.prototype</code>，即:</p>
+<pre><code class="javascript">Object.__proto__ === Function.prototype  // true
+</code></pre>
+<p>从经典图来看：</p>
+<p><img src="/images/egg/7.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>使用 <code>new Object()</code> 创建实例对象o1时，实例对象o1的 <code>__proto__</code>属性指向构造函数的 <code>prototype</code> 属性，对应上图就是 <code>Object.prototype</code>，即<code>o1.__proto__ === Object.prototype</code>结果为<code>true</code>。</p>
+<p><code>Function.prototype</code>指向的对象，它的<code>__proto__</code>会指向<code>Object.prototype</code>，因为<code>Function.prototype</code>指向的对象也是一个普通的被<code>Object</code>创建的对象，所以也遵循基本的规则。</p>
+<h3 id="function-Function"><a href="#function-Function" class="headerlink" title="function Function()"></a>function Function()</h3><p><code>Function</code>也是一个函数对象，也有<code>__proto__</code>属性，既然是函数，那么它一定是被<code>Function</code>创建，所以<code>Function</code>是被自身创建的，所以它的<code>__proto__</code>指向了自身的<code>Prototype</code>：</p>
+<pre><code class="javascript">Function.__proto__ === Function.prototype  // true
+</code></pre>
+<p><img src="/images/egg/8.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>到这里就有点烧脑了吧，我们再看下鸡生蛋蛋生鸡问题。</p>
+<h3 id="Function-amp-Object-鸡和蛋问题"><a href="#Function-amp-Object-鸡和蛋问题" class="headerlink" title="Function &amp; Object 鸡和蛋问题"></a>Function &amp; Object 鸡和蛋问题</h3><p>由上面可知，<code>Object</code>构造函数继承了<code>Function.prototype</code>，同时<code>Function</code>构造函数继承了<code>Object.prototype</code>，这里就产生了<strong>鸡和蛋</strong>的问题。为什么会出现这种问题呢？必须首先更深入一层去理解<code>Function.prototype</code>这个对象，因为它是导致<code>Function instanceof Object</code>和<code>Object instanceof Function</code>都为<code>true</code>的原因。</p>
+<pre><code class="javascript">// Object instanceof Function     即
+Object.__proto__ === Function.prototype   // true
+
+// Function instanceof Object     即
+Function.__proto__.__proto__ === Object.prototype   // true
+
+// Object instanceof Object         即             
+Object.__proto__.__proto__ === Object.prototype   // true
+
+// Function instanceof Function 即    
+Function.__proto__ === Function.prototype   // true
+</code></pre>
+<p>根据JS规范，<code>Function.prototype</code>又是个不同于一般函数（对象）的函数（对象），其中：</p>
+<ol>
+<li><code>Function.prototype</code>像普通函数一样可以调用，但总是返回<code>undefined</code>。</li>
+<li>普通函数实际上是<code>Function</code>的实例，即普通函数继承于<code>Function.prototype</code>。即<code>func.__proto__ === Function.prototype</code>。</li>
+<li><code>Function.prototype</code>继承于<code>Object.prototype</code>，并且没有<code>prototype</code>这个属性。</li>
+<li>所以，<code>Function.prototype</code>其实是个另类的函数，可以独立于/先于<code>Function</code>产生。</li>
+</ol>
+<p>而<code>Object</code>本身是个（构造）函数，是<code>Function</code>的实例，即<code>Object.__proto__</code>就是<code>Function.prototype</code>。</p>
+<p><strong>总结：先有<code>Object.prototype</code>（原型链顶端），<code>Function.prototype</code>继承<code>Object.prototype</code>而产生，最后，<code>Function</code>和<code>Object</code>和其它构造函数继承<code>Function.prototype</code>而产生</strong>。</p>
+<p>看到这里估计也都看烦了，是不是还是有点混乱呀？乱也很正常。那这篇文章就先让它乱着，下一篇我们将请另一个老朋友来帮忙，把它彻底理清楚，这位老朋友就是——<code>instanceof</code>，那就且听请下回分解咯。</p>
+<p>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            
+              <p>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </p>
+            
+            <p>
+              <i class="iconfont icon-tag"></i>
+              
+                <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+              
+                <a class="hover-with-bg" href="/tags/Function">Function</a>
+              
+              <span id="/2019/10/18/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" class="visitors leancloud_visitors" data-flag-title="由一段代码引发的关于Object和Function的鸡和蛋问题的思考">
+                <em id="visitors-text" class="post-meta-item-text"></em>
+                <i id="visitors-count"></i>
+              </span>
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"> <b>2019</b></a>
+    <br>
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/popper/popper.min.js"></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+  <script src="/js/lazyload.js"></script>
+
+
+  
+    <script src="/lib/tocbot/tocbot.min.js"></script>
+  
+  <script src="/js/post.js"></script>
+
+
+  <script src="/lib/prettify/prettify.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  ');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="/lib/typed/typed.min.js"></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "由一段代码引发的关于Object和Function的鸡和蛋问题的思考&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="/lib/anchor/anchor.min.js"></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js"></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script>
+    $('#post').find('img').each(
+      function () {
+        var _this = $(this);
+        var _src = _this.attr("src");
+        _this.wrap('<a data-fancybox="images" href="' + _src + '" ></a>');
+      }
+    );
+  </script>
+
+
+
+  <script src="/lib/smooth-scroll/smooth-scroll.min.js"></script>
+
+
+
+
+</body>
+</html>

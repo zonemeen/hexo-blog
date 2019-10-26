@@ -338,7 +338,7 @@ JavaScript 真是一门面向对象的编程语言吗？在过去JS语言的发�
 IIFE(Immediately Invoked Functions Expressions)其实可以就字面上直接来理解，Immediately就是立即的意思，invoked则是执行某个函数时「执行」的意思，function expression是一种用来创建函数的方法，总的来说，就是用函数表达式的方式建立函数后并立即执行它。
 下面我们将做更进一步的介绍和说明。
 函数的声明JavaScript 中有两种常见的声明函数的方法，分别是通过function 命令或函数表达式声明，来看个简单的例子：
-1234567891011// function 命令 function  sayHi ( name )  &#123;   console . log ( 'Hi'  + name ) ; &#125; sayHi( 'mi</div>
+// function 命令 function  sayHi ( name )  &#123;   console . log ( 'Hi'  + name ) ; &#125; sayHi( 'miqilin' ) ;// </div>
         </div>
       </a>
 
@@ -380,9 +380,9 @@ IIFE(Immediately Invoked Functions Expressions)其实可以就字面上直接来
 先前介绍事件的时候有说过，「JavaScript 是一个事件驱动(Event-driven) 的编程语言」，而事件的概念就如同：
 办公室电话响了(事件被触发Event fired) -&gt; 接电话(处理事件Event Handler)
 而写成代码形式就类似：
-12// 注：这里只是比喻，并没有电话响这个事件Office.addEventListener( '电话响', function 接电话()&#123; &#125;, false);
+// 注：这里只是比喻，并没有电话响这个事件Office.addEventListener( '电话响', function 接电话()&#123; &#125;, false);
 可以看到，Office通过addEventListener方法去注册了一个事件，当这个事件被触发时，它会去执行我们所指定的第二个参数，也就是某个「函数」(接电话)。
-换句话说，这个函数只会在满足了某个条件才会被动地去执行</div>
+换句话说，这个函数只会在满足了某个条件才会被动地去执行，我</div>
         </div>
       </a>
 
@@ -426,14 +426,14 @@ IIFE(Immediately Invoked Functions Expressions)其实可以就字面上直接来
 load 事件：
 
 注册在 window 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发load事件。
-123window.addEventListener('load', function(event) &#123;  console.log('所有资源都加载完成');&#125;);
+window.addEventListener('load', function(event) &#123;  console.log('所有资源都加载完成');&#125;);
 
 unload 、 beforeunload 事件：
 
 与 load 事件相反，unload 与 beforeunload 事件分别会在离开页面或重新整理时触发，而 beforeunload 会跳出对话框询问使用者是否要离开当前页面。
 
 
-er</div>
+error</div>
         </div>
       </a>
 
@@ -476,8 +476,8 @@ er</div>
 那么，今天我们要来看的第一个部分，就是隐藏在事件处理程序中的event 。
 隐藏在监听函数中的”event”当监听的事件发生时，浏览器会去执行我们通过addEventListener()注册的事件处理程序函数。
 这个时候，EventListener 会去创建一个「事件对象」 (Event Object)，里面包含了所有与这个事件相关的属性，并且以「参数」的形式传给我们的处理程序函数：
-123456789&lt;button id="btn"&gt;Click&lt;/button&gt;......var btn = document.getElementById('btn');// 参数 e 就是上面所说的事件对象 // 因为是参数，当然可以自己定名称btn.addEventListener('click', function(e)&#123;  console.log(e);&#125;, false);
-当点击&lt;but</div>
+&lt;button id="btn"&gt;Click&lt;/button&gt;......var btn = document.getElementById('btn');// 参数 e 就是上面所说的事件对象 // 因为是参数，当然可以自己定名称btn.addEventListener('click', function(e)&#123;  console.log(e);&#125;, false);
+当点击&lt;button&gt;后，</div>
         </div>
       </a>
 
@@ -566,9 +566,9 @@ DOM</div>
           <div class="index-text mb-1">之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。
 那arguments到底是什么呢？下面就由我来简洁地介绍一下 arguments吧。
 什么是参数(parameters)在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。
-1234567function MyFavorite(house, car, money) &#123;    console.log(house);    console.log(car);    console.log(money);&#125;MyFavorite();
+function MyFavorite(house, car, money) &#123;    console.log(house);    console.log(car);    console.log(money);&#125;MyFavorite();
 首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入MyFavorite()这样就可以了！
-一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不</div>
+一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在</div>
         </div>
       </a>
 
@@ -671,7 +671,7 @@ DOM</div>
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>

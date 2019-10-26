@@ -143,8 +143,8 @@
           <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
 对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
 官方对instanceof运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：
-12345function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true
-上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof </div>
+function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true
+上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof Objec</div>
         </div>
       </a>
 
@@ -230,9 +230,9 @@
         <div class="index-excerpt">
           <div class="index-text mb-1">作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。
 鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：
-123456Object instanceof Function  // trueFunction instanceof Object  // trueObject.__proto__ === Function.prototype  // trueFunction.__proto__ === Function.prototype  // trueFunction.prototype.__proto__ === Object.prototype  // true
+Object instanceof Function  // trueFunction instanceof Object  // trueObject.__proto__ === Function.prototype  // trueFunction.__proto__ === Function.prototype  // trueFunction.prototype.__proto__ === Object.prototype  // true
 那么Object和Function，谁是鸡谁是蛋呢？
-接下来就来深入探究下上面这段代码所引</div>
+接下来就来深入探究下上面这段代码所引起的鸡生蛋蛋</div>
         </div>
       </a>
 
@@ -270,10 +270,10 @@
         
         <div class="index-excerpt">
           <div class="index-text mb-1">根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。
-封装函数1function addClass(classes)&#123;&#125; //可将所有输入的标签的class添加一个类
+封装函数function addClass(classes)&#123;&#125; //可将所有输入的标签的class添加一个类
 实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
-123456function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(node)  for (let i = 0; i &lt; allTag.length; i++) &#123;    allTag[i].classList.add(classes)  &#125;&#125;
-命名空间在全局变量中创建一个对象</div>
+function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(node)  for (let i = 0; i &lt; allTag.length; i++) &#123;    allTag[i].classList.add(classes)  &#125;&#125;
+命名空间在全局变量中创建一个对象，用来储存封装</div>
         </div>
       </a>
 
@@ -312,12 +312,12 @@
         <div class="index-excerpt">
           <div class="index-text mb-1">在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。
 DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
-1var newDiv = document.createElement('div');
+var newDiv = document.createElement('div');
 在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChild()等方法将新元素加入至指定的位置之后才会显示。
 新建立的newDiv我们也可以同时对它指定属性，如：
-12newDiv.id = "myNewDiv"; newDiv.className = "box";
+newDiv.id = "myNewDiv"; newDiv.className = "box";
 document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有文字节点，那么document.createTextNode()就是用来建立文字节点的方法。
-用法很简单，直接在docume</div>
+用法很简单，直接在document.</div>
         </div>
       </a>
 
@@ -468,9 +468,9 @@ JavaScript核心 (以ECMA</div>
 分别运算
 查找特定值等  
 
-123456789101112131415161718let people = [  &#123;    name: '马云',    money: 2000  &#125;,  &#123;    name: '马化腾',    money: 1800  &#125;,  &#123;    name: '李彦宏',    money: 1500  &#125;,  &#123;    name: '我',    money: Infinity  &#125;];
+let people = [  &#123;    name: '马云',    money: 2000  &#125;,  &#123;    name: '马化腾',    money: 1800  &#125;,  &#123;    name: '李彦宏',    money: 1500  &#125;,  &#123;    name: '我',    money: Infinity  &#125;];
 forEach：遍历数组forEach与另外几种方法有些许不同，就是除了forEach以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是undefined(没有返回任何值)。  
-1234var forEachLoop = people.fo</div>
+var forEachLoop = people.forEach( function ( item, index, </div>
         </div>
       </a>
 
@@ -665,7 +665,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>

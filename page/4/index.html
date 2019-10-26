@@ -190,11 +190,12 @@
     
 原文链接：https://davidwalsh.name/javascript-tricks#comments   
 数组去重数组去重可能比您想象的更容易：  
-12var j = [...new Set([1, 2, 3, 4, 4])]&gt;&gt; [1, 2, 3, 4]
+var j = [...new Set([1, 2, 3, 4, 4])]&gt;&gt; [1, 2, 3, 4]
 很简单有木有！ 
 过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，null，false等）？ 你可能不知道还有这个技巧：  
-12let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
-创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象</div>
+let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
+创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象：  
+</div>
         </div>
       </a>
 
@@ -234,9 +235,9 @@
           <div class="index-text mb-1">这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！    
 什么意思呢？
 假设我们现在分别建立对象、函数和数组，直接上代码：  
-123456789101112131415161718192021// Object var a =  &#123;   name : 'miqilin' &#125;// function var  b  =  function ( ) &#123;   console . log ( 'Hello' ) ; &#125;// Array var c =  [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d =  'This is string' ;// number var e =  2 ;// boolean var f =  true ;
+// Object var a =  &#123;   name : 'miqilin' &#125;// function var  b  =  function ( ) &#123;   console . log ( 'Hello' ) ; &#125;// Array var c =  [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d =  'This is string' ;// number var e =  2 ;// boolean var f =  true ;
 接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的prototype。  
-对象（obj</div>
+对象（object）我们可以看到a这个对象本身的prototype也是一个对象</div>
         </div>
       </a>
 
@@ -277,10 +278,10 @@
 所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   
 构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  
 构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。我们先使用构造函数创建一个对象：  
-123456function Dog() &#123;    this.name = '阿黄'&#125;var dog = new Dog()console.log(dog.name)     // 阿黄
+function Dog() &#123;    this.name = '阿黄'&#125;var dog = new Dog()console.log(dog.name)     // 阿黄
 上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。  
 原型prototype  
-JavaScript是一种基于</div>
+JavaScript是一种基于原型的语言(</div>
         </div>
       </a>
 
@@ -371,11 +372,11 @@ JavaScript是一种基于</div>
 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。 
 这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。  
 内存空间管理JavaScript的内存生命周期:  
-1231. 分配你所需要的内存2. 使用分配到的内存（读、写）3. 不需要时将其释放、归还
+1. 分配你所需要的内存2. 使用分配到的内存（读、写）3. 不需要时将其释放、归还
 为了便于理解，我们使用一个简单的例子来解释这个周期。   
-123var a = 10;  // 在内存中给数值变量分配空间alert(a + 90);  // 使用分配到的内存a = null; // 使用完毕之后，释放内存空间
+var a = 10;  // 在内存中给数值变量分配空间alert(a + 90);  // 使用分配到的内存a = null; // 使用完毕之后，释放内存空间
 在JS中，每一个数据都需要一个内存空间。内存空间又被分为两种，栈内存(stack)与堆内存(heap)。  
-栈与堆栈(stack)是有序的，主要存放一些基本类型的变量和对象的地址，每个区块按照一定次序存放（后进先出），它们都是直接按</div>
+栈与堆栈(stack)是有序的，主要存放一些基本类型的变量和对象的地址，每个区块按照一定次序存放（后进先出），它们都是直接按值存储在栈中</div>
         </div>
       </a>
 
@@ -460,12 +461,12 @@ JavaScript是一种基于</div>
 在这篇文章中，我已经简略介绍了undefined和null的特性了。
 本文将探讨JavaScript中undefined和null之间的相似和差异之处。  
 相似性（1）undefined和null在if语句中，都会被自动转为false，加!转换为true，相等运算符对于两者比较是相等的。  
-12345678910if (!undefined)     console.log('undefined is false');// undefined is falseif (!null)     console.log('null is false');// null is falseundefined == null// true
+if (!undefined)     console.log('undefined is false');// undefined is falseif (!null)     console.log('null is false');// null is falseundefined == null// true
 （2）在JavaScript中，只有六个falsy值，null和undefined都包含在六个falsy值中，当进行逻辑判断时所有的Falsy值均为false。   
 
 false
 0
-‘’ </div>
+‘’ (空字符串，’’和””</div>
         </div>
       </a>
 
@@ -504,7 +505,8 @@ false
 以下我将介绍将各种类型的值，分别转换成数字、字符串或者布尔值（基于ES5规范）。   
 ToNumber（1）Number()   
 使用Number函数，可以将任意类型的值转化成数值。   
-12345678910111213141516171819202122//数值Number(123)  // 123  转换后为原值//字符串Number('123')  // 123  转换为相应的数值，前提能被解析为数值 //字符串Number('123abc')   // NaN  如果不能被解析为数值，则返回 NaN//布尔值Number(true)  // 1Number(false)  // 0//undefinedNumber(undefined)  // NaN//nullNumber(null)  // 0//对象Number(&#123;a: 1&#125;) // NaNNumber([5]) /</div>
+//数值Number(123)  // 123  转换后为原值//字符串Number('123')  // 123  转换为相应的数值，前提能被解析为数值 //字符串Number('123abc')   // NaN  如果不能被解析为数值，则返回 NaN//布尔值Number(true)  // 1Number(false)  // 0//undefinedNumber(undefined)  // NaN//nullNumber(null)  // 0//对象Number(&#123;a: 1&#125;) // NaNNumber([5]) // 5  //包含单个数值的数组将返回数字
+（2）ParseInt()</div>
         </div>
       </a>
 
@@ -544,11 +546,11 @@ ToNumber（1）Number()
           <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。  
 通过本文，我将尝试概述Javascript中类型判断的几种方法（基于ES5的规范）。
 typeoftypeof判断类型方法算是我们最最常用的了，直接上代码：   
-123456typeof 3 // "number"typeof "abc" // "string"typeof &#123;&#125; // "object"typeof true // "boolean"typeof undefined // "undefined"typeof function()&#123;&#125; // "function"
+typeof 3 // "number"typeof "abc" // "string"typeof &#123;&#125; // "object"typeof true // "boolean"typeof undefined // "undefined"typeof function()&#123;&#125; // "function"
 以上这些类型都比较正常，直到：   
-1typeof null // "object"
+typeof null // "object"
 这显然是一个错误。 这可能会在以后的ECMAScript哪个版本中修复，返回值将为“null”。   
-除此之外 Object 下还有很多细分的类型，比如 Arra</div>
+除此之外 Object 下还有很多细分的类型，比如 Array、Date、</div>
         </div>
       </a>
 
@@ -655,7 +657,7 @@ typeoftypeof判断类型方法算是我们最最常用的了，直接上代码�
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>

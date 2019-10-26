@@ -144,8 +144,8 @@
 SSH KeysSSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  
 由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     
 添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     
-1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。1$ git init    // 在当前目录新建一个Git代码库
-这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：1234$ echo "# myblog" </div>
+1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。$ git init    // 在当前目录新建一个Git代码库
+这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：$ echo "# myblog" &gt;&</div>
         </div>
       </a>
 
@@ -366,7 +366,7 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>

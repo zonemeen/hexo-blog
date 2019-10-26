@@ -200,7 +200,7 @@
 好，如果上面三行就看得懂的话那么就不用再往下看了，Congratulations！
 …… 不过如果你是初学者的话，我想应该不会，如果仅用三言两语就把闭包讲通，那还能称为Javascript 语言的一个难点吗？
 先来举个例子：
-1234567var n = 1;function f1() &#123;    console.</div>
+var n = 1;function f1() &#123;    console.log(n);</div>
         </div>
       </a>
 
@@ -292,7 +292,8 @@
 本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——作用域链。
 作用域(Scope)在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？
 作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：
-1234567function fn() &#123;    var inVariable = "inner variable";    console.log(inVariable); // inner variable&#125;fn(); console.log(inVariable); // Uncaught ReferenceError: inVariable is not defin</div>
+function fn() &#123;    var inVariable = "inner variable";    console.log(inVariable); // inner variable&#125;fn(); console.log(inVariable); // Uncaught ReferenceError: inVariable is not defined
+从上面的</div>
         </div>
       </a>
 
@@ -336,7 +337,7 @@
 
 详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下变量对象。
 变量对象变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明，先来看一段代码示例：
-12345678910function foo()&#123;    var a = 10;         function b()&#123;&#125;    (function c()&#123;&#125;)</div>
+function foo()&#123;    var a = 10;         function b()&#123;&#125;    (function c()&#123;&#125;);    consol</div>
         </div>
       </a>
 
@@ -466,7 +467,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
 大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
 谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明确的区分两者，也就是说 function 可以被当作 constructor 或者当作一般函数调用。
 而 constructor 的用法就是 function 搭配new关键字：
-1234567function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  'Chou' ; &#125;var pers</div>
+function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  'Chou' ; &#125;var person =  n</div>
         </div>
       </a>
 
@@ -680,7 +681,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
   <script src="/lib/prettify/prettify.min.js"></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
+      $('pre').addClass('prettyprint  ');
       prettyPrint();
     })
   </script>

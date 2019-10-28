@@ -5,7 +5,7 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -16,7 +16,7 @@
   <meta name="keywords" content>
   <title>米淇淋の的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css/css/all.min.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css/github-markdown.min.css">
@@ -42,9 +42,12 @@
   <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -84,7 +87,8 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
           </li>
         
       </ul>
@@ -145,7 +149,7 @@
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。
 废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。
 基本概念 
@@ -194,7 +198,7 @@
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">相信很多初学者在学习JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。
 在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章《JavaScript系列之变量对象》和《JavaScript系列之作用域和作用域链》，因为它们相互之间都是有关联的。
 闭包是什么？首先，先来看看MDN 对闭包的定义：
@@ -254,7 +258,7 @@ var n = 1;function f1() &#123;    console.log(n);</div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">上一篇《JavaScript系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。
 再来回顾一下关于执行上下文的三个阶段生命周期：
 
@@ -308,7 +312,7 @@ var n = 1;function f1() &#123;    console.log(n);</div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在上一篇《JavaScript系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。
 此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。
 先来回顾一下关于执行上下文的三个阶段生命周期：
@@ -361,7 +365,7 @@ function fn() &#123;    var inVariable = "inner variable";    console.log(inVari
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。
 上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：
 
@@ -409,7 +413,7 @@ function foo()&#123;    var a = 10;         function b()&#123;&#125;    (functio
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">如果你想成为一名优秀的JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。
 执行上下文和执行栈是JavaScript的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。
 执行上下文（Execution Context）当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：
@@ -460,7 +464,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。
 在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（Name）和该函数的内容（Code），但其实function这里面还有一个属性，这个属性就是prototype，这个属性会以空对象的型式呈现。
 除非你是把function当做function constructor来使用，否则这个属性就没有特别的用途；但如果你是把它当做function constructor，通过new这个关键字来执行这个function的话，它就有特别的意义了。
@@ -510,7 +514,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？
 大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
 谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明确的区分两者，也就是说 function 可以被当作 constructor 或者当作一般函数调用。
@@ -559,7 +563,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">2019年6月23日下午，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。
 镇远古镇第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦😜。
 我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。
@@ -621,7 +625,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
 而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（prototype）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。
 复习原型/原型链JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。
@@ -695,7 +699,8 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
   
 
   
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -707,7 +712,8 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -728,18 +734,18 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js"></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js"></script>
+  <script src="/js/lazyload.js" ></script>
 
 
 
-  <script src="/lib/prettify/prettify.min.js"></script>
+  <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  ');
@@ -749,7 +755,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js"></script>
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -769,7 +775,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js"></script>
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
@@ -786,7 +792,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 
 
 
-  <script src="/js/local-search.js"></script>
+  <script src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -798,7 +804,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 
 
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
   <script>
     $('#post').find('img').each(
       function () {
@@ -811,7 +817,7 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js"></script>
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js" ></script>
 
 
 

@@ -5,7 +5,7 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -16,7 +16,7 @@
   <meta name="keywords" content>
   <title>米淇淋の的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css/css/all.min.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css/github-markdown.min.css">
@@ -42,9 +42,12 @@
   <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -84,7 +87,8 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
           </li>
         
       </ul>
@@ -145,7 +149,7 @@
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。  
 对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？  
 第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。  
@@ -197,7 +201,7 @@
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！
     
 原文链接：https://davidwalsh.name/javascript-tricks#comments   
@@ -249,7 +253,7 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！    
 什么意思呢？
 假设我们现在分别建立对象、函数和数组，直接上代码：  
@@ -297,7 +301,7 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。   
 所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   
 构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  
@@ -349,7 +353,7 @@ JavaScript是一种基于原型的语言(</div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。   
 而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着malloc() 和 free() 这种低级内存管理语言也有可能出现泄露内存的情况。  
 这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   
@@ -403,7 +407,7 @@ JavaScript是一种基于原型的语言(</div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">对于很多没经验的前端开发来说，觉得JS反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。
 直到最近，看了阮一峰老师关于JS内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。 
 这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。  
@@ -454,7 +458,7 @@ var a = 10;  // 在内存中给数值变量分配空间alert(a + 90);  // 使用
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~   
 拖延症的形成我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。  
      
@@ -504,7 +508,7 @@ var a = 10;  // 在内存中给数值变量分配空间alert(a + 90);  // 使用
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在JavaScript中，将一个变量赋值为undefined或null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。
 在这篇文章中，我已经简略介绍了undefined和null的特性了。
 本文将探讨JavaScript中undefined和null之间的相似和差异之处。  
@@ -554,7 +558,7 @@ false
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。
 以下我将介绍将各种类型的值，分别转换成数字、字符串或者布尔值（基于ES5规范）。   
 ToNumber（1）Number()   
@@ -602,7 +606,7 @@ ToNumber（1）Number()
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。  
 通过本文，我将尝试概述Javascript中类型判断的几种方法（基于ES5的规范）。
 typeoftypeof判断类型方法算是我们最最常用的了，直接上代码：   
@@ -671,7 +675,8 @@ typeof null // "object"
   
 
   
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -683,7 +688,8 @@ typeof null // "object"
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -704,18 +710,18 @@ typeof null // "object"
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js"></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js"></script>
+  <script src="/js/lazyload.js" ></script>
 
 
 
-  <script src="/lib/prettify/prettify.min.js"></script>
+  <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  ');
@@ -725,7 +731,7 @@ typeof null // "object"
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js"></script>
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -745,7 +751,7 @@ typeof null // "object"
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js"></script>
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
@@ -762,7 +768,7 @@ typeof null // "object"
 
 
 
-  <script src="/js/local-search.js"></script>
+  <script src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -774,7 +780,7 @@ typeof null // "object"
 
 
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
   <script>
     $('#post').find('img').each(
       function () {
@@ -787,7 +793,7 @@ typeof null // "object"
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js"></script>
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js" ></script>
 
 
 

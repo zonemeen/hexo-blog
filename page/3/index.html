@@ -5,7 +5,7 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -16,7 +16,7 @@
   <meta name="keywords" content>
   <title>米淇淋の的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css/css/all.min.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css/github-markdown.min.css">
@@ -42,9 +42,12 @@
   <header style="height: 100vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -84,7 +87,8 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
           </li>
         
       </ul>
@@ -145,7 +149,7 @@
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
 对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
 官方对instanceof运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：
@@ -194,7 +198,7 @@ function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  /
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">JavaScript起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。
 现代Web应用程序严重依赖JavaScript，尤其是单页应用程序（SPA）。借助于React，AngularJS和Vue.js等新兴框架，Web应用程序主要使用JavaScript构建。
 扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能会遇到限制并迷失在混乱的海洋中。我想分享一些小技巧，这些技巧将帮助您以有效的方式编写干净的代码。
@@ -245,7 +249,7 @@ function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  /
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。
 鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：
 Object instanceof Function  // trueFunction instanceof Object  // trueObject.__proto__ === Function.prototype  // trueFunction.__proto__ === Function.prototype  // trueFunction.prototype.__proto__ === Object.prototype  // true
@@ -292,7 +296,7 @@ Object instanceof Function  // trueFunction instanceof Object  // trueObject.__p
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。
 封装函数function addClass(classes)&#123;&#125; //可将所有输入的标签的class添加一个类
 实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
@@ -339,7 +343,7 @@ function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。
 DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
 var newDiv = document.createElement('div');
@@ -391,7 +395,7 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在上一篇的分享当中，我们简单介绍了BOM 与DOM，也了解到JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。
 当一个网页被载入到浏览器时，浏览器会首先分析这个HTML 文档，然后会依照这份HTML 的内容解析成DOM (Document Object Model，即文件对象模型)。
 而DOM 是W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过DOM 提供的API 来操作DOM 的内容、结构与样式。
@@ -446,7 +450,7 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」，其中： 
 
 HTML 负责资料与结构
@@ -506,7 +510,7 @@ JavaScript核心 (以ECMA</div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。 
    
 接下来都是使用底下的基础数组来实现一些方法：  
@@ -560,7 +564,7 @@ var forEachLoop = people.forEach( function ( item, index, </div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">很多前端初级开发者也许并不深究typeof null为何为Object？想更深地了解这一bug的由来，可以参阅Dr. Axel Rauschmayer关于”typeof null”的历史这篇文章。 
 
 原文链接：http://www.2ality.com/2013/10/typeof-null.html
@@ -611,7 +615,7 @@ var forEachLoop = people.forEach( function ( item, index, </div>
         
           
         
-        <div class="index-excerpt">
+        <div class="index-excerpt" >
           <div class="index-text mb-1">当你刚开始学习JavaScript时，你是否有遇到许多书籍，教程以及那些说“JavaScript中的所有内容都是对象”的人？这算是一个JavaScript中老生常谈的话题了，虽然它并不是100％正确（JavaScript中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。
      
 想必有点疑惑吧，那么造成这种现象的原因是什么呢？接下来就由我一一道来。  
@@ -679,7 +683,8 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
   
 
   
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -691,7 +696,8 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -712,18 +718,18 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js"></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js"></script>
+  <script src="/js/lazyload.js" ></script>
 
 
 
-  <script src="/lib/prettify/prettify.min.js"></script>
+  <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  ');
@@ -733,7 +739,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js"></script>
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -753,7 +759,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js"></script>
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
@@ -770,7 +776,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="/js/local-search.js"></script>
+  <script src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -782,7 +788,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
   <script>
     $('#post').find('img').each(
       function () {
@@ -795,7 +801,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js"></script>
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js" ></script>
 
 
 

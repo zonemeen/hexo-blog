@@ -5,7 +5,7 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
@@ -16,7 +16,7 @@
   <meta name="keywords" content>
   <title>【译】谈谈“typeof null为object”这一bug的由来 ~ 米淇淋の的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css/css/all.min.css">
+  <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/lib/mdbootstrap/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css/github-markdown.min.css">
@@ -42,9 +42,12 @@
   <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋の的个人博客</strong>&nbsp;</a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
@@ -84,7 +87,8 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
           </li>
         
       </ul>
@@ -226,7 +230,8 @@
   
 
   
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
@@ -238,7 +243,8 @@
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -259,23 +265,23 @@
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js"></script>
-<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-<script src="/lib/mdbootstrap/js/mdb.min.js"></script>
-<script src="/js/main.js"></script>
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js/popper.min.js" ></script>
+<script src="/lib/bootstrap/js/bootstrap.min.js" ></script>
+<script src="/lib/mdbootstrap/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js"></script>
+  <script src="/js/lazyload.js" ></script>
 
 
   
-    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js/tocbot.min.js"></script>
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js/tocbot.min.js" ></script>
   
-  <script src="/js/post.js"></script>
+  <script src="/js/post.js" ></script>
 
 
-  <script src="/lib/prettify/prettify.min.js"></script>
+  <script src="/lib/prettify/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  ');
@@ -285,7 +291,7 @@
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js"></script>
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
@@ -305,7 +311,7 @@
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js"></script>
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
@@ -322,7 +328,7 @@
 
 
 
-  <script src="/js/local-search.js"></script>
+  <script src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -334,7 +340,7 @@
 
 
 
-  <script src="/lib/fancybox/jquery.fancybox.min.js"></script>
+  <script src="/lib/fancybox/jquery.fancybox.min.js" ></script>
   <script>
     $('#post').find('img').each(
       function () {
@@ -347,7 +353,7 @@
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js"></script>
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js/smooth-scroll.min.js" ></script>
 
 
 

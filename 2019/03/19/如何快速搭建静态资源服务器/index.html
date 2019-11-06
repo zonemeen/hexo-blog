@@ -157,7 +157,7 @@
 </ul>
 <p>①接下来第一步，先创建一个空目录：<br><img src="/images/http-server/4.jpg" srcset="/img/loading.gif" alt>     </p>
 <p>②利用命令行工具进入这个目录，这里用的是Git Bash。右击鼠标，点击Git Bash here，即可用Git Bash打开这个目录：<br><img src="/images/http-server/5.jpg" srcset="/img/loading.gif" alt>    </p>
-<p>③运行以下命令安装http-server：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g http-server</span><br></pre></td></tr></table></figure></p>
+<p>③运行以下命令安装http-server：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install http-server -g</span><br></pre></td></tr></table></figure></p>
 <p>这将http-server全局安装，以便它可以从命令行运行。</p>
 <p><img src="/images/http-server/6.jpg" srcset="/img/loading.gif" alt>    </p>
 <p>④使用HTTP-Server，命令行进入当前文件夹，输入以下命令即可：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ http-server</span><br></pre></td></tr></table></figure></p>
@@ -167,8 +167,9 @@
 <ol>
 <li><a href="http://192.168.1.116:8080/" target="_blank" rel="noopener">http://192.168.1.116:8080/</a> （只有这个地址能在手机中预览）</li>
 <li><a href="http://127.0.0.1:8080/" target="_blank" rel="noopener">http://127.0.0.1:8080/</a> （2和3性质是一样的）</li>
-<li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> （较为常用）    </li>
+<li><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a> （较为常用）   </li>
 </ol>
+<p>如果发现页面不存在，就在地址栏后面加 /index.html ，变成 <a href="http://127.0.0.1:xxxx/index.html" target="_blank" rel="noopener">http://127.0.0.1:xxxx/index.html</a></p>
 <p>⑤在该目录中创建一个HTML文件，您可以通过此HTTP地址访问它：<br><img src="/images/http-server/8.jpg" srcset="/img/loading.gif" alt><br><img src="/images/http-server/9.jpg" srcset="/img/loading.gif" alt>    </p>
 <p>⑥这里Windows 用户需要注意了，如果你发现你修改了源代码，页面却无法更新，说明 http-server 的缓存还未消除，那么可以这样做：  </p>
 <ol>
@@ -180,6 +181,7 @@
 <h3 id="其他命令安装HTTP-Server"><a href="#其他命令安装HTTP-Server" class="headerlink" title="其他命令安装HTTP-Server"></a>其他命令安装HTTP-Server</h3><p>这里就不仔细介绍步骤了，因为大部分操作和结果与第2步是一样的，直接上命令： </p>
 <p><strong>第一种方法：</strong><br>安装：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm i startserver -g</span><br></pre></td></tr></table></figure></p>
 <p>快速开启：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ startserver</span><br></pre></td></tr></table></figure></p>
+<p>也可以简写：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ss</span><br></pre></td></tr></table></figure></p>
 <p><strong>第二种方法：</strong><br>安装：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g live-server</span><br></pre></td></tr></table></figure></p>
 <p>快速开启：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ live-server</span><br></pre></td></tr></table></figure></p>
 <p>如果看到其他有意思的方法，后续还会增加的！   </p>

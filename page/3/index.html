@@ -137,6 +137,61 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/06/28/JavaScript系列之对象的继承/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/06/28/JavaScript系列之对象的继承/">
+        <p class="h4 index-header">JavaScript系列之对象的继承</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
+而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（prototype）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。
+复习原型/原型链JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。
+其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：
+
+所有对象都有一个属性 __proto__ 指向一个对象，也就是原型
+每个对象的原型都可以通过 constructor 找到构造函数，构造函数也可以通过 prototype 找到原型
+所有函数都可以通过 __proto__ 找到 Function 对象
+所有对象都可以通过</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-28&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+          
+            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
+          
+            <a href="/tags/%E7%BB%A7%E6%89%BF">继承</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/26/从instanceof身上深入理解原型原型链/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -593,55 +648,6 @@ var forEachLoop = people.forEach( function ( item, index, </div>
           <i class="iconfont icon-tag"></i>
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/05/28/JS中一切都是对象吗？看这一篇就知道了/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/05/28/JS中一切都是对象吗？看这一篇就知道了/">
-        <p class="h4 index-header">JS中一切都是对象吗？看这一篇就知道了</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">当你刚开始学习JavaScript时，你是否有遇到许多书籍，教程以及那些说“JavaScript中的所有内容都是对象”的人？这算是一个JavaScript中老生常谈的话题了，虽然它并不是100％正确（JavaScript中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。
-     
-想必有点疑惑吧，那么造成这种现象的原因是什么呢？接下来就由我一一道来。  
-历史原因说起一切都是对象这种说法的由来，就要好好提一下历史因素了。  
-1995年，JavaScript诞生之年，Netscape公司（JavaScript的设计者）与Sun公司（Java语言的发明者和所有者）合作开发一种可以嵌入网页的脚本语言，将JavaScript的数据结构借鉴Java而设计，包括将值分成原始值和对象两大类。   
-Java中一切皆对象，但基本类型却不是对象，为了解决这个问题，Java让每个基本类型都对应了一个包装器类型。包装器类型将基本类型包装起来，添加了属性和方法，包装器类型即为对象，所以可以这么说Java中的一切都可以充当对象，不会说的那么绝对。  
-因此借鉴了Java数据结构的</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-28&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
-          
-            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
           
         
       </div>

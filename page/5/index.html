@@ -137,6 +137,56 @@
     
     
       <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/04/26/JavaScript系列之类型判断/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/26/JavaScript系列之类型判断/">
+        <p class="h4 index-header">JavaScript系列之类型判断</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。  
+通过本文，我将尝试概述Javascript中类型判断的几种方法（基于ES5的规范）。
+typeoftypeof判断类型方法算是我们最最常用的了，直接上代码：   
+typeof 3 // "number"typeof "abc" // "string"typeof &#123;&#125; // "object"typeof true // "boolean"typeof undefined // "undefined"typeof function()&#123;&#125; // "function"
+以上这些类型都比较正常，直到：   
+typeof null // "object"
+这显然是一个错误。 这可能会在以后的ECMAScript哪个版本中修复，返回值将为“null”。   
+除此之外 Object 下还有很多细分的类型，比如 Array、Date、</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-26&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
         <a href="/2019/04/23/JavaScript系列之数据类型/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
@@ -563,60 +613,6 @@ position: absolute实现在父级元素内设置两个子元素，绝对定位�
             <a href="/tags/CSS">CSS</a>&nbsp;
           
             <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/19/如何快速搭建静态资源服务器/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httpserver.jpg" srcset="/img/loading.gif" alt="如何快速搭建静态资源服务器" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/19/如何快速搭建静态资源服务器/">
-        <p class="h4 index-header">如何快速搭建静态资源服务器</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的http服务器。以前的时候，都是使用php的本地环境，也算比较方便，但是自从学了nodejs，发现创建http-server更方便。  
-本文的目的在这篇文章中，我将向您展示如何使用NodeJS创建一个非常简单的HTTP服务器。您可以通过http访问目录中的静态资源，如HTML，Javascript，CSS等，比如：  
-
-http://localhost:8080/hello.html
-http://localhost:8080/abc.js   
-
-而不是通过默认的file:///来访问    
-那问题是为什么只有需要一个HTTP才能访问静态资源呢？ 
-是因为HTML文件含有Javascript文件时，如果通过默认的file://地址来访问此文件的话，浏览器会阻止本地Javascript文件的一些操作，此时就需要安装HTTP-Server来解决这个问题。    
-报错信息：  
-
-Failed to load file:///E:/webexamples/reactjs/hello-reactjs/p</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-19&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3">前端相关</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Node.js">Node.js</a>&nbsp;
-          
-            <a href="/tags/http-server">http-server</a>&nbsp;
           
         
       </div>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://luozongmin.com/2019/03/27/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2019-12-03</lastmod>
+  </url>  <url>
     <loc>https://luozongmin.com/2019/11/07/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</loc>
     <lastmod>2019-11-07</lastmod>
   </url>  <url>
@@ -50,9 +53,6 @@
     <lastmod>2019-10-27</lastmod>
   </url>  <url>
     <loc>https://luozongmin.com/2019/03/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/</loc>
-    <lastmod>2019-10-27</lastmod>
-  </url>  <url>
-    <loc>https://luozongmin.com/2019/03/27/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2019-10-27</lastmod>
   </url>  <url>
     <loc>https://luozongmin.com/2019/03/29/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</loc>

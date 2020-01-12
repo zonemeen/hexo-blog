@@ -15,7 +15,7 @@
   <meta name="description" content>
   <meta name="author" content="miqilin">
   <meta name="keywords" content>
-  <title>标签 - GitHub ~ 米淇淋的个人博客</title>
+  <title>标签 - github ~ 米淇淋的个人博客</title>
 
   <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
@@ -134,28 +134,16 @@
                 
 
 <div class="list-group">
-<!--  <p class="h4">共计 3 篇文章</p>-->
+<!--  <p class="h4">共计 1 篇文章</p>-->
   <hr>
   
     
       
       <p class="h5">2019</p>
     
-    <a href="/2019/03/29/Git命令拓展/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Git命令拓展</span>
-      <span style="float: right;">03-29</span>
-    </a>
-  
-    
-    <a href="/2019/03/27/使用Hexo+GitHub搭建个人博客/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">使用Hexo+GitHub搭建个人博客</span>
-      <span style="float: right;">03-27</span>
-    </a>
-  
-    
-    <a href="/2019/03/15/Git及Github操作手册/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Git/GitHub操作手册</span>
-      <span style="float: right;">03-15</span>
+    <a href="/2019/11/07/GitHub+jsDelivr+PicGo搭建免费、快速图床/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">GitHub+jsDelivr+PicGo搭建免费、快速图床</span>
+      <span style="float: right;">11-07</span>
     </a>
   
 </div>
@@ -276,7 +264,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "标签 - GitHub&nbsp;",
+        "标签 - github&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -318,6 +306,32 @@
     }
   </script>
 
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
 
 
   <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>

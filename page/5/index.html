@@ -142,33 +142,35 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/26/JavaScript系列之类型判断/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/05/22/分享7个有用的JavaScript技巧/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/26/JavaScript系列之类型判断/">
-        <p class="h4 index-header">JavaScript系列之类型判断</p>
+      <a href="/2019/05/22/分享7个有用的JavaScript技巧/">
+        <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。  
-通过本文，我将尝试概述Javascript中类型判断的几种方法（基于ES5的规范）。
-typeoftypeof判断类型方法算是我们最最常用的了，直接上代码：   
-typeof 3 // "number"typeof "abc" // "string"typeof &#123;&#125; // "object"typeof true // "boolean"typeof undefined // "undefined"typeof function()&#123;&#125; // "function"
-以上这些类型都比较正常，直到：   
-typeof null // "object"
-这显然是一个错误。 这可能会在以后的ECMAScript哪个版本中修复，返回值将为“null”。   
-除此之外 Object 下还有很多细分的类型，比如 Array、Date、</div>
+          <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！
+    
+原文链接：https://davidwalsh.name/javascript-tricks#comments   
+数组去重数组去重可能比您想象的更容易：  
+var j = [...new Set([1, 2, 3, 4, 4])]&gt;&gt; [1, 2, 3, 4]
+很简单有木有！ 
+过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，null，false等）？ 你可能不知道还有这个技巧：  
+let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
+创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象：  
+</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-26&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-22&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -181,7 +183,7 @@ typeof null // "object"
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
+            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
           
         
       </div>
@@ -192,54 +194,284 @@ typeof null // "object"
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/23/JavaScript系列之数据类型/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/05/14/Hexo搭建博客中遇到的一些“事”/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexobug.png" srcset="/img/loading.gif" alt="Hexo搭建博客中遇到的一些&#39;事&#39;" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/23/JavaScript系列之数据类型/">
-        <p class="h4 index-header">JavaScript系列之数据类型</p>
+      <a href="/2019/05/14/Hexo搭建博客中遇到的一些“事”/">
+        <p class="h4 index-header">Hexo搭建博客中遇到的一些&#39;事&#39;</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。    
-原始类型（值类型）
-Undefined undefined
-Null null
-Boolean true
-String &#39;hello&#39;
-Number 123
-Symbol(这里先不做介绍)  
-
-引用类型（对象类型）
-Object：由以上几种基本类型组成，而且对象里面还可以包含对象   
-
-var obj = &#123;&#125;;&lt;!-- 原始类型变量的包装类型如下 --&gt;var bool = new Boolean(true);var str = new String("hello");var num = new Number(1);var obj0 = new Object();
-如MDN所讲，JavaScript 是一种弱类型或者说是一门动态语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。  
-当然，原始类型和引用类型会有一些区别：  
-原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数</div>
+          <div class="index-text mb-1">我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！    
+搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。
+仓库的名字仓库的名字的正确格式应该是github用户名.github.io，比如说，如果你的github用户名是test，那么你就应该新建test.github.io的仓库（必须是你的github用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。    
+首页文章内容部分展示我用的是next主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的Mrakdown文件内容文字后面添加&lt;!--more--&gt;即可。例如：---title: HTML、CSS、JS中unicode字符的处理 ---# 前言</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-23&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-14&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/tools">tools</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/Hexo">Hexo</a>&nbsp;
           
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/10/学会如何学习（三）/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/10/学会如何学习（三）/">
+        <p class="h4 index-header">学会如何学习（三）</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~   
+拖延症的形成我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。  
+     
+这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。   
+习惯习惯可以分为四个阶段：  
+   
+第一阶段是提示 (cue) ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。   
+第二个阶段就是惯例 (routine)，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-10&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
+          
+            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/04/29/Git命令拓展/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gittuozh.jpg" srcset="/img/loading.gif" alt="Git命令拓展" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/29/Git命令拓展/">
+        <p class="h4 index-header">Git命令拓展</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">本文的内容基本上是从廖雪峰及阮一峰老师的Git 教程中总结出来的，方便自己以后查阅相关命令。
+一般来说，日常使用只需要记住下图6个命令即可。但是想往深度使用Git，恐怕还需要记住其余的几十个命令。
+
+上图中几个专用名词的译名如下：    
+
+Workspace：工作区
+Index / Stage：暂存区
+Repository：本地仓库
+Remote：远程仓库
+
+配置$ git config --list    //显示当前的Git配置$ git config -e [--global]    //编辑Git配置文件$ git config --global user.name "miqilin21"$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者
+新建Git代码库$ git init    //在当前目录新建一个Git代码库$ git init [project-name]   //新建一个目录，将其初始化为Git代码库$ git clone [url]    //下载一个项目</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-29&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/tools">tools</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Git">Git</a>&nbsp;
+          
+            <a href="/tags/GitHub">GitHub</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/04/24/CSS布局—三栏布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csssl.jpg" srcset="/img/loading.gif" alt="CSS笔记—三栏布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/24/CSS布局—三栏布局/">
+        <p class="h4 index-header">CSS笔记—三栏布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：    
+上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。  
+下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图： 
+绝对定位布局&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;    &lt;style&gt;	.container &#123;	    position: relative;	&#125;	.left &#123;	    position: absolute;	    width: 150px;	    height: 200px;	    left: 0;	    top: 0;	    background-color: red;	&#125;        .middle &#123;	    height: 200px;	    margin: 0 160px;	</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/04/22/CSS布局—左右布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csszy.png" srcset="/img/loading.gif" alt="CSS笔记—左右布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/22/CSS布局—左右布局/">
+        <p class="h4 index-header">CSS笔记—左右布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。
+下面是我罗列的几种css实现前端左右布局的方式：   
+position: absolute实现在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。&lt;section&gt;  &lt;div class="left-half"&gt;    &lt;article&gt;      &lt;h1&gt;Left Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;  &lt;div class="right-half"&gt;    &lt;article&gt;      &lt;h1&gt;Right Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;&lt;/section&gt; /*以上为html代码*/section &#123;  color: whi</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-22&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/04/21/CSS布局—居中布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/cssjuzh.png" srcset="/img/loading.gif" alt="CSS笔记—居中布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/04/21/CSS布局—居中布局/">
+        <p class="h4 index-header">CSS笔记—居中布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。 
+水平居中元素宽高未知当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：     
+①CSS3 transform：.parent &#123;    position: relative;&#125;.child &#123;    position: absolute;    left: 50%;    transform: translateX(-50%);&#125;
+②flexbox：.parent &#123;    display: flex;    justify-content: center;&#125;
+居中元素为内联元素常见的内联元素有：span, a, img, input, label 等等。   
+您可以在块级父元素内水平居中内联元素，只需css中加以下核心语法：.parent&#123;   text-align: center;&#125;
+这种方法适用于display 为 inline, inline-block, </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-21&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
           
         
       </div>
@@ -296,127 +528,31 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/14/Hexo搭建博客中遇到的一些“事”/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexobug.png" srcset="/img/loading.gif" alt="Hexo搭建博客中遇到的一些&#39;事&#39;" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/04/15/Git及Github操作手册/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitgithub.jpg" srcset="/img/loading.gif" alt="Git/GitHub操作手册" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/14/Hexo搭建博客中遇到的一些“事”/">
-        <p class="h4 index-header">Hexo搭建博客中遇到的一些&#39;事&#39;</p>
+      <a href="/2019/04/15/Git及Github操作手册/">
+        <p class="h4 index-header">Git/GitHub操作手册</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！    
-搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。
-仓库的名字仓库的名字的正确格式应该是github用户名.github.io，比如说，如果你的github用户名是test，那么你就应该新建test.github.io的仓库（必须是你的github用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。    
-首页文章内容部分展示我用的是next主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的Mrakdown文件内容文字后面添加&lt;!--more--&gt;即可。例如：---title: HTML、CSS、JS中unicode字符的处理 ---# 前言</div>
+          <div class="index-text mb-1">Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 
+SSH KeysSSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  
+由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     
+添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     
+1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。$ git init    // 在当前目录新建一个Git代码库
+这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：$ echo "# myblog" &gt;&</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-14&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/tools">tools</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Hexo">Hexo</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/08/学会如何学习（一）/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn1.jpg" srcset="/img/loading.gif" alt="学会如何学习（一）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/08/学会如何学习（一）/">
-        <p class="h4 index-header">学会如何学习（一）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？   
-无意中在Coursera上发现了一门神奇适用的课程，叫做“Learning How to Learn”， 旨在利用科学知识以及授课者切身经验教会你学会如何学习，学习这门课我才开始恍然大悟，原来学习应该这样学习，算是初步悟到如何学习的真谛了。下面我将讨论我从第一周课堂中学到的经验教训。    
-利用专注与发散思维研究发现，人有两种完全不同的思考模式，专注模式（focused mode）和发散模式（diffuse mode）。就目前神经学家所知，专注模式与发散模式只能单独存在，你不能同时使用两种模式。而发散思维是你试图了解新事物时应该采取的思维模式。
-课程讲述萨尔瓦多·达利 (20世纪著名的超现实主义画家)有时会坐在椅子上，放空自己的大脑，并常常会漫无目的地思考一下之前的工作。这样他就能把脑海中那些在发散模式下得到的的联想和点子及时地收集起来，然后带着这些在发散模式下得到的新想法回到专注模式里</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-08&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
-          
-            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/29/Git命令拓展/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gittuozh.jpg" srcset="/img/loading.gif" alt="Git命令拓展" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/29/Git命令拓展/">
-        <p class="h4 index-header">Git命令拓展</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">本文的内容基本上是从廖雪峰及阮一峰老师的Git 教程中总结出来的，方便自己以后查阅相关命令。
-一般来说，日常使用只需要记住下图6个命令即可。但是想往深度使用Git，恐怕还需要记住其余的几十个命令。
-
-上图中几个专用名词的译名如下：    
-
-Workspace：工作区
-Index / Stage：暂存区
-Repository：本地仓库
-Remote：远程仓库
-
-配置$ git config --list    //显示当前的Git配置$ git config -e [--global]    //编辑Git配置文件$ git config --global user.name "miqilin21"$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者
-新建Git代码库$ git init    //在当前目录新建一个Git代码库$ git init [project-name]   //新建一个目录，将其初始化为Git代码库$ git clone [url]    //下载一个项目</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-29&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-15&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -440,184 +576,66 @@ Remote：远程仓库
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/27/使用Hexo+GitHub搭建个人博客/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexogit.jpg" srcset="/img/loading.gif" alt="使用Hexo+GitHub搭建个人博客" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/04/08/HTML常用标签/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/html.jpg" srcset="/img/loading.gif" alt="HTML常用标签" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/27/使用Hexo+GitHub搭建个人博客/">
-        <p class="h4 index-header">使用Hexo+GitHub搭建个人博客</p>
+      <a href="/2019/04/08/HTML常用标签/">
+        <p class="h4 index-header">HTML常用标签</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">hexo是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到Github Pages上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~     
-下面一步一步地说怎么用hexo+github搭建一个个人博客。
-说明：本文只针对Windows平台下的搭建过程，其他平台的请自行上网查阅
-准备在搭建博客之前，需要安装node.js和git，具体操作请参考这篇文章，并同时申请Github账号，使用的开发工具为VScode。
-安装Hexo1、首先新建一个文件夹如myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中Git Bash Here在Git命令行中打开。  
-2、执行以下命令安装Hexo及生成第一篇博客文章：$ npm install -g hexo-cli   //安装hexo$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作$ hexo generate            //生成静态页面$ </div>
+          <div class="index-text mb-1">HTML 是用来描述网页的一种语言，通过添加各种标签，达到在浏览器中展示期望的效果。    
+
+HTML 指的是超文本标记语言 (Hyper Text Markup Language)    
+
+
+HTML 不是一种编程语言，而是一种标记语言 (markup language)    
+
+
+标记语言是一套标记标签 (markup tag)    
+
+
+HTML 使用标记标签来描述网页    
+
+浏览器不会显示 HTML 标签(HTML tag)，而是使用标签来解释页面的内容：     
+
+HTML 标签是由尖括号包围的关键词，比如 &lt;html&gt;  
+
+
+HTML 标签通常是成对出现的，比如 &lt;p&gt; 和 &lt;/p&gt;  
+
+
+标签对中的第一个标签是开始标签，第二个标签是结束标签     
+
+
+开始和结束标签也被称为开放标签和闭合标签     
+
+⭐越多代表我觉得此标签越重要
+标题标签 ⭐⭐⭐HTML提供了6个等级的标题(head)，即：h1、h2、h3、h4、h5和h6，h1是最高级的标题。其基本语法是：&lt;hn&gt; 标题信息 &lt;/hn&gt</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-08&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/tools">tools</a>&nbsp;
+            <a href="/categories/HTML">HTML</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/GitHub">GitHub</a>&nbsp;
+            <a href="/tags/HTML">HTML</a>&nbsp;
           
-            <a href="/tags/Hexo">Hexo</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/24/CSS布局—三栏布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csssl.jpg" srcset="/img/loading.gif" alt="CSS笔记—三栏布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/24/CSS布局—三栏布局/">
-        <p class="h4 index-header">CSS笔记—三栏布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：    
-上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。  
-下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图： 
-绝对定位布局&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;    &lt;style&gt;	.container &#123;	    position: relative;	&#125;	.left &#123;	    position: absolute;	    width: 150px;	    height: 200px;	    left: 0;	    top: 0;	    background-color: red;	&#125;        .middle &#123;	    height: 200px;	    margin: 0 160px;	</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-24&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/22/CSS布局—左右布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csszy.png" srcset="/img/loading.gif" alt="CSS笔记—左右布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/22/CSS布局—左右布局/">
-        <p class="h4 index-header">CSS笔记—左右布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。
-下面是我罗列的几种css实现前端左右布局的方式：   
-position: absolute实现在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。&lt;section&gt;  &lt;div class="left-half"&gt;    &lt;article&gt;      &lt;h1&gt;Left Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;  &lt;div class="right-half"&gt;    &lt;article&gt;      &lt;h1&gt;Right Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;&lt;/section&gt; /*以上为html代码*/section &#123;  color: whi</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-22&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/03/21/CSS布局—居中布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/cssjuzh.png" srcset="/img/loading.gif" alt="CSS笔记—居中布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/03/21/CSS布局—居中布局/">
-        <p class="h4 index-header">CSS笔记—居中布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。 
-水平居中元素宽高未知当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：     
-①CSS3 transform：.parent &#123;    position: relative;&#125;.child &#123;    position: absolute;    left: 50%;    transform: translateX(-50%);&#125;
-②flexbox：.parent &#123;    display: flex;    justify-content: center;&#125;
-居中元素为内联元素常见的内联元素有：span, a, img, input, label 等等。   
-您可以在块级父元素内水平居中内联元素，只需css中加以下核心语法：.parent&#123;   text-align: center;&#125;
-这种方法适用于display 为 inline, inline-block, </div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-03-21&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+            <a href="/tags/%E6%A0%87%E7%AD%BE">标签</a>&nbsp;
           
         
       </div>

@@ -202,7 +202,7 @@ console.log(f1.c);  // undefined
 <p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p>
 <p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p>
 <p>这里再说一个函数的例子来加深理解吧。</p>
-<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p>
+<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p>
 <p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif" alt></p>
 <p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p>
 <p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p>

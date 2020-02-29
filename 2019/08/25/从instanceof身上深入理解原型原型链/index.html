@@ -162,7 +162,7 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。</p>
+            <p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。</p>
 <p>对于原始类型（primitive type）的值，即<code>string</code>/<code>number</code>/<code>boolean</code>，你可以通过<code>typeof</code>判断其类型，但是<code>typeof</code>在判断到合成类型（complex type）的值的时候，返回值只有<code>object</code>/<code>function</code>，你不知道它到底是一个<code>object</code>对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。</p>
 <p>官方对<code>instanceof</code>运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：</p>
 <pre><code class="javascript">function Foo() {}
@@ -183,7 +183,7 @@ console.log(Function instanceof Object);   // true
 console.log(Function instanceof Function);   // true
 console.log(Object instanceof Object);   // true
 </code></pre>
-<p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p>
+<p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p>
 <p>但还有一种特殊情况，就是左边对象的原型链上，只有<code>null</code>对象。这时，<code>instanceof</code>判断会失真。</p>
 <pre><code class="javascript">var obj = Object.create(null);
 typeof obj // &quot;object&quot;
@@ -192,7 +192,7 @@ Object.create(null) instanceof Object // false
 <p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p>
 <p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p>
 <p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt>  </p>
-<p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p>
+<p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p>
 <p>那么问题又出来了。<code>instanceof</code>这样设计，到底有什么用？到底<code>instanceof</code>想表达什么呢？</p>
 <p>这就要重点讲讲继承了，即<code>instanceof</code>表示的就是一种继承关系，或者原型链的结构，请看后续文章介绍。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>

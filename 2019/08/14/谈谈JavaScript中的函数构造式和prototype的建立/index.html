@@ -162,7 +162,7 @@
       <div class="py-5 z-depth-3" id="board">
         <div class="post-content mx-auto" id="post">
           <div class="markdown-body">
-            <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">《谈谈JavaScript中的function constructor和new关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。</p>
+            <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/" target="_blank" rel="noopener">《谈谈JavaScript中的function constructor和new关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。</p>
 <p>在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实<code>function</code>这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
 <p>除非你是把<code>function</code>当做<code>function constructor</code>来使用，否则这个属性就没有特别的用途；但如果你是把它当做<code>function constructor</code>，通过<code>new</code>这个关键字来执行这个<code>function</code>的话，它就有特别的意义了。</p>
 <p><img src="/images/constructor/1.jpg" srcset="/img/loading.gif" alt></p>

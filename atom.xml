@@ -5,9 +5,9 @@
   <subtitle>I&#39;m miqilin. Welcome to my blog!</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://luozongmin.com/"/>
+  <link href="https://amberzqx.com/"/>
   <updated>2020-02-27T12:12:34.341Z</updated>
-  <id>https://luozongmin.com/</id>
+  <id>https://amberzqx.com/</id>
   
   <author>
     <name>miqilin</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>GitHub+jsDelivr+PicGo搭建免费、快速图床</title>
-    <link href="https://luozongmin.com/2020/01/07/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/"/>
-    <id>https://luozongmin.com/2020/01/07/GitHub+jsDelivr+PicGo搭建免费、快速图床/</id>
+    <link href="https://amberzqx.com/2020/01/07/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/"/>
+    <id>https://amberzqx.com/2020/01/07/GitHub+jsDelivr+PicGo搭建免费、快速图床/</id>
     <published>2020-01-06T16:00:00.000Z</published>
     <updated>2020-02-27T12:12:34.341Z</updated>
     
@@ -34,19 +34,19 @@
     
     </summary>
     
-      <category term="tools" scheme="https://luozongmin.com/categories/tools/"/>
+      <category term="tools" scheme="https://amberzqx.com/categories/tools/"/>
     
     
-      <category term="github" scheme="https://luozongmin.com/tags/github/"/>
+      <category term="github" scheme="https://amberzqx.com/tags/github/"/>
     
-      <category term="图床" scheme="https://luozongmin.com/tags/%E5%9B%BE%E5%BA%8A/"/>
+      <category term="图床" scheme="https://amberzqx.com/tags/%E5%9B%BE%E5%BA%8A/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之运行机制（Event Loop）</title>
-    <link href="https://luozongmin.com/2019/12/19/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"/>
-    <id>https://luozongmin.com/2019/12/19/JavaScript系列之运行机制/</id>
+    <link href="https://amberzqx.com/2019/12/19/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"/>
+    <id>https://amberzqx.com/2019/12/19/JavaScript系列之运行机制/</id>
     <published>2019-12-18T16:00:00.000Z</published>
     <updated>2020-02-27T12:22:00.332Z</updated>
     
@@ -61,21 +61,21 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="运行机制" scheme="https://luozongmin.com/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"/>
+      <category term="运行机制" scheme="https://amberzqx.com/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"/>
     
-      <category term="Event Loop" scheme="https://luozongmin.com/tags/Event-Loop/"/>
+      <category term="Event Loop" scheme="https://amberzqx.com/tags/Event-Loop/"/>
     
   </entry>
   
   <entry>
     <title>前端必备英语词汇，你了解多少呢？</title>
-    <link href="https://luozongmin.com/2019/12/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/"/>
-    <id>https://luozongmin.com/2019/12/12/前端必备英语词汇，你了解多少呢/</id>
+    <link href="https://amberzqx.com/2019/12/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/"/>
+    <id>https://amberzqx.com/2019/12/12/前端必备英语词汇，你了解多少呢/</id>
     <published>2019-12-11T16:00:00.000Z</published>
     <updated>2020-02-27T12:25:16.182Z</updated>
     
@@ -91,17 +91,17 @@
     
     </summary>
     
-      <category term="前端相关" scheme="https://luozongmin.com/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/"/>
+      <category term="前端相关" scheme="https://amberzqx.com/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/"/>
     
     
-      <category term="英语术语" scheme="https://luozongmin.com/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/"/>
+      <category term="英语术语" scheme="https://amberzqx.com/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之深入理解对象属性</title>
-    <link href="https://luozongmin.com/2019/12/02/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/"/>
-    <id>https://luozongmin.com/2019/12/02/JavaScript系列之深入理解对象属性/</id>
+    <link href="https://amberzqx.com/2019/12/02/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/"/>
+    <id>https://amberzqx.com/2019/12/02/JavaScript系列之深入理解对象属性/</id>
     <published>2019-12-01T16:00:00.000Z</published>
     <updated>2020-02-27T12:22:38.169Z</updated>
     
@@ -116,19 +116,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="对象" scheme="https://luozongmin.com/tags/%E5%AF%B9%E8%B1%A1/"/>
+      <category term="对象" scheme="https://amberzqx.com/tags/%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
   <entry>
     <title>一些好用的工具、网站</title>
-    <link href="https://luozongmin.com/2019/11/20/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/"/>
-    <id>https://luozongmin.com/2019/11/20/一些好用的工具、网站/</id>
+    <link href="https://amberzqx.com/2019/11/20/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/"/>
+    <id>https://amberzqx.com/2019/11/20/一些好用的工具、网站/</id>
     <published>2019-11-19T16:00:00.000Z</published>
     <updated>2020-02-27T12:23:08.829Z</updated>
     
@@ -144,17 +144,17 @@
     
     </summary>
     
-      <category term="tools" scheme="https://luozongmin.com/categories/tools/"/>
+      <category term="tools" scheme="https://amberzqx.com/categories/tools/"/>
     
     
-      <category term="工具" scheme="https://luozongmin.com/tags/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="https://amberzqx.com/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之立即执行函数IIFE</title>
-    <link href="https://luozongmin.com/2019/11/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/"/>
-    <id>https://luozongmin.com/2019/11/17/JavaScript系列之立即执行函数IIFE/</id>
+    <link href="https://amberzqx.com/2019/11/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/"/>
+    <id>https://amberzqx.com/2019/11/17/JavaScript系列之立即执行函数IIFE/</id>
     <published>2019-11-16T16:00:00.000Z</published>
     <updated>2020-02-27T12:15:13.443Z</updated>
     
@@ -169,19 +169,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="IIFE" scheme="https://luozongmin.com/tags/IIFE/"/>
+      <category term="IIFE" scheme="https://amberzqx.com/tags/IIFE/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之回调函数</title>
-    <link href="https://luozongmin.com/2019/11/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"/>
-    <id>https://luozongmin.com/2019/11/12/JavaScript系列之回调函数/</id>
+    <link href="https://amberzqx.com/2019/11/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"/>
+    <id>https://amberzqx.com/2019/11/12/JavaScript系列之回调函数/</id>
     <published>2019-11-11T16:00:00.000Z</published>
     <updated>2020-02-27T12:14:34.208Z</updated>
     
@@ -197,19 +197,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="Callback function" scheme="https://luozongmin.com/tags/Callback-function/"/>
+      <category term="Callback function" scheme="https://amberzqx.com/tags/Callback-function/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript事件三部曲之事件的兄弟姐妹们</title>
-    <link href="https://luozongmin.com/2019/11/08/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/"/>
-    <id>https://luozongmin.com/2019/11/08/JavaScript事件三部曲之事件的兄弟姐妹们/</id>
+    <link href="https://amberzqx.com/2019/11/08/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/"/>
+    <id>https://amberzqx.com/2019/11/08/JavaScript事件三部曲之事件的兄弟姐妹们/</id>
     <published>2019-11-07T16:00:00.000Z</published>
     <updated>2020-02-27T12:13:32.134Z</updated>
     
@@ -225,21 +225,21 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="事件" scheme="https://luozongmin.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+      <category term="事件" scheme="https://amberzqx.com/tags/%E4%BA%8B%E4%BB%B6/"/>
     
-      <category term="event" scheme="https://luozongmin.com/tags/event/"/>
+      <category term="event" scheme="https://amberzqx.com/tags/event/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript事件三部曲之隐藏在其中的&#39;秘密&#39;</title>
-    <link href="https://luozongmin.com/2019/11/06/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/"/>
-    <id>https://luozongmin.com/2019/11/06/JavaScript事件三部曲之隐藏在其中的秘密/</id>
+    <link href="https://amberzqx.com/2019/11/06/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/"/>
+    <id>https://amberzqx.com/2019/11/06/JavaScript事件三部曲之隐藏在其中的秘密/</id>
     <published>2019-11-05T16:00:00.000Z</published>
     <updated>2020-02-27T12:13:47.795Z</updated>
     
@@ -254,21 +254,21 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="事件" scheme="https://luozongmin.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+      <category term="事件" scheme="https://amberzqx.com/tags/%E4%BA%8B%E4%BB%B6/"/>
     
-      <category term="event" scheme="https://luozongmin.com/tags/event/"/>
+      <category term="event" scheme="https://amberzqx.com/tags/event/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript事件三部曲之事件机制的原理</title>
-    <link href="https://luozongmin.com/2019/11/04/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86/"/>
-    <id>https://luozongmin.com/2019/11/04/JavaScript事件三部曲之事件机制的原理/</id>
+    <link href="https://amberzqx.com/2019/11/04/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86/"/>
+    <id>https://amberzqx.com/2019/11/04/JavaScript事件三部曲之事件机制的原理/</id>
     <published>2019-11-03T16:00:00.000Z</published>
     <updated>2020-02-27T12:13:39.920Z</updated>
     
@@ -284,21 +284,21 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="事件" scheme="https://luozongmin.com/tags/%E4%BA%8B%E4%BB%B6/"/>
+      <category term="事件" scheme="https://amberzqx.com/tags/%E4%BA%8B%E4%BB%B6/"/>
     
-      <category term="event" scheme="https://luozongmin.com/tags/event/"/>
+      <category term="event" scheme="https://amberzqx.com/tags/event/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之类数组对象arguments</title>
-    <link href="https://luozongmin.com/2019/10/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1arguments/"/>
-    <id>https://luozongmin.com/2019/10/30/JavaScript系列之类数组对象arguments/</id>
+    <link href="https://amberzqx.com/2019/10/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1arguments/"/>
+    <id>https://amberzqx.com/2019/10/30/JavaScript系列之类数组对象arguments/</id>
     <published>2019-10-29T16:00:00.000Z</published>
     <updated>2020-02-27T12:14:43.349Z</updated>
     
@@ -313,19 +313,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="arguments" scheme="https://luozongmin.com/tags/arguments/"/>
+      <category term="arguments" scheme="https://amberzqx.com/tags/arguments/"/>
     
   </entry>
   
   <entry>
     <title>Flexbox 对你说爱不完</title>
-    <link href="https://luozongmin.com/2019/10/27/CSS%20Flexbox%20%E5%AF%B9%E4%BD%A0%E8%AF%B4%E7%88%B1%E4%B8%8D%E5%AE%8C/"/>
-    <id>https://luozongmin.com/2019/10/27/CSS Flexbox 对你说爱不完/</id>
+    <link href="https://amberzqx.com/2019/10/27/CSS%20Flexbox%20%E5%AF%B9%E4%BD%A0%E8%AF%B4%E7%88%B1%E4%B8%8D%E5%AE%8C/"/>
+    <id>https://amberzqx.com/2019/10/27/CSS Flexbox 对你说爱不完/</id>
     <published>2019-10-26T16:00:00.000Z</published>
     <updated>2020-02-27T12:11:47.287Z</updated>
     
@@ -341,19 +341,19 @@
     
     </summary>
     
-      <category term="CSS" scheme="https://luozongmin.com/categories/CSS/"/>
+      <category term="CSS" scheme="https://amberzqx.com/categories/CSS/"/>
     
     
-      <category term="CSS" scheme="https://luozongmin.com/tags/CSS/"/>
+      <category term="CSS" scheme="https://amberzqx.com/tags/CSS/"/>
     
-      <category term="布局" scheme="https://luozongmin.com/tags/%E5%B8%83%E5%B1%80/"/>
+      <category term="布局" scheme="https://amberzqx.com/tags/%E5%B8%83%E5%B1%80/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之闭包</title>
-    <link href="https://luozongmin.com/2019/10/20/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E9%97%AD%E5%8C%85(Closure)/"/>
-    <id>https://luozongmin.com/2019/10/20/JavaScript系列之闭包(Closure)/</id>
+    <link href="https://amberzqx.com/2019/10/20/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E9%97%AD%E5%8C%85(Closure)/"/>
+    <id>https://amberzqx.com/2019/10/20/JavaScript系列之闭包(Closure)/</id>
     <published>2019-10-19T16:00:00.000Z</published>
     <updated>2020-02-27T12:14:09.122Z</updated>
     
@@ -369,19 +369,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="闭包" scheme="https://luozongmin.com/tags/%E9%97%AD%E5%8C%85/"/>
+      <category term="闭包" scheme="https://amberzqx.com/tags/%E9%97%AD%E5%8C%85/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之this是什么</title>
-    <link href="https://luozongmin.com/2019/10/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/"/>
-    <id>https://luozongmin.com/2019/10/12/JavaScript系列之this是什么/</id>
+    <link href="https://amberzqx.com/2019/10/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/"/>
+    <id>https://amberzqx.com/2019/10/12/JavaScript系列之this是什么/</id>
     <published>2019-10-11T16:00:00.000Z</published>
     <updated>2020-02-27T12:13:57.729Z</updated>
     
@@ -396,19 +396,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="this" scheme="https://luozongmin.com/tags/this/"/>
+      <category term="this" scheme="https://amberzqx.com/tags/this/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之作用域和作用域链</title>
-    <link href="https://luozongmin.com/2019/10/03/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
-    <id>https://luozongmin.com/2019/10/03/JavaScript系列之作用域和作用域链/</id>
+    <link href="https://amberzqx.com/2019/10/03/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
+    <id>https://amberzqx.com/2019/10/03/JavaScript系列之作用域和作用域链/</id>
     <published>2019-10-02T16:00:00.000Z</published>
     <updated>2020-02-27T12:16:23.923Z</updated>
     
@@ -423,25 +423,25 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="Scope" scheme="https://luozongmin.com/tags/Scope/"/>
+      <category term="Scope" scheme="https://amberzqx.com/tags/Scope/"/>
     
-      <category term="Scope Chain" scheme="https://luozongmin.com/tags/Scope-Chain/"/>
+      <category term="Scope Chain" scheme="https://amberzqx.com/tags/Scope-Chain/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之变量对象</title>
-    <link href="https://luozongmin.com/2019/09/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/"/>
-    <id>https://luozongmin.com/2019/09/30/JavaScript系列之变量对象/</id>
+    <link href="https://amberzqx.com/2019/09/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/"/>
+    <id>https://amberzqx.com/2019/09/30/JavaScript系列之变量对象/</id>
     <published>2019-09-29T16:00:00.000Z</published>
     <updated>2020-02-27T12:14:17.757Z</updated>
     
-    <content type="html"><![CDATA[<p>JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/">《JavaScript系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p><p>上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：</p><p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p><p>详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下<strong>变量对象</strong>。</p><h3 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h3><p>变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的<strong>变量</strong>和<strong>函数声明</strong>，先来看一段代码示例：</p><pre><code class="javascript">function foo(){    var a = 10;         function b(){}    (function c(){});    console.log(a);     // 10    console.log(b);   // function b(){}    console.log(c);   // Uncaught ReferenceError: c is not defined}foo();</code></pre><p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由JavaScript引擎处理。</p><p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p><h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p><pre><code class="javascript">// 以浏览器中为例，全局对象为window// 全局上下文创建阶段// VO 为变量对象（Variable Object）的缩写windowEC = {    VO: Window,    scopeChain: {},    this: Window}</code></pre><p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p><h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p><p>这时变量对象的<strong>创建阶段</strong>会包括：</p><ol><li><strong>创建<code>arguments</code>对象</strong>。检查当前上下文中的参数，建立该对象下的属性与属性值。</li><li><strong>检查当前上下文的函数声明，也就是使用function关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li><li><strong>检查当前上下文中的变量声明</strong>（<code>var</code> 声明的变量），默认为 <code>undefined</code>；如果变量名称跟已经声明的形式参数或函数相同，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过变量声明，原属性值不会被修改。</li></ol><p><img src="/images/variableobject/1.jpg" srcset="/img/loading.gif" alt></p><p>对于第3点中的“跳过”一词想必大家会有一丝疑问？底下例子中既然按照上面的规则，变量声明的<code>foo</code>遇到函数声明的<code>foo</code>会跳过，可是为什么最后<code>foo</code>的输出结果仍然是被覆盖了？</p><pre><code class="javascript">function foo() { console.log(&#39;I am function foo&#39;) }var foo = 10;console.log(foo); // 10</code></pre><p>理由其实很简单，因为上面的三条规则仅仅适用于变量对象的<strong>创建过程</strong>，也就是执行上下文的创建过程。而<code>foo = 10</code>是在执行上下文的<strong>执行过程</strong>中运行的，输出结果自然会是10。对比下例：</p><pre><code class="javascript">console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }function foo() { console.log(&#39;I am function foo&#39;) }var foo = 10;console.log(foo); // 10</code></pre><p>为啥又是不一样的结果呢？其实它的执行顺序为：</p><pre><code class="javascript">// 首先将所有函数声明放入变量对象中，函数声明变量提升function foo() { console.log(&#39;I am function foo&#39;) }// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过变量声明默认undefined的赋值// var foo = undefined;// 然后开始执行阶段代码的执行console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }// 在执行上下文的执行过程中运行foo = 10;console.log(foo); // 10</code></pre><p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，<strong><code>function</code>声明会比<code>var</code>声明优先级更高一点</strong>。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p><pre><code class="javascript">function test() {    console.log(a);    console.log(foo());    var a = 1;    function foo() {        return 2;    }}test();/* 结果为：undefined2*/</code></pre><p>根据上述的规则，理解变量提升后可以将执行顺序理解为：</p><pre><code class="javascript">function test() {    function foo() {        return 2;    }    var a;    console.log(a);    console.log(foo());    a = 1;}test();</code></pre><p>这样是不是一目了然了呢？</p><p>当然还需要注意的是，函数未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象（VO）转变为了活动对象（AO），然后开始进行执行阶段的操作。</p><h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>当前进入执行阶段，变量对象（VO）激活成活动对象（AO），里面的属性都能被访问了，函数会顺序执行代码，改变变量对象的属性值，此阶段的执行上下文代码会分成两个阶段进行处理：</p><ol><li>进入执行上下文</li><li>执行代码</li></ol><h4 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h4><p>当进入执行上下文时，这时候还没有执行代码。让我们看一个例子：</p><pre><code class="javascript">function foo(a, b) {  var c = 10;  function d() {}  var e = function _e() {};  (function x() {});}foo(10); </code></pre><p>当进入带有参数10的<code>foo</code>函数上下文时，AO表现为如下：</p><pre><code class="javascript">AO = {    arguments: {        0: 10,        1: undefined,        length: 1    }    a: 10,    b: undefined,    c: undefined,    d: &lt;function reference to d&gt;,    e: undefined,}</code></pre><p><code>x</code> 是函数表达式，所以不在变量对象当中，<code>e</code> 变量引用的值也是函数表达式，所以变量 <code>e</code> 本身是声明，所以在变量对象当中。</p><h4 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h4><p>这个阶段会按顺序执行代码，修改变量对象的属性值，紧接上面的例子，执行完成后AO如下：</p><pre><code class="javascript">AO = {    arguments: {        0: 10,        1: undefined,        length: 1    }    a: 10,    b: undefined,    c: 10,    d: &lt;reference to function declaration d&gt;,    e: &lt;reference to Function expression to _e&gt;,}</code></pre><p>到这里变量对象的创建过程就介绍完了，让我们简短地总结一下：</p><ol><li>全局上下文的变量对象初始化是全局对象</li><li>函数上下文的变量对象初始化只包括 <code>Arguments</code> 对象</li><li>在进入执行上下文时会依次给变量对象<strong>添加形参</strong>、<strong>函数声明</strong>、<strong>变量声明</strong>等初始的属性值</li><li>函数未进入执行阶段之前，变量对象中的属性都不能访问</li><li>在执行代码阶段，会再次修改变量对象的属性值，并赋予该有的属性值</li></ol><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
+    <content type="html"><![CDATA[<p>JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/" target="_blank" rel="noopener">《JavaScript系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p><p>上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：</p><p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p><p>详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下<strong>变量对象</strong>。</p><h3 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h3><p>变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的<strong>变量</strong>和<strong>函数声明</strong>，先来看一段代码示例：</p><pre><code class="javascript">function foo(){    var a = 10;         function b(){}    (function c(){});    console.log(a);     // 10    console.log(b);   // function b(){}    console.log(c);   // Uncaught ReferenceError: c is not defined}foo();</code></pre><p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由JavaScript引擎处理。</p><p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p><h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p><pre><code class="javascript">// 以浏览器中为例，全局对象为window// 全局上下文创建阶段// VO 为变量对象（Variable Object）的缩写windowEC = {    VO: Window,    scopeChain: {},    this: Window}</code></pre><p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p><h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p><p>这时变量对象的<strong>创建阶段</strong>会包括：</p><ol><li><strong>创建<code>arguments</code>对象</strong>。检查当前上下文中的参数，建立该对象下的属性与属性值。</li><li><strong>检查当前上下文的函数声明，也就是使用function关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li><li><strong>检查当前上下文中的变量声明</strong>（<code>var</code> 声明的变量），默认为 <code>undefined</code>；如果变量名称跟已经声明的形式参数或函数相同，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过变量声明，原属性值不会被修改。</li></ol><p><img src="/images/variableobject/1.jpg" srcset="/img/loading.gif" alt></p><p>对于第3点中的“跳过”一词想必大家会有一丝疑问？底下例子中既然按照上面的规则，变量声明的<code>foo</code>遇到函数声明的<code>foo</code>会跳过，可是为什么最后<code>foo</code>的输出结果仍然是被覆盖了？</p><pre><code class="javascript">function foo() { console.log(&#39;I am function foo&#39;) }var foo = 10;console.log(foo); // 10</code></pre><p>理由其实很简单，因为上面的三条规则仅仅适用于变量对象的<strong>创建过程</strong>，也就是执行上下文的创建过程。而<code>foo = 10</code>是在执行上下文的<strong>执行过程</strong>中运行的，输出结果自然会是10。对比下例：</p><pre><code class="javascript">console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }function foo() { console.log(&#39;I am function foo&#39;) }var foo = 10;console.log(foo); // 10</code></pre><p>为啥又是不一样的结果呢？其实它的执行顺序为：</p><pre><code class="javascript">// 首先将所有函数声明放入变量对象中，函数声明变量提升function foo() { console.log(&#39;I am function foo&#39;) }// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过变量声明默认undefined的赋值// var foo = undefined;// 然后开始执行阶段代码的执行console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }// 在执行上下文的执行过程中运行foo = 10;console.log(foo); // 10</code></pre><p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，<strong><code>function</code>声明会比<code>var</code>声明优先级更高一点</strong>。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p><pre><code class="javascript">function test() {    console.log(a);    console.log(foo());    var a = 1;    function foo() {        return 2;    }}test();/* 结果为：undefined2*/</code></pre><p>根据上述的规则，理解变量提升后可以将执行顺序理解为：</p><pre><code class="javascript">function test() {    function foo() {        return 2;    }    var a;    console.log(a);    console.log(foo());    a = 1;}test();</code></pre><p>这样是不是一目了然了呢？</p><p>当然还需要注意的是，函数未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象（VO）转变为了活动对象（AO），然后开始进行执行阶段的操作。</p><h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>当前进入执行阶段，变量对象（VO）激活成活动对象（AO），里面的属性都能被访问了，函数会顺序执行代码，改变变量对象的属性值，此阶段的执行上下文代码会分成两个阶段进行处理：</p><ol><li>进入执行上下文</li><li>执行代码</li></ol><h4 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h4><p>当进入执行上下文时，这时候还没有执行代码。让我们看一个例子：</p><pre><code class="javascript">function foo(a, b) {  var c = 10;  function d() {}  var e = function _e() {};  (function x() {});}foo(10); </code></pre><p>当进入带有参数10的<code>foo</code>函数上下文时，AO表现为如下：</p><pre><code class="javascript">AO = {    arguments: {        0: 10,        1: undefined,        length: 1    }    a: 10,    b: undefined,    c: undefined,    d: &lt;function reference to d&gt;,    e: undefined,}</code></pre><p><code>x</code> 是函数表达式，所以不在变量对象当中，<code>e</code> 变量引用的值也是函数表达式，所以变量 <code>e</code> 本身是声明，所以在变量对象当中。</p><h4 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h4><p>这个阶段会按顺序执行代码，修改变量对象的属性值，紧接上面的例子，执行完成后AO如下：</p><pre><code class="javascript">AO = {    arguments: {        0: 10,        1: undefined,        length: 1    }    a: 10,    b: undefined,    c: 10,    d: &lt;reference to function declaration d&gt;,    e: &lt;reference to Function expression to _e&gt;,}</code></pre><p>到这里变量对象的创建过程就介绍完了，让我们简短地总结一下：</p><ol><li>全局上下文的变量对象初始化是全局对象</li><li>函数上下文的变量对象初始化只包括 <code>Arguments</code> 对象</li><li>在进入执行上下文时会依次给变量对象<strong>添加形参</strong>、<strong>函数声明</strong>、<strong>变量声明</strong>等初始的属性值</li><li>函数未进入执行阶段之前，变量对象中的属性都不能访问</li><li>在执行代码阶段，会再次修改变量对象的属性值，并赋予该有的属性值</li></ol><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
     
     <summary type="html">
     
@@ -452,19 +452,19 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="变量对象" scheme="https://luozongmin.com/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/"/>
+      <category term="变量对象" scheme="https://amberzqx.com/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之执行上下文和执行栈</title>
-    <link href="https://luozongmin.com/2019/09/28/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/"/>
-    <id>https://luozongmin.com/2019/09/28/JavaScript系列之执行上下文和执行栈/</id>
+    <link href="https://amberzqx.com/2019/09/28/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/"/>
+    <id>https://amberzqx.com/2019/09/28/JavaScript系列之执行上下文和执行栈/</id>
     <published>2019-09-27T16:00:00.000Z</published>
     <updated>2020-02-27T12:16:15.121Z</updated>
     
@@ -480,25 +480,25 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="Execution Context" scheme="https://luozongmin.com/tags/Execution-Context/"/>
+      <category term="Execution Context" scheme="https://amberzqx.com/tags/Execution-Context/"/>
     
-      <category term="Execution Context Stack" scheme="https://luozongmin.com/tags/Execution-Context-Stack/"/>
+      <category term="Execution Context Stack" scheme="https://amberzqx.com/tags/Execution-Context-Stack/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript系列之对象的继承</title>
-    <link href="https://luozongmin.com/2019/08/28/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%A7%E6%89%BF/"/>
-    <id>https://luozongmin.com/2019/08/28/JavaScript系列之对象的继承/</id>
+    <link href="https://amberzqx.com/2019/08/28/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%A7%E6%89%BF/"/>
+    <id>https://amberzqx.com/2019/08/28/JavaScript系列之对象的继承/</id>
     <published>2019-08-27T16:00:00.000Z</published>
     <updated>2020-02-27T12:14:25.519Z</updated>
     
-    <content type="html"><![CDATA[<p>这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。</p><p>而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（<code>prototype</code>）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。</p><h3 id="复习原型-原型链"><a href="#复习原型-原型链" class="headerlink" title="复习原型/原型链"></a>复习原型/原型链</h3><p>JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。</p><p>其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：</p><ul><li>所有对象都有一个属性 <code>__proto__</code> 指向一个对象，也就是原型</li><li>每个对象的原型都可以通过 <code>constructor</code> 找到构造函数，构造函数也可以通过 <code>prototype</code> 找到原型</li><li>所有函数都可以通过 <code>__proto__</code> 找到 <code>Function</code> 对象</li><li>所有对象都可以通过 <code>__proto__</code> 找到 <code>Object</code> 对象</li><li>对象之间通过 <code>__proto__</code> 连接起来，这样称之为原型链。当前对象上不存在的属性可以通过原型链一层层往上查找，直到顶层 <code>Object</code> 对象，顶层 <code>Object</code> 对象最终指向<code>null</code></li></ul><p>我觉得原型中最重要的内容其实就这些了，没必要看太多关于原型的文章，到头来只是会越来越糊涂，如果硬要推荐原型参阅资料的话，《JavaScript高级程序设计》这本书，当之无愧！</p><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过上面的介绍，我们知道JavaScript中的继承是通过原型/原型链来体现的，先看几行代码：</p><pre><code class="javascript">function Foo() { }var f1 = new Foo();f1.a = 10;Foo.prototype.a = 100;Foo.prototype.b = 200;console.log(f1.a);  // 10console.log(f1.b);  // 200console.log(f1.c);  // undefined</code></pre><p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p><p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p><p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p><p><img src="/images/inherit/1.jpg" srcset="/img/loading.gif" alt></p><p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p><p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p><p><img src="/images/inherit/2.jpg" srcset="/img/loading.gif" alt></p><p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p><p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p><p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p><p><img src="/images/inherit/3.jpg" srcset="/img/loading.gif" alt></p><p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p><p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p><p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p><p>这里再说一个函数的例子来加深理解吧。</p><p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p><p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif" alt></p><p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p><p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p><p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt></p><p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
+    <content type="html"><![CDATA[<p>这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。</p><p>而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（<code>prototype</code>）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。</p><h3 id="复习原型-原型链"><a href="#复习原型-原型链" class="headerlink" title="复习原型/原型链"></a>复习原型/原型链</h3><p>JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。</p><p>其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：</p><ul><li>所有对象都有一个属性 <code>__proto__</code> 指向一个对象，也就是原型</li><li>每个对象的原型都可以通过 <code>constructor</code> 找到构造函数，构造函数也可以通过 <code>prototype</code> 找到原型</li><li>所有函数都可以通过 <code>__proto__</code> 找到 <code>Function</code> 对象</li><li>所有对象都可以通过 <code>__proto__</code> 找到 <code>Object</code> 对象</li><li>对象之间通过 <code>__proto__</code> 连接起来，这样称之为原型链。当前对象上不存在的属性可以通过原型链一层层往上查找，直到顶层 <code>Object</code> 对象，顶层 <code>Object</code> 对象最终指向<code>null</code></li></ul><p>我觉得原型中最重要的内容其实就这些了，没必要看太多关于原型的文章，到头来只是会越来越糊涂，如果硬要推荐原型参阅资料的话，《JavaScript高级程序设计》这本书，当之无愧！</p><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>通过上面的介绍，我们知道JavaScript中的继承是通过原型/原型链来体现的，先看几行代码：</p><pre><code class="javascript">function Foo() { }var f1 = new Foo();f1.a = 10;Foo.prototype.a = 100;Foo.prototype.b = 200;console.log(f1.a);  // 10console.log(f1.b);  // 200console.log(f1.c);  // undefined</code></pre><p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p><p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p><p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p><p><img src="/images/inherit/1.jpg" srcset="/img/loading.gif" alt></p><p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p><p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p><p><img src="/images/inherit/2.jpg" srcset="/img/loading.gif" alt></p><p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p><p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p><p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p><p><img src="/images/inherit/3.jpg" srcset="/img/loading.gif" alt></p><p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p><p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p><p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p><p>这里再说一个函数的例子来加深理解吧。</p><p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在Chrome中打印出：</p><p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif" alt></p><p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p><p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p><p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt></p><p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
     
     <summary type="html">
     
@@ -510,27 +510,27 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="原型" scheme="https://luozongmin.com/tags/%E5%8E%9F%E5%9E%8B/"/>
+      <category term="原型" scheme="https://amberzqx.com/tags/%E5%8E%9F%E5%9E%8B/"/>
     
-      <category term="原型链" scheme="https://luozongmin.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+      <category term="原型链" scheme="https://amberzqx.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     
-      <category term="继承" scheme="https://luozongmin.com/tags/%E7%BB%A7%E6%89%BF/"/>
+      <category term="继承" scheme="https://amberzqx.com/tags/%E7%BB%A7%E6%89%BF/"/>
     
   </entry>
   
   <entry>
     <title>从instanceof身上深入理解原型/原型链</title>
-    <link href="https://luozongmin.com/2019/08/25/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
-    <id>https://luozongmin.com/2019/08/25/从instanceof身上深入理解原型原型链/</id>
+    <link href="https://amberzqx.com/2019/08/25/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    <id>https://amberzqx.com/2019/08/25/从instanceof身上深入理解原型原型链/</id>
     <published>2019-08-24T16:00:00.000Z</published>
     <updated>2020-02-27T12:28:40.992Z</updated>
     
-    <content type="html"><![CDATA[<p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。</p><p>对于原始类型（primitive type）的值，即<code>string</code>/<code>number</code>/<code>boolean</code>，你可以通过<code>typeof</code>判断其类型，但是<code>typeof</code>在判断到合成类型（complex type）的值的时候，返回值只有<code>object</code>/<code>function</code>，你不知道它到底是一个<code>object</code>对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。</p><p>官方对<code>instanceof</code>运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：</p><pre><code class="javascript">function Foo() {}var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true</code></pre><p>上面代码中，对象<code>f1</code>是构造函数<code>Foo</code>的实例，所以返回<code>true</code>，但是“f1 instanceof Object”为什么也是<code>true</code>呢？</p><p>至于为什么等会再解释，先把<code>instanceof</code>判断的规则告诉大家。根据以上代码看下图：</p><p><img src="/images/instanceof/1.jpg" srcset="/img/loading.gif" alt>  </p><p><code>instanceof</code>运算符的左边是实例对象，右边是构造函数，左边变量暂称为A，右边变量暂称为B。它会检查右边构造函数的原型对象（prototype），是否在左边对象的原型链上。</p><p>通俗一点来讲，<code>instanceof</code>的判断规则是：<strong><code>instanceof</code>会检查整个原型链，将沿着A的<code>__proto__</code>这条线来一直找，同时沿着B的<code>prototype</code>这条线来一直找，直到能找到同一个引用，即同一个对象，那么就返回<code>true</code>。如果找到终点还未重合，则返回<code>false</code></strong>。即上图中的 <code>f1</code>–&gt;<code>__proto__</code> 和 <code>Foo</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Foo)</code>为<code>true</code>。</p><p>按照以上规则，重新来看看“ f1 instanceof Object ”这句代码为什么是<code>true</code>？ 根据上图很容易就能看出来， f1–&gt;<code>__proto__</code>–&gt;<code>__proto__</code> 和<code>Object</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Object)</code>为<code>true</code>。</p><p>通过上面的规则，可以很好地解释一些比较怪异的现象，例如：</p><pre><code class="javascript">console.log(Object instanceof Function);   // trueconsole.log(Function instanceof Object);   // trueconsole.log(Function instanceof Function);   // trueconsole.log(Object instanceof Object);   // true</code></pre><p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p><p>但还有一种特殊情况，就是左边对象的原型链上，只有<code>null</code>对象。这时，<code>instanceof</code>判断会失真。</p><pre><code class="javascript">var obj = Object.create(null);typeof obj // &quot;object&quot;Object.create(null) instanceof Object // false</code></pre><p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p><p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p><p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt>  </p><p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p><p>那么问题又出来了。<code>instanceof</code>这样设计，到底有什么用？到底<code>instanceof</code>想表达什么呢？</p><p>这就要重点讲讲继承了，即<code>instanceof</code>表示的就是一种继承关系，或者原型链的结构，请看后续文章介绍。</p><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
+    <content type="html"><![CDATA[<p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。</p><p>对于原始类型（primitive type）的值，即<code>string</code>/<code>number</code>/<code>boolean</code>，你可以通过<code>typeof</code>判断其类型，但是<code>typeof</code>在判断到合成类型（complex type）的值的时候，返回值只有<code>object</code>/<code>function</code>，你不知道它到底是一个<code>object</code>对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。</p><p>官方对<code>instanceof</code>运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：</p><pre><code class="javascript">function Foo() {}var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true</code></pre><p>上面代码中，对象<code>f1</code>是构造函数<code>Foo</code>的实例，所以返回<code>true</code>，但是“f1 instanceof Object”为什么也是<code>true</code>呢？</p><p>至于为什么等会再解释，先把<code>instanceof</code>判断的规则告诉大家。根据以上代码看下图：</p><p><img src="/images/instanceof/1.jpg" srcset="/img/loading.gif" alt>  </p><p><code>instanceof</code>运算符的左边是实例对象，右边是构造函数，左边变量暂称为A，右边变量暂称为B。它会检查右边构造函数的原型对象（prototype），是否在左边对象的原型链上。</p><p>通俗一点来讲，<code>instanceof</code>的判断规则是：<strong><code>instanceof</code>会检查整个原型链，将沿着A的<code>__proto__</code>这条线来一直找，同时沿着B的<code>prototype</code>这条线来一直找，直到能找到同一个引用，即同一个对象，那么就返回<code>true</code>。如果找到终点还未重合，则返回<code>false</code></strong>。即上图中的 <code>f1</code>–&gt;<code>__proto__</code> 和 <code>Foo</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Foo)</code>为<code>true</code>。</p><p>按照以上规则，重新来看看“ f1 instanceof Object ”这句代码为什么是<code>true</code>？ 根据上图很容易就能看出来， f1–&gt;<code>__proto__</code>–&gt;<code>__proto__</code> 和<code>Object</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Object)</code>为<code>true</code>。</p><p>通过上面的规则，可以很好地解释一些比较怪异的现象，例如：</p><pre><code class="javascript">console.log(Object instanceof Function);   // trueconsole.log(Function instanceof Object);   // trueconsole.log(Function instanceof Function);   // trueconsole.log(Object instanceof Object);   // true</code></pre><p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p><p>但还有一种特殊情况，就是左边对象的原型链上，只有<code>null</code>对象。这时，<code>instanceof</code>判断会失真。</p><pre><code class="javascript">var obj = Object.create(null);typeof obj // &quot;object&quot;Object.create(null) instanceof Object // false</code></pre><p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p><p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p><p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt>  </p><p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p><p>那么问题又出来了。<code>instanceof</code>这样设计，到底有什么用？到底<code>instanceof</code>想表达什么呢？</p><p>这就要重点讲讲继承了，即<code>instanceof</code>表示的就是一种继承关系，或者原型链的结构，请看后续文章介绍。</p><p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>]]></content>
     
     <summary type="html">
     
@@ -541,21 +541,21 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="原型" scheme="https://luozongmin.com/tags/%E5%8E%9F%E5%9E%8B/"/>
+      <category term="原型" scheme="https://amberzqx.com/tags/%E5%8E%9F%E5%9E%8B/"/>
     
-      <category term="原型链" scheme="https://luozongmin.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+      <category term="原型链" scheme="https://amberzqx.com/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
     
   </entry>
   
   <entry>
     <title>【译】12个编写干净且可扩展的JavaScript技巧</title>
-    <link href="https://luozongmin.com/2019/08/22/%E3%80%90%E8%AF%91%E3%80%9112%E4%B8%AA%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80%E4%B8%94%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/"/>
-    <id>https://luozongmin.com/2019/08/22/【译】12个编写干净且可扩展的JavaScript技巧/</id>
+    <link href="https://amberzqx.com/2019/08/22/%E3%80%90%E8%AF%91%E3%80%9112%E4%B8%AA%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80%E4%B8%94%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/"/>
+    <id>https://amberzqx.com/2019/08/22/【译】12个编写干净且可扩展的JavaScript技巧/</id>
     <published>2019-08-21T16:00:00.000Z</published>
     <updated>2020-02-27T12:28:56.544Z</updated>
     
@@ -571,12 +571,12 @@
     
     </summary>
     
-      <category term="JavaScript" scheme="https://luozongmin.com/categories/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/categories/JavaScript/"/>
     
     
-      <category term="JavaScript" scheme="https://luozongmin.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://amberzqx.com/tags/JavaScript/"/>
     
-      <category term="编程技巧" scheme="https://luozongmin.com/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
+      <category term="编程技巧" scheme="https://amberzqx.com/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/"/>
     
   </entry>
   

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <title>JavaScript系列之变量对象 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/aiticle.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 十月 12日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      7 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/" target="_blank" rel="noopener">《JavaScript系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p>
+<p>上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：</p>
+<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下<strong>变量对象</strong>。</p>
+<h3 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h3><p>变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的<strong>变量</strong>和<strong>函数声明</strong>，先来看一段代码示例：</p>
+<pre><code class="javascript">function foo(){
+    var a = 10;     
+    function b(){}
+    (function c(){});
+    console.log(a);     // 10
+    console.log(b);   // function b(){}
+    console.log(c);   // Uncaught ReferenceError: c is not defined
+}
+
+foo();
+</code></pre>
+<p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由JavaScript引擎处理。</p>
+<p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p>
+<h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
+<pre><code class="javascript">// 以浏览器中为例，全局对象为window
+// 全局上下文创建阶段
+// VO 为变量对象（Variable Object）的缩写
+windowEC = {
+    VO: Window,
+    scopeChain: {},
+    this: Window
+}
+</code></pre>
+<p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p>
+<h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p>
+<p>这时变量对象的<strong>创建阶段</strong>会包括：</p>
+<ol>
+<li><strong>创建<code>arguments</code>对象</strong>。检查当前上下文中的参数，建立该对象下的属性与属性值。</li>
+<li><strong>检查当前上下文的函数声明，也就是使用function关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
+<li><strong>检查当前上下文中的变量声明</strong>（<code>var</code> 声明的变量），默认为 <code>undefined</code>；如果变量名称跟已经声明的形式参数或函数相同，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过变量声明，原属性值不会被修改。</li>
+</ol>
+<p><img src="/images/variableobject/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>对于第3点中的“跳过”一词想必大家会有一丝疑问？底下例子中既然按照上面的规则，变量声明的<code>foo</code>遇到函数声明的<code>foo</code>会跳过，可是为什么最后<code>foo</code>的输出结果仍然是被覆盖了？</p>
+<pre><code class="javascript">function foo() { console.log(&#39;I am function foo&#39;) }
+var foo = 10;
+
+console.log(foo); // 10
+</code></pre>
+<p>理由其实很简单，因为上面的三条规则仅仅适用于变量对象的<strong>创建过程</strong>，也就是执行上下文的创建过程。而<code>foo = 10</code>是在执行上下文的<strong>执行过程</strong>中运行的，输出结果自然会是10。对比下例：</p>
+<pre><code class="javascript">console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }
+function foo() { console.log(&#39;I am function foo&#39;) }
+
+var foo = 10;
+console.log(foo); // 10
+</code></pre>
+<p>为啥又是不一样的结果呢？其实它的执行顺序为：</p>
+<pre><code class="javascript">// 首先将所有函数声明放入变量对象中，函数声明变量提升
+function foo() { console.log(&#39;I am function foo&#39;) }
+
+// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过变量声明默认undefined的赋值
+// var foo = undefined;
+
+// 然后开始执行阶段代码的执行
+console.log(foo); // ƒ foo() { console.log(&#39;I am function foo&#39;) }
+
+// 在执行上下文的执行过程中运行
+foo = 10;
+console.log(foo); // 10
+</code></pre>
+<p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，<strong><code>function</code>声明会比<code>var</code>声明优先级更高一点</strong>。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p>
+<pre><code class="javascript">function test() {
+    console.log(a);
+    console.log(foo());
+
+    var a = 1;
+    function foo() {
+        return 2;
+    }
+}
+
+test();
+
+/* 结果为：
+undefined
+2
+*/
+</code></pre>
+<p>根据上述的规则，理解变量提升后可以将执行顺序理解为：</p>
+<pre><code class="javascript">function test() {
+    function foo() {
+        return 2;
+    }
+    var a;
+    console.log(a);
+    console.log(foo());
+    a = 1;
+}
+
+test();
+</code></pre>
+<p>这样是不是一目了然了呢？</p>
+<p>当然还需要注意的是，函数未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象（VO）转变为了活动对象（AO），然后开始进行执行阶段的操作。</p>
+<h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>当前进入执行阶段，变量对象（VO）激活成活动对象（AO），里面的属性都能被访问了，函数会顺序执行代码，改变变量对象的属性值，此阶段的执行上下文代码会分成两个阶段进行处理：</p>
+<ol>
+<li>进入执行上下文</li>
+<li>执行代码</li>
+</ol>
+<h4 id="进入执行上下文"><a href="#进入执行上下文" class="headerlink" title="进入执行上下文"></a>进入执行上下文</h4><p>当进入执行上下文时，这时候还没有执行代码。让我们看一个例子：</p>
+<pre><code class="javascript">function foo(a, b) {
+  var c = 10;
+  function d() {}
+  var e = function _e() {};
+  (function x() {});
+}
+
+foo(10); 
+</code></pre>
+<p>当进入带有参数10的<code>foo</code>函数上下文时，AO表现为如下：</p>
+<pre><code class="javascript">AO = {
+    arguments: {
+        0: 10,
+        1: undefined,
+        length: 1
+    }
+    a: 10,
+    b: undefined,
+    c: undefined,
+    d: &lt;function reference to d&gt;,
+    e: undefined,
+}
+</code></pre>
+<p><code>x</code> 是函数表达式，所以不在变量对象当中，<code>e</code> 变量引用的值也是函数表达式，所以变量 <code>e</code> 本身是声明，所以在变量对象当中。</p>
+<h4 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h4><p>这个阶段会按顺序执行代码，修改变量对象的属性值，紧接上面的例子，执行完成后AO如下：</p>
+<pre><code class="javascript">AO = {
+    arguments: {
+        0: 10,
+        1: undefined,
+        length: 1
+    }
+    a: 10,
+    b: undefined,
+    c: 10,
+    d: &lt;reference to function declaration d&gt;,
+    e: &lt;reference to Function expression to _e&gt;,
+}
+</code></pre>
+<p>到这里变量对象的创建过程就介绍完了，让我们简短地总结一下：</p>
+<ol>
+<li>全局上下文的变量对象初始化是全局对象</li>
+<li>函数上下文的变量对象初始化只包括 <code>Arguments</code> 对象</li>
+<li>在进入执行上下文时会依次给变量对象<strong>添加形参</strong>、<strong>函数声明</strong>、<strong>变量声明</strong>等初始的属性值</li>
+<li>函数未进入执行阶段之前，变量对象中的属性都不能访问</li>
+<li>在执行代码阶段，会再次修改变量对象的属性值，并赋予该有的属性值</li>
+</ol>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1">变量对象</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之变量对象&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

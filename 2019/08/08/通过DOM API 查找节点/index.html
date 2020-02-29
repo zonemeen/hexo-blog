@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <title>通过DOM API 查找节点 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/aiticle.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期四, 八月 8日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.9k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      12 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>在上一篇的分享当中，我们简单介绍了BOM 与DOM，也了解到JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。</p>
+<p>当一个网页被载入到浏览器时，浏览器会首先分析这个HTML 文档，然后会依照这份HTML 的内容解析成DOM (Document Object Model，即文件对象模型)。</p>
+<p>而DOM 是W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过DOM 提供的API 来操作DOM 的内容、结构与样式。</p>
+<p>所以说，DOM 是网页的根本，懂得<strong>控制DOM就可以控制整个网页，做出良好的互动体验</strong>。</p>
+<p>那么在今天的分享中，我们就继续来介绍DOM API 查找节点的方法吧。</p>
+<h3 id="前言-script标签放哪里有区别吗？"><a href="#前言-script标签放哪里有区别吗？" class="headerlink" title="前言:script标签放哪里有区别吗？"></a>前言:script标签放哪里有区别吗？</h3><p>针对<code>&lt;script&gt;</code>标签放哪里，这个题目其实没有标准答案，一般你会看到有两种版本：</p>
+<ul>
+<li>放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间</li>
+<li>放在<code>&lt;/body&gt;</code>之前</li>
+</ul>
+<p>还有人会说为什么放在<code>&lt;head&gt; ... &lt;/head&gt;</code>里面的JavaScript没有作用？我觉得这说的有出入，这里我们简单来讲一下问题所在。</p>
+<p>那么我们来试试上一篇介绍过的，先以<code>document.querySelector</code>取得<code>id=&quot;hello&quot;</code>的节点，然后通过<code>textContent</code>来修改内容。</p>
+<p>先来试试把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前。在jsbin里面马上执行看看，看起来似乎很ok呢！</p>
+<p><img src="/images/domapi/1.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>接着，我们试着把<code>&lt;script&gt;</code>标签移到<code>&lt;head&gt; ... &lt;/head&gt;</code>之间：</p>
+<p><img src="/images/domapi/2.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>咦？怎么什么都没有呢？而且也没有错误信息，JavaScript真的如大家说的一样，很垃圾吗？</p>
+<p><img src="/images/domapi/3.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>冷静一下，容我解释一下。</p>
+<p>前面说过，当一个网页被载入到浏览器时，浏览器会先分析这个HTML 文档，由上而下依序来读取解析：</p>
+<p><img src="/images/domapi/4.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>所以上面jsbin例子中，当浏览器在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间遇到<code>&lt;script&gt;</code>标签时，就会暂停解析网页，并且<strong>立即</strong>执行<code>&lt;script&gt;</code>里的内容，直到script执行完毕后再继续解析网页。</p>
+<p>当<code>&lt;head&gt; ... &lt;/head&gt;</code>里的<code>&lt;script&gt;</code>想要尝试去寻找<code>&lt;div id=&quot;hello&quot;&gt;</code>这个标签，但因为还没解析到网页本体，所以也无从取得。</p>
+<p>不是浏览器坏掉，也不是JavaScript太渣，而是因为我们<strong>不理解浏览器执行的原理所造成的误会</strong>。</p>
+<p>这里是浏览器加载一个有 <code>&lt;script&gt;</code> 标签的网站所发生的事情:</p>
+<ol>
+<li>拉取 HTML 页面</li>
+<li>开始解析 HTML</li>
+<li>解析到 <code>&lt;script&gt;</code> 标签之后准备获取 script 文件.</li>
+<li>浏览器获取script文件。同时，html 解析中断并且<strong>阻断</strong>页面上其他html的解析。</li>
+<li>一段时间后，script下载完成并且<strong>执行</strong>。</li>
+<li>继续解析HTML文档的其他部分（解析script之后的html代码）</li>
+</ol>
+<p>第4步导致了很不好的用户体验，直到script文件全部下载完成之前HTML都不能得到解析。</p>
+<p>那么，当我们把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>结束之前，由于DOM已经解析完成，所以<code>document.querySelector</code>就可以顺利取得<code>id=&quot;hello&quot;</code>的节点，并且把<code>&#39;HELLO&#39;</code>的字串放在网页里啦！</p>
+<p>这样说起来，<code>&lt;script&gt;</code>标签是不是就不适合放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间呢？</p>
+<p>也不能这么说，这点认真要讲的话之后或许可以用一整篇来说明这个。</p>
+<h3 id="DOM-节点的选取"><a href="#DOM-节点的选取" class="headerlink" title="DOM 节点的选取"></a>DOM 节点的选取</h3><p><img src="/images/domapi/5.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>上一篇文章说过，<code>document对象</code>是DOM tree的根节点，所以当我们要存取HTML时，都从<code>document</code>对象开始。而DOM的节点类型除了<strong>HTML元素节点</strong>(element nodes)外，还有<strong>文字节点</strong>(text nodes)、<strong>注释节点</strong>(comment nodes)等。</p>
+<p>而常见的DOM 选取方法有下列这些：</p>
+<pre><code class="javascript">// 根据传入的值，找到 DOM 中 id 为 &#39;xxx&#39; 的元素。
+document.getElementById(&#39;xxx&#39;);
+
+// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)
+document.getElementsByTagName(&#39;xxx&#39;);
+
+// 针对给定的 class 名称，返回所有符合条件的节点集合
+document.getElementsByClassName(&#39;xxx&#39;);
+
+// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的节点集合
+document.querySelector(&#39;xxx&#39;); 
+document.querySelectorAll(&#39;xxx&#39;);
+</code></pre>
+<h3 id="DOM-节点的类型"><a href="#DOM-节点的类型" class="headerlink" title="DOM 节点的类型"></a>DOM 节点的类型</h3><p>DOM 常用的节点类型有下面几种：</p>
+<p><img src="/images/domapi/6.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>可以通过节点类型常数或是对应数值来判断：</p>
+<pre><code class="javascript">document.nodeType === Node.DOCUMENT_NODE;   //true
+document.nodeType === 9;   //true
+</code></pre>
+<p>其他不常用或是已经废弃的部分可以参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType" target="_blank" rel="noopener">MDN Node.nodeType</a>一节。</p>
+<h3 id="DOM-节点间的查找遍历-Traversing"><a href="#DOM-节点间的查找遍历-Traversing" class="headerlink" title="DOM 节点间的查找遍历(Traversing)"></a>DOM 节点间的查找遍历(Traversing)</h3><p>由于DOM 节点有分层的概念，于是节点与节点之间的关系，我们大致上可以分成以下两种：</p>
+<ul>
+<li><strong>父子关系</strong>：除了<code>document</code>之外，每一个节点都会有个上层的节点，我们通常称之为「父节点」 (Parent node)，而相对地，从属于自己下层的节点，就会称为「子节点」 (Child node)。</li>
+<li><strong>兄弟关系</strong>：有同一个「父节点」的节点，那么他们彼此之间就是「兄弟节点」(Siblings node)。</li>
+</ul>
+<p>而隔层的节点基本上没有直接关系。</p>
+<p><img src="/images/domapi/7.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>上图中水平方向的邻层节点为父子关系，垂直方向的同层节点为兄弟关系。</p>
+<p><strong>Node.childNodes</strong></p>
+<p>所有的DOM节点对象都有<code>childNodes</code>属性，且此种属性无法修改。  </p>
+<p>我们可以通过<code>Node.hasChildNodes()</code>来检查某个DOM节点是否有子节点。</p>
+<pre><code class="javascript">var node = document.querySelector(&#39;#hello&#39;);
+
+// 如果 node 內有子元素
+if( node.hasChildNodes() ) {
+
+    // 可以通过 node.childNodes[n] (n 为数字索引) 取得对应的节点
+    // 注意，NodeList 对象內容为即时更新的集合
+    for (var i = 0; i &lt; node.childNodes[i].length; i++) {
+       // ...     
+    }; 
+}
+</code></pre>
+<p><code>Node.childNodes</code>返回的可能会有这几种：</p>
+<ul>
+<li>HTML 元素节点(element nodes)</li>
+<li>文字节点(text nodes)，包含空格</li>
+<li>注释节点(comment nodes)</li>
+</ul>
+<p><strong>Node.firstChild</strong></p>
+<p><code>Node.firstChild</code>可以取得<code>Node</code>节点的<strong>第一个</strong>子节点，如果没有子节点则返回<code>null</code>。</p>
+<p>要注意的是，子节点包括空白节点，如下面例子：</p>
+<pre><code class="html">&lt;p&gt;
+  &lt;span&gt;span 1&lt;/span&gt;
+  &lt;span&gt;span 2&lt;/span&gt;
+  &lt;span&gt;span 3&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;script&gt;
+  var p = document.querySelector(&#39;p&#39;);    
+
+  // tagName 属性可以取得 node 的标签名称
+  console.log(p.firstChild.tagName);      // undefined
+&lt;/script&gt;
+</code></pre>
+<p>因为取得的是<code>&lt;p&gt;</code>与第一个<code>&lt;span&gt;</code>中间的换行字元，所以<code>p.firstChild.tagName</code>会得到<code>undefined</code>。所以改成这样：</p>
+<pre><code class="html">&lt;p&gt;&lt;span&gt;span 1&lt;/span&gt;&lt;span&gt;span 2&lt;/span&gt;&lt;span&gt;span 3&lt;/span&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  var p = document.querySelector(&#39;p&#39;);    
+
+  // tagName 属性可以取得 node 的标签名称
+  console.log(p.firstChild.tagName);      // &quot;SPAN&quot;
+&lt;/script&gt;
+</code></pre>
+<p>把中间的换行与空白移除，就会得到预期中的<code>&quot;SPAN&quot;</code>了。</p>
+<p><strong>Node.lastChild</strong></p>
+<p><code>Node.lastChild</code>可以取得<code>Node</code>节点的最后一个子节点，如果没有子节点则返回<code>null</code>。</p>
+<p>与<code>Node.firstChild</code>一样的是，子节点也包括空白节点，所以像这样：</p>
+<pre><code class="html">&lt;p&gt;
+  &lt;span&gt;span 1&lt;/span&gt;
+  &lt;span&gt;span 2&lt;/span&gt;
+  &lt;span&gt;span 3&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;script&gt;
+  var p = document.querySelector(&#39;p&#39;);    
+
+  // textContent 属性可以取得节点内的文字内容
+  console.log(p.lastChild.textContent);      // &quot;&quot; (换行字元)
+&lt;/script&gt;
+</code></pre>
+<p>得到的会是一个换行字元的空字符串。</p>
+<p>移除节点之间多余的空白后：</p>
+<pre><code class="html">&lt;p&gt;&lt;span&gt;span 1&lt;/span&gt;&lt;span&gt;span 2&lt;/span&gt;&lt;span&gt;span 3&lt;/span&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  var p = document.querySelector(&#39;p&#39;);    
+  // textContent 属性可以取得节点内的文字内容
+  console.log(p.lastChild.textContent);      // &quot;span 3&quot;
+&lt;/script&gt;
+</code></pre>
+<p>输出的就会是正确的”span 3” 啦。</p>
+<p><strong>Node.parentNode</strong></p>
+<p>那么相较于Child系列，<code>parentNode</code>就单纯一些。</p>
+<p>通过<code>Node.parentNode</code>可以用来取得父元素，返回值可能会是一个元素节点(Element node)、根节点(Document node)或DocumentFragment节点。</p>
+<pre><code class="html">&lt;p&gt;&lt;span&gt;span 1&lt;/span&gt;&lt;span&gt;span 2&lt;/span&gt;&lt;span&gt;span 3&lt;/span&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  var el = document.querySelector(&#39;span&#39;);   
+  console.log( el.parentNode.nodeName );    // &quot;P&quot;
+&lt;/script&gt;
+</code></pre>
+<p><strong>Node.previousSibling</strong></p>
+<p>看完了DOM父与子之后，接着来看看兄弟节点。</p>
+<p>通过<code>Node.previousSibling</code>可以取得同层之间的前一个节点，如果node已经是第一个节点且前面无节点，则返回<code>null</code>。</p>
+<pre><code class="html">&lt;p&gt;&lt;span&gt;span 1&lt;/span&gt;&lt;span&gt;span 2&lt;/span&gt;&lt;span&gt;span 3&lt;/span&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  var el = document.querySelector(&#39;span&#39;);   
+  console.log( el.previousSibling );    // null
+
+  // document.querySelectorAll 会取得所有符合条件的集合，
+  // 而 document.querySelectorAll(&#39;span&#39;)[2] 指的是「第三个」符合条件的元素。
+  var el2 = document.querySelectorAll(&#39;span&#39;)[2];   
+  console.log( el2.previousSibling.textContent );    // &quot;span 2&quot;
+&lt;/script&gt;
+</code></pre>
+<p><strong>Node.nextSibling</strong></p>
+<p>与<code>Node.previousSibling</code>类似，通过<code>Node.nextSibling</code>可以取得同层之间的下一个节点，如果node已经是最后一个节点，则返回<code>null</code>。</p>
+<pre><code class="html">&lt;p&gt;&lt;span&gt;span 1&lt;/span&gt;&lt;span&gt;span 2&lt;/span&gt;&lt;span&gt;span 3&lt;/span&gt;&lt;/p&gt;
+
+&lt;script&gt;
+
+  // document.querySelector 会取得第一个符合条件的元素
+  var el = document.querySelector(&#39;span&#39;);
+
+  console.log( el.nextSibling.textContent );    // &quot;span 2&quot;
+&lt;/script&gt;
+</code></pre>
+<p><strong>document.getElementsBy*与document.querySelector/ document.querySelectorAll的差异</strong></p>
+<p>今天分享了很多关于DOM的选取以及查找遍历的方式，其中，像是<code>document.getElementById</code>以及<code>document.querySelector</code>因为取得的一定只会有一个元素/节点，所以不会有<code>index</code>与<code>length</code>属性。</p>
+<p>而<code>document.getElementsBy**</code>(注意，这里有个s)以及<code>document.querySelectorAll</code>则分别返回HTMLCollection与NodeList。</p>
+<p>这两者其实是有点差别的，HTMLCollection只收集HTML element 节点，而NodeList除了HTML element 节点，也包含文字节点、属性节点等。当然两者也有类似的地方，虽然不能使用数组的method，但这两种都可以用数组索引的方式来存取内容，也就是伪数组。</p>
+<p>另一个需要注意的地方是，HTMLCollection/NodeList在大部分情况下是<strong>即时更新</strong>的，但通过<code>document.querySelector</code>/<code>document.querySelectorAll</code>取得的NodeList是<strong>静态</strong>的。</p>
+<p>啥意思呢？举个例子：</p>
+<pre><code class="html">&lt;div id=&quot;outer&quot;&gt;
+  &lt;div id=&quot;inner&quot;&gt;inner&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+
+  // &lt;div id=&quot;outer&quot;&gt;
+  var outerDiv = document.getElementById(&#39;outer&#39;);    
+
+  // 所有的 &lt;div&gt; 标签
+  var allDivs = document.getElementsByTagName(&#39;div&#39;);    
+
+  console.log(allDivs.length);    // 2
+
+  // 清空 &lt;div id=&quot;outer&quot;&gt; 下的节点   
+  outerDiv.innerHTML = &#39;&#39;;    
+
+  // 因为清空了&lt;div id=&quot;outer&quot;&gt; 下的节点，所以只剩下 outer
+  console.log(allDivs.length);    // 1
+&lt;/script&gt;
+</code></pre>
+<p>如果改成<code>document.querySelector</code>的写法：</p>
+<pre><code class="html">&lt;div id=&quot;outer&quot;&gt;
+  &lt;div id=&quot;inner&quot;&gt;inner&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+
+  // &lt;div id=&quot;outer&quot;&gt;
+  var outerDiv = document.getElementById(&#39;outer&#39;);    
+
+  // 所有的 &lt;div&gt; 标签
+  var allDivs = document.querySelectorAll(&#39;div&#39;);    
+
+  console.log(allDivs.length);    // 2
+
+  // 清空 &lt;div id=&quot;outer&quot;&gt; 下的节点   
+  outerDiv.innerHTML = &#39;&#39;;    
+
+  // document.querySelector 返回的是静态的 NodeList，不受 outerDiv 更新影响
+  console.log(allDivs.length);    // 2
+&lt;/script&gt;
+</code></pre>
+<p>那么以上就是今天所要介绍的内容啦。</p>
+<p>在后续的文章会再继续说明DOM API新增/删除/修改节点的部分，欢迎持续关注。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/DOM">DOM</a>
+                
+                  <a class="hover-with-bg" href="/tags/API">API</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "通过DOM API 查找节点&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

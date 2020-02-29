@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <title>【译】12个编写干净且可扩展的JavaScript技巧 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/aiticle.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 九月 1日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.9k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      10 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>JavaScript起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。</p>
+<p>现代Web应用程序严重依赖JavaScript，尤其是单页应用程序（SPA）。借助于React，AngularJS和Vue.js等新兴框架，Web应用程序主要使用JavaScript构建。</p>
+<p>扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能会遇到限制并迷失在混乱的海洋中。我想分享一些小技巧，这些技巧将帮助您以有效的方式编写干净的代码。</p>
+<p>本文面向任何技能水平的JavaScript开发人员。 但是，至少具有JavaScript中级知识的开发人员将从这些技巧中获益最多。</p>
+<blockquote>
+<p>原文链接：<a href="https://blog.logrocket.com/12-tips-for-writing-clean-and-scalable-javascript-3ffe30abfe20/" target="_blank" rel="noopener">https://blog.logrocket.com/12-tips-for-writing-clean-and-scalable-javascript-3ffe30abfe20/</a></p>
+</blockquote>
+<h3 id="分隔您的代码"><a href="#分隔您的代码" class="headerlink" title="分隔您的代码"></a>分隔您的代码</h3><p>我建议保持代码库清洁和可读的最重要的事情是具有按主题分隔的特定逻辑块（通常是函数）。如果你编写一个函数，该函数应该默认只有一个目的，不应该一次做多个事情。</p>
+<p>此外，您应避免引起副作用，这意味着在大多数情况下，您不应更改在函数外声明的任何内容。 您将数据接收到带参数的函数中；其他一切都不应该被访问。如果您希望从函数中获取某些内容，请返回新值。</p>
+<h3 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h3><p>当然，如果以类似的方式使用这些函数或执行类似的操作，您可以将多个函数分组到一个模块（and/or 的类中）。例如，如果要进行许多不同的计算，请将它们拆分为可以链接的独立步骤（函数）。但是，这些函数都可以在一个文件（模块）中声明。 以下是JavaScript中的示例：</p>
+<pre><code class="javascript">function add(a, b) {
+    return a + b   
+}
+
+function subtract(a, b) {
+    return a - b   
+}
+
+module.exports = {
+    add,
+    subtract
+}
+
+const { add, subtract } = require(&#39;./calculations&#39;)
+
+console.log(subtract(5, add(3, 2))
+</code></pre>
+<p>如果您正在编写前端JavaScript，请务必使用默认导出作为最重要的项目，并为次要项目命名导出。</p>
+<h3 id="多个参数优先于单个对象参数"><a href="#多个参数优先于单个对象参数" class="headerlink" title="多个参数优先于单个对象参数"></a>多个参数优先于单个对象参数</h3><p>声明一个函数时，您应该总是喜欢多个参数而不是一个期望对象的参数：</p>
+<pre><code class="javascript">// GOOD
+function displayUser(firstName, lastName, age) {
+    console.log(`This is ${firstName} ${lastName}. She is ${age} years old.`)
+}
+
+// BAD
+function displayUser(user) {
+    console.log(`This is ${user.firstName} ${user.lastName}. She is ${user.age} years old.`)
+}
+</code></pre>
+<p>这背后的原因是，当您查看函数声明的第一行时，您能确切知道需要传递给函数的内容。</p>
+<p>尽管函数应该受到限制 - 只做一项工作 - 但是它可能会变得更大。在函数体中扫描需要传递的变量（嵌套在对象中）将花费更多时间。有时，使用整个对象并将其传递给函数似乎更容易，但为了扩展应用程序，此设置肯定会有所帮助。</p>
+<p>在某种程度上，声明特定参数没有意义。对我来说，它超过四个或五个功能参数。如果你的函数变大，你应该转向使用对象参数。</p>
+<p>这里的主要原因是参数需要以特定顺序传递。 如果您有可选参数，则需要传递undefined或null。 使用对象参数，您可以简单地传递整个对象，其中顺序和未定义的值无关紧要。</p>
+<h3 id="解构（Destructuring）"><a href="#解构（Destructuring）" class="headerlink" title="解构（Destructuring）"></a>解构（Destructuring）</h3><p>解构是ES6引入的一个很好的工具。它允许您从对象中获取特定字段并立即将其分配给变量。 您可以将它用于任何类型的对象或模块。</p>
+<pre><code class="javascript">// EXAMPLE FOR MODULES
+const { add, subtract } = require(&#39;./calculations&#39;)
+</code></pre>
+<p>只导入您需要在文件中使用的函数而不是整个模块，然后从中访问特定的函数。 同样，当您确定您确实需要一个对象作为函数参数时，也可以使用destructuring。 这仍将为您提供函数内所需内容的概述：</p>
+<pre><code class="javascript">function logCountry({name, code, language, currency, population, continent}) {
+    let msg = `The official language of ${name} `
+    if(code) msg += `(${code}) `
+    msg += `is ${language}. ${population} inhabitants pay in ${currency}.`
+    if(contintent) msg += ` The country is located in ${continent}`
+}
+
+logCountry({
+    name: &#39;Germany&#39;,
+    code: &#39;DE&#39;,
+    language &#39;german&#39;,
+    currency: &#39;Euro&#39;,
+    population: &#39;82 Million&#39;,
+})
+
+logCountry({
+    name: &#39;China&#39;,
+    language &#39;mandarin&#39;,
+    currency: &#39;Renminbi&#39;,
+    population: &#39;1.4 Billion&#39;,
+    continent: &#39;Asia&#39;,
+})
+</code></pre>
+<p>正如你所看到的，我仍然知道我需要传递什么给函数 - 即使它被包装在一个对象中。要解决了解所需内容的问题，请参阅下一个提示！（顺便说一句，这也适用于React功能组件。）</p>
+<h3 id="使用默认值"><a href="#使用默认值" class="headerlink" title="使用默认值"></a>使用默认值</h3><p>解构的默认值甚至基本函数参数都非常有用。首先，它们为您提供了一个可以传递给函数的值的示例。其次，您可以指出哪些值是必需的，哪些值不是。使用前面的示例，该函数的完整设置如下所示：</p>
+<pre><code class="javascript">function logCountry({
+    name = &#39;United States&#39;, 
+    code, 
+    language = &#39;English&#39;, 
+    currency = &#39;USD&#39;, 
+    population = &#39;327 Million&#39;, 
+    continent,
+}) {
+    let msg = `The official language of ${name} `
+    if(code) msg += `(${code}) `
+    msg += `is ${language}. ${population} inhabitants pay in ${currency}.`
+    if(contintent) msg += ` The country is located in ${continent}`
+}
+
+logCountry({
+    name: &#39;Germany&#39;,
+    code: &#39;DE&#39;,
+    language &#39;german&#39;,
+    currency: &#39;Euro&#39;,
+    population: &#39;82 Million&#39;,
+})
+
+logCountry({
+    name: &#39;China&#39;,
+    language &#39;mandarin&#39;,
+    currency: &#39;Renminbi&#39;,
+    population: &#39;1.4 Billion&#39;,
+    continent: &#39;Asia&#39;,
+})
+</code></pre>
+<p>显然，有时您可能不想使用默认值，而是在未传递值时抛出错误。 然而，这通常是一个方便的技巧。</p>
+<h3 id="数据稀缺性"><a href="#数据稀缺性" class="headerlink" title="数据稀缺性"></a>数据稀缺性</h3><p>前面的技巧引出了一个结论：最好不要传递您不需要的数据。同样，在设置函数时，这可能意味着更多的工作。但是，从长远来看，它肯定会为您提供更具可读性的代码库。确切地知道在特定位置使用哪些值是非常有价值的。</p>
+<h3 id="行数和缩进限制"><a href="#行数和缩进限制" class="headerlink" title="行数和缩进限制"></a>行数和缩进限制</h3><p>我见过大文件 - 非常大的文件。实际上，超过3,000行代码。在这些文件中查找逻辑块是非常困难的。</p>
+<p>因此，您应该将文件大小限制为一定数量的行。我倾向于将我的文件保存在100行代码之下。 有时候，很难分解文件，它们会增长到200-300行，在极少数情况下会增加到400行。</p>
+<p>超过此临界值，意味着文件太杂乱，难以维护。随意创建新的模块和文件夹。您的项目应该看起来像一个森林，由树（模块部分）和分支（模块和模块文件组）组成。避免试图模仿阿尔卑斯山，在密闭区域堆积代码。</p>
+<p>相比之下，你的实际文件应该看起来像Shire，这里和那里都有一些山丘（小水平的缩进），但一切都相对平坦。 尽量将压痕水平保持在四级以下。</p>
+<p>也许为这些提示启用eslint规则是有帮助的！</p>
+<h3 id="使用prettier"><a href="#使用prettier" class="headerlink" title="使用prettier"></a>使用prettier</h3><p>在团队中工作需要清晰的样式指南和格式。ESLint提供了一个巨大的规则集，您可以根据自己的需求进行自定义。还有 <code>eslint--fix</code>，它可以纠正一些错误，但不是全部。</p>
+<p>相反，我建议使用<a href="https://prettier.io/" target="_blank" rel="noopener">Prettier</a>格式化代码。这样，开发人员不必担心代码格式化，而只需编写高质量的代码。 外观将一致并且格式自动化。</p>
+<h3 id="使用有意义的变量名"><a href="#使用有意义的变量名" class="headerlink" title="使用有意义的变量名"></a>使用有意义的变量名</h3><p>理想情况下，应根据其内容命名变量。 以下是一些有助于您声明有意义的变量名称的指南。</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>函数通常执行某种操作。为了解释这一点，人类使用动词 - 转换或显示，例如。在开头用动词命名函数是个好主意，例如<code>convertCurrency</code> 或 <code>displayUserName</code>。</p>
+<h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><p>这些通常会包含一系列项目; 因此，将s附加到变量名称。 例如：</p>
+<pre><code class="javascript">const students = [&#39;Eddie&#39;, &#39;Julia&#39;, &#39;Nathan&#39;, &#39;Theresa&#39;]
+</code></pre>
+<h4 id="布尔"><a href="#布尔" class="headerlink" title="布尔"></a>布尔</h4><p>简单地说就是尽量多接近于自然语言，这样好理解。你会问“这个人是教师吗？”→“是”或“否”。同样：</p>
+<pre><code class="javascript">const isTeacher = true // OR false
+</code></pre>
+<h4 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a>数组函数</h4><p><code>forEach</code>, <code>map</code>, <code>reduce</code>, <code>filter</code>等是很好的原生JavaScript函数，用于处理数组和执行某些操作。 我看到很多人只是将<code>el</code> 或 <code>element</code>作为参数传递给回调函数。 虽然这很简单快捷，但您还应根据其值来命名。 例如：</p>
+<pre><code class="javascript">const cities = [&#39;Berlin&#39;, &#39;San Francisco&#39;, &#39;Tel Aviv&#39;, &#39;Seoul&#39;]
+cities.forEach(function(city) {
+...
+})
+</code></pre>
+<h4 id="标识"><a href="#标识" class="headerlink" title="标识"></a>标识</h4><p>通常，您必须跟踪特定数据集和对象的ID。当嵌套id时，只需将其保留为id即可。在这里，我喜欢在将对象返回到前端之前将MongoDB <code>_id</code>映射到 <code>id</code>。从对象中提取<code>id</code>时，请预先添加对象的类型。例如：</p>
+<pre><code class="javascript">const studentId = student.id
+// OR
+const { id: studentId } = student // destructuring with renaming
+</code></pre>
+<p>该规则的一个例外是模型中的MongoDB引用。 在这里，只需在引用的模型之后命名字段即可。 这将在填充参考文档时保持清晰：</p>
+<pre><code class="javascript">const StudentSchema = new Schema({
+    teacher: {
+        type: Schema.Types.ObjectId,
+        ref: &#39;Teacher&#39;,
+        required: true,
+    },
+    name: String,
+    ...
+})
+</code></pre>
+<h3 id="尽可能使用async-await"><a href="#尽可能使用async-await" class="headerlink" title="尽可能使用async / await"></a>尽可能使用async / await</h3><p>在可读性方面，回调是最糟糕的 - 特别是在嵌套时。Promises是一个很好的改进，但在我看来，async / await具有最好的可读性。即使对于初学者或来自其他语言的人来说，这也会有很大帮助。但是，请确保您了解其背后的概念，并且不要盲目地在任何地方使用它。</p>
+<h3 id="模块导入顺序"><a href="#模块导入顺序" class="headerlink" title="模块导入顺序"></a>模块导入顺序</h3><p>正如我们在技巧1和2中看到的那样，将逻辑保持在正确的位置是可维护性的关键。 同样，导入不同模块的方式可以减少文件中的混淆。 我在导入不同模块时遵循一个简单的结构：</p>
+<pre><code class="javascript">// 3rd party packages
+import React from &#39;react&#39;
+import styled from &#39;styled-components&#39;
+
+// Stores
+import Store from &#39;~/Store
+
+// reusable components
+import Button from &#39;~/components/Button&#39;
+
+// utility functions
+import { add, subtract } from &#39;~/utils/calculate&#39;
+
+// submodules
+import Intro from &#39;./Intro&#39;
+import Selector from &#39;./Selector&#39;
+</code></pre>
+<p>我在这里使用了React组件作为示例，因为有更多类型的导入。 您应该能够根据您的具体用例进行调整。</p>
+<h3 id="摆脱控制台"><a href="#摆脱控制台" class="headerlink" title="摆脱控制台"></a>摆脱控制台</h3><p><code>console.log</code> 是一种很好的调试方式 - 非常简单，快速，完成工作。显然，有更复杂的工具，但我认为每个开发人员仍然使用它。如果您忘记清理日志，您的控制台最终将陷入巨大的混乱。然后，您确实要在代码库中保留日志; 例如，警告和错误。</p>
+<p>要解决此问题，您仍然可以使用<code>console.log</code> 进行调试，但对于持久日志，请使用<a href="https://www.npmjs.com/package/loglevel" target="_blank" rel="noopener">loglevel</a>或<a href="https://www.npmjs.com/package/winston" target="_blank" rel="noopener">winston</a>等库。此外，您可以使用ESLint警告控制台语句。这样你就可以轻松地全局查找<code>console...</code> 并删除这些语句。</p>
+<p>遵循这些指导原则确实帮助我保持代码库的清洁和可扩展性。 你觉得还有什么提示特别有用的吗？请在评论中告诉我您在编码工作过程中值得推荐的内容，并请分享您用于帮助代码结构的任何其他提示！谢谢~</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "【译】12个编写干净且可扩展的JavaScript技巧&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

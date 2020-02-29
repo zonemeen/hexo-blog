@@ -104,7 +104,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.jpg')no-repeat center center;
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -142,35 +142,55 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/05/22/分享7个有用的JavaScript技巧/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/06/13/浅谈数组常见遍历方法/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/array.jpg" srcset="/img/loading.gif" alt="浅谈数组常见遍历方法" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/05/22/分享7个有用的JavaScript技巧/">
-        <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
+      <a href="/2019/06/13/浅谈数组常见遍历方法/">
+        <p class="h4 index-header">浅谈数组常见遍历方法</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个JavaScript技巧吧！
-    
-原文链接：https://davidwalsh.name/javascript-tricks#comments   
-数组去重数组去重可能比您想象的更容易：  
-var j = [...new Set([1, 2, 3, 4, 4])]&gt;&gt; [1, 2, 3, 4]
-很简单有木有！ 
-过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，null，false等）？ 你可能不知道还有这个技巧：  
-let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
-创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象：  
-</div>
+          <div class="index-text mb-1">本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。 
+   
+接下来都是使用底下的基础数组来实现一些方法：  
+
+累加
+比大小
+分别运算
+查找特定值等  
+
+let people = [
+  {
+    name: &#39;马云&#39;,
+    money: 2000
+  },
+  {
+    name: &#39;马化腾&#39;,
+    money: 1800
+  },
+  {
+    name: &#39;李彦宏&#39;,
+    money: 1500
+  },
+  {
+    name: &#39;我&#39;,
+    money: Infinity
+  }
+];
+
+forEach：遍历数组forEach与另外几种方法有些许不同，就是除了forEach以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是undefined(没有返回任何值)。  
+var forEachLoop = people.forEach( function ( ite</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-22&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-13&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -183,7 +203,7 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
           
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+            <a href="/tags/%E6%95%B0%E7%BB%84">数组</a>&nbsp;
           
         
       </div>
@@ -194,29 +214,47 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/05/14/Hexo搭建博客中遇到的一些“事”/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexobug.png" srcset="/img/loading.gif" alt="Hexo搭建博客中遇到的一些&#39;事&#39;" class="img-fluid rounded z-depth-3 index-thumbnails">
+        <a href="/2019/05/29/Git命令拓展/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gittuozh.jpg" srcset="/img/loading.gif" alt="Git命令拓展" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/05/14/Hexo搭建博客中遇到的一些“事”/">
-        <p class="h4 index-header">Hexo搭建博客中遇到的一些&#39;事&#39;</p>
+      <a href="/2019/05/29/Git命令拓展/">
+        <p class="h4 index-header">Git命令拓展</p>
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">我写的这篇文章已经详细讲解了怎样利用hexo搭建GitHub个人博客，自从入了hexo搭建博客的坑后，发现hexo真的是巨TM好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！    
-搭建过程中也并非一切顺利，稍微不注意就出现bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。
-仓库的名字仓库的名字的正确格式应该是github用户名.github.io，比如说，如果你的github用户名是test，那么你就应该新建test.github.io的仓库（必须是你的github用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。    
-首页文章内容部分展示我用的是next主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的Mrakdown文件内容文字后面添加&lt;!--more--&gt;即可。例如：---title: HTML、CSS、JS中unicode字符的处理 ---# 前言</div>
+          <div class="index-text mb-1">本文的内容基本上是从廖雪峰及阮一峰老师的Git 教程中总结出来的，方便自己以后查阅相关命令。
+一般来说，日常使用只需要记住下图6个命令即可。但是想往深度使用Git，恐怕还需要记住其余的几十个命令。
+
+上图中几个专用名词的译名如下：    
+
+Workspace：工作区
+Index / Stage：暂存区
+Repository：本地仓库
+Remote：远程仓库
+
+配置$ git config --list    //显示当前的Git配置
+
+$ git config -e [--global]    //编辑Git配置文件
+
+$ git config --global user.name &quot;miqilin21&quot;
+$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者
+
+新建Git代码库$ git init    //在当前目录新建一个Git代码库
+
+$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
+
+$ git clo</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-14&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-29&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -227,7 +265,298 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/Hexo">Hexo</a>&nbsp;
+            <a href="/tags/Git">Git</a>&nbsp;
+          
+            <a href="/tags/GitHub">GitHub</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/25/谈谈JavaScript中对象建立(Object)/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/25/谈谈JavaScript中对象建立(Object)/">
+        <p class="h4 index-header">谈谈JavaScript中创建对象(Object)</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。  
+对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？  
+第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。  
+第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Property）。  
+第三种放入的值可以是函数（function），在对象的情况下，我们会把这种函数称做方法（method）。在对象中的每一个Property或是Method都会占据电脑当中一个记忆体的位置，在需要使用到的时候，把它们调取出来。  
+接下来我将介绍三种创建JavaScript里的对象及如何调用的方法：  
+方法一：使用 [ ]创建对象  
+创建对象的第一个方法是使用[ ]，[ ]在</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-25&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
+          
+            <a href="/tags/Object">Object</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/24/CSS布局—三栏布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csssl.jpg" srcset="/img/loading.gif" alt="CSS笔记—三栏布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/24/CSS布局—三栏布局/">
+        <p class="h4 index-header">CSS笔记—三栏布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：    
+上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。  
+下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图： 
+绝对定位布局&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .container {
+        position: relative;
+    }
+    .left {
+        position: absolute;
+        width: 150px;
+        height: 200px;
+        left: 0;
+        top: 0;
+        background-color: red;
+    }
+        .middle {
+       </div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-24&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/22/CSS布局—左右布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csszy.png" srcset="/img/loading.gif" alt="CSS笔记—左右布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/22/CSS布局—左右布局/">
+        <p class="h4 index-header">CSS笔记—左右布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。
+下面是我罗列的几种css实现前端左右布局的方式：   
+position: absolute实现在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。   
+&lt;section&gt;
+  &lt;div class=&quot;left-half&quot;&gt;
+    &lt;article&gt;
+      &lt;h1&gt;Left Half&lt;/h1&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;right-half&quot;&gt;
+    &lt;article&gt;
+      &lt;h1&gt;Right Half&lt;/h1&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/section&gt; /*以上</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-22&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/21/CSS布局—居中布局/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/cssjuzh.png" srcset="/img/loading.gif" alt="CSS笔记—居中布局" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/21/CSS布局—居中布局/">
+        <p class="h4 index-header">CSS笔记—居中布局</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。 
+水平居中元素宽高未知当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：     
+①CSS3 transform：
+.parent {
+    position: relative;
+}
+.child {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+②flexbox：
+.parent {
+    display: flex;
+    justify-content: center;
+}
+
+居中元素为内联元素常见的内联元素有：span, a, img, input, label 等等。   
+您可以在块级父元素内水平居中内联元素，只需css中加以下核心语法：    
+.parent{
+   text-align: center;
+}
+
+这种方法适用于display 为 inline, inline-block, inline-table, inli</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-21&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/CSS">CSS</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/CSS">CSS</a>&nbsp;
+          
+            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/15/Git及Github操作手册/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitgithub.jpg" srcset="/img/loading.gif" alt="Git/GitHub操作手册" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/15/Git及Github操作手册/">
+        <p class="h4 index-header">Git/GitHub操作手册</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 
+SSH KeysSSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  
+由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     
+添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     
+1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。    
+$ git init    // 在当前目录新建一个Git代码库
+
+这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：     
+$ echo &quo</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-15&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/tools">tools</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/Git">Git</a>&nbsp;
+          
+            <a href="/tags/GitHub">GitHub</a>&nbsp;
           
         
       </div>
@@ -288,301 +617,13 @@ let res = [1,2,3,4,0,undefined,null,false,''].filter(Boolean);&gt;&gt; 1,2,3,4
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/29/Git命令拓展/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gittuozh.jpg" srcset="/img/loading.gif" alt="Git命令拓展" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/29/Git命令拓展/">
-        <p class="h4 index-header">Git命令拓展</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">本文的内容基本上是从廖雪峰及阮一峰老师的Git 教程中总结出来的，方便自己以后查阅相关命令。
-一般来说，日常使用只需要记住下图6个命令即可。但是想往深度使用Git，恐怕还需要记住其余的几十个命令。
-
-上图中几个专用名词的译名如下：    
-
-Workspace：工作区
-Index / Stage：暂存区
-Repository：本地仓库
-Remote：远程仓库
-
-配置$ git config --list    //显示当前的Git配置$ git config -e [--global]    //编辑Git配置文件$ git config --global user.name "miqilin21"$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者
-新建Git代码库$ git init    //在当前目录新建一个Git代码库$ git init [project-name]   //新建一个目录，将其初始化为Git代码库$ git clone [url]    //下载一个项目</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-29&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/tools">tools</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Git">Git</a>&nbsp;
-          
-            <a href="/tags/GitHub">GitHub</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/24/CSS布局—三栏布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csssl.jpg" srcset="/img/loading.gif" alt="CSS笔记—三栏布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/24/CSS布局—三栏布局/">
-        <p class="h4 index-header">CSS笔记—三栏布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：    
-上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。  
-下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图： 
-绝对定位布局&lt;!DOCTYPE html&gt;&lt;html lang="en"&gt;&lt;head&gt;    &lt;style&gt;	.container &#123;	    position: relative;	&#125;	.left &#123;	    position: absolute;	    width: 150px;	    height: 200px;	    left: 0;	    top: 0;	    background-color: red;	&#125;        .middle &#123;	    height: 200px;	    margin: 0 160px;	</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-24&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/22/CSS布局—左右布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csszy.png" srcset="/img/loading.gif" alt="CSS笔记—左右布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/22/CSS布局—左右布局/">
-        <p class="h4 index-header">CSS笔记—左右布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">css左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学css的时候更快理解其他复杂的布局方式。
-下面是我罗列的几种css实现前端左右布局的方式：   
-position: absolute实现在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。&lt;section&gt;  &lt;div class="left-half"&gt;    &lt;article&gt;      &lt;h1&gt;Left Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;  &lt;div class="right-half"&gt;    &lt;article&gt;      &lt;h1&gt;Right Half&lt;/h1&gt;    &lt;/article&gt;  &lt;/div&gt;&lt;/section&gt; /*以上为html代码*/section &#123;  color: whi</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-22&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/21/CSS布局—居中布局/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/cssjuzh.png" srcset="/img/loading.gif" alt="CSS笔记—居中布局" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/21/CSS布局—居中布局/">
-        <p class="h4 index-header">CSS笔记—居中布局</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。 
-水平居中元素宽高未知当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：     
-①CSS3 transform：.parent &#123;    position: relative;&#125;.child &#123;    position: absolute;    left: 50%;    transform: translateX(-50%);&#125;
-②flexbox：.parent &#123;    display: flex;    justify-content: center;&#125;
-居中元素为内联元素常见的内联元素有：span, a, img, input, label 等等。   
-您可以在块级父元素内水平居中内联元素，只需css中加以下核心语法：.parent&#123;   text-align: center;&#125;
-这种方法适用于display 为 inline, inline-block, </div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-21&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS">CSS</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS">CSS</a>&nbsp;
-          
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/20/学会如何学习（二）/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn2.jpg" srcset="/img/loading.gif" alt="学会如何学习（二）" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/20/学会如何学习（二）/">
-        <p class="h4 index-header">学会如何学习（二）</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">第一节课讲的是关于学习的一些基本认知，以及现代科学对大脑的认识，为的是帮助学习者提高对学习的信心，摆脱“自己不是学习（那个领域）的料”等妄自菲薄的想法。第二周就是讲具体的学习套路了，其主要内容都是围绕“组块”这个概念来的。  
-Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来说这是一个全新的概念，看上去并没有什么意义，就像一堆乱糟糟的拼图。从神经科学的角度来看，组块就是通过应用或意义连接在一起的信息碎片。而在不加理解或不关注上下文的情况下，单纯的死记硬背并不能帮助你理解其内涵和你所学概念之间的关联，那么这个概念拼图就没有可以拼合的边缘，无法关联到其他的拼图碎片上。      
-当你全神贯注于某件事上，就好像你的脑子里有一只章鱼。这只注意力的章鱼会在必要时把它的触须穿过工作记忆的四个插槽，从而帮助你把分布于大脑不同区域里的信息联系起来。      
-这和发散模式下的随机连接不同，创建组块的过程中，它需要集中注意力将大脑的不同部分连接起来，专注模式下将不同的想法联系在一起。但在你很紧张时，你的注意力章鱼会失去一些连接能力，这也是为什么在你生气、紧张、害怕的时候，大脑</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-20&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
-          
-            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/15/Git及Github操作手册/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitgithub.jpg" srcset="/img/loading.gif" alt="Git/GitHub操作手册" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/15/Git及Github操作手册/">
-        <p class="h4 index-header">Git/GitHub操作手册</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 
-SSH KeysSSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  
-由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     
-添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     
-1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。$ git init    // 在当前目录新建一个Git代码库
-这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：$ echo "# myblog" &gt;&</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-15&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/tools">tools</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/Git">Git</a>&nbsp;
-          
-            <a href="/tags/GitHub">GitHub</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/04/08/HTML常用标签/" target="_self">
+        <a href="/2019/05/08/HTML常用标签/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/html.jpg" srcset="/img/loading.gif" alt="HTML常用标签" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/04/08/HTML常用标签/">
+      <a href="/2019/05/08/HTML常用标签/">
         <p class="h4 index-header">HTML常用标签</p>
         
         
@@ -622,7 +663,7 @@ HTML 标签通常是成对出现的，比如 &lt;p&gt; 和 &lt;/p&gt;
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-04-08&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-08&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -636,6 +677,66 @@ HTML 标签通常是成对出现的，比如 &lt;p&gt; 和 &lt;/p&gt;
             <a href="/tags/HTML">HTML</a>&nbsp;
           
             <a href="/tags/%E6%A0%87%E7%AD%BE">标签</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/05/03/HTTP入门笔记/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httprm.jpg" srcset="/img/loading.gif" alt="HTTP入门笔记" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/05/03/HTTP入门笔记/">
+        <p class="h4 index-header">HTTP入门笔记</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015年出的最新版本 HTTP/2 更是成为互联网技术热点。   
+本文介绍了 HTTP 协议的基础知识以及浏览器和web服务器之间请求和响应的详细信息。  
+什么是HTTP?HTTP代表超文本传输协议。 这是互联网中数据通信的基础， 数据通信以客户端发送的请求开始，并以从Web服务器接收的响应结束，而HTTP的作用就是指导浏览器和服务器如何进行沟通。   
+HTTP通信过程简图：     
+
+客户端（通常为浏览器）负责发起请求
+
+
+web服务器在 80 端口接收请求
+
+
+web服务器之后负责响应请求的内容
+
+
+浏览器负责下载响应内容   
+
+curl命令curl是一种命令行工具，作用是发出网络请求，然后得到响应和提取数据，显示在”标准输出”（stdout）上面。后面所说的请求，就是通过使用 curl 命令来实现的。比如输入：curl -s -v -- &quot;www.sina.com&quot;这一行命令，输出的请求内容为：  
+&gt; GET / HTTP/1.1
+&gt; Host: www.sina.com
+</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-03&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/HTTP">HTTP</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/HTTP">HTTP</a>&nbsp;
           
         
       </div>
@@ -760,7 +861,7 @@ HTML 标签通常是成对出现的，比如 &lt;p&gt; 和 &lt;/p&gt;
   <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

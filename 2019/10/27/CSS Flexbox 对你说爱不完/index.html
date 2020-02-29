@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>Flexbox 对你说爱不完 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/article.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 十月 27日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.5k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      9 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>Flexbox 意为弹性布局，是一种新的CSS 3 布局方式，与传统布局方式(基于盒模型，依赖display属性 +position属性 +float属性)相比，flex布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。</p>
+<p>废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><img src="/images/flex/1.jpg" srcset="/img/loading.gif" alt> </p>
+<p>使用了flex布局，则有flex容器（flex container），子元素为项目(flex item）。</p>
+<p>在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start和end表示对应轴的起始位置，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴。比如将Flexbox的方向设置为row，则主轴就是横轴，而交叉轴就是纵轴；反之设置成column，则主轴就是纵轴，而交叉轴就是横轴，这个下面会具体讲。</p>
+<p>每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。</p>
+<p>这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cross size，这个还要取决于你主轴的方向，如果你垂直方向是主轴，那么项目的高度就是 main size。</p>
+<p>实际上，要实现 flex 布局需要先指定一个容器，任何一个容器都可以被指定为 flex 布局，这样容器内部的元素就可以使用 flex 来进行布局。语法如下：</p>
+<pre><code class="css">.container {
+    display: flex | inline-flex;       //可以有两种取值
+}
+</code></pre>
+<p>给div这类块元素设置<code>display: flex</code>或者给span这类行内元素设<code>display: inline-flex</code>，flex布局即创建！</p>
+<p>而Flex布局相关属性正好分为两拨，一拨作用在flex容器上，还有一拨作用在flex子项上。</p>
+<p><strong>需要注意的是：当时设置 flex 布局之后，子元素的 <code>float</code>、<code>clear</code>、<code>vertical-align</code> 的属性将会失效。</strong></p>
+<h3 id="Flex容器上的属性"><a href="#Flex容器上的属性" class="headerlink" title="Flex容器上的属性"></a>Flex容器上的属性</h3><p>有下面六种属性可以设置在容器上，它们分别是：</p>
+<ol>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ol>
+<p><strong>1. flex-direction: 决定主轴的方向(即项目的排列方向)</strong></p>
+<pre><code class="css">.container {
+    flex-direction: row | row-reverse | column | column-reverse;
+}
+</code></pre>
+<ul>
+<li><code>row</code>（默认）：主轴为水平方向，起点在左端</li>
+</ul>
+<p><img src="/images/flex/2.jpg" srcset="/img/loading.gif" alt> </p>
+<ul>
+<li><code>row-reverse</code>：主轴为水平方向，起点在右端</li>
+</ul>
+<p><img src="/images/flex/3.jpg" srcset="/img/loading.gif" alt> </p>
+<ul>
+<li><code>column</code>：主轴为垂直方向，起点在上沿</li>
+</ul>
+<p><img src="/images/flex/4.jpg" srcset="/img/loading.gif" alt> </p>
+<ul>
+<li><code>column-reverse</code>：主轴为垂直方向，起点在下沿</li>
+</ul>
+<p><img src="/images/flex/5.jpg" srcset="/img/loading.gif" alt> </p>
+<p><strong>2. flex-wrap: 决定容器内项目是否可换行</strong></p>
+<p>默认情况下，项目都排在主轴线上，使用 <code>flex-wrap</code> 可实现项目的换行。</p>
+<pre><code class="css">.container {
+    flex-wrap: nowrap | wrap | wrap-reverse;
+}
+</code></pre>
+<ul>
+<li><code>nowrap</code>（默认）：不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行</li>
+</ul>
+<p><img src="/images/flex/6.jpg" srcset="/img/loading.gif" alt> </p>
+<ul>
+<li><code>wrap</code>：项目主轴总尺寸超出容器时换行，第一行在上方</li>
+</ul>
+<p><img src="/images/flex/7.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>wrap-reverse</code>：换行并反向，第一行在下方</li>
+</ul>
+<p><img src="/images/flex/8.jpg" srcset="/img/loading.gif" alt></p>
+<p><strong>3. flex-flow: flex-direction 和 flex-wrap 的复合简写形式</strong></p>
+<pre><code class="css">.container {
+    flex-flow: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
+}
+</code></pre>
+<p>默认值为: row nowrap，这个属性其实没多大卵用，不就是两个属性的缩写嘛。</p>
+<p><strong>4. justify-content：定义项目在主轴的对齐方式</strong></p>
+<pre><code class="css">.container {
+    justify-content: flex-start | flex-end | center | space-between | space-around;
+}
+</code></pre>
+<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
+<ul>
+<li><code>flex-start</code>（默认）：左对齐</li>
+</ul>
+<p><img src="/images/flex/9.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>flex-end</code>：右对齐</li>
+</ul>
+<p><img src="/images/flex/10.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>center</code>：居中</li>
+</ul>
+<p><img src="/images/flex/11.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>space-between</code>：两端对齐，项目之间的间隔相等，即剩余空间等分成间隙</li>
+</ul>
+<p><img src="/images/flex/12.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>space-around</code>：每个项目两侧的间隔相等，所以项目之间的间隔是项目与边缘的间隔的两倍</li>
+</ul>
+<p><img src="/images/flex/13.jpg" srcset="/img/loading.gif" alt></p>
+<p><strong>5. align-items: 定义项目在交叉轴上的对齐方式</strong></p>
+<pre><code class="css">.container {
+    align-items: stretch | flex-start | flex-end | center | baseline;
+}
+</code></pre>
+<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
+<ul>
+<li><code>stretch</code>（默认）：如果项目未设置高度或设为<code>auto</code>，将占满整个容器的高度</li>
+</ul>
+<p><img src="/images/flex/14.jpg" srcset="/img/loading.gif" alt></p>
+<p>假设容器高度设置为 50px，而项目都没有设置高度或设为<code>auto</code>的情况下，则项目的高度也为 50px</p>
+<ul>
+<li><code>flex-start</code>：交叉轴的起点对齐</li>
+</ul>
+<p><img src="/images/flex/15.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>flex-end</code>：交叉轴的终点对齐</li>
+</ul>
+<p><img src="/images/flex/16.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>center</code>：交叉轴的中点对齐</li>
+</ul>
+<p><img src="/images/flex/17.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>baseline</code>: 项目的第一行文字的基线对齐</li>
+</ul>
+<p><img src="/images/flex/18.jpg" srcset="/img/loading.gif" alt></p>
+<p>以文字的底部为主</p>
+<p><strong>6. align-content: 定义多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用</strong></p>
+<pre><code class="css">.container {
+    align-content: stretch | flex-start | flex-end | center | space-between | space-around;
+}
+</code></pre>
+<p>什么叫项目只有一根轴线呢？其实可以这么理解：</p>
+<p>当你 <code>flex-wrap</code> 设置为 <code>nowrap</code> 的时候，容器仅存在一根轴线，因为项目不会换行，就不会产生多条轴线。</p>
+<p>当你 <code>flex-wrap</code> 设置为 <code>wrap</code> 的时候，容器可能会出现多条轴线，这时候你就需要去设置多条轴线之间的对齐方式了。</p>
+<p>建立在主轴为水平方向时测试，即 <code>flex-direction: row</code>, <code>flex-wrap: wrap</code></p>
+<ul>
+<li><code>stretch</code>（默认）：轴线占满整个交叉轴</li>
+</ul>
+<p><img src="/images/flex/19.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>flex-start</code>：轴线全部与交叉轴上的起点对齐</li>
+</ul>
+<p><img src="/images/flex/20.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>flex-end</code>：轴线全部与交叉轴上的终点对齐</li>
+</ul>
+<p><img src="/images/flex/21.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>center</code>：轴线全部在交叉轴上的中间对齐</li>
+</ul>
+<p><img src="/images/flex/22.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>space-between</code>：轴线与交叉轴两端对齐，轴线之间的间隔平均分布</li>
+</ul>
+<p><img src="/images/flex/23.jpg" srcset="/img/loading.gif" alt></p>
+<ul>
+<li><code>space-around</code>：每个轴线两侧的间隔都相等，所以轴线之间的间隔是轴线与边缘的间隔的两倍</li>
+</ul>
+<p><img src="/images/flex/24.jpg" srcset="/img/loading.gif" alt></p>
+<p>到这里关于容器上的所有属性都讲完了，接下来就来讲讲关于在 flex item（项目） 上的属性。</p>
+<h3 id="Flex-项目上的属性"><a href="#Flex-项目上的属性" class="headerlink" title="Flex 项目上的属性"></a>Flex 项目上的属性</h3><p>item 项目上有六种属性可运用，它们分别是：</p>
+<ol>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ol>
+<p><strong>1. order: 定义项目在容器中的排列顺序，数值越小，排列越靠前，默认值为 0</strong></p>
+<pre><code class="css">.item {
+    order: &lt;integer&gt;;
+}
+</code></pre>
+<p><img src="/images/flex/25.jpg" srcset="/img/loading.gif" alt></p>
+<p><strong>2. flex-grow: 定义项目的放大比例</strong></p>
+<pre><code class="css">.item {
+    flex-grow: &lt;number&gt;;
+}
+</code></pre>
+<p>默认值为 0，即如果存在剩余空间，也不放大。</p>
+<p>如果所有项目的 <code>flex-grow</code> 属性都为1，则它们将等分剩余空间（如果有的话）。如果一个项目的 <code>flex-grow</code> 属性为2，其他项目都为1，则前者占据的剩余空间将比其他项多一倍。</p>
+<p><strong>3. flex-shrink: 定义项目的缩小比例</strong></p>
+<pre><code class="css">.item {
+    flex-shrink: &lt;number&gt;;
+}
+</code></pre>
+<p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。</p>
+<p><img src="/images/flex/26.jpg" srcset="/img/loading.gif" alt></p>
+<p>如果所有项目的 <code>flex-shrink</code> 属性都为1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code> 属性为0，其他项目都为1，则空间不足时，前者不缩小。</p>
+<p>负值对该属性无效。</p>
+<p><strong>4. flex-basis: 定义了在分配容器剩余空间之前项目的默认大小。相当于对浏览器提前告知：浏览器兄弟，我要占据这么大的空间，提前帮我预留好</strong></p>
+<pre><code class="css">.item {
+    flex-basis: &lt;length&gt; | auto;
+}
+</code></pre>
+<p>默认值：<code>auto</code>，即项目本来的大小, 这时候 item 项目的宽高取决于 <code>width</code> 或 <code>height</code> 的值。</p>
+<p>当主轴为水平方向的时候，同时设置 <code>width</code> 和 <code>flex-basis</code>，会忽略 <code>width</code>。flex顾名思义就是弹性的意思，因此，实际上不建议对flex项目使用 <code>width</code> 属性，因为不够弹性。</p>
+<p>当容器剩余空间不足的时候，flex子项目的实际宽度通常不是设置的 <code>flex-basis</code> 尺寸，因为flex布局剩余空间不足的时候默认会收缩，如果有3个子项目，则默认按1:1:1收缩。</p>
+<p><strong>5. flex: flex-grow, flex-shrink 和 flex-basis的复合缩写</strong></p>
+<pre><code class="css">.item{
+    flex: none | [ &lt;&#39;flex-grow&#39;&gt; &lt;&#39;flex-shrink&#39;&gt;? || &lt;&#39;flex-basis&#39;&gt; ]
+} 
+</code></pre>
+<p>flex 的默认值是以上三个属性值的组合。假设以上三个属性同样取默认值，则 flex 的默认值为<code>0 1 auto</code>。</p>
+<p>有关快捷值：</p>
+<pre><code class="css">flex: auto  //等同于flex:1 1 auto
+flex: none  //等同于flex:0 0 auto
+</code></pre>
+<p><strong>6. align-self: 控制单独某一个项目的垂直对齐方式，与align-items属性语法区别不大</strong></p>
+<pre><code class="css">.item {
+     align-self: auto | flex-start | flex-end | center | baseline | stretch;
+}
+</code></pre>
+<p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自flex容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
+<p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
+<h3 id="从垂直居中看出flex的强大"><a href="#从垂直居中看出flex的强大" class="headerlink" title="从垂直居中看出flex的强大"></a>从垂直居中看出flex的强大</h3><p>以往让元素垂直居中并不容易，直到CSS3的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用flex，让垂直居中变得异常简单</p>
+<pre><code class="html">&lt;div class=“wrapper”&gt;
+    &lt;div class=“div”&gt;
+        flexbox 对你说爱不完
+    &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>几行简单代码，即可让div垂直居中</p>
+<pre><code class="css">.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</code></pre>
+<p>这里最重要的就是包裹元素的三个关键属性:</p>
+<ul>
+<li><code>display: flex</code> 将容器指定为flex布局，任何一个元素都可以指定</li>
+<li><code>align-items: center</code> 沿交叉轴对齐项目，这里指的是垂直方向</li>
+<li><code>justify-content: center</code> 设置主轴内容对齐方式</li>
+</ul>
+<h3 id="其他Flex知识点"><a href="#其他Flex知识点" class="headerlink" title="其他Flex知识点"></a>其他Flex知识点</h3><ul>
+<li>在Flex布局中，再强调一遍flex子元素中设置<code>float</code>，<code>clear</code>以及<code>vertical-align</code>属性都是没有用的。</li>
+<li>Flexbox布局最适合应用程序的组件和小规模布局（一维布局），而Grid布局则适用于更大规模的布局（二维布局），有关Grid布局的文章后面会补充。</li>
+<li>已经9102年了，Flex老语法不用在管了，果断放弃，然后私有前缀也不用再加了，看到就烦。</li>
+<li>如果想更好地理解Flex的工作原理，可以在此页面上尝试<a href="http://www.csstutorial.org/flex-both.html" target="_blank" rel="noopener">flex 布局编辑器</a>。</li>
+</ul>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/CSS">CSS</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/CSS">CSS</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%B8%83%E5%B1%80">布局</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Flexbox 对你说爱不完&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

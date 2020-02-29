@@ -104,7 +104,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.jpg')no-repeat center center;
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -142,13 +142,13 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/24/谈谈JavaScript中的函数构造式和prototype的建立/" target="_self">
+        <a href="/2019/08/14/谈谈JavaScript中的函数构造式和prototype的建立/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/constructor.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和prototype的建立" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/24/谈谈JavaScript中的函数构造式和prototype的建立/">
+      <a href="/2019/08/14/谈谈JavaScript中的函数构造式和prototype的建立/">
         <p class="h4 index-header">谈谈JavaScript中的函数构造式和prototype的建立</p>
         
         
@@ -166,7 +166,7 @@
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-24&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-14&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -192,13 +192,13 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/19/谈谈JavaScript中的函数构造式和new关键字/" target="_self">
+        <a href="/2019/08/09/谈谈JavaScript中的函数构造式和new关键字/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/new.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和new关键字" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/19/谈谈JavaScript中的函数构造式和new关键字/">
+      <a href="/2019/08/09/谈谈JavaScript中的函数构造式和new关键字/">
         <p class="h4 index-header">谈谈JavaScript中的函数构造式和new关键字</p>
         
         
@@ -209,13 +209,18 @@
 大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
 谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明确的区分两者，也就是说 function 可以被当作 constructor 或者当作一般函数调用。
 而 constructor 的用法就是 function 搭配new关键字：
-function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  'Chou' ; &#125;var person =  n</div>
+function  Person  ( ) { 
+  this . firstName =  &#39;Jay&#39; ; 
+  this . lastName =  &#39;Chou&#39; ; 
+}
+
+var </div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-19&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-09&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -241,13 +246,13 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/14/从原生JS实现jQuery的一个API中体会其设计思想/" target="_self">
+        <a href="/2019/08/04/从原生JS实现jQuery的一个API中体会其设计思想/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jquery.jpg" srcset="/img/loading.gif" alt="从原生JS实现jQuery的一个API中体会其设计思想" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/14/从原生JS实现jQuery的一个API中体会其设计思想/">
+      <a href="/2019/08/04/从原生JS实现jQuery的一个API中体会其设计思想/">
         <p class="h4 index-header">从原生JS实现jQuery的一个API中体会其设计思想</p>
         
         
@@ -255,16 +260,23 @@ function  Person  ( ) &#123;   this . firstName =  'Jay' ;   this . lastName =  
         
         <div class="index-excerpt" >
           <div class="index-text mb-1">根据统计，全世界大约有80~90%的网站直接或间接地使用了jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解jQuery呢？读源代码又太繁琐，所以这里利用原生JS来实现jQuery中的addClass这个API，通过实现此过程来体会jQuery的设计思想，力求简单易懂。
-封装函数function addClass(classes)&#123;&#125; //可将所有输入的标签的class添加一个类
+封装函数function addClass(classes){} //可将所有输入的标签的class添加一个类
+
 实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
-function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(node)  for (let i = 0; i &lt; allTag.length; i++) &#123;    allTag[i].classList.add(classes)  &#125;&#125;
-命名空间在全局变量中创建一个对象，用来储存封装</div>
+function addClass(node, classes) {
+  var allTag = document.querySelectorAll(node)
+  for (let i = 0; i &lt; allTag.length; i++) {
+    allTag[i].classList.add(classes)
+  }
+}
+
+命名空间在全局变量中创建一个对象，用来储存封装后的函数，这就是命名空间（名字前面统一加一个前</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-14&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-04&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -288,13 +300,13 @@ function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/11/DOM Node 的建立、删除与修改/" target="_self">
+        <a href="/2019/08/01/DOM Node 的建立、删除与修改/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/11/DOM Node 的建立、删除与修改/">
+      <a href="/2019/08/01/DOM Node 的建立、删除与修改/">
         <p class="h4 index-header">DOM Node 的建立、删除与修改</p>
         
         
@@ -303,18 +315,20 @@ function addClass(node, classes) &#123;  var allTag = document.querySelectorAll(
         <div class="index-excerpt" >
           <div class="index-text mb-1">在之前的介绍中，我们已经理解了DOM Node的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过DOM API来建立新的节点、修改以及删除节点。
 DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
-var newDiv = document.createElement('div');
+var newDiv = document.createElement(&#39;div&#39;);
+
 在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChild()等方法将新元素加入至指定的位置之后才会显示。
 新建立的newDiv我们也可以同时对它指定属性，如：
-newDiv.id = "myNewDiv"; newDiv.className = "box";
-document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有文字节点，那么document.createTextNode()就是用来建立文字节点的方法。
-用法很简单，直接在document.</div>
+newDiv.id = &quot;myNewDiv&quot;; 
+newDiv.className = &quot;box&quot;;
+
+document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有文字节点，那么document.createTextNode()就是</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-11&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-01&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -340,75 +354,13 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/01/贵州黔东南之行/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/guizhou.jpg" srcset="/img/loading.gif" alt="贵州黔东南之行" class="img-fluid rounded z-depth-3 index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/01/贵州黔东南之行/">
-        <p class="h4 index-header">贵州黔东南之行</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">2019年6月23日下午，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。
-镇远古镇第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦😜。
-我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。
-
-
-
-河边坐落了许多充满文艺的小店和清吧。
-
-晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。
-
-
-在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。
-西江千户苗寨第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。
-
-
-在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。
-
-来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了😄。
-
-因为苗寨难得遇到断电，“幸运</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-01&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/%E8%B4%B5%E5%B7%9E">贵州</a>&nbsp;
-          
-            <a href="/tags/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/06/30/【译】谈谈“typeof null为object”这一bug的由来/" target="_self">
+        <a href="/2019/07/30/【译】谈谈“typeof null为object”这一bug的由来/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/06/30/【译】谈谈“typeof null为object”这一bug的由来/">
+      <a href="/2019/07/30/【译】谈谈“typeof null为object”这一bug的由来/">
         <p class="h4 index-header">【译】谈谈“typeof null为object”这一bug的由来</p>
         
         
@@ -431,7 +383,7 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-30&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-30&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -453,13 +405,13 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/06/28/JS中一切都是对象吗？看这一篇就知道了/" target="_self">
+        <a href="/2019/07/28/JS中一切都是对象吗？看这一篇就知道了/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/06/28/JS中一切都是对象吗？看这一篇就知道了/">
+      <a href="/2019/07/28/JS中一切都是对象吗？看这一篇就知道了/">
         <p class="h4 index-header">JS中一切都是对象吗？看这一篇就知道了</p>
         
         
@@ -478,7 +430,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -502,13 +454,13 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/06/19/JavaScript中任何值的prototype到最后都是Object/" target="_self">
+        <a href="/2019/07/19/JavaScript中任何值的prototype到最后都是Object/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lastobject.jpg" srcset="/img/loading.gif" alt="JavaScript中任何值的prototype到最后都是Object" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/06/19/JavaScript中任何值的prototype到最后都是Object/">
+      <a href="/2019/07/19/JavaScript中任何值的prototype到最后都是Object/">
         <p class="h4 index-header">JavaScript中任何值的prototype到最后都是Object</p>
         
         
@@ -518,15 +470,35 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
           <div class="index-text mb-1">这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在JavaScript当中，所有的类型（字符串、数值、Boolean值、函数、数组、对象）的prototype的最后都是object！    
 什么意思呢？
 假设我们现在分别建立对象、函数和数组，直接上代码：  
-// Object var a =  &#123;   name : 'miqilin' &#125;// function var  b  =  function ( ) &#123;   console . log ( 'Hello' ) ; &#125;// Array var c =  [ 'A' , 'r' , 'r' , 'a' , 'y'] ;// string var d =  'This is string' ;// number var e =  2 ;// boolean var f =  true ;
-接着，我们会在Google Chrome 的console 视窗来分别检验这些类型的prototype。  
-对象（object）我们可以看到a这个对象本身的prototype也是一个对象</div>
+// Object 
+var a =  { 
+  name : &#39;miqilin&#39; 
+}
+
+// function 
+var  b  =  function ( ) { 
+  console . log ( &#39;Hello&#39; ) ; 
+}
+
+// Array 
+var c =  [ &#39;A&#39; , &#39;r&#39; , &#39;r&#39; , &#39;a&#39; , &#39;y&#39;] ;
+
+// string 
+var d =  &#39;This is string&#39; ;
+
+// number 
+var e =  2 ;
+
+// boolean 
+var f =  true ;
+
+接着，我们会在Google Chrome 的console</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-19&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-19&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -550,13 +522,13 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/06/18/JavaScript系列之原型与原型链/" target="_self">
+        <a href="/2019/07/16/JavaScript系列之原型与原型链/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/06/18/JavaScript系列之原型与原型链/">
+      <a href="/2019/07/16/JavaScript系列之原型与原型链/">
         <p class="h4 index-header">JavaScript系列之原型与原型链</p>
         
         
@@ -567,16 +539,22 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   
 构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  
 构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。我们先使用构造函数创建一个对象：  
-function Dog() &#123;    this.name = '阿黄'&#125;var dog = new Dog()console.log(dog.name)     // 阿黄
+function Dog() {
+    this.name = &#39;阿黄&#39;
+}
+
+var dog = new Dog()
+console.log(dog.name)     // 阿黄
+
 上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。  
 原型prototype  
-JavaScript是一种基于原型的语言(</div>
+JavaScript是一种基于原型</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-18&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-16&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -602,13 +580,13 @@ JavaScript是一种基于原型的语言(</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/06/17/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" target="_self">
+        <a href="/2019/07/12/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/egg.png" srcset="/img/loading.gif" alt="由一段代码引发的关于Object和Function的鸡和蛋问题的思考" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/06/17/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
+      <a href="/2019/07/12/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
         <p class="h4 index-header">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</p>
         
         
@@ -617,15 +595,21 @@ JavaScript是一种基于原型的语言(</div>
         <div class="index-excerpt" >
           <div class="index-text mb-1">作为一名前端开发者，我们都知道JS是单继承的，而Object.prototype是原型链的顶端，所有对象从它继承了包括toString()、valueOf()等等公共属性。
 鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：
-Object instanceof Function  // trueFunction instanceof Object  // trueObject.__proto__ === Function.prototype  // trueFunction.__proto__ === Function.prototype  // trueFunction.prototype.__proto__ === Object.prototype  // true
+Object instanceof Function  // true
+Function instanceof Object  // true
+
+Object.__proto__ === Function.prototype  // true
+Function.__proto__ === Function.prototype  // true
+Function.prototype.__proto__ === Object.prototype  // true
+
 那么Object和Function，谁是鸡谁是蛋呢？
-接下来就来深入探究下上面这段代码所引起的鸡生蛋蛋</div>
+接下来就来深入探究下上面这段代码所引</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-17&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -639,6 +623,60 @@ Object instanceof Function  // trueFunction instanceof Object  // trueObject.__p
             <a href="/tags/JavaScript">JavaScript</a>&nbsp;
           
             <a href="/tags/Function">Function</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2019/07/08/JavaScript系列之内存泄漏/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏" class="img-fluid rounded z-depth-3 index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/07/08/JavaScript系列之内存泄漏/">
+        <p class="h4 index-header">JavaScript系列之内存泄漏</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。   
+而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着malloc() 和 free() 这种低级内存管理语言也有可能出现泄露内存的情况。  
+这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   
+垃圾回收机制现在各大浏览器通常采用的垃圾回收有两种方法：标记清除（mark and sweep）、引用计数(reference counting)。  
+1、标记清除 
+这是javascript中最常用的垃圾回收方式。  
+工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   
+工作流程：  
+
+垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。
+去掉环境中的变量以及被环境中的变量引用的变量的标记。
+之后再被加上标记的变量将</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-08&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+          
+            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
           
         
       </div>
@@ -763,7 +801,7 @@ Object instanceof Function  // trueFunction instanceof Object  // trueObject.__p
   <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

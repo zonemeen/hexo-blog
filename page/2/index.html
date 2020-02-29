@@ -104,7 +104,7 @@
 </nav>
 
     <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.jpg')no-repeat center center;
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/index1.png')no-repeat center center;
            background-size: cover;
            background-attachment: fixed;">
       <div class="full-bg-img">
@@ -142,13 +142,13 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/09/30/JavaScript系列之类数组对象arguments/" target="_self">
+        <a href="/2019/10/30/JavaScript系列之类数组对象arguments/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/argument.png" srcset="/img/loading.gif" alt="JavaScript系列之类数组对象arguments" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/09/30/JavaScript系列之类数组对象arguments/">
+      <a href="/2019/10/30/JavaScript系列之类数组对象arguments/">
         <p class="h4 index-header">JavaScript系列之类数组对象arguments</p>
         
         
@@ -158,15 +158,22 @@
           <div class="index-text mb-1">之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。
 那arguments到底是什么呢？下面就由我来简洁地介绍一下 arguments吧。
 什么是参数(parameters)在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。
-function MyFavorite(house, car, money) &#123;    console.log(house);    console.log(car);    console.log(money);&#125;MyFavorite();
+function MyFavorite(house, car, money) {
+    console.log(house);
+    console.log(car);
+    console.log(money);
+}
+
+MyFavorite();
+
 首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入MyFavorite()这样就可以了！
-一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在</div>
+一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在于，即</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-30&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-30&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -190,13 +197,13 @@ function MyFavorite(house, car, money) &#123;    console.log(house);    console.
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/09/27/CSS Flexbox 对你说爱不完/" target="_self">
+        <a href="/2019/10/27/CSS Flexbox 对你说爱不完/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/flexbox.jpg" srcset="/img/loading.gif" alt="Flexbox 对你说爱不完" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/09/27/CSS Flexbox 对你说爱不完/">
+      <a href="/2019/10/27/CSS Flexbox 对你说爱不完/">
         <p class="h4 index-header">Flexbox 对你说爱不完</p>
         
         
@@ -215,7 +222,7 @@ function MyFavorite(house, car, money) &#123;    console.log(house);    console.
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-27&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-27&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -239,13 +246,13 @@ function MyFavorite(house, car, money) &#123;    console.log(house);    console.
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/09/20/JavaScript系列之闭包(Closure)/" target="_self">
+        <a href="/2019/10/20/JavaScript系列之闭包(Closure)/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/closure.jpg" srcset="/img/loading.gif" alt="JavaScript系列之闭包" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/09/20/JavaScript系列之闭包(Closure)/">
+      <a href="/2019/10/20/JavaScript系列之闭包(Closure)/">
         <p class="h4 index-header">JavaScript系列之闭包</p>
         
         
@@ -269,13 +276,16 @@ function MyFavorite(house, car, money) &#123;    console.log(house);    console.
 好，如果上面三行就看得懂的话那么就不用再往下看了，Congratulations！
 …… 不过如果你是初学者的话，我想应该不会，如果仅用三言两语就把闭包讲通，那还能称为Javascript 语言的一个难点吗？
 先来举个例子：
-var n = 1;function f1() &#123;    console.log(n);</div>
+var n = 1;
+
+function f1() {
+    console.log(n);  </div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-20&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-20&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -299,13 +309,13 @@ var n = 1;function f1() &#123;    console.log(n);</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/09/12/JavaScript系列之this是什么/" target="_self">
+        <a href="/2019/10/12/JavaScript系列之this是什么/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/this.jpg" srcset="/img/loading.gif" alt="JavaScript系列之this是什么" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/09/12/JavaScript系列之this是什么/">
+      <a href="/2019/10/12/JavaScript系列之this是什么/">
         <p class="h4 index-header">JavaScript系列之this是什么</p>
         
         
@@ -329,7 +339,7 @@ var n = 1;function f1() &#123;    console.log(n);</div>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-12&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -353,13 +363,13 @@ var n = 1;function f1() &#123;    console.log(n);</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/09/03/JavaScript系列之作用域和作用域链/" target="_self">
+        <a href="/2019/10/03/JavaScript系列之作用域和作用域链/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/scope.png" srcset="/img/loading.gif" alt="JavaScript系列之作用域和作用域链" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/09/03/JavaScript系列之作用域和作用域链/">
+      <a href="/2019/10/03/JavaScript系列之作用域和作用域链/">
         <p class="h4 index-header">JavaScript系列之作用域和作用域链</p>
         
         
@@ -373,14 +383,19 @@ var n = 1;function f1() &#123;    console.log(n);</div>
 本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——作用域链。
 作用域(Scope)在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？
 作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：
-function fn() &#123;    var inVariable = "inner variable";    console.log(inVariable); // inner variable&#125;fn(); console.log(inVariable); // Uncaught ReferenceError: inVariable is not defined
-从上面的</div>
+function fn() {
+    var inVariable = &quot;inner variable&quot;;
+    console.log(inVariable); // inner variable
+}
+
+fn(); 
+console.log(inVariable); // Uncaught ReferenceError: inVariable is not define</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-03&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-03&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -406,13 +421,13 @@ function fn() &#123;    var inVariable = "inner variable";    console.log(inVari
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/08/30/JavaScript系列之变量对象/" target="_self">
+        <a href="/2019/09/30/JavaScript系列之变量对象/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/vo.jpg" srcset="/img/loading.gif" alt="JavaScript系列之变量对象" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/08/30/JavaScript系列之变量对象/">
+      <a href="/2019/09/30/JavaScript系列之变量对象/">
         <p class="h4 index-header">JavaScript系列之变量对象</p>
         
         
@@ -424,13 +439,18 @@ function fn() &#123;    var inVariable = "inner variable";    console.log(inVari
 
 详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下变量对象。
 变量对象变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明，先来看一段代码示例：
-function foo()&#123;    var a = 10;         function b()&#123;&#125;    (function c()&#123;&#125;);    consol</div>
+function foo(){
+    var a = 10;     
+    function b(){}
+    (function c(){});
+    console.log(a);     // 10
+ </div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-30&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-30&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -454,13 +474,13 @@ function foo()&#123;    var a = 10;         function b()&#123;&#125;    (functio
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/08/28/JavaScript系列之执行上下文和执行栈/" target="_self">
+        <a href="/2019/09/28/JavaScript系列之执行上下文和执行栈/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/context.jpg" srcset="/img/loading.gif" alt="JavaScript系列之执行上下文和执行栈" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/08/28/JavaScript系列之执行上下文和执行栈/">
+      <a href="/2019/09/28/JavaScript系列之执行上下文和执行栈/">
         <p class="h4 index-header">JavaScript系列之执行上下文和执行栈</p>
         
         
@@ -479,7 +499,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -505,13 +525,13 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/28/JavaScript系列之对象的继承/" target="_self">
+        <a href="/2019/08/28/JavaScript系列之对象的继承/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/28/JavaScript系列之对象的继承/">
+      <a href="/2019/08/28/JavaScript系列之对象的继承/">
         <p class="h4 index-header">JavaScript系列之对象的继承</p>
         
         
@@ -532,7 +552,7 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -560,13 +580,13 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/26/从instanceof身上深入理解原型原型链/" target="_self">
+        <a href="/2019/08/25/从instanceof身上深入理解原型原型链/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/26/从instanceof身上深入理解原型原型链/">
+      <a href="/2019/08/25/从instanceof身上深入理解原型原型链/">
         <p class="h4 index-header">从instanceof身上深入理解原型/原型链</p>
         
         
@@ -576,14 +596,19 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
           <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
 对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
 官方对instanceof运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：
-function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  // trueconsole.log(f1 instanceof Object);  // true
-上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof Objec</div>
+function Foo() {}
+var f1 = new Foo();
+
+console.log(f1 instanceof Foo);  // true
+console.log(f1 instanceof Object);  // true
+
+上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof Object”为什么</div>
         </div>
       </a>
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-26&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-25&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -609,13 +634,13 @@ function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  /
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/07/24/【译】12个编写干净且可扩展的JavaScript技巧/" target="_self">
+        <a href="/2019/08/22/【译】12个编写干净且可扩展的JavaScript技巧/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/12jiqiao.jpg" srcset="/img/loading.gif" alt="【译】12个编写干净且可扩展的JavaScript技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/07/24/【译】12个编写干净且可扩展的JavaScript技巧/">
+      <a href="/2019/08/22/【译】12个编写干净且可扩展的JavaScript技巧/">
         <p class="h4 index-header">【译】12个编写干净且可扩展的JavaScript技巧</p>
         
         
@@ -636,7 +661,7 @@ function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  /
 
       <div>
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-24&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-22&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -774,7 +799,7 @@ function Foo() &#123;&#125;var f1 = new Foo();console.log(f1 instanceof Foo);  /
   <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
-      $('pre').addClass('prettyprint  ');
+      $('pre').addClass('prettyprint  linenums');
       prettyPrint();
     })
   </script>

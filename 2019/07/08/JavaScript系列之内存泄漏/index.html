@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>JavaScript系列之内存泄漏 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/article.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期一, 七月 8日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.5k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      9 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。   </p>
+<p>而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着<code>malloc()</code> 和 <code>free()</code> 这种低级内存管理语言也有可能出现泄露内存的情况。  </p>
+<p>这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   </p>
+<h4 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h4><p>现在各大浏览器通常采用的垃圾回收有两种方法：<strong>标记清除（mark and sweep）</strong>、<strong>引用计数(reference counting)</strong>。  </p>
+<p><strong>1、标记清除</strong> </p>
+<p>这是javascript中最常用的垃圾回收方式。  </p>
+<p>工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   </p>
+<p>工作流程：  </p>
+<ol>
+<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>去掉环境中的变量以及被环境中的变量引用的变量的标记。</li>
+<li>之后再被加上标记的变量将被视为准备删除的变量。</li>
+<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间。  </li>
+</ol>
+<p><strong>2、引用计数</strong>  </p>
+<p>工作原理：跟踪记录每个值被引用的次数。   </p>
+<p>工作流程：   </p>
+<ol>
+<li>将一个引用类型的值赋值给这个声明了的变量，这个引用类型值的引用次数就是1。</li>
+<li>同一个值又被赋值给另一个变量，这个引用类型值的引用次数加1。</li>
+<li>当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减1</li>
+<li>当引用次数变成0时，就表示这个值不再用到了。</li>
+<li>当垃圾收集器下一次运行时，它就会释放引用次数是0的值所占的内存。   </li>
+</ol>
+<p>但如果一个值不再需要了，引用数却不为0，垃圾回收机制无法释放这块内存，会导致内存泄漏。  </p>
+<pre><code class="javascript">var arr = [1, 2, 3];
+console.log(&#39;hello miqilin&#39;);
+</code></pre>
+<p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。  </p>
+<p>如果增加一行代码，解除arr对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。 </p>
+<pre><code class="javascript">var arr = [1, 2, 3];
+console.log(&#39;hello miqilin&#39;);
+arr = null;
+</code></pre>
+<p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了0，内存就可以释放出来了。  </p>
+<p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。  </p>
+<p>接下来，我将介绍四种常见的JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec" target="_blank" rel="noopener">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a>  </p>
+<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong> </p>
+<p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
+<pre><code class="javascript">function foo(arg) {
+     bar = &quot;this is a hidden global variable&quot;; 
+}
+</code></pre>
+<p>函数<code>foo</code>内部使用<code>var</code>声明，实际上JS会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
+<pre><code class="javascript">function foo(arg) {
+     window.bar = &quot;this is an explicit global variable&quot;; 
+}
+</code></pre>
+<p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。 </p>
+<p>另一种可以创建偶然全局变量的情况是<code>this</code>：  </p>
+<pre><code class="javascript">function foo() {
+     this.variable = &quot;potential accidental global&quot;; 
+}  
+// Foo called on its own, this points to the global object (window)
+// rather than being undefined. 
+foo();
+</code></pre>
+<p><strong>解决方法：</strong></p>
+<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。   </p>
+<p><strong>2.被遗忘的计时器或回调函数</strong> </p>
+<p>在JavaScript中使用<code>setInterval</code>非常常见。</p>
+<pre><code class="javascript">var someResource = getData(); 
+setInterval(function() {
+     var node = document.getElementById(&#39;Node&#39;);     
+     if(node) {
+         // Do stuff with node and someResource.
+         node.innerHTML = JSON.stringify(someResource));
+     } }, 1000);
+</code></pre>
+<p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。   </p>
+<pre><code class="javascript">var element = document.getElementById(&#39;button&#39;);  
+
+function onClick(event) {
+     element.innerHtml = &#39;text&#39;; 
+}  
+
+element.addEventListener(&#39;click&#39;, onClick); // Do stuff 
+element.removeEventListener(&#39;click&#39;, onClick); 
+element.parentNode.removeChild(element); 
+
+// Now when element goes out of scope,
+// both element and onClick will be collected even in old browsers that don&#39;t
+// handle cycles well.
+</code></pre>
+<p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。 </p>
+<p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
+<p>诸如jQuery之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定API时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版Internet Explorer）下运行也是如此。  </p>
+<p><strong>3.闭包</strong></p>
+<p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：  </p>
+<pre><code class="javascript">var theThing = null; 
+var replaceThing = function () {
+   var originalThing = theThing;   
+   var unused = function () {
+     if (originalThing)
+       console.log(&quot;hi&quot;);   
+};   
+   theThing = {
+     longStr: newArray(1000000).join(&#39;*&#39;),
+     someMethod: function () {
+       console.log(someMessage);
+     }
+   };
+ }; 
+setInterval(replaceThing, 1000);
+</code></pre>
+<p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
+<p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。  </p>
+<p>解决方法：</p>
+<p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
+<p><strong>4.脱离 DOM 的引用</strong>  </p>
+<p>如果把DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。   </p>
+<pre><code class="javascript">var elements = {
+     button: document.getElementById(&#39;button&#39;),
+     image: document.getElementById(&#39;image&#39;),
+     text: document.getElementById(&#39;text&#39;) 
+}; 
+
+function doStuff() {
+     image.src = &#39;http://some.url/image&#39;;
+     button.click();
+     console.log(text.innerHTML);
+     // Much more logic
+} 
+
+function removeButton() {
+     // The button is a direct child of body.
+     document.body.removeChild(document.getElementById(&#39;button&#39;));
+
+    // At this point, we still have a reference to #button in the global
+    // elements dictionary. In other words, the button element is still in
+    // memory and cannot be collected by the GC. 
+}
+</code></pre>
+<p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。  </p>
+<h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。  </p>
+<p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。  </p>
+<h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
+<li><a href="http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf" target="_blank" rel="noopener">http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf</a></li>
+<li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156" target="_blank" rel="noopener">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
+<li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html" target="_blank" rel="noopener">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
+</ul>
+<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~   </p>
+<p>本人Github链接如下，欢迎各位Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%86%85%E5%AD%98">内存</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之内存泄漏&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

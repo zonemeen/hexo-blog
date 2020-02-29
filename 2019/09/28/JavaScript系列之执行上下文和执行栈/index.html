@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>JavaScript系列之执行上下文和执行栈 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/article.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期六, 九月 28日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    2.4k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      8 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>如果你想成为一名优秀的JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
+<p>执行上下文和执行栈是JavaScript的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
+<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
+<ul>
+<li><strong>全局执行上下文（全局代码）</strong>：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 <code>window</code> 对象，<code>this</code> 指向这个全局对象。</li>
+<li><strong>函数执行上下文（函数体）</strong>：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。</li>
+<li><strong><code>Eval</code> 函数执行上下文（eval代码）</strong>： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用。</li>
+</ul>
+<p>执行上下文又包括三个生命周期阶段：<strong>创建阶段→执行阶段→回收阶段</strong>，本文重点介绍创建阶段。</p>
+<p><strong>1.创建阶段</strong></p>
+<p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
+<ul>
+<li><strong>创建变量对象(Variable object，VO)</strong>：首先初始化函数的参数<code>arguments</code>，提升函数声明和变量声明。后文会详细说明。</li>
+<li><strong>创建作用域链（Scope Chain）</strong>：在执行上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。后文会详细说明。</li>
+<li><strong>确定this指向</strong>：包括多种情况，后文会详细说明。</li>
+</ul>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为<code>undefined</code>，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在被执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过函数执行上下文中会多出<code>this</code> 、 <code>arguments</code>和函数的参数。</p>
+<p><strong>2.执行阶段</strong></p>
+<p>进入执行上下文、执行代码</p>
+<p><strong>3.回收阶段</strong></p>
+<p>执行完毕后执行上下文出栈并等待被垃圾回收</p>
+<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p>
+<h3 id="执行上下文栈（Execution-Context-Stack）"><a href="#执行上下文栈（Execution-Context-Stack）" class="headerlink" title="执行上下文栈（Execution Context Stack）"></a>执行上下文栈（Execution Context Stack）</h3><p>假如我们写的函数多了，每次调用函数时都创建一个新的执行上下文，如何管理创建的那么多执行上下文呢？</p>
+<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，具有 LIFO（后进先出）的栈结构，用于存储在代码执行期间创建的所有执行上下文。</p>
+<p>首次运行JS代码时，会创建一个<strong>全局</strong>执行上下文并Push到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个<strong>新的函数</strong>执行上下文并Push到当前执行栈的顶部，浏览器的JS执行引擎总是访问栈顶的执行上下文。</p>
+<p>根据执行栈LIFO规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中Pop出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时Pop出。</p>
+<p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
+<h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
+<pre><code class="javascript">function b(){
+}
+function a(){
+  b();
+}
+a();
+</code></pre>
+<p>这段代码背后执行的逻辑是这样的：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于JS提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
+<p><img src="/images/context/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>接着，代码会执行到<code>a( )</code>这个部分，这时候，会建立<code>a</code>的执行上下文（execution context），并且被放置到执行栈（execution stack）中。在这个execution stack中，最上面的execution context会是正在被执行的<code>a( )</code>。如下图：</p>
+<p><img src="/images/context/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>function a</code> 的execution context建立后，便会开始执行<code>function a</code>中的内容。由于在<code>function a( )</code> 里面有去执行<code>function b</code> ，因此，在这个execution stack中，接下来最上面会变成<code>function b</code> 的execution context。如下图：</p>
+<p><img src="/images/context/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>当<code>function b</code> 执行完之后，会从execution stack中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从execution stack中抽离，再回到Global Execution Context逐行执行。如下图：</p>
+<p><img src="/images/context/4.jpg" srcset="/img/loading.gif" alt></p>
+<h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
+<pre><code class="javascript">function b(){
+  var myVar;
+  console.log(myVar);
+}
+
+function a(){
+  var myVar = 2;
+  b();
+  console.log(myVar);
+}
+
+var myVar = 1;
+console.log(myVar);
+a();
+</code></pre>
+<p>你可以想像，如果我们在不同的execution context中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
+<p><img src="/images/context/5.jpg" srcset="/img/loading.gif" alt></p>
+<p>我们分别得到了1、<code>undefined</code>和2。为什么会这样呢？</p>
+<p>让我们来看看这段代码背后执行的逻辑：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，由于变量提升的缘故，<code>myVar</code>、<code>function a</code>和<code>b</code>都会被建立并储存在内存中，接着便开始逐行执行函数。一开始会碰到<code>var myVar = 1</code>所以，最外层的<code>myVar</code>便被给值为1，接着执行到了<code>console.log(myVar)</code>，这是在global execution context执行的，于是得到了第一个1的结果：</p>
+<p><img src="/images/context/6.jpg" srcset="/img/loading.gif" alt></p>
+<p>然后执行到了<code>a ( )</code>，于是建立了<code>a</code>的execution context，这时候由于逐行执行的关系，会先执行到<code>var myVar = 2</code>，但因为这是在function a的execution context中，所以并不会影响到global execution context的<code>myVar</code>：</p>
+<p><img src="/images/context/7.jpg" srcset="/img/loading.gif" alt></p>
+<p>在执行完<code>function a</code>中的<code>var myVar = 2</code>后，继续逐行执行，于是执行到了<code>b ( )</code>，这时候，<code>function b</code>的execution function便被建立，而且会先去执行<code>function b</code>里面的内容：</p>
+<p><img src="/images/context/8.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>function b</code>的execution function建立后，会开始逐行执行<code>function b</code>里面的内容，于是读到了<code>var myVar</code>;，这时候在<code>function b</code>这个execution context中的<code>myVar</code>变量被建立，但是还没被赋值，所以会是<code>undefined</code>。和上面提到的一样，由于这个<code>myVar</code>是在<code>function b</code>中的execution context所建立，所以并不会影响到其他execution context的<code>myVar</code>，这时候执行到了<code>function b</code>的 execution context中的<code>console.log(myVar)</code>，于是得到了第二个看到的<code>undefined</code>：</p>
+<p><img src="/images/context/9.jpg" srcset="/img/loading.gif" alt></p>
+<p>最后，<code>function b</code>执行完之后，会从execution stack中离开，继续回到<code>function a</code>中的<code>b( )</code>后逐行执行，也就是<code>console.log(myVar)</code>，这时候是在function a的execution context加以执行的，因此也就得到了结果中看到的第三个2了。</p>
+<p>最后由于<code>b ( )</code> 后面已经没有内容，<code>function a</code>执行完毕，这时候，<code>function a</code>也会从execution stack中抽离。</p>
+<p><img src="/images/context/10.jpg" srcset="/img/loading.gif" alt></p>
+<p>最后回到Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
+<p>由上面的例子，我们可以知道，我们是在不同的execution context中分别去声明变量<code>myVar</code>的，<strong>因此在不同的execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
+<p>由于我们是在不同的execution context中去声明变量，所以这其实是位于三个不同execution context中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
+<pre><code class="javascript">function b(){
+  var myVar;
+  console.log(myVar);
+}
+
+function a(){
+  var myVar = 2;
+  b();
+  console.log(myVar);
+}
+
+var myVar = 1;
+console.log(myVar);
+a();
+console.log(myVar);  // 一样会得到&quot;1&quot;
+</code></pre>
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该execution context中JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
+<pre><code class="javascript">function b(){
+  myVar;
+  console.log(myVar);
+}
+
+function a(){
+  myVar = 2;
+  b();
+  console.log(myVar);
+}
+
+var myVar = 1;
+console.log(myVar);
+a();
+console.log(myVar);
+
+/*
+打印出
+1
+2
+2
+2
+*/
+</code></pre>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/Execution%20Context">Execution Context</a>
+                
+                  <a class="hover-with-bg" href="/tags/Execution%20Context%20Stack">Execution Context Stack</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之执行上下文和执行栈&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

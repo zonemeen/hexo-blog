@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>CSS笔记—三栏布局 ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/article.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期五, 五月 24日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1.7k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      8 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：<br><img src="/images/sanlang/1.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。  </p>
+<p>下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图：<br><img src="/images/sanlang/2.jpg" srcset="/img/loading.gif" alt> </p>
+<h4 id="绝对定位布局"><a href="#绝对定位布局" class="headerlink" title="绝对定位布局"></a>绝对定位布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .container {
+        position: relative;
+    }
+    .left {
+        position: absolute;
+        width: 150px;
+        height: 200px;
+        left: 0;
+        top: 0;
+        background-color: red;
+    }
+        .middle {
+        height: 200px;
+        margin: 0 160px;
+        background-color: green;
+    }
+    .right {
+        position: absolute;
+        width: 150px;
+        height: 200px;
+            right: 0;
+        top: 0;
+            background-color: yellow;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>绝对定位布局是一个比较古老和容易想到的方式，其特点就是简单实用，而且也不容易出问题，缺点就是，容器脱离了文档流，后代元素也脱离了文档流，当高度未知的时候，会有问题，这就导致了这种方法的有效性和可使用性是比较差的。   </p>
+<h4 id="float布局"><a href="#float布局" class="headerlink" title="float布局"></a>float布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .left {
+        float: left;
+        height: 200px;
+        width: 150px;
+        background-color: red;
+    }
+        .middle {
+        margin: 0 160px;
+        height: 200px;
+        background-color: green;
+    }  
+    .right {
+        float: right;
+            width: 150px;
+        height: 200px;
+        background-color: yellow;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>float布局也是一种较为简单且容易想到的方式，原理是左右模块各自向左右浮动，并设置中间模块的 margin 值使中间模块宽度自适应，缺点就是中间部分最后加载，内容较多时会影响体验。   </p>
+<h4 id="BFC-三栏布局"><a href="#BFC-三栏布局" class="headerlink" title="BFC 三栏布局"></a>BFC 三栏布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .left {
+        float: left;
+        height: 200px;
+        width: 150px;
+        margin-right: 10px;
+        background-color: red;
+    }
+    .middle {
+        height: 200px;
+        overflow: hidden;
+        background-color: green;
+    }
+        .right {
+        float: right;
+            width: 150px;
+        height: 200px;
+        margin-left: 10px;
+        background-color: yellow;
+    }    
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+        &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>BFC有一特性：BFC的区域不会与外部浮动元素重叠，这里利用了这一特性，实现了两栏自适应布局。缺点和方法二类似，为了解决这个问题，引出下面要介绍的双飞翼布局。  </p>
+<h4 id="双飞翼布局"><a href="#双飞翼布局" class="headerlink" title="双飞翼布局"></a>双飞翼布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+        .content {
+          float: left;
+          width: 100%;
+        }
+        .left {
+        float: left;
+        height: 200px;
+        width: 150px;
+        margin-left: -100%;
+        background-color: red;
+    }
+        .middle {
+          height: 200px;
+          margin-left: 160px;
+          margin-right: 160px;
+          background-color: green;
+        }
+    .right {
+        width: 150px;
+        height: 200px;
+        float: right;
+        margin-left: -200px;
+        background-color: yellow;
+    }    
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;content&quot;&gt;
+        &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>双飞翼布局是在中间栏的 div 中再嵌套一个 div，内容写在嵌套的 div 里，然后对嵌套的 div 设置 margin-left 和 margin-right，效果上表现为左右两栏在中间栏的上面，中间栏还是 100% 宽度，只不过中间栏的内容通过 margin 的值显示在中间。    </p>
+<p>中间内容可以优先加载，但其HTML 代码结构稍微复杂点。   </p>
+<h4 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .container {
+        margin-left: 160px;
+        margin-right: 160px;
+    }
+    .middle {
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: green;
+    }
+    .left {
+        float: left;
+        width: 150px;
+        height: 200px;
+        margin-left: -100%;
+        position: relative;
+        left: -160px;
+        background-color: red;
+    }
+    .right {
+        float: left;
+        width: 150px;
+        height: 200px;
+        margin-left: -210px;
+        position: relative;
+        right: -220px;
+        background-color: yellow;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>圣杯布局的核心是左、中、右三栏都通过float进行浮动，然后通过margin负值进行调整。跟双飞翼布局比较像，但还是有一些区别，相对于双飞翼布局来说，其HTML 结构相对简单，但是css语法就稍微复杂，也是优先加载中间内容。</p>
+<p>还有注意一点是：中间内容要放在最上面，保证其先渲染。   </p>
+<h4 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+    .container {
+            display: flex;
+    }
+    .middle {
+            flex-grow: 1;
+        height: 200px;
+        background-color: green;
+    }
+    .left {
+        order: -1;
+        flex: 0 1 150px;
+        margin-right: 10px;
+        height: 200px;
+        background-color: red;
+    }
+    .right {
+        flex: 0 1 150px;
+            margin-left: 10px;
+        height: 200px;
+        background-color: yellow;
+    }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Flex布局是由CSS3提供的一种较为新兴的、方便的三栏布局方式，简单实用，缺点是其兼容性差一点。    </p>
+<h4 id="Table-布局"><a href="#Table-布局" class="headerlink" title="Table 布局"></a>Table 布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+      .container {
+        display: table;
+        width: 100%;
+      }
+      .left, .middle, .right {
+        display: table-cell;
+      }
+      .left {
+        width: 150px;
+        height: 200px;
+        background-color: red;
+      }
+      .middle {
+        background-color: green;
+      }
+      .right {
+        width: 150px;
+        height: 200px;
+        background-color: yellow;
+      }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>算是一种比较老的布局方式，较为简单，但其缺点是：无法设置栏间距，缺乏点灵活性，如下图：<br><img src="/images/sanlang/3.jpg" srcset="/img/loading.gif" alt> </p>
+<h4 id="Grid-网格-布局"><a href="#Grid-网格-布局" class="headerlink" title="Grid(网格)布局"></a>Grid(网格)布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;style&gt;
+      .container {
+        display: grid;
+        grid-template-columns: 160px auto 160px;
+            height: 200px;
+      }
+      .left {
+        background-color: red;
+            margin-right: 10px;      
+      }
+      .middle {
+        background-color: green;
+      }
+      .right {
+        background-color: yellow;
+            margin-left: 10px;
+      }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;container&quot;&gt;
+      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>网格布局作为一种比较新潮的实现方式，仅仅几条样式命令就能完成三栏布局，可见其布局之强大，但其兼容性比较差。    </p>
+<p><strong>以上就是我自己总结及结合文档所列出的8种css实现前端三栏布局的方式，如还有其他方式，欢迎大家告诉我哦。</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/CSS">CSS</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/CSS">CSS</a>
+                
+                  <a class="hover-with-bg" href="/tags/%E5%B8%83%E5%B1%80">布局</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CSS笔记—三栏布局&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

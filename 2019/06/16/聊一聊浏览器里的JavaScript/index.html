@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="description" content>
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content>
+  <title>谈谈浏览器里的JavaScript ~ 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+</head>
+
+
+<body>
+  <header style="height: 80vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background"
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/article.png')no-repeat center center;
+           background-size: cover;
+           background-attachment: fixed;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期日, 六月 16日 2019
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    1.8k 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      6 分钟
+                  </span>&nbsp;
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与JavaScript 是网页前端三大要素」，其中： </p>
+<ul>
+<li>HTML 负责资料与结构</li>
+<li>CSS 负责样式与呈现</li>
+<li>JavaScript 负责行为与互动</li>
+</ul>
+<p><img src="/images/dom/1.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>那么，如果你跟我在学JavaScript的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…  </p>
+<p><strong>我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！</strong>   </p>
+<p><img src="/images/dom/2.png" srcset="/img/loading.gif" alt>   </p>
+<p>那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  </p>
+<h3 id="浏览器里的JavaScript"><a href="#浏览器里的JavaScript" class="headerlink" title="浏览器里的JavaScript"></a>浏览器里的JavaScript</h3><p>严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  </p>
+<p>事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  </p>
+<p>所以广泛来说，在浏览器上的JavaScript 实际上包含了以下三部分：  </p>
+<ul>
+<li><strong>JavaScript核心</strong> (以ECMAScript标准为基础)</li>
+<li><strong>BOM</strong> (Browser Object Model，浏览器对象模型)</li>
+<li><strong>DOM</strong> (Document Object Model，文件对象模型)  </li>
+</ul>
+<p>由于BOM与DOM是由浏览器执行环境所提供；所以换句话说，在node环境下的JavaScript就不会有这两个部分。  </p>
+<p>前端开发者就是可以通过JavaScript 去调用BOM 与DOM 提供的API，进一步通过它们去控制浏览器的行为与网页的内容。  </p>
+<p>那么接下来就来具体介绍一下BOM与DOM吧。  </p>
+<h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。  </p>
+<p>在早期没有制定标准规范的时候，各家浏览器厂商几乎在自家浏览器上都有各自的功能，非常混乱。直到后来W3C 把各家浏览器都有的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了HTML5 的标准中，这也就是我们现在看到的BOM API。  </p>
+<p>BOM 有时也有人非正式地称它为Level 0 DOM。因为它在DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以Level 0 DOM与BOM两者实际上指的是同一个东西。</p>
+<h3 id="BOM的核心window对象"><a href="#BOM的核心window对象" class="headerlink" title="BOM的核心window对象"></a>BOM的核心window对象</h3><p><img src="/images/dom/3.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>从上图可以看出BOM的核心是<code>window</code>对象。 </p>
+<p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。  </p>
+<p>在浏览器里的<code>window</code>对象会扮演着两种角色：  </p>
+<ul>
+<li>ECMAScript 标准里的<strong>全局对象</strong> (Global Object)</li>
+<li>JavaScript 用来与浏览器沟通的窗口</li>
+</ul>
+<p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过window.xxx的方式取得它们。比如：  </p>
+<pre><code class="javascript">var a = 10; 
+console.log( window.a );    // 10
+</code></pre>
+<p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除： </p>
+<pre><code class="javascript">var a = 10; 
+console.log( window.a );    // 10
+
+console.log(delete window.a);     // false
+console.log( window.a );    // 10
+</code></pre>
+<p>但若是直接通过指定<code>window</code>对象的属性则可以：  </p>
+<pre><code class="javascript">window.a = 10; 
+console.log( window.a );    // 10
+
+console.log(delete window.a);        // true
+console.log( window.a );    // undefined
+</code></pre>
+<p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？  </p>
+<h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：  </p>
+<p><img src="/images/dom/4.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>(alert on Chrome)</p>
+<p>我想不管是不是刚接触JavaScript的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：  </p>
+<pre><code class="javascript">window.alert(&quot;message&quot;);
+</code></pre>
+<p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。  </p>
+<p>一行代码就可以生成一个对话框，很神奇吧？  </p>
+<p>而这就是浏览器环境的BOM提供给JavaScript控制的功能之一。  </p>
+<p>类似的对话框还有用来提供<strong>确定/取消</strong>的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm" target="_blank" rel="noopener">window.confirm()</a>，以及开放式问答的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt" target="_blank" rel="noopener">window.prompt()</a>对话框。  </p>
+<p>当然BOM 提供的API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。  </p>
+<h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将HTML文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为DOM Tree。 </p>
+<p>简单来说，我们把HTML每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的HTML如下：</p>
+<pre><code class="javascript">&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;米淇淋的个人博客&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;这是主题&lt;/h1&gt;
+        &lt;p&gt;这是一个&lt;i&gt;简单&lt;/i&gt;的段落&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><img src="/images/domapi-5.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>在最根部的地方，就是<code>document</code>，就是BOM图中<code>window</code>下面的那个。</p>
+<p>往下可以延伸出一个个的HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
+<p>而DOM API 就是定义了让JavaScript 可以存取、改变HTML 结构、样式和内容的方法，甚至是对节点绑定的事件。</p>
+<p>JavaScript 就是通过DOM 提供的API 来对HTML 做存取与操作。 </p>
+<h3 id="DOM-与-BOM-的区别"><a href="#DOM-与-BOM-的区别" class="headerlink" title="DOM 与 BOM 的区别"></a>DOM 与 BOM 的区别</h3><p>前面介绍BOM时，我们已经知道DOM的<code>document</code>其实也就是<code>window</code>对象的子对象之一。 </p>
+<p>而 DOM 与 BOM 最大的区别在于：</p>
+<ul>
+<li>BOM: JavaScript 与<strong>浏览器</strong>沟通的窗口，不涉及网页内容。</li>
+<li>DOM: JavaScript 用来控制<strong>网页</strong>的节点与内容的标准。</li>
+</ul>
+<p>BOM完全依赖于浏览器厂商实作本身无标准规范，而DOM有着W3C 所制定的标准来规范。</p>
+<p>想要通过DOM API 取得节点，JavaScript 可以这样写： </p>
+<pre><code class="javascript">// 根据传入的值，找到 DOM 中 id 为 &#39;xxx&#39; 的元素。
+document.getElementById(&#39;xxx&#39;);
+
+// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)
+document.getElementsByTagName(&#39;xxx&#39;);
+
+// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。
+document.getElementsByClassName(&#39;xxx&#39;);
+
+// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。
+document.querySelector(&#39;xxx&#39;); 
+document.querySelectorAll(&#39;xxx&#39;);
+</code></pre>
+<p>而透过DOM API选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
+<p>假设有一个HTML 节点：</p>
+<pre><code class="html">&lt;h1 id=&quot;greet&quot;&gt;&lt;/h1&gt;
+</code></pre>
+<p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
+<pre><code class="html">&lt;script&gt;
+    document.querySelector(&#39;#greet&#39;).textContent = &#39;Hello World!&#39;
+&lt;/script&gt;
+</code></pre>
+<p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output" target="_blank" rel="noopener">JS Bin on jsbin.com</a></p>
+<p>看到这里，恭喜你已经可以通过JavaScript 在网页上输出”Hello World!” 啦！</p>
+<p>在后续的内容中，我们会继续来介绍各种操作网页的DOM/BOM API。</p>
+<p>毕竟对前端工程师来说，搞懂<strong>怎么与浏览器打交道、怎么操作网页内容</strong>，就是做好WebUI最重要的基础。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+              <span>
+                <i class="iconfont icon-inbox"></i>
+                
+                  <a class="hover-with-bg" href="/categories/JavaScript">JavaScript</a>
+                  &nbsp;
+                
+              </span>&nbsp;&nbsp;
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
+                
+                  <a class="hover-with-bg" href="/tags/JavaScript">JavaScript</a>
+                
+                  <a class="hover-with-bg" href="/tags/DOM">DOM</a>
+                
+                  <a class="hover-with-bg" href="/tags/BOM">BOM</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br>
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> |
+    欢迎 Star<iframe
+            style="margin-left: 2px; margin-bottom:-5px;"
+            frameborder="0" scrolling="0" width="91px" height="20px"
+            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+
+
+    
+
+
+    <!-- cnzz Analytics icon -->
+    
+
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
+<script src="/js/main.js" ></script>
+
+
+  <script src="/js/lazyload.js" ></script>
+
+
+
+  
+    <script src="https://cdn.staticfile.org/tocbot/4.8.0/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
+
+
+  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
+
+
+
+<!-- Plugins -->
+
+
+  
+
+  
+
+  
+
+  
+
+  <!-- cnzz Analytics -->
+  
+
+
+
+  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "谈谈浏览器里的JavaScript&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "false",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

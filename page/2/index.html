@@ -12,14 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
@@ -29,7 +30,10 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
 
 
 </head>
@@ -103,10 +107,9 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shouye.jpg')no-repeat center center;
-           background-size: cover;
-           background-attachment: fixed;">
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test.png') no-repeat center center;
+           background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
@@ -130,7 +133,8 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -138,18 +142,22 @@
                 
 
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/11/19/JavaScript系列之类数组对象arguments/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/argument.png" srcset="/img/loading.gif" alt="JavaScript系列之类数组对象arguments" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/argument.png" srcset="/img/loading.gif" alt="JavaScript系列之类数组对象arguments"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/11/19/JavaScript系列之类数组对象arguments/">
         <p class="h4 index-header">JavaScript系列之类数组对象arguments</p>
+      </a>
+
+      <a href="/2019/11/19/JavaScript系列之类数组对象arguments/">
         
         
           
@@ -158,53 +166,48 @@
           <div class="index-text mb-1">之前在《JavaScript系列之this是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个JavaScript中的关键字，叫做”arguments”。
 那arguments到底是什么呢？下面就由我来简洁地介绍一下 arguments吧。
 什么是参数(parameters)在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。
-function MyFavorite(house, car, money) {
-    console.log(house);
-    console.log(car);
-    console.log(money);
-}
-
-MyFavorite();
-
-首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入MyFavorite()这样就可以了！
-一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在JavaScript中不太一样的地方在于，即</div>
+function MyFavorite(house, car, money) {</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-19&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/arguments">arguments</a>&nbsp;
+            <a href="/tags/arguments/">arguments</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/11/14/CSS Flexbox 对你说爱不完/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/flexbox.jpg" srcset="/img/loading.gif" alt="Flexbox 对你说爱不完" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/flexbox.jpg" srcset="/img/loading.gif" alt="Flexbox 对你说爱不完"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/11/14/CSS Flexbox 对你说爱不完/">
         <p class="h4 index-header">Flexbox 对你说爱不完</p>
+      </a>
+
+      <a href="/2019/11/14/CSS Flexbox 对你说爱不完/">
         
         
           
@@ -214,46 +217,48 @@ MyFavorite();
 废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。
 基本概念 
 使用了flex布局，则有flex容器（flex container），子元素为项目(flex item）。
-在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start和end表示对应轴的起始位置，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴。比如将Flexbox的方向设置为row，则主轴就是横轴，而交叉轴就是纵轴；反之设置成column，则主轴就是纵轴，而交叉轴就是横轴，这个下面会具体讲。
-每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。
-这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cr</div>
+在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start和end表示对应轴的起始位置，这是默认的设置，当然你可以通过修</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-14&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/CSS">CSS</a>&nbsp;
+            <a href="/categories/CSS/">CSS</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/CSS">CSS</a>&nbsp;
+            <a href="/tags/CSS/">CSS</a>&nbsp;
           
-            <a href="/tags/%E5%B8%83%E5%B1%80">布局</a>&nbsp;
+            <a href="/tags/布局/">布局</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/11/02/JavaScript系列之闭包(Closure)/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/closure.jpg" srcset="/img/loading.gif" alt="JavaScript系列之闭包" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/closure.jpg" srcset="/img/loading.gif" alt="JavaScript系列之闭包"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/11/02/JavaScript系列之闭包(Closure)/">
         <p class="h4 index-header">JavaScript系列之闭包</p>
+      </a>
+
+      <a href="/2019/11/02/JavaScript系列之闭包(Closure)/">
         
         
           
@@ -269,54 +274,48 @@ MyFavorite();
 
 自由变量是一个既不是函数的形参，也不是函数的局部变量的变量。
 
-由此，我们可以看出闭包共有两部分组成：
-
-闭包 = 函数 + 函数能够访问的自由变量
-
-好，如果上面三行就看得懂的话那么就不用再往下看了，Congratulations！
-…… 不过如果你是初学者的话，我想应该不会，如果仅用三言两语就把闭包讲通，那还能称为Javascript 语言的一个难点吗？
-先来举个例子：
-var n = 1;
-
-function f1() {
-    console.log(n);  </div>
+由此，我们可</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-02&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E9%97%AD%E5%8C%85">闭包</a>&nbsp;
+            <a href="/tags/闭包/">闭包</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/10/24/JavaScript系列之this是什么/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/this.jpg" srcset="/img/loading.gif" alt="JavaScript系列之this是什么" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/this.jpg" srcset="/img/loading.gif" alt="JavaScript系列之this是什么"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/10/24/JavaScript系列之this是什么/">
         <p class="h4 index-header">JavaScript系列之this是什么</p>
+      </a>
+
+      <a href="/2019/10/24/JavaScript系列之this是什么/">
         
         
           
@@ -329,48 +328,48 @@ function f1() {
 了解this也许你在其他面向对象的编程语言曾经看过this，也知道它会指向某个构造器(constructor)所建立的对象。但事实上在JavaScript里面，this所代表的不仅仅是那个被建立的对象。
 先来看看ECMAScript 标准规范对this 的定义：
 
-「The this keyword evaluates to the value of the ThisBinding of the current execution context.」「this 这个关键字代表的值为当前执行上下文的ThisBinding。」
-
-然后再来看看MDN 对this 的定义：
-
-「In most cases, the value of this is determined</div>
+「T</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-24&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/this">this</a>&nbsp;
+            <a href="/tags/this/">this</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/10/18/JavaScript系列之作用域和作用域链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/scope.png" srcset="/img/loading.gif" alt="JavaScript系列之作用域和作用域链" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/scope.png" srcset="/img/loading.gif" alt="JavaScript系列之作用域和作用域链"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/10/18/JavaScript系列之作用域和作用域链/">
         <p class="h4 index-header">JavaScript系列之作用域和作用域链</p>
+      </a>
+
+      <a href="/2019/10/18/JavaScript系列之作用域和作用域链/">
         
         
           
@@ -382,53 +381,50 @@ function f1() {
 
 本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——作用域链。
 作用域(Scope)在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？
-作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：
-function fn() {
-    var inVariable = &quot;inner variable&quot;;
-    console.log(inVariable); // inner variable
-}
-
-fn(); 
-console.log(inVariable); // Uncaught ReferenceError: inVariable is not define</div>
+作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-18&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/Scope">Scope</a>&nbsp;
+            <a href="/tags/Scope/">Scope</a>&nbsp;
           
-            <a href="/tags/Scope%20Chain">Scope Chain</a>&nbsp;
+            <a href="/tags/Scope-Chain/">Scope Chain</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/10/12/JavaScript系列之变量对象/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/vo.jpg" srcset="/img/loading.gif" alt="JavaScript系列之变量对象" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/vo.jpg" srcset="/img/loading.gif" alt="JavaScript系列之变量对象"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/10/12/JavaScript系列之变量对象/">
         <p class="h4 index-header">JavaScript系列之变量对象</p>
+      </a>
+
+      <a href="/2019/10/12/JavaScript系列之变量对象/">
         
         
           
@@ -437,51 +433,48 @@ console.log(inVariable); // Uncaught ReferenceError: inVariable is not define</d
           <div class="index-text mb-1">JavaScript编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。
 上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：
 
-详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下变量对象。
-变量对象变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的变量和函数声明，先来看一段代码示例：
-function foo(){
-    var a = 10;     
-    function b(){}
-    (function c(){});
-    console.log(a);     // 10
- </div>
+详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this等很多JavaScript初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1">变量对象</a>&nbsp;
+            <a href="/tags/变量对象/">变量对象</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/10/04/JavaScript系列之执行上下文和执行栈/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/context.jpg" srcset="/img/loading.gif" alt="JavaScript系列之执行上下文和执行栈" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/context.jpg" srcset="/img/loading.gif" alt="JavaScript系列之执行上下文和执行栈"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/10/04/JavaScript系列之执行上下文和执行栈/">
         <p class="h4 index-header">JavaScript系列之执行上下文和执行栈</p>
+      </a>
+
+      <a href="/2019/10/04/JavaScript系列之执行上下文和执行栈/">
         
         
           
@@ -491,48 +484,50 @@ function foo(){
 执行上下文和执行栈是JavaScript的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。
 执行上下文（Execution Context）当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：
 
-全局执行上下文（全局代码）：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 window 对象，this 指向这个全局对象。
-函数执行上下文（函数体）：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。
-Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中的代码，很少用而</div>
+全局执行上</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-04&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/Execution%20Context">Execution Context</a>&nbsp;
+            <a href="/tags/Execution-Context/">Execution Context</a>&nbsp;
           
-            <a href="/tags/Execution%20Context%20Stack">Execution Context Stack</a>&nbsp;
+            <a href="/tags/Execution-Context-Stack/">Execution Context Stack</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/09/24/谈谈JavaScript中的函数构造式和prototype的建立/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/constructor.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和prototype的建立" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/constructor.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和prototype的建立"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/09/24/谈谈JavaScript中的函数构造式和prototype的建立/">
         <p class="h4 index-header">谈谈JavaScript中的函数构造式和prototype的建立</p>
+      </a>
+
+      <a href="/2019/09/24/谈谈JavaScript中的函数构造式和prototype的建立/">
         
         
           
@@ -540,49 +535,50 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
         <div class="index-excerpt" >
           <div class="index-text mb-1">在《谈谈JavaScript中的function constructor和new关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字new来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明function constructor如何用来设定该对象的原型（prototype）。
 在JavaScript中的函数也是一种对象，其中包含一些属性像是该函数的名称（Name）和该函数的内容（Code），但其实function这里面还有一个属性，这个属性就是prototype，这个属性会以空对象的型式呈现。
-除非你是把function当做function constructor来使用，否则这个属性就没有特别的用途；但如果你是把它当做function constructor，通过new这个关键字来执行这个function的话，它就有特别的意义了。
-
-要进入这个function的prototype属性只要直接通过 .prototype 就可以了。
-然而，有一点很容易令人困惑的地方，我们会以为如果我使用 .prototype 时，就可以直接进入该</div>
+除非你是把function当做funct</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-24&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/constructor">constructor</a>&nbsp;
+            <a href="/tags/constructor/">constructor</a>&nbsp;
           
-            <a href="/tags/prototype">prototype</a>&nbsp;
+            <a href="/tags/prototype/">prototype</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/09/17/谈谈JavaScript中的函数构造式和new关键字/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/new.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和new关键字" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/new.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和new关键字"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/09/17/谈谈JavaScript中的函数构造式和new关键字/">
         <p class="h4 index-header">谈谈JavaScript中的函数构造式和new关键字</p>
+      </a>
+
+      <a href="/2019/09/17/谈谈JavaScript中的函数构造式和new关键字/">
         
         
           
@@ -590,53 +586,50 @@ Eval 函数执行上下文（eval代码）： 指的是运行在 eval 函数中�
         <div class="index-excerpt" >
           <div class="index-text mb-1">您是否曾困惑于 Javascript 中的new关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？
 大多数 Javascript 的新开发者不太想要使用new关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
-谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明确的区分两者，也就是说 function 可以被当作 constructor 或者当作一般函数调用。
-而 constructor 的用法就是 function 搭配new关键字：
-function  Person  ( ) { 
-  this . firstName =  &#39;Jay&#39; ; 
-  this . lastName =  &#39;Chou&#39; ; 
-}
-
-var </div>
+谈谈function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript 并没有明</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-17&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/constructor">constructor</a>&nbsp;
+            <a href="/tags/constructor/">constructor</a>&nbsp;
           
-            <a href="/tags/new">new</a>&nbsp;
+            <a href="/tags/new/">new</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/09/11/JavaScript系列之对象的继承/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/09/11/JavaScript系列之对象的继承/">
         <p class="h4 index-header">JavaScript系列之对象的继承</p>
+      </a>
+
+      <a href="/2019/09/11/JavaScript系列之对象的继承/">
         
         
           
@@ -644,36 +637,30 @@ var </div>
         <div class="index-excerpt" >
           <div class="index-text mb-1">这篇文章的重点讲的是关于JavaScript中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
 而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（prototype）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。
-复习原型/原型链JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。
-其实原型的概念很简单，我觉得用以下简短的几句话就能概括完全了：
-
-所有对象都有一个属性 __proto__ 指向一个对象，也就是原型
-每个对象的原型都可以通过 constructor 找到构造函数，构造函数也可以通过 prototype 找到原型
-所有函数都可以通过 __proto__ 找到 Function 对象
-所有对象都可以通过</div>
+复习原型/原型链JavaScript的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-11&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+            <a href="/tags/原型/">原型</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
+            <a href="/tags/原型链/">原型链</a>&nbsp;
           
-            <a href="/tags/%E7%BB%A7%E6%89%BF">继承</a>&nbsp;
+            <a href="/tags/继承/">继承</a>&nbsp;
           
         
       </div>
@@ -734,6 +721,32 @@ var </div>
 </div>
   
 
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoad = window.onload;
+  window.onload = function () {
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'one',
+      order: 'random',
+      theme: '#01222b',
+      preload: 'none',
+      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
+    });
+    oldLoad && oldLoad();
+  }
+</script>
+
+  
+
+  
+
   <footer class="mt-5">
   <div class="text-center py-3">
     <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
@@ -742,10 +755,9 @@ var </div>
     <!-- <b>2019</b> -->
     <br>
     Ported by <a href="https://github.com/miqilin21">miqilin</a> |
-    欢迎 Star<iframe
-            style="margin-left: 2px; margin-bottom:-5px;"
-            frameborder="0" scrolling="0" width="91px" height="20px"
-            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    欢迎 Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
     </iframe>
 
     
@@ -761,20 +773,20 @@ var </div>
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
-<script src="/js/main.js" ></script>
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js" ></script>
+  <script  src="/js/lazyload.js" ></script>
 
 
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
 
 
 
@@ -782,20 +794,8 @@ var </div>
 <!-- Plugins -->
 
 
-  
 
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
-
-
-
-  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  linenums');
@@ -805,12 +805,12 @@ var </div>
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "I'm miqilin. Welcome to my blog!&nbsp;",
+        "亲亲这边建议您要多喝烫水&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -825,11 +825,11 @@ var </div>
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -842,7 +842,7 @@ var </div>
 
 
 
-  <script src="/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -854,7 +854,7 @@ var </div>
 
 
 
-  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {

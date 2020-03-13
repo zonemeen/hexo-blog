@@ -12,14 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
@@ -29,7 +30,10 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
 
 
 </head>
@@ -103,10 +107,9 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shouye.jpg')no-repeat center center;
-           background-size: cover;
-           background-attachment: fixed;">
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test.png') no-repeat center center;
+           background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
@@ -130,7 +133,8 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -138,18 +142,22 @@
                 
 
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/05/18/如何快速搭建静态资源服务器/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httpserver.jpg" srcset="/img/loading.gif" alt="如何快速搭建静态资源服务器" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httpserver.jpg" srcset="/img/loading.gif" alt="如何快速搭建静态资源服务器"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/05/18/如何快速搭建静态资源服务器/">
         <p class="h4 index-header">如何快速搭建静态资源服务器</p>
+      </a>
+
+      <a href="/2019/05/18/如何快速搭建静态资源服务器/">
         
         
           
@@ -162,48 +170,48 @@ http://localhost:8080/hello.html
 http://localhost:8080/abc.js   
 
 而不是通过默认的file:///来访问    
-那问题是为什么只有需要一个HTTP才能访问静态资源呢？ 
-是因为HTML文件含有Javascript文件时，如果通过默认的file://地址来访问此文件的话，浏览器会阻止本地Javascript文件的一些操作，此时就需要安装HTTP-Server来解决这个问题。    
-报错信息：  
-
-Failed to load file:///E:/webexamples/reactjs/hello-reactjs/p</div>
+那问题是为什</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-18&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3">前端相关</a>&nbsp;
+            <a href="/categories/前端相关/">前端相关</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/Node-js">Node.js</a>&nbsp;
+            <a href="/tags/Node-js/">Node.js</a>&nbsp;
           
-            <a href="/tags/http-server">http-server</a>&nbsp;
+            <a href="/tags/http-server/">http-server</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/05/15/Git及Github操作手册/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitgithub.jpg" srcset="/img/loading.gif" alt="Git/GitHub操作手册" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitgithub.jpg" srcset="/img/loading.gif" alt="Git/GitHub操作手册"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/05/15/Git及Github操作手册/">
         <p class="h4 index-header">Git/GitHub操作手册</p>
+      </a>
+
+      <a href="/2019/05/15/Git及Github操作手册/">
         
         
           
@@ -212,49 +220,48 @@ Failed to load file:///E:/webexamples/reactjs/hello-reactjs/p</div>
           <div class="index-text mb-1">Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 
 SSH KeysSSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  
 由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     
-添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。     
-1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。    
-$ git init    // 在当前目录新建一个Git代码库
-
-这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：     
-$ echo &quo</div>
+添加远程库你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-15&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/tools">tools</a>&nbsp;
+            <a href="/categories/tools/">tools</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/Git">Git</a>&nbsp;
+            <a href="/tags/Git/">Git</a>&nbsp;
           
-            <a href="/tags/GitHub">GitHub</a>&nbsp;
+            <a href="/tags/GitHub/">GitHub</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/05/10/HTML常用标签/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/html.jpg" srcset="/img/loading.gif" alt="HTML常用标签" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/html.jpg" srcset="/img/loading.gif" alt="HTML常用标签"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/05/10/HTML常用标签/">
         <p class="h4 index-header">HTML常用标签</p>
+      </a>
+
+      <a href="/2019/05/10/HTML常用标签/">
         
         
           
@@ -278,53 +285,48 @@ HTML 使用标记标签来描述网页
 HTML 标签是由尖括号包围的关键词，比如 &lt;html&gt;  
 
 
-HTML 标签通常是成对出现的，比如 &lt;p&gt; 和 &lt;/p&gt;  
-
-
-标签对中的第一个标签是开始标签，第二个标签是结束标签     
-
-
-开始和结束标签也被称为开放标签和闭合标签     
-
-⭐越多代表我觉得此标签越重要
-标题标签 ⭐⭐⭐HTML提供了6个等级的标题(head)，即：h1、h2、h3、h4、h5和h6，h1是最高级的标题。其基本语法是：&lt;hn&gt; 标题信息 &lt;/hn&gt</div>
+HTML 标签通常是成对出现</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-10&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/HTML">HTML</a>&nbsp;
+            <a href="/categories/HTML/">HTML</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/HTML">HTML</a>&nbsp;
+            <a href="/tags/HTML/">HTML</a>&nbsp;
           
-            <a href="/tags/%E6%A0%87%E7%AD%BE">标签</a>&nbsp;
+            <a href="/tags/标签/">标签</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/05/05/HTTP入门笔记/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httprm.jpg" srcset="/img/loading.gif" alt="HTTP入门笔记" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/httprm.jpg" srcset="/img/loading.gif" alt="HTTP入门笔记"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/05/05/HTTP入门笔记/">
         <p class="h4 index-header">HTTP入门笔记</p>
+      </a>
+
+      <a href="/2019/05/05/HTTP入门笔记/">
         
         
           
@@ -344,29 +346,24 @@ web服务器在 80 端口接收请求
 web服务器之后负责响应请求的内容
 
 
-浏览器负责下载响应内容   
-
-curl命令curl是一种命令行工具，作用是发出网络请求，然后得到响应和提取数据，显示在”标准输出”（stdout）上面。后面所说的请求，就是通过使用 curl 命令来实现的。比如输入：curl -s -v -- &quot;www.sina.com&quot;这一行命令，输出的请求内容为：  
-&gt; GET / HTTP/1.1
-&gt; Host: www.sina.com
-</div>
+浏览器负责下载响应</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-05-05&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/HTTP">HTTP</a>&nbsp;
+            <a href="/categories/HTTP/">HTTP</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/HTTP">HTTP</a>&nbsp;
+            <a href="/tags/HTTP/">HTTP</a>&nbsp;
           
         
       </div>
@@ -427,6 +424,32 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 </div>
   
 
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoad = window.onload;
+  window.onload = function () {
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'one',
+      order: 'random',
+      theme: '#01222b',
+      preload: 'none',
+      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
+    });
+    oldLoad && oldLoad();
+  }
+</script>
+
+  
+
+  
+
   <footer class="mt-5">
   <div class="text-center py-3">
     <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
@@ -435,10 +458,9 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
     <!-- <b>2019</b> -->
     <br>
     Ported by <a href="https://github.com/miqilin21">miqilin</a> |
-    欢迎 Star<iframe
-            style="margin-left: 2px; margin-bottom:-5px;"
-            frameborder="0" scrolling="0" width="91px" height="20px"
-            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    欢迎 Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
     </iframe>
 
     
@@ -454,20 +476,20 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
-<script src="/js/main.js" ></script>
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js" ></script>
+  <script  src="/js/lazyload.js" ></script>
 
 
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
 
 
 
@@ -475,20 +497,8 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 <!-- Plugins -->
 
 
-  
 
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
-
-
-
-  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  linenums');
@@ -498,12 +508,12 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "I'm miqilin. Welcome to my blog!&nbsp;",
+        "亲亲这边建议您要多喝烫水&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -518,11 +528,11 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -535,7 +545,7 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 
 
 
-  <script src="/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -547,7 +557,7 @@ curl命令curl是一种命令行工具，作用是发出网络请求，然后得
 
 
 
-  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {

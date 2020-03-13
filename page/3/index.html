@@ -12,14 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
@@ -29,7 +30,10 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
 
 
 </head>
@@ -103,10 +107,9 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shouye.jpg')no-repeat center center;
-           background-size: cover;
-           background-attachment: fixed;">
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test.png') no-repeat center center;
+           background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
@@ -130,7 +133,8 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -138,18 +142,22 @@
                 
 
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/09/05/从instanceof身上深入理解原型原型链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/09/05/从instanceof身上深入理解原型原型链/">
         <p class="h4 index-header">从instanceof身上深入理解原型/原型链</p>
+      </a>
+
+      <a href="/2019/09/05/从instanceof身上深入理解原型原型链/">
         
         
           
@@ -157,53 +165,50 @@
         <div class="index-excerpt" >
           <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
 对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
-官方对instanceof运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：
-function Foo() {}
-var f1 = new Foo();
-
-console.log(f1 instanceof Foo);  // true
-console.log(f1 instanceof Object);  // true
-
-上面代码中，对象f1是构造函数Foo的实例，所以返回true，但是“f1 instanceof Object”为什么</div>
+官方对instanceof运算符的解释是返回一个布尔值，表示对象</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-05&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+            <a href="/tags/原型/">原型</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
+            <a href="/tags/原型链/">原型链</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/09/01/【译】12个编写干净且可扩展的JavaScript技巧/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/12jiqiao.jpg" srcset="/img/loading.gif" alt="【译】12个编写干净且可扩展的JavaScript技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/12jiqiao.jpg" srcset="/img/loading.gif" alt="【译】12个编写干净且可扩展的JavaScript技巧"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/09/01/【译】12个编写干净且可扩展的JavaScript技巧/">
         <p class="h4 index-header">【译】12个编写干净且可扩展的JavaScript技巧</p>
+      </a>
+
+      <a href="/2019/09/01/【译】12个编写干净且可扩展的JavaScript技巧/">
         
         
           
@@ -212,49 +217,48 @@ console.log(f1 instanceof Object);  // true
           <div class="index-text mb-1">JavaScript起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。
 现代Web应用程序严重依赖JavaScript，尤其是单页应用程序（SPA）。借助于React，AngularJS和Vue.js等新兴框架，Web应用程序主要使用JavaScript构建。
 扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能会遇到限制并迷失在混乱的海洋中。我想分享一些小技巧，这些技巧将帮助您以有效的方式编写干净的代码。
-本文面向任何技能水平的JavaScript开发人员。 但是，至少具有JavaScript中级知识的开发人员将从这些技巧中获益最多。
-
-原文链接：https://blog.logrocket.com/12-tips-for-writing-clean-and-scalable-javascript-3ffe30abfe20/
-
-分隔您的代码我建议保持代码库清洁和可读的最重要的事情是具有按主题分隔的特定逻辑块（通常是函数）。如果你编写一个函数，该函数应该默认只有一个目的，不应该一次做多个事情。
-此外，您应避免引起副作用，这</div>
+本文面向任何技能水平的JavaScript开发人员。 但是，至少具有JavaScript中级知识的开发人员将从这些技巧中获益</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-09-01&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+            <a href="/tags/编程技巧/">编程技巧</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/08/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/egg.png" srcset="/img/loading.gif" alt="由一段代码引发的关于Object和Function的鸡和蛋问题的思考" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/egg.png" srcset="/img/loading.gif" alt="由一段代码引发的关于Object和Function的鸡和蛋问题的思考"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/08/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
         <p class="h4 index-header">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</p>
+      </a>
+
+      <a href="/2019/08/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
         
         
           
@@ -265,49 +269,48 @@ console.log(f1 instanceof Object);  // true
 Object instanceof Function  // true
 Function instanceof Object  // true
 
-Object.__proto__ === Function.prototype  // true
-Function.__proto__ === Function.prototype  // true
-Function.prototype.__proto__ === Object.prototype  // true
-
-那么Object和Function，谁是鸡谁是蛋呢？
-接下来就来深入探究下上面这段代码所引</div>
+Objec</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-22&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/Function">Function</a>&nbsp;
+            <a href="/tags/Function/">Function</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/08/16/从原生JS实现jQuery的一个API中体会其设计思想/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jquery.jpg" srcset="/img/loading.gif" alt="从原生JS实现jQuery的一个API中体会其设计思想" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jquery.jpg" srcset="/img/loading.gif" alt="从原生JS实现jQuery的一个API中体会其设计思想"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/08/16/从原生JS实现jQuery的一个API中体会其设计思想/">
         <p class="h4 index-header">从原生JS实现jQuery的一个API中体会其设计思想</p>
+      </a>
+
+      <a href="/2019/08/16/从原生JS实现jQuery的一个API中体会其设计思想/">
         
         
           
@@ -317,51 +320,48 @@ Function.prototype.__proto__ === Object.prototype  // true
 封装函数function addClass(classes){} //可将所有输入的标签的class添加一个类
 
 实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
-function addClass(node, classes) {
-  var allTag = document.querySelectorAll(node)
-  for (let i = 0; i &lt; allTag.length; i++) {
-    allTag[i].classList.add(classes)
-  }
-}
-
-命名空间在全局变量中创建一个对象，用来储存封装后的函数，这就是命名空间（名字前面统一加一个前</div>
+function addClass(n</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-16&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/jQuery">jQuery</a>&nbsp;
+            <a href="/tags/jQuery/">jQuery</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/08/11/DOM Node 的建立、删除与修改/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/08/11/DOM Node 的建立、删除与修改/">
         <p class="h4 index-header">DOM Node 的建立、删除与修改</p>
+      </a>
+
+      <a href="/2019/08/11/DOM Node 的建立、删除与修改/">
         
         
           
@@ -371,51 +371,50 @@ function addClass(node, classes) {
 DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
 var newDiv = document.createElement(&#39;div&#39;);
 
-在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChild()等方法将新元素加入至指定的位置之后才会显示。
-新建立的newDiv我们也可以同时对它指定属性，如：
-newDiv.id = &quot;myNewDiv&quot;; 
-newDiv.className = &quot;box&quot;;
-
-document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有文字节点，那么document.createTextNode()就是</div>
+在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChild()等方</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-11&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/DOM">DOM</a>&nbsp;
+            <a href="/tags/DOM/">DOM</a>&nbsp;
           
-            <a href="/tags/API">API</a>&nbsp;
+            <a href="/tags/API/">API</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/08/08/通过DOM API 查找节点/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domapi.jpg" srcset="/img/loading.gif" alt="通过DOM API 查找节点" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domapi.jpg" srcset="/img/loading.gif" alt="通过DOM API 查找节点"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/08/08/通过DOM API 查找节点/">
         <p class="h4 index-header">通过DOM API 查找节点</p>
+      </a>
+
+      <a href="/2019/08/08/通过DOM API 查找节点/">
         
         
           
@@ -425,52 +424,50 @@ document.createTextNode()之前曾介绍过，除了HTML元素节点外，还有
 当一个网页被载入到浏览器时，浏览器会首先分析这个HTML 文档，然后会依照这份HTML 的内容解析成DOM (Document Object Model，即文件对象模型)。
 而DOM 是W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过DOM 提供的API 来操作DOM 的内容、结构与样式。
 所以说，DOM 是网页的根本，懂得控制DOM就可以控制整个网页，做出良好的互动体验。
-那么在今天的分享中，我们就继续来介绍DOM API 查找节点的方法吧。
-前言:script标签放哪里有区别吗？针对&lt;script&gt;标签放哪里，这个题目其实没有标准答案，一般你会看到有两种版本：
-
-放在&lt;head&gt; ... &lt;/head&gt;之间
-放在&lt;/body&gt;之前
-
-还有人会说为什么放在&lt;head&gt; ... &lt;/head&gt;里面的JavaScri</div>
+那么在今天的分享中</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-08&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/DOM">DOM</a>&nbsp;
+            <a href="/tags/DOM/">DOM</a>&nbsp;
           
-            <a href="/tags/API">API</a>&nbsp;
+            <a href="/tags/API/">API</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/08/01/聊一聊浏览器里的JavaScript/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/liulangqi.jpg" srcset="/img/loading.gif" alt="谈谈浏览器里的JavaScript" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/liulangqi.jpg" srcset="/img/loading.gif" alt="谈谈浏览器里的JavaScript"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/08/01/聊一聊浏览器里的JavaScript/">
         <p class="h4 index-header">谈谈浏览器里的JavaScript</p>
+      </a>
+
+      <a href="/2019/08/01/聊一聊浏览器里的JavaScript/">
         
         
           
@@ -487,50 +484,50 @@ JavaScript 负责行为与互动
 我还是不知道怎么通过JavaScript在网页上输出”Hello World!”啊！   
    
 那么相信看完今天的分享，我保证你一定可以通过JavaScript 在网页上输出”Hello World!” (嘻嘻)  
-浏览器里的JavaScript严格来说，JavaScript (或者说ECMAScript 标准) 并没有提供网页的操作方法。  
-事实上，前端开发者在网页的操作方法都是由JavaScript的执行平台，也就是浏览器提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM与DOM。  
-所以广泛来说，在浏览器上的JavaScript 实际上包含了以下三部分：  
-
-JavaScript核心 (以ECMA</div>
+浏览器里</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-08-01&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/DOM">DOM</a>&nbsp;
+            <a href="/tags/DOM/">DOM</a>&nbsp;
           
-            <a href="/tags/BOM">BOM</a>&nbsp;
+            <a href="/tags/BOM/">BOM</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/23/浅谈数组常见遍历方法/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/array.jpg" srcset="/img/loading.gif" alt="浅谈数组常见遍历方法" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/array.jpg" srcset="/img/loading.gif" alt="浅谈数组常见遍历方法"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/23/浅谈数组常见遍历方法/">
         <p class="h4 index-header">浅谈数组常见遍历方法</p>
+      </a>
+
+      <a href="/2019/07/23/浅谈数组常见遍历方法/">
         
         
           
@@ -559,50 +556,48 @@ let people = [
     money: 1500
   },
   {
-    name: &#39;我&#39;,
-    money: Infinity
-  }
-];
-
-forEach：遍历数组forEach与另外几种方法有些许不同，就是除了forEach以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是undefined(没有返回任何值)。  
-var forEachLoop = people.forEach( function ( ite</div>
+  </div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-23&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E6%95%B0%E7%BB%84">数组</a>&nbsp;
+            <a href="/tags/数组/">数组</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/20/【译】谈谈“typeof null为object”这一bug的由来/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/20/【译】谈谈“typeof null为object”这一bug的由来/">
         <p class="h4 index-header">【译】谈谈“typeof null为object”这一bug的由来</p>
+      </a>
+
+      <a href="/2019/07/20/【译】谈谈“typeof null为object”这一bug的由来/">
         
         
           
@@ -613,47 +608,46 @@ var forEachLoop = people.forEach( function ( ite</div>
 原文链接：http://www.2ality.com/2013/10/typeof-null.html
 
 我看了下C语言关于typeof的规范，它对于typeof null为何结果是’object’有更好的解释。  
-在JavaScript中，typeof null的结果是’Object‘，它错误地暗示null是一个对象，实际上它是一个原始值。我在上一篇文章也提到了这是JS的一大bug，不幸的是这并不能解决，因为这将破坏现有规范，接下来解释下这个bug的历史。  
-“typeof null”的错误从JavaScripts第一个版本开始就已经存在了。在这个版本，值以32位为单位存储，由小型标签（1-3位）和值的实际数据组成。类型标签存储在单元的低位中。 其中有五种：   
-
-000: object. 数据是对象的引用。
-1: int. 数据是31位有符号整数。
-010: double. 数</div>
+在JavaScript中，typeof null的结果是’Object‘，它错误地暗示null是一个对象，实际上它是一个原始值。我在上一篇文章也提到了这是JS的一大bug，不幸的是</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-20&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/18/JS中一切都是对象吗？看这一篇就知道了/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/18/JS中一切都是对象吗？看这一篇就知道了/">
         <p class="h4 index-header">JS中一切都是对象吗？看这一篇就知道了</p>
+      </a>
+
+      <a href="/2019/07/18/JS中一切都是对象吗？看这一篇就知道了/">
         
         
           
@@ -663,28 +657,26 @@ var forEachLoop = people.forEach( function ( ite</div>
      
 想必有点疑惑吧，那么造成这种现象的原因是什么呢？接下来就由我一一道来。  
 历史原因说起一切都是对象这种说法的由来，就要好好提一下历史因素了。  
-1995年，JavaScript诞生之年，Netscape公司（JavaScript的设计者）与Sun公司（Java语言的发明者和所有者）合作开发一种可以嵌入网页的脚本语言，将JavaScript的数据结构借鉴Java而设计，包括将值分成原始值和对象两大类。   
-Java中一切皆对象，但基本类型却不是对象，为了解决这个问题，Java让每个基本类型都对应了一个包装器类型。包装器类型将基本类型包装起来，添加了属性和方法，包装器类型即为对象，所以可以这么说Java中的一切都可以充当对象，不会说的那么绝对。  
-因此借鉴了Java数据结构的</div>
+1995年，JavaScript诞生之年，Netscape公司（JavaScript的设计者）与Sun公司（Java语言的发明者和所有者）合</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-18&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
+            <a href="/tags/对象/">对象</a>&nbsp;
           
         
       </div>
@@ -745,6 +737,32 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 </div>
   
 
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoad = window.onload;
+  window.onload = function () {
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'one',
+      order: 'random',
+      theme: '#01222b',
+      preload: 'none',
+      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
+    });
+    oldLoad && oldLoad();
+  }
+</script>
+
+  
+
+  
+
   <footer class="mt-5">
   <div class="text-center py-3">
     <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
@@ -753,10 +771,9 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
     <!-- <b>2019</b> -->
     <br>
     Ported by <a href="https://github.com/miqilin21">miqilin</a> |
-    欢迎 Star<iframe
-            style="margin-left: 2px; margin-bottom:-5px;"
-            frameborder="0" scrolling="0" width="91px" height="20px"
-            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    欢迎 Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
     </iframe>
 
     
@@ -772,20 +789,20 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
-<script src="/js/main.js" ></script>
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js" ></script>
+  <script  src="/js/lazyload.js" ></script>
 
 
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
 
 
 
@@ -793,20 +810,8 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 <!-- Plugins -->
 
 
-  
 
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
-
-
-
-  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  linenums');
@@ -816,12 +821,12 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "I'm miqilin. Welcome to my blog!&nbsp;",
+        "亲亲这边建议您要多喝烫水&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -836,11 +841,11 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -853,7 +858,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -865,7 +870,7 @@ Java中一切皆对象，但基本类型却不是对象，为了解决这个问�
 
 
 
-  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {

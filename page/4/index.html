@@ -12,14 +12,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.10.2/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.8.9/css/mdb.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
 <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
 
@@ -29,7 +30,10 @@
 <link rel="stylesheet" href="/css/main.css">
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
 
 
 </head>
@@ -103,10 +107,9 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background"
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shouye.jpg')no-repeat center center;
-           background-size: cover;
-           background-attachment: fixed;">
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test.png') no-repeat center center;
+           background-size: cover;">
       <div class="full-bg-img">
         <div class="mask rgba-black-light flex-center">
           <div class="container text-center white-text fadeInUp">
@@ -130,7 +133,8 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
+        <div class="py-5 z-depth-3" id="board"
+          style=margin-top:0>
           
           <div class="container">
             <div class="row">
@@ -138,18 +142,22 @@
                 
 
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/15/谈谈JavaScript中对象建立(Object)/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/15/谈谈JavaScript中对象建立(Object)/">
         <p class="h4 index-header">谈谈JavaScript中创建对象(Object)</p>
+      </a>
+
+      <a href="/2019/07/15/谈谈JavaScript中对象建立(Object)/">
         
         
           
@@ -158,50 +166,50 @@
           <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用JavaScript里的对象（Object）。  
 对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？  
 第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。  
-第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Property）。  
-第三种放入的值可以是函数（function），在对象的情况下，我们会把这种函数称做方法（method）。在对象中的每一个Property或是Method都会占据电脑当中一个记忆体的位置，在需要使用到的时候，把它们调取出来。  
-接下来我将介绍三种创建JavaScript里的对象及如何调用的方法：  
-方法一：使用 [ ]创建对象  
-创建对象的第一个方法是使用[ ]，[ ]在</div>
+第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Pr</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-15&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%AF%B9%E8%B1%A1">对象</a>&nbsp;
+            <a href="/tags/对象/">对象</a>&nbsp;
           
-            <a href="/tags/Object">Object</a>&nbsp;
+            <a href="/tags/Object/">Object</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/12/分享7个有用的JavaScript技巧/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/12/分享7个有用的JavaScript技巧/">
         <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
+      </a>
+
+      <a href="/2019/07/12/分享7个有用的JavaScript技巧/">
         
         
           
@@ -215,48 +223,48 @@ var j = [...new Set([1, 2, 3, 4, 4])]
 &gt;&gt; [1, 2, 3, 4]
 
 很简单有木有！ 
-过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，null，false等）？ 你可能不知道还有这个技巧：  
-let res = [1,2,3,4,0,undefined,null,false,&#39;&#39;].filter(Boolean);
-&gt;&gt; 1,2,3,4
-
-创建空对象您可以使用{ }创建一个看似空的对象，但该对象仍然具有__proto__和通常的hasOwnProperty以及其他对象方法。 但是，有一种方法可以创建一个纯</div>
+过滤掉falsy值是否需要从数组中过滤出falsy值（0，undefined，nul</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7">编程技巧</a>&nbsp;
+            <a href="/tags/编程技巧/">编程技巧</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/09/JavaScript中任何值的prototype到最后都是Object/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lastobject.jpg" srcset="/img/loading.gif" alt="JavaScript中任何值的prototype到最后都是Object" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lastobject.jpg" srcset="/img/loading.gif" alt="JavaScript中任何值的prototype到最后都是Object"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/09/JavaScript中任何值的prototype到最后都是Object/">
         <p class="h4 index-header">JavaScript中任何值的prototype到最后都是Object</p>
+      </a>
+
+      <a href="/2019/07/09/JavaScript中任何值的prototype到最后都是Object/">
         
         
           
@@ -276,55 +284,48 @@ var  b  =  function ( ) {
 }
 
 // Array 
-var c =  [ &#39;A&#39; , &#39;r&#39; , &#39;r&#39; , &#39;a&#39; , &#39;y&#39;] ;
-
-// string 
-var d =  &#39;This is string&#39; ;
-
-// number 
-var e =  2 ;
-
-// boolean 
-var f =  true ;
-
-接着，我们会在Google Chrome 的console</div>
+var c =  [ &#3</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-09&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+            <a href="/tags/原型/">原型</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/03/JavaScript系列之原型与原型链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/03/JavaScript系列之原型与原型链/">
         <p class="h4 index-header">JavaScript系列之原型与原型链</p>
+      </a>
+
+      <a href="/2019/07/03/JavaScript系列之原型与原型链/">
         
         
           
@@ -333,56 +334,50 @@ var f =  true ;
           <div class="index-text mb-1">JavaScript 也是一门面向对象的语言，ES6之前并没有引入类（class）的概念，像c++ 这种典型的面向对象语言都是通过类来创建实例对象，而JavaScript是直接通过构造函数来创建实例。   
 所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。   
 构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。  
-构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来调用。我们先使用构造函数创建一个对象：  
-function Dog() {
-    this.name = &#39;阿黄&#39;
-}
-
-var dog = new Dog()
-console.log(dog.name)     // 阿黄
-
-上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。  
-原型prototype  
-JavaScript是一种基于原型</div>
+构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用new关键字来</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-03&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B">原型</a>&nbsp;
+            <a href="/tags/原型/">原型</a>&nbsp;
           
-            <a href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE">原型链</a>&nbsp;
+            <a href="/tags/原型链/">原型链</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/07/01/贵州黔东南之行/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/guizhou.jpg" srcset="/img/loading.gif" alt="贵州黔东南之行" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/guizhou.jpg" srcset="/img/loading.gif" alt="贵州黔东南之行"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/07/01/贵州黔东南之行/">
         <p class="h4 index-header">贵州黔东南之行</p>
+      </a>
+
+      <a href="/2019/07/01/贵州黔东南之行/">
         
         
           
@@ -399,52 +394,48 @@ JavaScript是一种基于原型</div>
 晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。
 
 
-在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。
-西江千户苗寨第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。
-
-
-在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。
-
-来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了😄。
-
-因为苗寨难得遇到断电，“幸运</div>
+在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-07-01&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
+            <a href="/categories/游记/">游记</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E8%B4%B5%E5%B7%9E">贵州</a>&nbsp;
+            <a href="/tags/贵州/">贵州</a>&nbsp;
           
-            <a href="/tags/%E6%B8%B8%E8%AE%B0">游记</a>&nbsp;
+            <a href="/tags/游记/">游记</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/30/JavaScript系列之内存泄漏/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/06/30/JavaScript系列之内存泄漏/">
         <p class="h4 index-header">JavaScript系列之内存泄漏</p>
+      </a>
+
+      <a href="/2019/06/30/JavaScript系列之内存泄漏/">
         
         
           
@@ -453,52 +444,48 @@ JavaScript是一种基于原型</div>
           <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。   
 而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如C语言有着malloc() 和 free() 这种低级内存管理语言也有可能出现泄露内存的情况。  
 这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。   
-垃圾回收机制现在各大浏览器通常采用的垃圾回收有两种方法：标记清除（mark and sweep）、引用计数(reference counting)。  
-1、标记清除 
-这是javascript中最常用的垃圾回收方式。  
-工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。   
-工作流程：  
-
-垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。
-去掉环境中的变量以及被环境中的变量引用的变量的标记。
-之后再被加上标记的变量将</div>
+垃圾回收机制现在各大浏览器通常采用的垃圾回收有两种方法：标记清除（mark and sweep）、引用计数(reference </div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-30&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
+            <a href="/tags/内存/">内存</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/28/JavaScript系列之内存空间/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunkj.jpg" srcset="/img/loading.gif" alt="JavaScript系列之内存空间" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunkj.jpg" srcset="/img/loading.gif" alt="JavaScript系列之内存空间"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/06/28/JavaScript系列之内存空间/">
         <p class="h4 index-header">JavaScript系列之内存空间</p>
+      </a>
+
+      <a href="/2019/06/28/JavaScript系列之内存空间/">
         
         
           
@@ -512,49 +499,48 @@ JavaScript是一种基于原型</div>
 2. 使用分配到的内存（读、写）
 3. 不需要时将其释放、归还
 为了便于理解，我们使用一个简单的例子来解释这个周期。   
-var a = 10;  // 在内存中给数值变量分配空间
-alert(a + 90);  // 使用分配到的内存
-a = null; // 使用完毕之后，释放内存空间
-
-在JS中，每一个数据都需要一个内存空间。内存空间又被分为两种，栈内存(stack)与堆内存(heap)。  
-栈与堆栈(stack)是有序的，主要存放一些基本类型的变量和对象的地址，每个区块按照一定次序存放（后进先出），它们都是直接按值</div>
+var </div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E5%86%85%E5%AD%98">内存</a>&nbsp;
+            <a href="/tags/内存/">内存</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/22/学会如何学习（三）/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/06/22/学会如何学习（三）/">
         <p class="h4 index-header">学会如何学习（三）</p>
+      </a>
+
+      <a href="/2019/06/22/学会如何学习（三）/">
         
         
           
@@ -563,48 +549,48 @@ a = null; // 使用完毕之后，释放内存空间
           <div class="index-text mb-1">第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~   
 拖延症的形成我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。  
      
-这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。   
-习惯习惯可以分为四个阶段：  
-   
-第一阶段是提示 (cue) ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。   
-第二个阶段就是惯例 (routine)，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办</div>
+这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-22&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93">学习之道</a>&nbsp;
+            <a href="/categories/学习之道/">学习之道</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0">高效学习</a>&nbsp;
+            <a href="/tags/高效学习/">高效学习</a>&nbsp;
           
-            <a href="/tags/%E6%96%B9%E6%B3%95">方法</a>&nbsp;
+            <a href="/tags/方法/">方法</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/17/Undefined vs Null/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/un-null.jpg" srcset="/img/loading.gif" alt="Undefined vs Null" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/un-null.jpg" srcset="/img/loading.gif" alt="Undefined vs Null"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/06/17/Undefined vs Null/">
         <p class="h4 index-header">Undefined vs Null</p>
+      </a>
+
+      <a href="/2019/06/17/Undefined vs Null/">
         
         
           
@@ -616,51 +602,46 @@ a = null; // 使用完毕之后，释放内存空间
 相似性（1）undefined和null在if语句中，都会被自动转为false，加!转换为true，相等运算符对于两者比较是相等的。  
 if (!undefined) 
     console.log(&#39;undefined is false&#39;);
-// undefined is false
-
-if (!null) 
-    console.log(&#39;null is false&#39;);
-// null is false
-
-undefined == null
-// true
-
-（2）在JavaScript中，只有六个falsy值，null和undefined都包含在六个falsy值中，当进行逻辑判断时所有的Falsy值均为false。 </div>
+// </div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-17&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
         
       </div>
     </div>
   </div>
 
-  <div class="row mb-4 mx-auto">
+  <div class="row mx-auto index-card">
     
     
       <div class="col-12 col-md-4 m-auto">
         <a href="/2019/06/15/JavaScript系列之类型转换/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换" class="img-fluid rounded z-depth-3 index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换"
+               class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 m-auto">
+    <div class="col-12 col-md-8 mx-auto index-info">
       <a href="/2019/06/15/JavaScript系列之类型转换/">
         <p class="h4 index-header">JavaScript系列之类型转换</p>
+      </a>
+
+      <a href="/2019/06/15/JavaScript系列之类型转换/">
         
         
           
@@ -677,40 +658,26 @@ Number(123)  // 123  转换后为原值
 Number(&#39;123&#39;)  // 123  转换为相应的数值，前提能被解析为数值
 
 //字符串
-Number(&#39;123abc&#39;)   // NaN  如果不能被解析为数值，则返回 NaN
-
-//布尔值
-Number(true)  // 1
-Number(false)  // 0
-
-//undefined
-Number(undefined)  // NaN
-
-//null
-Number(null)  // 0
-
-//对象
-Number({a: 1}) // NaN
-Number([5]) // 5  //包含</div>
+Number(&#39;123a</div>
         </div>
       </a>
 
-      <div>
+      <div class="index-btm">
         
           <i class="iconfont icon-riqi2"></i>&nbsp;2019-06-15&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript">JavaScript</a>&nbsp;
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
           &nbsp;
         
         
           <i class="iconfont icon-tag"></i>
           
-            <a href="/tags/JavaScript">JavaScript</a>&nbsp;
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a>&nbsp;
+            <a href="/tags/数据类型/">数据类型</a>&nbsp;
           
         
       </div>
@@ -771,6 +738,32 @@ Number([5]) // 5  //包含</div>
 </div>
   
 
+  
+    <!-- APlayer 音乐播放器 -->
+    <div id="aplayer"></div>
+    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
+<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
+<script type="text/javascript">
+  var oldLoad = window.onload;
+  window.onload = function () {
+    new APlayer({
+      container: document.getElementById('aplayer'),
+      fixed: true,
+      autoplay: 'false' === 'true',
+      loop: 'one',
+      order: 'random',
+      theme: '#01222b',
+      preload: 'none',
+      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
+    });
+    oldLoad && oldLoad();
+  }
+</script>
+
+  
+
+  
+
   <footer class="mt-5">
   <div class="text-center py-3">
     <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
@@ -779,10 +772,9 @@ Number([5]) // 5  //包含</div>
     <!-- <b>2019</b> -->
     <br>
     Ported by <a href="https://github.com/miqilin21">miqilin</a> |
-    欢迎 Star<iframe
-            style="margin-left: 2px; margin-bottom:-5px;"
-            frameborder="0" scrolling="0" width="91px" height="20px"
-            src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    欢迎 Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
     </iframe>
 
     
@@ -798,20 +790,20 @@ Number([5]) // 5  //包含</div>
 </footer>
 
 <!-- SCRIPTS -->
-<script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js" ></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<script src="https://cdn.staticfile.org/mdbootstrap/4.8.9/js/mdb.min.js" ></script>
-<script src="/js/main.js" ></script>
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
 
 
-  <script src="/js/lazyload.js" ></script>
+  <script  src="/js/lazyload.js" ></script>
 
 
 
 
 
-  <script src="https://cdn.staticfile.org/smooth-scroll/16.1.0/smooth-scroll.min.js" ></script>
+
 
 
 
@@ -819,20 +811,8 @@ Number([5]) // 5  //包含</div>
 <!-- Plugins -->
 
 
-  
 
-  
-
-  
-
-  
-
-  <!-- cnzz Analytics -->
-  
-
-
-
-  <script src="https://cdn.staticfile.org/prettify/r298/prettify.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
   <script>
     $(document).ready(function () {
       $('pre').addClass('prettyprint  linenums');
@@ -842,12 +822,12 @@ Number([5]) // 5  //包含</div>
 
 
 
-  <script src="https://cdn.staticfile.org/typed.js/2.0.10/typed.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "I'm miqilin. Welcome to my blog!&nbsp;",
+        "亲亲这边建议您要多喝烫水&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -862,11 +842,11 @@ Number([5]) // 5  //包含</div>
 
 
 
-  <script src="https://cdn.staticfile.org/anchor-js/4.2.0/anchor.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
   <script>
     anchors.options = {
       placement: "right",
-      visible: "false",
+      visible: "hover",
       
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
@@ -879,7 +859,7 @@ Number([5]) // 5  //包含</div>
 
 
 
-  <script src="/js/local-search.js" ></script>
+  <script  src="/js/local-search.js" ></script>
   <script>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
@@ -891,7 +871,7 @@ Number([5]) // 5  //包含</div>
 
 
 
-  <script src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
   <script>
     $("#post img:not(.no-zoom img, img[no-zoom])").each(
       function () {

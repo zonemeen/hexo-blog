@@ -40,7 +40,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -132,20 +132,74 @@
         <div class="py-5 z-depth-3" id="board"
           >
           
+            <div class="about-avatar">
+              <img src="/img/avatar.jpg" srcset="/img/loading.gif"
+                   class="img-fluid z-depth-1 rounded-circle"
+                   alt="avatar">
+            </div>
+          
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="page-content">
-  <h4 id="关于自己"><a href="#关于自己" class="headerlink" title="关于自己"></a>关于自己</h4><p>未来希望成为一名优秀前端工作者，还是一名具有吃遍各地美食梦的程序🐵   </p>
-<h4 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h4><p>记录一些学习、开发过程中的想法和心得，分享一些日常~</p>
-<h4 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h4><p><a href="https://github.com/miqilin21" target="_blank" rel="noopener">GitHub</a>    </p>
-<p><a href="https://i.loli.net/2019/03/21/5c935fa3cfa54.jpg" target="_blank" rel="noopener">微信</a>     </p>
-<p><a href="miqilin18@gmail.com">邮箱</a>    </p>
-<p><a href="https://www.zhihu.com/people/mi-qi-lin-60-52/activities" target="_blank" rel="noopener">知乎</a>  </p>
-<p><a href="https://juejin.im/user/5cbe712ae51d456e88333976" target="_blank" rel="noopener">掘金</a>  </p>
-<h4 id="作品集"><a href="#作品集" class="headerlink" title="作品集"></a>作品集</h4>
+<div class="text-center">
+  <p class="h3">miqilin</p>
+  <p>前端开发 / 半个厨子 / 足球迷</p>
+  
+    
+    
+    
+    <a href="https://github.com/miqilin21" class="h4 px-1 false">
+      <i class="fab fa-github" aria-hidden="true"></i>
+      
+    </a>
+  
+    
+    
+    
+    <a href="https://www.zhihu.com/people/mi-qi-lin-60-52/activities" class="h4 px-1 false">
+      <i class="fab fa-zhihu" aria-hidden="true"></i>
+      
+    </a>
+  
+    
+    
+    
+    <a href="javascript:;" class="h4 px-1 qr-trigger">
+      <i class="fab fa-weixin" aria-hidden="true"></i>
+      
+        <img class="qr-img" src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/be.jpg" srcset="/img/loading.gif" alt="qrcode" />
+      
+    </a>
+  
+</div>
+<div class="mt-5 markdown-body">
+  <!-- #### 关于自己
+未来希望成为一名优秀前端工作者，还是一名具有吃遍各地美食梦的程序🐵
+
+#### 关于博客
+记录一些学习、开发过程中的想法和心得，分享一些日常~
+
+#### 联系方式
+[GitHub](https://github.com/miqilin21)
+
+[微信](https://i.loli.net/2019/03/21/5c935fa3cfa54.jpg)
+
+[邮箱](miqilin18@gmail.com)
+
+[知乎](https://www.zhihu.com/people/mi-qi-lin-60-52/activities)
+
+[掘金](https://juejin.im/user/5cbe712ae51d456e88333976)
+
+#### 作品集 -->
+<h3 id="关于自己"><a href="#关于自己" class="headerlink" title="关于自己"></a>关于自己</h3><p>目前坐标：深圳</p>
+<p>未来希望成为一名优秀前端工作者</p>
+<p>还是一名具有吃遍各地美食梦的程序 🐵</p>
+<p>我的有趣人生进程，持续前进</p>
+<h3 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h3><p>记录一些学习、开发过程中的想法和心得，分享一些日常~</p>
+<!-- #### 作品集 -->
+
 </div>
 
               </div>
@@ -185,28 +239,6 @@
   </div>
 </div>
   
-
-  
-    <!-- APlayer 音乐播放器 -->
-    <div id="aplayer"></div>
-    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
-<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
-<script type="text/javascript">
-  var oldLoad = window.onload;
-  window.onload = function () {
-    new APlayer({
-      container: document.getElementById('aplayer'),
-      fixed: true,
-      autoplay: 'false' === 'true',
-      loop: 'one',
-      order: 'random',
-      theme: '#01222b',
-      preload: 'none',
-      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
-    });
-    oldLoad && oldLoad();
-  }
-</script>
 
   
 

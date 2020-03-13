@@ -336,28 +336,6 @@ SayHI(jaychou);  // HI Chou
   
 
   
-    <!-- APlayer 音乐播放器 -->
-    <div id="aplayer"></div>
-    <script defer src="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.js" ></script>
-<link  rel="stylesheet" href="https://cdn.staticfile.org/aplayer/1.10.1/APlayer.min.css" />
-<script type="text/javascript">
-  var oldLoad = window.onload;
-  window.onload = function () {
-    new APlayer({
-      container: document.getElementById('aplayer'),
-      fixed: true,
-      autoplay: 'false' === 'true',
-      loop: 'one',
-      order: 'random',
-      theme: '#01222b',
-      preload: 'none',
-      audio: [{"name":"music","artist":"Travis Scott","url":"/songs/YOSEMITE.mp3","cover":"/img/cover.jpg"},{"name":"name","artist":"artist","url":"https://...url.mp3","cover":"https://...cover.jpg"}]
-    });
-    oldLoad && oldLoad();
-  }
-</script>
-
-  
 
   
 

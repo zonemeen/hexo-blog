@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>Git/GitHub操作手册 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期一, 七月 15日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.8k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      6 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下git/github远程仓库的使用及相关配置。 </p>
+<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。  </p>
+<p>由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的，所以，需要一点设置。     </p>
+<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步，这样，GitHub上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了Git常用的操作流程。<br><img src="/images/github/1.jpg" srcset="/img/loading.gif" alt>     </p>
+<p>1、在本地新建文件夹，命名为blog，在本地的blog仓库的路径下运行命令行。    </p>
+<pre><code class="bash">$ git init    // 在当前目录新建一个Git代码库
+</code></pre>
+<p>这个操作在当前目录下生成一个.git文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：     </p>
+<pre><code class="bash">$ echo &quot;# myblog&quot; &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为&#39;myBlog&#39;；如果目录下已经有文件，请省略这一步
+$ git add README.md                //将README.md文件提交到问题暂存区
+$ git commit -m &quot;first commit&quot;     //将暂存区文件提交到本地仓库，且本次提交记录为&#39;first commit&#39;
+$ git status -sb      //显示当前所有文件的状态
+</code></pre>
+<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。   </p>
+<p>2、登陆GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg" srcset="/img/loading.gif" alt>     </p>
+<p>在Repository name填入blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的Git仓库。    </p>
+<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用HTTPS 地址，因为使用HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放http端口的公司内部就无法使用SSH协议而只能用HTTPS 。    </p>
+<p>5、目前，在GitHub上的这个blog仓库还是空的，GitHub告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到GitHub仓库。<br>现在，我们根据GitHub的提示，在本地的blog仓库下运行命令：    </p>
+<pre><code class="bash">$ git remote add origin git@github.com:miqilin21/blog.git
+</code></pre>
+<p>6、下一步，就可以把本地库的所有内容推送到远程库上：     </p>
+<pre><code class="bash">$ git push -u origin master
+</code></pre>
+<p>把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。   </p>
+<p>由于远程库是空的，我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code>    </p>
+<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用git的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：    </p>
+<pre><code class="bash">$ git push   //将本地仓库修改内容同步到远程仓库
+</code></pre>
+<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：    </p>
+<pre><code class="bash">$ git pull      //将远程库修改的内容下载到本地库
+</code></pre>
+<p>最后把本地master分支的最新修改<code>$ git push</code>推送至GitHub，现在，你就拥有了真正的分布式版本库！    </p>
+<h4 id="从远程库clone"><a href="#从远程库clone" class="headerlink" title="从远程库clone"></a>从远程库clone</h4><p>上面已经讲了     </p>
+<ul>
+<li>在本地创建仓库</li>
+</ul>
+<ul>
+<li>将本地仓库上传到 GitHub    </li>
+</ul>
+<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。   </p>
+<p>1、在GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>请按图中所示，一模一样的操作，然后点击创建按钮。    </p>
+<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>3、现在，远程库已经准备好了，下一步是用命令git clone克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。    </p>
+<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：    </p>
+<pre><code class="bash">$ git clone git@github.com:miqilin21/git-demo.git
+</code></pre>
+<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！    </p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：    </p>
+<p>1、在本地创建仓库    </p>
+<p>2、将本地仓库上传到 GitHub </p>
+<p>3、GitHub 上的仓库克隆下载到本地    </p>
+<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。    </p>
+<p>我们最后再回顾一遍已经学到的命令：    </p>
+<blockquote>
+<p>git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+</blockquote>
+<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="noopener">常用Git命令清单</a><br><a href="http://www.runoob.com/git/git-install-setup.html" target="_blank" rel="noopener">Git菜鸟教程</a><br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000" target="_blank" rel="noopener">廖雪峰的Git教程</a>  </p>
+</blockquote>
+<p>本人Github链接如下，欢迎各位Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/tools/">tools</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                      <a class="hover-with-bg" href="/tags/GitHub/">GitHub</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "Git/GitHub操作手册&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

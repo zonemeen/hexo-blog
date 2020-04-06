@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>CSS笔记—居中布局 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期日, 七月 21日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      4 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。</p>
+<h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="元素宽高未知"><a href="#元素宽高未知" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：</p>
+<p>①CSS3 transform：</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</code></pre>
+<p>②flexbox：</p>
+<pre><code class="css">.parent {
+  display: flex;
+  justify-content: center;
+}
+</code></pre>
+<h4 id="居中元素为内联元素"><a href="#居中元素为内联元素" class="headerlink" title="居中元素为内联元素"></a>居中元素为内联元素</h4><p>常见的内联元素有：span, a, img, input, label 等等。</p>
+<p>您可以在块级父元素内水平居中内联元素，只需 css 中加以下核心语法：</p>
+<pre><code class="css">.parent {
+  text-align: center;
+}
+</code></pre>
+<p>这种方法适用于 display 为 inline, inline-block, inline-table, inline-flex 类型的元素。</p>
+<h4 id="居中元素为块级元素"><a href="#居中元素为块级元素" class="headerlink" title="居中元素为块级元素"></a>居中元素为块级元素</h4><p>常见的块元素：div, h1~h6, table, p, ul, li 等等。</p>
+<p>① 设置 margin：0 auto</p>
+<pre><code class="css">.parent {
+  width: 100%;
+}
+.child {
+  width: 800px;
+  height: 100px;
+  margin: 0 auto;
+  background: #999;
+}
+</code></pre>
+<p>此方法只能进行水平的居中，对浮动元素或绝对定位元素是无效的。</p>
+<p>② 转换为 inline-block 属性：</p>
+<pre><code class="css">.parent {
+  text-align: center;
+}
+.child {
+  display: inline-block;
+}
+</code></pre>
+<h4 id="居中元素为浮动元素"><a href="#居中元素为浮动元素" class="headerlink" title="居中元素为浮动元素"></a>居中元素为浮动元素</h4><p>加以下核心语法:</p>
+<pre><code class="css">.child {
+  width: 100px;
+  float: left;
+  position: relative;
+  left: 50%;
+  margin-left: -50px;
+}
+</code></pre>
+<h4 id="居中元素为绝对定位元素"><a href="#居中元素为绝对定位元素" class="headerlink" title="居中元素为绝对定位元素"></a>居中元素为绝对定位元素</h4><p>①</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+}
+</code></pre>
+<p>②</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  width: 100px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+</code></pre>
+<h3 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h3><h4 id="元素宽高未知-1"><a href="#元素宽高未知-1" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，也可以利用以下同样两种方法将元素垂直居中：</p>
+<p>①CSS3 transform：</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  left: 50%;
+  transform: translateY(-50%);
+}
+</code></pre>
+<p>②flexbox：</p>
+<pre><code class="css">.parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+</code></pre>
+<p>适用于子元素为浮动、绝对定位、内联元素，均可垂直居中。</p>
+<p>其中 flexbox 是 CSS3 新增的属性，设计初衷就是为了解决像垂直居中这样的常见布局问题，相信未来 flexbox 布局会越来越多应用。</p>
+<h4 id="元素宽高已知"><a href="#元素宽高已知" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>①</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  height: 100px;
+  margin-top: -50px;
+}
+</code></pre>
+<p>②</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100px;
+  margin: auto 0;
+}
+</code></pre>
+<h4 id="居中元素为单行文本"><a href="#居中元素为单行文本" class="headerlink" title="居中元素为单行文本"></a>居中元素为单行文本</h4><p>①</p>
+<pre><code class="css">.text {
+  line-height: 200px;
+  height: 200px;
+}
+</code></pre>
+<p>将文本的 line-height 属性值设为和文字父容器一样的高度，但适用于只有一行文字的情况。</p>
+<p>②</p>
+<pre><code class="css">.link {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+</code></pre>
+<p>有时内联/文本元素可以垂直居中显示，只是因为它们上部和下部都有相等的 padding。</p>
+<h4 id="居中元素为多行文本"><a href="#居中元素为多行文本" class="headerlink" title="居中元素为多行文本"></a>居中元素为多行文本</h4><p>①table：</p>
+<pre><code class="css">.parent {
+  display: table;
+}
+.child {
+  display: table-cell;
+  margin: 0;
+  vertical-align: middle;
+}
+</code></pre>
+<p>②flexbox:</p>
+<pre><code class="css">.parent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 400px;
+}
+</code></pre>
+<h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><h4 id="元素宽高已知-1"><a href="#元素宽高已知-1" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>① 负边距居中：</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+</code></pre>
+<p>此方法灵活性差，不能自适应，且宽高不支持百分比尺寸和 min-/max- 属性。</p>
+<p>② 绝对居中：</p>
+<pre><code class="css">div {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: fixed;
+  //absolute is ok
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+</code></pre>
+<p>元素的宽高支持百分比 % 属性值和 min-/max- 属性。</p>
+<p>③transform :</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</code></pre>
+<p>④table-cell:</p>
+<pre><code class="css">.parent {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  border: 1px solid red;
+}
+.child {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-color: #999;
+}
+</code></pre>
+<p>这种方法适用于子元素 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，前提需要知道父元素的宽高，且父元素的宽高不能设为百分比数。</p>
+<p>⑤font-size 结合 vertical-align：</p>
+<pre><code class="css">.parent {
+  font-size: 175.4px;
+  height: 200px;
+  text-align: center;
+}
+
+.child {
+  vertical-align: middle;
+  display: inline-block;
+  font-size: 12px;
+  width: 50px;
+  height: 50px;
+  background-color: #999;
+}
+</code></pre>
+<p>该方法前提条件是需给父元素设一个合适的 font-size 值，该值一般为其父元素的高度除以 1.14 得到的值，并且子元素必须是一个 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，此外还需在子元素内加上 vertical-align: middle 属性。</p>
+<p>⑥ 文本内容：</p>
+<pre><code class="css">text {
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+</code></pre>
+<h4 id="元素宽高未知-2"><a href="#元素宽高未知-2" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>①transform :</p>
+<pre><code class="css">.parent {
+  position: relative;
+}
+.child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+</code></pre>
+<p>transform 方法中元素既可以加宽高，也可不加，用于水平垂直居中布局。</p>
+<p>②flexbox :</p>
+<pre><code class="css">.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</code></pre>
+<p>③grid:</p>
+<pre><code class="css">body,
+html {
+  height: 100%;
+  display: grid;
+}
+span {
+  /* thing to center */
+  margin: auto;
+}
+</code></pre>
+<p>该方法适用于只有一个元素的时候，作为非常新的布局方式，其兼容性也比较差。</p>
+<p><strong>上面只是把所有方法的代码要点罗列了一下，能满足所有的居中布局方案，如你还有其他好方法，欢迎交流指正哦。</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CSS/">CSS</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/布局/">布局</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CSS笔记—居中布局&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

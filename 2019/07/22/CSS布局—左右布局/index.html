@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>CSS笔记—左右布局 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期一, 七月 22日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.2k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      6 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>css 左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学 css 的时候更快理解其他复杂的布局方式。</p>
+<p>下面是我罗列的几种 css 实现前端左右布局的方式：</p>
+<h4 id="position-absolute-实现"><a href="#position-absolute-实现" class="headerlink" title="position: absolute 实现"></a>position: absolute 实现</h4><p>在父级元素内设置两个子元素，绝对定位它们，然后使用百分比将它们分成左右两部分。 这里的好处是，有两个可以容纳自己内容的独立容器。</p>
+<pre><code class="css">&lt;section&gt;
+  &lt;div class=&quot;left-half&quot;&gt;
+    &lt;article&gt;
+      &lt;h1&gt;Left Half&lt;/h1&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;right-half&quot;&gt;
+    &lt;article&gt;
+      &lt;h1&gt;Right Half&lt;/h1&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/section&gt; /*以上为html代码*/
+
+section {
+  color: white;
+  text-align: center;
+}
+div {
+  height: 100%;
+}
+article {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  padding: 20px;
+}
+h1 {
+  font-size: 20px;
+}
+.left-half {
+  background-color: #ea68a2;
+  position: absolute;
+  left: 0px;
+  width: 50%;
+}
+.right-half {
+  background-color: pink;
+  position: absolute;
+  right: 0px;
+  width: 50%;
+}
+</code></pre>
+<h4 id="table-实现"><a href="#table-实现" class="headerlink" title="table 实现"></a>table 实现</h4><p>table 布局是页面布局中使用的最早的布局方式，随着前端技术的发展，table 布局由于自身的局限性逐渐被 div 布局取代。</p>
+<pre><code class="css">&lt;section
+  &gt; &lt;div
+  class=&quot;left-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Left
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;div
+  class=&quot;right-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Right
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;/section
+  &gt; body {
+  color: white;
+  text-align: center;
+}
+h1 {
+  font-size: 20px;
+}
+div {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  width: 50%;
+  padding: 50px;
+}
+.left-half {
+  background: #ea68a2;
+}
+.right-half {
+  background: pink;
+}
+</code></pre>
+<h4 id="float-实现"><a href="#float-实现" class="headerlink" title="float 实现"></a>float 实现</h4><p>float 属性是 css 中关于布局的一个关键属性，可以产生脱离文档流的布局现象，其 left 属性值使该区域向父级标签区域的左侧边界放置，right 属性值使该区域块向父级标签的右侧边界放置，利用该属性可以实现左右布局。</p>
+<pre><code class="css">&lt;section
+  &gt; &lt;div
+  class=&quot;left-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Left
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;div
+  class=&quot;right-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Right
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;/section
+  &gt; html,
+body,
+section,
+div {
+  height: 80%;
+}
+body {
+  color: white;
+  text-align: center;
+}
+section {
+  width: 100%;
+}
+article {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  padding: 1rem;
+  transform: translate(-50%, -50%);
+}
+h1 {
+  font-size: 20px;
+}
+.left-half {
+  background-color: #ea68a2;
+  float: left;
+  width: 50%;
+}
+.right-half {
+  background-color: pink;
+  float: left;
+  width: 50%;
+}
+</code></pre>
+<p>对于 float 对后面同级元素的影响，既可以采用 margin 进行影响的清除，还可以在受影响的元素上添加 overflow：hidden 来清除浮动对该区域块带来的影响。</p>
+<h4 id="Inline-Block-实现"><a href="#Inline-Block-实现" class="headerlink" title="Inline-Block 实现"></a>Inline-Block 实现</h4><p>display:inline-block 属性是介于行内元素（display: inline）和块级元素（display: block）之间的属性，它既可以像行内元素一样水平布局，也可以像块级元素设置宽高属性，所以左右布局可以利用它这种属性。</p>
+<pre><code class="css">&lt;div
+  class=&quot;left-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Left
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;div
+  class=&quot;right-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Right
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; * {
+  box-sizing: border-box;
+}
+html,
+body,
+div {
+  height: 80%;
+}
+body {
+  color: white;
+  text-align: center;
+}
+article {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+h1 {
+  font-size: 25px;
+}
+div {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+}
+.left-half {
+  background: #ea68a2;
+}
+.right-half {
+  background: pink;
+}
+</code></pre>
+<h4 id="flexbox-实现"><a href="#flexbox-实现" class="headerlink" title="flexbox 实现"></a>flexbox 实现</h4><p>css3 中出现了弹性盒子 flexbox 布局，使用这种方法，可以将父级容器变成一个灵活的盒子，子容器占用相等的份额， 无需再设置宽高。</p>
+<pre><code class="css">&lt;section
+  class=&quot;container&quot;
+  &gt; &lt;div
+  class=&quot;left-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Left
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;div
+  class=&quot;right-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Right
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;/section
+  &gt; html,
+body,
+section {
+  height: 80%;
+}
+body {
+  color: white;
+  text-align: center;
+}
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+h1 {
+  font-size: 25px;
+}
+.container {
+  display: flex;
+}
+.left-half {
+  background-color: #ea68a2;
+  flex: 1;
+}
+.right-half {
+  background-color: pink;
+  flex: 1;
+}
+</code></pre>
+<h4 id="grid-实现"><a href="#grid-实现" class="headerlink" title="grid 实现"></a>grid 实现</h4><p>CSS Grid(网格) 布局技术就像是 Flexbox 和 Table 的混合体，你可以通过将 CSS 规则应用于父元素(成为 Grid Container 网格容器)和其子元素（成为 Grid Items 网格项），你就可以轻松使用 Grid 布局。</p>
+<pre><code class="css">&lt;section
+  class=&quot;container&quot;
+  &gt; &lt;div
+  class=&quot;left-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Left
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;div
+  class=&quot;right-half&quot;
+  &gt; &lt;article
+  &gt; &lt;h1
+  &gt; Right
+  Half&lt;/h1
+  &gt; &lt;/article
+  &gt; &lt;/div
+  &gt; &lt;/secion
+  &gt; html,
+body,
+section,
+div {
+  height: 100%;
+}
+body {
+  color: white;
+}
+article {
+  position: relative;
+  top: 50%;
+  text-align: center;
+  transform: translate(0, -50%);
+}
+h1 {
+  font-size: 25px;
+}
+.container {
+  display: grid;
+}
+
+.left-half {
+  background: #ea68a2;
+  grid-column: 1;
+}
+.right-half {
+  background: pink;
+  grid-column: 2;
+}
+</code></pre>
+<p>作为比较新兴的布局技术，相信在未来的前端发展中，Grid 布局技术会越来越受到广大开发者的青睐。</p>
+<p><strong>以上就是我自己总结及结合文档所列出的 6 种 css 实现前端左右布局的方式，如还有其他方式，欢迎大家告诉我。</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CSS/">CSS</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
+                    
+                      <a class="hover-with-bg" href="/tags/布局/">布局</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "CSS笔记—左右布局&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

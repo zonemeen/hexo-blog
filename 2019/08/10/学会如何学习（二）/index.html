@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>学会如何学习（二） - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期六, 八月 10日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    5.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      18 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>第一节课讲的是关于学习的一些基本认知，以及现代科学对大脑的认识，为的是帮助学习者提高对学习的信心，摆脱“自己不是学习（那个领域）的料”等妄自菲薄的想法。第二周就是讲具体的学习套路了，其主要内容都是围绕“组块”这个概念来的。  </p>
+<h3 id="Part1-组块"><a href="#Part1-组块" class="headerlink" title="Part1 组块"></a>Part1 组块</h3><h4 id="什么是组块"><a href="#什么是组块" class="headerlink" title="什么是组块"></a>什么是组块</h4><p>什么是组块 (chunk) ？对于绝大多数人来说这是一个全新的概念，看上去并没有什么意义，就像一堆乱糟糟的拼图。从神经科学的角度来看，<strong>组块就是通过应用或意义连接在一起的信息碎片</strong>。而在不加理解或不关注上下文的情况下，单纯的死记硬背并不能帮助你理解其内涵和你所学概念之间的关联，那么这个概念拼图就没有可以拼合的边缘，无法关联到其他的拼图碎片上。<br><img src="/images/learn2/1.jpg" srcset="/img/loading.gif" alt>      </p>
+<p>当你全神贯注于某件事上，就好像你的脑子里有一只章鱼。这只注意力的章鱼会在必要时把它的触须穿过工作记忆的四个插槽，从而帮助你把分布于大脑不同区域里的信息联系起来。<br><img src="/images/learn2/2.jpg" srcset="/img/loading.gif" alt>      </p>
+<p>这和发散模式下的随机连接不同，创建组块的过程中，它需要集中<strong>注意力</strong>将大脑的不同部分连接起来，专注模式下将不同的想法联系在一起。但在你很紧张时，你的注意力章鱼会失去一些连接能力，这也是为什么在你生气、紧张、害怕的时候，大脑似乎不能专注工作。    </p>
+<p>在任何领域获得专业知识的第一步都是先创建出概念组块。这种根据意义将信息碎片拼接起来的思维跃进，可以运用于所有人类能够掌握的领域，如运动、音乐、舞蹈等。<strong>最重要的是专注的训练和重复可以建立强的记忆痕迹，从而帮助你创建组块</strong>。专业的培养都是一小步一小步的，这个过程中，小的组块可以形成更大的组块。随着你对学习材料的理解越来越深入，所有的专业知识都只是更有创造性的见解的铺路石。    </p>
+<p>但仅仅通过练习和重复来创建组块，并不能使你得心应手并有创造力地运用它们。组块化可以让大脑工作得更有效，一旦你把某个想法、概念或动作组块化后，你就不再需要记住有关的全部细节，你只需要知道最主要的那个概念就行了，也就是只需要记住组块。这就像清晨起床穿衣服，你只需要一个简单的想法——“我要穿衣服”， 但细想你会发现这个简单想法的组块所包含的活动是非常复杂的。   </p>
+<h4 id="怎样形成组块"><a href="#怎样形成组块" class="headerlink" title="怎样形成组块"></a>怎样形成组块</h4><p>如果你是吉他初学者，你想学习弹奏一首有难度的吉他曲，你脑中关于这首曲子的神经表征可被看作是一个巨大的组块。首先你会听这首曲子、看别人弹奏这首曲子，还要从持琴姿势学起。和大多数技能一样，你通常需要将曲子的每一小部分转化为一个小的神经组块，再将这些小组块组合起来形成大组块。经过一段时间的练习，当你掌握了很多乐段之后，你就能流利地弹奏一个乐段了。<br><img src="/images/learn2/3.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>对于数学和科学的相关学科来说，关上书本检测自己，能够帮你检验那些你以为已经明白了的问题，并且加快你的学习速度。<strong>当你能独自完成某件事时，你才是真正掌握了它</strong>。许多事情都是这个道理，就像你只是看别人画画，并不代表你也能画出来，仅仅听别人唱歌并不能使你拥有同样的唱功和洪亮的嗓音。某件事如果你只是在看，或者就算理解了如何去做，也不代表你能真正做到。只有在你自己实际操作和完全掌握的情况下才能建立起神经模型。  </p>
+<p><strong>组块化的第一步：就是对你想要组块化的信息全神贯注</strong>。如果你正开着电视，或是每隔几分钟就检查、回复手机上的消息，这些都会增加你建立组块的难度，因为你的大脑并没有完全投入到新信息的组块化中去。   </p>
+<p><strong>组块化的第二步：要求你对建立组块的对象有基本的了解</strong>。无论是理解概念性的知识，还是寻找故事中不同情节间的关联，通常我们都可以自然而然地领会所学内容的大意。  </p>
+<p><strong>组块化的第三步：是获取背景知识</strong>。不断重复和练习解决相关的或不相关的问题，这样你不仅知道如何使用组块，还明白应该什么时候使用。这样做能帮你认识新建立的组块是如何融入整体知识框架的。   </p>
+<p>最后<strong>第四步，练习能帮你拓宽组块连接的神经网络，并确保它们不仅牢固，还能通过不同途径访问</strong>。正如下图所示，学习由两部分组成，自上而下的认识以及由下至上的组块化。<br><img src="/images/learn2/4.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>在由下至上组块化的过程中，练习和重复能够帮助你建立和强化每一个组块，这样你就可以在需要它的时候使用它。当自上而下的方法能够让你清楚地看到你正在学习什么以及它适用于哪里。就完全掌握知识而言，这两个过程都非常重要。而背景认识就是这两个过程的交汇处，背景认识意味着学会在特定的时候使用正确的方法。   </p>
+<p>通常在真正的阅读之前，快速浏览书中某一章的图片以及小标题，能够帮助你知晓大意。听那些有严谨层次结构的课程，可以帮你弄清楚应在哪里建立组块以及如何把不同组块联系起来。一旦完成了这些，再了解具体的信息，那么就算遗漏了一些让你疑惑的部分，你依然可以理解主要部分。   </p>
+<p><img src="/images/learn2/5.jpg" srcset="/img/loading.gif" alt>   </p>
+<p><strong>总的来说，最好在精神高度集中的时候建立组块，理解基本的含义后，通过练习来真正掌握知识，并对情境有个大致了解，是建立组块的基本步骤</strong>。快把“组块”融入到你正在使用的学习中去吧！  </p>
+<h4 id="能力错觉"><a href="#能力错觉" class="headerlink" title="能力错觉"></a>能力错觉</h4><p>这一小节来介绍一些让学习走上正轨的基本理念。   </p>
+<p><strong>1.回顾的重要性</strong>   </p>
+<p>学习书本或资料时，最常见方法之一就是反复阅读。不过心理学家Jeffrey Karpicke证明，这种方法的成效远不及另一种简单技巧——回顾。也就是阅读材料后，移开视线，看看你能回忆起多少内容。<br><img src="/images/learn2/6.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>Karpicke发表在《科学》杂志上的研究提供了可靠证据。先让学生们学一篇科技文章，然后通过尽力回忆其中信息来巩固练习；接着，让他们重读并再次回想。结果相同时间内仅用回顾法练习的学生较使用其他学习方法的学生而言，对材料的掌握更为全面深入。其他学习方法包括反复阅读资料，或者绘制可以加强学习材料之间联系的思维导图。学生通过正式考试或非正式自测都证明了回顾法有助于学习。这给了我们一个重要提示，<strong>即在回顾知识时，我们并非机械地复述，而是在通过回顾这个过程加深理解</strong>。这也有助于我们形成知识组块，就好像回忆过程帮助我们在神经上嵌入了“钩子”，以便我们串联起前后知识。    </p>
+<p>比起被动重复阅读，回顾——<strong>即在心里检索关键概念</strong>——可以使你的学习更加专注高效，只有隔上一定时间后再重读才会有效果，因为这样，重读就更像是间隔重复练习。    </p>
+<p><strong>2.能力的错觉</strong>   </p>
+<p>你该明白你才是要解决问题和掌握概念的人，如果你看到某个习题答案后告诉自己，“哦，我明白他们为什么这么做了！” 那么这个答案并不真正属于你，因为你没有真正把这些概念嵌入自己潜在的神经回路中去。这是一种学习中最为常见的自欺欺人式错觉。如果你想要很好地掌握材料以在考试中取得好成绩，并从中创新，就必须让这些知识在你脑海里生根发芽。    </p>
+<p>另一个类似情况就是做笔记和注释。做笔记时高亮和下划线必须要谨慎，否则不仅没有效果还容易产生误导。在空白处写笔记总结关键概念也被证明是一种很更好的办法。<br><img src="/images/learn2/7.jpg" srcset="/img/loading.gif" alt>   </p>
+<p>Karpicke的研究还发现，学生们喜欢重读笔记或课本的原因是，当他们面前打开着课本、笔记或谷歌时，会误以为这些知识同样在他们的脑海里，然而事实却并非如此。因为看书比回顾做起来简单，学生们会陷入一种自欺欺人的错觉。事实上，这种学习方式效率很低。    </p>
+<p><strong>3.自测与犯错</strong>   </p>
+<p>能力的错觉提醒我们，在学习资料上花太多时间并不能保证你真的懂了。而<strong>自测是一种极其有用的办法，来确保你是真的学会了，而不是自欺欺人的错觉</strong>。从某种意义上来说，这就是回忆在发挥作用。  </p>
+<p>让你发现自己是否真的掌握一个概念，犯错实际上是件好事。因为你之后就会想要避免重复犯错，所以实际考试前，在自测中犯的错是很有价值的，因为它们能让你一点点弥补思维漏洞。<strong>犯错可以纠正思考方向，让你学得更好、做得更好</strong>。</p>
+<p><strong>4.多场合回顾</strong>   </p>
+<p>回顾是一种有效工具，而<strong>在常规学习场所以外回顾知识则会帮助你加深对知识的理解</strong>。通过在不同物理环境下回顾和思考知识，你会脱离对给定场所的依赖，这会帮助你避免由于考试与学习场所的不同而产生的问题。<br><img src="/images/learn2/8.jpg" srcset="/img/loading.gif" alt>   </p>
+<h3 id="Part2-看到全局"><a href="#Part2-看到全局" class="headerlink" title="Part2 看到全局"></a>Part2 看到全局</h3><h4 id="是什么激励了你？"><a href="#是什么激励了你？" class="headerlink" title="是什么激励了你？"></a>是什么激励了你？</h4><p>你会发现当学的东西并非自己真正喜欢的东西时，学习是非常困难的；而学习自己真正感兴趣的东西的时候，一切都变得非常简单，那这是为什么呢?   </p>
+<p>你的大脑有一套神经递质的广泛投射系统，它加载的不是经验本身的内容，而是信息的重要性以及对未来的价值。神经递质是可以影响神经元如何回应其他神经元的化学物质。今天我们将要谈谈它们其中的三种，<strong>乙酰胆碱、多巴胺和血清素</strong>。  </p>
+<p><strong>乙酰胆碱影响专注学习和集中注意力</strong>。当你注意力高度集中的时候，这些乙酰胆碱神经元就会广泛地投射出来，并且激活环路来控制突触可塑性，从而形成新的长期记忆。   </p>
+<p><strong>多巴胺信号与意料之外的奖励相关</strong>。当接受到一个毫无预期的奖励时，这些神经元将分泌出多巴胺，多巴胺的信号将广泛投射，这会对学习产生强有力的影响；同时也会影响决策，甚至是感官输入的价值所在，它控制着我们的动力。比如番茄工作法中的设置奖励就是给自己的多巴胺神经元加油。  </p>
+<p><strong>血清素影响社会生活和冒险行为</strong>。它可以有力地影响你的社交生活。在猴子部落中的雄性首领有着最高的血清素分泌水平，而位列最末的公猴，其血清素水平则最低。血清素也与风险行为有着紧密的联系，在那些血清素低的猴子身上往往能观察到更多的冒险行为。服刑犯人中，因暴力犯罪而入狱的是社会中血清素分泌活动最低的群体之一。  </p>
+<p><strong>情绪也可以强烈地影响你的学习</strong>。你自己应该深有体会，情绪曾一度被认为与认知互不影响，然而近期研究显示，情绪、感觉以及注意力互相交织，并与学习和记忆力互相影响。    </p>
+<p>对于成功的学习来说，情绪及神经递质系统比感知和动作要反应迟缓，但却同等重要。   </p>
+<h4 id="组块库的价值"><a href="#组块库的价值" class="headerlink" title="组块库的价值"></a>组块库的价值</h4><p>将新的组块和原有组块结合起来的能力，体现在很多历史的创新变革中。比如比尔·盖茨与其他工业领袖会留出长达一周的阅读周期，以便在一段时间内掌握多种不同想法，把新鲜想法留在头脑中，与未忘记的想法进行自我交流，可以形成<strong>创新性思维</strong>。</p>
+<p>你的组块库越大，运用越熟练，无论学什么科目，你都将能够更轻易地解决问题。组块化并非创新灵活度所需要的全部，但是它是重要的一环。组块还可以帮助你理解新概念。这是因为当你理解一个组块时，你会发现这一组块能以令人惊讶的方式与相似的组块联系起来。不仅在同一领域中如此，在截然不同的领域中也是这样。这就是所谓的<strong>知识迁移</strong>(transfer)。<br><img src="/images/learn2/9.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>你建立每一个组块，它就为你补上知识拼图的一块，但如果你不训练变大的组块，它们就会保持模糊的状态，你要学习的东西拼到一起就会更为困难。<strong>建立组块库就是在训练你的大脑，不仅要认出一个特定的概念，还要识别概念的类别，以便你能够自如地知晓如何快速处理你遇到的问题</strong>。你将开始看到一些为你简化解决方法的模式，并很快发现不同的解决方法就潜藏在你的记忆边缘。   </p>
+<p>有两种途径解决问题，一是顺序性地，一步步推理；二是通过整体性的直觉。顺序性思维涉及到专注模式；而直觉通常需要创造性的发散模式来联系不同的想法。大多数较难的问题和概念都是通过直觉来理解的，因为新的想法和你熟悉的领域相去甚远。发散模式是半随机地进行连接，这意味着它们带来的解决方法，应该由专注模式进行小心验证。直觉性的理解不是永远正确的，你大概会想无论你在学什么，仅在单一的部分或章节里就有那么多问题和概念，根本没法全学会。这时<strong>机遇定律</strong>就发挥作用了，幸运女神会眷顾努力之人。<strong>专注于你正在学习的单元，你会发现一旦你把第一个问题或概念放进组块库，不论那是什么，第二个概念的进入就会容易一些，然后第三个概念也就更容易，这并不都那么简单，但会越来越容易</strong>。<br><img src="/images/learn2/10.jpg" srcset="/img/loading.gif" alt>    </p>
+<h4 id="过度学习、思维定势、交替学习"><a href="#过度学习、思维定势、交替学习" class="headerlink" title="过度学习、思维定势、交替学习"></a>过度学习、思维定势、交替学习</h4><p>当你在学习一个新单词、一种新概念或新的问题解法时，你需要在同一学习阶段内反复练习。一定的练习是必要且有用的，但在完全掌握此阶段的所有内容后继续学习训练，就是所谓的过度学习。过度学习在有些场合是有意义的，比如对网球发球、钢琴协奏曲演奏可能非常重要，它能在紧张的时候，帮助其行为自动化。但仍要警惕在单一学习阶段的重复性过度识记，研究表明，<strong>这可能会对宝贵的学习时间造成浪费</strong>。  </p>
+<p>一旦你在某一阶段学会了一个基本概念，在这段时间不断地巩固它，并不能加强你所期许的长期记忆联系。<strong>学完一段时间之后再复习是更好更有用的，这可以加强并深化你的组块化神经模式</strong>。但请注意，重复你已经掌握的东西非常容易，而这可能会造成能力错觉，让你误以为自己已掌握了所有材料，但其实你只掌握了简单的部分。所以，<strong>你应该均衡学习，把精力集中在你认为困难的部分。专注于学习的困难部分称为刻意训练 (deliberate practice) ，这种刻意训练 (deliberate practice) 通常是好学生与优秀学生的差别所在</strong>。   </p>
+<p>这些与<strong>思维定势</strong>(Einstellung) 的概念有关。一个已经形成并加强的神经模式可能阻碍你发现更棒的解决方案。思维定势在这张弹珠脑图里就表现为，你最初的想法向大脑上方移动，而解法的思维模式则位于下方。<br><img src="/images/learn2/11.jpg" srcset="/img/loading.gif" alt> </p>
+<p>密集的专注模式以及先前构造的思维模式，会形成惯性，阻止你走向一个可能发现解决方法的新区域。你可以把思维定势想像为一个路障，而它是你最初的想法所造成的，这种错误的方式在运动和科学学科中就很容易发生。因为有时你最初”发生什么”或”该去做什么”的直觉是有误导性的，<strong>在学习新事物时，你必须摒弃错误的旧思想和方法</strong>。  </p>
+<p>学生学习时会犯的一项重大失误是，在学会游泳前就跳入水中。换句话说，他们盲目地开始做作业，不看书、不上课、不看在线课程，或甚至不与熟识此方面的人交谈。这种学习方法只会失败。就像在放任思想在一个专注模式的弹珠器里跳来跳去，而完全不考虑解法到底在哪里。在学习和生活中，理解如何得到真正的解决方法很重要。掌握一门新学科不仅要学习基础组块，更要学会如何选择和应用不同的组块。<strong>最佳的学习方法是，在需要不同技术和策略的问题中来回切换、练习，这就是所谓的交替学习</strong>。  </p>
+<p>交替学习非常重要，你需要让自己的大脑习惯这种思想，即仅仅知道如何使用特定的概念、方法或解题技巧是不够的，你也需要知道何时去使用 ，要贯彻交替学习的思想。这样你才能脱离只会练习和重复，而开始学会独立思考。当你在一个学科内交替学习，你就开始在这个学科内发展创造力了。当你在多个不同学科间交替学习，你就能更容易地在不同领域的组块间创造联系，这能进一步提高你的创造性。当然，在不同领域间发展固定知识组块需要时间，所以有时需要取舍。成为几个领域的专家，意味着你可以将一个领域的新思想引入另一个领域，但这也可能意味着，你在某个领域的专业知识 并不如专攻一个领域的人那么深厚。反过来，如果你只专研一个学科，你可能对它有很深刻的理解，但也变得只习惯某种思考方式，这种根深蒂固的思考模式，让你很难把握新思想。  </p>
+<p>科学哲学家Thomas Kuhn发现，科学中大部分的方式转变都是由年轻人，或者之前学习其他学科的人所提出的。他们不那么容易陷于思维定势，不会被先前的专业训练阻碍思想。有句老话说道，科学会随着每个葬礼的进行而进步，因为葬礼意味着根深蒂固的旧思想的流逝。  </p>
+<p>最后我转帖一个别人在元学习课程里用拼图的理念去学编程的文章，作为一个实例参考:  </p>
+<p><a href="https://www.jianshu.com/p/385551d15a67" target="_blank" rel="noopener">元学习课心得和实践（一）——八小时搞定《JavaScript DOM》</a></p>
+<p>下一节课我们会学习怎样应对拖延症，以及拖延症和记忆的关系。</p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/学习之道/">学习之道</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/高效学习/">高效学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/方法/">方法</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "学会如何学习（二）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

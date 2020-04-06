@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>从instanceof身上深入理解原型/原型链 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期二, 十一月 5日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    877 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      3 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>今天将延续<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>，借助一个老朋友——instanceof运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。</p>
+<p>对于原始类型（primitive type）的值，即<code>string</code>/<code>number</code>/<code>boolean</code>，你可以通过<code>typeof</code>判断其类型，但是<code>typeof</code>在判断到合成类型（complex type）的值的时候，返回值只有<code>object</code>/<code>function</code>，你不知道它到底是一个<code>object</code>对象，还是数组，也不能判断出Object 下具体是什么细分的类型，比如 <code>Array</code>、<code>Date</code>、<code>RegExp</code>、<code>Error</code> 等。</p>
+<p>官方对<code>instanceof</code>运算符的解释是返回一个布尔值，表示对象是否为某个构造函数的实例。比如：</p>
+<pre><code class="javascript">function Foo() {}
+var f1 = new Foo();
+
+console.log(f1 instanceof Foo);  // true
+console.log(f1 instanceof Object);  // true
+</code></pre>
+<p>上面代码中，对象<code>f1</code>是构造函数<code>Foo</code>的实例，所以返回<code>true</code>，但是“f1 instanceof Object”为什么也是<code>true</code>呢？</p>
+<p>至于为什么等会再解释，先把<code>instanceof</code>判断的规则告诉大家。根据以上代码看下图：</p>
+<p><img src="/images/instanceof/1.jpg" srcset="/img/loading.gif" alt>  </p>
+<p><code>instanceof</code>运算符的左边是实例对象，右边是构造函数，左边变量暂称为A，右边变量暂称为B。它会检查右边构造函数的原型对象（prototype），是否在左边对象的原型链上。</p>
+<p>通俗一点来讲，<code>instanceof</code>的判断规则是：<strong><code>instanceof</code>会检查整个原型链，将沿着A的<code>__proto__</code>这条线来一直找，同时沿着B的<code>prototype</code>这条线来一直找，直到能找到同一个引用，即同一个对象，那么就返回<code>true</code>。如果找到终点还未重合，则返回<code>false</code></strong>。即上图中的 <code>f1</code>–&gt;<code>__proto__</code> 和 <code>Foo</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Foo)</code>为<code>true</code>。</p>
+<p>按照以上规则，重新来看看“ f1 instanceof Object ”这句代码为什么是<code>true</code>？ 根据上图很容易就能看出来， f1–&gt;<code>__proto__</code>–&gt;<code>__proto__</code> 和<code>Object</code>–&gt;<code>prototype</code> 指向同一个对象，<code>console.log(f1 instanceof Object)</code>为<code>true</code>。</p>
+<p>通过上面的规则，可以很好地解释一些比较怪异的现象，例如：</p>
+<pre><code class="javascript">console.log(Object instanceof Function);   // true
+console.log(Function instanceof Object);   // true
+console.log(Function instanceof Function);   // true
+console.log(Object instanceof Object);   // true
+</code></pre>
+<p>这些就是<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>所讲的看似很混乱的东西，现在知道为何了吧。</p>
+<p>但还有一种特殊情况，就是左边对象的原型链上，只有<code>null</code>对象。这时，<code>instanceof</code>判断会失真。</p>
+<pre><code class="javascript">var obj = Object.create(null);
+typeof obj // &quot;object&quot;
+Object.create(null) instanceof Object // false
+</code></pre>
+<p>上面代码中，<code>Object.create(null)</code>返回一个新对象<code>obj</code>，它的原型是<code>null</code>（<code>Object.create</code>后续会有专门文章介绍）。右边的构造函数<code>Object</code>的<code>prototype</code>属性，不在左边的原型链上，因此<code>instanceof</code>就认为<code>obj</code>不是<code>Object</code>的实例。但是，只要一个对象的原型不是<code>null</code>，<code>instanceof</code>运算符的判断就不会失真。</p>
+<p>说到这里，继续贴上这幅原型/原型链的经典图，是否现在看起来没那么复杂了呢。</p>
+<p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt>  </p>
+<p>如果<a href="https://luozongmin.com/2019/06/01/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/" target="_blank" rel="noopener">这篇文章</a>你看的比较仔细，再结合刚才介绍的<code>instanceof</code>的概念规则，相信能看懂上面这张图的内容了。</p>
+<p>那么问题又出来了。<code>instanceof</code>这样设计，到底有什么用？到底<code>instanceof</code>想表达什么呢？</p>
+<p>这就要重点讲讲继承了，即<code>instanceof</code>表示的就是一种继承关系，或者原型链的结构，请看后续文章介绍。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的GitHub博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/原型/">原型</a>
+                    
+                      <a class="hover-with-bg" href="/tags/原型链/">原型链</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "从instanceof身上深入理解原型/原型链&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

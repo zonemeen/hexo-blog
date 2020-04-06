@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>HTML常用标签 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期三, 七月 10日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    3.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      13 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>HTML 是用来描述网页的一种语言，通过添加各种标签，达到在浏览器中展示期望的效果。    </p>
+<ul>
+<li>HTML 指的是超文本标记语言 (Hyper Text Markup Language)    </li>
+</ul>
+<ul>
+<li>HTML 不是一种编程语言，而是一种标记语言 (markup language)    </li>
+</ul>
+<ul>
+<li>标记语言是一套标记标签 (markup tag)    </li>
+</ul>
+<ul>
+<li>HTML 使用标记标签来描述网页    </li>
+</ul>
+<p>浏览器不会显示 HTML 标签(HTML tag)，而是使用标签来解释页面的内容：     </p>
+<ul>
+<li>HTML 标签是由尖括号包围的关键词，比如 <code>&lt;html&gt;</code>  </li>
+</ul>
+<ul>
+<li>HTML 标签通常是成对出现的，比如 <code>&lt;p&gt;</code> 和 <code>&lt;/p&gt;</code>  </li>
+</ul>
+<ul>
+<li>标签对中的第一个标签是开始标签，第二个标签是结束标签     </li>
+</ul>
+<ul>
+<li>开始和结束标签也被称为开放标签和闭合标签     </li>
+</ul>
+<p>⭐越多代表我觉得此标签越重要</p>
+<h4 id="标题标签-⭐⭐⭐"><a href="#标题标签-⭐⭐⭐" class="headerlink" title="标题标签 ⭐⭐⭐"></a>标题标签 ⭐⭐⭐</h4><p>HTML提供了6个等级的标题(head)，即：h1、h2、h3、h4、h5和h6，h1是最高级的标题。其基本语法是：<code>&lt;hn&gt; 标题信息 &lt;/hn&gt;</code>     </p>
+<p>注意：h1因为重要，尽量少用，一般都是给logo用，或者页面中最重要标题信息，其他5个级别标题在一个页面中都可以出现多次，h1只能出现一次。    </p>
+<h4 id="段落标签-⭐⭐⭐"><a href="#段落标签-⭐⭐⭐" class="headerlink" title="段落标签 ⭐⭐⭐"></a>段落标签 ⭐⭐⭐</h4><p>在网页中要想把文字内容有条理地显示，离不开段落标签（paragraph）,它是网页中文章内容的基本组成部分。其基本语法是：<code>&lt;p&gt; 文本内容 &lt;/p&gt;</code>    </p>
+<p>注意：段落标签是HTML文档中最常见的标签，默认情况下，文本在一个段落中会根据浏览器窗口的大小自动换行。 </p>
+<h4 id="水平线标签-⭐⭐"><a href="#水平线标签-⭐⭐" class="headerlink" title="水平线标签 ⭐⭐"></a>水平线标签 ⭐⭐</h4><p>在网页中经常看到一些水平线将段落与段落间隔开，层次分明。这些水平线可以通过插入图片来实现，也可以简单地通过<code>&lt;hr/&gt;</code> 标签(horizontal)来完成。其基本语法是：<code>&lt;hr /&gt;是单标签</code>    </p>
+<h4 id="换行标签-⭐⭐⭐"><a href="#换行标签-⭐⭐⭐" class="headerlink" title="换行标签 ⭐⭐⭐"></a>换行标签 ⭐⭐⭐</h4><p>在HTML中，一个段落的文字会从左往右按顺序排列，直到浏览器窗口的右端，然后会自动换行，如果希望某段文字强制进行换行，就需要使用换行标签(break)。其基本语法是：<code>&lt;br /&gt;</code>   </p>
+<p>注意：除了少数应用（比如诗歌的分行），应该尽量避免使用这个标签，因为它并没有特别的语义含义，而且分行的视觉效果完全可以通过p标签、列表标签和CSS命令达到。   </p>
+<h4 id="div-span标签-⭐⭐⭐⭐"><a href="#div-span标签-⭐⭐⭐⭐" class="headerlink" title="div span标签 ⭐⭐⭐⭐"></a>div span标签 ⭐⭐⭐⭐</h4><p>div 和 span是没有语义的，是现在网页布局用到的最主要的2个盒子，比如css+div的结合就可以基本上满足页面布局需要。其基本语法是：</p>
+<pre><code class="html">&lt;div&gt; 这是头部 &lt;/div&gt;     &lt;span&gt; 今日行情 &lt;/span&gt;
+</code></pre>
+<h4 id="文本格式化标签-⭐⭐"><a href="#文本格式化标签-⭐⭐" class="headerlink" title="文本格式化标签 ⭐⭐"></a>文本格式化标签 ⭐⭐</h4><p>在网页中，有时要为某些文字设置加粗、加斜或加下划线的效果，这时就需要用到HTML中的文本格式化标签，使文字以特殊的方式显示。其基本语法是：<br><img src="/images/html/1.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>注意：b i s u 只有使用，没有强调的意思，strong em del ins的语义更强烈。    </p>
+<h4 id="图像标签img-⭐⭐⭐⭐"><a href="#图像标签img-⭐⭐⭐⭐" class="headerlink" title="图像标签img ⭐⭐⭐⭐"></a>图像标签img ⭐⭐⭐⭐</h4><p>要想在网页中显示图像就需要使用图像标签，下图详细介绍了图像标签<code>&lt;img /&gt;</code> 以及与其相关的一些属性。其基本语法是：<br><img src="/images/html/2.jpg" srcset="/img/loading.gif" alt>    </p>
+<ol>
+<li>基本图像插入方式：<br> <code>&lt;img src=&quot;wo.jpg&quot;/&gt;</code></li>
+<li>带有alt的图像插入方式：<br> <code>&lt;img src=&quot;wo.jpg&quot; alt=&quot;这是我吴彦祖的照片&quot;/&gt;</code></li>
+<li>带有title的图像插入方式：<br> <code>&lt;img src=&quot;wo.jpg&quot; title=&quot;吴彦祖&quot;/&gt;</code></li>
+<li>带有宽度的图像插入方式：<br> <code>&lt;img src=&quot;wo.jpg&quot; title=&quot;吴彦祖&quot; width=&quot;300&quot; /&gt;</code></li>
+<li>带有边框的图像插入方式：<br> <code>&lt;img src=&quot;wo.jpg&quot; title=&quot;吴彦祖&quot; width=&quot;300&quot; border=&quot;10&quot; /&gt;</code></li>
+</ol>
+<h4 id="链接标签-⭐⭐⭐⭐"><a href="#链接标签-⭐⭐⭐⭐" class="headerlink" title="链接标签 ⭐⭐⭐⭐"></a>链接标签 ⭐⭐⭐⭐</h4><p>在HTML中创建超链接比较简单，只需用链接标签(anchor)环绕需要被链接的对象即可。其基本语法是：<br><code>&lt;a href=&quot;跳转目标&quot; target=&quot;目标窗口的弹出方式&quot;&gt;文本或图像&lt;/a&gt;</code>   </p>
+<p>href：Hypertext Reference的缩写，意思是超文本引用，用于指定链接目标的url地址。    </p>
+<p>target：用于指定链接页面的打开方式，其取值有self(新链接页面覆盖原页面，为默认值)、blank(在新窗口打开)、_parent(载入父级窗口，与iframe结合用得到)、_top(载入顶级窗口，与iframe结合用得到)，注意：     </p>
+<ol>
+<li>外部链接：需要添加 <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a>  </li>
+<li>内部链接：直接链接内部页面名称即可，如<a href="index.html">首页</a>；还有可以通过创建锚点链接，能够快速定位到内部页面的目标内容：①.使用<a href="#id名">链接文本</a> ②.使用相应的id名标注跳转到目标的位置 </li>
+<li>如果没有确定的链接目标时，通常将href属性定义为”#”(即href=”#”)，表示该链接暂时为一个空链接。</li>
+<li>不仅可以创建文本超链接，在网页中各种网页元素，如图像、表格、音频、视频等都可以添加超链接。   </li>
+<li>当然也可以利用base标签来设置整体链接的打开状态，如网易这样设置让页面所有链接按新窗口打开：<br><img src="/images/html/3.jpg" srcset="/img/loading.gif" alt>     </li>
+</ol>
+<h4 id="特殊字符标签-⭐"><a href="#特殊字符标签-⭐" class="headerlink" title="特殊字符标签 ⭐"></a>特殊字符标签 ⭐</h4><p><img src="/images/html/4.jpg" srcset="/img/loading.gif" alt>    </p>
+<h4 id="无序列表ul-⭐⭐⭐⭐"><a href="#无序列表ul-⭐⭐⭐⭐" class="headerlink" title="无序列表ul ⭐⭐⭐⭐"></a>无序列表ul ⭐⭐⭐⭐</h4><p>无序列表(unordered list)的各个列表项之间没有顺序级别之分，是并列的。其基本语法是：   </p>
+<pre><code class="html">&lt;ul&gt;
+  &lt;li&gt;列表项1&lt;/li&gt;
+  &lt;li&gt;列表项2&lt;/li&gt;
+  &lt;li&gt;列表项3&lt;/li&gt;
+  ......
+&lt;/ul&gt;
+</code></pre>
+<p>注意：     </p>
+<ul>
+<li><code>&lt;ul&gt;&lt;/ul&gt;</code>中只能嵌套<code>&lt;li&gt;&lt;/li&gt;</code>，直接在<code>&lt;ul&gt;&lt;/ul&gt;</code>标签内输入其他标签或者文字的做法是不被允许的。  </li>
+<li><code>&lt;li&gt;</code>与<code>&lt;/li&gt;</code>之间相当于一个容器，可以容纳所有元素。   </li>
+<li>无序列表会自带样式属性，但还是让css来做！   </li>
+</ul>
+<h4 id="有序列表ol-⭐⭐"><a href="#有序列表ol-⭐⭐" class="headerlink" title="有序列表ol ⭐⭐"></a>有序列表ol ⭐⭐</h4><p>有序列表(ordered list)即为有排列顺序的列表，其各个列表项按照一定的顺序排列定义。其基本语法是：   </p>
+<pre><code class="html">&lt;ol&gt;
+   &lt;li&gt;列表项1&lt;/li&gt;
+   &lt;li&gt;列表项2&lt;/li&gt;
+   &lt;li&gt;列表项3&lt;/li&gt;
+   ...... 
+&lt;/ol&gt;   
+</code></pre>
+<p>所有特性基本和ul一致，且自带顺序。   </p>
+<h4 id="定义列表-⭐"><a href="#定义列表-⭐" class="headerlink" title="定义列表 ⭐"></a>定义列表 ⭐</h4><p>定义列表(definition list)常用于对术语或名词进行解释和描述，定义列表的列表项前没有任何项目符号。其基本语法是：    </p>
+<pre><code class="html">&lt;dl&gt;
+  &lt;dt&gt;名词1&lt;/dt&gt;
+  &lt;dd&gt;名词1解释1&lt;/dd&gt;
+  &lt;dd&gt;名词1解释2&lt;/dd&gt;    
+  ......  
+  &lt;dt&gt;名词2&lt;/dt&gt;
+  &lt;dd&gt;名词2解释1&lt;/dd&gt;
+  &lt;dd&gt;名词2解释2&lt;/dd&gt;     
+  ...... 
+&lt;/dl&gt;
+</code></pre>
+<h4 id="表格table-⭐⭐"><a href="#表格table-⭐⭐" class="headerlink" title="表格table ⭐⭐"></a>表格table ⭐⭐</h4><p>表格还是较为常用的一种标签，但不是用来布局，常见处理、显示表格式数据。其基本语法是：    </p>
+<pre><code class="html">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;单元格内的文字&lt;/td&gt;
+    ...
+  &lt;/tr&gt; 
+  ...
+&lt;/table&gt;
+</code></pre>
+<p>上面的语法中包含三对HTML标签，分别为<code>&lt;table&gt;&lt;/table&gt;</code>、<code>&lt;tr&gt;&lt;/tr&gt;</code>、<code>&lt;td&gt;&lt;/td&gt;</code>，他们是创建表格的基本标签，缺一不可，下面对他们进行具体解释：    </p>
+<ul>
+<li>table用于定义一个表格。  </li>
+<li>tr用于定义表格中的一行，必须嵌套在table标签中，且只能嵌套<code>&lt;td&gt;&lt;/td&gt;</code>，在table中包含几对tr，就有几行表格。   </li>
+<li>td /td：用于定义表格中的单元格，必须嵌套在<code>&lt;tr&gt;&lt;/tr&gt;</code>标签中，一对<code>&lt;tr&gt;&lt;/tr&gt;</code>中包含几对<code>&lt;td&gt;&lt;/td&gt;</code>，就表示该行中有多少”列”（或多少个单元格），但表格只有行tr和单元格td，行里面装单元格，没有列的概念；<code>&lt;td&gt;&lt;/td&gt;</code>标签像一个容器，可以容纳所有的元素。   </li>
+</ul>
+<h4 id="表单标签-⭐⭐"><a href="#表单标签-⭐⭐" class="headerlink" title="表单标签 ⭐⭐"></a>表单标签 ⭐⭐</h4><p>表单的目的是为了收集用户信息，在HTML中，一个完整的表单通常由表单控件（也称为表单元素）、提示信息和表单域3个部分构成。<br><img src="/images/html/5.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>表单控件：包含了具体的表单功能项，如单行文本输入框、密码输入框、复选框、提交按钮、重置按钮等。 </p>
+<p>提示信息：一个表单中通常还需要包含一些说明性的文字，作用是提示用户进行填写和操作。    </p>
+<p>表单域：相当于一个容器，用来容纳所有的表单控件和提示信息，可以通过它定义处理表单数据所用程序的url地址，以及数据提交到服务器的方法。如果不定义表单域，表单中的数据就无法传送到后台服务器。    </p>
+<h4 id="input控件-⭐⭐⭐⭐"><a href="#input控件-⭐⭐⭐⭐" class="headerlink" title="input控件 ⭐⭐⭐⭐"></a>input控件 ⭐⭐⭐⭐</h4><p><code>&lt;input /&gt;</code>标签为单标签，type属性为其最基本的属性，其取值有多种，用于指定不同的控件类型。其常见属性如下所示：<br><img src="/images/html/6.jpg" srcset="/img/loading.gif" alt>    </p>
+<p>text语法:   </p>
+<pre><code class="html">&lt;tr&gt;
+  &lt;td&gt;所在地区&lt;/td&gt;    
+  &lt;td&gt;&lt;input type=&quot;text&quot; value=&quot;北京&quot; /&gt;&lt;/td&gt;    //value为默认值
+&lt;/tr&gt;
+</code></pre>
+<p>password语法： </p>
+<pre><code class="html">&lt;tr&gt;
+  &lt;td&gt;密码&lt;/td&gt;
+  &lt;td&gt;&lt;input type=&quot;password&quot; value=&quot;123456&quot; /&gt;&lt;/td&gt;    
+&lt;/tr&gt;
+</code></pre>
+<p>radio单选按钮语法：   </p>
+<pre><code class="html">&lt;tr&gt;
+  &lt;td&gt;性别&lt;/td&gt;
+  &lt;td&gt;
+     男&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt;
+     女&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt;
+     人妖&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt;
+  &lt;/td&gt;    
+&lt;/tr&gt;
+</code></pre>
+<h4 id="label标签-⭐⭐"><a href="#label标签-⭐⭐" class="headerlink" title="label标签 ⭐⭐"></a>label标签 ⭐⭐</h4><p>label标签为input元素定义标注，其中for属性规定了label与哪个表单元素绑定。其基本语法是：   </p>
+<pre><code class="html">&lt;label for=&quot;male&quot;&gt;Male&lt;/label&gt;
+&lt;input type=&quot;radio&quot; name=&quot;sex&quot; id=&quot;male&quot; value=&quot;male&quot;&gt; 
+</code></pre>
+<p>点击Male会直接跳到右边的文本框内，label通过for和id建立联系快速找到。当然也可以简化成这种形式：   </p>
+<pre><code class="html">&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot;&gt;Male&lt;/label&gt;
+</code></pre>
+<h4 id="textarea文件域-⭐⭐"><a href="#textarea文件域-⭐⭐" class="headerlink" title="textarea文件域 ⭐⭐"></a>textarea文件域 ⭐⭐</h4><p>text 文本框只能写一行文本，如果需要输入大量的信息，就需要用到textarea标签，可以轻松地创建多行文本输入框。其基本语法是：    </p>
+<pre><code class="html">&lt;textarea cols=&quot;每行的字符数&quot; rows=&quot;显示的行数&quot;&gt;
+   文本内容   
+&lt;/textarea&gt;
+</code></pre>
+<p>但是textarea的宽和高通常是通过css来控制的,cols和rows几乎不用。    </p>
+<h4 id="下拉菜单-⭐⭐"><a href="#下拉菜单-⭐⭐" class="headerlink" title="下拉菜单 ⭐⭐"></a>下拉菜单 ⭐⭐</h4><p>使用select标签定义下拉菜单的基本语法如下：    </p>
+<pre><code class="html">&lt;select&gt;
+  &lt;option&gt;选项1&lt;/option&gt;
+  &lt;option&gt;选项2&lt;/option&gt;
+  &lt;option&gt;选项3&lt;/option&gt;
+  ...
+&lt;/select&gt;
+</code></pre>
+<p>注意：  </p>
+<ul>
+<li><code>&lt;select&gt;&lt;/select&gt;</code>中至少应包含一对<code>&lt;option&gt;&lt;/option&gt;</code>。</li>
+<li>在option中定义selected=”selected”时，当前项即为默认选中项。    </li>
+</ul>
+<h4 id="表单域-⭐⭐"><a href="#表单域-⭐⭐" class="headerlink" title="表单域 ⭐⭐"></a>表单域 ⭐⭐</h4><p>在HTML中，form标签被用于定义表单域，即创建一个表单，以实现用户信息的收集和传递，form中的所有内容都会被提交给服务器。其基本语法是：    </p>
+<pre><code class="html">&lt;form action=&quot;url地址&quot; method=&quot;提交方式&quot; name=&quot;表单名称&quot;&gt;    
+    各种表单控件   
+&lt;/form&gt;
+</code></pre>
+<p>常见属性：   </p>
+<ul>
+<li>Action：在表单收集到信息后，需要将信息传递给服务器进行处理，action属性用于指定接受并处理表单数据的服务器程序的url地址。   </li>
+<li>method：用于设置表单数据的提交方式，其取值为get或post。   </li>
+<li>name：用于指定表单的名称，以区分同一个页面中的多个表单。<br>注意：每个表单都应该有自己的表单域。    </li>
+</ul>
+<h4 id="HTML5常用新标签-⭐⭐⭐"><a href="#HTML5常用新标签-⭐⭐⭐" class="headerlink" title="HTML5常用新标签 ⭐⭐⭐"></a>HTML5常用新标签 ⭐⭐⭐</h4><ul>
+<li>header：定义文档的页眉</li>
+</ul>
+<ul>
+<li>nav：定义导航链接的部分</li>
+</ul>
+<ul>
+<li>footer：定义文档或节的页脚</li>
+</ul>
+<ul>
+<li>article：标签规定独立的自包含内容</li>
+</ul>
+<ul>
+<li>section：定义文档中的节（section、区段）</li>
+</ul>
+<ul>
+<li>aside：定义其所处内容之外的内容（侧边）</li>
+</ul>
+<ul>
+<li>datalist：标签定义选项列表，与input元素配合使用</li>
+</ul>
+<ul>
+<li>fieldset：可将表单内的相关元素分组，打包，与legend搭配使用</li>
+</ul>
+<h4 id="HTML5新增的input-type属性"><a href="#HTML5新增的input-type属性" class="headerlink" title="HTML5新增的input type属性"></a>HTML5新增的input type属性</h4><p><img src="/images/html/7.jpg" srcset="/img/loading.gif" alt>     </p>
+<h4 id="多媒体标签"><a href="#多媒体标签" class="headerlink" title="多媒体标签"></a>多媒体标签</h4><ul>
+<li>embed：标签定义嵌入的内容</li>
+</ul>
+<ul>
+<li>audio：播放音频</li>
+</ul>
+<ul>
+<li>video：播放视频   </li>
+</ul>
+<h4 id="多媒体embed-⭐⭐"><a href="#多媒体embed-⭐⭐" class="headerlink" title="多媒体embed ⭐⭐"></a>多媒体embed ⭐⭐</h4><p>embed可以用来插入各种多媒体（较大的），格式可以是Wav、AIFF、AU、MP3等。其中url为音频或视频文件的路径，可以是相对路径或绝对路径。其基本语法是：  </p>
+<pre><code class="html">&lt;embed src=&#39;http://player.youku.com/player.php/sid/XMzk4MDUzNTA1Mg==/v.swf&#39; allowFullScreen=&#39;true&#39; 
+quality=&#39;high&#39; width=&#39;480&#39; height=&#39;400&#39; align=&#39;middle&#39; allowScriptAccess=&#39;always&#39; type=&#39;applicati
+on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
+</code></pre>
+<h4 id="多媒体audio-⭐⭐"><a href="#多媒体audio-⭐⭐" class="headerlink" title="多媒体audio ⭐⭐"></a>多媒体audio ⭐⭐</h4><p>HTML5通过<code>&lt;audio&gt;</code>标签来解决音频播放的问题。其基本语法是：  </p>
+<pre><code class="html">&lt;audio src=&quot;./music/See You Again.mp3&quot;&gt;&lt;/audio&gt; //通过src指定音频文件路径即可
+</code></pre>
+<p>并且可以通过添加属性来更友好控制音频的播放，如：   </p>
+<ul>
+<li>autoplay 自动播放  </li>
+</ul>
+<ul>
+<li>controls 是否显示默认播放组件  </li>
+</ul>
+<ul>
+<li>loop 循环播放 ，loop=2就是循环2次 ，loop或者loop=“-1”无限循环   </li>
+</ul>
+<h4 id="多媒体video-⭐⭐"><a href="#多媒体video-⭐⭐" class="headerlink" title="多媒体video ⭐⭐"></a>多媒体video ⭐⭐</h4><p>同音频播放一样，<code>&lt;video&gt;</code>（通常插入较小的视频）使用也相当简单。其基本语法是：   </p>
+<pre><code class="html">&lt;video src=&quot;./video/movie.mp4&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt; //通过src指定视频文件路径
+</code></pre>
+<p>同样，通过附加属性可以更友好的控制视频的播放：  </p>
+<ul>
+<li>autoplay 自动播放</li>
+</ul>
+<ul>
+<li>controls 是否显示默认播放组件</li>
+</ul>
+<ul>
+<li>loop 循环播放 </li>
+</ul>
+<ul>
+<li>width 设置播放窗口的宽度 </li>
+</ul>
+<ul>
+<li>height 设置播放窗口的高度</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/HTML/">HTML</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/HTML/">HTML</a>
+                    
+                      <a class="hover-with-bg" href="/tags/标签/">标签</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe
+      style="margin-left: 2px; margin-bottom:-5px;"
+      frameborder="0"
+      scrolling="0"
+      width="91px"
+      height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true"
+    >
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "HTML常用标签&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

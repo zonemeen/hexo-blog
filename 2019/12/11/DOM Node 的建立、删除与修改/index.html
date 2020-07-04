@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>DOM Node 的建立、删除与修改 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期三, 十二月 11日 2019
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.7k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      7 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
+<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
+<pre><code class="javascript">var newDiv = document.createElement(&quot;div&quot;);
+</code></pre>
+<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
+<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
+<pre><code class="javascript">newDiv.id = &quot;myNewDiv&quot;;
+newDiv.className = &quot;box&quot;;
+</code></pre>
+<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
+<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
+<pre><code class="javascript">var newDiv = document.createElement(&quot;div&quot;);
+
+// 建立 textNode 文字节点
+var textNode = document.createTextNode(&quot;Hello world!&quot;);
+
+// 通过 newDiv.appendChild 将 textNode 加入至 newDiv
+newDiv.appendChild(textNode);
+</code></pre>
+<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
+<p>例如，一开始我们有一个 HTML 的容器元素：</p>
+<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;&lt;/ul&gt;
+</code></pre>
+<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
+<pre><code class="javascript">// 取得外层容器 myList
+var ul = document.getElementById(&quot;myList&quot;);
+
+// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i &lt; 3; i++) {
+  // 生成新的 li，加入文字后置入 fragment 中。
+  let li = document.createElement(&quot;li&quot;);
+  li.appendChild(document.createTextNode(&quot;Item &quot; + (i + 1)));
+  fragment.appendChild(li);
+}
+
+// 最后将组合完成的 fragment 放进 ul 容器
+ul.appendChild(fragment);
+</code></pre>
+<p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
+<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
+<p>我们只要将对应的 HTML 字符串传入：</p>
+<pre><code class="javascript">document.write(&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;);
+</code></pre>
+<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
+<pre><code class="javascript">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误
+document.write(&#39;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#39; + &quot;&lt;/script&gt;&quot;);
+
+// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了
+document.write(&#39;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#39; + &quot;&lt;/script&gt;&quot;);
+</code></pre>
+<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
+<pre><code class="javascript">window.onload = function () {
+  document.write(&quot;Hello world!&quot;);
+};
+</code></pre>
+<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
+<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
+<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
+<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
+<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;
+  &lt;li&gt;Item1&lt;/li&gt;
+  &lt;li&gt;Item2&lt;/li&gt;
+  &lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+  // 取得容器
+  var myList = document.getElementById(&quot;myList&quot;);
+  // 建立新的 &lt;li&gt; 元素
+  var newList = document.createElement(&quot;li&quot;);
+
+  // 建立 textNode 文字节点
+  var textNode = document.createTextNode(&quot;Hello world!&quot;);
+
+  // 通过 appendChild 将 textNode 加入至 newList
+  newList.appendChild(textNode);
+
+  // 通过 appendChild 将 newList 加入至 myList
+  myList.appendChild(newList);
+&lt;/script&gt;
+</code></pre>
+<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
+<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;
+  &lt;li&gt;Item1&lt;/li&gt;
+  &lt;li&gt;Item2&lt;/li&gt;
+  &lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+  // 取得容器
+  var myList = document.getElementById(&quot;myList&quot;);
+
+  // 取得 &quot;&lt;li&gt;Item2&lt;/li&gt;&quot; 的元素
+  var refNode = document.querySelectorAll(&quot;li&quot;)[1];
+
+  // 建立 li 元素节点
+  var newNode = document.createElement(&quot;li&quot;);
+
+  // 建立 textNode 文字节点
+  var textNode = document.createTextNode(&quot;Hello world!&quot;);
+  newNode.appendChild(textNode);
+
+  // 将新节点 newNode 插入 refNode 的前方
+  myList.insertBefore(newNode, refNode);
+&lt;/script&gt;
+</code></pre>
+<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
+<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;
+  &lt;li&gt;Item1&lt;/li&gt;
+  &lt;li&gt;Item2&lt;/li&gt;
+  &lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+  // 取得容器
+  var myList  = document.getElementById(&#39;myList&#39;);
+
+  // 取得 &quot;&lt;li&gt;Item2&lt;/li&gt;&quot; 的元素
+  var oldNode = document.querySelectorAll(&#39;li&#39;)[1];
+
+  // 建立 li 元素节点
+  var newNode = document.createElement(&#39;li&#39;);
+
+  // 建立 textNode 文字节点
+  var textNode = document.createTextNode(&quot;Hello world!&quot;);
+  newNode.appendChild(textNode);
+
+  // 将原有的 oldNode 替换成新节点 newNode
+  myList.replaceChild(newNode, oldNode);
+&lt;script&gt;
+</code></pre>
+<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg" srcset="/img/loading.gif" alt></p>
+<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
+<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;
+  &lt;li&gt;Item1&lt;/li&gt;
+  &lt;li&gt;Item2&lt;/li&gt;
+  &lt;li&gt;Item3&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+  // 取得容器
+  var myList = document.getElementById(&quot;myList&quot;);
+
+  // 取得 &quot;&lt;li&gt;Item2&lt;/li&gt;&quot; 的元素
+  var removeNode = document.querySelectorAll(&quot;li&quot;)[1];
+
+  // 将 myList 下的 removeNode 节点移除
+  myList.removeChild(removeNode);
+&lt;/script&gt;
+</code></pre>
+<p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
+<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
+<p>刚好呼应阿基米德的一句众所周知的名言：</p>
+<blockquote>
+<p>「给我一个支点，我就能撬动整个地球。」</p>
+</blockquote>
+<p>那么有了 DOM API 的帮助后， JavaScript 也可以说：</p>
+<blockquote>
+<p>「给我一个节点，我就能建立整个网页世界。」</p>
+</blockquote>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DOM/">DOM</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API/">API</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "DOM Node 的建立、删除与修改&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

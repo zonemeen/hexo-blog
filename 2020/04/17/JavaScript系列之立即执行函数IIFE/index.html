@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>JavaScript系列之立即执行函数IIFE - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期五, 四月 17日 2020
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.4k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      9 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
+<p><strong>IIFE(Immediately Invoked Functions Expressions)</strong>其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，<strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它</strong>。</p>
+<p>下面我们将做更进一步的介绍和说明。</p>
+<h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
+<pre><code class="javascript">// function 命令
+function sayHi(name) {
+  console.log(&quot;Hi&quot; + name);
+}
+sayHi(&quot;miqilin&quot;);
+
+// 函数表达式
+var sayHello = function (name) {
+  console.log(&quot;Hello &quot; + name);
+};
+sayHello(&quot;miqilin&quot;);
+</code></pre>
+<h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
+<p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
+<pre><code class="javascript">// 函数表达式
+var sayHello = function (name) {
+  console.log(&quot;Hello &quot; + name);
+};
+console.log(sayHello);
+</code></pre>
+<p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
+<p><img src="/images/IIFE/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
+<p><img src="/images/IIFE/2.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
+<p><img src="/images/IIFE/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
+<pre><code class="javascript">//不可行的做法
+function ( name )  {
+  console.log( &#39;Hello &#39;  + name ) ;
+}
+</code></pre>
+<p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
+<p><img src="/images/IIFE/4.jpg" srcset="/img/loading.gif" alt></p>
+<p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
+<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function(){ ...}</code>包起来，像是这样：</p>
+<pre><code class="javascript">(function (name) {
+  console.log(&quot;Hello &quot; + name);
+});
+</code></pre>
+<p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
+<p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
+<p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
+<p><img src="/images/IIFE/5.jpg" srcset="/img/loading.gif" alt></p>
+<p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
+<pre><code class="javascript">(function (window, undefined) {
+  // 略...
+})(window);
+</code></pre>
+<p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
+<p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
+<h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
+<pre><code class="javascript">//IIFE
+(function (name) {
+  var greeting = &quot;Hello&quot;;
+  console.log(greeting + &quot; &quot; + name);
+})(&quot;miqilin&quot;);
+</code></pre>
+<p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
+<p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
+<p><img src="/images/IIFE/6.jpg" srcset="/img/loading.gif" alt></p>
+<p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
+<p><img src="/images/IIFE/7.jpg" srcset="/img/loading.gif" alt></p>
+<p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
+<p><img src="/images/IIFE/8.jpg" srcset="/img/loading.gif" alt></p>
+<p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
+<p><img src="/images/IIFE/9.jpg" srcset="/img/loading.gif" alt></p>
+<p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
+<h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
+<pre><code class="javascript">//全局执行上下文
+var greeting = &quot;Hi&quot;;
+
+//IIFE
+(function (name) {
+  var greeting = &quot;Hello&quot;;
+  console.log(greeting + &quot; &quot; + name);
+})(&quot;miqilin&quot;);
+
+console.log(greeting);
+</code></pre>
+<p>这时候的打印出的顺序为：</p>
+<p><img src="/images/IIFE/10.jpg" srcset="/img/loading.gif" alt></p>
+<p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
+<p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
+<p><img src="/images/IIFE/11.jpg" srcset="/img/loading.gif" alt></p>
+<p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
+<h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
+<p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
+<pre><code class="javascript">//全局执行上下文
+var greeting = &quot;Hi&quot;;
+
+//IIFE
+(function (global, name) {
+  var greeting = &quot;Hello&quot;;
+  global.greeting = &quot;Hola&quot;;
+  console.log(greeting + &quot; &quot; + name);
+})(window, &quot;miqilin&quot;);
+
+console.log(greeting);
+</code></pre>
+<p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
+<p><img src="/images/IIFE/12.jpg" srcset="/img/loading.gif" alt></p>
+<p>这操作够骚吧！哈哈~</p>
+<h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
+<pre><code class="javascript">for (var i = 0; i &lt; 5; i++) {
+  window.setTimeout(function () {
+    console.log(i);
+  }, 1000);
+}
+</code></pre>
+<p>真的是这样吗？我们来看看执行的结果：</p>
+<pre><code>//过了接近一秒五个五同时打出
+5
+5
+5
+5
+5
+</code></pre><p>为什么会这样呢？</p>
+<p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
+<p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
+<p><img src="/images/IIFE/13.jpg" srcset="/img/loading.gif" alt></p>
+<p>那么要怎么解决这个问题呢？</p>
+<p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
+<pre><code class="javascript">for (var i = 0; i &lt; 5; i++) {
+  // 为了凸显差异，我们将传入后的参数改名为 x
+  // 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。
+  (function (x) {
+    window.setTimeout(function () {
+      console.log(x);
+    }, 1000);
+  })(i);
+}
+</code></pre>
+<p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
+<p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
+<p>所以我们稍微修改一下：</p>
+<pre><code class="javascript">for (var i = 0; i &lt; 5; i++) {
+  (function (x) {
+    // 将原来的 1000 改成 1000 * x
+    window.setTimeout(function () {
+      console.log(x);
+    }, 1000 * x);
+  })(i);
+}
+</code></pre>
+<p>像这样，就可以依序打印出我们想要的结果喽！</p>
+<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>{ }</code>作为它的块级作用域。</p>
+<p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
+<pre><code class="javascript">for (let i = 0; i &lt; 5; i++) {
+  window.setTimeout(function () {
+    console.log(i);
+  }, 1000 * (i + 1));
+}
+</code></pre>
+<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/IIFE/">IIFE</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之立即执行函数IIFE&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

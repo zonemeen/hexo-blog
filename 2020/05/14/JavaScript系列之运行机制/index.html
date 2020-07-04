@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>JavaScript系列之运行机制（Event Loop） - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期四, 五月 14日 2020
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    3.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      11 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>有了一定 JavaScript 基础的朋友们一定知道，JS 里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的 JavaScript 系列文章里，我就总结了 JS 前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解 JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。</p>
+<h3 id="单线程的问题"><a href="#单线程的问题" class="headerlink" title="单线程的问题"></a>单线程的问题</h3><p>JavaScript 语言的一大特点就是单线程，也就是说，同一个时间只能做一件事，不像诸如 Java 等多线程语言一样能同时进行多个任务和流程。</p>
+<p>其中 JS 引擎中负责解释和执行 JavaScript 代码的线程只有一个，叫它<strong>主线程</strong>。</p>
+<p>但是实际上还存在其他的线程。例如：处理 AJAX 请求的线程、处理 DOM 事件的线程、定时器线程、读写文件的线程(例如在 Node.js 中)等等。这些线程可能存在于 JS 引擎之内，也可能存在于 JS 引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。</p>
+<p>但因单线程随之<strong>所带来的问题</strong>是，所有任务都需要排队，上一个任务没执行完，下一个任务就会一直等待，会导致任务执行阻塞。具体的例子是：在浏览器中，要向服务器发送 ajax 请求，http 通信有延迟，而且等待返回数据的时间也未知，那线程就无法处理其他任务了，页面可能长时间会无法接受响应。</p>
+<p>另外，<strong>GUI 渲染线程与 JS 引擎线程是互斥的</strong>，当 JavaScript 引擎执行时 GUI 线程会被挂起，直到 JS 程序执行完成，才会接着执行。因此如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞。</p>
+<p>所以 JS 用异步任务 (asynchronous callback) 去解决这些<strong>问题</strong>。</p>
+<h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>写基础系列文章的过程中经常能碰到<strong>同步</strong>(Synchronous)与<strong>异步</strong>(Asynchronous)的概念，这也是初学 JavaScript 时容易搞混的特性之一。</p>
+<p>两者容易搞混我觉得很大的原因出在 Synchronous 在国内被翻译成了「<strong>同步</strong>」，光看字面意思会认为「<strong>同步</strong>」就是「所有动作同时进行」，但事实上<strong>刚好相反</strong>。</p>
+<p>要快速理解同步异步 ， 直接先看一段代码：</p>
+<pre><code class="javascript">console.log(&quot;1&quot;);
+console.log(&quot;2&quot;);
+
+/*打印出
+1
+2
+*/
+</code></pre>
+<p>这段代码的实现就叫做<strong>同步</strong>，也就是说按照顺序一步一步来处理，做完第一件事情之后，再去做下一件事情。</p>
+<p>再来看另一段代码：</p>
+<pre><code class="javascript">console.log(&quot;1&quot;);
+setTimeout(function () {
+  console.log(&quot;2&quot;);
+}, 1000);
+console.log(&quot;3&quot;);
+
+/*打印出
+1
+3
+2
+*/
+</code></pre>
+<p>这段代码的实现就叫做<strong>异步</strong>，也就是说不完全按照顺序去做，如果在函数 A 返回的时候，调用者还不能够得到预期结果，而是需要通过一定的手段等待一段时间去得到，这样也就不耽搁时间。</p>
+<p>所以说 JavaScript 的同步代码比较好理解，而其优势之一是其如何处理异步代码。异步代码会被放入一个事件队列（下面会讲到），等到所有其他代码执行后才进行，而不会阻塞线程，接下来将重点介绍<strong>异步</strong>。</p>
+<h3 id="异步过程是如何形成的？"><a href="#异步过程是如何形成的？" class="headerlink" title="异步过程是如何形成的？"></a>异步过程是如何形成的？</h3><p>简单的总结一下，一个异步过程通常是这样的：</p>
+<ol>
+<li>主线程发起一个异步请求，相应的工作线程接收请求并告知主线程已收到(异步函数返回)；</li>
+<li>主线程可以继续执行后面的代码，同时工作线程执行异步任务；</li>
+<li>工作线程完成工作后，通知主线程；</li>
+<li>主线程收到通知后，执行一定的动作(调用回调函数)。</li>
+</ol>
+<p>异步函数通常具有以下的形式：</p>
+<pre><code class="javascript">A(argus..., callbackFn)
+</code></pre>
+<p>其中，函数 A 可以叫做异步过程的发起函数，也叫做异步任务注册函数。<code>argus</code>是这个函数需要的参数。<code>callbackFn</code>也是这个函数的参数，但是它比较特殊所以单独列出来。</p>
+<p>所以，从主线程的角度看，一个异步过程包括下面两个要素：</p>
+<ul>
+<li>发起函数(或叫注册函数)<code>A</code></li>
+<li>回调函数<code>callbackFn</code></li>
+</ul>
+<p>它们都是在主线程上调用的，其中注册函数用来发起异步过程，回调函数用来处理结果。</p>
+<p>举一个栗子：</p>
+<pre><code class="javascript">setTimeout(fn, 1000);
+</code></pre>
+<p>其中的<code>setTimeout</code>就是异步过程的发起函数，<code>fn</code>是回调函数。</p>
+<p>注意：前面说的形式<code>A(argus..., callbackFn)</code>只是一种抽象的表示，并不代表回调函数一定要作为发起函数的参数，例如：</p>
+<pre><code class="javascript">var request = new XMLHttpRequest();
+request.open(&quot;GET&quot;, url);
+request.send(); // 发起函数
+request.onreadystatechange = xxx; // 添加回调函数
+</code></pre>
+<p>这种形式的发起函数和回调函数就是分离的。</p>
+<h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>上面提到了异步任务完成后，会通知主线程，以 <code>callback</code> 的方式获取结果或者执行回调。但是如果当前的主线程是忙碌的，异步任务的信号无法接收到怎么办呢？所以还需要一个地方保存这些 <code>callback</code>，也就是<strong>任务队列（task queue）</strong>。</p>
+<p>那么这里就要具体提提 JavaScript 异步执行的<strong>运行机制</strong>了，先用一张图来表现整个过程：</p>
+<p><img src="/images/eventloop/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图的完整过程就是：所有同步任务都在主线程上执行，形成一个执行栈，当执行栈遇到异步任务时（浏览器通常是调用 WebAPIs，常见的有 <code>XMLHttpRequest</code>，<code>setTimeout</code>，事件回调等），不会等待，而是继续执行往下执行。而异步任务就会以各种方式，把 <code>callback</code> 加入任务队列中。一旦执行栈中的所有同步任务执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个 <code>callback</code> 任务放入到栈中执行。结束后栈内被清空，还会再去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作，而这种循环的机制，就称之为<strong>事件循环</strong>（Event Loop）。</p>
+<h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop(事件循环)"></a>Event Loop(事件循环)</h3><p>事件循环可不是像上面一样一句两句就能讲清的，并且暂时不讨论 node.js 的 Event Loop 执行机制，以下关于浏览器的 Event Loop 执行机制，那在完全了解 Event Loop 之前，还需了解一下宏任务与微任务，因为任务队列又分为<code>macrotask</code>（宏任务）与<code>microtask</code>（微任务），在 ES2015 中 <code>macrotask</code> 即指 Task，而 <code>microtask</code> 则是指代 Job。</p>
+<ul>
+<li>宏任务大概包括：<code>script</code>(整体代码), <code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>（Nodejs 环境）, <code>I/O</code>, <code>UI rendering</code>。</li>
+<li>微任务大概包括: <code>process.nextTick</code>（Nodejs 环境）, <code>Promise</code>, <code>Object.observe</code>(已废弃), <code>MutationObserver</code>(html5 新特性)。</li>
+</ul>
+<p>关于<code>macrotask</code>和<code>microtask</code>的理解，得结合事件循坏的机制，下面这张图就可以说是介绍得很清楚了。</p>
+<p><img src="/images/eventloop/2.jpg" srcset="/img/loading.gif" alt></p>
+<p>事件循环的顺序，决定了 JavaScript 代码的执行顺序，一次事件循环的步骤简单总结起来就是：</p>
+<ol>
+<li>检查<code>macrotask</code>队列是否为空，非空则到步骤 2，为空则到步骤 3；</li>
+<li>执行<code>macrotask</code>中的一个任务；</li>
+<li>继续检查<code>microtask</code>队列是否为空，非空则到步骤 4，否则到步骤 5；</li>
+<li>取出<code>microtask</code>中的任务执行，执行完成返回到步骤 3；</li>
+<li>检查是否需要进行视图更新，需要则进行更新，否则进行下一轮的事件循环；</li>
+</ol>
+<p>上面这么多文字表述是不是有点晦涩难懂，那我们通过 2 个 demo 例子来逐步理解<strong>事件循环</strong>的具体顺序吧：</p>
+<pre><code class="javascript">//demo1
+
+console.log(1);
+
+//setTimeout1
+setTimeout(() =&gt; {
+  console.log(2);
+  Promise.resolve().then((data) =&gt; {
+    console.log(3);
+  });
+});
+
+//setTimeout2
+setTimeout(() =&gt; {
+  console.log(4);
+});
+
+Promise.resolve().then((data) =&gt; {
+  console.log(5);
+});
+
+// 1，5，2，3，4
+</code></pre>
+<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
+<ol>
+<li>主线程上遇到<code>console.log(1)</code>同步代码，执行，输出’1’。</li>
+<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)。</li>
+<li>接着遇到<code>setTimeout2</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)。</li>
+<li>首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘5’。</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code>的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，发现队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’3’，<code>microtask</code>队列为空，进入下一个事件循环。</li>
+<li>检查宏任务队列，发现有 <code>setTimeout2</code>的回调函数, 立即执行回调函数输出’4’。</li>
+</ol>
+<p>再思考一下下面代码的执行顺序：</p>
+<pre><code class="javascript">//demo2
+
+console.log(1);
+
+//setTimeout1
+setTimeout(function () {
+  console.log(2);
+}, 0);
+
+//setTimeout2
+setTimeout(function () {
+  console.log(3);
+  //setTimeout3
+  setTimeout(function () {
+    console.log(4);
+  });
+  Promise.resolve().then(function () {
+    console.log(5);
+  });
+}, 200);
+
+//Promise1
+Promise.resolve()
+  .then(function () {
+    console.log(6);
+  })
+  .then(function () {
+    console.log(7);
+  });
+
+//Promise2
+Promise.resolve().then(function () {
+  console.log(8);
+});
+
+console.log(9);
+
+// 1，9，6，8，7，2，3，5，4
+</code></pre>
+<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
+<ol>
+<li>首先顺序执行完主进程上的同步任务，第一句和最后一句的<code>console.log</code>。</li>
+<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)；</li>
+<li>接着遇到<code>setTimeout2</code>，它的作用是在 200ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)；</li>
+<li>同步任务执行完之后，首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘6’，然后执行第二个<code>promise</code>的<code>then</code>回调，输出’8’，由于第一个<code>promise</code>的<code>.then()</code>的返回依然是<code>promise</code>，所以第二个<code>.then()</code>会放到<code>microtask</code>队列继续执行，输出 ‘7’;</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code> 的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，队列为空，进入下一次事件循环；</li>
+<li>检查宏任务队列，发现有 <code>setTimeout2</code> 的回调函数, 立即执行回调函数输出’3’；</li>
+<li>接着遇到<code>setTimeout3</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在下一次的事件循环中执行)，检查微任务队列，即 <code>microtask</code> 队列，发现此队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’5’；</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环，检查宏任务队列，发现有 <code>setTimeout3</code> 的回调函数，立即执行回调函数输出，输出’4’。至此代码执行结束。</li>
+</ol>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>这里再补一道面试题，如何执行这段代码的过程就不详细说明了，朋友们自行去体会：</p>
+<pre><code class="javascript">console.log(&quot;1&quot;);
+
+setTimeout(function () {
+  console.log(&quot;2&quot;);
+  process.nextTick(function () {
+    console.log(&quot;3&quot;);
+  });
+  new Promise(function (resolve) {
+    console.log(&quot;4&quot;);
+    resolve();
+  }).then(function () {
+    console.log(&quot;5&quot;);
+  });
+});
+process.nextTick(function () {
+  console.log(&quot;6&quot;);
+});
+new Promise(function (resolve) {
+  console.log(&quot;7&quot;);
+  resolve();
+}).then(function () {
+  console.log(&quot;8&quot;);
+});
+
+setTimeout(function () {
+  console.log(&quot;9&quot;);
+  process.nextTick(function () {
+    console.log(&quot;10&quot;);
+  });
+  new Promise(function (resolve) {
+    console.log(&quot;11&quot;);
+    resolve();
+  }).then(function () {
+    console.log(&quot;12&quot;);
+  });
+});
+
+// 1，7，6，8，2，4，3，5，9，11，10，12
+// node环境下的事件监听依赖libuv驱动I/O库与前端环境不完全相同，输出顺序可能会有误差
+</code></pre>
+<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><ul>
+<li><a href="https://blog.csdn.net/leftfist/article/details/41891407" target="_blank" rel="noopener">Node.js 机制及原理理解初步</a></li>
+<li><a href="http://lynnelv.github.io/js-event-loop-nodejs" target="_blank" rel="noopener">深入理解 js 事件循环机制（Node.js 篇）</a></li>
+</ul>
+<p>后续自己也会追加一篇关于 Node.js 的事件循环机制的文章。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/运行机制/">运行机制</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Event-Loop/">Event Loop</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之运行机制（Event Loop）&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

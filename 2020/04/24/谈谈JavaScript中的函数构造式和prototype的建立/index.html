@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>谈谈JavaScript中的函数构造式和prototype的建立 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期五, 四月 24日 2020
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    1.5k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      6 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/" target="_blank" rel="noopener">《谈谈 JavaScript 中的 function constructor 和 new 关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。</p>
+<p>在 JavaScript 中的函数也是一种对象，其中包含一些属性像是该函数的名称（<code>Name</code>）和该函数的内容（<code>Code</code>），但其实<code>function</code>这里面还有一个属性，这个属性就是<code>prototype</code>，这个属性会以空对象的型式呈现。</p>
+<p>除非你是把<code>function</code>当做<code>function constructor</code>来使用，否则这个属性就没有特别的用途；但如果你是把它当做<code>function constructor</code>，通过<code>new</code>这个关键字来执行这个<code>function</code>的话，它就有特别的意义了。</p>
+<p><img src="/images/constructor/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>要进入这个<code>function</code>的<code>prototype</code>属性只要直接通过 <code>.prototype</code> 就可以了。</p>
+<p>然而，有一点很容易令人困惑的地方，我们会以为如果我使用 <code>.prototype</code> 时，就可以直接进入该函数的原型，但实际上并不是这样的！</p>
+<p><strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个<code>function constructor</code>所建立出来的对象的<code>prototype</code></strong>，听起来有点混乱吧…没关系，让我们来看一些代码来帮助我们理解这一概念。</p>
+<h3 id="说明函数中的-prototype-属性"><a href="#说明函数中的-prototype-属性" class="headerlink" title="说明函数中的 prototype 属性"></a>说明函数中的 prototype 属性</h3><p><strong>1.function 中的 prototype 属性一开始是空对象</strong></p>
+<p>我们先执行上篇文章最后所写的代码：</p>
+<pre><code class="javascript">function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+var person1 = new Person(&quot;Jay&quot;, &quot;chou&quot;);
+console.log(person1);
+var person2 = new Person(&quot;Jane&quot;, &quot;chou&quot;);
+console.log(person2);
+</code></pre>
+<p>到 Google Chrome 的 console 视窗中，我们输入 <code>Person.prototype</code>得到的结果会得到一个空对象，如下图：</p>
+<p><img src="/images/constructor/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><strong>2.通过 function constructor 所建立的对象会继承该 function 中 prototype 的内容</strong></p>
+<p>接着，让我们在<code>Person.prototype</code>里面增加一个<code>getFullName</code>的函数：</p>
+<pre><code class="javascript">function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+Person.prototype.getFullName = function () {
+  return this.firstName + &quot; &quot; + this.lastName;
+};
+
+var person1 = new Person(&quot;Jay&quot;, &quot;chou&quot;);
+console.log(person1);
+var person2 = new Person(&quot;Jane&quot;, &quot;chou&quot;);
+console.log(person2);
+</code></pre>
+<p>在上面代码的第 6 - 8 行中，我们为<code>Person.prototype</code>添加了一个函数，所以当我们在 Google Chrome 的 console 视窗中调用<code>Person.prototype</code>时，会多了这个函数在内：</p>
+<p><img src="/images/constructor/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>刚刚，我们有提到很重要的一句话，「<strong>函数当中<code>prototype</code>这个属性并不是这个函数的<code>prototype</code>，它指的是所有通过这个 function constructor 所建立出来的对象的<code>prototype</code></strong>」。</p>
+<p>这句话的意思其实是说<code>Person.prototype</code>并不是<code>Person.__proto__</code>，但是所有通过<code>Person</code>这个<code>function constructor</code>所建立的对象，在该实例对象的<code>__proto__</code>中，会包含有<code>Person.prototype</code>的内容。</p>
+<p>也就是说，当我们使用<code>new</code>这个运算符来执行<code>function constructor</code>时，它会先建立一个空对象，同时将该构造函数中<code>prototype</code>这个属性的内容（<code>Person.prototype</code>），设置到该实例对象的<code>prototype</code>中，即 <code>person1.__proto__ === Person.prototype</code>的结果为<code>true</code>。</p>
+<p>因此，当我们在 Google Chrome 的 console 中输入<code>person1.__proto__</code>时，我们就可以看到刚刚在<code>Person.prototype</code>所建立的函数<code>getFullName</code>已经继承在里面了：</p>
+<p><img src="/images/constructor/4.jpg" srcset="/img/loading.gif" alt></p>
+<h3 id="实际运用"><a href="#实际运用" class="headerlink" title="实际运用"></a>实际运用</h3><p>由于<code>Person.prototype</code>中的方法已经被继承到由<code>Person</code>这个<code>function constructor</code>所建立的实例对象<code>person1</code>中，所以这时侯，我们就可以顺利的使用 <code>person1.getFullName</code> 这个方法：</p>
+<pre><code class="javascript">function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+}
+
+Person.prototype.getFullName = function () {
+  return this.firstName + &quot; &quot; + this.lastName;
+};
+
+var person1 = new Person(&quot;Jay&quot;, &quot;chou&quot;);
+console.log(person1);
+console.log(person1.getFullName());
+</code></pre>
+<p>可以正确的执行<code>getFullName</code>这个函数并得到如下的结果：</p>
+<p><img src="/images/constructor/5.png" srcset="/img/loading.gif" alt></p>
+<h3 id="通过-function-constructor-与-Prototype-的实用处"><a href="#通过-function-constructor-与-Prototype-的实用处" class="headerlink" title="通过 function constructor 与 Prototype 的实用处"></a>通过 function constructor 与 Prototype 的实用处</h3><p>通过这样的方法，我们可以让所有根据这个函数构造器（<code>function constructor</code>）所建立的对象都包含有某些我们想要使用的方法。如果我们有 1000 个对象是根据这个函数构造器所建立的，那么我们只需要使用 <code>.prototype</code>这样的方法，就可以让这 1000 个物件都可以使用到我们想要执行的某个<code>method</code>，这样减少了代码的复用。</p>
+<p>有的人可能会好奇问，为什么我们不把<code>getFullName</code>这个方法直接写在函数构造式当中呢？</p>
+<pre><code class="javascript">function Person(firstName, lastName) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.getFullName = function () {
+    return this.firstName + &quot; &quot; + this.lastName;
+  };
+}
+
+/*
+Person . prototype . getFullName  =  function ( )  { 
+  return  this . firstName +  &#39; &#39;  +  this . lastName ; 
+}
+*/
+</code></pre>
+<blockquote>
+<p>注意！我们不该把方法放在<code>function constructor</code> 中。</p>
+</blockquote>
+<p>把方法放在函数构造式中这么做虽然仍然可以正确执行并得到结果，但是这么做会有个问题，如果我们是把这个方法直接写在函数构造式中，那么每一个对象都会包含有这个方法，如果我们有 1000 个对象根据这个函数构造式所建立，那么这 1000 个对象都会包含这个方法在内，如此将会占据相当多的内存；但如果是建立在<code>prototype</code> 中，我们只会有一个这样的方法。</p>
+<p>所以，为了性能上的考量，通常会把方法（<code>method</code>）放在构造函数的<code>prototype</code> 中，因为它们可以是通用的；把属性（<code>property</code>）放在构造函数当中，因为每一个对象可能都会有不同的属性内容，如此将能有效减少内存的问题。</p>
+<p>最后，如果感觉当前缺少你要用的方法，可以自己通过这一方法去创建。</p>
+<p>例如在 json2.js 源码中，为<code>Date</code>、<code>String</code>、<code>Number</code>、<code>Boolean</code>方法添加一个<code>toJSON</code>的属性。</p>
+<pre><code class="javascript">if (typeof Date.prototype.toJSON !== &quot;function&quot;) {
+  Date.prototype.toJSON = function (key) {
+    return isFinite(this.valueOf())
+      ? this.getUTCFullYear() +
+          &quot;-&quot; +
+          f(this.getUTCMonth() + 1) +
+          &quot;-&quot; +
+          f(this.getUTCDate()) +
+          &quot;T&quot; +
+          f(this.getUTCHours()) +
+          &quot;:&quot; +
+          f(this.getUTCMinutes()) +
+          &quot;:&quot; +
+          f(this.getUTCSeconds()) +
+          &quot;Z&quot;
+      : null;
+  };
+
+  String.prototype.toJSON = Number.prototype.toJSON = Boolean.prototype.toJSON = function (
+    key
+  ) {
+    return this.valueOf();
+  };
+}
+</code></pre>
+<p>如果你要添加内置方法的原型属性，最好做一步判断，如果该属性不存在，则添加。如果本来就存在，就没必要再添加了。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/constructor/">constructor</a>
+                    
+                      <a class="hover-with-bg" href="/tags/prototype/">prototype</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "谈谈JavaScript中的函数构造式和prototype的建立&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="author" content="miqilin">
+  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <title>JavaScript系列之内存空间 - 米淇淋的个人博客</title>
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+
+
+  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
+
+
+<!-- 自定义样式保持在最底部 -->
+
+
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/">首页</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/archives/">归档</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/">分类</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">标签</a>
+          </li>
+        
+          
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">关于</a>
+          </li>
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="view intro-2" id="background" parallax=true
+         style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask rgba-black-light flex-center">
+          <div class="container text-center white-text fadeInUp">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              
+                <p class="mt-3 post-meta">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                  星期二, 一月 28日 2020
+                </p>
+              
+
+              <p class="mt-1">
+                
+                  
+                  <span class="post-meta">
+                    <i class="far fa-chart-bar"></i>
+                    2.1k 字
+                  </span>
+                
+
+                
+                  
+                  <span class="post-meta">
+                      <i class="far fa-clock"></i>
+                      7 分钟
+                  </span>
+                
+
+                
+              </p>
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5 z-depth-3" id="board">
+          <div class="post-content mx-auto" id="post">
+            
+            <div class="markdown-body">
+              <p>对于很多没经验的前端开发来说，觉得 JS 反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。</p>
+<p>直到最近，看了阮一峰老师关于 JS 内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。</p>
+<p><em>这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。</em></p>
+<h4 id="内存空间管理"><a href="#内存空间管理" class="headerlink" title="内存空间管理"></a>内存空间管理</h4><p>JavaScript 的内存生命周期:</p>
+<pre><code>1. 分配你所需要的内存
+2. 使用分配到的内存（读、写）
+3. 不需要时将其释放、归还
+</code></pre><p>为了便于理解，我们使用一个简单的例子来解释这个周期。</p>
+<pre><code class="javascript">var a = 10; // 在内存中给数值变量分配空间
+alert(a + 90); // 使用分配到的内存
+a = null; // 使用完毕之后，释放内存空间
+</code></pre>
+<p>在 JS 中，每一个数据都需要一个内存空间。内存空间又被分为两种，<strong>栈内存(stack)</strong>与<strong>堆内存(heap)</strong>。</p>
+<h4 id="栈与堆"><a href="#栈与堆" class="headerlink" title="栈与堆"></a>栈与堆</h4><p>栈(stack)是有序的，主要存放一些<strong>基本类型的变量和对象的地址</strong>，每个区块按照一定次序存放（后进先出），它们都是直接按值存储在栈中的，每种类型的数据占用的内存空间的大小也是确定的，并由系统自动分配和自动释放。</p>
+<p>因此，这样带来的好处就是，内存可以及时得到回收，相对于堆来说，更加容易管理内存空间，且寻址速度也更快。</p>
+<p><img src="/images/memory/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>堆(heap)是没有特别的顺序的，数据可以任意存放，多用于<strong>复杂数据类型（引用类型）</strong>分配空间，例如数组对象、object 对象。</p>
+<p>其实这样说也不太准确，因为，引用类型数据的地址是存储于栈中的，当我们想要访问引用类型的值的时候，需要先从栈中获得想要访问对象的地址，然后，再通过地址指向找出堆中的所需数据。就好比书架上的书，虽然已经按顺序放好了，但我们只要知道书的名字，就可以对应的取下来。</p>
+<p><img src="/images/memory/2.jpg" srcset="/img/loading.gif" alt></p>
+<h4 id="变量的存放"><a href="#变量的存放" class="headerlink" title="变量的存放"></a>变量的存放</h4><p>首先，我们来看一下代码：</p>
+<pre><code class="javascript">//原始类型都放在栈（stack）里
+//引用类型都放在堆（heap）里
+var a = 10;
+var b = &quot;lzm&quot;;
+var c = true;
+var d = { n: 22 }; //地址假设为0x0012ff7f，不代表实际地址
+var e = { n: 22 }; //重新开辟一段内存空间，地址假设为0x0012ff8c
+console.log(e == d); //false
+var obj = new Object(); //地址假设为0x0012ff9d
+var arr = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]; //地址假设为0x0012ff6e
+</code></pre>
+<p>为什么<code>console.log(e == d)</code>的结果为<code>false</code>？可以用下面的内存图解释：</p>
+<p><img src="/images/memory/3.jpg" srcset="/img/loading.gif" alt></p>
+<p>变量 a,b,c 为基本数据类型，它们的值，直接存放在栈中，d,e,obj,arr 为复合数据类型，他们的引用变量及地址存储在栈中，指向于存储在堆中的实际对象。我们是无法直接操纵堆中的数据的，也就是说我们无法直接操纵对象，我们只能通过栈中对对象的引用来操作对象，就像我们通过遥控机操作电视一样，区别在于这台电视本身并没有控制按钮。</p>
+<p>变量 d,e 虽然指向存在堆内存中对象内容的值是相等的，但是它们来自栈内存中变量地址不相同，导致<code>console.log(e == d)</code>的结果为<code>false</code>。</p>
+<p>这里就回到了最初的疑问，为什么原始类型值要放在栈中，而引用类型值要放在堆中，为什么要分开放置呢？单列一种内存岂不是更省事吗？那接下来，援引<a href="http://blog.sina.com.cn/s/blog_8ecde0fe0102vy6e.html" target="_blank" rel="noopener">这篇文章</a>里边的解释：</p>
+<p>记住一句话：能量是守衡的，无非是时间换空间，空间换时间的问题。堆比栈大，栈比堆的运算速度快,对象是一个复杂的结构，并且可以自由扩展，如：数组可以无限扩充，对象可以自由添加属性。将他们放在堆中是为了不影响栈的效率。而是通过引用的方式查找到堆中的实际对象再进行操作。相对于简单数据类型而言，简单数据类型就比较稳定，并且它只占据很小的内存。不将简单数据类型放在堆是因为通过引用到堆中查找实际对象是要花费时间的，而这个综合成本远大于直接从栈中取得实际值的成本。所以简单数据类型的值直接存放在栈中。</p>
+<h4 id="比较抠细节的面试题"><a href="#比较抠细节的面试题" class="headerlink" title="比较抠细节的面试题"></a>比较抠细节的面试题</h4><p>下面的几道是关于内存空间的面试题，虽然不是特别的难，但比较扣细节你稍不注意就错了，我的建议还是老老实实画个内存图再自信的给出正确答案吧。</p>
+<p><strong>第一题：</strong></p>
+<pre><code class="javascript">var a = 1
+var b = a
+b = 2
+请问 a 显示是几？
+</code></pre>
+<p><img src="/images/memory/4.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图中可以看出，答案为：1。在栈内存中的数据发生复制行为时，系统会自动为新的变量分配一个新值。<code>var b = a</code>执行之后，a 与 b 虽然值都等于 1，但是他们其实已经是相互独立互不影响的值了。</p>
+<p><strong>第二题：</strong></p>
+<pre><code class="javascript">var a = {name: &#39;a&#39;}
+var b = a
+b = {name: &#39;b&#39;}
+请问现在 a.name 是多少？
+</code></pre>
+<p><img src="/images/memory/5.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图中可以看出，答案为：”a”。因为<code>b ={name:&#39;b&#39;}</code>后相当于重新在堆内存中分配内存给对象<code>{name:&#39;b&#39;}</code>，同时栈内存中变量 b 的指向地址也随之变化，变量 a 不受影响。</p>
+<p><strong>第三题：</strong></p>
+<pre><code class="javascript">var a = {name: &#39;a&#39;}
+var b = a
+b.name = &#39;b&#39;
+请问现在 a.name 是多少？
+</code></pre>
+<p><img src="/images/memory/6.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图中可以看出，答案为：”b”。我们通过<code>var b = a</code>执行一次复制引用类型的操作。引用类型的复制同样也会为新的变量自动分配一个新的值保存在栈内存中，但不同的是，这个新的值，仅仅只是引用类型的一个地址指针。当地址指针相同时，尽管他们相互独立，但是在堆内存中访问到的具体对象实际上是同一个，因此<code>b.name =&#39;b&#39;</code>使堆内存中对象的 value 值变化，<code>a.name</code>的值也随之变化。</p>
+<p><strong>第四题：</strong></p>
+<pre><code class="javascript">var a = {name: &#39;a&#39;}
+var b = a
+b = null
+请问现在 a 是什么？
+</code></pre>
+<p><img src="/images/memory/7.jpg" srcset="/img/loading.gif" alt></p>
+<p>上图中可以看出，答案为：{name: “a”}。因为<code>null</code>为基本类型，存在栈内存当中。因此栈内存中的变量 b 由之前指向对象的一个地址转变为<code>null</code>，变量 a 的地址还是指向原先的对象。</p>
+<p><strong>第五题：</strong></p>
+<pre><code class="javascript">var a = { n: 1 };
+var b = a;
+a.x = a = { n: 2 };
+
+a.x; // 这时 a.x 的值是多少
+b.x; // 这时 b.x 的值是多少
+</code></pre>
+<p>答案是：<code>a.x</code> –&gt; <code>undefined</code>；<code>b.x</code> –&gt; <code>{n: 2}</code>。这道题的关键在于：</p>
+<ol>
+<li>优先级。<code>.</code>的优先级高于<code>=</code>，所以先执行<code>a.x</code>，堆内存中的<code>{n: 1}</code>就会变成<code>{n: 1, x: undefined}</code>，改变之后相应的<code>b.x</code>也变化了，因为指向的是同一个对象。</li>
+<li>赋值操作是从右到左，所以先执行<code>a = {n: 2}</code>，<code>a</code>的引用就被改变了，然后这个返回值又赋值给了<code>a.x</code>，需要注意的是这时候<code>a.x</code>是第一步中的<code>{n: 1, x: undefined}</code>那个对象，其实就是<code>b.x</code>，相当于<code>b.x = {n: 2}</code></li>
+</ol>
+<p><img src="/images/memory/9.jpg" srcset="/img/loading.gif" alt></p>
+<p>最后来个图总结一下：</p>
+<p><img src="/images/memory/8.png" srcset="/img/loading.gif" alt></p>
+<p>以上都是通过内存图来解释关于内存空间的知识，如有不合理的地方，希望指正一下~后续还会增加内存泄漏以及深浅拷贝的文章，敬请期待！</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <p>
+                
+                  <span>
+                <i class="iconfont icon-inbox"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                      &nbsp;
+                    
+                  </span>&nbsp;&nbsp;
+                
+                
+                  <span>
+                <i class="iconfont icon-tag"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/内存/">内存</a>
+                    
+                  </span>
+                
+              </p>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+              
+            </div>
+
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc-start"></div>
+<div id="toc">
+  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
+      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  
+
+  <footer class="mt-5">
+  <div class="text-center py-3">
+    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
+    <i class="iconfont icon-love"></i> -->
+    Copyright &copy; 米淇淋的个人博客 2020
+    <!-- <b>2019</b> -->
+    <br />
+    Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
+    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
+      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
+    </iframe>
+
+    
+ 
+
+
+    <!-- cnzz Analytics icon -->
+    
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/main.js" ></script>
+
+
+  <script  src="/js/lazyload.js" ></script>
+
+
+
+  
+  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var navHeight = $('#navbar').height();
+      var post = $('#post');
+      var toc = $('#toc');
+      var tocLimMax = post.offset().top + post.height() - navHeight;
+
+      $(window).scroll(function () {
+        var tocLimMin = $('#toc-start').offset().top - navHeight;
+        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
+
+        if (tocLimMin <= scroH && scroH <= tocLimMax) {
+          toc.css({
+            'display': 'block',
+            'position': 'fixed',
+            'top': navHeight,
+          });
+        } else if (scroH <= tocLimMin) {
+          toc.css({
+            'position': '',
+            'top': '',
+          });
+        } else if (scroH > tocLimMax) {
+          toc.css('display', 'none');
+        }
+      });
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '.post-content',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        scrollSmooth: true,
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc > p').css('visibility', 'visible');
+      }
+      var offset = $('#board-ctn').css('margin-right')
+      $('#toc-ctn').css({
+        'right': offset
+      })
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+<!-- Plugins -->
+
+
+
+  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      $('pre').addClass('prettyprint  linenums');
+      prettyPrint();
+    })
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "JavaScript系列之内存空间&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      getSearchFile(path);
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script>
+    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+      function () {
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "images");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

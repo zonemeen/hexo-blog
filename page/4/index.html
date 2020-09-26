@@ -146,70 +146,18 @@
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/15/谈谈JavaScript中对象建立(Object)/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)"
-               class="index-img img-fluid rounded index-thumbnails">
-        </a>
-      </div>
-    
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/11/15/谈谈JavaScript中对象建立(Object)/">
-        <p class="h4 index-header">谈谈JavaScript中创建对象(Object)</p>
-      </a>
-
-      <a href="/2019/11/15/谈谈JavaScript中对象建立(Object)/">
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用 JavaScript 里的对象（Object）。
-对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？
-第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。
-第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Proper</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-15&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/对象/">对象</a>&nbsp;
-          
-            <a href="/tags/Object/">Object</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/12/分享7个有用的JavaScript技巧/" target="_self">
+        <a href="/2020/02/12/分享7个有用的JavaScript技巧/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/11/12/分享7个有用的JavaScript技巧/">
+      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
         <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
       </a>
 
-      <a href="/2019/11/12/分享7个有用的JavaScript技巧/">
+      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
         
         
           
@@ -228,7 +176,7 @@ var j = [...new Set([1, 2, 3, 4, 4])] &gt;&gt; [1, 2, 3, 4];
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-12&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -252,44 +200,34 @@ var j = [...new Set([1, 2, 3, 4, 4])] &gt;&gt; [1, 2, 3, 4];
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/09/JavaScript中任何值的prototype到最后都是Object/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lastobject.jpg" srcset="/img/loading.gif" alt="JavaScript中任何值的prototype到最后都是Object"
+        <a href="/2020/02/11/DOM Node 的建立、删除与修改/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/11/09/JavaScript中任何值的prototype到最后都是Object/">
-        <p class="h4 index-header">JavaScript中任何值的prototype到最后都是Object</p>
+      <a href="/2020/02/11/DOM Node 的建立、删除与修改/">
+        <p class="h4 index-header">DOM Node 的建立、删除与修改</p>
       </a>
 
-      <a href="/2019/11/09/JavaScript中任何值的prototype到最后都是Object/">
+      <a href="/2020/02/11/DOM Node 的建立、删除与修改/">
         
         
           
         
         <div class="index-excerpt" >
-          <div class="index-text mb-1">这篇笔记延伸上一篇所提到的原型（prototype）的概念，说明了在 JavaScript 当中，所有的类型（字符串、数值、Boolean 值、函数、数组、对象）的 prototype 的最后都是 object！
-什么意思呢？
-假设我们现在分别建立对象、函数和数组，直接上代码：
-// Object
-var a = {
-  name: &quot;miqilin&quot;,
-};
+          <div class="index-text mb-1">在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。
+DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
+var newDiv = document.createElement(&quot;div&quot;);
 
-// function
-var b = function () {
-  console.log(&quot;Hello&quot;);
-};
-
-// Array
-var c = [&quot;A&quot;, &q</div>
+在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChi</div>
         </div>
       </a>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-09&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-11&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -302,7 +240,9 @@ var c = [&quot;A&quot;, &q</div>
           
             <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
           
-            <a href="/tags/原型/">原型</a>&nbsp;
+            <a href="/tags/DOM/">DOM</a>&nbsp;
+          
+            <a href="/tags/API/">API</a>&nbsp;
           
         
       </div>
@@ -313,18 +253,18 @@ var c = [&quot;A&quot;, &q</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/11/03/JavaScript系列之原型与原型链/" target="_self">
+        <a href="/2020/02/03/JavaScript系列之原型与原型链/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/11/03/JavaScript系列之原型与原型链/">
+      <a href="/2020/02/03/JavaScript系列之原型与原型链/">
         <p class="h4 index-header">JavaScript系列之原型与原型链</p>
       </a>
 
-      <a href="/2019/11/03/JavaScript系列之原型与原型链/">
+      <a href="/2020/02/03/JavaScript系列之原型与原型链/">
         
         
           
@@ -339,7 +279,7 @@ var c = [&quot;A&quot;, &q</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-11-03&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-03&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -365,18 +305,18 @@ var c = [&quot;A&quot;, &q</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/30/JavaScript系列之内存泄漏/" target="_self">
+        <a href="/2020/01/30/JavaScript系列之内存泄漏/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/30/JavaScript系列之内存泄漏/">
+      <a href="/2020/01/30/JavaScript系列之内存泄漏/">
         <p class="h4 index-header">JavaScript系列之内存泄漏</p>
       </a>
 
-      <a href="/2019/10/30/JavaScript系列之内存泄漏/">
+      <a href="/2020/01/30/JavaScript系列之内存泄漏/">
         
         
           
@@ -391,7 +331,7 @@ var c = [&quot;A&quot;, &q</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-30&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-30&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -415,18 +355,18 @@ var c = [&quot;A&quot;, &q</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/28/JavaScript系列之内存空间/" target="_self">
+        <a href="/2020/01/28/JavaScript系列之内存空间/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunkj.jpg" srcset="/img/loading.gif" alt="JavaScript系列之内存空间"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/28/JavaScript系列之内存空间/">
+      <a href="/2020/01/28/JavaScript系列之内存空间/">
         <p class="h4 index-header">JavaScript系列之内存空间</p>
       </a>
 
-      <a href="/2019/10/28/JavaScript系列之内存空间/">
+      <a href="/2020/01/28/JavaScript系列之内存空间/">
         
         
           
@@ -446,7 +386,7 @@ var a =</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-28&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-28&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -470,18 +410,18 @@ var a =</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/22/学会如何学习（三）/" target="_self">
+        <a href="/2020/01/22/学会如何学习（三）/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/22/学会如何学习（三）/">
+      <a href="/2020/01/22/学会如何学习（三）/">
         <p class="h4 index-header">学会如何学习（三）</p>
       </a>
 
-      <a href="/2019/10/22/学会如何学习（三）/">
+      <a href="/2020/01/22/学会如何学习（三）/">
         
         
           
@@ -496,7 +436,7 @@ var a =</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-22&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-22&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -520,18 +460,18 @@ var a =</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/17/Undefined vs Null/" target="_self">
+        <a href="/2020/01/17/Undefined vs Null/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/un-null.jpg" srcset="/img/loading.gif" alt="Undefined vs Null"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/17/Undefined vs Null/">
+      <a href="/2020/01/17/Undefined vs Null/">
         <p class="h4 index-header">Undefined vs Null</p>
       </a>
 
-      <a href="/2019/10/17/Undefined vs Null/">
+      <a href="/2020/01/17/Undefined vs Null/">
         
         
           
@@ -548,7 +488,7 @@ if (!undefined) console.log(&quot;undefined is false&quot;);
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-17&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-17&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -570,18 +510,18 @@ if (!undefined) console.log(&quot;undefined is false&quot;);
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/15/JavaScript系列之类型转换/" target="_self">
+        <a href="/2020/01/15/JavaScript系列之类型转换/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/15/JavaScript系列之类型转换/">
+      <a href="/2020/01/15/JavaScript系列之类型转换/">
         <p class="h4 index-header">JavaScript系列之类型转换</p>
       </a>
 
-      <a href="/2019/10/15/JavaScript系列之类型转换/">
+      <a href="/2020/01/15/JavaScript系列之类型转换/">
         
         
           
@@ -604,7 +544,7 @@ Number(&quot;123abc</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-15&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-15&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>
@@ -628,18 +568,18 @@ Number(&quot;123abc</div>
     
     
       <div class="col-12 col-md-4 m-auto">
-        <a href="/2019/10/13/JavaScript系列之类型判断/" target="_self">
+        <a href="/2020/01/13/JavaScript系列之类型判断/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断"
                class="index-img img-fluid rounded index-thumbnails">
         </a>
       </div>
     
     <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2019/10/13/JavaScript系列之类型判断/">
+      <a href="/2020/01/13/JavaScript系列之类型判断/">
         <p class="h4 index-header">JavaScript系列之类型判断</p>
       </a>
 
-      <a href="/2019/10/13/JavaScript系列之类型判断/">
+      <a href="/2020/01/13/JavaScript系列之类型判断/">
         
         
           
@@ -656,7 +596,69 @@ typeof {}; // &quot;object&q</div>
 
       <div class="index-btm">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-10-13&nbsp;&nbsp;
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-13&nbsp;&nbsp;
+        
+        
+          <i class="iconfont icon-inbox"></i>
+          
+            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
+          &nbsp;
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
+          
+            <a href="/tags/数据类型/">数据类型</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto">
+        <a href="/2020/01/12/JavaScript系列之数据类型/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型"
+               class="index-img img-fluid rounded index-thumbnails">
+        </a>
+      </div>
+    
+    <div class="col-12 col-md-8 mx-auto index-info">
+      <a href="/2020/01/12/JavaScript系列之数据类型/">
+        <p class="h4 index-header">JavaScript系列之数据类型</p>
+      </a>
+
+      <a href="/2020/01/12/JavaScript系列之数据类型/">
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。
+原始类型（值类型）
+Undefined undefined
+Null null
+Boolean true
+String &#39;hello&#39;
+Number 123
+Symbol(这里先不做介绍)
+
+引用类型（对象类型）
+Object：由以上几种基本类型组成，而且对象里面还可以包含对象
+
+var obj = {};
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+var bool = new Boolean(true);
+var str = new String(&q</div>
+        </div>
+      </a>
+
+      <div class="index-btm">
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-12&nbsp;&nbsp;
         
         
           <i class="iconfont icon-inbox"></i>

@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之执行上下文和执行栈 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期一, 五月 4日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-05-04 00:00" pubdate>
+        2020年5月4日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    2.4k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      8 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,10 +209,12 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript系列之执行上下文和执行栈</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
 <p>执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
 <h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
@@ -195,12 +244,11 @@
 <p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
 <p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
 <h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
-<pre><code class="javascript">function b() {}
-function a() {
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
   b();
-}
-a();
-</code></pre>
+&#125;
+a();</code></pre></div>
 <p>这段代码背后执行的逻辑是这样的：</p>
 <p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
 <p><img src="/images/context/1.jpg" srcset="/img/loading.gif" alt></p>
@@ -211,21 +259,20 @@ a();
 <p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
 <p><img src="/images/context/4.jpg" srcset="/img/loading.gif" alt></p>
 <h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
-<pre><code class="javascript">function b() {
-  var myVar;
-  console.log(myVar);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-function a() {
-  var myVar = 2;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
   b();
-  console.log(myVar);
-}
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-var myVar = 1;
-console.log(myVar);
-a();
-</code></pre>
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();</code></pre></div>
 <p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
 <p><img src="/images/context/5.jpg" srcset="/img/loading.gif" alt></p>
 <p>我们分别得到了 1、<code>undefined</code>和 2。为什么会这样呢？</p>
@@ -244,65 +291,62 @@ a();
 <p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
 <p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
 <p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
-<pre><code class="javascript">function b() {
-  var myVar;
-  console.log(myVar);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-function a() {
-  var myVar = 2;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
   b();
-  console.log(myVar);
-}
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-var myVar = 1;
-console.log(myVar);
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
 a();
-console.log(myVar); // 一样会得到&quot;1&quot;
-</code></pre>
+<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到"1"</span></code></pre></div>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
-<pre><code class="javascript">function b() {
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
   myVar;
-  console.log(myVar);
-}
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-function a() {
-  myVar = 2;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  myVar = <span class="hljs-number">2</span>;
   b();
-  console.log(myVar);
-}
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
 
-var myVar = 1;
-console.log(myVar);
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
 a();
-console.log(myVar);
+<span class="hljs-built_in">console</span>.log(myVar);
 
-/*
+<span class="hljs-comment">/*
 打印出
 1
 2
 2
 2
-*/
-</code></pre>
+*/</span></code></pre></div>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
@@ -310,24 +354,47 @@ console.log(myVar);
                     
                       <a class="hover-with-bg" href="/tags/Execution-Context-Stack/">Execution Context Stack</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/05/12/JavaScript系列之变量对象/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript系列之变量对象</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
+                        <span class="hidden-mobile">谈谈JavaScript中的函数构造式和prototype的建立</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -343,8 +410,8 @@ console.log(myVar);
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -374,123 +441,69 @@ console.log(myVar);
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -521,6 +534,8 @@ console.log(myVar);
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -537,24 +552,29 @@ console.log(myVar);
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

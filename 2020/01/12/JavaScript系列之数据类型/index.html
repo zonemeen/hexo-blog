@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之数据类型 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 一月 12日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-12 00:00" pubdate>
+        2020年1月12日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      4 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,10 +209,12 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript系列之数据类型</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
 <h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
 <li>Undefined <code>undefined</code></li>
@@ -178,13 +227,12 @@
 <h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
 <li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
 </ul>
-<pre><code class="JavaScript">var obj = {};
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
+<span class="xml"><span class="hljs-comment">&lt;!-- 原始类型变量的包装类型如下 --&gt;</span>
 var bool = new Boolean(true);
-var str = new String(&quot;hello&quot;);
+var str = new String("hello");
 var num = new Number(1);
-var obj0 = new Object();
-</code></pre>
+var obj0 = new Object();</span></code></pre></div>
 <p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
 <p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
 <p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
@@ -198,34 +246,30 @@ var obj0 = new Object();
 </ul>
 <p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<pre><code class="JavaScript">var str = &quot;Hello, world!&quot;;  //双引号
-var str = &#39;Hello, world!&#39;; //单引号
-var str = `Hello, world!`;  //反引号
-</code></pre>
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">"Hello, world!"</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">'Hello, world!'</span>; <span class="hljs-comment">//单引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre></div>
 <p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
 <p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在\$ {…}中来将它们嵌入到字符串中，比如：</p>
-<pre><code class="JavaScript">var name = &quot;miqilin&quot;;
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">"miqilin"</span>;
 
-// embed a variable
-console.log( `Hello, ${name}!` ); // Hello, miqilin!
+<span class="hljs-comment">// embed a variable</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
 
-// embed an expression
-console.log( `the result is ${1 + 2}` ); // the result is 3
-</code></pre>
+<span class="hljs-comment">// embed an expression</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre></div>
 <p>加反引号后计算<code>$ {...}</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
 <p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<pre><code class="JavaScript">console.log( &quot;the result is ${1 + 2}&quot; ); // the result is ${1 + 2} (双引号不生效)
-</code></pre>
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">"the result is $&#123;1 + 2&#125;"</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre></div>
 <h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
 <ul>
 <li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换){}</code></li>
 <li>字面量或变量定义 <code>var bool = true;</code></li>
 <li>也出现在比较的结果 ：</li>
 </ul>
-<pre><code class="JavaScript">var isGreater = 4 &gt; 1;
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
 
-console.log( isGreater ); // true (the comparison result is &quot;yes&quot;)
-</code></pre>
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is "yes")</span></code></pre></div>
 <h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
 <ul>
 <li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
@@ -240,21 +284,18 @@ console.log( isGreater ); // true (the comparison result is &quot;yes&quot;)
 <li><code>void(expression)</code></li>
 </ul>
 <p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
-<pre><code class="javascript">undefined == null; // true
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre></div>
 <p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
-<pre><code class="javascript">Number(undefined); // NaN
-5 + undefined; // NaN
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre></div>
 <h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<pre><code class="javascript">var obj = { name: &quot;miqilin&quot; };
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">"miqilin"</span> &#125;;
 
-var obj = new Cat();
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
 
-var obj = new (function () {
-  this.sound = &quot;wow&quot;;
-})();
-</code></pre>
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.sound = <span class="hljs-string">"wow"</span>;
+&#125;)();</code></pre></div>
 <p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
 <p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
@@ -262,42 +303,64 @@ var obj = new (function () {
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
                       <a class="hover-with-bg" href="/tags/数据类型/">数据类型</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/13/JavaScript系列之类型判断/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript系列之类型判断</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/10/学会如何学习（二）/">
+                        <span class="hidden-mobile">学会如何学习（二）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -313,8 +376,8 @@ var obj = new (function () {
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -344,123 +407,69 @@ var obj = new (function () {
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -491,6 +500,8 @@ var obj = new (function () {
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -507,24 +518,29 @@ var obj = new (function () {
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

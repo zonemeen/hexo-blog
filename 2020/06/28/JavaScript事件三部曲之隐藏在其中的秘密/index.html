@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript事件三部曲之隐藏在其中的&#39;秘密&#39; - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 六月 28日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-28 00:00" pubdate>
+        2020年6月28日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    2.6k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      10 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,24 +209,25 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript事件三部曲之隐藏在其中的&#39;秘密&#39;</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p><a href="https://zhuanlan.zhihu.com/p/73091706" target="_blank" rel="noopener">上篇文章</a>我们提到，注册事件的方法 addEventListener()内有三个参数，分别是「事件名称」、「事件的处理程序」，以及「捕获」或「冒泡」的机制切换。</p>
 <p>那么，今天我们要来看的第一个部分，就是隐藏在事件处理程序中的<code>event</code> 。</p>
 <h3 id="隐藏在监听函数中的”event”"><a href="#隐藏在监听函数中的”event”" class="headerlink" title="隐藏在监听函数中的”event”"></a>隐藏在监听函数中的”event”</h3><p>当监听的事件发生时，浏览器会去执行我们通过<code>addEventListener()</code>注册的事件处理程序函数。</p>
 <p>这个时候，EventListener 会去创建一个「事件对象」 (Event Object)，里面包含了所有与这个事件相关的属性，并且以「参数」的形式传给我们的处理程序函数：</p>
-<pre><code class="javascript">&lt;button id=&quot;btn&quot;&gt;Click&lt;/button&gt;
+<div class="hljs"><pre><code class="hljs javascript">&lt;button id="btn"&gt;Click&lt;/button&gt;
 ......
-var btn = document.getElementById(&#39;btn&#39;);
+var btn = document.getElementById('btn');
 
 // 参数 e 就是上面所说的事件对象
 // 因为是参数，当然可以自己定名称
-btn.addEventListener(&#39;click&#39;, function(e){
+btn.addEventListener('click', function(e)&#123;
   console.log(e);
-}, false);
-</code></pre>
+&#125;, false);</code></pre></div>
 <p>当点击<code>&lt;button&gt;</code>后，可以从<code>console</code>看到<code>event</code>对象中提供了这么多东西：</p>
 <p><img src="/images/event/5.jpg" srcset="/img/loading.gif" alt></p>
 <p>像是</p>
@@ -193,253 +241,242 @@ btn.addEventListener(&#39;click&#39;, function(e){
 <h3 id="event-preventDefault"><a href="#event-preventDefault" class="headerlink" title="event. preventDefault()"></a>event. preventDefault()</h3><p>HTML 中部分元素会有默认行为，像是<code>&lt;a&gt;</code>标签默认页面跳转或是锚点定位，或是表单的<code>submit</code>等等…</p>
 <p>如果我们需要在这些元素上绑定事件，那么适当地<strong>取消它们的默认行为</strong>就是很重要的一件事。</p>
 <p>比如，有一个通往 baidu 的链接<code>&lt;a&gt;</code>:</p>
-<pre><code class="html">&lt;a id=&quot;link&quot; href=&quot;https://www.baidu.com&quot;&gt;百度&lt;/a&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"link"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://www.baidu.com"</span>&gt;</span>百度<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre></div>
 <p>假设今天点击这个 link 时，我希望浏览器执行<code>console.log(&#39;米淇淋你好帅!&#39;)</code>;那么根据先前所说，我可以先注册<code>click</code>事件：</p>
-<pre><code class="javascript">var link = document.querySelector(&quot;#link&quot;);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> link = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"#link"</span>);
 
 link.addEventListener(
-  &quot;click&quot;,
-  function (e) {
-    console.log(&quot;米淇淋你好coll!&quot;);
-  },
-  false
-);
-</code></pre>
+  <span class="hljs-string">"click"</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"米淇淋你好coll!"</span>);
+  &#125;,
+  <span class="hljs-literal">false</span>
+);</code></pre></div>
 <p>结果你却发现，即便我们在<code>&lt;a&gt;</code>中去注册了<code>click</code>事件，但是当我点击这个 link 的时候，浏览器开始会 console.log 出”米淇淋你好帅!”，但最后 baidu 的网页依旧会覆盖我想要的内容。</p>
 <p>可是我希望执行的是<code>console.log(&#39;米淇淋你好帅!&#39;)</code>;而不是直接把我带偏了去到 baidu 的网站，那么我们该怎么做，才能避免呢？</p>
 <p>这时候如果<strong>调用<code>event.preventDefault()</code>方法，默认事件行为将不再触发</strong>：</p>
-<pre><code class="javascript">var link = document.querySelector(&quot;#link&quot;);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> link = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"#link"</span>);
 
-// 在 事件处理函数中 加上 e.preventDefault();
+<span class="hljs-comment">// 在 事件处理函数中 加上 e.preventDefault();</span>
 link.addEventListener(
-  &quot;click&quot;,
-  function (e) {
+  <span class="hljs-string">"click"</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
     e.preventDefault();
-    console.log(&quot;米淇淋你好帅!&quot;);
-  },
-  false
-);
-</code></pre>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"米淇淋你好帅!"</span>);
+  &#125;,
+  <span class="hljs-literal">false</span>
+);</code></pre></div>
 <p>这个时候，再试着点击 link 一次，你会发现浏览器默认的跳转页面的行为不见了，<code>console.log(&#39;米淇淋你好帅!&#39;)</code>;也可顺利执行啦哈哈。</p>
 <p>但要注意的是，<code>event.preventDefault()</code>并不会阻止事件向上传递(即事件冒泡) 。</p>
 <p>另外，值得一提的是，下面这样设置也可以让 a 标签仅仅当做一个普通的按钮，点击实现一个功能，不想页面跳转，也不想锚点定位：</p>
-<pre><code class="html">&lt;a href=&quot;javascript:;&quot;&gt;链接&lt;/a&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>&gt;</span>链接<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></code></pre></div>
 <p>此外，在事件处理函数的<strong>最后</strong>加上<code>return false</code>;也会有<code>event.preventDefault()</code>的效果，但切记不可以加在前面，若是加在前面事件处理函数就直接 gg 了。</p>
 <h3 id="event-stopPropagation-amp-event-stopImmediatePropagation"><a href="#event-stopPropagation-amp-event-stopImmediatePropagation" class="headerlink" title="event.stopPropagation() &amp; event.stopImmediatePropagation()"></a>event.stopPropagation() &amp; event.stopImmediatePropagation()</h3><p>1.<code>event.stopPropagation()</code> 方法阻止事件向上冒泡传递，阻止任何父事件处理程序被执行。</p>
 <p>接下来我们看个例子：</p>
-<pre><code class="javascript">&lt;div&gt;
-  &lt;div id=&quot;parent&quot;&gt;
+<div class="hljs"><pre><code class="hljs javascript">&lt;div&gt;
+  &lt;div id="parent"&gt;
     父元素
-    &lt;div id=&quot;child&quot;&gt;子元素&lt;/div&gt;
+    &lt;div id="child"&gt;子元素&lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 ......
-var parent = document.getElementById(&#39;parent&#39;);
-var child = document.getElementById(&#39;child&#39;);
+var parent = document.getElementById('parent');
+var child = document.getElementById('child');
 
-child.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;child bubbling&#39;);
-}, false);
+child.addEventListener('click', function () &#123;
+  console.log('child bubbling');
+&#125;, false);
 
-parent.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;parent bubbling&#39;);
-}, false);
+parent.addEventListener('click', function () &#123;
+  console.log('parent bubbling');
+&#125;, false);
 
-document.body.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;body bubbling&#39;);
-}, false);
+document.body.addEventListener('click', function () &#123;
+  console.log('body bubbling');
+&#125;, false);
 
-document.documentElement.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;html bubbling&#39;);
-}, false);
+document.documentElement.addEventListener('click', function () &#123;
+  console.log('html bubbling');
+&#125;, false);
 
-document.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;document bubbling&#39;);
-}, false);
+document.addEventListener('click', function () &#123;
+  console.log('document bubbling');
+&#125;, false);
 
-window.addEventListener(&#39;click&#39;, function () {
-  console.log(&#39;window bubbling&#39;);
-}, false);
-</code></pre>
+window.addEventListener('click', function () &#123;
+  console.log('window bubbling');
+&#125;, false);</code></pre></div>
 <p>当我点击的是「子元素」的时候，通过<code>console.log</code>可以观察到事件触发的顺序为：</p>
-<pre><code>child bubbling
-parent bubbling
-body bubbling
-html bubbling
-document bubbling
-window bubbling
-</code></pre><p>而如果在「子元素」中加入<code>event.stopPropagation()</code> 方法，其余保持原样的话：</p>
-<pre><code class="javascript">child.addEventListener(
-  &quot;click&quot;,
-  function (e) {
-    console.log(&quot;child bubbling&quot;);
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-symbol">child</span> <span class="hljs-keyword">bubbling
+</span><span class="hljs-symbol">parent</span> <span class="hljs-keyword">bubbling
+</span><span class="hljs-keyword">body </span><span class="hljs-keyword">bubbling
+</span><span class="hljs-symbol">html</span> <span class="hljs-keyword">bubbling
+</span><span class="hljs-symbol">document</span> <span class="hljs-keyword">bubbling
+</span><span class="hljs-symbol">window</span> <span class="hljs-keyword">bubbling</span></code></pre></div>
+<p>而如果在「子元素」中加入<code>event.stopPropagation()</code> 方法，其余保持原样的话：</p>
+<div class="hljs"><pre><code class="hljs javascript">child.addEventListener(
+  <span class="hljs-string">"click"</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"child bubbling"</span>);
     e.stopPropagation();
-  },
-  false
-);
-</code></pre>
+  &#125;,
+  <span class="hljs-literal">false</span>
+);</code></pre></div>
 <p>再次点击「子元素」，则只出现：</p>
-<pre><code>child bubbling
-</code></pre><p>其余父事件不会触发，即<code>event.stopPropagation()</code> 方法阻止了事件向上冒泡传递，阻止任何父事件处理程序被执行。</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-attribute">child bubbling</span></code></pre></div>
+<p>其余父事件不会触发，即<code>event.stopPropagation()</code> 方法阻止了事件向上冒泡传递，阻止任何父事件处理程序被执行。</p>
 <p>2.<code>stopImmediatePropagation()</code>方法 <strong>既能阻止事件向父元素冒泡，也能阻止元素同事件类型的其它监听器被触发</strong>。而 stopPropagation 只能实现前者的效果。</p>
 <p>我们来看个例子：</p>
-<pre><code class="javascript">&lt;body&gt;
-  &lt;button id=&quot;btn&quot;&gt;click me to stop propagation&lt;/button&gt;
+<div class="hljs"><pre><code class="hljs javascript">&lt;body&gt;
+  &lt;button id="btn"&gt;click me to stop propagation&lt;/button&gt;
 &lt;/body&gt;
 ......
-var btn = document.querySelector(&#39;#btn&#39;);
+var btn = document.querySelector('#btn');
 
-btn.addEventListener(&#39;click&#39;, function(e) {
-  console.log(&#39;btn click 1&#39;);
+btn.addEventListener('click', function(e) &#123;
+  console.log('btn click 1');
   //e.stopImmediatePropagation();
-});
+&#125;);
 
-btn.addEventListener(&#39;click&#39;, function() {
-  console.log(&#39;btn click 2&#39;);
-});
+btn.addEventListener('click', function() &#123;
+  console.log('btn click 2');
+&#125;);
 
-document.body.addEventListener(&#39;click&#39;, function() {
-  console.log(&#39;body click&#39;);
-});
+document.body.addEventListener('click', function() &#123;
+  console.log('body click');
+&#125;);
 
-document.documentElement.addEventListener(&#39;click&#39;, function() {
-  console.log(&#39;html click&#39;);
-});
+document.documentElement.addEventListener('click', function() &#123;
+  console.log('html click');
+&#125;);
 
-document.addEventListener(&#39;click&#39;, function() {
-  console.log(&#39;document click&#39;);
-});
+document.addEventListener('click', function() &#123;
+  console.log('document click');
+&#125;);
 
-window.addEventListener(&#39;click&#39;, function() {
-  console.log(&#39;window click&#39;);
-});
-</code></pre>
+window.addEventListener('click', function() &#123;
+  console.log('window click');
+&#125;);</code></pre></div>
 <p>当我点击 button 的时候，通过<code>console.log</code>可以观察到事件触发的顺序为：</p>
-<pre><code>btn click 1
-btn click 2
-body click
-html click
-document click
-window click
-</code></pre><p>而如果在「btn 的第一个监听函数」中加入<code>event.stopImmediatePropagation()</code> 方法，其余保持原样的话：</p>
-<pre><code class="javascript">btn.addEventListener(&quot;click&quot;, function (e) {
-  console.log(&quot;btn click 1&quot;);
+<div class="hljs"><pre><code class="hljs undefined">btn <span class="hljs-built_in">click</span> <span class="hljs-number">1</span>
+btn <span class="hljs-built_in">click</span> <span class="hljs-number">2</span>
+body <span class="hljs-built_in">click</span>
+html <span class="hljs-built_in">click</span>
+document <span class="hljs-built_in">click</span>
+window <span class="hljs-built_in">click</span></code></pre></div>
+<p>而如果在「btn 的第一个监听函数」中加入<code>event.stopImmediatePropagation()</code> 方法，其余保持原样的话：</p>
+<div class="hljs"><pre><code class="hljs javascript">btn.addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"btn click 1"</span>);
   e.stopImmediatePropagation();
-});
-</code></pre>
+&#125;);</code></pre></div>
 <p>再次点击 button，则只出现：</p>
-<pre><code>btn click 1
-</code></pre><p>所以说，使用 <code>stopImmediatePropagation()</code> 方法后，点击按钮时，仅触发设置了<code>stopImmediatePropagation()</code> 方法的监听器，与此同时按钮的其余同类型点击事件不触发。</p>
+<div class="hljs"><pre><code class="hljs undefined">btn <span class="hljs-built_in">click</span> <span class="hljs-number">1</span></code></pre></div>
+<p>所以说，使用 <code>stopImmediatePropagation()</code> 方法后，点击按钮时，仅触发设置了<code>stopImmediatePropagation()</code> 方法的监听器，与此同时按钮的其余同类型点击事件不触发。</p>
 <h3 id="event-target-amp-event-currentTarget"><a href="#event-target-amp-event-currentTarget" class="headerlink" title="event.target &amp; event.currentTarget"></a>event.target &amp; event.currentTarget</h3><p>老实说并不能好好用文字描述这两者的区别，我们直接看个例子：</p>
-<pre><code class="javascript">&lt;style&gt;
-  #a{
+<div class="hljs"><pre><code class="hljs javascript">&lt;style&gt;
+  #a&#123;
     width: 200px;
     height: 200px;
     background: yellow       ;
-  }
-  #b{
+  &#125;
+  #b&#123;
     width: 150px;
     height: 150px;
     background: green;
-  }
-  #c{
+  &#125;
+  #c&#123;
     width: 100px;
     height: 100px;
     background: grey;
-  }
-  #d{
+  &#125;
+  #d&#123;
     width: 50px;
     height: 50px;
     background: black;
-  }
+  &#125;
 &lt;/style&gt;
 ......
-&lt;div id=&quot;a&quot;&gt;
-  &lt;div id=&quot;b&quot;&gt;
-    &lt;div id=&quot;c&quot;&gt;
-      &lt;div id=&quot;d&quot;&gt;&lt;/div&gt;
+&lt;div id="a"&gt;
+  &lt;div id="b"&gt;
+    &lt;div id="c"&gt;
+      &lt;div id="d"&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 ......
-document.getElementById(&#39;a&#39;).addEventListener(&#39;click&#39;, function(e) {
+document.getElementById('a').addEventListener('click', function(e) &#123;
     console.log(
-      &#39;target:&#39; + e.target.id + &#39;&amp;currentTarget:&#39; + e.currentTarget.id
+      'target:' + e.target.id + '&amp;currentTarget:' + e.currentTarget.id
     )
-})
-  document.getElementById(&#39;b&#39;).addEventListener(&#39;click&#39;, function(e) {
+&#125;)
+  document.getElementById('b').addEventListener('click', function(e) &#123;
     console.log(
-      &#39;target:&#39; + e.target.id + &#39;&amp;currentTarget:&#39; + e.currentTarget.id
+      'target:' + e.target.id + '&amp;currentTarget:' + e.currentTarget.id
     )
-})
-  document.getElementById(&#39;c&#39;).addEventListener(&#39;click&#39;, function(e) {
+&#125;)
+  document.getElementById('c').addEventListener('click', function(e) &#123;
     console.log(
-      &#39;target:&#39; + e.target.id + &#39;&amp;currentTarget:&#39; + e.currentTarget.id
+      'target:' + e.target.id + '&amp;currentTarget:' + e.currentTarget.id
     )
-})
-  document.getElementById(&#39;d&#39;).addEventListener(&#39;click&#39;, function(e) {
+&#125;)
+  document.getElementById('d').addEventListener('click', function(e) &#123;
     console.log(
-      &#39;target:&#39; + e.target.id + &#39;&amp;currentTarget:&#39; + e.currentTarget.id
+      'target:' + e.target.id + '&amp;currentTarget:' + e.currentTarget.id
     )
-})
-</code></pre>
+&#125;)</code></pre></div>
 <p><a href="https://jsbin.com/rubedoqepi/edit?html,js,output" target="_blank" rel="noopener">jsbin</a> 点这里。</p>
 <p><img src="/images/event/6.gif" srcset="/img/loading.gif" alt></p>
 <p>当我们点击最里层黑色区域的元素 d 的时候，会依次输出:</p>
-<pre><code>target:d&amp;currentTarget:d
-target:d&amp;currentTarget:c
-target:d&amp;currentTarget:b
-target:d&amp;currentTarget:a
-</code></pre><p>从输出中我们可以看到，<code>event.target</code>指向引起触发事件的元素，而<code>event.currentTarget</code>则是事件绑定的元素，只有被点击的那个目标元素的<code>event.target</code>才会等于<code>event.currentTarget</code>。<strong>也就是说，<code>event.currentTarget</code>始终是监听事件者，而<code>event.target</code>是事件的真正发出者</strong>。</p>
+<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-selector-tag">target</span><span class="hljs-selector-pseudo">:d</span>&amp;<span class="hljs-selector-tag">currentTarget</span><span class="hljs-selector-pseudo">:d</span>
+<span class="hljs-selector-tag">target</span><span class="hljs-selector-pseudo">:d</span>&amp;<span class="hljs-selector-tag">currentTarget</span><span class="hljs-selector-pseudo">:c</span>
+<span class="hljs-selector-tag">target</span><span class="hljs-selector-pseudo">:d</span>&amp;<span class="hljs-selector-tag">currentTarget</span><span class="hljs-selector-pseudo">:b</span>
+<span class="hljs-selector-tag">target</span><span class="hljs-selector-pseudo">:d</span>&amp;<span class="hljs-selector-tag">currentTarget</span><span class="hljs-selector-pseudo">:a</span></code></pre></div>
+<p>从输出中我们可以看到，<code>event.target</code>指向引起触发事件的元素，而<code>event.currentTarget</code>则是事件绑定的元素，只有被点击的那个目标元素的<code>event.target</code>才会等于<code>event.currentTarget</code>。<strong>也就是说，<code>event.currentTarget</code>始终是监听事件者，而<code>event.target</code>是事件的真正发出者</strong>。</p>
 <p>另外，值得一提的是，function 内部的<code>this</code>指的也就是<code>event.currentTarget</code>。</p>
 <h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件。这种方法叫做事件代理或叫事件委托（Event Delegation）。</p>
 <h4 id="1-优点"><a href="#1-优点" class="headerlink" title="1.优点"></a>1.优点</h4><ul>
 <li>减少内存消耗，提高性能</li>
 </ul>
 <p>假设有一个列表，列表之中有大量的列表项，我们需要在点击每个列表项的时候响应一个事件：</p>
-<pre><code class="html">&lt;ul id=&quot;myList&quot;&gt;
-  &lt;li&gt;Item 1&lt;/li&gt;
-  &lt;li&gt;Item 2&lt;/li&gt;
-  &lt;li&gt;Item 3&lt;/li&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item 3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   ......
-  &lt;li&gt;Item n&lt;/li&gt;
-&lt;/ul&gt;
-</code></pre>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item n<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre></div>
 <p>如果给每个列表项都绑定一个函数，假如此时列表项很多，那无疑对内存的消耗是非常大的，并且效率上需要消耗很多性能。借助事件代理，我们只需要给父容器 <code>ul</code> 绑定方法即可，这样不管点击的是哪一个后代元素，都会根据冒泡传播的传递机制，把容器的 click 行为触发，然后把对应的方法执行，根据事件源，我们可以知道点击的是谁，从而完成不同的事。</p>
 <ul>
 <li>动态绑定事件</li>
 </ul>
 <p>在很多时候，我们需要通过用户操作动态的增删列表项元素，如果一开始给每个子元素绑定事件，那么在列表发生变化时，就需要重新给新增的元素绑定事件，给即将删去的元素解绑事件，如果用事件代理就会省去很多这样麻烦。</p>
 <h4 id="2-如何实现"><a href="#2-如何实现" class="headerlink" title="2.如何实现"></a>2.如何实现</h4><p>接下来我们来实现上例中父层元素 <code>#myList</code> 下的 <code>li</code> 元素的事件委托到它的父层元素上：</p>
-<pre><code class="javascript">// 取得容器
-var myList = document.getElementById(&quot;myList&quot;);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 取得容器</span>
+<span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);
 
-// 让父层 myList 来监听 click 事件
+<span class="hljs-comment">// 让父层 myList 来监听 click 事件</span>
 myList.addEventListener(
-  &quot;click&quot;,
-  function (e) {
-    // 判断目标元素若是 li 则执行 console.log
-    if (e.target.tagName.toLowerCase() === &quot;li&quot;) {
-      console.log(e.target.textContent);
-    }
-  },
-  false
+  <span class="hljs-string">"click"</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+    <span class="hljs-comment">// 判断目标元素若是 li 则执行 console.log</span>
+    <span class="hljs-keyword">if</span> (e.target.tagName.toLowerCase() === <span class="hljs-string">"li"</span>) &#123;
+      <span class="hljs-built_in">console</span>.log(e.target.textContent);
+    &#125;
+  &#125;,
+  <span class="hljs-literal">false</span>
 );
 
-// 建立新的 &lt;li&gt; 元素
-var newList = document.createElement(&quot;li&quot;);
+<span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span>
+<span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>);
 
-// 建立 textNode 文字节点
-var textNode = document.createTextNode(&quot;Hello world!&quot;);
+<span class="hljs-comment">// 建立 textNode 文字节点</span>
+<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Hello world!"</span>);
 
-// 通过 appendChild 将 textNode 加入至 newList
+<span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span>
 newList.appendChild(textNode);
 
-// 通过 appendChild 将 newList 加入至 myList
-myList.appendChild(newList);
-</code></pre>
+<span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span>
+myList.appendChild(newList);</code></pre></div>
 <p>我们把<code>click</code>事件改由父层的<code>myList</code>来监听，利用事件传递的原理，判断<code>e.target</code>是我们想要的目标节点时，才去执行后续的动作。</p>
 <p>这样的好处是你的事件管理会非常轻松，而且后续加上的<code>newList</code>也会有<code>click</code>的效果，无需另外再去绑定<code>click</code>事件。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
@@ -447,19 +484,18 @@ myList.appendChild(newList);
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
@@ -467,24 +503,47 @@ myList.appendChild(newList);
                     
                       <a class="hover-with-bg" href="/tags/event/">event</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/07/03/JavaScript事件三部曲之事件的兄弟姐妹们/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript事件三部曲之事件的兄弟姐妹们</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/26/JavaScript事件三部曲之事件机制的原理/">
+                        <span class="hidden-mobile">JavaScript事件三部曲之事件机制的原理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -500,8 +559,8 @@ myList.appendChild(newList);
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -531,123 +590,69 @@ myList.appendChild(newList);
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -678,6 +683,8 @@ myList.appendChild(newList);
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -694,24 +701,29 @@ myList.appendChild(newList);
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

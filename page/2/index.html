@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,22 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +58,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,12 +131,12 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
@@ -122,7 +146,7 @@
 
           
             <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
+              <i class="iconfont icon-arrowdown"></i>
             </div>
           
         </div>
@@ -133,7 +157,7 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
+        <div class="py-5" id="board"
           style=margin-top:0>
           
           <div class="container">
@@ -145,536 +169,609 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/06/19/JavaScript系列之类数组对象arguments/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/argument.png" srcset="/img/loading.gif" alt="JavaScript系列之类数组对象arguments"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/argument.png" srcset="/img/loading.gif" alt="JavaScript系列之类数组对象arguments">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/06/19/JavaScript系列之类数组对象arguments/">
-        <p class="h4 index-header">JavaScript系列之类数组对象arguments</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/19/JavaScript系列之类数组对象arguments/">JavaScript系列之类数组对象arguments</a>
+      </h1>
 
-      <a href="/2020/06/19/JavaScript系列之类数组对象arguments/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/19/JavaScript系列之类数组对象arguments/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">之前在《JavaScript 系列之 this 是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。
+          
+            
+          
+          之前在《JavaScript 系列之 this 是什么》这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。
 那arguments到底是什么呢？下面就由我来简洁地介绍一下 arguments吧。
-什么是参数(parameters)在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。
-function MyFavorite(house, car, mon</div>
-        </div>
-      </a>
+什么是参数(parameters)在了解arguments之前，我们必须要先了解一下什么是参数(parameter)。参数其实就
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-19&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-19 00:00" pubdate>
+              2020-06-19
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/arguments/">arguments</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/arguments/">arguments</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/06/14/CSS Flexbox 对你说爱不完/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/flexbox.jpg" srcset="/img/loading.gif" alt="Flexbox 对你说爱不完"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/flexbox.jpg" srcset="/img/loading.gif" alt="Flexbox 对你说爱不完">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">
-        <p class="h4 index-header">Flexbox 对你说爱不完</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">Flexbox 对你说爱不完</a>
+      </h1>
 
-      <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Flexbox 意为弹性布局，是一种新的 CSS 3 布局方式，与传统布局方式(基于盒模型，依赖 display 属性 +position 属性 +float 属性)相比，flex 布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。
+          
+            
+          
+          Flexbox 意为弹性布局，是一种新的 CSS 3 布局方式，与传统布局方式(基于盒模型，依赖 display 属性 +position 属性 +float 属性)相比，flex 布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。
 废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。
 基本概念
-使用了 flex 布局，则有 flex 容器（flex container），子元素为项目(flex item）。
-在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start 和 end 表示对应轴的起始位置，这是默认</div>
-        </div>
-      </a>
+使用了 flex 布局，则有 flex 容器（flex container），
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-14&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-14 00:00" pubdate>
+              2020-06-14
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/CSS/">CSS</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CSS/">CSS</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/CSS/">CSS</a>&nbsp;
-          
-            <a href="/tags/布局/">布局</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CSS/">CSS</a>
+            
+              <a href="/tags/布局/">布局</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/06/02/JavaScript系列之闭包(Closure)/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/closure.jpg" srcset="/img/loading.gif" alt="JavaScript系列之闭包"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/closure.jpg" srcset="/img/loading.gif" alt="JavaScript系列之闭包">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/06/02/JavaScript系列之闭包(Closure)/">
-        <p class="h4 index-header">JavaScript系列之闭包</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/06/02/JavaScript系列之闭包(Closure)/">JavaScript系列之闭包</a>
+      </h1>
 
-      <a href="/2020/06/02/JavaScript系列之闭包(Closure)/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/06/02/JavaScript系列之闭包(Closure)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">相信很多初学者在学习 JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。
-在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章《JavaScript 系列之变量对象》和《JavaScript 系列之作用域和作用域链》，因为它们相互之间都是有关联的。
-闭包是什么？首先，先来看看 MDN 对闭包的定义：
-
-闭包是指那些能够访问自由变量的函数。
-
-那什么是自由变量呢？
-
-自由变量是一个既不是函数的形参，也不是函数的局部变量的变量。
-
-由此</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-06-02&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
           
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+            
+          
+          相信很多初学者在学习 JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。
+在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章《JavaScript 系列之变量对象》和《JavaScript 系列之作用域和作用域链》，因为它们相互之间都
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-06-02 00:00" pubdate>
+              2020-06-02
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/闭包/">闭包</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/闭包/">闭包</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/05/24/JavaScript系列之this是什么/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/this.jpg" srcset="/img/loading.gif" alt="JavaScript系列之this是什么"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/this.jpg" srcset="/img/loading.gif" alt="JavaScript系列之this是什么">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/24/JavaScript系列之this是什么/">
-        <p class="h4 index-header">JavaScript系列之this是什么</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/05/24/JavaScript系列之this是什么/">JavaScript系列之this是什么</a>
+      </h1>
 
-      <a href="/2020/05/24/JavaScript系列之this是什么/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/05/24/JavaScript系列之this是什么/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">上一篇《JavaScript 系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。
+          
+            
+          
+          上一篇《JavaScript 系列之作用域和作用域链》中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。
 再来回顾一下关于执行上下文的三个阶段生命周期：
 
 本章将专门介绍与执行上下文创建阶段直接相关的最后一个细节——this是什么？以及它的指向到底是什么。
-了解 this也许你在其他面向对象的编程语言曾经看过this，也知道它会指向某个构造器(constructor)所建立的对象。但事实上在 JavaScript 里面，this所代表的不仅仅是那个被建立的对象。
-先来看看 ECMAScript 标准规范对 this 的定</div>
-        </div>
-      </a>
+了解 this也许你在其他面向对象的编程语言曾经看过this，也知道
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-24&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-24 00:00" pubdate>
+              2020-05-24
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/this/">this</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/this/">this</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/05/18/JavaScript系列之作用域和作用域链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/scope.png" srcset="/img/loading.gif" alt="JavaScript系列之作用域和作用域链"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/scope.png" srcset="/img/loading.gif" alt="JavaScript系列之作用域和作用域链">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/18/JavaScript系列之作用域和作用域链/">
-        <p class="h4 index-header">JavaScript系列之作用域和作用域链</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/05/18/JavaScript系列之作用域和作用域链/">JavaScript系列之作用域和作用域链</a>
+      </h1>
 
-      <a href="/2020/05/18/JavaScript系列之作用域和作用域链/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/05/18/JavaScript系列之作用域和作用域链/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在上一篇《JavaScript 系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。
+          
+            
+          
+          在上一篇《JavaScript 系列之变量对象》中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。
 此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。
 先来回顾一下关于执行上下文的三个阶段生命周期：
 
 本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——作用域链。
-作用域(Scope)在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？
-作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码</div>
-        </div>
-      </a>
+作用域
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-18&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-18 00:00" pubdate>
+              2020-05-18
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/Scope/">Scope</a>&nbsp;
-          
-            <a href="/tags/Scope-Chain/">Scope Chain</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/Scope/">Scope</a>
+            
+              <a href="/tags/Scope-Chain/">Scope Chain</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/05/12/JavaScript系列之变量对象/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/vo.jpg" srcset="/img/loading.gif" alt="JavaScript系列之变量对象"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/vo.jpg" srcset="/img/loading.gif" alt="JavaScript系列之变量对象">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/12/JavaScript系列之变量对象/">
-        <p class="h4 index-header">JavaScript系列之变量对象</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/05/12/JavaScript系列之变量对象/">JavaScript系列之变量对象</a>
+      </h1>
 
-      <a href="/2020/05/12/JavaScript系列之变量对象/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/05/12/JavaScript系列之变量对象/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript 编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript 系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。
+          
+            
+          
+          JavaScript 编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇《JavaScript 系列之执行上下文和执行栈》，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。
 上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：
 
-详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this 等很多 JavaScript 初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解 JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会</div>
-        </div>
-      </a>
+详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-12&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-12 00:00" pubdate>
+              2020-05-12
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/变量对象/">变量对象</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/变量对象/">变量对象</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/context.jpg" srcset="/img/loading.gif" alt="JavaScript系列之执行上下文和执行栈"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/context.jpg" srcset="/img/loading.gif" alt="JavaScript系列之执行上下文和执行栈">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/">
-        <p class="h4 index-header">JavaScript系列之执行上下文和执行栈</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/">JavaScript系列之执行上下文和执行栈</a>
+      </h1>
 
-      <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。
+          
+            
+          
+          如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。
 执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。
-执行上下文（Execution Context）当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：
+执行上下文（Execution Context
+        </a>
+      </p>
 
-全局</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-05-04&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-05-04 00:00" pubdate>
+              2020-05-04
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/Execution-Context/">Execution Context</a>&nbsp;
-          
-            <a href="/tags/Execution-Context-Stack/">Execution Context Stack</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/Execution-Context/">Execution Context</a>
+            
+              <a href="/tags/Execution-Context-Stack/">Execution Context Stack</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/constructor.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和prototype的建立"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/constructor.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和prototype的建立">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
-        <p class="h4 index-header">谈谈JavaScript中的函数构造式和prototype的建立</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">谈谈JavaScript中的函数构造式和prototype的建立</a>
+      </h1>
 
-      <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在《谈谈 JavaScript 中的 function constructor 和 new 关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。
-在 JavaScript 中的函数也是一种对象，其中包含一些属性像是该函数的名称（Name）和该函数的内容（Code），但其实function这里面还有一个属性，这个属性就是prototype，这个属性会以空对象的型式呈现。
-除非你是把fun</div>
-        </div>
-      </a>
+          
+            
+          
+          在《谈谈 JavaScript 中的 function constructor 和 new 关键字》这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。
+在 JavaScript 中的函数也是一种
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-24&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-24 00:00" pubdate>
+              2020-04-24
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/constructor/">constructor</a>&nbsp;
-          
-            <a href="/tags/prototype/">prototype</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/constructor/">constructor</a>
+            
+              <a href="/tags/prototype/">prototype</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/new.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和new关键字"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/new.jpg" srcset="/img/loading.gif" alt="谈谈JavaScript中的函数构造式和new关键字">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/">
-        <p class="h4 index-header">谈谈JavaScript中的函数构造式和new关键字</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/">谈谈JavaScript中的函数构造式和new关键字</a>
+      </h1>
 
-      <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">您是否曾困惑于 Javascript 中的 new 关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？
+          
+            
+          
+          您是否曾困惑于 Javascript 中的 new 关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？
 大多数 Javascript 的新开发者不太想要使用 new 关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。
-谈谈 function constructorconstructor 翻为构造器但为了让您之后更好地理解，会直接使用 constructor；在 Javascript 中任何一个函数(function)都可以被当作 constructor；Javascript</div>
-        </div>
-      </a>
+谈谈 function constructorconstru
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-17&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-17 00:00" pubdate>
+              2020-04-17
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/constructor/">constructor</a>&nbsp;
-          
-            <a href="/tags/new/">new</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/constructor/">constructor</a>
+            
+              <a href="/tags/new/">new</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/11/JavaScript系列之对象的继承/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jichen.jpg" srcset="/img/loading.gif" alt="JavaScript系列之对象的继承">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/11/JavaScript系列之对象的继承/">
-        <p class="h4 index-header">JavaScript系列之对象的继承</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/11/JavaScript系列之对象的继承/">JavaScript系列之对象的继承</a>
+      </h1>
 
-      <a href="/2020/04/11/JavaScript系列之对象的继承/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/11/JavaScript系列之对象的继承/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">这篇文章的重点讲的是关于 JavaScript 中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自 B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
-而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（prototype）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。
-复习原型/原型链JavaScript 的继承得靠原型/原型链来实现，当然原型/原型链不是</div>
-        </div>
-      </a>
+          
+            
+          
+          这篇文章的重点讲的是关于 JavaScript 中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自 B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。
+而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-11&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-11 00:00" pubdate>
+              2020-04-11
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/原型/">原型</a>&nbsp;
-          
-            <a href="/tags/原型链/">原型链</a>&nbsp;
-          
-            <a href="/tags/继承/">继承</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/原型/">原型</a>
+            
+              <a href="/tags/原型链/">原型链</a>
+            
+              <a href="/tags/继承/">继承</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
 
 
-  <nav aria-label="index posts navigation">
-    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fas fa-angle-double-right"></i></a>
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
   <script>
-    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
     }
   </script>
@@ -690,8 +787,8 @@ function MyFavorite(house, car, mon</div>
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -721,73 +818,45 @@ function MyFavorite(house, car, mon</div>
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
-
-
-  <script  src="/js/lazyload.js" ></script>
-
-
-
-
-
-
-
-
-
 
 <!-- Plugins -->
 
 
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
-  </script>
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
 
 
 
@@ -811,21 +880,6 @@ function MyFavorite(house, car, mon</div>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
 
 
   <script  src="/js/local-search.js" ></script>
@@ -833,24 +887,15 @@ function MyFavorite(house, car, mon</div>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
-        $(this).wrap(element);
-      }
-    );
-  </script>
+
+
 
 
 

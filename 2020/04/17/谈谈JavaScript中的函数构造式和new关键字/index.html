@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>谈谈JavaScript中的函数构造式和new关键字 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期五, 四月 17日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-04-17 00:00" pubdate>
+        2020年4月17日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.7k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      6 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,22 +209,23 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">谈谈JavaScript中的函数构造式和new关键字</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>您是否曾困惑于 Javascript 中的 new 关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？</p>
 <p>大多数 Javascript 的新开发者不太想要使用 new 关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。</p>
 <h3 id="谈谈-function-constructor"><a href="#谈谈-function-constructor" class="headerlink" title="谈谈 function constructor"></a>谈谈 function constructor</h3><p><code>constructor</code> 翻为构造器但为了让您之后更好地理解，会直接使用 <code>constructor</code>；在 Javascript 中任何一个函数(<code>function</code>)都可以被当作 <code>constructor</code>；Javascript 并没有明确的区分两者，也就是说 <code>function</code> 可以被当作 <code>constructor</code> 或者当作一般函数调用。</p>
 <p>而 <code>constructor</code> 的用法就是 <code>function</code> 搭配<code>new</code>关键字：</p>
-<pre><code class="javascript">function Person() {
-  this.firstName = &quot;Jay&quot;;
-  this.lastName = &quot;Chou&quot;;
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
+  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+&#125;
 
-var person = new Person();
-console.log(person);
-</code></pre>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
+<span class="hljs-built_in">console</span>.log(person);</code></pre></div>
 <p>接着我们把<code>person</code>呼叫出来看，会得到如下的结果，<strong>通过<code>new</code>它会帮我们建立一个对象</strong>，然后里面有<code>Person</code>这个<code>function</code>里面的内容，并且变成了属性名称和属性值：</p>
 <p><img src="/images/new/1.png" srcset="/img/loading.gif" alt></p>
 <h3 id="进一步来看-new-让这个过程发生了什么"><a href="#进一步来看-new-让这个过程发生了什么" class="headerlink" title="进一步来看 new 让这个过程发生了什么"></a>进一步来看 new 让这个过程发生了什么</h3><p>当使用<code>new</code>命令时，它后面的函数依次执行下面的 4 个步骤：</p>
@@ -193,61 +241,56 @@ console.log(person);
 <p>所以当执行<code>People</code>这个<code>function</code>，执行到<code>this.firstName</code>和<code>this.lastName</code>时，因为<code>this</code>现在指称的是那个空对象，所以实际上是在帮这个空对象赋予属性名称和属性值。</p>
 <p>在这样的过程中，<strong>只要这个构造函数<code>People</code> 没有指定<code>return</code>为其他对象，它就会直接返回给我们这个新建立的对象</strong>。</p>
 <p>接着让我们通过一段代码来更清楚的了解这个执行的过程：</p>
-<pre><code class="javascript">function Person() {
-  this.firstName = &quot;Jay&quot;;
-  this.lastName = &quot;Chou&quot;;
-  console.log(&quot;这个函数有被执行&quot;);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
+  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"这个函数有被执行"</span>);
+&#125;
 
-var person = new Person();
-console.log(person);
-</code></pre>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
+<span class="hljs-built_in">console</span>.log(person);</code></pre></div>
 <p>这时候在 chrome 中呼叫出来的结果如下，说明了当我们使用<code>new</code> 在构造对象的时候<code>People</code> 这个<code>function</code> 确实有被执行：</p>
 <p><img src="/images/new/2.png" srcset="/img/loading.gif" alt></p>
 <h3 id="通过-new-会帮我们建立一个空的对象"><a href="#通过-new-会帮我们建立一个空的对象" class="headerlink" title="通过 new 会帮我们建立一个空的对象"></a>通过 new 会帮我们建立一个空的对象</h3><p>现在我把我们上面的代码改成这样：</p>
-<pre><code class="javascript">function Person() {
-  console.log(this);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+&#125;
 
-var person = new Person();
-// console.log(person);
-</code></pre>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
+<span class="hljs-comment">// console.log(person);</span></code></pre></div>
 <p>这时候代码返回的结果如下，表示的确在执行这段代码的过程中帮我们建立了一个新的空对象：</p>
 <p><img src="/images/new/3.jpg" srcset="/img/loading.gif" alt></p>
 <h3 id="函数的最后若-return-其他对象，则原新对象内容会被覆盖"><a href="#函数的最后若-return-其他对象，则原新对象内容会被覆盖" class="headerlink" title="函数的最后若 return 其他对象，则原新对象内容会被覆盖"></a>函数的最后若 return 其他对象，则原新对象内容会被覆盖</h3><p>现在，让我们把原本的代码稍微做如下修改：</p>
-<pre><code class="javascript">function Person() {
-  this.firstName = &quot;Jay&quot;;
-  this.lastName = &quot;Chou&quot;;
-  return { RETURN: &quot;原本this的内容就不会被返回&quot; };
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
+  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+  <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">RETURN</span>: <span class="hljs-string">"原本this的内容就不会被返回"</span> &#125;;
+&#125;
 
-var person = new Person();
-console.log(person);
-</code></pre>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
+<span class="hljs-built_in">console</span>.log(person);</code></pre></div>
 <p>构造函数的内部若<code>return</code>其他对象，<code>new</code>命令会返回<code>return</code>语句指定的对象，将原新对象内容覆盖掉；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。返回的结果如下：</p>
 <p><img src="/images/new/4.png" srcset="/img/loading.gif" alt></p>
-<h3 id="手写一个-new-实现"><a href="#手写一个-new-实现" class="headerlink" title="手写一个 new 实现"></a>手写一个 new 实现</h3><pre><code class="javascript">function create() {
-  // 创建一个空的对象
-  var obj = new Object(),
-    // 获得构造函数，arguments中去除第一个参数
-    Con = [].shift.call(arguments);
-  // 链接到原型，obj 可以访问到构造函数原型中的属性
+<h3 id="手写一个-new-实现"><a href="#手写一个-new-实现" class="headerlink" title="手写一个 new 实现"></a>手写一个 new 实现</h3><div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-comment">// 创建一个空的对象</span>
+  <span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>(),
+    <span class="hljs-comment">// 获得构造函数，arguments中去除第一个参数</span>
+    Con = [].shift.call(<span class="hljs-built_in">arguments</span>);
+  <span class="hljs-comment">// 链接到原型，obj 可以访问到构造函数原型中的属性</span>
   obj.__proto__ = Con.prototype;
-  // 绑定 this 实现继承，obj 可以访问到构造函数中的属性
-  var ret = Con.apply(obj, arguments);
-  // 优先返回构造函数返回的对象
-  return ret instanceof Object ? ret : obj;
-}
-</code></pre>
+  <span class="hljs-comment">// 绑定 this 实现继承，obj 可以访问到构造函数中的属性</span>
+  <span class="hljs-keyword">var</span> ret = Con.apply(obj, <span class="hljs-built_in">arguments</span>);
+  <span class="hljs-comment">// 优先返回构造函数返回的对象</span>
+  <span class="hljs-keyword">return</span> ret <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span> ? ret : obj;
+&#125;</code></pre></div>
 <p>使用这个手写的 new</p>
-<pre><code class="javascript">function Person() {...}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;...&#125;
 
-// 使用内置函数new
-var person = new Person(...)
+<span class="hljs-comment">// 使用内置函数new</span>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person(...)
 
-// 使用手写的new，即create
-var person = create(Person, ...)
-</code></pre>
+<span class="hljs-comment">// 使用手写的new，即create</span>
+<span class="hljs-keyword">var</span> person = create(Person, ...)</code></pre></div>
 <p>代码原理解析：</p>
 <ol>
 <li>用<code>new Object()</code> 的方式新建了一个对象<code>obj</code></li>
@@ -257,28 +300,26 @@ var person = create(Person, ...)
 <li>返回 <code>obj</code></li>
 </ol>
 <h3 id="function-constructor-的实际应用"><a href="#function-constructor-的实际应用" class="headerlink" title="function constructor 的实际应用"></a>function constructor 的实际应用</h3><p>由上面的方法，我们可以通过<code>function</code>的方式来建立一个新的对象，如果我们想要<strong>建立出同属性名称但不同属性值的对象内容，我们可以把对象的属性值变成参数</strong>，如此就能通过此<code>function constructor</code>建立出许多不同的对象：</p>
-<pre><code class="javascript">function Person(firstName, lastName) {
-  this.firstName = firstName;
-  this.lastName = lastName;
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params">firstName, lastName</span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.firstName = firstName;
+  <span class="hljs-keyword">this</span>.lastName = lastName;
+&#125;
 
-var person1 = new Person(&quot;Jay&quot;, &quot;chou&quot;);
-console.log(person1);
-var person2 = new Person(&quot;Jane&quot;, &quot;chou&quot;);
-console.log(person2);
-</code></pre>
+<span class="hljs-keyword">var</span> person1 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Jay"</span>, <span class="hljs-string">"chou"</span>);
+<span class="hljs-built_in">console</span>.log(person1);
+<span class="hljs-keyword">var</span> person2 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Jane"</span>, <span class="hljs-string">"chou"</span>);
+<span class="hljs-built_in">console</span>.log(person2);</code></pre></div>
 <p>如此，我们就可以通过同一个构造函数建立出很多不同的对象：</p>
 <p><img src="/images/new/5.png" srcset="/img/loading.gif" alt></p>
 <p>此外，我们会把根据<strong>构造器（<code>constructor</code>）所建立出来的对象称作是实例（<code>instance</code>）</strong>，这在之前的文章里也有提过。</p>
 <h3 id="注意！如果我们忘了加上-new-关键字"><a href="#注意！如果我们忘了加上-new-关键字" class="headerlink" title="注意！如果我们忘了加上 new 关键字"></a>注意！如果我们忘了加上 new 关键字</h3><p>这里有一个地方我们需要非常留意，如果你在撰写代码的过程当中，忘记加上<code>new</code>这个关键字的话，比如：</p>
-<pre><code class="javascript">function Person() {
-  this.firstName = &quot;Jay&quot;;
-  this.lastName = &quot;Chou&quot;;
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
+  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+&#125;
 
-var person = Person();
-console.log(person);
-</code></pre>
+<span class="hljs-keyword">var</span> person = Person();
+<span class="hljs-built_in">console</span>.log(person);</code></pre></div>
 <p>如此，因为 JavaScript 不知道你是要执行这个函数，还是要根据这个<code>function</code>去建立<code>object</code>，因次最后会返回<code>undefined</code>的结果。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>其实构造函数（function constructor）就是普通的 function，只是我们可以通过这个 function 来建立对象。</li>
@@ -290,19 +331,18 @@ console.log(person);
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
@@ -310,24 +350,47 @@ console.log(person);
                     
                       <a class="hover-with-bg" href="/tags/new/">new</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">谈谈JavaScript中的函数构造式和prototype的建立</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/04/11/JavaScript系列之对象的继承/">
+                        <span class="hidden-mobile">JavaScript系列之对象的继承</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -343,8 +406,8 @@ console.log(person);
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -374,123 +437,69 @@ console.log(person);
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -521,6 +530,8 @@ console.log(person);
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -537,24 +548,29 @@ console.log(person);
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

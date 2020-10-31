@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,22 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +58,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,12 +131,12 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
@@ -122,7 +146,7 @@
 
           
             <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
+              <i class="iconfont icon-arrowdown"></i>
             </div>
           
         </div>
@@ -133,7 +157,7 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
+        <div class="py-5" id="board"
           style=margin-top:0>
           
           <div class="container">
@@ -145,499 +169,558 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/12/分享7个有用的JavaScript技巧/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/7jiqiao.jpg" srcset="/img/loading.gif" alt="【译】分享7个好用的JavaScript技巧">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
-        <p class="h4 index-header">【译】分享7个好用的JavaScript技巧</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/12/分享7个有用的JavaScript技巧/">【译】分享7个好用的JavaScript技巧</a>
+      </h1>
 
-      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">就像所有其他编程语言一样，JavaScript 也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个 JavaScript 技巧吧！
+          
+            
+          
+          就像所有其他编程语言一样，JavaScript 也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个 JavaScript 技巧吧！
 
 原文链接：https://davidwalsh.name/javascript-tricks#comments
 数组去重数组去重可能比您想象的更容易：
-var j = [...new Set([1, 2, 3, 4, 4])] &gt;&gt; [1, 2, 3, 4];
+var j = [...new Se
+        </a>
+      </p>
 
-很简单有木有！
-过滤掉 falsy 值是否需要从数组中过滤出 falsy 值（0，undefined，null，</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-12&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-12 00:00" pubdate>
+              2020-02-12
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/编程技巧/">编程技巧</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/编程技巧/">编程技巧</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/11/DOM Node 的建立、删除与修改/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domnode.png" srcset="/img/loading.gif" alt="DOM Node 的建立、删除与修改">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/11/DOM Node 的建立、删除与修改/">
-        <p class="h4 index-header">DOM Node 的建立、删除与修改</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/11/DOM Node 的建立、删除与修改/">DOM Node 的建立、删除与修改</a>
+      </h1>
 
-      <a href="/2020/02/11/DOM Node 的建立、删除与修改/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/11/DOM Node 的建立、删除与修改/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。
+          
+            
+          
+          在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。
 DOM 节点的新增document.createElement(tagName)通过document.createElement()可以建立一个新的元素：
-var newDiv = document.createElement(&quot;div&quot;);
+var newDiv = document.createElem
+        </a>
+      </p>
 
-在建立新的div元素newDiv后，这时候我们在浏览器上还看不到它，直到通过appendChild()、insertBefore()或replaceChi</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-11&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-11 00:00" pubdate>
+              2020-02-11
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/DOM/">DOM</a>&nbsp;
-          
-            <a href="/tags/API/">API</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/DOM/">DOM</a>
+            
+              <a href="/tags/API/">API</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/03/JavaScript系列之原型与原型链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/prototype.jpg" srcset="/img/loading.gif" alt="JavaScript系列之原型与原型链">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/03/JavaScript系列之原型与原型链/">
-        <p class="h4 index-header">JavaScript系列之原型与原型链</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/03/JavaScript系列之原型与原型链/">JavaScript系列之原型与原型链</a>
+      </h1>
 
-      <a href="/2020/02/03/JavaScript系列之原型与原型链/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/03/JavaScript系列之原型与原型链/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript 也是一门面向对象的语言，ES6 之前并没有引入类（class）的概念，像 c++ 这种典型的面向对象语言都是通过类来创建实例对象，而 JavaScript 是直接通过构造函数来创建实例。
+          
+            
+          
+          JavaScript 也是一门面向对象的语言，ES6 之前并没有引入类（class）的概念，像 c++ 这种典型的面向对象语言都是通过类来创建实例对象，而 JavaScript 是直接通过构造函数来创建实例。
 所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。
-构造函数构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。
-构造函数就是一个普通的函数，创建方式和普通函数没有区别，不同的是构造函数习惯上首字母大写。另外就是调用方式的不同，普通函数是直接调用，而构造函数需要使用 new 关键字来调用</div>
-        </div>
-      </a>
+构造函数构造函数模式的目的就是为了创建一个自定义类
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-03&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-03 00:00" pubdate>
+              2020-02-03
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/原型/">原型</a>&nbsp;
-          
-            <a href="/tags/原型链/">原型链</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/原型/">原型</a>
+            
+              <a href="/tags/原型链/">原型链</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/30/JavaScript系列之内存泄漏/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunxielou.png" srcset="/img/loading.gif" alt="JavaScript系列之内存泄漏">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/30/JavaScript系列之内存泄漏/">
-        <p class="h4 index-header">JavaScript系列之内存泄漏</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/30/JavaScript系列之内存泄漏/">JavaScript系列之内存泄漏</a>
+      </h1>
 
-      <a href="/2020/01/30/JavaScript系列之内存泄漏/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/30/JavaScript系列之内存泄漏/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。
+          
+            
+          
+          在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。
 而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如 C 语言有着malloc() 和 free() 这种低级内存管理语言也有可能出现泄露内存的情况。
-这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。
-垃圾回收机制现在各大浏览器通常采用的垃圾回收有两种方法：标记清除（mark and sweep）、引用计数(reference counti</div>
-        </div>
-      </a>
+这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-30&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-30 00:00" pubdate>
+              2020-01-30
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/内存/">内存</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/内存/">内存</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/28/JavaScript系列之内存空间/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunkj.jpg" srcset="/img/loading.gif" alt="JavaScript系列之内存空间"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/neicunkj.jpg" srcset="/img/loading.gif" alt="JavaScript系列之内存空间">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/28/JavaScript系列之内存空间/">
-        <p class="h4 index-header">JavaScript系列之内存空间</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/28/JavaScript系列之内存空间/">JavaScript系列之内存空间</a>
+      </h1>
 
-      <a href="/2020/01/28/JavaScript系列之内存空间/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/28/JavaScript系列之内存空间/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">对于很多没经验的前端开发来说，觉得 JS 反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。
+          
+            
+          
+          对于很多没经验的前端开发来说，觉得 JS 反正有垃圾回收机制，很容易忽视内存空间的管理，这其实是一个大错误。
 直到最近，看了阮一峰老师关于 JS 内存泄漏的文章，才发现自己以前写的代码，存在许多内存泄漏的问题，再者，因为忽略对内存空间的学习，导致后面很多进阶概念很模糊，比如闭包、作用域链，比如深拷贝与浅拷贝的区别等等。
 这里先介绍内存空间，后续还会通过别的文章来介绍深浅拷贝和内存泄漏。
-内存空间管理JavaScript 的内存生命周期:
-1. 分配你所需要的内存
-2. 使用分配到的内存（读、写）
-3. 不需要时将其释放、归还
-为了便于理解，我们使用一个简单的例子来解释这个周期。
-var a =</div>
-        </div>
-      </a>
+内存空间管
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-28&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-28 00:00" pubdate>
+              2020-01-28
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/内存/">内存</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/内存/">内存</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/22/学会如何学习（三）/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn3.png" srcset="/img/loading.gif" alt="学会如何学习（三）">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/22/学会如何学习（三）/">
-        <p class="h4 index-header">学会如何学习（三）</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/22/学会如何学习（三）/">学会如何学习（三）</a>
+      </h1>
 
-      <a href="/2020/01/22/学会如何学习（三）/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/22/学会如何学习（三）/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~
+          
+            
+          
+          第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~
 拖延症的形成我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。
 
-这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的</div>
-        </div>
-      </a>
+这里要强调一下，很多
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-22&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-22 00:00" pubdate>
+              2020-01-22
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/学习之道/">学习之道</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/学习之道/">学习之道</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/高效学习/">高效学习</a>&nbsp;
-          
-            <a href="/tags/方法/">方法</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/高效学习/">高效学习</a>
+            
+              <a href="/tags/方法/">方法</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/17/Undefined vs Null/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/un-null.jpg" srcset="/img/loading.gif" alt="Undefined vs Null"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/un-null.jpg" srcset="/img/loading.gif" alt="Undefined vs Null">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/17/Undefined vs Null/">
-        <p class="h4 index-header">Undefined vs Null</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/17/Undefined vs Null/">Undefined vs Null</a>
+      </h1>
 
-      <a href="/2020/01/17/Undefined vs Null/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/17/Undefined vs Null/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。
+          
+            
+          
+          在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。
 在这篇文章中，我已经简略介绍了undefined和null的特性了。
 本文将探讨 JavaScript 中undefined和null之间的相似和差异之处。
-相似性（1）undefined和null在 if 语句中，都会被自动转为false，加!转换为true，相等运算符对于两者比较是相等的。
-if (!undefined) console.log(&quot;undefined is false&quot;);
-/</div>
-        </div>
-      </a>
+相似性（1）undefined和null在 if 语句中，都会
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-17&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-17 00:00" pubdate>
+              2020-01-17
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/15/JavaScript系列之类型转换/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/15/JavaScript系列之类型转换/">
-        <p class="h4 index-header">JavaScript系列之类型转换</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/15/JavaScript系列之类型转换/">JavaScript系列之类型转换</a>
+      </h1>
 
-      <a href="/2020/01/15/JavaScript系列之类型转换/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/15/JavaScript系列之类型转换/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。
+          
+            
+          
+          JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。
 以下我将介绍将各种类型的值，分别转换成数字、字符串或者布尔值（基于 ES5 规范）。
 ToNumber（1）Number()
 使用 Number 函数，可以将任意类型的值转化成数值。
 //数值
-Number(123); // 123  转换后为原值
+Number(123); 
+        </a>
+      </p>
 
-//字符串
-Number(&quot;123&quot;); // 123  转换为相应的数值，前提能被解析为数值
-
-//字符串
-Number(&quot;123abc</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-15&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-15 00:00" pubdate>
+              2020-01-15
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/数据类型/">数据类型</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/数据类型/">数据类型</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/13/JavaScript系列之类型判断/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/13/JavaScript系列之类型判断/">
-        <p class="h4 index-header">JavaScript系列之类型判断</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/13/JavaScript系列之类型判断/">JavaScript系列之类型判断</a>
+      </h1>
 
-      <a href="/2020/01/13/JavaScript系列之类型判断/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/13/JavaScript系列之类型判断/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。
+          
+            
+          
+          类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。
 通过本文，我将尝试概述 Javascript 中类型判断的几种方法（基于 ES5 的规范）。
 typeoftypeof 判断类型方法算是我们最最常用的了，直接上代码：
-typeof 3; // &quot;number&quot;
-typeof &quot;abc&quot;; // &quot;string&quot;
-typeof {}; // &quot;object&q</div>
-        </div>
-      </a>
+typeof
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-13&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-13 00:00" pubdate>
+              2020-01-13
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/数据类型/">数据类型</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/数据类型/">数据类型</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/01/12/JavaScript系列之数据类型/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/01/12/JavaScript系列之数据类型/">
-        <p class="h4 index-header">JavaScript系列之数据类型</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/01/12/JavaScript系列之数据类型/">JavaScript系列之数据类型</a>
+      </h1>
 
-      <a href="/2020/01/12/JavaScript系列之数据类型/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/01/12/JavaScript系列之数据类型/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。
+          
+            
+          
+          JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。
 原始类型（值类型）
 Undefined undefined
 Null null
@@ -647,47 +730,51 @@ Number 123
 Symbol(这里先不做介绍)
 
 引用类型（对象类型）
-Object：由以上几种基本类型组成，而且对象里面还可以包含对象
+Object：由以上几种基本类型组成，而且对象里面还可以包含
+        </a>
+      </p>
 
-var obj = {};
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
-var bool = new Boolean(true);
-var str = new String(&q</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-01-12&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-01-12 00:00" pubdate>
+              2020-01-12
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/数据类型/">数据类型</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/数据类型/">数据类型</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
 
 
-  <nav aria-label="index posts navigation">
-    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fas fa-angle-double-right"></i></a>
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/3/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
   <script>
-    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
     }
   </script>
@@ -703,8 +790,8 @@ var str = new String(&q</div>
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -734,73 +821,45 @@ var str = new String(&q</div>
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
-
-
-  <script  src="/js/lazyload.js" ></script>
-
-
-
-
-
-
-
-
-
 
 <!-- Plugins -->
 
 
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
-  </script>
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
 
 
 
@@ -824,21 +883,6 @@ var str = new String(&q</div>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
 
 
   <script  src="/js/local-search.js" ></script>
@@ -846,24 +890,15 @@ var str = new String(&q</div>
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
-        $(this).wrap(element);
-      }
-    );
-  </script>
+
+
 
 
 

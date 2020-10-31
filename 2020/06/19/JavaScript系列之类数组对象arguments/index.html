@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之类数组对象arguments - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期五, 六月 19日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-06-19 00:00" pubdate>
+        2020年6月19日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    2.4k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      9 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,53 +209,51 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript系列之类数组对象arguments</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991" target="_blank" rel="noopener">《JavaScript 系列之 this 是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。</p>
 <p>那<code>arguments</code>到底是什么呢？下面就由我来简洁地介绍一下 <code>arguments</code>吧。</p>
 <h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解<code>arguments</code>之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。</p>
-<pre><code class="javascript">function MyFavorite(house, car, money) {
-  console.log(house);
-  console.log(car);
-  console.log(money);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+&#125;
 
-MyFavorite();
-</code></pre>
+MyFavorite();</code></pre></div>
 <p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
 <p>一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在 JavaScript 中不太一样的地方在于，即使你没有给它任何参数值就加以执行，也不会报错，而是会返回<code>undefined</code>。</p>
 <p><img src="/images/arguments/1.jpg" srcset="/img/loading.gif" alt></p>
 <p>为什么会得到”<code>undefined</code>“呢？</p>
 <p>之所以会这样是因为当 JavaScript 在执行这个函数的时候，由于提升机制，它会先把我们的参数(<code>house</code>, <code>car</code>, <code>money</code>)存到内存中了，并且赋予它的值是<code>undefined</code>。</p>
 <p>参数值会由左至右读取，如果我依序执行这样的代码就理解了：</p>
-<pre><code class="javascript">MyFavorite();
-MyFavorite(&quot;别墅&quot;);
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;);
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;, &quot;一亿元&quot;);
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript">MyFavorite();
+MyFavorite(<span class="hljs-string">"别墅"</span>);
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>);
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>, <span class="hljs-string">"一亿元"</span>);</code></pre></div>
 <p>会分别读到以下的结果，表示 JavaScript 会由左至右来读取参数值，而且即使某些参数值有缺值的情况，JavaScript 还是可以正常执行。</p>
 <p><img src="/images/arguments/2.jpg" srcset="/img/loading.gif" alt></p>
 <h3 id="设置函数中参数的默认值"><a href="#设置函数中参数的默认值" class="headerlink" title="设置函数中参数的默认值"></a>设置函数中参数的默认值</h3><p>由于目前的几款浏览器使用的 JavaScript 版本都尚不支持直接在参数的地方设置默认值（ES6 的将可以），所以很多的框架都还不会用这种方式设置默认值。</p>
 <p><strong>方法一：在 ES6 的 JavaScript 中，可以直接通过这种方式设置参数默认值：</strong></p>
-<pre><code class="javascript">function MyFavorite(house, car, money = &quot;一亿元&quot;) {
-  console.log(house);
-  console.log(car);
-  console.log(money);
-  console.log(&quot;----------------&quot;);
-}
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money = <span class="hljs-string">"一亿元"</span></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"----------------"</span>);
+&#125;</code></pre></div>
 <p><strong>方法二：利用强制转换的概念设置默认值</strong></p>
 <p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的默认值，利用简单的”=”和”||”就可以达到参数默认值的效果：</p>
-<pre><code class="javascript">function MyFavorite(house, car, money) {
-  money = money || &quot;一亿元&quot;;
-  console.log(house);
-  console.log(car);
-  console.log(money);
-  console.log(&quot;----------------&quot;);
-}
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  money = money || <span class="hljs-string">"一亿元"</span>;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"----------------"</span>);
+&#125;</code></pre></div>
 <p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到默认值为”一亿元”：</p>
 <p><img src="/images/arguments/3.jpg" srcset="/img/loading.gif" alt></p>
 <h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>了解了<code>parameters</code>的概念后，让我们回来谈谈<code>arguments</code>，MDN 将它叫做类数组对象，那么什么是类数组对象呢？</p>
@@ -217,112 +262,105 @@ MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;, &quot;一亿元&quot;);
 <p>就是拥有一个 <code>length</code> 属性和若干索引属性的对象</p>
 </blockquote>
 <p>举个例子：</p>
-<pre><code class="javascript">var array = [&#39;house&#39;, &#39;car&#39;, &#39;money&#39;];
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-string">'house'</span>, <span class="hljs-string">'car'</span>, <span class="hljs-string">'money'</span>];
 
-var arrayLike = {
-    0: &#39;house&#39;,
-    1: &#39;car&#39;,
-    2: &#39;money&#39;,
-    length: 3
-}
+<span class="hljs-keyword">var</span> arrayLike = &#123;
+    <span class="hljs-number">0</span>: <span class="hljs-string">'house'</span>,
+    <span class="hljs-number">1</span>: <span class="hljs-string">'car'</span>,
+    <span class="hljs-number">2</span>: <span class="hljs-string">'money'</span>,
+    <span class="hljs-attr">length</span>: <span class="hljs-number">3</span>
+&#125;
 
-//读取
-console.log(array[0]); // house
-console.log(arrayLike[0]); // house
+<span class="hljs-comment">//读取</span>
+<span class="hljs-built_in">console</span>.log(array[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
+<span class="hljs-built_in">console</span>.log(arrayLike[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
 
-array[0] = &#39;new house&#39;;
-arrayLike[0] = &#39;new house&#39;;
+array[<span class="hljs-number">0</span>] = <span class="hljs-string">'new house'</span>;
+arrayLike[<span class="hljs-number">0</span>] = <span class="hljs-string">'new house'</span>;
 
-//长度
-console.log(array.length); // 3
-console.log(arrayLike.length); // 3
+<span class="hljs-comment">//长度</span>
+<span class="hljs-built_in">console</span>.log(array.length); <span class="hljs-comment">// 3</span>
+<span class="hljs-built_in">console</span>.log(arrayLike.length); <span class="hljs-comment">// 3</span>
 
-//遍历
-for(var i = 0, len = array.length; i &lt; len; i++) {
+<span class="hljs-comment">//遍历</span>
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = array.length; i &lt; len; i++) &#123;
    ……
-}
-for(var i = 0, len = arrayLike.length; i &lt; len; i++) {
+&#125;
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = arrayLike.length; i &lt; len; i++) &#123;
     ……
-}
-</code></pre>
+&#125;</code></pre></div>
 <p>上面我们可以看得出来，类数组对象与数组在读取、获取长度、遍历三个方面一样，都能取到，那为什么还叫做类数组对象呢？</p>
 <p>因为类数组对象不可以使用数组的方法，比如：</p>
-<pre><code class="javascript">arrayLike.push(&quot;name&quot;);
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript">arrayLike.push(<span class="hljs-string">"name"</span>);</code></pre></div>
 <p>然而上述代码会报错: <code>arrayLike.push is not a function</code>，所以终归还是类数组呐……</p>
 <h3 id="调用数组方法"><a href="#调用数组方法" class="headerlink" title="调用数组方法"></a>调用数组方法</h3><p>如果类数组想用数组的方法怎么办呢？</p>
 <p>直接调用是不可取的，那我们可以通过 <code>Function.call</code> 的方法进行间接调用：</p>
-<pre><code class="javascript">var arrayLike = { 0: &quot;house&quot;, 1: &quot;car&quot;, 2: &quot;money&quot;, length: 3 };
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">"house"</span>, <span class="hljs-number">1</span>: <span class="hljs-string">"car"</span>, <span class="hljs-number">2</span>: <span class="hljs-string">"money"</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
 
-console.log(Array.prototype.join.call(arrayLike, &quot;&amp;&quot;)); // house&amp;car&amp;money
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.join.call(arrayLike, <span class="hljs-string">"&amp;"</span>)); <span class="hljs-comment">// house&amp;car&amp;money</span>
 
-console.log(Array.prototype.slice.call(arrayLike, 0)); // [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]
-// slice可以做到类数组转数组
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// ["house", "car", "money"]</span>
+<span class="hljs-comment">// slice可以做到类数组转数组</span>
 
-Array.prototype.map.call(arrayLike, function (item) {
-  return item.toUpperCase();
-});
-// [&quot;HOUSE&quot;, &quot;CAR&quot;, &quot;MONEY&quot;]
-</code></pre>
+<span class="hljs-built_in">Array</span>.prototype.map.call(arrayLike, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> item.toUpperCase();
+&#125;);
+<span class="hljs-comment">// ["HOUSE", "CAR", "MONEY"]</span></code></pre></div>
 <p>在上面已经提到了一种类数组转数组的方法，再补充三个：</p>
-<pre><code class="javascript">var arrayLike = { 0: &quot;house&quot;, 1: &quot;car&quot;, 2: &quot;money&quot;, length: 3 };
-// 1. slice
-console.log(Array.prototype.slice.call(arrayLike)); // [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]
-// 2. splice
-console.log(Array.prototype.splice.call(arrayLike, 0)); // [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]
-// 3. ES6 Array.from
-console.log(Array.from(arrayLike)); // [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]
-// 4. apply
-console.log(Array.prototype.concat.apply([], arrayLike));
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">"house"</span>, <span class="hljs-number">1</span>: <span class="hljs-string">"car"</span>, <span class="hljs-number">2</span>: <span class="hljs-string">"money"</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
+<span class="hljs-comment">// 1. slice</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike)); <span class="hljs-comment">// ["house", "car", "money"]</span>
+<span class="hljs-comment">// 2. splice</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.splice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// ["house", "car", "money"]</span>
+<span class="hljs-comment">// 3. ES6 Array.from</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.from(arrayLike)); <span class="hljs-comment">// ["house", "car", "money"]</span>
+<span class="hljs-comment">// 4. apply</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.concat.apply([], arrayLike));</code></pre></div>
 <p>接下来重点讲讲 <code>Arguments</code> 这个类数组对象。</p>
 <h3 id="arguments-对象"><a href="#arguments-对象" class="headerlink" title="arguments 对象"></a>arguments 对象</h3><p><code>arguments</code>比起<code>this</code>来说，要容易理解的多，<code>arguments</code>对象只定义在函数体中，包括了函数的参数和其他属性。</p>
 <p>同样地通过上面的例子加以理解，我们直接在函数中去打印出”arguments”这个关键字：</p>
-<pre><code class="javascript">function MyFavorite(house, car, money) {
-  money = money || &quot;一亿元&quot;;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  money = money || <span class="hljs-string">"一亿元"</span>;
 
-  console.log(arguments);
-  console.log(&quot;----------------&quot;);
-}
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"----------------"</span>);
+&#125;
 
 MyFavorite();
-MyFavorite(&quot;别墅&quot;);
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;);
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;, &quot;一亿元&quot;);
-</code></pre>
+MyFavorite(<span class="hljs-string">"别墅"</span>);
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>);
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>, <span class="hljs-string">"一亿元"</span>);</code></pre></div>
 <p>打印结果如下：</p>
 <p><img src="/images/arguments/4.jpg" srcset="/img/loading.gif" alt></p>
 <p>我们可以看到除了类数组的索引属性和<code>length</code>属性之外，还有一个<code>callee</code>属性，而且我们可以看到<code>arguments</code>对象的<code>__ proto __</code>是指向<code>object</code>的，这也说明了他是个类数组对象，而不是一个数组。下面我们进行一一介绍。</p>
 <h4 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h4><p><code>arguments.length</code>为函数实参个数，举个例子：</p>
-<pre><code class="javascript">function foo(house, car, money) {
-  console.log(&quot;实参的长度为：&quot; + arguments.length);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"实参的长度为："</span> + <span class="hljs-built_in">arguments</span>.length);
+&#125;
 
-console.log(&quot;形参的长度为：&quot; + foo.length);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"形参的长度为："</span> + foo.length);
 
-foo(1);
+foo(<span class="hljs-number">1</span>);
 
-// 形参的长度为：3
-// 实参的长度为：1
-</code></pre>
+<span class="hljs-comment">// 形参的长度为：3</span>
+<span class="hljs-comment">// 实参的长度为：1</span></code></pre></div>
 <h4 id="callee-属性"><a href="#callee-属性" class="headerlink" title="callee 属性"></a>callee 属性</h4><p>每个参数实例都有一个<code>callee</code>属性，通过它可以调用函数自身。 ES5 的严格模式不允许访问<code>arguments.callee</code>。</p>
 <p>讲个闭包经典面试题使用 <code>callee</code> 的解决方法：</p>
-<pre><code class="javascript">var data = [];
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> data = [];
 
-for (var i = 0; i &lt; 3; i++) {
-  (data[i] = function () {
-    console.log(arguments.callee.i);
-  }).i = i;
-}
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+  (data[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>.callee.i);
+  &#125;).i = i;
+&#125;
 
-data[0]();
-data[1]();
-data[2]();
+data[<span class="hljs-number">0</span>]();
+data[<span class="hljs-number">1</span>]();
+data[<span class="hljs-number">2</span>]();
 
-// 0
-// 1
-// 2
-</code></pre>
+<span class="hljs-comment">// 0</span>
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 2</span></code></pre></div>
 <h3 id="最后来看看展开运算符-spread-…"><a href="#最后来看看展开运算符-spread-…" class="headerlink" title="最后来看看展开运算符 spread(…)"></a>最后来看看展开运算符 spread(…)</h3><p>除了<code>arguments</code>这个关键字，在新版 ES6 的 JavaScript 中另外提供了一个展开运算符(spread)，它就是「<code>...</code>」三个点，这个<code>...</code>有什么用呢？</p>
 <p>根据<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">MDN</a>对于展开运算符 spread 的描述如下：</p>
 <blockquote>
@@ -332,97 +370,115 @@ data[2]();
 <p>举例来说：</p>
 <p>在函数的部分，在参数的地方我们用”<code>...other</code>“，<code>other</code>是你想要储存成的数组变量名称，可以自己取。</p>
 <p>在执行函数的地方，原本我们只有三个参数(<code>house</code>, <code>car</code>, <code>money</code>)，也只能填写三个参数；但使用了展开运算符”<code>...</code>“后，我们在执行函数的地方就可以带入不只三个参数（例如，我在最后面又加了”老婆”和”孩子”），这些多的参数值最后都会被放到<code>other</code>这个数组当中。</p>
-<pre><code class="javascript">function MyFavorite(house, car, money, ...other) {
-  console.log(other);
-  console.log(
-    &quot;What my favorite are&quot; + house + &quot;,&quot; + car + &quot;,&quot; + money + &quot;,&quot; + other
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money, ...other</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(other);
+  <span class="hljs-built_in">console</span>.log(
+    <span class="hljs-string">"What my favorite are"</span> + house + <span class="hljs-string">","</span> + car + <span class="hljs-string">","</span> + money + <span class="hljs-string">","</span> + other
   );
-}
+&#125;
 
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;, &quot;一亿&quot;);
-MyFavorite(&quot;别墅&quot;, &quot;法拉利&quot;, &quot;一亿&quot;, &quot;老婆&quot;, &quot;孩子&quot;);
-</code></pre>
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>, <span class="hljs-string">"一亿"</span>);
+MyFavorite(<span class="hljs-string">"别墅"</span>, <span class="hljs-string">"法拉利"</span>, <span class="hljs-string">"一亿"</span>, <span class="hljs-string">"老婆"</span>, <span class="hljs-string">"孩子"</span>);</code></pre></div>
 <p>结果就会长的像这样子：</p>
 <p><img src="/images/arguments/5.jpg" srcset="/img/loading.gif" alt></p>
 <p>展开运算符还有其他的使用方式，像是把数组元素做连接等等，使用灵活的话相当方便，如果有需要的话，可以参考引 1。</p>
 <p>引 1：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax" target="_blank" rel="noopener">Microsoft Developer Netword：展开运算符(…)</a></p>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><strong>1.利用 arguments 实现方法的重载</strong></p>
 <p>下面我们利用<code>arguments</code>对象来实现一个参数相加的函数，不论传入多少参数都行，将传入的参数相加后返回。</p>
-<pre><code class="javascript">function add() {
-  var len = arguments.length,
-    sum = 0;
-  for (; len--; ) {
-    sum += arguments[len];
-  }
-  return sum;
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> len = <span class="hljs-built_in">arguments</span>.length,
+    sum = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (; len--; ) &#123;
+    sum += <span class="hljs-built_in">arguments</span>[len];
+  &#125;
+  <span class="hljs-keyword">return</span> sum;
+&#125;
 
-console.log(add(1, 2, 3)); //6
-console.log(add(1, 3)); //4
-console.log(add(1, 2, 3, 5, 6)); //17
-</code></pre>
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//6</span>
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//4</span>
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)); <span class="hljs-comment">//17</span></code></pre></div>
 <p>由于 JS 是一种弱类型的语言，没有重载机制，当我们重写函数时，会将原来的函数直接覆盖，这里我们能利用<code>arguments</code>，来判断传入的实参类型与数量进行不同的操作，然后返回不同的数值。</p>
 <p><strong>2.利用 arguments.callee 实现递归</strong></p>
 <p>先来看看平常我们是怎么实现递归的，这是一个结算阶乘的函数。</p>
-<pre><code class="javascript">function foo(num) {
-  if (num &lt;= 1) {
-    return 1;
-  } else {
-    return num * foo(num - 1);
-  }
-}
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">return</span> num * foo(num - <span class="hljs-number">1</span>);
+  &#125;
+&#125;</code></pre></div>
 <p>但是当这个函数变成了一个匿名函数时，我们就可以利用<code>callee</code>来递归这个函数。</p>
-<pre><code class="javascript">function foo(num) {
-  if (num &lt;= 1) {
-    return 1;
-  } else {
-    return num * arguments.callee(num - 1);
-  }
-}
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">return</span> num * <span class="hljs-built_in">arguments</span>.callee(num - <span class="hljs-number">1</span>);
+  &#125;
+&#125;</code></pre></div>
 <p>这个方法虽然好用，但是有一点值得注意，ECMAScript4 中为了限制 JS 的灵活度，让 JS 变得严格，新增了严格模式，在严格模式中我们被禁止不使用<code>var</code>来直接声明一个全局变量，当然这不是重点，重点是<code>arguments.callee</code>这个属性也被禁止了。不过这都不是事儿，ES6 为我们新增了很多好用的变量声明方式和新的语法糖，作为一个时髦的前端，我们赶紧学习一些 ES6 的新语法吧。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
                       <a class="hover-with-bg" href="/tags/arguments/">arguments</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/06/26/JavaScript事件三部曲之事件机制的原理/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript事件三部曲之事件机制的原理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">
+                        <span class="hidden-mobile">Flexbox 对你说爱不完</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -438,8 +494,8 @@ console.log(add(1, 2, 3, 5, 6)); //17
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -469,123 +525,69 @@ console.log(add(1, 2, 3, 5, 6)); //17
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -616,6 +618,8 @@ console.log(add(1, 2, 3, 5, 6)); //17
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -632,24 +636,29 @@ console.log(add(1, 2, 3, 5, 6)); //17
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

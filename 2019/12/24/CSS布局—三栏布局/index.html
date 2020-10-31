@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>CSS笔记—三栏布局 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期二, 十二月 24日 2019
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-24 00:00" pubdate>
+        2019年12月24日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.7k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      8 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,355 +209,371 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">CSS笔记—三栏布局</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：<br><img src="/images/sanlang/1.jpg" srcset="/img/loading.gif" alt></p>
 <p>上图的布局就是一个常见的三栏布局：即左边商品导航和右边导航为固定宽度，中间内容随浏览器宽度变化自适应。</p>
 <p>下面详细介绍了一些经典及新兴的三栏布局方式，且所有方式显示的效果如下图：<br><img src="/images/sanlang/2.jpg" srcset="/img/loading.gif" alt></p>
-<h4 id="绝对定位布局"><a href="#绝对定位布局" class="headerlink" title="绝对定位布局"></a>绝对定位布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .container {
-        position: relative;
-      }
-      .left {
-        position: absolute;
-        width: 150px;
-        height: 200px;
-        left: 0;
-        top: 0;
-        background-color: red;
-      }
-      .middle {
-        height: 200px;
-        margin: 0 160px;
-        background-color: green;
-      }
-      .right {
-        position: absolute;
-        width: 150px;
-        height: 200px;
-        right: 0;
-        top: 0;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="绝对定位布局"><a href="#绝对定位布局" class="headerlink" title="绝对定位布局"></a>绝对定位布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.container</span> &#123;
+        <span class="hljs-attribute">position</span>: relative;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">position</span>: absolute;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">position</span>: absolute;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>绝对定位布局是一个比较古老和容易想到的方式，其特点就是简单实用，而且也不容易出问题，缺点就是，容器脱离了文档流，后代元素也脱离了文档流，当高度未知的时候，会有问题，这就导致了这种方法的有效性和可使用性是比较差的。</p>
-<h4 id="float-布局"><a href="#float-布局" class="headerlink" title="float 布局"></a>float 布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .left {
-        float: left;
-        height: 200px;
-        width: 150px;
-        background-color: red;
-      }
-      .middle {
-        margin: 0 160px;
-        height: 200px;
-        background-color: green;
-      }
-      .right {
-        float: right;
-        width: 150px;
-        height: 200px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="float-布局"><a href="#float-布局" class="headerlink" title="float 布局"></a>float 布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">float</span>: right;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>float 布局也是一种较为简单且容易想到的方式，原理是左右模块各自向左右浮动，并设置中间模块的 margin 值使中间模块宽度自适应，缺点就是中间部分最后加载，内容较多时会影响体验。</p>
-<h4 id="BFC-三栏布局"><a href="#BFC-三栏布局" class="headerlink" title="BFC 三栏布局"></a>BFC 三栏布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .left {
-        float: left;
-        height: 200px;
-        width: 150px;
-        margin-right: 10px;
-        background-color: red;
-      }
-      .middle {
-        height: 200px;
-        overflow: hidden;
-        background-color: green;
-      }
-      .right {
-        float: right;
-        width: 150px;
-        height: 200px;
-        margin-left: 10px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="BFC-三栏布局"><a href="#BFC-三栏布局" class="headerlink" title="BFC 三栏布局"></a>BFC 三栏布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">overflow</span>: hidden;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">float</span>: right;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>BFC 有一特性：BFC 的区域不会与外部浮动元素重叠，这里利用了这一特性，实现了两栏自适应布局。缺点和方法二类似，为了解决这个问题，引出下面要介绍的双飞翼布局。</p>
-<h4 id="双飞翼布局"><a href="#双飞翼布局" class="headerlink" title="双飞翼布局"></a>双飞翼布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .content {
-        float: left;
-        width: 100%;
-      }
-      .left {
-        float: left;
-        height: 200px;
-        width: 150px;
-        margin-left: -100%;
-        background-color: red;
-      }
-      .middle {
-        height: 200px;
-        margin-left: 160px;
-        margin-right: 160px;
-        background-color: green;
-      }
-      .right {
-        width: 150px;
-        height: 200px;
-        float: right;
-        margin-left: -200px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;content&quot;&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="双飞翼布局"><a href="#双飞翼布局" class="headerlink" title="双飞翼布局"></a>双飞翼布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.content</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">float</span>: right;
+        <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>双飞翼布局是在中间栏的 div 中再嵌套一个 div，内容写在嵌套的 div 里，然后对嵌套的 div 设置 margin-left 和 margin-right，效果上表现为左右两栏在中间栏的上面，中间栏还是 100% 宽度，只不过中间栏的内容通过 margin 的值显示在中间。</p>
 <p>中间内容可以优先加载，但其 HTML 代码结构稍微复杂点。</p>
-<h4 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .container {
-        margin-left: 160px;
-        margin-right: 160px;
-      }
-      .middle {
-        float: left;
-        width: 100%;
-        height: 200px;
-        background-color: green;
-      }
-      .left {
-        float: left;
-        width: 150px;
-        height: 200px;
-        margin-left: -100%;
-        position: relative;
-        left: -160px;
-        background-color: red;
-      }
-      .right {
-        float: left;
-        width: 150px;
-        height: 200px;
-        margin-left: -210px;
-        position: relative;
-        right: -220px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.container</span> &#123;
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">160px</span>;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">100%</span>;
+        <span class="hljs-attribute">position</span>: relative;
+        <span class="hljs-attribute">left</span>: -<span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">float</span>: left;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">210px</span>;
+        <span class="hljs-attribute">position</span>: relative;
+        <span class="hljs-attribute">right</span>: -<span class="hljs-number">220px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>圣杯布局的核心是左、中、右三栏都通过 float 进行浮动，然后通过 margin 负值进行调整。跟双飞翼布局比较像，但还是有一些区别，相对于双飞翼布局来说，其 HTML 结构相对简单，但是 css 语法就稍微复杂，也是优先加载中间内容。</p>
 <p>还有注意一点是：中间内容要放在最上面，保证其先渲染。</p>
-<h4 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .container {
-        display: flex;
-      }
-      .middle {
-        flex-grow: 1;
-        height: 200px;
-        background-color: green;
-      }
-      .left {
-        order: -1;
-        flex: 0 1 150px;
-        margin-right: 10px;
-        height: 200px;
-        background-color: red;
-      }
-      .right {
-        flex: 0 1 150px;
-        margin-left: 10px;
-        height: 200px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="Flex-布局"><a href="#Flex-布局" class="headerlink" title="Flex 布局"></a>Flex 布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.container</span> &#123;
+        <span class="hljs-attribute">display</span>: flex;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">flex-grow</span>: <span class="hljs-number">1</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">order</span>: -<span class="hljs-number">1</span>;
+        <span class="hljs-attribute">flex</span>: <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">flex</span>: <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>Flex 布局是由 CSS3 提供的一种较为新兴的、方便的三栏布局方式，简单实用，缺点是其兼容性差一点。</p>
-<h4 id="Table-布局"><a href="#Table-布局" class="headerlink" title="Table 布局"></a>Table 布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .container {
-        display: table;
-        width: 100%;
-      }
-      .left,
-      .middle,
-      .right {
-        display: table-cell;
-      }
-      .left {
-        width: 150px;
-        height: 200px;
-        background-color: red;
-      }
-      .middle {
-        background-color: green;
-      }
-      .right {
-        width: 150px;
-        height: 200px;
-        background-color: yellow;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="Table-布局"><a href="#Table-布局" class="headerlink" title="Table 布局"></a>Table 布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.container</span> &#123;
+        <span class="hljs-attribute">display</span>: table;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+      &#125;
+      <span class="hljs-selector-class">.left</span>,
+      <span class="hljs-selector-class">.middle</span>,
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">display</span>: table-cell;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: red;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">width</span>: <span class="hljs-number">150px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+        <span class="hljs-attribute">background-color</span>: yellow;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>算是一种比较老的布局方式，较为简单，但其缺点是：无法设置栏间距，缺乏点灵活性，如下图：<br><img src="/images/sanlang/3.jpg" srcset="/img/loading.gif" alt></p>
-<h4 id="Grid-网格-布局"><a href="#Grid-网格-布局" class="headerlink" title="Grid(网格)布局"></a>Grid(网格)布局</h4><pre><code class="html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
-      .container {
-        display: grid;
-        grid-template-columns: 160px auto 160px;
-        height: 200px;
-      }
-      .left {
-        background-color: red;
-        margin-right: 10px;
-      }
-      .middle {
-        background-color: green;
-      }
-      .right {
-        background-color: yellow;
-        margin-left: 10px;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;container&quot;&gt;
-      &lt;div class=&quot;left&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;middle&quot;&gt;&lt;/div&gt;
-      &lt;div class=&quot;right&quot;&gt;&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+<h4 id="Grid-网格-布局"><a href="#Grid-网格-布局" class="headerlink" title="Grid(网格)布局"></a>Grid(网格)布局</h4><div class="hljs"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+      <span class="hljs-selector-class">.container</span> &#123;
+        <span class="hljs-attribute">display</span>: grid;
+        <span class="hljs-attribute">grid-template-columns</span>: <span class="hljs-number">160px</span> auto <span class="hljs-number">160px</span>;
+        <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+      &#125;
+      <span class="hljs-selector-class">.left</span> &#123;
+        <span class="hljs-attribute">background-color</span>: red;
+        <span class="hljs-attribute">margin-right</span>: <span class="hljs-number">10px</span>;
+      &#125;
+      <span class="hljs-selector-class">.middle</span> &#123;
+        <span class="hljs-attribute">background-color</span>: green;
+      &#125;
+      <span class="hljs-selector-class">.right</span> &#123;
+        <span class="hljs-attribute">background-color</span>: yellow;
+        <span class="hljs-attribute">margin-left</span>: <span class="hljs-number">10px</span>;
+      &#125;
+    </span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"container"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"left"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"middle"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"right"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
 <p>网格布局作为一种比较新潮的实现方式，仅仅几条样式命令就能完成三栏布局，可见其布局之强大，但其兼容性比较差。</p>
 <p><strong>以上就是我自己总结及结合文档所列出的 8 种 css 实现前端三栏布局的方式，如还有其他方式，欢迎大家告诉我哦。</strong></p>
 
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/CSS/">CSS</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/CSS/">CSS</a>
                     
                       <a class="hover-with-bg" href="/tags/布局/">布局</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/27/使用Hexo+GitHub搭建个人博客/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">使用Hexo+GitHub搭建个人博客</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/22/CSS布局—左右布局/">
+                        <span class="hidden-mobile">CSS笔记—左右布局</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -526,8 +589,8 @@
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -557,123 +620,69 @@
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -704,6 +713,8 @@
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -720,24 +731,29 @@
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

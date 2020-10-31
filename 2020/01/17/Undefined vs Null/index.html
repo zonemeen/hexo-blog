@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>Undefined vs Null - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期五, 一月 17日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-17 00:00" pubdate>
+        2020年1月17日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.3k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      5 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,23 +209,24 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">Undefined vs Null</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。</p>
 <p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_blank" rel="noopener">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
 <p>本文将探讨 JavaScript 中<code>undefined</code>和<code>null</code>之间的相似和差异之处。</p>
 <h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在 if 语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。</p>
-<pre><code class="javascript">if (!undefined) console.log(&quot;undefined is false&quot;);
-// undefined is false
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (!<span class="hljs-literal">undefined</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"undefined is false"</span>);
+<span class="hljs-comment">// undefined is false</span>
 
-if (!null) console.log(&quot;null is false&quot;);
-// null is false
+<span class="hljs-keyword">if</span> (!<span class="hljs-literal">null</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"null is false"</span>);
+<span class="hljs-comment">// null is false</span>
 
-undefined == null;
-// true
-</code></pre>
+<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// true</span></code></pre></div>
 <p>（2）在 JavaScript 中，只有六个 falsy 值，<code>null</code>和<code>undefined</code>都包含在六个 falsy 值中，当进行逻辑判断时所有的 Falsy 值均为 false。</p>
 <ul>
 <li>false</li>
@@ -202,12 +250,11 @@ undefined == null;
 <h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！</p>
 <p>1995 年 JavaScript 诞生之初，像 Java 一样，只设置了<code>null</code>作为表示”无”的值。</p>
 <p>根据 C 语言的传统，<code>null</code>被设计成可以自动转为 0。</p>
-<pre><code class="javascript">Number(null);
-// 0
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>);
+<span class="hljs-comment">// 0</span>
 
-6 + null;
-// 6
-</code></pre>
+<span class="hljs-number">6</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// 6</span></code></pre></div>
 <p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。</p>
 <p>首先，<code>null</code>像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示”无”的值最好不是对象。</p>
 <p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果<code>null</code>自动转为 0，很不容易发现错误。</p>
@@ -215,58 +262,48 @@ undefined == null;
 <h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong></p>
 <p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。</p>
 <p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。</p>
-<pre><code class="javascript">console.log(typeof undefined); // undefined
-console.log(typeof null); // object
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// object</span></code></pre></div>
 <p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？</p>
 <p>原因解释：这是 JS 一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。</p>
 <p><strong>（2）转为数值区别</strong></p>
 <p>JavaScript 的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为 0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。</p>
-<pre><code class="javascript">var a1 = 5 + null;
-console.log(a1); // 5
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">5</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-built_in">console</span>.log(a1); <span class="hljs-comment">// 5</span>
 
-var a2 = 5 + undefined;
-console.log(a2); // NaN
-</code></pre>
+<span class="hljs-keyword">var</span> a2 = <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>;
+<span class="hljs-built_in">console</span>.log(a2); <span class="hljs-comment">// NaN</span></code></pre></div>
 <p><strong>（3）null !== undefined</strong></p>
 <p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript 规范规定<code>null</code>不严格等于<code>undefined</code>。</p>
-<pre><code class="javascript">null !== undefined; // true
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-literal">null</span> !== <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span>
 
-null === undefined; // false
-</code></pre>
+<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span></code></pre></div>
 <p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。</p>
-<pre><code class="javascript">null == undefined; // true
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span></code></pre></div>
 <p>在 JavaScript 中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。</p>
 <p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。</p>
 <h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。</p>
 <p><strong>null 表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
 <p>（1） 利用 document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回 null。</p>
-<pre><code class="javascript">console.log(null == document.getElementById(&quot;notExistElement&quot;)); // true
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"notExistElement"</span>)); <span class="hljs-comment">// true</span></code></pre></div>
 <p>（2） 作为对象原型链的终点。</p>
-<pre><code class="javascript">Object.getPrototypeOf(Object.prototype); // null
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Object</span>.getPrototypeOf(<span class="hljs-built_in">Object</span>.prototype); <span class="hljs-comment">// null</span></code></pre></div>
 <p><strong>undefined 表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：</p>
 <p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。</p>
-<pre><code class="javascript">var a;
-console.log(a); // undefined
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
+<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span></code></pre></div>
 <p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。</p>
-<pre><code class="javascript">//函数定义了形参 a
-function f(a) {
-  console.log(a); // undefined
-}
-f(); //未传递实参
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//函数定义了形参 a</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">a</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
+&#125;
+f(); <span class="hljs-comment">//未传递实参</span></code></pre></div>
 <p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。</p>
-<pre><code class="javascript">var a = new Object();
-a.p; // undefined
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+a.p; <span class="hljs-comment">// undefined</span></code></pre></div>
 <p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
-<pre><code class="javascript">var a = f();
-a; // undefined
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = f();
+a; <span class="hljs-comment">// undefined</span></code></pre></div>
 <p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。</p>
 <p>最后引用玉伯大大对 null 和 undefined 的解释：</p>
 <p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。</p>
@@ -276,40 +313,62 @@ a; // undefined
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/22/学会如何学习（三）/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">学会如何学习（三）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/15/JavaScript系列之类型转换/">
+                        <span class="hidden-mobile">JavaScript系列之类型转换</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -325,8 +384,8 @@ a; // undefined
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -356,123 +415,69 @@ a; // undefined
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -503,6 +508,8 @@ a; // undefined
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -519,24 +526,29 @@ a; // undefined
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

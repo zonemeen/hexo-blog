@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之类型转换 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期三, 一月 15日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-01-15 00:00" pubdate>
+        2020年1月15日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.5k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      6 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,192 +209,180 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">JavaScript系列之类型转换</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。</p>
 <p>以下我将介绍将各种类型的值，分别转换成<strong>数字</strong>、<strong>字符串</strong>或者<strong>布尔值</strong>（基于 ES5 规范）。</p>
 <h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h4><p><strong>（1）Number()</strong></p>
 <p>使用 Number 函数，可以将任意类型的值转化成数值。</p>
-<pre><code class="javascript">//数值
-Number(123); // 123  转换后为原值
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//数值</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// 123  转换后为原值</span>
 
-//字符串
-Number(&quot;123&quot;); // 123  转换为相应的数值，前提能被解析为数值
+<span class="hljs-comment">//字符串</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">"123"</span>); <span class="hljs-comment">// 123  转换为相应的数值，前提能被解析为数值</span>
 
-//字符串
-Number(&quot;123abc&quot;); // NaN  如果不能被解析为数值，则返回 NaN
+<span class="hljs-comment">//字符串</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">"123abc"</span>); <span class="hljs-comment">// NaN  如果不能被解析为数值，则返回 NaN</span>
 
-//布尔值
-Number(true); // 1
-Number(false); // 0
+<span class="hljs-comment">//布尔值</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 0</span>
 
-//undefined
-Number(undefined); // NaN
+<span class="hljs-comment">//undefined</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
 
-//null
-Number(null); // 0
+<span class="hljs-comment">//null</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
 
-//对象
-Number({ a: 1 }); // NaN
-Number([5]); // 5  //包含单个数值的数组将返回数字
-</code></pre>
+<span class="hljs-comment">//对象</span>
+<span class="hljs-built_in">Number</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">Number</span>([<span class="hljs-number">5</span>]); <span class="hljs-comment">// 5  //包含单个数值的数组将返回数字</span></code></pre></div>
 <p><strong>（2）ParseInt()</strong></p>
 <p><code>parseInt</code>函数可用于将字符串转为整数。</p>
-<pre><code class="javascript">parseInt(&quot;123&quot;); // 123
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"123"</span>); <span class="hljs-comment">// 123</span>
 
-parseInt(&quot;   123&quot;); // 123  如果字符串头部有空格，空格会被自动去除
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"   123"</span>); <span class="hljs-comment">// 123  如果字符串头部有空格，空格会被自动去除</span>
 
-parseInt(1.23); // 1  如果参数不是字符串，则会先转为字符串再转换
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-number">1.23</span>); <span class="hljs-comment">// 1  如果参数不是字符串，则会先转为字符串再转换</span>
 
-parseInt(&quot;8a&quot;); //  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"8a"</span>); <span class="hljs-comment">//  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分</span>
 
-parseInt(&quot;abc&quot;); // NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN
-parseInt(&quot;+1&quot;); // 1
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"abc"</span>); <span class="hljs-comment">// NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN</span>
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"+1"</span>); <span class="hljs-comment">// 1</span>
 
-parseInt(&quot;1000&quot;, 10); // 1000  第二个参数（2到36之间），表示被解析的值的进制
-</code></pre>
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"1000"</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 1000  第二个参数（2到36之间），表示被解析的值的进制</span></code></pre></div>
 <p>如上，<code>Number()</code>函数会整体将目标字符串转为数值，只要有一个字符无法转成数值，目标就会被转为<code>NaN</code>，这点要比<code>parseInt()</code>函数严格很多。</p>
 <p>这里要注意一点，就是转换’011’时看起来 01 结构是 8 进制，实际上 JS 经过升级，后面加逗号 8 才是转为 8 进制或其他进制。</p>
-<pre><code class="javascript">parseInt(&quot;011&quot;); // 11
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"011"</span>); <span class="hljs-comment">// 11</span>
 
-parseInt(&quot;011&quot;, 8); // 9
-</code></pre>
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">"011"</span>, <span class="hljs-number">8</span>); <span class="hljs-comment">// 9</span></code></pre></div>
 <p><strong>（3）ParseFloat()</strong><br><code>parseFloat</code>函数用于将一个字符串转为浮点数。</p>
-<pre><code class="javascript">parseFloat(&quot;3.14&quot;); //  3.14
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">"3.14"</span>); <span class="hljs-comment">//  3.14</span>
 
-parseFloat(&quot;3.14more&quot;); // 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">"3.14more"</span>); <span class="hljs-comment">// 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分</span>
 
-parseFloat([]); // NaN
-parseFloat(&quot;AAA&quot;); // NaN
-parseFloat(&quot;&quot;); // NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN
-</code></pre>
+<span class="hljs-built_in">parseFloat</span>([]); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">"AAA"</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">""</span>); <span class="hljs-comment">// NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN</span></code></pre></div>
 <p>上面代码中，尤其注意的是，<code>parseFloat</code>会将空字符串转为<code>NaN</code>。</p>
 <p>这些特点使得<code>parseFloat</code>的转换结果不同于<code>Number</code>函数。</p>
-<pre><code class="javascript">Number(true); // 1
-parseFloat(true); // NaN
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// NaN</span>
 
-Number(null); // 0
-parseFloat(null); // NaN
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// NaN</span>
 
-Number(&quot;&quot;); // 0
-parseFloat(&quot;&quot;); // NaN
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">""</span>); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">""</span>); <span class="hljs-comment">// NaN</span>
 
-Number(&quot;1.23A&quot;); // NaN
-parseFloat(&quot;1.23A&quot;); // 1.23
-</code></pre>
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">"1.23A"</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">"1.23A"</span>); <span class="hljs-comment">// 1.23</span></code></pre></div>
 <p><strong>（4）字符串减 0</strong></p>
 <p>字符串数字后直接减一个 0，可将字符串转为数值。</p>
-<pre><code class="javascript">&quot;1&quot; - 0; // 1
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-string">"1"</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1</span>
 
-&quot;123&quot; - 0; // 123
+<span class="hljs-string">"123"</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 123</span>
 
-&quot;1.23&quot; - 0; // 1.23
+<span class="hljs-string">"1.23"</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1.23</span>
 
-&quot;12A&quot; - 0; // NaN  字符串里不是数字，则返回NaN
-&quot;null&quot; - 0; // NaN
-</code></pre>
+<span class="hljs-string">"12A"</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN  字符串里不是数字，则返回NaN</span>
+<span class="hljs-string">"null"</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN</span></code></pre></div>
 <p>上面代码中，字符串减 0 操作既有<code>parseInt</code>、也有<code>parseFloat</code>的功能。</p>
 <p>还比较省代码数量，在实际应用中会比较常见。</p>
 <p><strong>（5）字符串前加+</strong></p>
 <p>字符串数字前加一个+，可将字符串转为数字。</p>
-<pre><code class="javascript">+&quot;1&quot; + // 1
-  &quot;1.23&quot; + // 1.23
-  &quot;.1&quot; + // 0.1
-  &quot;-1&quot; + // -1
-  &quot;12A&quot;; // NaN
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript">+<span class="hljs-string">"1"</span> + <span class="hljs-comment">// 1</span>
+  <span class="hljs-string">"1.23"</span> + <span class="hljs-comment">// 1.23</span>
+  <span class="hljs-string">".1"</span> + <span class="hljs-comment">// 0.1</span>
+  <span class="hljs-string">"-1"</span> + <span class="hljs-comment">// -1</span>
+  <span class="hljs-string">"12A"</span>; <span class="hljs-comment">// NaN</span></code></pre></div>
 <p>上面代码中，字符串前加+操作也有<code>parseInt</code>和<code>parseFloat</code>的功能。</p>
 <h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p><strong>（1）toString()</strong></p>
-<pre><code class="javascript">// 数值
-var a = 123;
-a.toString(); // &quot;123&quot;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-number">123</span>;
+a.toString(); <span class="hljs-comment">// "123"</span>
 
-// 布尔值
-var a = true;
-a.toString(); // &quot;true&quot;
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">true</span>;
+a.toString(); <span class="hljs-comment">// "true"</span>
 
-// undefined
-var a = undefined;
-a.toString(); // 报错
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">undefined</span>;
+a.toString(); <span class="hljs-comment">// 报错</span>
 
-// null
-var a = null;
-a.toString(); // 报错
+<span class="hljs-comment">// null</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">null</span>;
+a.toString(); <span class="hljs-comment">// 报错</span>
 
-// 对象
-var a = {};
-a.toString(); // &quot;[object Object]&quot;
-</code></pre>
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-keyword">var</span> a = &#123;&#125;;
+a.toString(); <span class="hljs-comment">// "[object Object]"</span></code></pre></div>
 <p>上面代码中，注意一点<code>null</code>、<code>undefined</code>用<code>toString()</code>转为字符串是不行的，而且<code>toString()</code>方法占的字节较多，那么有别的解决方法吗？</p>
 <p><strong>（2）加’’(双引号)</strong></p>
 <p>当然有，更常用的转为字符串方法为：</p>
-<pre><code class="javascript">// 数值
-1 + &quot;&quot;; // &quot;1&quot;
-&quot;&quot; + 1; // &quot;1&quot;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-number">1</span> + <span class="hljs-string">""</span>; <span class="hljs-comment">// "1"</span>
+<span class="hljs-string">""</span> + <span class="hljs-number">1</span>; <span class="hljs-comment">// "1"</span>
 
-// 布尔值
-true + &quot;&quot;; // &quot;true&quot;
-&quot;&quot; + true; // &quot;true&quot;
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-literal">true</span> + <span class="hljs-string">""</span>; <span class="hljs-comment">// "true"</span>
+<span class="hljs-string">""</span> + <span class="hljs-literal">true</span>; <span class="hljs-comment">// "true"</span>
 
-// undefined
-undefined + &quot;&quot;; // &quot;undefined&quot;
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-literal">undefined</span> + <span class="hljs-string">""</span>; <span class="hljs-comment">// "undefined"</span>
 
-// null
-null + &quot;&quot;; // &quot;null&quot;
+<span class="hljs-comment">// null</span>
+<span class="hljs-literal">null</span> + <span class="hljs-string">""</span>; <span class="hljs-comment">// "null"</span>
 
-// 对象
-var obj = {};
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-keyword">var</span> obj = &#123;&#125;;
 obj +
-  &quot;&quot;[(1, 2, 3)] + // &quot;[object Object]&quot;
-  &quot;&quot;; // &quot;1,2,3&quot;  数组，返回该数组的字符串形式
-</code></pre>
+  <span class="hljs-string">""</span>[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)] + <span class="hljs-comment">// "[object Object]"</span>
+  <span class="hljs-string">""</span>; <span class="hljs-comment">// "1,2,3"  数组，返回该数组的字符串形式</span></code></pre></div>
 <p>相比<code>toString()</code>方法，这种方法更为常用，且和前后加’’的顺序无关。</p>
 <p><strong>（3）String()</strong></p>
 <p><code>String</code>函数可以将任意类型的值转化成字符串。</p>
-<pre><code class="javascript">// 数值
-String(123); // &quot;123&quot;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// "123"</span>
 
-// 布尔值
-String(true); // &quot;true&quot;
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// "true"</span>
 
-// undefined
-String(undefined); // &quot;undefined&quot;
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// "undefined"</span>
 
-// null
-String(null); // &quot;null&quot;
+<span class="hljs-comment">// null</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// "null"</span>
 
-// 对象
-String({ a: 1 }); // &quot;[object Object]&quot;
-String([1, 2, 3]); // &quot;1,2,3&quot;  数组，返回该数组的字符串形式
-</code></pre>
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-built_in">String</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// "[object Object]"</span>
+<span class="hljs-built_in">String</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// "1,2,3"  数组，返回该数组的字符串形式</span></code></pre></div>
 <h4 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h4><p><strong>（1）Boolean()</strong></p>
 <p><code>Boolean</code>函数可以将任意类型的值转为布尔值。</p>
 <p>它的转换规则比较简单：除了以下五个<code>falsy</code>值的转换结果为<code>false</code>，其余的值全部为<code>true</code>。</p>
-<pre><code class="javascript">Boolean(undefined); // false
-Boolean(null); // false
-Boolean(0); // false 包括+0、-0
-Boolean(NaN); // false
-Boolean(&quot;&quot;); // false 和&quot;&quot;一样都为空字符串，这里当成同一种
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">// false 包括+0、-0</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">NaN</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">""</span>); <span class="hljs-comment">// false 和""一样都为空字符串，这里当成同一种</span></code></pre></div>
 <p>所以的话，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。</p>
-<pre><code class="javascript">Boolean({}); // true
-Boolean([]); // true
-Boolean(new Boolean(false)); // true
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(&#123;&#125;); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">Boolean</span>([]); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">false</span>)); <span class="hljs-comment">// true</span></code></pre></div>
 <p>这里需要注意的是，<code>Boolean()</code>操作对于’’和’ ‘（中间有空格）的结果是不一样的：</p>
-<pre><code class="javascript">Boolean(&quot;&quot;); // false
-Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-string">""</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">"  "</span>); <span class="hljs-comment">// true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容</span></code></pre></div>
 <p><strong>（2）类型值前加！！</strong></p>
 <p>任何数据类型值前面加两个！！，都可以将其转为布尔类型。</p>
-<pre><code class="javascript">!!undefined; // false
-!!null; // false
-!!0; // false
-!!NaN; // false
-!!&quot;&quot;; // false
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript">!!<span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-literal">null</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-number">0</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-literal">NaN</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-string">""</span>; <span class="hljs-comment">// false</span></code></pre></div>
 <p>从<code>Boolean()</code>九个字符变为！！两个字符，省了代码量；转换规则也与<code>Boolean</code>函数一致，故老手多用此类方法。</p>
 <p>目前总结的就这么多啦，如有一些遗漏或有误的地方，欢迎大家指正~</p>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
@@ -356,42 +391,64 @@ Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输�
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
                       <a class="hover-with-bg" href="/tags/数据类型/">数据类型</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/01/17/Undefined vs Null/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Undefined vs Null</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/01/13/JavaScript系列之类型判断/">
+                        <span class="hidden-mobile">JavaScript系列之类型判断</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -407,8 +464,8 @@ Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输�
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -438,123 +495,69 @@ Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输�
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -585,6 +588,8 @@ Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输�
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -601,24 +606,29 @@ Boolean(&quot;  &quot;); // true 因为中间有空格，代表有空格键输�
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

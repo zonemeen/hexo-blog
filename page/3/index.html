@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,22 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +58,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,12 +131,12 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
@@ -122,7 +146,7 @@
 
           
             <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
+              <i class="iconfont icon-arrowdown"></i>
             </div>
           
         </div>
@@ -133,7 +157,7 @@
   <main>
     
       <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board"
+        <div class="py-5" id="board"
           style=margin-top:0>
           
           <div class="container">
@@ -145,229 +169,259 @@
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/05/从instanceof身上深入理解原型原型链/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/instanceof.jpg" srcset="/img/loading.gif" alt="从instanceof身上深入理解原型/原型链">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/05/从instanceof身上深入理解原型原型链/">
-        <p class="h4 index-header">从instanceof身上深入理解原型/原型链</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/05/从instanceof身上深入理解原型原型链/">从instanceof身上深入理解原型/原型链</a>
+      </h1>
 
-      <a href="/2020/04/05/从instanceof身上深入理解原型原型链/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/05/从instanceof身上深入理解原型原型链/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">今天将延续这篇文章，借助一个老朋友——instanceof 运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
-对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个object对象，还是数组，也不能判断出 Object 下具体是什么细分的类型，比如 Array、Date、RegExp、Error 等。
-官方对instanceof运算符的解释是返回一个布尔值，表示</div>
-        </div>
-      </a>
+          
+            
+          
+          今天将延续这篇文章，借助一个老朋友——instanceof 运算符，将通过它以及结合多次讲的原型/原型链经典图来深入理解原型/原型链。
+对于原始类型（primitive type）的值，即string/number/boolean，你可以通过typeof判断其类型，但是typeof在判断到合成类型（complex type）的值的时候，返回值只有object/function，你不知道它到底是一个
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-05&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-05 00:00" pubdate>
+              2020-04-05
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/原型/">原型</a>&nbsp;
-          
-            <a href="/tags/原型链/">原型链</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/原型/">原型</a>
+            
+              <a href="/tags/原型链/">原型链</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/04/02/【译】12个编写干净且可扩展的JavaScript技巧/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/12jiqiao.jpg" srcset="/img/loading.gif" alt="【译】12个编写干净且可扩展的JavaScript技巧"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/12jiqiao.jpg" srcset="/img/loading.gif" alt="【译】12个编写干净且可扩展的JavaScript技巧">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/04/02/【译】12个编写干净且可扩展的JavaScript技巧/">
-        <p class="h4 index-header">【译】12个编写干净且可扩展的JavaScript技巧</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/04/02/【译】12个编写干净且可扩展的JavaScript技巧/">【译】12个编写干净且可扩展的JavaScript技巧</a>
+      </h1>
 
-      <a href="/2020/04/02/【译】12个编写干净且可扩展的JavaScript技巧/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/04/02/【译】12个编写干净且可扩展的JavaScript技巧/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">JavaScript 起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。
+          
+            
+          
+          JavaScript 起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。
 现代 Web 应用程序严重依赖 JavaScript，尤其是单页应用程序（SPA）。借助于 React，AngularJS 和 Vue.js 等新兴框架，Web 应用程序主要使用 JavaScript 构建。
-扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能会遇到限制并迷失在混乱的海洋中。我想分享一些小技巧，这些技巧将帮助您以有效的方式编写干净的代码。
-本文面向任何技能水平的 JavaScript 开发人员。 但是，至少具有 JavaScript 中级知</div>
-        </div>
-      </a>
+扩展这些应用程序有时候会比较棘手，通过简单的设置，您最终可能
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-04-02&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-04-02 00:00" pubdate>
+              2020-04-02
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/编程技巧/">编程技巧</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/编程技巧/">编程技巧</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/16/从原生JS实现jQuery的一个API中体会其设计思想/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jquery.jpg" srcset="/img/loading.gif" alt="从原生JS实现jQuery的一个API中体会其设计思想"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jquery.jpg" srcset="/img/loading.gif" alt="从原生JS实现jQuery的一个API中体会其设计思想">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/16/从原生JS实现jQuery的一个API中体会其设计思想/">
-        <p class="h4 index-header">从原生JS实现jQuery的一个API中体会其设计思想</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/03/16/从原生JS实现jQuery的一个API中体会其设计思想/">从原生JS实现jQuery的一个API中体会其设计思想</a>
+      </h1>
 
-      <a href="/2020/03/16/从原生JS实现jQuery的一个API中体会其设计思想/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/03/16/从原生JS实现jQuery的一个API中体会其设计思想/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">根据统计，全世界大约有 80~90%的网站直接或间接地使用了 jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解 jQuery 呢？读源代码又太繁琐，所以这里利用原生 JS 来实现 jQuery 中的 addClass 这个 API，通过实现此过程来体会 jQuery 的设计思想，力求简单易懂。
-封装函数function addClass(classes) {} //可将所有输入的标签的class添加一个类
+          
+            
+          
+          根据统计，全世界大约有 80~90%的网站直接或间接地使用了 jQuery，鉴于它如此流行，所以每一位前端工程师都应该了解和学习它。那如何才能快速理解 jQuery 呢？读源代码又太繁琐，所以这里利用原生 JS 来实现 jQuery 中的 addClass 这个 API，通过实现此过程来体会 jQuery 的设计思想，力求简单易懂。
+封装函数function addClass(classes) &
+        </a>
+      </p>
 
-实现这个函数函数addClass()是输入一个类名，给选中的所有标签添加一个类，所以要用到classList.add()，具体实现如下:
-funct</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-16&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-16 00:00" pubdate>
+              2020-03-16
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/jQuery/">jQuery</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/jQuery/">jQuery</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/08/通过DOM API 查找节点/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domapi.jpg" srcset="/img/loading.gif" alt="通过DOM API 查找节点"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/domapi.jpg" srcset="/img/loading.gif" alt="通过DOM API 查找节点">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/08/通过DOM API 查找节点/">
-        <p class="h4 index-header">通过DOM API 查找节点</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/03/08/通过DOM API 查找节点/">通过DOM API 查找节点</a>
+      </h1>
 
-      <a href="/2020/03/08/通过DOM API 查找节点/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/03/08/通过DOM API 查找节点/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在上一篇的分享当中，我们简单介绍了 BOM 与 DOM，也了解到 JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。
+          
+            
+          
+          在上一篇的分享当中，我们简单介绍了 BOM 与 DOM，也了解到 JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。
 当一个网页被载入到浏览器时，浏览器会首先分析这个 HTML 文档，然后会依照这份 HTML 的内容解析成 DOM (Document Object Model，即文件对象模型)。
-而 DOM 是 W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过 DOM 提供的 API 来操作 DOM 的内容、结构与样式。
-所以说，DOM 是网页的根本，懂得控制 DOM 就可以控制整个网页，做出良好的互动</div>
-        </div>
-      </a>
+而 DOM 是 W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-08&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-08 00:00" pubdate>
+              2020-03-08
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/DOM/">DOM</a>&nbsp;
-          
-            <a href="/tags/API/">API</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/DOM/">DOM</a>
+            
+              <a href="/tags/API/">API</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/03/01/聊一聊浏览器里的JavaScript/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/liulangqi.jpg" srcset="/img/loading.gif" alt="谈谈浏览器里的JavaScript"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/liulangqi.jpg" srcset="/img/loading.gif" alt="谈谈浏览器里的JavaScript">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/03/01/聊一聊浏览器里的JavaScript/">
-        <p class="h4 index-header">谈谈浏览器里的JavaScript</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/03/01/聊一聊浏览器里的JavaScript/">谈谈浏览器里的JavaScript</a>
+      </h1>
 
-      <a href="/2020/03/01/聊一聊浏览器里的JavaScript/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/03/01/聊一聊浏览器里的JavaScript/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与 JavaScript 是网页前端三大要素」，其中：
+          
+            
+          
+          在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与 JavaScript 是网页前端三大要素」，其中：
 
 HTML 负责资料与结构
 CSS 负责样式与呈现
@@ -375,59 +429,65 @@ JavaScript 负责行为与互动
 
 
 那么，如果你跟我在学 JavaScript 的时候也有一样的疑问：变量、类型、对象、流程控制、函数…表面上看似基础都学会了，但…
-我还是不知道怎么通过 JavaScript 在网页上输出”Hello World!”啊！
+我还是不知道怎么通过 JavaScr
+        </a>
+      </p>
 
-那么相信看完今天的分享，我保证你一定可以通过 JavaScript 在网页上输出”Hello World!” (嘻嘻)
-浏览器里的 JavaSc</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-03-01&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-03-01 00:00" pubdate>
+              2020-03-01
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/DOM/">DOM</a>&nbsp;
-          
-            <a href="/tags/BOM/">BOM</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/DOM/">DOM</a>
+            
+              <a href="/tags/BOM/">BOM</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/23/浅谈数组常见遍历方法/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/array.jpg" srcset="/img/loading.gif" alt="浅谈数组常见遍历方法"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/array.jpg" srcset="/img/loading.gif" alt="浅谈数组常见遍历方法">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/23/浅谈数组常见遍历方法/">
-        <p class="h4 index-header">浅谈数组常见遍历方法</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/23/浅谈数组常见遍历方法/">浅谈数组常见遍历方法</a>
+      </h1>
 
-      <a href="/2020/02/23/浅谈数组常见遍历方法/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/23/浅谈数组常见遍历方法/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。
+          
+            
+          
+          本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。
 
 接下来都是使用底下的基础数组来实现一些方法：
 
@@ -437,260 +497,290 @@ JavaScript 负责行为与互动
 查找特定值等
 
 let people = [
-  {
-    name: &quot;马云&quot;,
+  &#123;
+    name: "马云",
     money: 2000,
-  },
-  {
-    name: &quot;马化腾&quot;,
-    money: 1800,
-  },
-  {
-    name: &quot;李彦宏&quot;,
-    money: 1500,
-  },
-  {
- </div>
-        </div>
-      </a>
+  &#125;,
+  &#123;
+  
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-23&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-23 00:00" pubdate>
+              2020-02-23
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/数组/">数组</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/数组/">数组</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/egg.png" srcset="/img/loading.gif" alt="由一段代码引发的关于Object和Function的鸡和蛋问题的思考"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/egg.png" srcset="/img/loading.gif" alt="由一段代码引发的关于Object和Function的鸡和蛋问题的思考">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
-        <p class="h4 index-header">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</a>
+      </h1>
 
-      <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">作为一名前端开发者，我们都知道 JS 是单继承的，而 Object.prototype 是原型链的顶端，所有对象从它继承了包括 toString()、valueOf()等等公共属性。
-鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实例对象。所以这里就引伸出了一个有意思的鸡和蛋的问题：
-Object instanceof Function; // true
-Function instanceof Object; // true
+          
+            
+          
+          作为一名前端开发者，我们都知道 JS 是单继承的，而 Object.prototype 是原型链的顶端，所有对象从它继承了包括 toString()、valueOf()等等公共属性。
+鸡和蛋问题的由来首先Object和Function都是构造函数，而所有的构造函数都是Function的实例对象。 因此Object是Function的实例对象；而Function.prototype是Object的实
+        </a>
+      </p>
 
-</div>
-        </div>
-      </a>
-
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-22&nbsp;&nbsp;
-        
-        
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-22 00:00" pubdate>
+              2020-02-22
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/Function/">Function</a>&nbsp;
-          
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/Function/">Function</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/21/【译】谈谈“typeof null为object”这一bug的由来/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/21/【译】谈谈“typeof null为object”这一bug的由来/">
-        <p class="h4 index-header">【译】谈谈“typeof null为object”这一bug的由来</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/21/【译】谈谈“typeof null为object”这一bug的由来/">【译】谈谈“typeof null为object”这一bug的由来</a>
+      </h1>
 
-      <a href="/2020/02/21/【译】谈谈“typeof null为object”这一bug的由来/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/21/【译】谈谈“typeof null为object”这一bug的由来/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">很多前端初级开发者也许并不深究 typeof null 为何为 Object？想更深地了解这一 bug 的由来，可以参阅 Dr. Axel Rauschmayer 关于”typeof null”的历史这篇文章。
+          
+            
+          
+          很多前端初级开发者也许并不深究 typeof null 为何为 Object？想更深地了解这一 bug 的由来，可以参阅 Dr. Axel Rauschmayer 关于”typeof null”的历史这篇文章。
 
 原文链接：http://www.2ality.com/2013/10/typeof-null.html
 
-我看了下 C 语言关于typeof的规范，它对于typeof null为何结果是’object’有更好的解释。
-在 JavaScript 中，typeof null的结果是’Object‘，它错误地暗示null是一个对象，实际上它是一个原始值。我在上一篇文章也提到了这是 JS 的</div>
-        </div>
-      </a>
+我看了下 C 语言关于typeof的规范，它对于typeof null为何结果是
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-21&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-21 00:00" pubdate>
+              2020-02-21
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/">
-        <p class="h4 index-header">JS中一切都是对象吗？看这一篇就知道了</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/">JS中一切都是对象吗？看这一篇就知道了</a>
+      </h1>
 
-      <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">当你刚开始学习 JavaScript 时，你是否有遇到许多书籍，教程以及那些说“JavaScript 中的所有内容都是对象”的人？这算是一个 JavaScript 中老生常谈的话题了，虽然它并不是 100％正确（JavaScript 中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。
+          
+            
+          
+          当你刚开始学习 JavaScript 时，你是否有遇到许多书籍，教程以及那些说“JavaScript 中的所有内容都是对象”的人？这算是一个 JavaScript 中老生常谈的话题了，虽然它并不是 100％正确（JavaScript 中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。
 
 想必有点疑惑吧，那么造成这种现象的原因是什么呢？接下来就由我一一道来。
-历史原因说起一切都是对象这种说法的由来，就要好好提一下历史因素了。
-1995 年，JavaScript 诞生之年，Netscape 公司（JavaScript 的设计者）与 Sun 公司（Java 语言的发明者和</div>
-        </div>
-      </a>
+历史原因说起
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-18&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-18 00:00" pubdate>
+              2020-02-18
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/对象/">对象</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/对象/">对象</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
   <div class="row mx-auto index-card">
     
     
-      <div class="col-12 col-md-4 m-auto">
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/15/谈谈JavaScript中对象建立(Object)/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)"
-               class="index-img img-fluid rounded index-thumbnails">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jianliobject.png" srcset="/img/loading.gif" alt="谈谈JavaScript中创建对象(Object)">
         </a>
       </div>
     
-    <div class="col-12 col-md-8 mx-auto index-info">
-      <a href="/2020/02/15/谈谈JavaScript中对象建立(Object)/">
-        <p class="h4 index-header">谈谈JavaScript中创建对象(Object)</p>
-      </a>
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/15/谈谈JavaScript中对象建立(Object)/">谈谈JavaScript中创建对象(Object)</a>
+      </h1>
 
-      <a href="/2020/02/15/谈谈JavaScript中对象建立(Object)/">
-        
-        
+      <p class="index-excerpt">
+        <a href="/2020/02/15/谈谈JavaScript中对象建立(Object)/">
           
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">在这篇文章中我将会着重说明如何创建和调用 JavaScript 里的对象（Object）。
+          
+            
+          
+          在这篇文章中我将会着重说明如何创建和调用 JavaScript 里的对象（Object）。
 对象（Object）是什么？在开始介绍如何创建对象前，我们要知道对象是什么。对象（Object）简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？
-第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（String），而在对象当中，我们把这类的值称为属性（Property）。
-第二种可以放入的值是对象（Object），也就是在一个对象里面再嵌入一个对象，这种以对象为值的情况我们也把它称作属性（Proper</div>
-        </div>
-      </a>
+第一种是原生的值（primitive），像是布尔值（Boolean）、数值（Number）或是字符串（Str
+        </a>
+      </p>
 
-      <div class="index-btm">
+      <div class="index-btm post-metas">
         
-          <i class="iconfont icon-riqi2"></i>&nbsp;2020-02-15&nbsp;&nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-15 00:00" pubdate>
+              2020-02-15
+            </time>
+          </div>
         
         
-          <i class="iconfont icon-inbox"></i>
-          
-            <a href="/categories/JavaScript/">JavaScript</a>&nbsp;
-          &nbsp;
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
         
         
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/JavaScript/">JavaScript</a>&nbsp;
-          
-            <a href="/tags/对象/">对象</a>&nbsp;
-          
-            <a href="/tags/Object/">Object</a>&nbsp;
-          
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/对象/">对象</a>
+            
+              <a href="/tags/Object/">Object</a>
+            
+          </div>
         
       </div>
-    </div>
+    </article>
   </div>
 
 
 
-  <nav aria-label="index posts navigation">
-    <span class="pagination pg-blue justify-content-center mt-5" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/2/"><i class="fas fa-angle-double-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="fas fa-angle-double-right"></i></a>
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
   
   <script>
-    for (ele of document.getElementById("pagination").getElementsByClassName("page-number")) {
+    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
       ele.href += '#board';
     }
   </script>
@@ -706,8 +796,8 @@ Function instanceof Object; // true
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -737,73 +827,45 @@ Function instanceof Object; // true
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
-
-
-  <script  src="/js/lazyload.js" ></script>
-
-
-
-
-
-
-
-
-
 
 <!-- Plugins -->
 
 
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
-  </script>
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
 
 
 
@@ -827,21 +889,6 @@ Function instanceof Object; // true
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
-      
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
-  </script>
-
 
 
   <script  src="/js/local-search.js" ></script>
@@ -849,24 +896,15 @@ Function instanceof Object; // true
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
-      function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
-        $(this).wrap(element);
-      }
-    );
-  </script>
+
+
 
 
 

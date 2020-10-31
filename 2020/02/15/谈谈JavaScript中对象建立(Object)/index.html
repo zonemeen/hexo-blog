@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>谈谈JavaScript中创建对象(Object) - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期六, 二月 15日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-02-15 00:00" pubdate>
+        2020年2月15日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.4k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      5 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,10 +209,12 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">谈谈JavaScript中创建对象(Object)</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>在这篇文章中我将会着重说明如何创建和调用 JavaScript 里的对象（Object）。</p>
 <h4 id="对象（Object）是什么？"><a href="#对象（Object）是什么？" class="headerlink" title="对象（Object）是什么？"></a>对象（Object）是什么？</h4><p>在开始介绍如何创建对象前，我们要知道对象是什么。<strong>对象（<code>Object</code>）</strong>简单地来说，就是一堆「名称- 值」的配对（key - value pairs）。至于可以放入哪些值呢？</p>
 <p>第一种是原生的值（<code>primitive</code>），像是布尔值（<code>Boolean</code>）、数值（<code>Number</code>）或是字符串（<code>String</code>），而在对象当中，我们把这类的值称为属性（<code>Property</code>）。</p>
@@ -176,75 +225,66 @@
 <p>创建对象的第一个方法是使用<code>[ ]</code>，<code>[ ]</code>在 JavaScript 中被称做 Computed Member Access：</p>
 <p><img src="/images/object/2.jpg" srcset="/img/loading.gif" alt></p>
 <p>让我们看一下底下的例子：</p>
-<pre><code class="javascript">// 创建对象
-var person = new Object();
-person[&quot;firstname&quot;] = &quot;Jay&quot;;
-person[&quot;lastname&quot;] = &quot;Chou&quot;;
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建对象</span>
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+person[<span class="hljs-string">"firstname"</span>] = <span class="hljs-string">"Jay"</span>;
+person[<span class="hljs-string">"lastname"</span>] = <span class="hljs-string">"Chou"</span>;</code></pre></div>
 <p>这是利用<code>[ ]</code>创建对象的方法，首先我们创建一个对象，叫做<code>person</code>，接着开始给它「名称-值」配对，例如，<code>firstname</code>是属性的名称，<code>Jay</code>则是它的值；<code>lastname</code>也是属性名称，<code>Chou</code>则是它的值。通过这种方法，我们就可以创建对象里面的各种「名称-值」配对。</p>
 <p><strong>调用对象</strong></p>
 <p>紧接上面的例子，我们也同样可以利用<code>[ ]</code>来调用已经建立好的对象，<code>[ ]</code>里面如果放的是字符串而不是变量，注意要记得加上引号’像是这样：</p>
-<pre><code class="javascript">// 调用对象
-console.log(person[&quot;firstname&quot;]); // Jay
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 调用对象</span>
+<span class="hljs-built_in">console</span>.log(person[<span class="hljs-string">"firstname"</span>]); <span class="hljs-comment">// Jay</span></code></pre></div>
 <p>另外，如果是通过<code>[ ]</code>来调用对象的话，还有一个特别的地方，就是<code>[ ]</code>内可以放变量，像是这样（当<code>[ ]</code>里面放的是变量时不用加引号<code>&quot;</code>），一样可以调用到对象的值，这个是用种方法二（<code>.</code>）做不到的：</p>
-<pre><code class="javascript">// 调用对象
-var id = &quot;lastname&quot;;
-console.log(person[id]); // Chou
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 调用对象</span>
+<span class="hljs-keyword">var</span> id = <span class="hljs-string">"lastname"</span>;
+<span class="hljs-built_in">console</span>.log(person[id]); <span class="hljs-comment">// Chou</span></code></pre></div>
 <h4 id="方法二：使用点符号"><a href="#方法二：使用点符号" class="headerlink" title="方法二：使用点符号 ."></a>方法二：使用点符号 .</h4><p><strong>创建对象</strong></p>
 <p>第二种创建对象的方法是使用英文的句点 <code>.</code>，在 JavaScript 中被称做 Member Access，创建的方法如下：我们在刚刚创建的<code>person</code>这个对象里面，再创建一个对象属性，名称为<code>address</code>。其实，我觉得可以把.翻译成中文的「的」，所以这里的意思就是，在<code>person</code>的里面创建一个名称为<code>address</code>的对象；在<code>person</code>的<code>address</code>的<code>country</code>，创建一个值为<code>&quot;China&quot;</code>，以此类推…。</p>
-<pre><code class="javascript">// 创建对象
-person.address = new Object();
-person.address.country = &quot;China&quot;;
-person.address.city = &quot;Hangzhou&quot;;
-person.address.location = &quot;Xihu&quot;;
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建对象</span>
+person.address = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+person.address.country = <span class="hljs-string">"China"</span>;
+person.address.city = <span class="hljs-string">"Hangzhou"</span>;
+person.address.location = <span class="hljs-string">"Xihu"</span>;</code></pre></div>
 <p><strong>调用对象</strong></p>
 <p>同样的方法也可以用来调用出该对象的值：</p>
-<pre><code class="javascript">// 调用对象
-console.log(person.address); //{country: &quot;China&quot;, city: &quot;Hangzhou&quot;, location: &quot;Xihu&quot;}
-console.log(person.address.country); // China
-console.log(person[&quot;address&quot;][&quot;location&quot;]); // Xihu
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 调用对象</span>
+<span class="hljs-built_in">console</span>.log(person.address); <span class="hljs-comment">//&#123;country: "China", city: "Hangzhou", location: "Xihu"&#125;</span>
+<span class="hljs-built_in">console</span>.log(person.address.country); <span class="hljs-comment">// China</span>
+<span class="hljs-built_in">console</span>.log(person[<span class="hljs-string">"address"</span>][<span class="hljs-string">"location"</span>]); <span class="hljs-comment">// Xihu</span></code></pre></div>
 <p>从上面可以看出，<code>.</code> 和<code>[ ]</code>是可以交替使用的。</p>
 <h4 id="方法三：使用"><a href="#方法三：使用" class="headerlink" title="方法三：使用{ }"></a>方法三：使用{ }</h4><p><strong>创建对象</strong></p>
 <p>其实还有在创建对象上有更快的做法，我们可以直接使用<code>{ }</code>，我们可以把上面的代码，改成这样：</p>
-<pre><code class="javascript">// 创建对象
-var person = {
-  firstname: &quot;Jay&quot;,
-  lastname: &quot;Chou&quot;,
-  address: {
-    country: &quot;China&quot;,
-    city: &quot;Hangzhou&quot;,
-    location: &quot;Xihu&quot;,
-  },
-};
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 创建对象</span>
+<span class="hljs-keyword">var</span> person = &#123;
+  <span class="hljs-attr">firstname</span>: <span class="hljs-string">"Jay"</span>,
+  <span class="hljs-attr">lastname</span>: <span class="hljs-string">"Chou"</span>,
+  <span class="hljs-attr">address</span>: &#123;
+    <span class="hljs-attr">country</span>: <span class="hljs-string">"China"</span>,
+    <span class="hljs-attr">city</span>: <span class="hljs-string">"Hangzhou"</span>,
+    <span class="hljs-attr">location</span>: <span class="hljs-string">"Xihu"</span>,
+  &#125;,
+&#125;;</code></pre></div>
 <p>通过这种方式，可以得到与方法二一模一样的结果，调用方法也一致。</p>
 <p><strong>搭配函数使用对象</strong></p>
 <p>在我们创建好对象后，我们可以搭配函数(<code>function</code>)来使用对象，例如，我先把刚刚创建的对象<code>person</code>，改成叫做<code>jaychou</code>。</p>
-<pre><code class="javascript">var jaychou = {
-  firstname: &quot;Jay&quot;,
-  lastname: &quot;Chou&quot;,
-  address: {
-    country: &quot;China&quot;,
-    city: &quot;Hangzhou&quot;,
-    location: &quot;Xihu&quot;,
-  },
-};
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> jaychou = &#123;
+  <span class="hljs-attr">firstname</span>: <span class="hljs-string">"Jay"</span>,
+  <span class="hljs-attr">lastname</span>: <span class="hljs-string">"Chou"</span>,
+  <span class="hljs-attr">address</span>: &#123;
+    <span class="hljs-attr">country</span>: <span class="hljs-string">"China"</span>,
+    <span class="hljs-attr">city</span>: <span class="hljs-string">"Hangzhou"</span>,
+    <span class="hljs-attr">location</span>: <span class="hljs-string">"Xihu"</span>,
+  &#125;,
+&#125;;</code></pre></div>
 <p>接着创建一个名称为<code>SayHI</code>的函数，并且带入我们的对象：</p>
-<pre><code class="javascript">function SayHI(people) {
-  console.log(&quot;HI&quot; + people.lastname);
-}
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SayHI</span>(<span class="hljs-params">people</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"HI"</span> + people.lastname);
+&#125;
 
-SayHI(jaychou); // HI Chou
-</code></pre>
+SayHI(jaychou); <span class="hljs-comment">// HI Chou</span></code></pre></div>
 <p><strong>直接在函数参数的地方创建对象</strong></p>
 <p>我们也可以直接在调用函数的同时创建对象，像是这样子：</p>
-<pre><code class="javascript">SayHI({ firstname: &quot;Jony&quot;, lastname: &quot;J&quot; }); // HI J
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript">SayHI(&#123; <span class="hljs-attr">firstname</span>: <span class="hljs-string">"Jony"</span>, <span class="hljs-attr">lastname</span>: <span class="hljs-string">"J"</span> &#125;); <span class="hljs-comment">// HI J</span></code></pre></div>
 <p>一开始看到这样的写法可能会觉得很奇怪，但其实这种方式和我们直接在函数的参数里面输入字符串或数值是一样的意思，只是这里是创建一个对象。我们把这种直接在函数的参数中创建对象的方法称做”creating object on the fly”（即动态创建对象）。</p>
 <h4 id="其他说明"><a href="#其他说明" class="headerlink" title="其他说明"></a>其他说明</h4><p>其实使用<code>new Object</code>不是创建对象最好的方式，这点会在之后的文章再作说明。另外，虽然使用<code>[ ]</code>和<code>.</code>都可以拿来创建对象和调用对象，但还是建议尽量使用点符号.作为创建对象和调用对象的方法，这样比较干净简洁，在 debug 的时候也比较容易。</p>
 <p>还有不论你使用的是<code>new Object</code>、”<code>.</code>“、或者直接用”<code>{ }</code>“来创建对象，其实在 JavaScript 转译之后，本质上做的都是同样的事。它都会将这个对象建立在内存中，并创建该对象的属性（<code>property</code>）和方法（<code>method</code>）在内存中。</p>
@@ -253,19 +293,18 @@ SayHI(jaychou); // HI Chou
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
@@ -273,24 +312,47 @@ SayHI(jaychou); // HI Chou
                     
                       <a class="hover-with-bg" href="/tags/Object/">Object</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/02/18/JS中一切都是对象吗？看这一篇就知道了/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JS中一切都是对象吗？看这一篇就知道了</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
+                        <span class="hidden-mobile">【译】分享7个好用的JavaScript技巧</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -306,8 +368,8 @@ SayHI(jaychou); // HI Chou
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -337,123 +399,69 @@ SayHI(jaychou); // HI Chou
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -484,6 +492,8 @@ SayHI(jaychou); // HI Chou
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -500,24 +510,29 @@ SayHI(jaychou); // HI Chou
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

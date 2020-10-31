@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>谈谈浏览器里的JavaScript - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期日, 三月 1日 2020
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-03-01 00:00" pubdate>
+        2020年3月1日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    1.8k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      7 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,10 +209,12 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">谈谈浏览器里的JavaScript</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与 JavaScript 是网页前端三大要素」，其中：</p>
 <ul>
 <li>HTML 负责资料与结构</li>
@@ -200,30 +249,26 @@
 <li>JavaScript 用来与浏览器沟通的窗口</li>
 </ul>
 <p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过 window.xxx 的方式取得它们。比如：</p>
-<pre><code class="javascript">var a = 10;
-console.log(window.a); // 10
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre></div>
 <p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除：</p>
-<pre><code class="javascript">var a = 10;
-console.log(window.a); // 10
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
 
-console.log(delete window.a); // false
-console.log(window.a); // 10
-</code></pre>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre></div>
 <p>但若是直接通过指定<code>window</code>对象的属性则可以：</p>
-<pre><code class="javascript">window.a = 10;
-console.log(window.a); // 10
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
 
-console.log(delete window.a); // true
-console.log(window.a); // undefined
-</code></pre>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// undefined</span></code></pre></div>
 <p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？</p>
 <h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：</p>
 <p><img src="/images/dom/4.jpg" srcset="/img/loading.gif" alt></p>
 <p>(alert on Chrome)</p>
 <p>我想不管是不是刚接触 JavaScript 的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：</p>
-<pre><code class="javascript">window.alert(&quot;message&quot;);
-</code></pre>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.alert(<span class="hljs-string">"message"</span>);</code></pre></div>
 <p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。</p>
 <p>一行代码就可以生成一个对话框，很神奇吧？</p>
 <p>而这就是浏览器环境的 BOM 提供给 JavaScript 控制的功能之一。</p>
@@ -231,7 +276,7 @@ console.log(window.a); // undefined
 <p>当然 BOM 提供的 API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。</p>
 <h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将 HTML 文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为 DOM Tree。</p>
 <p>简单来说，我们把 HTML 每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的 HTML 如下：</p>
-<pre><code class="javascript">&lt;html&gt;
+<div class="hljs"><pre><code class="hljs javascript">&lt;html&gt;
   &lt;head&gt;
     &lt;title&gt;米淇淋的个人博客&lt;/title&gt;
   &lt;/head&gt;
@@ -241,8 +286,7 @@ console.log(window.a); // undefined
       这是一个&lt;i&gt;简单&lt;/i&gt;的段落
     &lt;/p&gt;
   &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
+&lt;/html&gt;</code></pre></div>
 <p><img src="/images/domapi-5.jpg" srcset="/img/loading.gif" alt></p>
 <p>在最根部的地方，就是<code>document</code>，就是 BOM 图中<code>window</code>下面的那个。</p>
 <p>往下可以延伸出一个个的 HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
@@ -256,28 +300,25 @@ console.log(window.a); // undefined
 </ul>
 <p>BOM 完全依赖于浏览器厂商实作本身无标准规范，而 DOM 有着 W3C 所制定的标准来规范。</p>
 <p>想要通过 DOM API 取得节点，JavaScript 可以这样写：</p>
-<pre><code class="javascript">// 根据传入的值，找到 DOM 中 id 为 &#39;xxx&#39; 的元素。
-document.getElementById(&quot;xxx&quot;);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 根据传入的值，找到 DOM 中 id 为 'xxx' 的元素。</span>
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"xxx"</span>);
 
-// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)
-document.getElementsByTagName(&quot;xxx&quot;);
+<span class="hljs-comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span>
+<span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">"xxx"</span>);
 
-// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。
-document.getElementsByClassName(&quot;xxx&quot;);
+<span class="hljs-comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span>
+<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">"xxx"</span>);
 
-// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。
-document.querySelector(&quot;xxx&quot;);
-document.querySelectorAll(&quot;xxx&quot;);
-</code></pre>
+<span class="hljs-comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span>
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"xxx"</span>);
+<span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">"xxx"</span>);</code></pre></div>
 <p>而透过 DOM API 选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
 <p>假设有一个 HTML 节点：</p>
-<pre><code class="html">&lt;h1 id=&quot;greet&quot;&gt;&lt;/h1&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"greet"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre></div>
 <p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
-<pre><code class="html">&lt;script&gt;
-  document.querySelector(&quot;#greet&quot;).textContent = &quot;Hello World!&quot;;
-&lt;/script&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">"#greet"</span>).textContent = <span class="hljs-string">"Hello World!"</span>;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
 <p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output" target="_blank" rel="noopener">JS Bin on jsbin.com</a></p>
 <p>看到这里，恭喜你已经可以通过 JavaScript 在网页上输出”Hello World!” 啦！</p>
 <p>在后续的内容中，我们会继续来介绍各种操作网页的 DOM/BOM API。</p>
@@ -287,19 +328,18 @@ document.querySelectorAll(&quot;xxx&quot;);
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
@@ -307,24 +347,47 @@ document.querySelectorAll(&quot;xxx&quot;);
                     
                       <a class="hover-with-bg" href="/tags/BOM/">BOM</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/03/08/通过DOM API 查找节点/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">通过DOM API 查找节点</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/02/23/浅谈数组常见遍历方法/">
+                        <span class="hidden-mobile">浅谈数组常见遍历方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -340,8 +403,8 @@ document.querySelectorAll(&quot;xxx&quot;);
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -371,123 +434,69 @@ document.querySelectorAll(&quot;xxx&quot;);
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -518,6 +527,8 @@ document.querySelectorAll(&quot;xxx&quot;);
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -534,24 +545,29 @@ document.querySelectorAll(&quot;xxx&quot;);
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

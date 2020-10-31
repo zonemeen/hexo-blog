@@ -1,13 +1,13 @@
+
+
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
 
 
 
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -18,24 +18,35 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>HTML常用标签 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/5.12.1/css/all.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/mdbootstrap/4.13.0/css/mdb.min.css">
-<link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/3.0.1/github-markdown.min.css">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1067060_qzomjdt8bmp.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
 
 
-  <link rel="stylesheet" href="/lib/prettify/tomorrow-night-eighties.min.css">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
+  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+
+  
+    
+    
+      
+      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
 <link rel="stylesheet" href="/css/main.css">
-
-
-  <link defer rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css">
-
 
 <!-- 自定义样式保持在最底部 -->
 
 
+  <script src="/js/utils.js"></script>
+  <script src="/js/color-schema.js"></script>
 </head>
 
 
@@ -60,46 +71,72 @@
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/">首页</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/archives/">归档</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/categories/">分类</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/tags/">标签</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
         
           
           
           
           
-          <li class="nav-item">
-            <a class="nav-link" href="/about/">关于</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;&nbsp;</a>
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
       </ul>
@@ -107,43 +144,53 @@
   </div>
 </nav>
 
-    <div class="view intro-2" id="background" parallax=true
+    <div class="banner intro-2" id="background" parallax=true
          style="background: url('https://miqilin-blog.oss-cn-shenzhen.aliyuncs.com/test1.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask rgba-black-light flex-center">
-          <div class="container text-center white-text fadeInUp">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
             <span class="h2" id="subtitle">
               
             </span>
 
             
-              
-                <p class="mt-3 post-meta">
-                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                  星期二, 十二月 10日 2019
-                </p>
-              
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-12-10 00:00" pubdate>
+        2019年12月10日
+      </time>
+    </span>
+  
+</div>
 
-              <p class="mt-1">
-                
-                  
-                  <span class="post-meta">
-                    <i class="far fa-chart-bar"></i>
-                    3.5k 字
-                  </span>
-                
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
 
-                
-                  
-                  <span class="post-meta">
-                      <i class="far fa-clock"></i>
-                      13 分钟
-                  </span>
-                
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      41
+       分钟
+    </span>
+  
 
-                
-              </p>
+  
+  
+</div>
+
             
           </div>
 
@@ -162,10 +209,12 @@
     <div class="d-none d-lg-block col-lg-2"></div>
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
-        <div class="py-5 z-depth-3" id="board">
-          <div class="post-content mx-auto" id="post">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">HTML常用标签</h1>
             
-            <div class="markdown-body">
+            <div class="markdown-body" id="post-body">
               <p>HTML 是用来描述网页的一种语言，通过添加各种标签，达到在浏览器中展示期望的效果。</p>
 <ul>
 <li>HTML 指的是超文本标记语言 (Hyper Text Markup Language)</li>
@@ -201,9 +250,8 @@
 <h4 id="换行标签-⭐⭐⭐"><a href="#换行标签-⭐⭐⭐" class="headerlink" title="换行标签 ⭐⭐⭐"></a>换行标签 ⭐⭐⭐</h4><p>在 HTML 中，一个段落的文字会从左往右按顺序排列，直到浏览器窗口的右端，然后会自动换行，如果希望某段文字强制进行换行，就需要使用换行标签(break)。其基本语法是：<code>&lt;br /&gt;</code></p>
 <p>注意：除了少数应用（比如诗歌的分行），应该尽量避免使用这个标签，因为它并没有特别的语义含义，而且分行的视觉效果完全可以通过 p 标签、列表标签和 CSS 命令达到。</p>
 <h4 id="div-span-标签-⭐⭐⭐⭐"><a href="#div-span-标签-⭐⭐⭐⭐" class="headerlink" title="div span 标签 ⭐⭐⭐⭐"></a>div span 标签 ⭐⭐⭐⭐</h4><p>div 和 span 是没有语义的，是现在网页布局用到的最主要的 2 个盒子，比如 css+div 的结合就可以基本上满足页面布局需要。其基本语法是：</p>
-<pre><code class="html">&lt;div&gt;这是头部&lt;/div&gt;
-&lt;span&gt; 今日行情 &lt;/span&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>这是头部<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span> 今日行情 <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></code></pre></div>
 <h4 id="文本格式化标签-⭐⭐"><a href="#文本格式化标签-⭐⭐" class="headerlink" title="文本格式化标签 ⭐⭐"></a>文本格式化标签 ⭐⭐</h4><p>在网页中，有时要为某些文字设置加粗、加斜或加下划线的效果，这时就需要用到 HTML 中的文本格式化标签，使文字以特殊的方式显示。其基本语法是：<br><img src="/images/html/1.jpg" srcset="/img/loading.gif" alt></p>
 <p>注意：b i s u 只有使用，没有强调的意思，strong em del ins 的语义更强烈。</p>
 <h4 id="图像标签-img-⭐⭐⭐⭐"><a href="#图像标签-img-⭐⭐⭐⭐" class="headerlink" title="图像标签 img ⭐⭐⭐⭐"></a>图像标签 img ⭐⭐⭐⭐</h4><p>要想在网页中显示图像就需要使用图像标签，下图详细介绍了图像标签<code>&lt;img /&gt;</code> 以及与其相关的一些属性。其基本语法是：<br><img src="/images/html/2.jpg" srcset="/img/loading.gif" alt></p>
@@ -226,13 +274,12 @@
 </ol>
 <h4 id="特殊字符标签-⭐"><a href="#特殊字符标签-⭐" class="headerlink" title="特殊字符标签 ⭐"></a>特殊字符标签 ⭐</h4><p><img src="/images/html/4.jpg" srcset="/img/loading.gif" alt></p>
 <h4 id="无序列表-ul-⭐⭐⭐⭐"><a href="#无序列表-ul-⭐⭐⭐⭐" class="headerlink" title="无序列表 ul ⭐⭐⭐⭐"></a>无序列表 ul ⭐⭐⭐⭐</h4><p>无序列表(unordered list)的各个列表项之间没有顺序级别之分，是并列的。其基本语法是：</p>
-<pre><code class="html">&lt;ul&gt;
-  &lt;li&gt;列表项1&lt;/li&gt;
-  &lt;li&gt;列表项2&lt;/li&gt;
-  &lt;li&gt;列表项3&lt;/li&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   ......
-&lt;/ul&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre></div>
 <p>注意：</p>
 <ul>
 <li><code>&lt;ul&gt;&lt;/ul&gt;</code>中只能嵌套<code>&lt;li&gt;&lt;/li&gt;</code>，直接在<code>&lt;ul&gt;&lt;/ul&gt;</code>标签内输入其他标签或者文字的做法是不被允许的。</li>
@@ -240,35 +287,32 @@
 <li>无序列表会自带样式属性，但还是让 css 来做！</li>
 </ul>
 <h4 id="有序列表-ol-⭐⭐"><a href="#有序列表-ol-⭐⭐" class="headerlink" title="有序列表 ol ⭐⭐"></a>有序列表 ol ⭐⭐</h4><p>有序列表(ordered list)即为有排列顺序的列表，其各个列表项按照一定的顺序排列定义。其基本语法是：</p>
-<pre><code class="html">&lt;ol&gt;
-  &lt;li&gt;列表项1&lt;/li&gt;
-  &lt;li&gt;列表项2&lt;/li&gt;
-  &lt;li&gt;列表项3&lt;/li&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ol</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>列表项3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   ......
-&lt;/ol&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ol</span>&gt;</span></code></pre></div>
 <p>所有特性基本和 ul 一致，且自带顺序。</p>
 <h4 id="定义列表-⭐"><a href="#定义列表-⭐" class="headerlink" title="定义列表 ⭐"></a>定义列表 ⭐</h4><p>定义列表(definition list)常用于对术语或名词进行解释和描述，定义列表的列表项前没有任何项目符号。其基本语法是：</p>
-<pre><code class="html">&lt;dl&gt;
-  &lt;dt&gt;名词1&lt;/dt&gt;
-  &lt;dd&gt;名词1解释1&lt;/dd&gt;
-  &lt;dd&gt;名词1解释2&lt;/dd&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>名词1<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>名词1解释1<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>名词1解释2<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
   ......
-  &lt;dt&gt;名词2&lt;/dt&gt;
-  &lt;dd&gt;名词2解释1&lt;/dd&gt;
-  &lt;dd&gt;名词2解释2&lt;/dd&gt;
+  <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>名词2<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>名词2解释1<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>名词2解释2<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
   ......
-&lt;/dl&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span></code></pre></div>
 <h4 id="表格-table-⭐⭐"><a href="#表格-table-⭐⭐" class="headerlink" title="表格 table ⭐⭐"></a>表格 table ⭐⭐</h4><p>表格还是较为常用的一种标签，但不是用来布局，常见处理、显示表格式数据。其基本语法是：</p>
-<pre><code class="html">&lt;table&gt;
-  &lt;tr&gt;
-    &lt;td&gt;单元格内的文字&lt;/td&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>单元格内的文字<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
     ...
-  &lt;/tr&gt;
+  <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
   ...
-&lt;/table&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span></code></pre></div>
 <p>上面的语法中包含三对 HTML 标签，分别为<code>&lt;table&gt;&lt;/table&gt;</code>、<code>&lt;tr&gt;&lt;/tr&gt;</code>、<code>&lt;td&gt;&lt;/td&gt;</code>，他们是创建表格的基本标签，缺一不可，下面对他们进行具体解释：</p>
 <ul>
 <li>table 用于定义一个表格。</li>
@@ -281,56 +325,48 @@
 <p>表单域：相当于一个容器，用来容纳所有的表单控件和提示信息，可以通过它定义处理表单数据所用程序的 url 地址，以及数据提交到服务器的方法。如果不定义表单域，表单中的数据就无法传送到后台服务器。</p>
 <h4 id="input-控件-⭐⭐⭐⭐"><a href="#input-控件-⭐⭐⭐⭐" class="headerlink" title="input 控件 ⭐⭐⭐⭐"></a>input 控件 ⭐⭐⭐⭐</h4><p><code>&lt;input /&gt;</code>标签为单标签，type 属性为其最基本的属性，其取值有多种，用于指定不同的控件类型。其常见属性如下所示：<br><img src="/images/html/6.jpg" srcset="/img/loading.gif" alt></p>
 <p>text 语法:</p>
-<pre><code class="html">&lt;tr&gt;
-  &lt;td&gt;所在地区&lt;/td&gt;
-  &lt;td&gt;&lt;input type=&quot;text&quot; value=&quot;北京&quot; /&gt;&lt;/td&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>所在地区<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"北京"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
   //value为默认值
-&lt;/tr&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></code></pre></div>
 <p>password 语法：</p>
-<pre><code class="html">&lt;tr&gt;
-  &lt;td&gt;密码&lt;/td&gt;
-  &lt;td&gt;&lt;input type=&quot;password&quot; value=&quot;123456&quot; /&gt;&lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>密码<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"password"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"123456"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></code></pre></div>
 <p>radio 单选按钮语法：</p>
-<pre><code class="html">&lt;tr&gt;
-  &lt;td&gt;性别&lt;/td&gt;
-  &lt;td&gt;
-    男&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt; 女&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt;
-    人妖&lt;input type=&quot;radio&quot; name=&quot;sex&quot; /&gt;
-  &lt;/td&gt;
-&lt;/tr&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>性别<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
+    男<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sex"</span> /&gt;</span> 女<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sex"</span> /&gt;</span>
+    人妖<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sex"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></code></pre></div>
 <h4 id="label-标签-⭐⭐"><a href="#label-标签-⭐⭐" class="headerlink" title="label 标签 ⭐⭐"></a>label 标签 ⭐⭐</h4><p>label 标签为 input 元素定义标注，其中 for 属性规定了 label 与哪个表单元素绑定。其基本语法是：</p>
-<pre><code class="html">&lt;label for=&quot;male&quot;&gt;Male&lt;/label&gt;
-&lt;input type=&quot;radio&quot; name=&quot;sex&quot; id=&quot;male&quot; value=&quot;male&quot; /&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"male"</span>&gt;</span>Male<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sex"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"male"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"male"</span> /&gt;</span></code></pre></div>
 <p>点击 Male 会直接跳到右边的文本框内，label 通过 for 和 id 建立联系快速找到。当然也可以简化成这种形式：</p>
-<pre><code class="html">&lt;label&gt;&lt;input type=&quot;radio&quot; name=&quot;sex&quot; value=&quot;male&quot; /&gt;Male&lt;/label&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"radio"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"sex"</span> <span class="hljs-attr">value</span>=<span class="hljs-string">"male"</span> /&gt;</span>Male<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></code></pre></div>
 <h4 id="textarea-文件域-⭐⭐"><a href="#textarea-文件域-⭐⭐" class="headerlink" title="textarea 文件域 ⭐⭐"></a>textarea 文件域 ⭐⭐</h4><p>text 文本框只能写一行文本，如果需要输入大量的信息，就需要用到 textarea 标签，可以轻松地创建多行文本输入框。其基本语法是：</p>
-<pre><code class="html">&lt;textarea cols=&quot;每行的字符数&quot; rows=&quot;显示的行数&quot;&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">textarea</span> <span class="hljs-attr">cols</span>=<span class="hljs-string">"每行的字符数"</span> <span class="hljs-attr">rows</span>=<span class="hljs-string">"显示的行数"</span>&gt;</span>
    文本内容   
-&lt;/textarea&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">textarea</span>&gt;</span></code></pre></div>
 <p>但是 textarea 的宽和高通常是通过 css 来控制的,cols 和 rows 几乎不用。</p>
 <h4 id="下拉菜单-⭐⭐"><a href="#下拉菜单-⭐⭐" class="headerlink" title="下拉菜单 ⭐⭐"></a>下拉菜单 ⭐⭐</h4><p>使用 select 标签定义下拉菜单的基本语法如下：</p>
-<pre><code class="html">&lt;select&gt;
-  &lt;option&gt;选项1&lt;/option&gt;
-  &lt;option&gt;选项2&lt;/option&gt;
-  &lt;option&gt;选项3&lt;/option&gt;
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">select</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span>选项1<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span>选项2<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">option</span>&gt;</span>选项3<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
   ...
-&lt;/select&gt;
-</code></pre>
+<span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></code></pre></div>
 <p>注意：</p>
 <ul>
 <li><code>&lt;select&gt;&lt;/select&gt;</code>中至少应包含一对<code>&lt;option&gt;&lt;/option&gt;</code>。</li>
 <li>在 option 中定义 selected=”selected”时，当前项即为默认选中项。</li>
 </ul>
 <h4 id="表单域-⭐⭐"><a href="#表单域-⭐⭐" class="headerlink" title="表单域 ⭐⭐"></a>表单域 ⭐⭐</h4><p>在 HTML 中，form 标签被用于定义表单域，即创建一个表单，以实现用户信息的收集和传递，form 中的所有内容都会被提交给服务器。其基本语法是：</p>
-<pre><code class="html">&lt;form action=&quot;url地址&quot; method=&quot;提交方式&quot; name=&quot;表单名称&quot;&gt;各种表单控件&lt;/form&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"url地址"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"提交方式"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"表单名称"</span>&gt;</span>各种表单控件<span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></code></pre></div>
 <p>常见属性：</p>
 <ul>
 <li>Action：在表单收集到信息后，需要将信息传递给服务器进行处理，action 属性用于指定接受并处理表单数据的服务器程序的 url 地址。</li>
@@ -372,13 +408,11 @@
 <li>video：播放视频</li>
 </ul>
 <h4 id="多媒体-embed-⭐⭐"><a href="#多媒体-embed-⭐⭐" class="headerlink" title="多媒体 embed ⭐⭐"></a>多媒体 embed ⭐⭐</h4><p>embed 可以用来插入各种多媒体（较大的），格式可以是 Wav、AIFF、AU、MP3 等。其中 url 为音频或视频文件的路径，可以是相对路径或绝对路径。其基本语法是：</p>
-<pre><code class="html">&lt;embed src=&#39;http://player.youku.com/player.php/sid/XMzk4MDUzNTA1Mg==/v.swf&#39; allowFullScreen=&#39;true&#39;
-quality=&#39;high&#39; width=&#39;480&#39; height=&#39;400&#39; align=&#39;middle&#39; allowScriptAccess=&#39;always&#39; type=&#39;applicati
-on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">embed</span> <span class="hljs-attr">src</span>=<span class="hljs-string">'http://player.youku.com/player.php/sid/XMzk4MDUzNTA1Mg==/v.swf'</span> <span class="hljs-attr">allowFullScreen</span>=<span class="hljs-string">'true'</span>
+<span class="hljs-attr">quality</span>=<span class="hljs-string">'high'</span> <span class="hljs-attr">width</span>=<span class="hljs-string">'480'</span> <span class="hljs-attr">height</span>=<span class="hljs-string">'400'</span> <span class="hljs-attr">align</span>=<span class="hljs-string">'middle'</span> <span class="hljs-attr">allowScriptAccess</span>=<span class="hljs-string">'always'</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'applicati
+on/x-shockwave-flash'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">embed</span>&gt;</span></code></pre></div>
 <h4 id="多媒体-audio-⭐⭐"><a href="#多媒体-audio-⭐⭐" class="headerlink" title="多媒体 audio ⭐⭐"></a>多媒体 audio ⭐⭐</h4><p>HTML5 通过<code>&lt;audio&gt;</code>标签来解决音频播放的问题。其基本语法是：</p>
-<pre><code class="html">&lt;audio src=&quot;./music/See You Again.mp3&quot;&gt;&lt;/audio&gt; //通过src指定音频文件路径即可
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">audio</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./music/See You Again.mp3"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">audio</span>&gt;</span> //通过src指定音频文件路径即可</code></pre></div>
 <p>并且可以通过添加属性来更友好控制音频的播放，如：</p>
 <ul>
 <li>autoplay 自动播放</li>
@@ -390,9 +424,8 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
 <li>loop 循环播放 ，loop=2 就是循环 2 次 ，loop 或者 loop=“-1”无限循环</li>
 </ul>
 <h4 id="多媒体-video-⭐⭐"><a href="#多媒体-video-⭐⭐" class="headerlink" title="多媒体 video ⭐⭐"></a>多媒体 video ⭐⭐</h4><p>同音频播放一样，<code>&lt;video&gt;</code>（通常插入较小的视频）使用也相当简单。其基本语法是：</p>
-<pre><code class="html">&lt;video src=&quot;./video/movie.mp4&quot; controls=&quot;controls&quot;&gt;&lt;/video&gt;
-//通过src指定视频文件路径
-</code></pre>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./video/movie.mp4"</span> <span class="hljs-attr">controls</span>=<span class="hljs-string">"controls"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span>
+//通过src指定视频文件路径</code></pre></div>
 <p>同样，通过附加属性可以更友好的控制视频的播放：</p>
 <ul>
 <li>autoplay 自动播放</li>
@@ -413,42 +446,64 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
             </div>
             <hr>
             <div>
-              <p>
+              <div class="post-metas mb-3">
                 
-                  <span>
-                <i class="iconfont icon-inbox"></i>
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
                     
                       <a class="hover-with-bg" href="/categories/HTML/">HTML</a>
-                      &nbsp;
                     
-                  </span>&nbsp;&nbsp;
+                  </div>
                 
                 
-                  <span>
-                <i class="iconfont icon-tag"></i>
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/HTML/">HTML</a>
                     
                       <a class="hover-with-bg" href="/tags/标签/">标签</a>
                     
-                  </span>
+                  </div>
                 
-              </p>
+              </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" rel="nofollow noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/12/15/Git及Github操作手册/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Git/GitHub操作手册</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/12/05/HTTP入门笔记/">
+                        <span class="hidden-mobile">HTTP入门笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
             
-          </div>
+          </article>
         </div>
       </div>
     </div>
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc-start"></div>
-<div id="toc">
-  <p class="h5"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div id="tocbot"></div>
 </div>
 
@@ -464,8 +519,8 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
   </main>
 
   
-    <a class="z-depth-1" id="scroll-top-button" href="#" role="button">
-      <i class="fa fa-chevron-up scroll-top-arrow" aria-hidden="true"></i>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
     </a>
   
 
@@ -495,123 +550,69 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
 
   
 
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  米淇淋的个人博客 2019–2020
   
 
-  <footer class="mt-5">
-  <div class="text-center py-3">
-    <!-- <a href="https://luozongmin.com" target="_self" rel="nofollow noopener"><b>miqilin</b></a>
-    <i class="iconfont icon-love"></i> -->
-    
-    <a href="https://hexo.io/" target="_self" rel="nofollow noopener"
-      ><b>Hexo</b></a
-    >
-    
-    <i class="iconfont icon-love"></i>
-    
-    <a
-      href="https://github.com/fluid-dev/hexo-theme-fluid"
-      target="_self"
-      rel="nofollow noopener"
-      ><b>Fluid</b></a
-    >
-    <br />
+  
 
-    米淇淋的个人博客 2019 - 2020
-    <!-- <b>2019</b> -->
-    <!-- Ported by <a href="https://github.com/miqilin21">miqilin</a> | 欢迎
-    Star<iframe style="margin-left: 2px; margin-bottom:-5px;" frameborder="0" scrolling="0" width="91px" height="20px"
-      src="https://ghbtns.com/github-btn.html?user=miqilin21&repo=miqilin21.github.io&type=star&count=true">
-    </iframe> -->
-
-    
- 
-
-
-    <!-- cnzz Analytics icon -->
-    
-  </div>
+  
 </footer>
 
 <!-- SCRIPTS -->
 <script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
-<script  src="https://cdn.staticfile.org/mdbootstrap/4.13.0/js/mdb.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
 <script  src="/js/main.js" ></script>
 
+<!-- Plugins -->
 
-  <script  src="/js/lazyload.js" ></script>
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
 
 
 
   
-  <script  src="https://cdn.staticfile.org/tocbot/4.10.0/tocbot.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
   <script>
     $(document).ready(function () {
-      var navHeight = $('#navbar').height();
-      var post = $('#post');
-      var toc = $('#toc');
-      var tocLimMax = post.offset().top + post.height() - navHeight;
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
 
-      $(window).scroll(function () {
-        var tocLimMin = $('#toc-start').offset().top - navHeight;
-        var scroH = document.body.scrollTop + document.documentElement.scrollTop;
-
-        if (tocLimMin <= scroH && scroH <= tocLimMax) {
-          toc.css({
-            'display': 'block',
-            'position': 'fixed',
-            'top': navHeight,
-          });
-        } else if (scroH <= tocLimMin) {
-          toc.css({
-            'position': '',
-            'top': '',
-          });
-        } else if (scroH > tocLimMax) {
-          toc.css('display', 'none');
-        }
-      });
       tocbot.init({
         tocSelector: '#tocbot',
-        contentSelector: '.post-content',
+        contentSelector: '#post-body',
         headingSelector: 'h1,h2,h3,h4,h5,h6',
         linkClass: 'tocbot-link',
         activeLinkClass: 'tocbot-active-link',
         listClass: 'tocbot-list',
         isCollapsedClass: 'tocbot-is-collapsed',
         collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
         scrollSmooth: true,
+        headingsOffset: -boardTop
       });
       if ($('.toc-list-item').length > 0) {
-        $('#toc > p').css('visibility', 'visible');
+        $('#toc').css('visibility', 'visible');
       }
-      var offset = $('#board-ctn').css('margin-right')
-      $('#toc-ctn').css({
-        'right': offset
-      })
     });
-  </script>
-
-
-
-
-
-
-
-
-
-
-<!-- Plugins -->
-
-
-
-  <script  src="https://cdn.staticfile.org/prettify/188.0.0/prettify.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      $('pre').addClass('prettyprint  linenums');
-      prettyPrint();
-    })
   </script>
 
 
@@ -642,6 +643,8 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
       placement: "right",
       visible: "hover",
       
+      icon: "#"
+      
     };
     var el = "h1,h2,h3,h4,h5,h6".split(",");
     var res = [];
@@ -658,24 +661,29 @@ on/x-shockwave-flash&#39;&gt;&lt;/embed&gt;
     var path = "/local-search.xml";
     var inputArea = document.querySelector("#local-search-input");
     inputArea.onclick = function () {
-      getSearchFile(path);
+      searchFunc(path, 'local-search-input', 'local-search-result');
       this.onclick = null
     }
   </script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
   <script>
-    $("#post img:not(.no-zoom img, img[no-zoom])").each(
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
       function () {
-        var element = document.createElement("a");
-        $(element).attr("data-fancybox", "images");
-        $(element).attr("href", $(this).attr("src"));
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
         $(this).wrap(element);
       }
     );
   </script>
+
+
+
 
 
 

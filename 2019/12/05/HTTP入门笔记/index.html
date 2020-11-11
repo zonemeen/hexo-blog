@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>HTTP入门笔记 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="HTTP入门笔记">
               
             </span>
 
@@ -210,15 +223,15 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">HTTP入门笔记</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015 年出的最新版本 HTTP/2 更是成为互联网技术热点。</p>
 <p>本文介绍了 HTTP 协议的基础知识以及浏览器和 web 服务器之间请求和响应的详细信息。</p>
 <h4 id="什么是-HTTP"><a href="#什么是-HTTP" class="headerlink" title="什么是 HTTP?"></a><strong>什么是 HTTP?</strong></h4><p>HTTP 代表超文本传输协议。 这是互联网中数据通信的基础， 数据通信以客户端发送的请求开始，并以从 Web 服务器接收的响应结束，而 HTTP 的作用就是指导浏览器和服务器如何进行沟通。</p>
-<p>HTTP 通信过程简图：<br><img src="/images/http/1.jpg" srcset="/img/loading.gif" alt></p>
+<p>HTTP 通信过程简图：<br><img src="/images/http/1.jpg" srcset="/img/loading.gif"></p>
 <ul>
 <li>客户端（通常为浏览器）负责发起请求</li>
 </ul>
@@ -245,22 +258,23 @@
 &lt; Content-Length: 23568
 &lt; Last-Modified: Sun, 03 Mar 2019 06:16:24 GMT
 &lt; Connection: keep-alive
-&lt; ETag: <span class="hljs-string">"5c7b7138-5c10"</span>
+&lt; ETag: <span class="hljs-string">&quot;5c7b7138-5c10&quot;</span>
 &lt; Expires: Sun, 03 Mar 2019 06:22:38 GMT
 &lt; Cache-Control: max-age=300
 &lt; Accept-Ranges: bytes
 &lt; Set-Cookie: TS0106d18b=0103cff18ca232a2464de8b94e660a71bf04913ec10acc3f4e7336f5c7620c43c          b93a3a1e3e5b394e3b5f0d8d9c8c835e649efa77c; Path=/
 &lt;</code></pre></div>
+
 <p>想了解关于 curl 里的参数，推荐使用 explainshell.com 来查看解释，很快捷很详细哦。</p>
-<h4 id="请求的格式"><a href="#请求的格式" class="headerlink" title="请求的格式 "></a><strong>请求的格式 </strong></h4><p>来自计算机客户端的请求一般包含以下几个部分：</p>
+<h4 id="请求的格式"><a href="#请求的格式" class="headerlink" title="**请求的格式 **"></a>**请求的格式 **</h4><p>来自计算机客户端的请求一般包含以下几个部分：</p>
 <blockquote>
-<p>1 请求行：动词 路径 协议/版本 比如： GET /index.html HTTP/1.1<br>2 请求头：Key1: value1<br>2 Key2: value2<br>Key3: value3<br>Content-Type: application/x-www-form-urlencoded<br>Host: <a href="http://www.baidu.com" target="_blank" rel="noopener">http://www.baidu.com</a><br>User-Agent: curl/7.54.0<br>回车：没有内容<br>4 消息体：要上传的数据</p>
+<p>1 请求行：动词 路径 协议/版本 比如： GET /index.html HTTP/1.1<br>2 请求头：Key1: value1<br>2 Key2: value2<br>Key3: value3<br>Content-Type: application/x-www-form-urlencoded<br>Host: <a target="_blank" rel="noopener" href="http://www.baidu.com/">http://www.baidu.com</a><br>User-Agent: curl/7.54.0<br>回车：没有内容<br>4 消息体：要上传的数据</p>
 </blockquote>
 <ul>
 <li>请求最多包含四部分，最少包含三部分，最少三部分时消息体可以为空，且第三部分永远是一个回车（\n）</li>
 </ul>
 <ul>
-<li>动词有 GET（从服务器获取资源，一项或多项） POST（在服务器新建一个资源） PUT（在服务器整体更新资源，客户端提供改变后的完整资源）PATCH（在服务器局部更新资源，客户端提供改变的属性） DELETE （从服务器删除资源） 等。如果想用 POST，就输入：curl -X POST -d “1234567890” -s -v – “<a href="https://www.sina.com&quot;" target="_blank" rel="noopener">https://www.sina.com&quot;</a></li>
+<li>动词有 GET（从服务器获取资源，一项或多项） POST（在服务器新建一个资源） PUT（在服务器整体更新资源，客户端提供改变后的完整资源）PATCH（在服务器局部更新资源，客户端提供改变的属性） DELETE （从服务器删除资源） 等。如果想用 POST，就输入：curl -X POST -d “1234567890” -s -v – “<a target="_blank" rel="noopener" href="https://www.sina.com&quot;/">https://www.sina.com&quot;</a></li>
 </ul>
 <ul>
 <li>这里的路径包括「查询参数」，但不包括「锚点」</li>
@@ -291,7 +305,7 @@
 </li>
 </ul>
 <ul>
-<li>状态码列表<br><img src="/images/http/2.jpg" srcset="/img/loading.gif" alt><br><img src="/images/http/3.jpg" srcset="/img/loading.gif" alt></li>
+<li>状态码列表<br><img src="/images/http/2.jpg" srcset="/img/loading.gif"><br><img src="/images/http/3.jpg" srcset="/img/loading.gif"></li>
 </ul>
 <h4 id="如何在-Chrome-上检查-HTTP-请求和响应？"><a href="#如何在-Chrome-上检查-HTTP-请求和响应？" class="headerlink" title="如何在 Chrome 上检查 HTTP 请求和响应？"></a><strong>如何在 Chrome 上检查 HTTP 请求和响应？</strong></h4><p>将 Google Chrome 视为常用浏览器，在其他浏览器中查看详细信息的过程仍然相同。</p>
 <ol>
@@ -299,16 +313,16 @@
 <li>您也可以通过右键单击页面打开开发人员控制台，然后选择“检查”选项。</li>
 <li>转到“Network”选项，然后重新加载页面。 现在，您将看到页面上每个组件的加载时间。</li>
 <li>点击“Show Overview”图标以删除时间线，以便您可以清楚地查看其他详细信息。</li>
-<li>单击左侧栏上的页面 URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><img src="/images/http/4.jpg" srcset="/img/loading.gif" alt></li>
+<li>单击左侧栏上的页面 URL，然后转到“Response”选项。 （您还可以在“Preview”选项下查看相同的详细信息）。<br><img src="/images/http/4.jpg" srcset="/img/loading.gif"></li>
 </ol>
 <p>您可以在上面的部分中详细了解请求和响应的详细信息。 “Headers”选项将显示所选项目的请求和响应的 HTTP 标头信息的详细信息。</p>
 <h4 id="HTTP-标头检查工具"><a href="#HTTP-标头检查工具" class="headerlink" title="HTTP 标头检查工具"></a><strong>HTTP 标头检查工具</strong></h4><p>与 Chrome 类似，还有许多其他免费工具可用于检查 HTTP 标头中收到的响应代码。 例如，转到此 HTTP 标头检查工具，输入您要检查的任何 URL，然后单击“提交”按钮。</p>
-<p>例如输入<a href="https://www.baidu.com，您将看到如下标头的详细信息：" target="_blank" rel="noopener">https://www.baidu.com，您将看到如下标头的详细信息：</a></p>
+<p>例如输入<a href="https://www.baidu.com，您将看到如下标头的详细信息：">https://www.baidu.com，您将看到如下标头的详细信息：</a></p>
 <blockquote>
 <p>HTTP/1.1 200 OK<br>Accept-Ranges: bytes<br>Cache-Control: private, no-cache, no-store, proxy-revalidate, no-transform<br>Connection: Keep-Alive<br>Content-Length: 277<br>Content-Type: text/html<br>Date: Sun, 03 Mar 2019 07:27:41 GMT<br>Etag: “575e1f6f-115”<br>Last-Modified: Mon, 13 Jun 2016 02:50:23 GMT<br>Pragma: no-cache<br>Server: bfe/1.0.8.18</p>
 </blockquote>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
 
             </div>
             <hr>
@@ -332,14 +346,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2019/12/10/HTML常用标签/">
+                      <a href="/2019/12/10/HTML%E5%B8%B8%E7%94%A8%E6%A0%87%E7%AD%BE/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">HTML常用标签</span>
                         <span class="visible-mobile">上一篇</span>
@@ -349,7 +363,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/09/01/贵州黔东南之行/">
+                      <a href="/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/">
                         <span class="hidden-mobile">贵州黔东南之行</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -369,7 +383,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -381,16 +395,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -411,9 +424,10 @@
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -428,10 +442,27 @@
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -446,105 +477,47 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "HTTP入门笔记&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -558,6 +531,11 @@
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

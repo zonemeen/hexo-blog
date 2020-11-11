@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>浅谈数组常见遍历方法 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="浅谈数组常见遍历方法">
               
             </span>
 
@@ -210,13 +223,13 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">浅谈数组常见遍历方法</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>本文主要介绍数组常见的遍历方法：forEach、map、filter、find、every、some、reduce，它们都有个共同点：不会改变原始数组。</p>
-<p><img src="/images/array/1.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/array/1.png" srcset="/img/loading.gif"></p>
 <p>接下来都是使用底下的基础数组来实现一些方法：</p>
 <ul>
 <li>累加</li>
@@ -226,32 +239,35 @@
 </ul>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> people = [
   &#123;
-    <span class="hljs-attr">name</span>: <span class="hljs-string">"马云"</span>,
-    <span class="hljs-attr">money</span>: <span class="hljs-number">2000</span>,
+    name: <span class="hljs-string">&quot;马云&quot;</span>,
+    money: <span class="hljs-number">2000</span>,
   &#125;,
   &#123;
-    <span class="hljs-attr">name</span>: <span class="hljs-string">"马化腾"</span>,
-    <span class="hljs-attr">money</span>: <span class="hljs-number">1800</span>,
+    name: <span class="hljs-string">&quot;马化腾&quot;</span>,
+    money: <span class="hljs-number">1800</span>,
   &#125;,
   &#123;
-    <span class="hljs-attr">name</span>: <span class="hljs-string">"李彦宏"</span>,
-    <span class="hljs-attr">money</span>: <span class="hljs-number">1500</span>,
+    name: <span class="hljs-string">&quot;李彦宏&quot;</span>,
+    money: <span class="hljs-number">1500</span>,
   &#125;,
   &#123;
-    <span class="hljs-attr">name</span>: <span class="hljs-string">"我"</span>,
-    <span class="hljs-attr">money</span>: <span class="hljs-literal">Infinity</span>,
+    name: <span class="hljs-string">&quot;我&quot;</span>,
+    money: <span class="hljs-literal">Infinity</span>,
   &#125;,
 ];</code></pre></div>
+
 <h3 id="forEach：遍历数组"><a href="#forEach：遍历数组" class="headerlink" title="forEach：遍历数组"></a>forEach：遍历数组</h3><p>forEach 与另外几种方法有些许不同，就是除了 forEach 以外的几个方法都会返回值，如果在等号的左方放一个变量，那么此变量返回值将会是<code>undefined</code>(没有返回任何值)。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> forEachLoop = people.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-built_in">console</span>.log(item, index, array); <span class="hljs-comment">//（对象,索引,全部数组）</span>
 &#125;);
 <span class="hljs-built_in">console</span>.log(forEachLoop); <span class="hljs-comment">// undefined</span></code></pre></div>
+
 <p>其它的方法都会返回一个值或数组，以此来说就会传回原本的数组值。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> mapLoop = people.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-keyword">return</span> item;
 &#125;);
 <span class="hljs-built_in">console</span>.log(mapLoop); <span class="hljs-comment">//与原本数组资料相同</span></code></pre></div>
+
 <h3 id="map：一一映射另一个数组"><a href="#map：一一映射另一个数组" class="headerlink" title="map：一一映射另一个数组"></a>map：一一映射另一个数组</h3><p>map 会 return 返回的对象、值，作用上是用来处理数组返回新值产生一个新数组，要特别注意返回的值数量与原始数组长度相同，所以如果不给 return，默认返回<code>undefined</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 没有给return 也会产生undefined</span>
 <span class="hljs-keyword">var</span> mapEmpty = people.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;&#125;);
@@ -262,10 +278,10 @@
   <span class="hljs-keyword">return</span> item; <span class="hljs-comment">//返回对象</span>
 &#125;);
 <span class="hljs-built_in">console</span>.log(everyoneAdd); <span class="hljs-comment">// 返回每个处理后的数值，不过记得这是传参考特性，会影响到原始的对象</span>
-<span class="hljs-comment">// &#123;name: "马云", money: 2500&#125;</span>
-<span class="hljs-comment">// &#123;name: "马化腾", money: 2300&#125;</span>
-<span class="hljs-comment">// &#123;name: "李彦宏", money: 2000&#125;</span>
-<span class="hljs-comment">// &#123;name: "我", money: Infinity&#125;</span>
+<span class="hljs-comment">// &#123;name: &quot;马云&quot;, money: 2500&#125;</span>
+<span class="hljs-comment">// &#123;name: &quot;马化腾&quot;, money: 2300&#125;</span>
+<span class="hljs-comment">// &#123;name: &quot;李彦宏&quot;, money: 2000&#125;</span>
+<span class="hljs-comment">// &#123;name: &quot;我&quot;, money: Infinity&#125;</span>
 
 <span class="hljs-keyword">var</span> mapMoneyThan1500 = people.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-comment">// 错误示范，长度不符合时</span>
@@ -274,7 +290,8 @@
   &#125;
 &#125;);
 <span class="hljs-built_in">console</span>.log(mapMoneyThan1500);
-<span class="hljs-comment">// [&#123;name: "马云", money: 2000&#125;, &#123;name: "马化腾", money: 1800&#125;, undefined, &#123;name: "我", money: Infinity&#125; ]</span></code></pre></div>
+<span class="hljs-comment">// [&#123;name: &quot;马云&quot;, money: 2000&#125;, &#123;name: &quot;马化腾&quot;, money: 1800&#125;, undefined, &#123;name: &quot;我&quot;, money: Infinity&#125; ]</span></code></pre></div>
+
 <h3 id="filter：过滤掉数组中符合条件的元素"><a href="#filter：过滤掉数组中符合条件的元素" class="headerlink" title="filter：过滤掉数组中符合条件的元素"></a>filter：过滤掉数组中符合条件的元素</h3><p>filter() 检测数值元素，并返回符合条件所有元素的数组。 filter() 不会改变原始数组。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// filter</span>
 <span class="hljs-keyword">var</span> filterEmpty = people.filter(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;&#125;);
@@ -284,6 +301,7 @@
   <span class="hljs-keyword">return</span> item.money &gt; <span class="hljs-number">1500</span>; <span class="hljs-comment">// 取得大于1500</span>
 &#125;);
 <span class="hljs-built_in">console</span>.log(filterMoneyThan1500); <span class="hljs-comment">// 马云，马化腾，我 这三个对象</span></code></pre></div>
+
 <h3 id="find：返回符合条件的数组的第一个元素的值"><a href="#find：返回符合条件的数组的第一个元素的值" class="headerlink" title="find：返回符合条件的数组的第一个元素的值"></a>find：返回符合条件的数组的第一个元素的值</h3><p>find 是用来查找数组中符合条件的对象，且<strong>仅能有一个</strong>，当返回的<code>true</code>数量超过两个以上时，那会以第一个为优先，通常会用来查找特定 id。如果没有符合条件的对象，则返回<code>undefined</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> findEmpty = people.find(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;&#125;);
 <span class="hljs-built_in">console</span>.log(findEmpty); <span class="hljs-comment">// 没有条件，会是 undefined</span>
@@ -291,12 +309,13 @@
 <span class="hljs-keyword">var</span> findMoneyThan1500 = people.find(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-keyword">return</span> item.money &gt; <span class="hljs-number">1500</span>; <span class="hljs-comment">// 取得大于1500</span>
 &#125;);
-<span class="hljs-built_in">console</span>.log(findMoneyThan1500); <span class="hljs-comment">// 虽然满足条件的有3个，但只会返回 '马云' 这一个对象</span>
+<span class="hljs-built_in">console</span>.log(findMoneyThan1500); <span class="hljs-comment">// 虽然满足条件的有3个，但只会返回 &#x27;马云&#x27; 这一个对象</span>
 
 <span class="hljs-keyword">var</span> findMe = people.find(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
-  <span class="hljs-keyword">return</span> item.name === <span class="hljs-string">"我"</span>; <span class="hljs-comment">// 找到我</span>
+  <span class="hljs-keyword">return</span> item.name === <span class="hljs-string">&quot;我&quot;</span>; <span class="hljs-comment">// 找到我</span>
 &#125;);
 <span class="hljs-built_in">console</span>.log(findMe); <span class="hljs-comment">// 我 这一对象</span></code></pre></div>
+
 <h3 id="every：验证数组中是否每个元素都满足指定的条件"><a href="#every：验证数组中是否每个元素都满足指定的条件" class="headerlink" title="every：验证数组中是否每个元素都满足指定的条件"></a>every：验证数组中是否每个元素都满足指定的条件</h3><p>验证全部的结果，当全部的值都为 <code>true</code> 时，则最终会得到 <code>true</code>；只要其中之一为 <code>false</code>，则返回 <code>false</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> ans = people.every(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-keyword">return</span> item.money &gt; <span class="hljs-number">1800</span>;
@@ -307,6 +326,7 @@
   <span class="hljs-keyword">return</span> item.money &gt; <span class="hljs-number">500</span>;
 &#125;);
 <span class="hljs-built_in">console</span>.log(ans2); <span class="hljs-comment">// true: 大家钱都超过 500</span></code></pre></div>
+
 <h3 id="some：验证数组中是否有元素满足指定的条件"><a href="#some：验证数组中是否有元素满足指定的条件" class="headerlink" title="some：验证数组中是否有元素满足指定的条件"></a>some：验证数组中是否有元素满足指定的条件</h3><p>与前者类似，但只要部分为 <code>true</code>，则返回 <code>true</code>；全部为 <code>false</code> 时返回值才会为 <code>false</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> ans = people.some(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
   <span class="hljs-keyword">return</span> item.money &gt; <span class="hljs-number">1800</span>;
@@ -317,6 +337,7 @@
   <span class="hljs-keyword">return</span> item.money &lt; <span class="hljs-number">500</span>;
 &#125;);
 <span class="hljs-built_in">console</span>.log(ans2); <span class="hljs-comment">// false: 大家钱都不少于 500</span></code></pre></div>
+
 <h3 id="reduce：将数组合成一个值"><a href="#reduce：将数组合成一个值" class="headerlink" title="reduce：将数组合成一个值"></a>reduce：将数组合成一个值</h3><p>reduce 是其中最为特殊的，首先他返回的参数与之前的不同，它会接收到前一个返回的值供下一个对象使用，很适合用在累加与对比上，返回的可以是数字也可以是数组。</p>
 <ul>
 <li>accumulator: 前一个参数，如果是第一个数组的话，值是以另外传入或初始化的值</li>
@@ -324,39 +345,42 @@
 <li>currentIndex: 当前索引</li>
 <li>array: 全部数组</li>
 </ul>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> reduceEmpty = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
-  accumulator,
-  currentValue,
-  currentIndex,
-  array
-</span>) </span>&#123;&#125;);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> reduceEmpty = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span></span>
+<span class="hljs-function"><span class="hljs-params">  accumulator,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentValue,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentIndex,</span></span>
+<span class="hljs-function"><span class="hljs-params">  array</span></span>
+<span class="hljs-function"><span class="hljs-params"></span>) </span>&#123;&#125;);
 <span class="hljs-built_in">console</span>.log(reduceEmpty); <span class="hljs-comment">// 沒有条件，会是 undefined</span></code></pre></div>
+
 <p>可以通过与前一个相加的方式，累加数组中所有的值。</p>
 <div class="hljs"><pre><code class="hljs javascript">people.pop(); <span class="hljs-comment">// 我的钱深不可测，先移除掉</span>
-<span class="hljs-keyword">var</span> reducePlus = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
-  accumulator,
-  currentValue,
-  currentIndex,
-  array
-</span>) </span>&#123;
+<span class="hljs-keyword">var</span> reducePlus = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span></span>
+<span class="hljs-function"><span class="hljs-params">  accumulator,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentValue,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentIndex,</span></span>
+<span class="hljs-function"><span class="hljs-params">  array</span></span>
+<span class="hljs-function"><span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-comment">// 分別是前一个返回值, 当前值, 当前索引值</span>
   <span class="hljs-built_in">console</span>.log(accumulator, currentValue, currentIndex);
   <span class="hljs-keyword">return</span> accumulator + currentValue.money; <span class="hljs-comment">// 与前一个值相加</span>
 &#125;,
 <span class="hljs-number">0</span>); <span class="hljs-comment">// 传入初始化值为 0</span>
 <span class="hljs-built_in">console</span>.log(reducePlus); <span class="hljs-comment">// 总和为 5300</span></code></pre></div>
+
 <p>也可以相互对比，取出最高的值。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> reduceBestOne = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
-  accumulator,
-  currentValue,
-  currentIndex,
-  array
-</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"reduce"</span>, accumulator, currentValue, currentIndex);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> reduceBestOne = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span></span>
+<span class="hljs-function"><span class="hljs-params">  accumulator,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentValue,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentIndex,</span></span>
+<span class="hljs-function"><span class="hljs-params">  array</span></span>
+<span class="hljs-function"><span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;reduce&quot;</span>, accumulator, currentValue, currentIndex);
   <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.max(accumulator, currentValue.money); <span class="hljs-comment">// 与前一个值比较哪个更大</span>
 &#125;,
 <span class="hljs-number">0</span>);
 <span class="hljs-built_in">console</span>.log(reduceBestOne); <span class="hljs-comment">// 最大值为 2000</span></code></pre></div>
+
 <p>reduce 功能很强大，其余几种遍历方法可以用 reduce 方法来代替，这里只列出 map 被 reduce 代替的例子。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//map方法</span>
 <span class="hljs-keyword">var</span> mapMoneyDouble = people.map(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item, index, array</span>) </span>&#123;
@@ -365,19 +389,20 @@
 <span class="hljs-built_in">console</span>.log(mapMoneyDouble); <span class="hljs-comment">// 4000, 3600, 3000, Infinity</span>
 
 <span class="hljs-comment">//reduce方法实现同样的功能</span>
-<span class="hljs-keyword">var</span> reduceMoneyDouble = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">
-  accumulator,
-  currentValue,
-  currentIndex,
-  array
-</span>) </span>&#123;
+<span class="hljs-keyword">var</span> reduceMoneyDouble = people.reduce(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span></span>
+<span class="hljs-function"><span class="hljs-params">  accumulator,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentValue,</span></span>
+<span class="hljs-function"><span class="hljs-params">  currentIndex,</span></span>
+<span class="hljs-function"><span class="hljs-params">  array</span></span>
+<span class="hljs-function"><span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-comment">//钱翻倍</span>
   accumulator.push(currentValue.money * <span class="hljs-number">2</span>); <span class="hljs-comment">//钱翻倍</span>
   <span class="hljs-keyword">return</span> accumulator;
 &#125;,
 []);
 <span class="hljs-built_in">console</span>.log(reduceMoneyDouble); <span class="hljs-comment">// 4000, 3600, 3000, Infinity</span></code></pre></div>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -397,20 +422,20 @@
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/数组/">数组</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/03/01/聊一聊浏览器里的JavaScript/">
+                      <a href="/2020/03/01/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">谈谈浏览器里的JavaScript</span>
                         <span class="visible-mobile">上一篇</span>
@@ -420,7 +445,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/02/22/由一段代码引发的关于Object和Function的鸡和蛋问题的思考/">
+                      <a href="/2020/02/22/%E7%94%B1%E4%B8%80%E6%AE%B5%E4%BB%A3%E7%A0%81%E5%BC%95%E5%8F%91%E7%9A%84%E5%85%B3%E4%BA%8EObject%E5%92%8CFunction%E7%9A%84%E9%B8%A1%E5%92%8C%E8%9B%8B%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%80%83/">
                         <span class="hidden-mobile">由一段代码引发的关于Object和Function的鸡和蛋问题的思考</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -440,7 +465,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -452,16 +477,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -482,9 +506,10 @@
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -499,10 +524,27 @@
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -517,105 +559,47 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "浅谈数组常见遍历方法&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -629,6 +613,11 @@
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

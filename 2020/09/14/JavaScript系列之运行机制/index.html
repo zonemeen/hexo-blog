@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之运行机制（Event Loop） - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之运行机制（Event Loop）">
               
             </span>
 
@@ -210,11 +223,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之运行机制（Event Loop）</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>有了一定 JavaScript 基础的朋友们一定知道，JS 里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的 JavaScript 系列文章里，我就总结了 JS 前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解 JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。</p>
 <h3 id="单线程的问题"><a href="#单线程的问题" class="headerlink" title="单线程的问题"></a>单线程的问题</h3><p>JavaScript 语言的一大特点就是单线程，也就是说，同一个时间只能做一件事，不像诸如 Java 等多线程语言一样能同时进行多个任务和流程。</p>
 <p>其中 JS 引擎中负责解释和执行 JavaScript 代码的线程只有一个，叫它<strong>主线程</strong>。</p>
@@ -225,26 +238,28 @@
 <h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>写基础系列文章的过程中经常能碰到<strong>同步</strong>(Synchronous)与<strong>异步</strong>(Asynchronous)的概念，这也是初学 JavaScript 时容易搞混的特性之一。</p>
 <p>两者容易搞混我觉得很大的原因出在 Synchronous 在国内被翻译成了「<strong>同步</strong>」，光看字面意思会认为「<strong>同步</strong>」就是「所有动作同时进行」，但事实上<strong>刚好相反</strong>。</p>
 <p>要快速理解同步异步 ， 直接先看一段代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"1"</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"2"</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
 
-<span class="hljs-comment">/*打印出
-1
-2
-*/</span></code></pre></div>
+<span class="hljs-comment">/*打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre></div>
+
 <p>这段代码的实现就叫做<strong>同步</strong>，也就是说按照顺序一步一步来处理，做完第一件事情之后，再去做下一件事情。</p>
 <p>再来看另一段代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"1"</span>);
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"2"</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
 &#125;, <span class="hljs-number">1000</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"3"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
 
-<span class="hljs-comment">/*打印出
-1
-3
-2
-*/</span></code></pre></div>
+<span class="hljs-comment">/*打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">3</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre></div>
+
 <p>这段代码的实现就叫做<strong>异步</strong>，也就是说不完全按照顺序去做，如果在函数 A 返回的时候，调用者还不能够得到预期结果，而是需要通过一定的手段等待一段时间去得到，这样也就不耽搁时间。</p>
 <p>所以说 JavaScript 的同步代码比较好理解，而其优势之一是其如何处理异步代码。异步代码会被放入一个事件队列（下面会讲到），等到所有其他代码执行后才进行，而不会阻塞线程，接下来将重点介绍<strong>异步</strong>。</p>
 <h3 id="异步过程是如何形成的？"><a href="#异步过程是如何形成的？" class="headerlink" title="异步过程是如何形成的？"></a>异步过程是如何形成的？</h3><p>简单的总结一下，一个异步过程通常是这样的：</p>
@@ -256,6 +271,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 </ol>
 <p>异步函数通常具有以下的形式：</p>
 <div class="hljs"><pre><code class="hljs javascript">A(argus..., callbackFn)</code></pre></div>
+
 <p>其中，函数 A 可以叫做异步过程的发起函数，也叫做异步任务注册函数。<code>argus</code>是这个函数需要的参数。<code>callbackFn</code>也是这个函数的参数，但是它比较特殊所以单独列出来。</p>
 <p>所以，从主线程的角度看，一个异步过程包括下面两个要素：</p>
 <ul>
@@ -264,17 +280,19 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 </ul>
 <p>它们都是在主线程上调用的，其中注册函数用来发起异步过程，回调函数用来处理结果。</p>
 <p>举一个栗子：</p>
-<div class="hljs"><pre><code class="hljs javascript">setTimeout(fn, <span class="hljs-number">1000</span>);</code></pre></div>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(fn, <span class="hljs-number">1000</span>);</code></pre></div>
+
 <p>其中的<code>setTimeout</code>就是异步过程的发起函数，<code>fn</code>是回调函数。</p>
 <p>注意：前面说的形式<code>A(argus..., callbackFn)</code>只是一种抽象的表示，并不代表回调函数一定要作为发起函数的参数，例如：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> XMLHttpRequest();
-request.open(<span class="hljs-string">"GET"</span>, url);
+request.open(<span class="hljs-string">&quot;GET&quot;</span>, url);
 request.send(); <span class="hljs-comment">// 发起函数</span>
 request.onreadystatechange = xxx; <span class="hljs-comment">// 添加回调函数</span></code></pre></div>
+
 <p>这种形式的发起函数和回调函数就是分离的。</p>
 <h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>上面提到了异步任务完成后，会通知主线程，以 <code>callback</code> 的方式获取结果或者执行回调。但是如果当前的主线程是忙碌的，异步任务的信号无法接收到怎么办呢？所以还需要一个地方保存这些 <code>callback</code>，也就是<strong>任务队列（task queue）</strong>。</p>
 <p>那么这里就要具体提提 JavaScript 异步执行的<strong>运行机制</strong>了，先用一张图来表现整个过程：</p>
-<p><img src="/images/eventloop/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/eventloop/1.jpg" srcset="/img/loading.gif"></p>
 <p>上图的完整过程就是：所有同步任务都在主线程上执行，形成一个执行栈，当执行栈遇到异步任务时（浏览器通常是调用 WebAPIs，常见的有 <code>XMLHttpRequest</code>，<code>setTimeout</code>，事件回调等），不会等待，而是继续执行往下执行。而异步任务就会以各种方式，把 <code>callback</code> 加入任务队列中。一旦执行栈中的所有同步任务执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个 <code>callback</code> 任务放入到栈中执行。结束后栈内被清空，还会再去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作，而这种循环的机制，就称之为<strong>事件循环</strong>（Event Loop）。</p>
 <h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop(事件循环)"></a>Event Loop(事件循环)</h3><p>事件循环可不是像上面一样一句两句就能讲清的，并且暂时不讨论 node.js 的 Event Loop 执行机制，以下关于浏览器的 Event Loop 执行机制，那在完全了解 Event Loop 之前，还需了解一下宏任务与微任务，因为任务队列又分为<code>macrotask</code>（宏任务）与<code>microtask</code>（微任务），在 ES2015 中 <code>macrotask</code> 即指 Task，而 <code>microtask</code> 则是指代 Job。</p>
 <ul>
@@ -282,7 +300,7 @@ request.onreadystatechange = xxx; <span class="hljs-comment">// 添加回调函�
 <li>微任务大概包括: <code>process.nextTick</code>（Nodejs 环境）, <code>Promise</code>, <code>Object.observe</code>(已废弃), <code>MutationObserver</code>(html5 新特性)。</li>
 </ul>
 <p>关于<code>macrotask</code>和<code>microtask</code>的理解，得结合事件循坏的机制，下面这张图就可以说是介绍得很清楚了。</p>
-<p><img src="/images/eventloop/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/eventloop/2.jpg" srcset="/img/loading.gif"></p>
 <p>事件循环的顺序，决定了 JavaScript 代码的执行顺序，一次事件循环的步骤简单总结起来就是：</p>
 <ol>
 <li>检查<code>macrotask</code>队列是否为空，非空则到步骤 2，为空则到步骤 3；</li>
@@ -297,7 +315,7 @@ request.onreadystatechange = xxx; <span class="hljs-comment">// 添加回调函�
 <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
 
 <span class="hljs-comment">//setTimeout1</span>
-setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
   <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
   <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;
     <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
@@ -305,7 +323,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 &#125;);
 
 <span class="hljs-comment">//setTimeout2</span>
-setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
   <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
 &#125;);
 
@@ -314,6 +332,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 &#125;);
 
 <span class="hljs-comment">// 1，5，2，3，4</span></code></pre></div>
+
 <p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
 <ol>
 <li>主线程上遇到<code>console.log(1)</code>同步代码，执行，输出’1’。</li>
@@ -329,15 +348,15 @@ setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;
 <span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
 
 <span class="hljs-comment">//setTimeout1</span>
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
 &#125;, <span class="hljs-number">0</span>);
 
 <span class="hljs-comment">//setTimeout2</span>
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
   <span class="hljs-comment">//setTimeout3</span>
-  setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
   &#125;);
   <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
@@ -362,6 +381,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 <span class="hljs-built_in">console</span>.log(<span class="hljs-number">9</span>);
 
 <span class="hljs-comment">// 1，9，6，8，7，2，3，5，4</span></code></pre></div>
+
 <p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
 <ol>
 <li>首先顺序执行完主进程上的同步任务，第一句和最后一句的<code>console.log</code>。</li>
@@ -374,51 +394,52 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 <li>此时<code>microtask</code>队列为空，进入下一个事件循环，检查宏任务队列，发现有 <code>setTimeout3</code> 的回调函数，立即执行回调函数输出，输出’4’。至此代码执行结束。</li>
 </ol>
 <h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>这里再补一道面试题，如何执行这段代码的过程就不详细说明了，朋友们自行去体会：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"1"</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
 
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"2"</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
   process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"3"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
   &#125;);
   <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"4"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;4&quot;</span>);
     resolve();
   &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"5"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;5&quot;</span>);
   &#125;);
 &#125;);
 process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"6"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;6&quot;</span>);
 &#125;);
 <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"7"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;7&quot;</span>);
   resolve();
 &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"8"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;8&quot;</span>);
 &#125;);
 
-setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"9"</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;9&quot;</span>);
   process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"10"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;10&quot;</span>);
   &#125;);
   <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"11"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;11&quot;</span>);
     resolve();
   &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"12"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;12&quot;</span>);
   &#125;);
 &#125;);
 
 <span class="hljs-comment">// 1，7，6，8，2，4，3，5，9，11，10，12</span>
 <span class="hljs-comment">// node环境下的事件监听依赖libuv驱动I/O库与前端环境不完全相同，输出顺序可能会有误差</span></code></pre></div>
+
 <h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><ul>
-<li><a href="https://blog.csdn.net/leftfist/article/details/41891407" target="_blank" rel="noopener">Node.js 机制及原理理解初步</a></li>
-<li><a href="http://lynnelv.github.io/js-event-loop-nodejs" target="_blank" rel="noopener">深入理解 js 事件循环机制（Node.js 篇）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/leftfist/article/details/41891407">Node.js 机制及原理理解初步</a></li>
+<li><a target="_blank" rel="noopener" href="http://lynnelv.github.io/js-event-loop-nodejs">深入理解 js 事件循环机制（Node.js 篇）</a></li>
 </ul>
 <p>后续自己也会追加一篇关于 Node.js 的事件循环机制的文章。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -438,7 +459,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/运行机制/">运行机制</a>
+                      <a class="hover-with-bg" href="/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/">运行机制</a>
                     
                       <a class="hover-with-bg" href="/tags/Event-Loop/">Event Loop</a>
                     
@@ -446,14 +467,14 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/09/27/GitHub+jsDelivr+PicGo搭建免费、快速图床/">
+                      <a href="/2020/09/27/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">GitHub+jsDelivr+PicGo搭建免费、快速图床</span>
                         <span class="visible-mobile">上一篇</span>
@@ -463,7 +484,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/08/13/JavaScript系列之深入理解对象属性/">
+                      <a href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/">
                         <span class="hidden-mobile">JavaScript系列之深入理解对象属性</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -483,7 +504,7 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -495,16 +516,15 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -525,9 +545,10 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -542,10 +563,27 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -560,105 +598,47 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之运行机制（Event Loop）&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -672,6 +652,11 @@ setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

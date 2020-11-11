@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之立即执行函数IIFE - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之立即执行函数IIFE">
               
             </span>
 
@@ -172,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.5k 字
     </span>
   
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      27
+      28
        分钟
     </span>
   
@@ -210,109 +223,117 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之立即执行函数IIFE</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
-<p><strong>IIFE(Immediately Invoked Functions Expressions)</strong>其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，<strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它</strong>。</p>
+<p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
 <p>下面我们将做更进一步的介绍和说明。</p>
 <h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hi"</span> + name);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
 &#125;
-sayHi(<span class="hljs-string">"miqilin"</span>);
+sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
 
 <span class="hljs-comment">// 函数表达式</span>
 <span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello "</span> + name);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
 &#125;;
-sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
+sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></div>
+
 <h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
 <p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
 <span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello "</span> + name);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
 &#125;;
 <span class="hljs-built_in">console</span>.log(sayHello);</code></pre></div>
+
 <p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
-<p><img src="/images/IIFE/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/1.jpg" srcset="/img/loading.gif"></p>
 <p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
-<p><img src="/images/IIFE/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/2.jpg" srcset="/img/loading.gif"></p>
 <p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
-<p><img src="/images/IIFE/3.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/3.jpg" srcset="/img/loading.gif"></p>
 <p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">'Hello '</span>  + name ) ;
+  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
 &#125;</code></pre></div>
+
 <p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
-<p><img src="/images/IIFE/4.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/4.jpg" srcset="/img/loading.gif"></p>
 <p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
-<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function(){ ...}</code>包起来，像是这样：</p>
+<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
 <div class="hljs"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Hello "</span> + name);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
 &#125;);</code></pre></div>
+
 <p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
 <p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
 <p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
-<p><img src="/images/IIFE/5.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/5.jpg" srcset="/img/loading.gif"></p>
 <p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
-<div class="hljs"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">window, undefined</span>) </span>&#123;
+<div class="hljs"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
   <span class="hljs-comment">// 略...</span>
 &#125;)(<span class="hljs-built_in">window</span>);</code></pre></div>
+
 <p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
 <p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
 <h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
 (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">"Hello"</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">" "</span> + name);
-&#125;)(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></div>
+
 <p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
 <p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
-<p><img src="/images/IIFE/6.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/6.jpg" srcset="/img/loading.gif"></p>
 <p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
-<p><img src="/images/IIFE/7.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/7.jpg" srcset="/img/loading.gif"></p>
 <p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
-<p><img src="/images/IIFE/8.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/8.jpg" srcset="/img/loading.gif"></p>
 <p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
-<p><img src="/images/IIFE/9.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/9.jpg" srcset="/img/loading.gif"></p>
 <p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
 <h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">"Hi"</span>;
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
 
 <span class="hljs-comment">//IIFE</span>
 (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">"Hello"</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">" "</span> + name);
-&#125;)(<span class="hljs-string">"miqilin"</span>);
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
 
 <span class="hljs-built_in">console</span>.log(greeting);</code></pre></div>
+
 <p>这时候的打印出的顺序为：</p>
-<p><img src="/images/IIFE/10.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/10.jpg" srcset="/img/loading.gif"></p>
 <p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
 <p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
-<p><img src="/images/IIFE/11.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/11.jpg" srcset="/img/loading.gif"></p>
 <p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
 <h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
 <p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">"Hi"</span>;
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
 
 <span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">global, name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">"Hello"</span>;
-  global.greeting = <span class="hljs-string">"Hola"</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">" "</span> + name);
-&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">"miqilin"</span>);
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
 
 <span class="hljs-built_in">console</span>.log(greeting);</code></pre></div>
+
 <p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
-<p><img src="/images/IIFE/12.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/12.jpg" srcset="/img/loading.gif"></p>
 <p>这操作够骚吧！哈哈~</p>
 <h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
@@ -320,17 +341,19 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
     <span class="hljs-built_in">console</span>.log(i);
   &#125;, <span class="hljs-number">1000</span>);
 &#125;</code></pre></div>
+
 <p>真的是这样吗？我们来看看执行的结果：</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
+<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
 <span class="hljs-number">5</span>
 <span class="hljs-number">5</span>
 <span class="hljs-number">5</span>
 <span class="hljs-number">5</span>
 <span class="hljs-number">5</span></code></pre></div>
+
 <p>为什么会这样呢？</p>
 <p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
 <p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
-<p><img src="/images/IIFE/13.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/IIFE/13.jpg" srcset="/img/loading.gif"></p>
 <p>那么要怎么解决这个问题呢？</p>
 <p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
@@ -342,6 +365,7 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
     &#125;, <span class="hljs-number">1000</span>);
   &#125;)(i);
 &#125;</code></pre></div>
+
 <p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
 <p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
 <p>所以我们稍微修改一下：</p>
@@ -353,16 +377,18 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
     &#125;, <span class="hljs-number">1000</span> * x);
   &#125;)(i);
 &#125;</code></pre></div>
+
 <p>像这样，就可以依序打印出我们想要的结果喽！</p>
-<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>{ }</code>作为它的块级作用域。</p>
+<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
 <p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
   <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-built_in">console</span>.log(i);
   &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
 &#125;</code></pre></div>
+
 <p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -388,14 +414,14 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/23/一些好用的工具、网站/">
+                      <a href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">一些好用的工具、网站</span>
                         <span class="visible-mobile">上一篇</span>
@@ -405,7 +431,7 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/07/10/JavaScript系列之回调函数/">
+                      <a href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
                         <span class="hidden-mobile">JavaScript系列之回调函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -425,7 +451,7 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -437,16 +463,15 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -467,9 +492,10 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -484,10 +510,27 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -502,105 +545,47 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之立即执行函数IIFE&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -614,6 +599,11 @@ sayHello(<span class="hljs-string">"miqilin"</span>);</code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

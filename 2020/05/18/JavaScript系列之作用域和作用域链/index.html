@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之作用域和作用域链 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之作用域和作用域链">
               
             </span>
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      34
        分钟
     </span>
   
@@ -210,25 +223,26 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之作用域和作用域链</h1>
             
-            <div class="markdown-body" id="post-body">
-              <p>在上一篇<a href="https://zhuanlan.zhihu.com/p/69142071" target="_blank" rel="noopener">《JavaScript 系列之变量对象》</a>中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。</p>
+            <div class="markdown-body">
+              <p>在上一篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69142071">《JavaScript 系列之变量对象》</a>中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。</p>
 <p>此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。</p>
 <p>先来回顾一下关于执行上下文的三个阶段生命周期：</p>
-<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif"></p>
 <p>本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——<strong>作用域链</strong>。</p>
 <h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？</p>
 <p>作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">"inner variable"</span>;
+  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
   <span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// inner variable</span>
 &#125;
 
 fn();
 <span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre></div>
+
 <p>从上面的代码中我们可以很直观地体会作用域的概念，变量<code>inVariable</code>在全局作用域没有声明，所以在全局作用域下直接取值会报错。所以我们可以这样理解：<strong>作用域就像一个地头蛇，我的地盘我做主，让属于自己域内的变量不会轻易外泄出去</strong>。也就是说<strong>作用域最大的用处就是隔离变量，不同作用域下同名变量不会有冲突</strong>。这几句话总比前面那句好理解多了吧。</p>
 <p>关于 JavaScript 中的作用域类型，<strong>ES6 之前 JavaScript 并没有块级作用域，只有全局作用域和函数作用域</strong>。ES6 的到来，为我们提供了‘块级作用域’,可通过新增命令 let 和 const 来体现：</p>
 <ul>
@@ -236,23 +250,24 @@ fn();
 <li>函数作用域—  变量可以在定义它们的函数的边界内访问</li>
 <li>块级作用域—变量可以在定义它们的块中访问，块由 { 和 } 分隔</li>
 </ul>
-<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> global = <span class="hljs-string">"global scoped"</span>;
+<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">const</span> global = <span class="hljs-string">"function scoped"</span>;
-  <span class="hljs-built_in">console</span>.log(global); <span class="hljs-comment">// function scoped</span>
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
 &#125;
 
 fn();
-<span class="hljs-built_in">console</span>.log(global); <span class="hljs-comment">// global scoped</span></code></pre></div>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span></code></pre></div>
+
 <p>从上面例子可以看出全局作用域和函数作用域的作用范围，即使全局变量在函数内部分配了不同的值，它也只保留在同一函数的边界内，互相并不影响，我们也不会因使用相同的变量名而出错。再来看个例子加深理解：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> global = <span class="hljs-string">"global scoped"</span>;
-<span class="hljs-keyword">const</span> anotherGlobal = <span class="hljs-string">"also global scoped"</span>;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
+<span class="hljs-keyword">const</span> anotherGlobal = <span class="hljs-string">&quot;also global scoped&quot;</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">const</span> global = <span class="hljs-string">"function scoped"</span>;
-  <span class="hljs-built_in">console</span>.log(global); <span class="hljs-comment">// function scoped</span>
-  <span class="hljs-keyword">const</span> scoped = <span class="hljs-string">"also function scoped"</span>;
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
+  <span class="hljs-keyword">const</span> scoped = <span class="hljs-string">&quot;also function scoped&quot;</span>;
 
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inner</span>(<span class="hljs-params"></span>) </span>&#123;
     <span class="hljs-built_in">console</span>.log(scoped); <span class="hljs-comment">// also function scoped</span>
@@ -262,29 +277,32 @@ fn();
   inner();
 &#125;
 
-<span class="hljs-built_in">console</span>.log(global); <span class="hljs-comment">// global scoped</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span>
 <span class="hljs-built_in">console</span>.log(anotherGlobal); <span class="hljs-comment">// also global scoped</span>
 
 fn();
 inner(); <span class="hljs-comment">// Uncaught ReferenceError: inner is not defined</span></code></pre></div>
+
 <p>在这里我们可以看到 <code>inner()</code> 函数可以访问在其父函数中声明的变量—<code>fn()</code>。每当我们需要函数内部的变量时，引擎将首先在当前函数作用域内查找它。如果它没有当前函数作用域内找到它，它将继续上升，向上一级查找，直到它找到全局作用域内的变量，如果找不到变量，我们将得到一个 ReferenceError。格外注意<strong>函数内层作用域可以访问外层作用域的变量，反之则不行</strong>。</p>
 <p>除了上面所讲的最外层函数外面定义的变量拥有全局作用域，全局作用域还有一种特殊的出现场合：就是<strong>所有末声明直接赋值的变量将自动声明为拥有全局作用域的变量</strong>：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  variable = <span class="hljs-string">"undeclared variable"</span>;
-  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">"inner variable"</span>;
+  variable = <span class="hljs-string">&quot;undeclared variable&quot;</span>;
+  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
 &#125;
 
 fn();
 <span class="hljs-built_in">console</span>.log(variable); <span class="hljs-comment">// undeclared variable</span>
 <span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre></div>
+
 <p>全局作用域有个弊端：如果我们写了很多行 JavaScript 代码，变量定义都没有用函数包括，那么它们就全部都在全局作用域中，这样就会污染全局命名空间，容易引起命名冲突。同时意外的全局变量还会引起内存泄漏，所以在编程时，尽量避免全局变量的使用，以便后期更快地调试。</p>
 <p>还有值得注意的是：<strong>块语句（大括号“｛｝”中间的语句），如 <code>if</code> 和 <code>switch</code> 条件语句或 <code>for</code> 和 <code>while</code> 循环语句，不像函数，它们不会创建一个新的作用域</strong>。在块语句中定义的变量将保留在它们已经存在的作用域中。比如：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;
-  <span class="hljs-comment">// 'if' 条件语句块不会创建一个新的作用域</span>
-  <span class="hljs-keyword">var</span> name = <span class="hljs-string">"miqilin"</span>; <span class="hljs-comment">// name 依然在全局作用域中</span>
+  <span class="hljs-comment">// &#x27;if&#x27; 条件语句块不会创建一个新的作用域</span>
+  <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>; <span class="hljs-comment">// name 依然在全局作用域中</span>
 &#125;
 
 <span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// miqilin</span></code></pre></div>
+
 <p>JS 的初学者经常需要花点时间才能习惯变量提升，而如果不理解这种特有行为，就可能导致 bug 出现 。正因为如此， ES6 引入了块级作用域，让变量的生命周期更加可控。</p>
 <h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>在 ES6 中，我们得到了两个新的变量声明关键字 - <code>let</code>和<code>const</code>。它们和<code>var</code>之间的主要区别在于，使用 ES6 关键字声明的变量是块作用域，这意味着它们仅在它们定义的代码块中可用。块级作用域在如下情况被创建：</p>
 <ol>
@@ -297,14 +315,16 @@ fn();
 </ul>
 <p><code>let</code>/<code>const</code>创建的变量不会像使用<code>var</code>声明的变量那样被提升到顶部，因此你需要手动将 <code>let</code>/<code>const</code> 声明放置到顶部，以便让变量在整个代码块内部可用。比如：</p>
 <div class="hljs"><pre><code class="hljs javascript">cosole.log(name); <span class="hljs-comment">// Uncaught ReferenceError: cosole is not defined</span>
-<span class="hljs-keyword">const</span> name = <span class="hljs-string">"miqilin"</span>;</code></pre></div>
+<span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;</code></pre></div>
+
 <p>所以确保代码没有引用错误的一种方法是确保只使用<code>let</code>和<code>const</code>进行变量声明。</p>
 <ul>
 <li><strong>禁止重复声明</strong></li>
 </ul>
 <p>如果一个标识符已经在代码块内部被定义，那么在此代码块内使用同一个标识符再进行 <code>let</code> 声明就会抛出错误。比如：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
-<span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>; <span class="hljs-comment">// Uncaught SyntaxError: Identifier 'count' has already been declared</span></code></pre></div>
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>; <span class="hljs-comment">// Uncaught SyntaxError: Identifier &#x27;count&#x27; has already been declared</span></code></pre></div>
+
 <p>上面例子中<code>count</code> 变量被前后声明了两次：第一次使用 <code>var</code> ，另一次使用 <code>let</code> 。因为 <code>let</code> 不能在同一作用域内重复声明一个已有标识符，此处的 <code>let</code> 声明就会抛出错误。但如果在嵌套的作用域内使用 <code>let</code> 声明一个同名的新变量，则不会抛出错误：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
 <span class="hljs-comment">// 不会抛出错误</span>
@@ -312,6 +332,7 @@ fn();
   <span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>;
   <span class="hljs-comment">// 其他代码</span>
 &#125;</code></pre></div>
+
 <ul>
 <li><strong>循环中的绑定块作用域的妙用</strong></li>
 </ul>
@@ -321,6 +342,7 @@ fn();
 &#125;
 <span class="hljs-built_in">console</span>.log(i);
 <span class="hljs-comment">// ReferenceError: i is not defined</span></code></pre></div>
+
 <p>上面代码中，因为用<code>let</code>声明计数器<code>i</code>，只在<code>for</code>循环体内有效，所以在循环体外引用就会报错。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
@@ -329,6 +351,7 @@ fn();
   &#125;;
 &#125;
 a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 10</span></code></pre></div>
+
 <p>上面代码中，变量<code>i</code>是<code>var</code>命令声明的，在全局范围内都有效，所以全局只有一个变量<code>i</code>。每一次循环，变量<code>i</code>的值都会发生改变，而循环内被赋给数组<code>a</code>的函数内部的<code>console.log(i)</code>，里面的<code>i</code>指向的就是全局的<code>i</code>。也就是说，所有数组<code>a</code>的成员里面的<code>i</code>，指向的都是同一个<code>i</code>，导致运行时输出的是最后一轮的<code>i</code>的值，也就是 10。</p>
 <p>如果换使用 let，声明的变量仅在块级作用域内有效，最后输出的是 6。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
@@ -338,10 +361,11 @@ a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 10</span>
   &#125;;
 &#125;
 a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 6</span></code></pre></div>
+
 <p>上面代码中，变量<code>i</code>是<code>let</code>声明的，当前的<code>i</code>只在本轮循环有效，所以每一次循环的<code>i</code>其实都是一个新的变量，所以最后输出的是 6。你可能会问，如果每一轮循环的变量 i 都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量 i 时，就在上一轮循环的基础上进行计算。</p>
 <p>另外，<code>for</code>循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-keyword">let</span> i = <span class="hljs-string">"abc"</span>;
+  <span class="hljs-keyword">let</span> i = <span class="hljs-string">&quot;abc&quot;</span>;
   <span class="hljs-built_in">console</span>.log(i);
 &#125;
 <span class="hljs-comment">// abc</span>
@@ -349,6 +373,7 @@ a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 6</span><
 <span class="hljs-comment">// abc</span>
 <span class="hljs-comment">// abc</span>
 <span class="hljs-comment">// abc</span></code></pre></div>
+
 <p>上面代码正确运行，输出了 5 次 abc。这表明函数内部的变量 i 与循环变量 i 不在同一个作用域，有各自单独的作用域。</p>
 <h3 id="作用域链-Scope-Chain"><a href="#作用域链-Scope-Chain" class="headerlink" title="作用域链(Scope Chain)"></a>作用域链(Scope Chain)</h3><p>上面用一大篇幅来讲解作用域，其实在里面就有涉及到作用域链的知识了。简单的来说，当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。看下面一个例子：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -363,11 +388,12 @@ a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 6</span><
 <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
 a(); <span class="hljs-comment">// 2</span>
 b(); <span class="hljs-comment">// Uncaught ReferenceError: b is not defined</span></code></pre></div>
+
 <p>最后加以执行<code>a()</code>和<code>b()</code>，这时候我们会发现两件事：</p>
 <p>1.执行<code>a()</code>会得到 2 的结果：之所以会有这样的结果，是因为当我们执行<code>function a</code>里面的<code>function b</code>时，因为在<code>function b</code>里面它找不到<code>myVar</code>这个变量，因此它开始往它的外层去搜寻，而这时候它的父级作用域是<code>function a</code>，在<code>function a</code>里面它便找到了<code>myVar = 2</code>，因此它就不再往外部环境 (<code>myVar = 1</code>)去找了，直接返回了 2 这样的结果。</p>
 <p>2.<code>b()</code>会得到<code>b is not defined</code>的结果：之所以<code>b</code>会是<code>not defined</code>（记得是<code>not defined</code>不是<code>undefined</code>哦！)，是因为这时候在最外层的全局上下文（<code>global execution context</code>）中，找不到<code>function b</code>。</p>
 <p>而从<code>b() --&gt; a() --&gt; global execution context</code>这样的链，就称为<strong>作用域链（Scope Chain）</strong>：</p>
-<p><img src="/images/scopechain/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/scopechain/2.jpg" srcset="/img/loading.gif"></p>
 <p>如果我们把<code>function a</code>里面对于<code>myVar</code>的声明拿掉的话，它才会继续往外层搜寻<code>myVar</code>，直到找到全局作用域中的声明<code>myVar = 1</code>，这时候才会返回 1 的结果。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -380,6 +406,7 @@ b(); <span class="hljs-comment">// Uncaught ReferenceError: b is not defined</sp
 
 <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
 a(); <span class="hljs-comment">// 1</span></code></pre></div>
+
 <p>如果我们更进一步的把全局作用域中，对于<code>myVar</code>的声明也拿掉，那么现在在全局作用域中也找不到<code>myVar</code>这个变量了，也就是说，在这整个作用域链中都找不到<code>myVar</code>，因此可想而知，最后的结果是<code>not defined</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -392,7 +419,8 @@ a(); <span class="hljs-comment">// 1</span></code></pre></div>
 
 <span class="hljs-comment">//var myVar = 1;</span>
 a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined</span></code></pre></div>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -420,14 +448,14 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/24/JavaScript系列之this是什么/">
+                      <a href="/2020/05/24/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaScript系列之this是什么</span>
                         <span class="visible-mobile">上一篇</span>
@@ -437,7 +465,7 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/12/JavaScript系列之变量对象/">
+                      <a href="/2020/05/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/">
                         <span class="hidden-mobile">JavaScript系列之变量对象</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -457,7 +485,7 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -469,16 +497,15 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -499,9 +526,10 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -516,10 +544,27 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -534,105 +579,47 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之作用域和作用域链&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -646,6 +633,11 @@ a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

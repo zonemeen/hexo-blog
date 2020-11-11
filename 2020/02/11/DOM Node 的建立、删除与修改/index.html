@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>DOM Node 的建立、删除与修改 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="DOM Node 的建立、删除与修改">
               
             </span>
 
@@ -172,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      1.7k 字
     </span>
   
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      22
        分钟
     </span>
   
@@ -210,154 +223,166 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">DOM Node 的建立、删除与修改</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
 <h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);</code></pre></div>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</code></pre></div>
+
 <p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
 <p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
-<div class="hljs"><pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">"myNewDiv"</span>;
-newDiv.className = <span class="hljs-string">"box"</span>;</code></pre></div>
+<div class="hljs"><pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">&quot;myNewDiv&quot;</span>;
+newDiv.className = <span class="hljs-string">&quot;box&quot;</span>;</code></pre></div>
+
 <h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
 <p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);
 
 <span class="hljs-comment">// 建立 textNode 文字节点</span>
-<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Hello world!"</span>);
+<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);
 
 <span class="hljs-comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv</span>
 newDiv.appendChild(textNode);</code></pre></div>
+
 <h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
 <p>例如，一开始我们有一个 HTML 的容器元素：</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre></div>
+
 <p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 取得外层容器 myList</span>
-<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);
+<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);
 
 <span class="hljs-comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span>
 <span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();
 
 <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
   <span class="hljs-comment">// 生成新的 li，加入文字后置入 fragment 中。</span>
-  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>);
-  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Item "</span> + (i + <span class="hljs-number">1</span>)));
+  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);
+  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Item &quot;</span> + (i + <span class="hljs-number">1</span>)));
   fragment.appendChild(li);
 &#125;
 
 <span class="hljs-comment">// 最后将组合完成的 fragment 放进 ul 容器</span>
 ul.appendChild(fragment);</code></pre></div>
+
 <p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
 <h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
 <p>我们只要将对应的 HTML 字符串传入：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;h1&gt;Hello World!&lt;/h1&gt;"</span>);</code></pre></div>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;</span>);</code></pre></div>
+
 <p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">'&lt;script type="textjavascript" src="file.js"&gt;'</span> + <span class="hljs-string">"&lt;/script&gt;"</span>);
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);
 
 <span class="hljs-comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">'&lt;script type="textjavascript" src="file.js"&gt;'</span> + <span class="hljs-string">"&lt;/script&gt;"</span>);</code></pre></div>
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);</code></pre></div>
+
 <p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"Hello world!"</span>);
+  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;Hello world!&quot;</span>);
 &#125;;</code></pre></div>
+
 <p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
 <h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
 <p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
-<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg" srcset="/img/loading.gif" alt></p>
+<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg" srcset="/img/loading.gif"></p>
 <p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-comment">// 取得容器</span>
-  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);
-  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span>
-  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+<span class="javascript">  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
 
-  <span class="hljs-comment">// 建立 textNode 文字节点</span>
-  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Hello world!"</span>);
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
 
-  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span>
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span></span>
   newList.appendChild(textNode);
 
-  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span>
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span></span>
   myList.appendChild(newList);
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
-<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg" srcset="/img/loading.gif" alt></p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
+
+<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg" srcset="/img/loading.gif"></p>
 <p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-comment">// 取得容器</span>
-  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
 
-  <span class="hljs-comment">// 取得 "&lt;li&gt;Item2&lt;/li&gt;" 的元素</span>
-  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">"li"</span>)[<span class="hljs-number">1</span>];
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
 
-  <span class="hljs-comment">// 建立 li 元素节点</span>
-  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"li"</span>);
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
 
-  <span class="hljs-comment">// 建立 textNode 文字节点</span>
-  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Hello world!"</span>);
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
   newNode.appendChild(textNode);
 
-  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span>
+<span class="javascript">  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span></span>
   myList.insertBefore(newNode, refNode);
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
-<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg" srcset="/img/loading.gif" alt></p>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
+
+<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg" srcset="/img/loading.gif"></p>
 <p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-comment">// 取得容器</span>
-  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'myList'</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myList&#x27;</span>);</span>
 
-  <span class="hljs-comment">// 取得 "&lt;li&gt;Item2&lt;/li&gt;" 的元素</span>
-  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">'li'</span>)[<span class="hljs-number">1</span>];
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;li&#x27;</span>)[<span class="hljs-number">1</span>];</span>
 
-  <span class="hljs-comment">// 建立 li 元素节点</span>
-  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'li'</span>);
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);</span>
 
-  <span class="hljs-comment">// 建立 textNode 文字节点</span>
-  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">"Hello world!"</span>);
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
   newNode.appendChild(textNode);
 
-  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span>
+<span class="javascript">  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span></span>
   myList.replaceChild(newNode, oldNode);
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="undefined"></span></span></span></code></pre></div>
-<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg" srcset="/img/loading.gif" alt></p>
+<span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></code></pre></div>
+
+<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg" srcset="/img/loading.gif"></p>
 <p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"myList"</span>&gt;</span>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-  <span class="hljs-comment">// 取得容器</span>
-  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"myList"</span>);
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
 
-  <span class="hljs-comment">// 取得 "&lt;li&gt;Item2&lt;/li&gt;" 的元素</span>
-  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">"li"</span>)[<span class="hljs-number">1</span>];
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
 
-  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span>
+<span class="javascript">  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span></span>
   myList.removeChild(removeNode);
-</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre></div>
+
 <p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
 <p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
 <p>刚好呼应阿基米德的一句众所周知的名言：</p>
@@ -368,7 +393,7 @@ ul.appendChild(fragment);</code></pre></div>
 <blockquote>
 <p>「给我一个节点，我就能建立整个网页世界。」</p>
 </blockquote>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -396,14 +421,14 @@ ul.appendChild(fragment);</code></pre></div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/02/12/分享7个有用的JavaScript技巧/">
+                      <a href="/2020/02/12/%E5%88%86%E4%BA%AB7%E4%B8%AA%E6%9C%89%E7%94%A8%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">【译】分享7个好用的JavaScript技巧</span>
                         <span class="visible-mobile">上一篇</span>
@@ -413,7 +438,7 @@ ul.appendChild(fragment);</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/02/03/JavaScript系列之原型与原型链/">
+                      <a href="/2020/02/03/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">
                         <span class="hidden-mobile">JavaScript系列之原型与原型链</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -433,7 +458,7 @@ ul.appendChild(fragment);</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -445,16 +470,15 @@ ul.appendChild(fragment);</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -475,9 +499,10 @@ ul.appendChild(fragment);</code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -492,10 +517,27 @@ ul.appendChild(fragment);</code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -510,105 +552,47 @@ ul.appendChild(fragment);</code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "DOM Node 的建立、删除与修改&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -622,6 +606,11 @@ ul.appendChild(fragment);</code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

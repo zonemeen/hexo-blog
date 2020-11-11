@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之对象的继承 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之对象的继承">
               
             </span>
 
@@ -210,11 +223,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之对象的继承</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>这篇文章的重点讲的是关于 JavaScript 中对象的继承，这是面向对象编程很重要的一个方面。A 对象继承自 B 对象，就能直接拥有 B 对象的所有属性和方法，作用是避免了代码的复用，节省代码量。</p>
 <p>而大部分面向对象的编程语言，都是通过“类”（class）来实现对象的继承。传统上，JavaScript 语言的继承不通过 class（ES6 引入了 class 语法，基于 class 的继承不在这里介绍），而是通过“原型对象”（<code>prototype</code>）实现，因此，这里把“继承”着重拿出来讲，就为了体现这个不同。</p>
 <h3 id="复习原型-原型链"><a href="#复习原型-原型链" class="headerlink" title="复习原型/原型链"></a>复习原型/原型链</h3><p>JavaScript 的继承得靠原型/原型链来实现，当然原型/原型链不是这篇文章的重点，之前的文章也已经介绍过了，所以这里我们来复习一下即可。</p>
@@ -239,28 +252,29 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
 <span class="hljs-built_in">console</span>.log(f1.a); <span class="hljs-comment">// 10</span>
 <span class="hljs-built_in">console</span>.log(f1.b); <span class="hljs-comment">// 200</span>
 <span class="hljs-built_in">console</span>.log(f1.c); <span class="hljs-comment">// undefined</span></code></pre></div>
+
 <p>以上代码中，<code>f1</code>是<code>Foo</code>函数通过<code>new</code>构造出来的对象，<code>f1.a</code>是<code>f1</code>对象的基本属性，而<code>f1.b</code>是从<code>Foo.prototype</code>继承得到的，因为<code>f1.__proto__</code>指向的是<code>Foo.prototype</code>。</p>
 <p>这里有一个重要的规则：<strong>当访问一个对象的属性时，首先在基本属性中查找，如果没有，再沿着<code>__proto__</code>这条链往上找，看是否在链上，有的话就能继承这一属性，如果没有，就返回<code>undefined</code>，这就是原型链</strong>，又复习一遍咯。</p>
 <p>看图直观一些，这里还是采用反复用的原型/原型链经典图：</p>
-<p><img src="/images/inherit/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/inherit/1.jpg" srcset="/img/loading.gif"></p>
 <p>上图中，访问<code>f1.a</code>时，<code>f1</code>的基本属性中有<code>a</code>，则不会继续沿着<code>__proto__</code>找，直接读出基本属性<code>a</code>的值；而访问<code>f1.b</code>时，<code>f1</code>的基本属性中没有<code>b</code>，于是沿着<code>__proto__</code>找到了<code>Foo.prototype.b</code>。</p>
 <p>那我们如何在实际应用中区分一个属性到底是基本属性还是在原型链中的公有属性呢？这里可以好好利用一下这个属性——<code>hasOwnProperty</code>，一下就能测出谁是基本属性，当在<code>for…in…</code>循环中，需要额外注意。</p>
-<p><img src="/images/inherit/2.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/inherit/2.jpg" srcset="/img/loading.gif"></p>
 <p><code>hasOwnProperty()</code> 方法会返回一个布尔值，指示对象自身属性中是否具有指定的属性，所以上图中，右边的只打印出<code>a</code>一个值，因为<code>b</code>是在<code>Foo.prototype</code>上的，不属于自身属性。</p>
 <p>那<code>f1</code>的这个<code>hasOwnProperty()</code>方法，<code>f1</code>自身没有，<code>Foo.prototype</code>中也没有，又是从何而来呢？</p>
 <p>还是引用那张原型/原型链经典图，从图上来看，<code>hasOwnProperty()</code>方法是从<code>Object.prototype</code>中继承来的：</p>
-<p><img src="/images/inherit/3.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/inherit/3.jpg" srcset="/img/loading.gif"></p>
 <p>所以对象的原型链是沿着<code>__proto__</code>这条线走的，因此在查找<code>f1.hasOwnProperty</code>属性时，因为自身没有这一属性，就会沿着原型链一直查找到<code>Object.prototype</code>上有这一属性，如果没找到则返回<code>undefined</code>。</p>
 <p>由于所有的对象的原型链都会最终找到<code>Object.prototype</code>，因此所有的对象都会有<code>Object.prototype</code>中的方法，比如<code>toString</code>、<code>valueOf</code>等这些公有属性，这就是所谓的“继承”。</p>
 <p>当然这只是一个例子，你可以自定义函数和对象来实现自己的继承，这一点后续文章会有专门介绍。</p>
 <p>这里再说一个函数的例子来加深理解吧。</p>
-<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在 Chrome 中打印出：</p>
-<p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif" alt></p>
+<p>我们都知道每个函数都有<code>apply</code>，<code>call</code>方法，都有<code>length</code>，<code>arguments</code>，<code>caller</code>等属性。为什么每个函数都有？这肯定是“继承”来的。在介绍<code>instanceof</code><a target="_blank" rel="noopener" href="https://luozongmin.com/2019/06/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">这篇文章</a>中也提到，函数是由<code>Function</code>函数创建，都继承自<code>Function.prototype</code>中的方法。不信可以在 Chrome 中打印出：</p>
+<p><img src="/images/inherit/4.jpg" srcset="/img/loading.gif"></p>
 <p>直接可以看到了吧，有<code>call</code>、<code>length</code>等这些属性。</p>
 <p>那怎么还有<code>hasOwnProperty</code>呢？上图中<code>hasOwnProperty</code>右边显示<code>Object</code>，代表<code>Function.prototype</code>继承自<code>Object.prototype</code>。有疑问可以再看看这张原型/原型链经典大图，<code>Function.prototype.__proto__</code>会指向<code>Object.prototype</code>。</p>
-<p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/inherit/5.jpg" srcset="/img/loading.gif"></p>
 <p>最后还是那句话，当你完全搞懂上面这张图的时候，就是你掌握原型、原型链的时候了。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -280,24 +294,24 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/原型/">原型</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%9E%8B/">原型</a>
                     
-                      <a class="hover-with-bg" href="/tags/原型链/">原型链</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型链</a>
                     
-                      <a class="hover-with-bg" href="/tags/继承/">继承</a>
+                      <a class="hover-with-bg" href="/tags/%E7%BB%A7%E6%89%BF/">继承</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/17/谈谈JavaScript中的函数构造式和new关键字/">
+                      <a href="/2020/04/17/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0%E5%BC%8F%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">谈谈JavaScript中的函数构造式和new关键字</span>
                         <span class="visible-mobile">上一篇</span>
@@ -307,7 +321,7 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/04/05/从instanceof身上深入理解原型原型链/">
+                      <a href="/2020/04/05/%E4%BB%8Einstanceof%E8%BA%AB%E4%B8%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%8E%9F%E5%9E%8B%E5%8E%9F%E5%9E%8B%E9%93%BE/">
                         <span class="hidden-mobile">从instanceof身上深入理解原型/原型链</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -327,7 +341,7 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -339,16 +353,15 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -369,9 +382,10 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -386,10 +400,27 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -404,105 +435,47 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之对象的继承&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -516,6 +489,11 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

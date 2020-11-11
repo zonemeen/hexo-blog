@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之闭包 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之闭包">
               
             </span>
 
@@ -172,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      2.8k 字
     </span>
   
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      34
        分钟
     </span>
   
@@ -210,13 +223,13 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之闭包</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>相信很多初学者在学习 JavaScript 的时候，一直对闭包(closure) 有所疑惑。因为从字面上来看，完全看不出它所代表的东西。那么今天，我想通过这篇文章，尽量用简单易懂的话来与各位介绍「闭包」到底是什么。</p>
-<p>在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章<a href="https://zhuanlan.zhihu.com/p/69142071" target="_blank" rel="noopener">《JavaScript 系列之变量对象》</a>和<a href="https://zhuanlan.zhihu.com/p/69910449" target="_blank" rel="noopener">《JavaScript 系列之作用域和作用域链》</a>，因为它们相互之间都是有关联的。</p>
+<p>在具体介绍闭包之前，为了更好的理解本文要介绍的内容，建议先去阅读前面的文章<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69142071">《JavaScript 系列之变量对象》</a>和<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69910449">《JavaScript 系列之作用域和作用域链》</a>，因为它们相互之间都是有关联的。</p>
 <h3 id="闭包是什么？"><a href="#闭包是什么？" class="headerlink" title="闭包是什么？"></a>闭包是什么？</h3><p>首先，先来看看 MDN 对闭包的定义：</p>
 <blockquote>
 <p>闭包是指那些能够访问自由变量的函数。</p>
@@ -239,6 +252,7 @@
 &#125;
 
 f1();</code></pre></div>
+
 <p><code>f1</code> 函数可以访问变量 <code>n</code>，但是 <code>n</code> 既不是 <code>f1</code> 函数的形参，也不是 <code>f1</code> 函数的局部变量，所以这种情况下的 <code>n</code> 就是自由变量。其实上面代码中就存在闭包了，即函数 <code>f1</code> + <code>f1</code> 函数访问的自由变量 <code>n</code> 就构成了一个<strong>闭包</strong>。</p>
 <p>上面代码中，函数 <code>f1</code> 可以读取全局自由变量 <code>n</code>。但是，函数外部无法读取函数内部声明的变量：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -246,6 +260,7 @@ f1();</code></pre></div>
 &#125;
 
 <span class="hljs-built_in">console</span>.log(n); <span class="hljs-comment">// Uncaught ReferenceError: n is not defined</span></code></pre></div>
+
 <p>如果有时需要得到函数内的局部变量。正常情况下，这是办不到的，只有通过改变形式才能实现。那就是在函数的内部，再定义一个函数。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f1</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-keyword">var</span> n = <span class="hljs-number">1</span>;
@@ -257,6 +272,7 @@ f1();</code></pre></div>
 
 <span class="hljs-keyword">var</span> a = f1();
 a();</code></pre></div>
+
 <p>上面代码中，函数<code>f2</code>就在函数<code>f1</code>内部，这时<code>f1</code>内部的所有局部变量，对<code>f2</code>都是可见的。既然<code>f2</code>可以读取<code>f1</code>的局部变量，那么只要把<code>f2</code>作为返回值，我们就可以在<code>f1</code>外部读取它的内部变量了。</p>
 <p>所以<strong>闭包是一个可以从另一个函数的作用域访问变量的函数。这是通过在函数内创建函数来实现的。当然，外部函数无法访问内部范围</strong>。</p>
 <p>在我们深入研究闭包之前，有必要先从不使用闭包的情况切入，了解为什么要用闭包。</p>
@@ -267,19 +283,20 @@ a();</code></pre></div>
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
   count += <span class="hljs-number">1</span>;
-  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dog(s)"</span>);
+  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dog(s)&quot;</span>);
 &#125;
 
 countDogs(); <span class="hljs-comment">// 1 dog(s)</span>
 countDogs(); <span class="hljs-comment">// 2 dog(s)</span>
 countDogs(); <span class="hljs-comment">// 3 dog(s)</span></code></pre></div>
+
 <p>接着继续写代码的其他部分，当写到后面时，我发现我也需要写猫的计数函数，于是我又开始写了猫的计数函数：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 狗的计数函数</span>
 <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
   count += <span class="hljs-number">1</span>;
-  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dog(s)"</span>);
+  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dog(s)&quot;</span>);
 &#125;
 
 <span class="hljs-comment">// 中间的其它代码...</span>
@@ -289,12 +306,13 @@ countDogs(); <span class="hljs-comment">// 3 dog(s)</span></code></pre></div>
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countCats</span>(<span class="hljs-params"></span>) </span>&#123;
   count += <span class="hljs-number">1</span>;
-  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" cat(s)"</span>);
+  <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; cat(s)&quot;</span>);
 &#125;
 
 countCats(); <span class="hljs-comment">// 1 cat(s)</span>
 countCats(); <span class="hljs-comment">// 2 cat(s)</span>
 countCats(); <span class="hljs-comment">// 3 cat(s)</span></code></pre></div>
+
 <p>乍看之下好像没啥问题，当我执行<code>countDogs()</code>或<code>countCats()</code>，都会让<code>count</code>增加，然而问题在于当我在不注意的情况下把<code>count</code>这个变量建立在了全局作用域底下时，不论是执行<code>countDogs()</code>或是<code>countCats()</code>时，都是用到了全局的<code>count</code>变量，这使得当我执行下面的代码时，它没有办法分辨现在到底是在对狗计数还是对猫计数，进而导致把猫的数量和狗的数量交错计算的错误情况：</p>
 <div class="hljs"><pre><code class="hljs javascript">countCats(); <span class="hljs-comment">// 1 cat(s)</span>
 countCats(); <span class="hljs-comment">// 2 cat(s)</span>
@@ -304,6 +322,7 @@ countDogs(); <span class="hljs-comment">// 4 dog(s)，我希望是 1 dog(s)</spa
 countDogs(); <span class="hljs-comment">// 5 dog(s)，我希望是 2 dog(s)</span>
 
 countCats(); <span class="hljs-comment">// 6 cat(s)，我希望是 4 cat(s)</span></code></pre></div>
+
 <h3 id="闭包让函数有私有变量"><a href="#闭包让函数有私有变量" class="headerlink" title="闭包让函数有私有变量"></a>闭包让函数有私有变量</h3><p>从上面的例子我们知道，如果错误的使用全局变量，很容易会出现一些莫名其妙的 bug ，这时候我们就可以利用闭包（closure）的写法，让函数有自己私有变量，简单来说就是<code>countDogs</code>里面能有一个计算<code>dogs</code>的<code>count</code>变数；而<code>countCats</code>里面也能有一个计算<code>cats</code>的<code>count</code>变量，两者是不会互相干扰的。</p>
 <p>为了达到这样的效果，我们就要利用闭包，让变量保留在该函数中而不会被外在环境干扰。</p>
 <p>改成闭包的写法会像这样：</p>
@@ -311,15 +330,16 @@ countCats(); <span class="hljs-comment">// 6 cat(s)，我希望是 4 cat(s)</spa
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dogs"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dogs&quot;</span>);
   &#125;
   <span class="hljs-keyword">return</span> countDogs;
 &#125;
 
 <span class="hljs-keyword">const</span> countDogs = dogHouse();
-countDogs(); <span class="hljs-comment">// "1 dogs"</span>
-countDogs(); <span class="hljs-comment">// "2 dogs"</span>
-countDogs(); <span class="hljs-comment">// "3 dogs"</span></code></pre></div>
+countDogs(); <span class="hljs-comment">// &quot;1 dogs&quot;</span>
+countDogs(); <span class="hljs-comment">// &quot;2 dogs&quot;</span>
+countDogs(); <span class="hljs-comment">// &quot;3 dogs&quot;</span></code></pre></div>
+
 <p>这样我们就将专门计算狗的变量<code>count</code>闭包在<code>dogHouse</code>这个函数中，在<code>dogHouse</code>这个函数中里面的<code>countDogs()</code>才是我们真正执行计数的函数，而在<code>dogHouse</code>这个函数中存在<code>count</code>这个变量，由于 JavaScript 变量会被缩限在函数的执行上下文中，因此这个<code>count</code>的值只有在<code>dogHouse</code>里面才能被取用，在<code>dogHouse</code>函数外是取用不到这个值的。</p>
 <p>接着因为我们要能够执行在<code>dogHouse</code>中真正核心<code>countDogs()</code>这个函数，因此我们会在最后把这个函数给 return 出来，好让我们可以在外面去调用到<code>dogHouse</code>里面的这个<code>countDogs()</code>函数。</p>
 <p>最后当我们在使用闭包时，我们先把存在<code>dogHouse</code>里面的<code>countDogs</code>拿出来用，并一样命名为<code>countDogs</code>（这里变量名称可以自己取），因此当我执行全局中的<code>countDogs</code>时，实际上会执行的是<code>dogHouse</code>里面的<code>countDogs</code>函数。</p>
@@ -329,7 +349,7 @@ countDogs(); <span class="hljs-comment">// "3 dogs"</span></code></pre></div>
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dogs"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dogs&quot;</span>);
   &#125;
   <span class="hljs-keyword">return</span> countDogs;
 &#125;
@@ -338,7 +358,7 @@ countDogs(); <span class="hljs-comment">// "3 dogs"</span></code></pre></div>
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countCats</span>(<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" cats"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; cats&quot;</span>);
   &#125;
   <span class="hljs-keyword">return</span> countCats;
 &#125;
@@ -346,21 +366,22 @@ countDogs(); <span class="hljs-comment">// "3 dogs"</span></code></pre></div>
 <span class="hljs-keyword">const</span> countDogs = dogHouse();
 <span class="hljs-keyword">const</span> countCats = catHouse();
 
-countDogs(); <span class="hljs-comment">// "1 dogs"</span>
-countDogs(); <span class="hljs-comment">// "2 dogs"</span>
-countDogs(); <span class="hljs-comment">// "3 dogs"</span>
+countDogs(); <span class="hljs-comment">// &quot;1 dogs&quot;</span>
+countDogs(); <span class="hljs-comment">// &quot;2 dogs&quot;</span>
+countDogs(); <span class="hljs-comment">// &quot;3 dogs&quot;</span>
 
-countCats(); <span class="hljs-comment">// "1 cats"</span>
-countCats(); <span class="hljs-comment">// "2 cats"</span>
+countCats(); <span class="hljs-comment">// &quot;1 cats&quot;</span>
+countCats(); <span class="hljs-comment">// &quot;2 cats&quot;</span>
 
-countDogs(); <span class="hljs-comment">// "4 dogs"</span></code></pre></div>
+countDogs(); <span class="hljs-comment">// &quot;4 dogs&quot;</span></code></pre></div>
+
 <p>当我们正确地使用闭包时，虽然一样都是使用<code>count</code>来计数，但是是在不同执行环境内的<code>count</code>因此也不会相互干扰。</p>
 <h3 id="进一步了解和使用闭包"><a href="#进一步了解和使用闭包" class="headerlink" title="进一步了解和使用闭包"></a>进一步了解和使用闭包</h3><p>另外，甚至在运用的是同一个<code>dogHouse</code> 时，变量间也都是独立的执行环境不会干扰，比如：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dogHouse</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dogs"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dogs&quot;</span>);
   &#125;
   <span class="hljs-keyword">return</span> countDogs;
 &#125;
@@ -380,21 +401,22 @@ countPuppy(); <span class="hljs-comment">// 1 dogs</span>
 
 countGolden(); <span class="hljs-comment">// 3 dogs</span>
 countPug(); <span class="hljs-comment">// 2 dogs</span></code></pre></div>
+
 <h3 id="将参数代入闭包中"><a href="#将参数代入闭包中" class="headerlink" title="将参数代入闭包中"></a>将参数代入闭包中</h3><p>但是这么做的话你可能觉得还不够清楚，因为都是叫做<code>dogs</code>，这时候我们一样可以把外面的变量通过函数的参数代入闭包中，像是下面这样，返回的结果就清楚多了：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 通过函数的参数将值代入闭包中</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dogHouse</span>(<span class="hljs-params">name</span>) </span>&#123;
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">countDogs</span>(<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" "</span> + name);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; &quot;</span> + name);
   &#125;
   <span class="hljs-keyword">return</span> countDogs;
 &#125;
 
 <span class="hljs-comment">// 同样是使用 dogHouse 但是使用不同的参数</span>
-<span class="hljs-keyword">var</span> countGolden = dogHouse(<span class="hljs-string">"Golden"</span>);
-<span class="hljs-keyword">var</span> countPug = dogHouse(<span class="hljs-string">"Pug"</span>);
-<span class="hljs-keyword">var</span> countPuppy = dogHouse(<span class="hljs-string">"Puppy"</span>);
+<span class="hljs-keyword">var</span> countGolden = dogHouse(<span class="hljs-string">&quot;Golden&quot;</span>);
+<span class="hljs-keyword">var</span> countPug = dogHouse(<span class="hljs-string">&quot;Pug&quot;</span>);
+<span class="hljs-keyword">var</span> countPuppy = dogHouse(<span class="hljs-string">&quot;Puppy&quot;</span>);
 
 <span class="hljs-comment">// 结果看起来更清楚了</span>
 countGolden(); <span class="hljs-comment">// 1 Golden</span>
@@ -405,6 +427,7 @@ countPuppy(); <span class="hljs-comment">// 1 Puppy</span>
 
 countGolden(); <span class="hljs-comment">// 3 Golden</span>
 countPug(); <span class="hljs-comment">// 2 Pug</span></code></pre></div>
+
 <p>为了进一步简化代码，我们可以在闭包中直接 return 一个函数出来，我们就可以不必为里面的函数命名了，而是用匿名函数的方式直接把它返回出来。</p>
 <p>因此写法可以简化成这样：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dogHouse</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -412,7 +435,7 @@ countPug(); <span class="hljs-comment">// 2 Pug</span></code></pre></div>
   <span class="hljs-comment">// 把原本 countDogs 函数改成匿名函数直接放进来</span>
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" dogs"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; dogs&quot;</span>);
   &#125;;
 &#125;
 
@@ -421,21 +444,22 @@ countPug(); <span class="hljs-comment">// 2 Pug</span></code></pre></div>
   <span class="hljs-comment">// 把原本 countCats 函数改成匿名函数直接放进来</span>
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     count += <span class="hljs-number">1</span>;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" cats"</span>);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; cats&quot;</span>);
   &#125;;
 &#125;</code></pre></div>
+
 <p>然后我们刚刚有提到，可以透过函数参数的方式把值代入闭包当中，因此实际上我们只需要一个 counter ，在不同的时间点给它参数区分就好。这样子不管你是要记录哪一种动物都很方便了，而且代码也相当简洁：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createCounter</span>(<span class="hljs-params">name</span>) </span>&#123;
   <span class="hljs-keyword">var</span> count = <span class="hljs-number">0</span>;
   <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
     count++;
-    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">" "</span> + name);
+    <span class="hljs-built_in">console</span>.log(count + <span class="hljs-string">&quot; &quot;</span> + name);
   &#125;;
 &#125;
 
-<span class="hljs-keyword">const</span> dogCounter = createCounter(<span class="hljs-string">"dogs"</span>);
-<span class="hljs-keyword">const</span> catCounter = createCounter(<span class="hljs-string">"cats"</span>);
-<span class="hljs-keyword">const</span> pigCounter = createCounter(<span class="hljs-string">"pigs"</span>);
+<span class="hljs-keyword">const</span> dogCounter = createCounter(<span class="hljs-string">&quot;dogs&quot;</span>);
+<span class="hljs-keyword">const</span> catCounter = createCounter(<span class="hljs-string">&quot;cats&quot;</span>);
+<span class="hljs-keyword">const</span> pigCounter = createCounter(<span class="hljs-string">&quot;pigs&quot;</span>);
 
 dogCounter(); <span class="hljs-comment">// 1 dogs</span>
 dogCounter(); <span class="hljs-comment">// 2 dogs</span>
@@ -444,38 +468,42 @@ catCounter(); <span class="hljs-comment">// 2 cats</span>
 pigCounter(); <span class="hljs-comment">// 1 pigs</span>
 dogCounter(); <span class="hljs-comment">// 3 dogs</span>
 catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
+
 <h3 id="闭包的实际应用"><a href="#闭包的实际应用" class="headerlink" title="闭包的实际应用"></a>闭包的实际应用</h3><p>我们要实现这样的一个需求：点击某个按钮，提示点击的是”第 n 个”按钮，此处我们先不用事件代理:</p>
 <div class="hljs"><pre><code class="hljs javascript">.....
-&lt;button&gt;测试1&lt;/button&gt;
-&lt;button&gt;测试2&lt;/button&gt;
-&lt;button&gt;测试3&lt;/button&gt;
-&lt;script type="text/javascript"&gt;
-   var buttons = document.getElementsByTagName('button')
-    for (var i = 0; i &lt; buttons.length; i++) &#123;
-      buttons[i].onclick = function () &#123;
-        console.log('第' + (i + 1) + '个')
+&lt;button&gt;测试<span class="hljs-number">1</span>&lt;/button&gt;
+&lt;button&gt;测试<span class="hljs-number">2</span>&lt;/button&gt;
+&lt;button&gt;测试<span class="hljs-number">3</span>&lt;/button&gt;
+&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;
+   <span class="hljs-keyword">var</span> buttons = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&#x27;button&#x27;</span>)
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; buttons.length; i++) &#123;
+      buttons[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;第&#x27;</span> + (i + <span class="hljs-number">1</span>) + <span class="hljs-string">&#x27;个&#x27;</span>)
       &#125;
     &#125;
 &lt;/script&gt;</code></pre></div>
+
 <p>这时候可能会预期点选不同的按钮时，会根据每个 button 点击顺序的不同而得到不同的结果。但是实际执行后，你会发现返回的结果都是“第四个”。这是因为<code>i</code>是全局变量，执行到点击事件时，此时<code>i</code>的值为 3。</p>
 <p>如果要强制返回预期的结果，那该如何修改呢？最简单的是用<code>let</code>声明<code>i</code>：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; buttons.length; i++) &#123;
   buttons[i].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"第"</span> + (i + <span class="hljs-number">1</span>) + <span class="hljs-string">"个"</span>);
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;第&quot;</span> + (i + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;个&quot;</span>);
   &#125;;
 &#125;</code></pre></div>
-<p>简单来说，通过<code>let</code>可以帮我们把所定义的变量缩限在块级作用域中，也就是变量的作用域只有在<code>{ }</code>内，来避免 <code>i</code> 这个变量跑到全局变量被重复覆盖。</p>
+
+<p>简单来说，通过<code>let</code>可以帮我们把所定义的变量缩限在块级作用域中，也就是变量的作用域只有在<code>&#123; &#125;</code>内，来避免 <code>i</code> 这个变量跑到全局变量被重复覆盖。</p>
 <p>另外我们可以通过闭包的方式来修改:</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; buttons.length; i++) &#123;
   (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">j</span>) </span>&#123;
     buttons[j].onclick = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"第"</span> + (j + <span class="hljs-number">1</span>) + <span class="hljs-string">"个"</span>);
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;第&quot;</span> + (j + <span class="hljs-number">1</span>) + <span class="hljs-string">&quot;个&quot;</span>);
     &#125;;
   &#125;)(i);
 &#125;</code></pre></div>
+
 <p>这其实也是「立即执行函数表达式 (Immediately Invoked Function Expression, IIFE)」的概念，后续会有专门的文章进行介绍。</p>
 <p>希望看完这篇文章后，你能对于闭包有更清楚的认识。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -495,20 +523,20 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/闭包/">闭包</a>
+                      <a class="hover-with-bg" href="/tags/%E9%97%AD%E5%8C%85/">闭包</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/06/14/CSS Flexbox 对你说爱不完/">
+                      <a href="/2020/06/14/CSS%20Flexbox%20%E5%AF%B9%E4%BD%A0%E8%AF%B4%E7%88%B1%E4%B8%8D%E5%AE%8C/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Flexbox 对你说爱不完</span>
                         <span class="visible-mobile">上一篇</span>
@@ -518,7 +546,7 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/24/JavaScript系列之this是什么/">
+                      <a href="/2020/05/24/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/">
                         <span class="hidden-mobile">JavaScript系列之this是什么</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -538,7 +566,7 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -550,16 +578,15 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -580,9 +607,10 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -597,10 +625,27 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -615,105 +660,47 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之闭包&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -727,6 +714,11 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

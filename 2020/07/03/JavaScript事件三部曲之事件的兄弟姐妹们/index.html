@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript事件三部曲之事件的兄弟姐妹们 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript事件三部曲之事件的兄弟姐妹们">
               
             </span>
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25
+      26
        分钟
     </span>
   
@@ -210,11 +223,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript事件三部曲之事件的兄弟姐妹们</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。</p>
 <h3 id="事件的种类"><a href="#事件的种类" class="headerlink" title="事件的种类"></a>事件的种类</h3><p>浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是 Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：</p>
 <h4 id="界面相关事件"><a href="#界面相关事件" class="headerlink" title="界面相关事件"></a>界面相关事件</h4><p>界面相关的事件不一定会与使用者对 DOM 的操作有关系，反而大多数与 window 对象比较有关系。</p>
@@ -222,19 +235,21 @@
 <li><code>load</code> 事件：</li>
 </ul>
 <p>注册在 <code>window</code> 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发<code>load</code>事件。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">"load"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"所有资源都加载完成"</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;所有资源都加载完成&quot;</span>);
 &#125;);</code></pre></div>
+
 <ul>
 <li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
 </ul>
 <p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
-<p><img src="/images/event/7.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/event/7.jpg" srcset="/img/loading.gif"></p>
 <ul>
 <li><code>error</code> 事件：</li>
 </ul>
 <p><code>error</code> 事件会在 <code>document</code> 或是图片载入错误时触发。由于考虑到维护性，大多事件的注册我会强烈建议使用「非侵入式 JavaScript」的写法，即 JavaScript 代码和标记的分离。只有 <code>error</code> 事件最适合以 <code>on-event</code> 的写法来处理：</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"image.jpg"</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">"this.src='default.jpg'"</span> /&gt;</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.jpg&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;default.jpg&#x27;&quot;</span> /&gt;</span></code></pre></div>
+
 <p>像这样，当<code>image.jpg</code>这张图片不存在的时候，马上就会触发<code>error</code>事件，就会通过<code>this.src</code>将<code>&lt;img&gt;</code>的 <code>src</code> 属性替换成指定的图片，是相当实用的技巧。</p>
 <p>若是在网页 <code>load</code> 完成后才注册了<code>error</code>事件，你只会看到破图的结果，因为<code>error</code>事件不会再次被触发，后来挂上去的事件处理函数就等于没有一样。</p>
 <ul>
@@ -246,37 +261,39 @@
 </li>
 </ul>
 <p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
-<p><img src="/images/event/8.jpg" srcset="/img/loading.gif" alt></p>
-<p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306" target="_blank" rel="noopener">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
+<p><img src="/images/event/8.jpg" srcset="/img/loading.gif"></p>
+<p>我们在<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/66576306">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
 <div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-      <span class="hljs-comment">// 因 Document 结构未载入，无效</span>
-      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"hello"</span>).textContent = <span class="hljs-string">"Hello"</span>;
-    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-comment">// 因 Document 结构未载入，无效</span></span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"hello"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+
 <p>那么，改成这样：</p>
 <div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
-      <span class="hljs-built_in">document</span>.addEventListener(
-        <span class="hljs-string">"DOMContentLoaded"</span>,
-        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span>
-          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"hello"</span>).textContent = <span class="hljs-string">"Hello"</span>;
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.addEventListener(</span>
+<span class="javascript">        <span class="hljs-string">&quot;DOMContentLoaded&quot;</span>,</span>
+<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span>
+<span class="javascript">          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span></span>
+<span class="javascript">          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
         &#125;,
-        <span class="hljs-literal">false</span>
+<span class="javascript">        <span class="hljs-literal">false</span></span>
       );
-    </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"hello"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre></div>
+
 <p>就可以排除<code>&lt;script&gt;</code>标签放在<code>&lt;head&gt; ... &lt;/head&gt;</code>抓不到 DOM 的问题啦。</p>
 <p>与大家所熟知的 <code>jQuery$( document ).ready( handler )</code>作用类似。</p>
 <h4 id="鼠标相关事件"><a href="#鼠标相关事件" class="headerlink" title="鼠标相关事件"></a>鼠标相关事件</h4><ul>
@@ -294,7 +311,7 @@
 <li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
 <li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
 </ol>
-<p><img src="/images/event/9.gif" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/event/9.gif" srcset="/img/loading.gif"></p>
 <p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
 <h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
 <ul>
@@ -306,13 +323,14 @@
 </li>
 </ul>
 <p>如果我们针对同个元素同时绑定了这三个键盘事件，那么这三个事件执行的顺序会是：</p>
-<div class="hljs"><pre><code class="hljs undefined"><span class="hljs-attribute">keydown
-keypress
-keyup</span></code></pre></div>
-<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a href="https://gist.github.com/tylerbuchea/8011573" target="_blank" rel="noopener">这里</a>查看：</p>
+<div class="hljs"><pre><code class="hljs ebnf"><span class="hljs-attribute">keydown</span>
+<span class="hljs-attribute">keypress</span>
+<span class="hljs-attribute">keyup</span></code></pre></div>
+
+<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a target="_blank" rel="noopener" href="https://gist.github.com/tylerbuchea/8011573">这里</a>查看：</p>
 <p>例如，今天你想要当使用者在<code>input</code>输入框按下 「enter」 时，发动<code>submit</code>，就可以这样做：</p>
 <div class="hljs"><pre><code class="hljs javascript">textBox.addEventListener(
-  <span class="hljs-string">"keydown"</span>,
+  <span class="hljs-string">&quot;keydown&quot;</span>,
   <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
     <span class="hljs-comment">// enter 的 keyCode 是 13</span>
     <span class="hljs-keyword">if</span> (e.keyCode === <span class="hljs-number">13</span>) &#123;
@@ -321,6 +339,7 @@ keyup</span></code></pre></div>
   &#125;,
   <span class="hljs-literal">false</span>
 );</code></pre></div>
+
 <p>像这样，通过<code>e.keyCode</code>就可以判断使用者目前按下的是哪个按钮。</p>
 <h4 id="表单相关事件"><a href="#表单相关事件" class="headerlink" title="表单相关事件"></a>表单相关事件</h4><ul>
 <li><p><code>input</code> 事件： 当 <code>input</code>、 <code>textarea</code> 以及带有 <code>contenteditable</code> 的元素內容被改变时，就会触发 <code>input</code> 事件。</p>
@@ -344,7 +363,7 @@ keyup</span></code></pre></div>
 <p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
 <p>但是，新的问题来了！</p>
 <p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
-<p><img src="/images/event/10.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/event/10.jpg" srcset="/img/loading.gif"></p>
 <p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
 <p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
 <p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
@@ -356,25 +375,28 @@ keyup</span></code></pre></div>
 <li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
 </ul>
 <p>执行的时候像这样：</p>
-<p><img src="/images/event/11.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/event/11.jpg" srcset="/img/loading.gif"></p>
 <p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
 <h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">'build'</span>);
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">&#x27;build&#x27;</span>);
 
 <span class="hljs-comment">// 监听事件</span>
-elem.addEventListener(<span class="hljs-string">'build'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
+elem.addEventListener(<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
 
 <span class="hljs-comment">// 触发事件</span>
 elem.dispatchEvent(event);</code></pre></div>
+
 <p>若是想要在自订事件內增加更多资料，则可以改用<code>CustomEvent</code>：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">"build"</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre></div>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">&quot;build&quot;</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre></div>
+
 <p>那么在 Event 处理函数就可以通过<code>event</code>来接收：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventHandler</span>(<span class="hljs-params">e</span>) </span>&#123;
-  log(<span class="hljs-string">"The time is: "</span> + e.detail);
+  log(<span class="hljs-string">&quot;The time is: &quot;</span> + e.detail);
 &#125;</code></pre></div>
+
 <p>当然，浏览器提供的事件相当多，今天分享的部分主要是比较常见的一些事件，以及工作上实际需要特別注意的部分。</p>
-<p>其他的多数事件你都可以在 MDN 的 <a href="https://developer.mozilla.org/en-US/docs/Web/Events" target="_blank" rel="noopener">Event reference</a> 找到。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p>其他的多数事件你都可以在 MDN 的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference</a> 找到。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -394,7 +416,7 @@ elem.dispatchEvent(event);</code></pre></div>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/事件/">事件</a>
+                      <a class="hover-with-bg" href="/tags/%E4%BA%8B%E4%BB%B6/">事件</a>
                     
                       <a class="hover-with-bg" href="/tags/event/">event</a>
                     
@@ -402,14 +424,14 @@ elem.dispatchEvent(event);</code></pre></div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/07/10/JavaScript系列之回调函数/">
+                      <a href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaScript系列之回调函数</span>
                         <span class="visible-mobile">上一篇</span>
@@ -419,7 +441,7 @@ elem.dispatchEvent(event);</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/06/28/JavaScript事件三部曲之隐藏在其中的秘密/">
+                      <a href="/2020/06/28/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/">
                         <span class="hidden-mobile">JavaScript事件三部曲之隐藏在其中的'秘密'</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -439,7 +461,7 @@ elem.dispatchEvent(event);</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -451,16 +473,15 @@ elem.dispatchEvent(event);</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -481,9 +502,10 @@ elem.dispatchEvent(event);</code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -498,10 +520,27 @@ elem.dispatchEvent(event);</code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -516,105 +555,47 @@ elem.dispatchEvent(event);</code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript事件三部曲之事件的兄弟姐妹们&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -628,6 +609,11 @@ elem.dispatchEvent(event);</code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

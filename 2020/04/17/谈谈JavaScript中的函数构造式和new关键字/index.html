@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>谈谈JavaScript中的函数构造式和new关键字 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="谈谈JavaScript中的函数构造式和new关键字">
               
             </span>
 
@@ -210,24 +223,25 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">谈谈JavaScript中的函数构造式和new关键字</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>您是否曾困惑于 Javascript 中的 new 关键字呢？是否曾想理解关于 function 和 constructor 的区别是什么呢？</p>
 <p>大多数 Javascript 的新开发者不太想要使用 new 关键字，因为这会让代码写的像是 Java 并且在使用上会造成一点混乱；在这篇文章我会尽量尝试着去理清这些东西，并解释它是如何运作的。</p>
 <h3 id="谈谈-function-constructor"><a href="#谈谈-function-constructor" class="headerlink" title="谈谈 function constructor"></a>谈谈 function constructor</h3><p><code>constructor</code> 翻为构造器但为了让您之后更好地理解，会直接使用 <code>constructor</code>；在 Javascript 中任何一个函数(<code>function</code>)都可以被当作 <code>constructor</code>；Javascript 并没有明确的区分两者，也就是说 <code>function</code> 可以被当作 <code>constructor</code> 或者当作一般函数调用。</p>
 <p>而 <code>constructor</code> 的用法就是 <code>function</code> 搭配<code>new</code>关键字：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
-  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+  <span class="hljs-built_in">this</span>.firstName = <span class="hljs-string">&quot;Jay&quot;</span>;
+  <span class="hljs-built_in">this</span>.lastName = <span class="hljs-string">&quot;Chou&quot;</span>;
 &#125;
 
 <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
 <span class="hljs-built_in">console</span>.log(person);</code></pre></div>
+
 <p>接着我们把<code>person</code>呼叫出来看，会得到如下的结果，<strong>通过<code>new</code>它会帮我们建立一个对象</strong>，然后里面有<code>Person</code>这个<code>function</code>里面的内容，并且变成了属性名称和属性值：</p>
-<p><img src="/images/new/1.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/new/1.png" srcset="/img/loading.gif"></p>
 <h3 id="进一步来看-new-让这个过程发生了什么"><a href="#进一步来看-new-让这个过程发生了什么" class="headerlink" title="进一步来看 new 让这个过程发生了什么"></a>进一步来看 new 让这个过程发生了什么</h3><p>当使用<code>new</code>命令时，它后面的函数依次执行下面的 4 个步骤：</p>
 <ol>
 <li>创建一个空对象，作为将要返回的对象实例。</li>
@@ -242,35 +256,38 @@
 <p>在这样的过程中，<strong>只要这个构造函数<code>People</code> 没有指定<code>return</code>为其他对象，它就会直接返回给我们这个新建立的对象</strong>。</p>
 <p>接着让我们通过一段代码来更清楚的了解这个执行的过程：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
-  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"这个函数有被执行"</span>);
+  <span class="hljs-built_in">this</span>.firstName = <span class="hljs-string">&quot;Jay&quot;</span>;
+  <span class="hljs-built_in">this</span>.lastName = <span class="hljs-string">&quot;Chou&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;这个函数有被执行&quot;</span>);
 &#125;
 
 <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
 <span class="hljs-built_in">console</span>.log(person);</code></pre></div>
+
 <p>这时候在 chrome 中呼叫出来的结果如下，说明了当我们使用<code>new</code> 在构造对象的时候<code>People</code> 这个<code>function</code> 确实有被执行：</p>
-<p><img src="/images/new/2.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/new/2.png" srcset="/img/loading.gif"></p>
 <h3 id="通过-new-会帮我们建立一个空的对象"><a href="#通过-new-会帮我们建立一个空的对象" class="headerlink" title="通过 new 会帮我们建立一个空的对象"></a>通过 new 会帮我们建立一个空的对象</h3><p>现在我把我们上面的代码改成这样：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>);
 &#125;
 
 <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
 <span class="hljs-comment">// console.log(person);</span></code></pre></div>
+
 <p>这时候代码返回的结果如下，表示的确在执行这段代码的过程中帮我们建立了一个新的空对象：</p>
-<p><img src="/images/new/3.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/new/3.jpg" srcset="/img/loading.gif"></p>
 <h3 id="函数的最后若-return-其他对象，则原新对象内容会被覆盖"><a href="#函数的最后若-return-其他对象，则原新对象内容会被覆盖" class="headerlink" title="函数的最后若 return 其他对象，则原新对象内容会被覆盖"></a>函数的最后若 return 其他对象，则原新对象内容会被覆盖</h3><p>现在，让我们把原本的代码稍微做如下修改：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
-  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
-  <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">RETURN</span>: <span class="hljs-string">"原本this的内容就不会被返回"</span> &#125;;
+  <span class="hljs-built_in">this</span>.firstName = <span class="hljs-string">&quot;Jay&quot;</span>;
+  <span class="hljs-built_in">this</span>.lastName = <span class="hljs-string">&quot;Chou&quot;</span>;
+  <span class="hljs-keyword">return</span> &#123; <span class="hljs-attr">RETURN</span>: <span class="hljs-string">&quot;原本this的内容就不会被返回&quot;</span> &#125;;
 &#125;
 
 <span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person();
 <span class="hljs-built_in">console</span>.log(person);</code></pre></div>
+
 <p>构造函数的内部若<code>return</code>其他对象，<code>new</code>命令会返回<code>return</code>语句指定的对象，将原新对象内容覆盖掉；否则，就会不管<code>return</code>语句，返回<code>this</code>对象。返回的结果如下：</p>
-<p><img src="/images/new/4.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/new/4.png" srcset="/img/loading.gif"></p>
 <h3 id="手写一个-new-实现"><a href="#手写一个-new-实现" class="headerlink" title="手写一个 new 实现"></a>手写一个 new 实现</h3><div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">create</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-comment">// 创建一个空的对象</span>
   <span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>(),
@@ -283,6 +300,7 @@
   <span class="hljs-comment">// 优先返回构造函数返回的对象</span>
   <span class="hljs-keyword">return</span> ret <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Object</span> ? ret : obj;
 &#125;</code></pre></div>
+
 <p>使用这个手写的 new</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;...&#125;
 
@@ -291,6 +309,7 @@
 
 <span class="hljs-comment">// 使用手写的new，即create</span>
 <span class="hljs-keyword">var</span> person = create(Person, ...)</code></pre></div>
+
 <p>代码原理解析：</p>
 <ol>
 <li>用<code>new Object()</code> 的方式新建了一个对象<code>obj</code></li>
@@ -301,32 +320,34 @@
 </ol>
 <h3 id="function-constructor-的实际应用"><a href="#function-constructor-的实际应用" class="headerlink" title="function constructor 的实际应用"></a>function constructor 的实际应用</h3><p>由上面的方法，我们可以通过<code>function</code>的方式来建立一个新的对象，如果我们想要<strong>建立出同属性名称但不同属性值的对象内容，我们可以把对象的属性值变成参数</strong>，如此就能通过此<code>function constructor</code>建立出许多不同的对象：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params">firstName, lastName</span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.firstName = firstName;
-  <span class="hljs-keyword">this</span>.lastName = lastName;
+  <span class="hljs-built_in">this</span>.firstName = firstName;
+  <span class="hljs-built_in">this</span>.lastName = lastName;
 &#125;
 
-<span class="hljs-keyword">var</span> person1 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Jay"</span>, <span class="hljs-string">"chou"</span>);
+<span class="hljs-keyword">var</span> person1 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Jay&quot;</span>, <span class="hljs-string">&quot;chou&quot;</span>);
 <span class="hljs-built_in">console</span>.log(person1);
-<span class="hljs-keyword">var</span> person2 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">"Jane"</span>, <span class="hljs-string">"chou"</span>);
+<span class="hljs-keyword">var</span> person2 = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;Jane&quot;</span>, <span class="hljs-string">&quot;chou&quot;</span>);
 <span class="hljs-built_in">console</span>.log(person2);</code></pre></div>
+
 <p>如此，我们就可以通过同一个构造函数建立出很多不同的对象：</p>
-<p><img src="/images/new/5.png" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/new/5.png" srcset="/img/loading.gif"></p>
 <p>此外，我们会把根据<strong>构造器（<code>constructor</code>）所建立出来的对象称作是实例（<code>instance</code>）</strong>，这在之前的文章里也有提过。</p>
 <h3 id="注意！如果我们忘了加上-new-关键字"><a href="#注意！如果我们忘了加上-new-关键字" class="headerlink" title="注意！如果我们忘了加上 new 关键字"></a>注意！如果我们忘了加上 new 关键字</h3><p>这里有一个地方我们需要非常留意，如果你在撰写代码的过程当中，忘记加上<code>new</code>这个关键字的话，比如：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.firstName = <span class="hljs-string">"Jay"</span>;
-  <span class="hljs-keyword">this</span>.lastName = <span class="hljs-string">"Chou"</span>;
+  <span class="hljs-built_in">this</span>.firstName = <span class="hljs-string">&quot;Jay&quot;</span>;
+  <span class="hljs-built_in">this</span>.lastName = <span class="hljs-string">&quot;Chou&quot;</span>;
 &#125;
 
 <span class="hljs-keyword">var</span> person = Person();
 <span class="hljs-built_in">console</span>.log(person);</code></pre></div>
+
 <p>如此，因为 JavaScript 不知道你是要执行这个函数，还是要根据这个<code>function</code>去建立<code>object</code>，因次最后会返回<code>undefined</code>的结果。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
 <li>其实构造函数（function constructor）就是普通的 function，只是我们可以通过这个 function 来建立对象。</li>
 <li>通过在 function 前面加上 new 这个运算符，它会把函数中 this 这个关键字建立成一个新的对象，然后如果你没有在该函数的内部指定返回出其它对象的话，它就会自动返回这个新的对象给你。</li>
 </ul>
 <p>那又是如何通过<code>function constructors</code> 来设定我们的原型（<code>prototype</code>）呢？让我们在下一篇文章来谈吧！</p>
-<p>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</p>
+<p>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</p>
 
             </div>
             <hr>
@@ -354,14 +375,14 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/04/24/谈谈JavaScript中的函数构造式和prototype的建立/">
+                      <a href="/2020/04/24/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0%E5%BC%8F%E5%92%8Cprototype%E7%9A%84%E5%BB%BA%E7%AB%8B/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">谈谈JavaScript中的函数构造式和prototype的建立</span>
                         <span class="visible-mobile">上一篇</span>
@@ -371,7 +392,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/04/11/JavaScript系列之对象的继承/">
+                      <a href="/2020/04/11/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%BB%A7%E6%89%BF/">
                         <span class="hidden-mobile">JavaScript系列之对象的继承</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -391,7 +412,7 @@
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -403,16 +424,15 @@
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -433,9 +453,10 @@
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -450,10 +471,27 @@
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -468,105 +506,47 @@
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "谈谈JavaScript中的函数构造式和new关键字&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -580,6 +560,11 @@
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

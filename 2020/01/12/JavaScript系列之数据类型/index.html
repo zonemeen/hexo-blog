@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之数据类型 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之数据类型">
               
             </span>
 
@@ -172,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.1k 字
     </span>
   
 
@@ -182,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -210,11 +223,11 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之数据类型</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
 <h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
 <li>Undefined <code>undefined</code></li>
@@ -228,12 +241,13 @@
 <li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
 </ul>
 <div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
-<span class="xml"><span class="hljs-comment">&lt;!-- 原始类型变量的包装类型如下 --&gt;</span>
-var bool = new Boolean(true);
-var str = new String("hello");
-var num = new Number(1);
-var obj0 = new Object();</span></code></pre></div>
-<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures" target="_blank" rel="noopener">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
+<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre></div>
+
+<p>如<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
 <p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
 <p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
 <h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
@@ -246,30 +260,34 @@ var obj0 = new Object();</span></code></pre></div>
 </ul>
 <p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">"Hello, world!"</span>;  <span class="hljs-comment">//双引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">'Hello, world!'</span>; <span class="hljs-comment">//单引号</span>
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
 <span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre></div>
+
 <p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
-<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在\$ {…}中来将它们嵌入到字符串中，比如：</p>
-<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">"miqilin"</span>;
+<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
 
 <span class="hljs-comment">// embed a variable</span>
 <span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
 
 <span class="hljs-comment">// embed an expression</span>
 <span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre></div>
-<p>加反引号后计算<code>$ {...}</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
+
+<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
 <p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">"the result is $&#123;1 + 2&#125;"</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre></div>
+<div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre></div>
+
 <h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
 <ul>
-<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换){}</code></li>
+<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
 <li>字面量或变量定义 <code>var bool = true;</code></li>
 <li>也出现在比较的结果 ：</li>
 </ul>
 <div class="hljs"><pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
 
-<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is "yes")</span></code></pre></div>
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre></div>
+
 <h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
 <ul>
 <li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
@@ -278,27 +296,30 @@ var obj0 = new Object();</span></code></pre></div>
 <h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
 <ul>
 <li>变量声明了，但没赋值 <code>var obj;</code></li>
-<li>获取对象不存在的属性 <code>var obj = {x: 0}; obj.y;</code></li>
-<li>无返回值函数的执行结果 <code>function f(){}; var obj = f();</code></li>
-<li>调用函数时，应该提供的参数没有提供 <code>function f(i){console.log(i)}; f();</code></li>
+<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
+<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
+<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
 <li><code>void(expression)</code></li>
 </ul>
 <p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre></div>
+
 <p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
 <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre></div>
+
 <h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">"miqilin"</span> &#125;;
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
 
 <span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
 
 <span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">this</span>.sound = <span class="hljs-string">"wow"</span>;
+  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
 &#125;)();</code></pre></div>
+
 <p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">https://github.com/miqilin21/miqilin21.github.io</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
 
             </div>
             <hr>
@@ -318,20 +339,20 @@ var obj0 = new Object();</span></code></pre></div>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/数据类型/">数据类型</a>
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/13/JavaScript系列之类型判断/">
+                      <a href="/2020/01/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaScript系列之类型判断</span>
                         <span class="visible-mobile">上一篇</span>
@@ -341,7 +362,7 @@ var obj0 = new Object();</span></code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/01/10/学会如何学习（二）/">
+                      <a href="/2020/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
                         <span class="hidden-mobile">学会如何学习（二）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -361,7 +382,7 @@ var obj0 = new Object();</span></code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -373,16 +394,15 @@ var obj0 = new Object();</span></code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -403,9 +423,10 @@ var obj0 = new Object();</span></code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -420,10 +441,27 @@ var obj0 = new Object();</span></code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -438,105 +476,47 @@ var obj0 = new Object();</span></code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之数据类型&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -550,6 +530,11 @@ var obj0 = new Object();</span></code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

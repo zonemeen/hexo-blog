@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>JavaScript系列之变量对象 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JavaScript系列之变量对象">
               
             </span>
 
@@ -210,14 +223,14 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">JavaScript系列之变量对象</h1>
             
-            <div class="markdown-body" id="post-body">
-              <p>JavaScript 编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/" target="_blank" rel="noopener">《JavaScript 系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p>
+            <div class="markdown-body">
+              <p>JavaScript 编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a target="_blank" rel="noopener" href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/">《JavaScript 系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p>
 <p>上一篇文章也提到了，一个执行上下文的生命周期可以分为三个阶段：</p>
-<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif"></p>
 <p>详细了解执行上下文对于初学者来说极为重要，因为其中涉及到了变量对象，作用域链，this 等很多 JavaScript 初学者没完全搞懂，且极为重要的概念，它关系到我们能不能真正理解 JavaScript，真正理解也能更为轻松地胜任后续工作，在后面的文章中我们会一一详细介绍，这里我们先重点了解一下<strong>变量对象</strong>。</p>
 <h3 id="变量对象"><a href="#变量对象" class="headerlink" title="变量对象"></a>变量对象</h3><p>变量对象（Variable Object）是一个与执行上下文相关的数据作用域，存储了在上下文中定义的<strong>变量</strong>和<strong>函数声明</strong>，先来看一段代码示例：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -230,17 +243,19 @@
 &#125;
 
 foo();</code></pre></div>
-<p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code></strong>和<strong>函数<code>b（）</code>的声明</strong>。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问 c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由 JavaScript 引擎处理。</p>
+
+<p>在上面的例子中，<code>foo（）</code>函数的变量对象包含<strong>变量<code>a</code>**和</strong>函数<code>b（）</code>的声明**。这里要注意的一点是，函数表达式并不像函数声明一样包含在变量对象中，在示例中所看到的那样，访问 c（）函数会导致引用错误。因为变量对象是抽象的和特殊的，它不能在代码中访问，但会由 JavaScript 引擎处理。</p>
 <p>上面利用的是函数上下文下的变量对象来说明变量对象储存了什么，但变量对象还存在于全局上下文中，接下来就分别来聊聊全局上下文中和函数上下文中的变量对象吧。</p>
 <h3 id="全局上下文"><a href="#全局上下文" class="headerlink" title="全局上下文"></a>全局上下文</h3><p>以浏览器中为例，全局对象为<code>window</code>。 全局上下文有一个特殊的地方，它的变量对象，就是<code>window</code>全局对象，而这个特殊，在<code>this</code>指向上也同样适用，<code>this</code>也是指向<code>window</code>。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 以浏览器中为例，全局对象为window</span>
 <span class="hljs-comment">// 全局上下文创建阶段</span>
 <span class="hljs-comment">// VO 为变量对象（Variable Object）的缩写</span>
 windowEC = &#123;
-  <span class="hljs-attr">VO</span>: Window,
-  <span class="hljs-attr">scopeChain</span>: &#123;&#125;,
-  <span class="hljs-attr">this</span>: Window,
+  VO: Window,
+  scopeChain: &#123;&#125;,
+  <span class="hljs-built_in">this</span>: Window,
 &#125;;</code></pre></div>
+
 <p>除此之外，全局上下文的生命周期，与程序的生命周期一致，只要程序运行不结束，比如关掉浏览器窗口，全局上下文就会一直存在。其他所有的上下文环境，都能直接访问全局上下文的属性。</p>
 <h3 id="函数上下文"><a href="#函数上下文" class="headerlink" title="函数上下文"></a>函数上下文</h3><p>在上面已经提到了，变量对象存储了执行上下文中的变量和函数声明，但在函数上下文中，还多了一个<code>arguments(函数参数列表)</code>, 一个伪数组对象。</p>
 <p>这时变量对象的<strong>创建阶段</strong>会包括：</p>
@@ -249,38 +264,41 @@ windowEC = &#123;
 <li><strong>检查当前上下文的函数声明，也就是使用 function 关键字声明的函数</strong>。在变量对象中以函数名建立一个属性，属性值为指向该函数所在内存地址的引用。如果变量对象已经存在相同名称的属性，则完全替换这个属性。</li>
 <li><strong>检查当前上下文中的变量声明</strong>（<code>var</code> 声明的变量），默认为 <code>undefined</code>；如果变量名称跟已经声明的形式参数或函数相同，为了防止同名的函数被修改为<code>undefined</code>，则会直接跳过变量声明，原属性值不会被修改。</li>
 </ol>
-<p><img src="/images/variableobject/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/variableobject/1.jpg" srcset="/img/loading.gif"></p>
 <p>对于第 3 点中的“跳过”一词想必大家会有一丝疑问？底下例子中既然按照上面的规则，变量声明的<code>foo</code>遇到函数声明的<code>foo</code>会跳过，可是为什么最后<code>foo</code>的输出结果仍然是被覆盖了？</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"I am function foo"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;I am function foo&quot;</span>);
 &#125;
 <span class="hljs-keyword">var</span> foo = <span class="hljs-number">10</span>;
 
 <span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// 10</span></code></pre></div>
+
 <p>理由其实很简单，因为上面的三条规则仅仅适用于变量对象的<strong>创建过程</strong>，也就是执行上下文的创建过程。而<code>foo = 10</code>是在执行上下文的<strong>执行过程</strong>中运行的，输出结果自然会是 10。对比下例：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// ƒ foo() &#123; console.log('I am function foo') &#125;</span>
+<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// ƒ foo() &#123; console.log(&#x27;I am function foo&#x27;) &#125;</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"I am function foo"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;I am function foo&quot;</span>);
 &#125;
 
 <span class="hljs-keyword">var</span> foo = <span class="hljs-number">10</span>;
 <span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// 10</span></code></pre></div>
+
 <p>为啥又是不一样的结果呢？其实它的执行顺序为：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 首先将所有函数声明放入变量对象中，函数声明变量提升</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"I am function foo"</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;I am function foo&quot;</span>);
 &#125;
 
 <span class="hljs-comment">// 其次将所有变量声明放入变量对象中，但是因为foo已经存在同名函数，因此此时会跳过变量声明默认undefined的赋值</span>
 <span class="hljs-comment">// var foo = undefined;</span>
 
 <span class="hljs-comment">// 然后开始执行阶段代码的执行</span>
-<span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// ƒ foo() &#123; console.log('I am function foo') &#125;</span>
+<span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// ƒ foo() &#123; console.log(&#x27;I am function foo&#x27;) &#125;</span>
 
 <span class="hljs-comment">// 在执行上下文的执行过程中运行</span>
 foo = <span class="hljs-number">10</span>;
 <span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// 10</span></code></pre></div>
-<p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，<strong><code>function</code>声明会比<code>var</code>声明优先级更高一点</strong>。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p>
+
+<p>根据上面的规则，理解变量提升就变得十分简单了，我们也可以看出，**<code>function</code>声明会比<code>var</code>声明优先级更高一点**。为了帮助大家更好的理解变量对象，我们再结合一个简单的例子来进行探讨。</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-built_in">console</span>.log(a);
   <span class="hljs-built_in">console</span>.log(foo());
@@ -293,10 +311,11 @@ foo = <span class="hljs-number">10</span>;
 
 test();
 
-<span class="hljs-comment">/* 结果为：
-undefined
-2
-*/</span></code></pre></div>
+<span class="hljs-comment">/* 结果为：</span>
+<span class="hljs-comment">undefined</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre></div>
+
 <p>根据上述的规则，理解变量提升后可以将执行顺序理解为：</p>
 <div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span>(<span class="hljs-params"></span>) </span>&#123;
   <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
@@ -309,6 +328,7 @@ undefined
 &#125;
 
 test();</code></pre></div>
+
 <p>这样是不是一目了然了呢？</p>
 <p>当然还需要注意的是，函数未进入执行阶段之前，变量对象中的属性都不能访问！但是进入执行阶段之后，变量对象（VO）转变为了活动对象（AO），然后开始进行执行阶段的操作。</p>
 <h3 id="执行阶段"><a href="#执行阶段" class="headerlink" title="执行阶段"></a>执行阶段</h3><p>当前进入执行阶段，变量对象（VO）激活成活动对象（AO），里面的属性都能被访问了，函数会顺序执行代码，改变变量对象的属性值，此阶段的执行上下文代码会分成两个阶段进行处理：</p>
@@ -325,33 +345,36 @@ test();</code></pre></div>
 &#125;
 
 foo(<span class="hljs-number">10</span>);</code></pre></div>
+
 <p>当进入带有参数 10 的<code>foo</code>函数上下文时，AO 表现为如下：</p>
 <div class="hljs"><pre><code class="hljs javascript">AO = &#123;
-    <span class="hljs-attr">arguments</span>: &#123;
+    <span class="hljs-built_in">arguments</span>: &#123;
         <span class="hljs-number">0</span>: <span class="hljs-number">10</span>,
         <span class="hljs-number">1</span>: <span class="hljs-literal">undefined</span>,
-        <span class="hljs-attr">length</span>: <span class="hljs-number">1</span>
+        length: <span class="hljs-number">1</span>
     &#125;
     a: <span class="hljs-number">10</span>,
-    <span class="hljs-attr">b</span>: <span class="hljs-literal">undefined</span>,
-    <span class="hljs-attr">c</span>: <span class="hljs-literal">undefined</span>,
-    <span class="hljs-attr">d</span>: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">function</span> <span class="hljs-attr">reference</span> <span class="hljs-attr">to</span> <span class="hljs-attr">d</span>&gt;</span>,
-    e: undefined,
-&#125;</span></code></pre></div>
+    b: <span class="hljs-literal">undefined</span>,
+    c: <span class="hljs-literal">undefined</span>,
+    d: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">function</span> <span class="hljs-attr">reference</span> <span class="hljs-attr">to</span> <span class="hljs-attr">d</span>&gt;</span>,</span>
+<span class="xml">    e: undefined,</span>
+<span class="xml">&#125;</span></code></pre></div>
+
 <p><code>x</code> 是函数表达式，所以不在变量对象当中，<code>e</code> 变量引用的值也是函数表达式，所以变量 <code>e</code> 本身是声明，所以在变量对象当中。</p>
 <h4 id="执行代码"><a href="#执行代码" class="headerlink" title="执行代码"></a>执行代码</h4><p>这个阶段会按顺序执行代码，修改变量对象的属性值，紧接上面的例子，执行完成后 AO 如下：</p>
 <div class="hljs"><pre><code class="hljs javascript">AO = &#123;
-    <span class="hljs-attr">arguments</span>: &#123;
+    <span class="hljs-built_in">arguments</span>: &#123;
         <span class="hljs-number">0</span>: <span class="hljs-number">10</span>,
         <span class="hljs-number">1</span>: <span class="hljs-literal">undefined</span>,
-        <span class="hljs-attr">length</span>: <span class="hljs-number">1</span>
+        length: <span class="hljs-number">1</span>
     &#125;
     a: <span class="hljs-number">10</span>,
-    <span class="hljs-attr">b</span>: <span class="hljs-literal">undefined</span>,
-    <span class="hljs-attr">c</span>: <span class="hljs-number">10</span>,
-    <span class="hljs-attr">d</span>: &lt;reference to function declaration d&gt;,
+    b: <span class="hljs-literal">undefined</span>,
+    c: <span class="hljs-number">10</span>,
+    d: <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">reference</span> <span class="hljs-attr">to</span> <span class="hljs-attr">function</span> <span class="hljs-attr">declaration</span> <span class="hljs-attr">d</span>&gt;</span>,</span>
     e: &lt;reference to Function expression to _e&gt;,
 &#125;</code></pre></div>
+
 <p>到这里变量对象的创建过程就介绍完了，让我们简短地总结一下：</p>
 <ol>
 <li>全局上下文的变量对象初始化是全局对象</li>
@@ -360,7 +383,7 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
 <li>函数未进入执行阶段之前，变量对象中的属性都不能访问</li>
 <li>在执行代码阶段，会再次修改变量对象的属性值，并赋予该有的属性值</li>
 </ol>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io" target="_blank" rel="noopener">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
             </div>
             <hr>
@@ -380,20 +403,20 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
                     
                       <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
                     
-                      <a class="hover-with-bg" href="/tags/变量对象/">变量对象</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/">变量对象</a>
                     
                   </div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/05/18/JavaScript系列之作用域和作用域链/">
+                      <a href="/2020/05/18/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">JavaScript系列之作用域和作用域链</span>
                         <span class="visible-mobile">上一篇</span>
@@ -403,7 +426,7 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/05/04/JavaScript系列之执行上下文和执行栈/">
+                      <a href="/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/">
                         <span class="hidden-mobile">JavaScript系列之执行上下文和执行栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -423,7 +446,7 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -435,16 +458,15 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -465,9 +487,10 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -482,10 +505,27 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -500,105 +540,47 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "JavaScript系列之变量对象&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -612,6 +594,11 @@ foo(<span class="hljs-number">10</span>);</code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

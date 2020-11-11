@@ -5,11 +5,12 @@
 
 
 
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
   <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
@@ -18,35 +19,47 @@
   <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
   <title>Git命令拓展 - 米淇淋的个人博客</title>
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
 
 
-  <link rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css">
-  <link rel="stylesheet" href="/lib/hint/hint.min.css">
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css">
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
     
   
 
   
+    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
 
 
 <!-- 主题依赖的图标库，不要自行修改 -->
+
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
 
 <link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
 
-<link rel="stylesheet" href="/css/main.css">
+
+<link  rel="stylesheet" href="/css/main.css" />
 
 <!-- 自定义样式保持在最底部 -->
 
 
-  <script src="/js/utils.js"></script>
-  <script src="/js/color-schema.js"></script>
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="米淇淋的个人博客" type="application/atom+xml">
 </head>
 
 
@@ -149,8 +162,8 @@
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="container page-header text-center fade-in-up">
-            <span class="h2" id="subtitle">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git命令拓展">
               
             </span>
 
@@ -210,14 +223,14 @@
     <div class="col-lg-8 nopadding-md">
       <div class="container nopadding-md" id="board-ctn">
         <div class="py-5" id="board">
-          <article class="post-content mx-auto" id="post">
+          <article class="post-content mx-auto">
             <!-- SEO header -->
             <h1 style="display: none">Git命令拓展</h1>
             
-            <div class="markdown-body" id="post-body">
+            <div class="markdown-body">
               <p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
 <p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
-<p><img src="/images/git/1.jpg" srcset="/img/loading.gif" alt></p>
+<p><img src="/images/git/1.jpg" srcset="/img/loading.gif"></p>
 <p>上图中几个专用名词的译名如下：</p>
 <ul>
 <li>Workspace：工作区</li>
@@ -229,13 +242,15 @@
 
 $ git config -e [--global]    //编辑Git配置文件
 
-$ git config --global user.name <span class="hljs-string">"miqilin21"</span>
+$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
 $ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre></div>
+
 <h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><div class="hljs"><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
 
 $ git init [project-name]   //新建一个目录，将其初始化为Git代码库
 
 $ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre></div>
+
 <h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><div class="hljs"><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
 
 $ git add [dir]    //添加指定目录到暂存区，包括子目录
@@ -245,13 +260,15 @@ $ git add    //添加当前目录的所有文件到暂存区
 $ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
 
 $ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre></div>
-<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><div class="hljs"><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">"Commit message"</span>    //提交暂存区到仓库区
+
+<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><div class="hljs"><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
 
 $ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
 
 $ git commit -v    //提交时显示所有diff信息
 
-$ git commit --amend -m <span class="hljs-string">"Latest commit message"</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre></div>
+$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre></div>
+
 <h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><div class="hljs"><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
 
 $ git remote -v    //显示所有远程仓库
@@ -267,6 +284,7 @@ $ git push [remote] [branch]    //上传本地指定分支到远程仓库
 $ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
 
 $ git push [remote] --all    //推送所有分支到远程仓库</code></pre></div>
+
 <h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><div class="hljs"><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
 
 $ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
@@ -290,6 +308,7 @@ $ git stash apply    //恢复工作现场
 $ git stash drop    //删除stash内容
 
 $ git stash pop    //恢复的同时直接删除stash内容</code></pre></div>
+
 <h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><div class="hljs"><pre><code class="hljs bash">$ git branch    //列出所有本地分支
 
 $ git branch -r    //列出所有远程分支
@@ -315,6 +334,7 @@ $ git branch -d [branch-name]    //删除分支
 $ git push origin --delete [branch-name]
 $ git push origin :[branch-name]
 $ git branch -dr [remote/branch]     //删除远程分支</code></pre></div>
+
 <h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><div class="hljs"><pre><code class="hljs bash">$ git tag    //列出所有tag
 
 $ git tag [tag]    //新建一个tag在当前commit
@@ -331,6 +351,7 @@ $ git push [remote] [tag]    //提交指定tag
 
 $ git push [remote] --tags
 $ git push --tags origin    //提交所有tag</code></pre></div>
+
 <h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><div class="hljs"><pre><code class="hljs bash">$ git status    //显示有变更的文件
 
 $ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
@@ -358,7 +379,7 @@ $ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
 
 $ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
 
-$ git diff --shortstat <span class="hljs-string">"@&#123;0 day ago&#125;"</span>    //显示今天你写了多少行代码
+$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
 
 $ git show [commit]    //显示某次提交的元数据和内容变化
 
@@ -392,14 +413,14 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
               
               
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2020/01/06/学会如何学习（一）/">
+                      <a href="/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">学会如何学习（一）</span>
                         <span class="visible-mobile">上一篇</span>
@@ -409,7 +430,7 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2019/12/27/使用Hexo+GitHub搭建个人博客/">
+                      <a href="/2019/12/27/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
                         <span class="hidden-mobile">使用Hexo+GitHub搭建个人博客</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
@@ -429,7 +450,7 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
   <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div id="tocbot"></div>
+  <div class="toc-body" id="toc-body"></div>
 </div>
 
       </div>
@@ -441,16 +462,15 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
 
 
     
-  </main>
 
-  
-    <a id="scroll-top-button" href="#" role="button">
-      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-    </a>
-  
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
 
-  
-    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -471,9 +491,10 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
     </div>
   </div>
 </div>
-  
+    
 
-  
+    
+  </main>
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content">
@@ -488,10 +509,27 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
 </footer>
 
 <!-- SCRIPTS -->
+
+  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
 <script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
 <script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
-<script  src="/js/main.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
 <!-- Plugins -->
 
@@ -506,105 +544,47 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
-  <script  src="/js/clipboard-use.js" ></script>
-
-
-
-
-
-
-
   <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
-  <script>
-    $(document).ready(function () {
-      var boardCtn = $('#board-ctn');
-      var boardTop = boardCtn.offset().top;
 
-      tocbot.init({
-        tocSelector: '#tocbot',
-        contentSelector: '#post-body',
-        headingSelector: 'h1,h2,h3,h4,h5,h6',
-        linkClass: 'tocbot-link',
-        activeLinkClass: 'tocbot-active-link',
-        listClass: 'tocbot-list',
-        isCollapsedClass: 'tocbot-is-collapsed',
-        collapsibleClass: 'tocbot-is-collapsible',
-        collapseDepth: 0,
-        scrollSmooth: true,
-        headingsOffset: -boardTop
-      });
-      if ($('.toc-list-item').length > 0) {
-        $('#toc').css('visibility', 'visible');
-      }
-    });
-  </script>
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+
+
 
 
 
   <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
   <script>
-    var typed = new Typed('#subtitle', {
-      strings: [
-        '  ',
-        "Git命令拓展&nbsp;",
-      ],
-      cursorChar: "_",
-      typeSpeed: 70,
-      loop: false,
-    });
-    typed.stop();
-    $(document).ready(function () {
-      $(".typed-cursor").addClass("h2");
-      typed.start();
-    });
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
-  <script>
-    anchors.options = {
-      placement: "right",
-      visible: "hover",
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
       
-      icon: "#"
+      typing(title)
       
-    };
-    var el = "h1,h2,h3,h4,h5,h6".split(",");
-    var res = [];
-    for (item of el) {
-      res.push(".markdown-body > " + item)
-    }
-    anchors.add(res.join(", "))
+    })(window, document);
   </script>
 
 
 
   <script  src="/js/local-search.js" ></script>
   <script>
-    var path = "/local-search.xml";
-    var inputArea = document.querySelector("#local-search-input");
-    inputArea.onclick = function () {
-      searchFunc(path, 'local-search-input', 'local-search-result');
-      this.onclick = null
-    }
-  </script>
-
-
-
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-  <script>
-    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
-      function () {
-        var element = document.createElement('a');
-        $(element).attr('data-fancybox', 'images');
-        $(element).attr('href', $(this).attr('src'));
-        $(this).wrap(element);
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
       }
-    );
+    })()
   </script>
 
 
@@ -618,6 +598,11 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre></div>
 
 
 
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 

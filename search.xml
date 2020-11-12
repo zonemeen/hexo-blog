@@ -252,283 +252,182 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>CSS笔记—居中布局</title>
-    <url>/2019/12/21/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/</url>
-    <content><![CDATA[<p>我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。</p>
-<h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="元素宽高未知"><a href="#元素宽高未知" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：</p>
-<p>①CSS3 transform：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">50%</span>);
-&#125;</code></pre>
+    <title>DOM Node 的建立、删除与修改</title>
+    <url>/2020/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/</url>
+    <content><![CDATA[<p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
+<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</code></pre>
 
-<p>②flexbox：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">justify-content</span>: center;
-&#125;</code></pre>
+<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
+<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
+<pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">&quot;myNewDiv&quot;</span>;
+newDiv.className = <span class="hljs-string">&quot;box&quot;</span>;</code></pre>
 
-<h4 id="居中元素为内联元素"><a href="#居中元素为内联元素" class="headerlink" title="居中元素为内联元素"></a>居中元素为内联元素</h4><p>常见的内联元素有：span, a, img, input, label 等等。</p>
-<p>您可以在块级父元素内水平居中内联元素，只需 css 中加以下核心语法：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">text-align</span>: center;
-&#125;</code></pre>
+<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
+<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);
 
-<p>这种方法适用于 display 为 inline, inline-block, inline-table, inline-flex 类型的元素。</p>
-<h4 id="居中元素为块级元素"><a href="#居中元素为块级元素" class="headerlink" title="居中元素为块级元素"></a>居中元素为块级元素</h4><p>常见的块元素：div, h1~h6, table, p, ul, li 等等。</p>
-<p>① 设置 margin：0 auto</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">800px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
-  <span class="hljs-attribute">background</span>: <span class="hljs-number">#999</span>;
-&#125;</code></pre>
+<span class="hljs-comment">// 建立 textNode 文字节点</span>
+<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);
 
-<p>此方法只能进行水平的居中，对浮动元素或绝对定位元素是无效的。</p>
-<p>② 转换为 inline-block 属性：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">text-align</span>: center;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">display</span>: inline-block;
-&#125;</code></pre>
+<span class="hljs-comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv</span>
+newDiv.appendChild(textNode);</code></pre>
 
-<h4 id="居中元素为浮动元素"><a href="#居中元素为浮动元素" class="headerlink" title="居中元素为浮动元素"></a>居中元素为浮动元素</h4><p>加以下核心语法:</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">float</span>: left;
-  <span class="hljs-attribute">position</span>: relative;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
-&#125;</code></pre>
+<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
+<p>例如，一开始我们有一个 HTML 的容器元素：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
 
-<h4 id="居中元素为绝对定位元素"><a href="#居中元素为绝对定位元素" class="headerlink" title="居中元素为绝对定位元素"></a>居中元素为绝对定位元素</h4><p>①</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
-&#125;</code></pre>
+<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 取得外层容器 myList</span>
+<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);
 
-<p>②</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
-&#125;</code></pre>
+<span class="hljs-comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span>
+<span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();
 
-<h3 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h3><h4 id="元素宽高未知-1"><a href="#元素宽高未知-1" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，也可以利用以下同样两种方法将元素垂直居中：</p>
-<p>①CSS3 transform：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">50%</span>);
-&#125;</code></pre>
-
-<p>②flexbox：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">flex-direction</span>: column;
-  <span class="hljs-attribute">justify-content</span>: center;
-&#125;</code></pre>
-
-<p>适用于子元素为浮动、绝对定位、内联元素，均可垂直居中。</p>
-<p>其中 flexbox 是 CSS3 新增的属性，设计初衷就是为了解决像垂直居中这样的常见布局问题，相信未来 flexbox 布局会越来越多应用。</p>
-<h4 id="元素宽高已知"><a href="#元素宽高已知" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>①</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">50px</span>;
-&#125;</code></pre>
-
-<p>②</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">margin</span>: auto <span class="hljs-number">0</span>;
-&#125;</code></pre>
-
-<h4 id="居中元素为单行文本"><a href="#居中元素为单行文本" class="headerlink" title="居中元素为单行文本"></a>居中元素为单行文本</h4><p>①</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.text</span> &#123;
-  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">200px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
-&#125;</code></pre>
-
-<p>将文本的 line-height 属性值设为和文字父容器一样的高度，但适用于只有一行文字的情况。</p>
-<p>②</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.link</span> &#123;
-  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">30px</span>;
-  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">30px</span>;
-&#125;</code></pre>
-
-<p>有时内联/文本元素可以垂直居中显示，只是因为它们上部和下部都有相等的 padding。</p>
-<h4 id="居中元素为多行文本"><a href="#居中元素为多行文本" class="headerlink" title="居中元素为多行文本"></a>居中元素为多行文本</h4><p>①table：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: table;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">display</span>: table-cell;
-  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
-  <span class="hljs-attribute">vertical-align</span>: middle;
-&#125;</code></pre>
-
-<p>②flexbox:</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">justify-content</span>: center;
-  <span class="hljs-attribute">flex-direction</span>: column;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;
-&#125;</code></pre>
-
-<h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><h4 id="元素宽高已知-1"><a href="#元素宽高已知-1" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>① 负边距居中：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
-  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">50px</span>;
-&#125;</code></pre>
-
-<p>此方法灵活性差，不能自适应，且宽高不支持百分比尺寸和 min-/max- 属性。</p>
-<p>② 绝对居中：</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">margin</span>: auto;
-  <span class="hljs-attribute">position</span>: fixed;
-  //absolute is ok
-  <span class="hljs-selector-tag">top</span>: 0;
-  <span class="hljs-selector-tag">right</span>: 0;
-  <span class="hljs-selector-tag">bottom</span>: 0;
-  <span class="hljs-selector-tag">left</span>: 0;
-&#125;</code></pre>
-
-<p>元素的宽高支持百分比 % 属性值和 min-/max- 属性。</p>
-<p>③transform :</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>);
-&#125;</code></pre>
-
-<p>④table-cell:</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: table-cell;
-  <span class="hljs-attribute">vertical-align</span>: middle;
-  <span class="hljs-attribute">text-align</span>: center;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid red;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;
-  <span class="hljs-attribute">display</span>: inline-block;
-  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#999</span>;
-&#125;</code></pre>
-
-<p>这种方法适用于子元素 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，前提需要知道父元素的宽高，且父元素的宽高不能设为百分比数。</p>
-<p>⑤font-size 结合 vertical-align：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">175.4px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
-  <span class="hljs-attribute">text-align</span>: center;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+  <span class="hljs-comment">// 生成新的 li，加入文字后置入 fragment 中。</span>
+  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);
+  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Item &quot;</span> + (i + <span class="hljs-number">1</span>)));
+  fragment.appendChild(li);
 &#125;
 
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">vertical-align</span>: middle;
-  <span class="hljs-attribute">display</span>: inline-block;
-  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
-  <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;
-  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#999</span>;
-&#125;</code></pre>
+<span class="hljs-comment">// 最后将组合完成的 fragment 放进 ul 容器</span>
+ul.appendChild(fragment);</code></pre>
 
-<p>该方法前提条件是需给父元素设一个合适的 font-size 值，该值一般为其父元素的高度除以 1.14 得到的值，并且子元素必须是一个 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，此外还需在子元素内加上 vertical-align: middle 属性。</p>
-<p>⑥ 文本内容：</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">text</span> &#123;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;
-  <span class="hljs-attribute">text-align</span>: center;
-&#125;</code></pre>
+<p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
+<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
+<p>我们只要将对应的 HTML 字符串传入：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;</span>);</code></pre>
 
-<h4 id="元素宽高未知-2"><a href="#元素宽高未知-2" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>①transform :</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">position</span>: relative;
-&#125;
-<span class="hljs-selector-class">.child</span> &#123;
-  <span class="hljs-attribute">position</span>: absolute;
-  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
-  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>);
-&#125;</code></pre>
+<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误</span>
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);
 
-<p>transform 方法中元素既可以加宽高，也可不加，用于水平垂直居中布局。</p>
-<p>②flexbox :</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">justify-content</span>: center;
-  <span class="hljs-attribute">align-items</span>: center;
-&#125;</code></pre>
+<span class="hljs-comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了</span>
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);</code></pre>
 
-<p>③grid:</p>
-<pre><code class="hljs css"><span class="hljs-selector-tag">body</span>,
-<span class="hljs-selector-tag">html</span> &#123;
-  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
-  <span class="hljs-attribute">display</span>: grid;
-&#125;
-<span class="hljs-selector-tag">span</span> &#123;
-  <span class="hljs-comment">/* thing to center */</span>
-  <span class="hljs-attribute">margin</span>: auto;
-&#125;</code></pre>
+<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;Hello world!&quot;</span>);
+&#125;;</code></pre>
 
-<p>该方法适用于只有一个元素的时候，作为非常新的布局方式，其兼容性也比较差。</p>
-<p><strong>上面只是把所有方法的代码要点罗列了一下，能满足所有的居中布局方案，如你还有其他好方法，欢迎交流指正哦。</strong></p>
+<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
+<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
+<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
+<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg"></p>
+<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+<span class="javascript">  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span></span>
+  newList.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span></span>
+  myList.appendChild(newList);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg"></p>
+<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+  newNode.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span></span>
+  myList.insertBefore(newNode, refNode);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg"></p>
+<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myList&#x27;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;li&#x27;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+  newNode.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span></span>
+  myList.replaceChild(newNode, oldNode);
+<span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></code></pre>
+
+<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg"></p>
+<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span></span>
+  myList.removeChild(removeNode);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
+<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
+<p>刚好呼应阿基米德的一句众所周知的名言：</p>
+<blockquote>
+<p>「给我一个支点，我就能撬动整个地球。」</p>
+</blockquote>
+<p>那么有了 DOM API 的帮助后， JavaScript 也可以说：</p>
+<blockquote>
+<p>「给我一个节点，我就能建立整个网页世界。」</p>
+</blockquote>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>CSS</tag>
-        <tag>布局</tag>
+        <tag>JavaScript</tag>
+        <tag>DOM</tag>
+        <tag>API</tag>
       </tags>
   </entry>
   <entry>
@@ -849,6 +748,286 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>CSS笔记—居中布局</title>
+    <url>/2019/12/21/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/</url>
+    <content><![CDATA[<p>我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。</p>
+<h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="元素宽高未知"><a href="#元素宽高未知" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：</p>
+<p>①CSS3 transform：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateX</span>(-<span class="hljs-number">50%</span>);
+&#125;</code></pre>
+
+<p>②flexbox：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+&#125;</code></pre>
+
+<h4 id="居中元素为内联元素"><a href="#居中元素为内联元素" class="headerlink" title="居中元素为内联元素"></a>居中元素为内联元素</h4><p>常见的内联元素有：span, a, img, input, label 等等。</p>
+<p>您可以在块级父元素内水平居中内联元素，只需 css 中加以下核心语法：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">text-align</span>: center;
+&#125;</code></pre>
+
+<p>这种方法适用于 display 为 inline, inline-block, inline-table, inline-flex 类型的元素。</p>
+<h4 id="居中元素为块级元素"><a href="#居中元素为块级元素" class="headerlink" title="居中元素为块级元素"></a>居中元素为块级元素</h4><p>常见的块元素：div, h1~h6, table, p, ul, li 等等。</p>
+<p>① 设置 margin：0 auto</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">800px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+  <span class="hljs-attribute">background</span>: <span class="hljs-number">#999</span>;
+&#125;</code></pre>
+
+<p>此方法只能进行水平的居中，对浮动元素或绝对定位元素是无效的。</p>
+<p>② 转换为 inline-block 属性：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">text-align</span>: center;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">display</span>: inline-block;
+&#125;</code></pre>
+
+<h4 id="居中元素为浮动元素"><a href="#居中元素为浮动元素" class="headerlink" title="居中元素为浮动元素"></a>居中元素为浮动元素</h4><p>加以下核心语法:</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">float</span>: left;
+  <span class="hljs-attribute">position</span>: relative;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
+&#125;</code></pre>
+
+<h4 id="居中元素为绝对定位元素"><a href="#居中元素为绝对定位元素" class="headerlink" title="居中元素为绝对定位元素"></a>居中元素为绝对定位元素</h4><p>①</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
+&#125;</code></pre>
+
+<p>②</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">right</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+&#125;</code></pre>
+
+<h3 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h3><h4 id="元素宽高未知-1"><a href="#元素宽高未知-1" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>当元素的宽高都未知的时候，也可以利用以下同样两种方法将元素垂直居中：</p>
+<p>①CSS3 transform：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">50%</span>);
+&#125;</code></pre>
+
+<p>②flexbox：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">flex-direction</span>: column;
+  <span class="hljs-attribute">justify-content</span>: center;
+&#125;</code></pre>
+
+<p>适用于子元素为浮动、绝对定位、内联元素，均可垂直居中。</p>
+<p>其中 flexbox 是 CSS3 新增的属性，设计初衷就是为了解决像垂直居中这样的常见布局问题，相信未来 flexbox 布局会越来越多应用。</p>
+<h4 id="元素宽高已知"><a href="#元素宽高已知" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>①</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">50px</span>;
+&#125;</code></pre>
+
+<p>②</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">bottom</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">margin</span>: auto <span class="hljs-number">0</span>;
+&#125;</code></pre>
+
+<h4 id="居中元素为单行文本"><a href="#居中元素为单行文本" class="headerlink" title="居中元素为单行文本"></a>居中元素为单行文本</h4><p>①</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.text</span> &#123;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">200px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+&#125;</code></pre>
+
+<p>将文本的 line-height 属性值设为和文字父容器一样的高度，但适用于只有一行文字的情况。</p>
+<p>②</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.link</span> &#123;
+  <span class="hljs-attribute">padding-top</span>: <span class="hljs-number">30px</span>;
+  <span class="hljs-attribute">padding-bottom</span>: <span class="hljs-number">30px</span>;
+&#125;</code></pre>
+
+<p>有时内联/文本元素可以垂直居中显示，只是因为它们上部和下部都有相等的 padding。</p>
+<h4 id="居中元素为多行文本"><a href="#居中元素为多行文本" class="headerlink" title="居中元素为多行文本"></a>居中元素为多行文本</h4><p>①table：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: table;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">display</span>: table-cell;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span>;
+  <span class="hljs-attribute">vertical-align</span>: middle;
+&#125;</code></pre>
+
+<p>②flexbox:</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">flex-direction</span>: column;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">400px</span>;
+&#125;</code></pre>
+
+<h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><h4 id="元素宽高已知-1"><a href="#元素宽高已知-1" class="headerlink" title="元素宽高已知"></a>元素宽高已知</h4><p>① 负边距居中：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">margin-left</span>: -<span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">margin-top</span>: -<span class="hljs-number">50px</span>;
+&#125;</code></pre>
+
+<p>此方法灵活性差，不能自适应，且宽高不支持百分比尺寸和 min-/max- 属性。</p>
+<p>② 绝对居中：</p>
+<pre><code class="hljs css"><span class="hljs-selector-tag">div</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">margin</span>: auto;
+  <span class="hljs-attribute">position</span>: fixed;
+  //absolute is ok
+  <span class="hljs-selector-tag">top</span>: 0;
+  <span class="hljs-selector-tag">right</span>: 0;
+  <span class="hljs-selector-tag">bottom</span>: 0;
+  <span class="hljs-selector-tag">left</span>: 0;
+&#125;</code></pre>
+
+<p>元素的宽高支持百分比 % 属性值和 min-/max- 属性。</p>
+<p>③transform :</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>);
+&#125;</code></pre>
+
+<p>④table-cell:</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: table-cell;
+  <span class="hljs-attribute">vertical-align</span>: middle;
+  <span class="hljs-attribute">text-align</span>: center;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid red;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#999</span>;
+&#125;</code></pre>
+
+<p>这种方法适用于子元素 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，前提需要知道父元素的宽高，且父元素的宽高不能设为百分比数。</p>
+<p>⑤font-size 结合 vertical-align：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">175.4px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">200px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+&#125;
+
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">vertical-align</span>: middle;
+  <span class="hljs-attribute">display</span>: inline-block;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#999</span>;
+&#125;</code></pre>
+
+<p>该方法前提条件是需给父元素设一个合适的 font-size 值，该值一般为其父元素的高度除以 1.14 得到的值，并且子元素必须是一个 display 为 inline, inline-block, inline-table, inline-flex 类型的元素，此外还需在子元素内加上 vertical-align: middle 属性。</p>
+<p>⑥ 文本内容：</p>
+<pre><code class="hljs css"><span class="hljs-selector-tag">text</span> &#123;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">line-height</span>: <span class="hljs-number">100px</span>;
+  <span class="hljs-attribute">text-align</span>: center;
+&#125;</code></pre>
+
+<h4 id="元素宽高未知-2"><a href="#元素宽高未知-2" class="headerlink" title="元素宽高未知"></a>元素宽高未知</h4><p>①transform :</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">position</span>: relative;
+&#125;
+<span class="hljs-selector-class">.child</span> &#123;
+  <span class="hljs-attribute">position</span>: absolute;
+  <span class="hljs-attribute">top</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">left</span>: <span class="hljs-number">50%</span>;
+  <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translate</span>(-<span class="hljs-number">50%</span>, -<span class="hljs-number">50%</span>);
+&#125;</code></pre>
+
+<p>transform 方法中元素既可以加宽高，也可不加，用于水平垂直居中布局。</p>
+<p>②flexbox :</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.parent</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">justify-content</span>: center;
+  <span class="hljs-attribute">align-items</span>: center;
+&#125;</code></pre>
+
+<p>③grid:</p>
+<pre><code class="hljs css"><span class="hljs-selector-tag">body</span>,
+<span class="hljs-selector-tag">html</span> &#123;
+  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;
+  <span class="hljs-attribute">display</span>: grid;
+&#125;
+<span class="hljs-selector-tag">span</span> &#123;
+  <span class="hljs-comment">/* thing to center */</span>
+  <span class="hljs-attribute">margin</span>: auto;
+&#125;</code></pre>
+
+<p>该方法适用于只有一个元素的时候，作为非常新的布局方式，其兼容性也比较差。</p>
+<p><strong>上面只是把所有方法的代码要点罗列了一下，能满足所有的居中布局方案，如你还有其他好方法，欢迎交流指正哦。</strong></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>布局</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS笔记—左右布局</title>
     <url>/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<p>css 左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学 css 的时候更快理解其他复杂的布局方式。</p>
@@ -1155,182 +1334,175 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>DOM Node 的建立、删除与修改</title>
-    <url>/2020/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/</url>
-    <content><![CDATA[<p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
-<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</code></pre>
+    <title>Git命令拓展</title>
+    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
+    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
+<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
+<p><img src="/images/git/1.jpg"></p>
+<p>上图中几个专用名词的译名如下：</p>
+<ul>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：本地仓库</li>
+<li>Remote：远程仓库</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
 
-<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
-<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
-<pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">&quot;myNewDiv&quot;</span>;
-newDiv.className = <span class="hljs-string">&quot;box&quot;</span>;</code></pre>
+$ git config -e [--global]    //编辑Git配置文件
 
-<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
-<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);
+$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
+$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
 
-<span class="hljs-comment">// 建立 textNode 文字节点</span>
-<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);
+<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
 
-<span class="hljs-comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv</span>
-newDiv.appendChild(textNode);</code></pre>
+$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
 
-<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
-<p>例如，一开始我们有一个 HTML 的容器元素：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
+$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
 
-<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 取得外层容器 myList</span>
-<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);
+<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
 
-<span class="hljs-comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span>
-<span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();
+$ git add [dir]    //添加指定目录到暂存区，包括子目录
 
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
-  <span class="hljs-comment">// 生成新的 li，加入文字后置入 fragment 中。</span>
-  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);
-  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Item &quot;</span> + (i + <span class="hljs-number">1</span>)));
-  fragment.appendChild(li);
-&#125;
+$ git add    //添加当前目录的所有文件到暂存区
 
-<span class="hljs-comment">// 最后将组合完成的 fragment 放进 ul 容器</span>
-ul.appendChild(fragment);</code></pre>
+$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
 
-<p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
-<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
-<p>我们只要将对应的 HTML 字符串传入：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;</span>);</code></pre>
+$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
 
-<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);
+<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
 
-<span class="hljs-comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);</code></pre>
+$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
 
-<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;Hello world!&quot;</span>);
-&#125;;</code></pre>
+$ git commit -v    //提交时显示所有diff信息
 
-<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
-<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
-<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
-<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg"></p>
-<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
-<span class="javascript">  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
 
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+$ git remote -v    //显示所有远程仓库
 
-<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span></span>
-  newList.appendChild(textNode);
+$ git remote show [remote]    //显示某个远程仓库的信息
 
-<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span></span>
-  myList.appendChild(newList);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
 
-<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg"></p>
-<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+$ git push [remote] [branch]    //上传本地指定分支到远程仓库
 
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
 
-<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
 
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
-  newNode.appendChild(textNode);
+<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
 
-<span class="javascript">  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span></span>
-  myList.insertBefore(newNode, refNode);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
 
-<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg"></p>
-<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+$ git checkout    //恢复暂存区的所有文件到工作区
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myList&#x27;</span>);</span>
+$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
 
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;li&#x27;</span>)[<span class="hljs-number">1</span>];</span>
+$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
 
-<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);</span>
+$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
 
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
-  newNode.appendChild(textNode);
+$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
 
-<span class="javascript">  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span></span>
-  myList.replaceChild(newNode, oldNode);
-<span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></code></pre>
+$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
 
-<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg"></p>
-<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+$ git stash list    //查看保存的工作现场
 
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+$ git stash apply    //恢复工作现场
 
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+$ git stash drop    //删除stash内容
 
-<span class="javascript">  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span></span>
-  myList.removeChild(removeNode);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
 
-<p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
-<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
-<p>刚好呼应阿基米德的一句众所周知的名言：</p>
-<blockquote>
-<p>「给我一个支点，我就能撬动整个地球。」</p>
-</blockquote>
-<p>那么有了 DOM API 的帮助后， JavaScript 也可以说：</p>
-<blockquote>
-<p>「给我一个节点，我就能建立整个网页世界。」</p>
-</blockquote>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
+
+$ git branch -r    //列出所有远程分支
+
+$ git branch -a    //列出所有本地分支和远程分支
+
+$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
+
+$ git branch [branch] [commit]    //新建一个分支，指向指定commit
+
+$ git checkout -b [branch]    //新建一个分支，并切换到该分支
+
+$ git checkout [branch-name]    //切换到指定分支，并更新工作区
+
+$ git merge [branch]    //合并指定分支到当前分支
+
+$ git push origin [branch-name]    //将分支推送到远程仓库
+
+$ git push --all origin    //将所有分支推送到远程仓库
+
+$ git branch -d [branch-name]    //删除分支
+
+$ git push origin --delete [branch-name]
+$ git push origin :[branch-name]
+$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
+
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
+
+$ git tag [tag]    //新建一个tag在当前commit
+
+$ git tag [tag] [commit]    //新建一个tag在指定commit
+
+$ git tag -d [tag]    //删除本地tag
+
+$ git push origin :refs/tags/[tagName]    //删除远程tag
+
+$ git show [tag]    //查看tag信息
+
+$ git push [remote] [tag]    //提交指定tag
+
+$ git push [remote] --tags
+$ git push --tags origin    //提交所有tag</code></pre>
+
+<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
+
+$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
+
+$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
+
+$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
+
+$ git <span class="hljs-built_in">log</span> --follow [file]
+$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
+
+$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
+
+$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
+
+$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
+
+$ git blame [file]    //显示指定文件是什么人在什么时间修改过
+
+$ git diff    //显示暂存区和工作区的差异
+
+$ git diff --cached [file]    //显示暂存区和上一个commit的差异
+
+$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
+
+$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
+
+$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
+
+$ git show [commit]    //显示某次提交的元数据和内容变化
+
+$ git show --name-only [commit]    //显示某次提交发生变化的文件
+
+$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
+
+$ git reflog    //显示当前分支的最近几次提交</code></pre>
 ]]></content>
       <categories>
-        <category>JavaScript</category>
+        <category>tools</category>
       </categories>
       <tags>
-        <tag>JavaScript</tag>
-        <tag>DOM</tag>
-        <tag>API</tag>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -1383,7 +1555,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
 <p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
 <p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
 <p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
 <pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
 
@@ -1395,7 +1567,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
 <p>我们最后再回顾一遍已经学到的命令：</p>
 <blockquote>
-<p>git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+<p>git clone <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
 </blockquote>
 <h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
 <p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
@@ -1667,178 +1839,6 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>Git命令拓展</title>
-    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
-    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
-<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
-<p><img src="/images/git/1.jpg"></p>
-<p>上图中几个专用名词的译名如下：</p>
-<ul>
-<li>Workspace：工作区</li>
-<li>Index / Stage：暂存区</li>
-<li>Repository：本地仓库</li>
-<li>Remote：远程仓库</li>
-</ul>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
-
-$ git config -e [--global]    //编辑Git配置文件
-
-$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
-$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
-
-<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
-
-$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
-
-$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
-
-<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
-
-$ git add [dir]    //添加指定目录到暂存区，包括子目录
-
-$ git add    //添加当前目录的所有文件到暂存区
-
-$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
-
-$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
-
-<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
-
-$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
-
-$ git commit -v    //提交时显示所有diff信息
-
-$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
-
-<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
-
-$ git remote -v    //显示所有远程仓库
-
-$ git remote show [remote]    //显示某个远程仓库的信息
-
-$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
-
-$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
-
-$ git push [remote] [branch]    //上传本地指定分支到远程仓库
-
-$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
-
-$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
-
-<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
-
-$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
-
-$ git checkout    //恢复暂存区的所有文件到工作区
-
-$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-
-$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
-
-$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-
-$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
-
-$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
-
-$ git stash list    //查看保存的工作现场
-
-$ git stash apply    //恢复工作现场
-
-$ git stash drop    //删除stash内容
-
-$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
-
-<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
-
-$ git branch -r    //列出所有远程分支
-
-$ git branch -a    //列出所有本地分支和远程分支
-
-$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
-
-$ git branch [branch] [commit]    //新建一个分支，指向指定commit
-
-$ git checkout -b [branch]    //新建一个分支，并切换到该分支
-
-$ git checkout [branch-name]    //切换到指定分支，并更新工作区
-
-$ git merge [branch]    //合并指定分支到当前分支
-
-$ git push origin [branch-name]    //将分支推送到远程仓库
-
-$ git push --all origin    //将所有分支推送到远程仓库
-
-$ git branch -d [branch-name]    //删除分支
-
-$ git push origin --delete [branch-name]
-$ git push origin :[branch-name]
-$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
-
-<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
-
-$ git tag [tag]    //新建一个tag在当前commit
-
-$ git tag [tag] [commit]    //新建一个tag在指定commit
-
-$ git tag -d [tag]    //删除本地tag
-
-$ git push origin :refs/tags/[tagName]    //删除远程tag
-
-$ git show [tag]    //查看tag信息
-
-$ git push [remote] [tag]    //提交指定tag
-
-$ git push [remote] --tags
-$ git push --tags origin    //提交所有tag</code></pre>
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
-
-$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
-
-$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
-
-$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
-
-$ git <span class="hljs-built_in">log</span> --follow [file]
-$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
-
-$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
-
-$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
-
-$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
-
-$ git blame [file]    //显示指定文件是什么人在什么时间修改过
-
-$ git diff    //显示暂存区和工作区的差异
-
-$ git diff --cached [file]    //显示暂存区和上一个commit的差异
-
-$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
-
-$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
-
-$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
-
-$ git show [commit]    //显示某次提交的元数据和内容变化
-
-$ git show --name-only [commit]    //显示某次提交发生变化的文件
-
-$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
-
-$ git reflog    //显示当前分支的最近几次提交</code></pre>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>HTTP入门笔记</title>
     <url>/2019/12/05/HTTP%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>HTTP 协议是互联网的基础协议，也是现在网页开发的必备知识，2015 年出的最新版本 HTTP/2 更是成为互联网技术热点。</p>
@@ -2016,62 +2016,6 @@ $ hexo g</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>JavaScript中任何值的prototype到最后都是Object</title>
-    <url>/2020/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/</url>
-    <content><![CDATA[<p>这篇笔记延伸上一篇所提到的<a href="https://luozongmin.com/2019/04/25/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型（prototype）</a>的概念，说明了在 JavaScript 当中，所有的类型（字符串、数值、Boolean 值、函数、数组、对象）的 prototype 的最后都是 object！</p>
-<p>什么意思呢？</p>
-<p>假设我们现在分别建立对象、函数和数组，直接上代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// Object</span>
-<span class="hljs-keyword">var</span> a = &#123;
-  name: <span class="hljs-string">&quot;miqilin&quot;</span>,
-&#125;;
-
-<span class="hljs-comment">// function</span>
-<span class="hljs-keyword">var</span> b = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello&quot;</span>);
-&#125;;
-
-<span class="hljs-comment">// Array</span>
-<span class="hljs-keyword">var</span> c = [<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
-
-<span class="hljs-comment">// string</span>
-<span class="hljs-keyword">var</span> d = <span class="hljs-string">&quot;This is string&quot;</span>;
-
-<span class="hljs-comment">// number</span>
-<span class="hljs-keyword">var</span> e = <span class="hljs-number">2</span>;
-
-<span class="hljs-comment">// boolean</span>
-<span class="hljs-keyword">var</span> f = <span class="hljs-literal">true</span>;</code></pre>
-
-<p>接着，我们会在 Google Chrome 的 console 视窗来分别检验这些类型的<code>prototype</code>。</p>
-<h4 id="对象（object）"><a href="#对象（object）" class="headerlink" title="对象（object）"></a>对象（object）</h4><p>我们可以看到 a 这个对象本身的<code>prototype</code>也是一个对象，在下去就没了（<code>null</code>），也就是<strong>Object → Object → null 的过程</strong>。</p>
-<p><img src="/images/object/3.jpg"></p>
-<p>而<code>a.__proto__</code>就是对象的原型，打开来看会发现里面有许多内置的方法。</p>
-<p><img src="/images/object/4.jpg"></p>
-<p>如果我在 console 中输入<code>a.</code>，则会出现对于对象而言内置的方法：</p>
-<p><img src="/images/object/5.jpg"></p>
-<p>由于<code>a.__proto__</code>仍然是一个对象，所以如果我输入<code>a.__proto__.</code>的话，会得到除了<code>name</code>一样对于对象可以使用的方法：</p>
-<p><img src="/images/object/6.jpg"></p>
-<h4 id="函数（function）"><a href="#函数（function）" class="headerlink" title="函数（function）"></a>函数（function）</h4><p>接着我们来看看函数，根据上面同样的方法得出是<strong>function → function → object → null</strong>的过程，所以最后还是结束在<code>object</code>。</p>
-<p><img src="/images/object/7.jpg"></p>
-<p>如果我们想要看函数有哪些内置的方法可以用，我们可以输入<code>b.</code>或<code>b.__proto__.</code>就可以看到了，这里我们就可以看到我们常用的<code>apply</code> , <code>bind</code> ,和<code>call</code>。</p>
-<p><img src="/images/object/8.jpg"></p>
-<h4 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h4><p>对于数组的话则是<strong>array → array → object → null</strong>的过程。</p>
-<p><img src="/images/object/9.jpg"></p>
-<p>如果我们要看数组有哪些方法可以用，一样可以透过<code>c.</code>或<code>c.__proto__.</code>来检视：</p>
-<p><img src="/images/object/10.jpg"></p>
-<p>同样的方法也可以用来检视字符串、数字和 Boolean 值，有兴趣的通过 chrome 来试试看吧！</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>原型</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JS中一切都是对象吗？看这一篇就知道了</title>
     <url>/2020/02/18/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/</url>
     <content><![CDATA[<p>当你刚开始学习 JavaScript 时，你是否有遇到许多书籍，教程以及那些说“JavaScript 中的所有内容都是对象”的人？这算是一个 JavaScript 中老生常谈的话题了，虽然它并不是 100％正确（JavaScript 中不是所有都是对象），但其实这种说法又有那么一点说得过去，这可能有点自相矛盾。</p>
@@ -2182,6 +2126,62 @@ foo.bar = <span class="hljs-string">&quot;lzm&quot;</span>; <span class="hljs-co
       <tags>
         <tag>JavaScript</tag>
         <tag>对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript中任何值的prototype到最后都是Object</title>
+    <url>/2020/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/</url>
+    <content><![CDATA[<p>这篇笔记延伸上一篇所提到的<a href="https://luozongmin.com/2019/04/25/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/">原型（prototype）</a>的概念，说明了在 JavaScript 当中，所有的类型（字符串、数值、Boolean 值、函数、数组、对象）的 prototype 的最后都是 object！</p>
+<p>什么意思呢？</p>
+<p>假设我们现在分别建立对象、函数和数组，直接上代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// Object</span>
+<span class="hljs-keyword">var</span> a = &#123;
+  name: <span class="hljs-string">&quot;miqilin&quot;</span>,
+&#125;;
+
+<span class="hljs-comment">// function</span>
+<span class="hljs-keyword">var</span> b = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello&quot;</span>);
+&#125;;
+
+<span class="hljs-comment">// Array</span>
+<span class="hljs-keyword">var</span> c = [<span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;y&quot;</span>];
+
+<span class="hljs-comment">// string</span>
+<span class="hljs-keyword">var</span> d = <span class="hljs-string">&quot;This is string&quot;</span>;
+
+<span class="hljs-comment">// number</span>
+<span class="hljs-keyword">var</span> e = <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">// boolean</span>
+<span class="hljs-keyword">var</span> f = <span class="hljs-literal">true</span>;</code></pre>
+
+<p>接着，我们会在 Google Chrome 的 console 视窗来分别检验这些类型的<code>prototype</code>。</p>
+<h4 id="对象（object）"><a href="#对象（object）" class="headerlink" title="对象（object）"></a>对象（object）</h4><p>我们可以看到 a 这个对象本身的<code>prototype</code>也是一个对象，在下去就没了（<code>null</code>），也就是<strong>Object → Object → null 的过程</strong>。</p>
+<p><img src="/images/object/3.jpg"></p>
+<p>而<code>a.__proto__</code>就是对象的原型，打开来看会发现里面有许多内置的方法。</p>
+<p><img src="/images/object/4.jpg"></p>
+<p>如果我在 console 中输入<code>a.</code>，则会出现对于对象而言内置的方法：</p>
+<p><img src="/images/object/5.jpg"></p>
+<p>由于<code>a.__proto__</code>仍然是一个对象，所以如果我输入<code>a.__proto__.</code>的话，会得到除了<code>name</code>一样对于对象可以使用的方法：</p>
+<p><img src="/images/object/6.jpg"></p>
+<h4 id="函数（function）"><a href="#函数（function）" class="headerlink" title="函数（function）"></a>函数（function）</h4><p>接着我们来看看函数，根据上面同样的方法得出是<strong>function → function → object → null</strong>的过程，所以最后还是结束在<code>object</code>。</p>
+<p><img src="/images/object/7.jpg"></p>
+<p>如果我们想要看函数有哪些内置的方法可以用，我们可以输入<code>b.</code>或<code>b.__proto__.</code>就可以看到了，这里我们就可以看到我们常用的<code>apply</code> , <code>bind</code> ,和<code>call</code>。</p>
+<p><img src="/images/object/8.jpg"></p>
+<h4 id="数组（Array）"><a href="#数组（Array）" class="headerlink" title="数组（Array）"></a>数组（Array）</h4><p>对于数组的话则是<strong>array → array → object → null</strong>的过程。</p>
+<p><img src="/images/object/9.jpg"></p>
+<p>如果我们要看数组有哪些方法可以用，一样可以透过<code>c.</code>或<code>c.__proto__.</code>来检视：</p>
+<p><img src="/images/object/10.jpg"></p>
+<p>同样的方法也可以用来检视字符串、数字和 Boolean 值，有兴趣的通过 chrome 来试试看吧！</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>原型</tag>
       </tags>
   </entry>
   <entry>
@@ -2971,367 +2971,6 @@ myList.appendChild(newList);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>JavaScript系列之作用域和作用域链</title>
-    <url>/2020/05/18/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/</url>
-    <content><![CDATA[<p>在上一篇<a href="https://zhuanlan.zhihu.com/p/69142071">《JavaScript 系列之变量对象》</a>中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。</p>
-<p>此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。</p>
-<p>先来回顾一下关于执行上下文的三个阶段生命周期：</p>
-<p><img src="/images/scopechain/1.jpg"></p>
-<p>本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——<strong>作用域链</strong>。</p>
-<h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？</p>
-<p>作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// inner variable</span>
-&#125;
-
-fn();
-<span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre>
-
-<p>从上面的代码中我们可以很直观地体会作用域的概念，变量<code>inVariable</code>在全局作用域没有声明，所以在全局作用域下直接取值会报错。所以我们可以这样理解：<strong>作用域就像一个地头蛇，我的地盘我做主，让属于自己域内的变量不会轻易外泄出去</strong>。也就是说<strong>作用域最大的用处就是隔离变量，不同作用域下同名变量不会有冲突</strong>。这几句话总比前面那句好理解多了吧。</p>
-<p>关于 JavaScript 中的作用域类型，<strong>ES6 之前 JavaScript 并没有块级作用域，只有全局作用域和函数作用域</strong>。ES6 的到来，为我们提供了‘块级作用域’,可通过新增命令 let 和 const 来体现：</p>
-<ul>
-<li>全局作用域  —  变量可以随处访问</li>
-<li>函数作用域—  变量可以在定义它们的函数的边界内访问</li>
-<li>块级作用域—变量可以在定义它们的块中访问，块由 { 和 } 分隔</li>
-</ul>
-<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
-&#125;
-
-fn();
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span></code></pre>
-
-<p>从上面例子可以看出全局作用域和函数作用域的作用范围，即使全局变量在函数内部分配了不同的值，它也只保留在同一函数的边界内，互相并不影响，我们也不会因使用相同的变量名而出错。再来看个例子加深理解：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
-<span class="hljs-keyword">const</span> anotherGlobal = <span class="hljs-string">&quot;also global scoped&quot;</span>;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
-  <span class="hljs-keyword">const</span> scoped = <span class="hljs-string">&quot;also function scoped&quot;</span>;
-
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inner</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(scoped); <span class="hljs-comment">// also function scoped</span>
-    <span class="hljs-built_in">console</span>.log(anotherGlobal); <span class="hljs-comment">// also global scoped</span>
-  &#125;
-
-  inner();
-&#125;
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span>
-<span class="hljs-built_in">console</span>.log(anotherGlobal); <span class="hljs-comment">// also global scoped</span>
-
-fn();
-inner(); <span class="hljs-comment">// Uncaught ReferenceError: inner is not defined</span></code></pre>
-
-<p>在这里我们可以看到 <code>inner()</code> 函数可以访问在其父函数中声明的变量—<code>fn()</code>。每当我们需要函数内部的变量时，引擎将首先在当前函数作用域内查找它。如果它没有当前函数作用域内找到它，它将继续上升，向上一级查找，直到它找到全局作用域内的变量，如果找不到变量，我们将得到一个 ReferenceError。格外注意<strong>函数内层作用域可以访问外层作用域的变量，反之则不行</strong>。</p>
-<p>除了上面所讲的最外层函数外面定义的变量拥有全局作用域，全局作用域还有一种特殊的出现场合：就是<strong>所有末声明直接赋值的变量将自动声明为拥有全局作用域的变量</strong>：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
-  variable = <span class="hljs-string">&quot;undeclared variable&quot;</span>;
-  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
-&#125;
-
-fn();
-<span class="hljs-built_in">console</span>.log(variable); <span class="hljs-comment">// undeclared variable</span>
-<span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre>
-
-<p>全局作用域有个弊端：如果我们写了很多行 JavaScript 代码，变量定义都没有用函数包括，那么它们就全部都在全局作用域中，这样就会污染全局命名空间，容易引起命名冲突。同时意外的全局变量还会引起内存泄漏，所以在编程时，尽量避免全局变量的使用，以便后期更快地调试。</p>
-<p>还有值得注意的是：<strong>块语句（大括号“｛｝”中间的语句），如 <code>if</code> 和 <code>switch</code> 条件语句或 <code>for</code> 和 <code>while</code> 循环语句，不像函数，它们不会创建一个新的作用域</strong>。在块语句中定义的变量将保留在它们已经存在的作用域中。比如：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;
-  <span class="hljs-comment">// &#x27;if&#x27; 条件语句块不会创建一个新的作用域</span>
-  <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>; <span class="hljs-comment">// name 依然在全局作用域中</span>
-&#125;
-
-<span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// miqilin</span></code></pre>
-
-<p>JS 的初学者经常需要花点时间才能习惯变量提升，而如果不理解这种特有行为，就可能导致 bug 出现 。正因为如此， ES6 引入了块级作用域，让变量的生命周期更加可控。</p>
-<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>在 ES6 中，我们得到了两个新的变量声明关键字 - <code>let</code>和<code>const</code>。它们和<code>var</code>之间的主要区别在于，使用 ES6 关键字声明的变量是块作用域，这意味着它们仅在它们定义的代码块中可用。块级作用域在如下情况被创建：</p>
-<ol>
-<li>在一个函数内部</li>
-<li>在一个代码块（由一对花括号包裹）内部</li>
-</ol>
-<p><code>let</code> 声明的语法与 <code>var</code> 的语法一致。你基本上可以用 <code>let</code> 来代替 <code>var</code> 进行变量声明，但会将变量的作用域限制在当前代码块中。块级作用域有以下几个特点：</p>
-<ul>
-<li><strong>声明变量不会提升到代码块顶部</strong></li>
-</ul>
-<p><code>let</code>/<code>const</code>创建的变量不会像使用<code>var</code>声明的变量那样被提升到顶部，因此你需要手动将 <code>let</code>/<code>const</code> 声明放置到顶部，以便让变量在整个代码块内部可用。比如：</p>
-<pre><code class="hljs javascript">cosole.log(name); <span class="hljs-comment">// Uncaught ReferenceError: cosole is not defined</span>
-<span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;</code></pre>
-
-<p>所以确保代码没有引用错误的一种方法是确保只使用<code>let</code>和<code>const</code>进行变量声明。</p>
-<ul>
-<li><strong>禁止重复声明</strong></li>
-</ul>
-<p>如果一个标识符已经在代码块内部被定义，那么在此代码块内使用同一个标识符再进行 <code>let</code> 声明就会抛出错误。比如：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
-<span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>; <span class="hljs-comment">// Uncaught SyntaxError: Identifier &#x27;count&#x27; has already been declared</span></code></pre>
-
-<p>上面例子中<code>count</code> 变量被前后声明了两次：第一次使用 <code>var</code> ，另一次使用 <code>let</code> 。因为 <code>let</code> 不能在同一作用域内重复声明一个已有标识符，此处的 <code>let</code> 声明就会抛出错误。但如果在嵌套的作用域内使用 <code>let</code> 声明一个同名的新变量，则不会抛出错误：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
-<span class="hljs-comment">// 不会抛出错误</span>
-<span class="hljs-keyword">if</span> (condition) &#123;
-  <span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>;
-  <span class="hljs-comment">// 其他代码</span>
-&#125;</code></pre>
-
-<ul>
-<li><strong>循环中的绑定块作用域的妙用</strong></li>
-</ul>
-<p>开发者可能最希望实现<code>for</code>循环的块级作用域了，因为可以把声明的计数器变量限制在循环内，比如：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
-  <span class="hljs-comment">// ...</span>
-&#125;
-<span class="hljs-built_in">console</span>.log(i);
-<span class="hljs-comment">// ReferenceError: i is not defined</span></code></pre>
-
-<p>上面代码中，因为用<code>let</code>声明计数器<code>i</code>，只在<code>for</code>循环体内有效，所以在循环体外引用就会报错。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
-  a[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;;
-&#125;
-a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 10</span></code></pre>
-
-<p>上面代码中，变量<code>i</code>是<code>var</code>命令声明的，在全局范围内都有效，所以全局只有一个变量<code>i</code>。每一次循环，变量<code>i</code>的值都会发生改变，而循环内被赋给数组<code>a</code>的函数内部的<code>console.log(i)</code>，里面的<code>i</code>指向的就是全局的<code>i</code>。也就是说，所有数组<code>a</code>的成员里面的<code>i</code>，指向的都是同一个<code>i</code>，导致运行时输出的是最后一轮的<code>i</code>的值，也就是 10。</p>
-<p>如果换使用 let，声明的变量仅在块级作用域内有效，最后输出的是 6。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
-  a[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;;
-&#125;
-a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 6</span></code></pre>
-
-<p>上面代码中，变量<code>i</code>是<code>let</code>声明的，当前的<code>i</code>只在本轮循环有效，所以每一次循环的<code>i</code>其实都是一个新的变量，所以最后输出的是 6。你可能会问，如果每一轮循环的变量 i 都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量 i 时，就在上一轮循环的基础上进行计算。</p>
-<p>另外，<code>for</code>循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-keyword">let</span> i = <span class="hljs-string">&quot;abc&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(i);
-&#125;
-<span class="hljs-comment">// abc</span>
-<span class="hljs-comment">// abc</span>
-<span class="hljs-comment">// abc</span>
-<span class="hljs-comment">// abc</span>
-<span class="hljs-comment">// abc</span></code></pre>
-
-<p>上面代码正确运行，输出了 5 次 abc。这表明函数内部的变量 i 与循环变量 i 不在同一个作用域，有各自单独的作用域。</p>
-<h3 id="作用域链-Scope-Chain"><a href="#作用域链-Scope-Chain" class="headerlink" title="作用域链(Scope Chain)"></a>作用域链(Scope Chain)</h3><p>上面用一大篇幅来讲解作用域，其实在里面就有涉及到作用域链的知识了。简单的来说，当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。看下面一个例子：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(myVar);
-  &#125;
-
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-a(); <span class="hljs-comment">// 2</span>
-b(); <span class="hljs-comment">// Uncaught ReferenceError: b is not defined</span></code></pre>
-
-<p>最后加以执行<code>a()</code>和<code>b()</code>，这时候我们会发现两件事：</p>
-<p>1.执行<code>a()</code>会得到 2 的结果：之所以会有这样的结果，是因为当我们执行<code>function a</code>里面的<code>function b</code>时，因为在<code>function b</code>里面它找不到<code>myVar</code>这个变量，因此它开始往它的外层去搜寻，而这时候它的父级作用域是<code>function a</code>，在<code>function a</code>里面它便找到了<code>myVar = 2</code>，因此它就不再往外部环境 (<code>myVar = 1</code>)去找了，直接返回了 2 这样的结果。</p>
-<p>2.<code>b()</code>会得到<code>b is not defined</code>的结果：之所以<code>b</code>会是<code>not defined</code>（记得是<code>not defined</code>不是<code>undefined</code>哦！)，是因为这时候在最外层的全局上下文（<code>global execution context</code>）中，找不到<code>function b</code>。</p>
-<p>而从<code>b() --&gt; a() --&gt; global execution context</code>这样的链，就称为<strong>作用域链（Scope Chain）</strong>：</p>
-<p><img src="/images/scopechain/2.jpg"></p>
-<p>如果我们把<code>function a</code>里面对于<code>myVar</code>的声明拿掉的话，它才会继续往外层搜寻<code>myVar</code>，直到找到全局作用域中的声明<code>myVar = 1</code>，这时候才会返回 1 的结果。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(myVar);
-  &#125;
-
-  <span class="hljs-comment">//var myVar = 2;</span>
-  b();
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-a(); <span class="hljs-comment">// 1</span></code></pre>
-
-<p>如果我们更进一步的把全局作用域中，对于<code>myVar</code>的声明也拿掉，那么现在在全局作用域中也找不到<code>myVar</code>这个变量了，也就是说，在这整个作用域链中都找不到<code>myVar</code>，因此可想而知，最后的结果是<code>not defined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(myVar);
-  &#125;
-
-  <span class="hljs-comment">//var myVar = 2;</span>
-  b();
-&#125;
-
-<span class="hljs-comment">//var myVar = 1;</span>
-a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined</span></code></pre>
-
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Scope</tag>
-        <tag>Scope Chain</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之内存泄漏</title>
-    <url>/2020/01/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</url>
-    <content><![CDATA[<p>在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。</p>
-<p>而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如 C 语言有着<code>malloc()</code> 和 <code>free()</code> 这种低级内存管理语言也有可能出现泄露内存的情况。</p>
-<p>这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。</p>
-<h4 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h4><p>现在各大浏览器通常采用的垃圾回收有两种方法：<strong>标记清除（mark and sweep）</strong>、**引用计数(reference counting)**。</p>
-<p><strong>1、标记清除</strong></p>
-<p>这是 javascript 中最常用的垃圾回收方式。</p>
-<p>工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。</p>
-<p>工作流程：</p>
-<ol>
-<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。</li>
-<li>去掉环境中的变量以及被环境中的变量引用的变量的标记。</li>
-<li>之后再被加上标记的变量将被视为准备删除的变量。</li>
-<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间。</li>
-</ol>
-<p><strong>2、引用计数</strong></p>
-<p>工作原理：跟踪记录每个值被引用的次数。</p>
-<p>工作流程：</p>
-<ol>
-<li>将一个引用类型的值赋值给这个声明了的变量，这个引用类型值的引用次数就是 1。</li>
-<li>同一个值又被赋值给另一个变量，这个引用类型值的引用次数加 1。</li>
-<li>当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减 1</li>
-<li>当引用次数变成 0 时，就表示这个值不再用到了。</li>
-<li>当垃圾收集器下一次运行时，它就会释放引用次数是 0 的值所占的内存。</li>
-</ol>
-<p>但如果一个值不再需要了，引用数却不为 0，垃圾回收机制无法释放这块内存，会导致内存泄漏。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);</code></pre>
-
-<p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为 1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。</p>
-<p>如果增加一行代码，解除 arr 对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);
-arr = <span class="hljs-literal">null</span>;</code></pre>
-
-<p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了 0，内存就可以释放出来了。</p>
-<p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。</p>
-<p>接下来，我将介绍四种常见的 JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a></p>
-<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong></p>
-<p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
-  bar = <span class="hljs-string">&quot;this is a hidden global variable&quot;</span>;
-&#125;</code></pre>
-
-<p>函数<code>foo</code>内部使用<code>var</code>声明，实际上 JS 会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
-  <span class="hljs-built_in">window</span>.bar = <span class="hljs-string">&quot;this is an explicit global variable&quot;</span>;
-&#125;</code></pre>
-
-<p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。</p>
-<p>另一种可以创建偶然全局变量的情况是<code>this</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.variable = <span class="hljs-string">&quot;potential accidental global&quot;</span>;
-&#125;
-<span class="hljs-comment">// Foo called on its own, this points to the global object (window)</span>
-<span class="hljs-comment">// rather than being undefined.</span>
-foo();</code></pre>
-
-<p><strong>解决方法：</strong></p>
-<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。</p>
-<p><strong>2.被遗忘的计时器或回调函数</strong></p>
-<p>在 JavaScript 中使用<code>setInterval</code>非常常见。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> someResource = getData();
-<span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
-     <span class="hljs-keyword">var</span> node = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;Node&#x27;</span>);
-     <span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-params">node</span>)</span> &#123;
-         <span class="hljs-comment">// Do stuff with node and someResource.</span>
-         node.innerHTML = <span class="hljs-built_in">JSON</span>.stringify(someResource));
-     &#125; &#125;, <span class="hljs-number">1000</span>);</code></pre>
-
-<p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onClick</span>(<span class="hljs-params">event</span>) </span>&#123;
-  element.innerHtml = <span class="hljs-string">&quot;text&quot;</span>;
-&#125;
-
-element.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick); <span class="hljs-comment">// Do stuff</span>
-element.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick);
-element.parentNode.removeChild(element);
-
-<span class="hljs-comment">// Now when element goes out of scope,</span>
-<span class="hljs-comment">// both element and onClick will be collected even in old browsers that don&#x27;t</span>
-<span class="hljs-comment">// handle cycles well.</span></code></pre>
-
-<p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中 IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。</p>
-<p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
-<p>诸如 jQuery 之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定 API 时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版 Internet Explorer）下运行也是如此。</p>
-<p><strong>3.闭包</strong></p>
-<p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> theThing = <span class="hljs-literal">null</span>;
-<span class="hljs-keyword">var</span> replaceThing = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> originalThing = theThing;
-  <span class="hljs-keyword">var</span> unused = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">if</span> (originalThing) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hi&quot;</span>);
-  &#125;;
-  theThing = &#123;
-    longStr: newArray(<span class="hljs-number">1000000</span>).join(<span class="hljs-string">&quot;*&quot;</span>),
-    someMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(someMessage);
-    &#125;,
-  &#125;;
-&#125;;
-<span class="hljs-built_in">setInterval</span>(replaceThing, <span class="hljs-number">1000</span>);</code></pre>
-
-<p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
-<p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。</p>
-<p>解决方法：</p>
-<p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
-<p><strong>4.脱离 DOM 的引用</strong></p>
-<p>如果把 DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> elements = &#123;
-  button: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>),
-  image: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;image&quot;</span>),
-  text: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;text&quot;</span>),
-&#125;;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params"></span>) </span>&#123;
-  image.src = <span class="hljs-string">&quot;http://some.url/image&quot;</span>;
-  button.click();
-  <span class="hljs-built_in">console</span>.log(text.innerHTML);
-  <span class="hljs-comment">// Much more logic</span>
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeButton</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-comment">// The button is a direct child of body.</span>
-  <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>));
-
-  <span class="hljs-comment">// At this point, we still have a reference to #button in the global</span>
-  <span class="hljs-comment">// elements dictionary. In other words, the button element is still in</span>
-  <span class="hljs-comment">// memory and cannot be collected by the GC.</span>
-&#125;</code></pre>
-
-<p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。</p>
-<h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js 垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。</p>
-<p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。</p>
-<h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
-<li><a href="http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf">http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf</a></li>
-<li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
-<li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
-</ul>
-<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>内存</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript系列之this是什么</title>
     <url>/2020/05/24/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/</url>
     <content><![CDATA[<p>上一篇<a href="https://zhuanlan.zhihu.com/p/69910449">《JavaScript 系列之作用域和作用域链》</a>中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。</p>
@@ -3701,6 +3340,367 @@ a.apply(obj);
       <tags>
         <tag>JavaScript</tag>
         <tag>this</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之作用域和作用域链</title>
+    <url>/2020/05/18/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/</url>
+    <content><![CDATA[<p>在上一篇<a href="https://zhuanlan.zhihu.com/p/69142071">《JavaScript 系列之变量对象》</a>中，我们已经知道一个执行上下文的数据（函数的形参、函数及变量声明）作为属性储存在变量对象中。</p>
+<p>此外，我们也知道每次进入上下文时都会创建变量对象并填充初始值，并且值会在代码执行阶段进行更新，现在就对执行上下文做更深一步的了解。</p>
+<p>先来回顾一下关于执行上下文的三个阶段生命周期：</p>
+<p><img src="/images/scopechain/1.jpg"></p>
+<p>本章将专门介绍与执行上下文创建阶段直接相关的另一个细节——<strong>作用域链</strong>。</p>
+<h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>在介绍作用域链前，有必要先来了解一下被称为作用域(Scope)的特性，那什么是作用域呢？</p>
+<p>作用域就是在运行时代码中不同部分中函数和变量的可访问性。可能这句话并不太好理解，我们先来看段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// inner variable</span>
+&#125;
+
+fn();
+<span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre>
+
+<p>从上面的代码中我们可以很直观地体会作用域的概念，变量<code>inVariable</code>在全局作用域没有声明，所以在全局作用域下直接取值会报错。所以我们可以这样理解：<strong>作用域就像一个地头蛇，我的地盘我做主，让属于自己域内的变量不会轻易外泄出去</strong>。也就是说<strong>作用域最大的用处就是隔离变量，不同作用域下同名变量不会有冲突</strong>。这几句话总比前面那句好理解多了吧。</p>
+<p>关于 JavaScript 中的作用域类型，<strong>ES6 之前 JavaScript 并没有块级作用域，只有全局作用域和函数作用域</strong>。ES6 的到来，为我们提供了‘块级作用域’,可通过新增命令 let 和 const 来体现：</p>
+<ul>
+<li>全局作用域  —  变量可以随处访问</li>
+<li>函数作用域—  变量可以在定义它们的函数的边界内访问</li>
+<li>块级作用域—变量可以在定义它们的块中访问，块由 { 和 } 分隔</li>
+</ul>
+<h3 id="全局作用域和函数作用域"><a href="#全局作用域和函数作用域" class="headerlink" title="全局作用域和函数作用域"></a>全局作用域和函数作用域</h3><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
+&#125;
+
+fn();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span></code></pre>
+
+<p>从上面例子可以看出全局作用域和函数作用域的作用范围，即使全局变量在函数内部分配了不同的值，它也只保留在同一函数的边界内，互相并不影响，我们也不会因使用相同的变量名而出错。再来看个例子加深理解：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;global scoped&quot;</span>;
+<span class="hljs-keyword">const</span> anotherGlobal = <span class="hljs-string">&quot;also global scoped&quot;</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">const</span> <span class="hljs-built_in">global</span> = <span class="hljs-string">&quot;function scoped&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// function scoped</span>
+  <span class="hljs-keyword">const</span> scoped = <span class="hljs-string">&quot;also function scoped&quot;</span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">inner</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(scoped); <span class="hljs-comment">// also function scoped</span>
+    <span class="hljs-built_in">console</span>.log(anotherGlobal); <span class="hljs-comment">// also global scoped</span>
+  &#125;
+
+  inner();
+&#125;
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">global</span>); <span class="hljs-comment">// global scoped</span>
+<span class="hljs-built_in">console</span>.log(anotherGlobal); <span class="hljs-comment">// also global scoped</span>
+
+fn();
+inner(); <span class="hljs-comment">// Uncaught ReferenceError: inner is not defined</span></code></pre>
+
+<p>在这里我们可以看到 <code>inner()</code> 函数可以访问在其父函数中声明的变量—<code>fn()</code>。每当我们需要函数内部的变量时，引擎将首先在当前函数作用域内查找它。如果它没有当前函数作用域内找到它，它将继续上升，向上一级查找，直到它找到全局作用域内的变量，如果找不到变量，我们将得到一个 ReferenceError。格外注意<strong>函数内层作用域可以访问外层作用域的变量，反之则不行</strong>。</p>
+<p>除了上面所讲的最外层函数外面定义的变量拥有全局作用域，全局作用域还有一种特殊的出现场合：就是<strong>所有末声明直接赋值的变量将自动声明为拥有全局作用域的变量</strong>：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>) </span>&#123;
+  variable = <span class="hljs-string">&quot;undeclared variable&quot;</span>;
+  <span class="hljs-keyword">var</span> inVariable = <span class="hljs-string">&quot;inner variable&quot;</span>;
+&#125;
+
+fn();
+<span class="hljs-built_in">console</span>.log(variable); <span class="hljs-comment">// undeclared variable</span>
+<span class="hljs-built_in">console</span>.log(inVariable); <span class="hljs-comment">// Uncaught ReferenceError: inVariable is not defined</span></code></pre>
+
+<p>全局作用域有个弊端：如果我们写了很多行 JavaScript 代码，变量定义都没有用函数包括，那么它们就全部都在全局作用域中，这样就会污染全局命名空间，容易引起命名冲突。同时意外的全局变量还会引起内存泄漏，所以在编程时，尽量避免全局变量的使用，以便后期更快地调试。</p>
+<p>还有值得注意的是：<strong>块语句（大括号“｛｝”中间的语句），如 <code>if</code> 和 <code>switch</code> 条件语句或 <code>for</code> 和 <code>while</code> 循环语句，不像函数，它们不会创建一个新的作用域</strong>。在块语句中定义的变量将保留在它们已经存在的作用域中。比如：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) &#123;
+  <span class="hljs-comment">// &#x27;if&#x27; 条件语句块不会创建一个新的作用域</span>
+  <span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>; <span class="hljs-comment">// name 依然在全局作用域中</span>
+&#125;
+
+<span class="hljs-built_in">console</span>.log(name); <span class="hljs-comment">// miqilin</span></code></pre>
+
+<p>JS 的初学者经常需要花点时间才能习惯变量提升，而如果不理解这种特有行为，就可能导致 bug 出现 。正因为如此， ES6 引入了块级作用域，让变量的生命周期更加可控。</p>
+<h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><p>在 ES6 中，我们得到了两个新的变量声明关键字 - <code>let</code>和<code>const</code>。它们和<code>var</code>之间的主要区别在于，使用 ES6 关键字声明的变量是块作用域，这意味着它们仅在它们定义的代码块中可用。块级作用域在如下情况被创建：</p>
+<ol>
+<li>在一个函数内部</li>
+<li>在一个代码块（由一对花括号包裹）内部</li>
+</ol>
+<p><code>let</code> 声明的语法与 <code>var</code> 的语法一致。你基本上可以用 <code>let</code> 来代替 <code>var</code> 进行变量声明，但会将变量的作用域限制在当前代码块中。块级作用域有以下几个特点：</p>
+<ul>
+<li><strong>声明变量不会提升到代码块顶部</strong></li>
+</ul>
+<p><code>let</code>/<code>const</code>创建的变量不会像使用<code>var</code>声明的变量那样被提升到顶部，因此你需要手动将 <code>let</code>/<code>const</code> 声明放置到顶部，以便让变量在整个代码块内部可用。比如：</p>
+<pre><code class="hljs javascript">cosole.log(name); <span class="hljs-comment">// Uncaught ReferenceError: cosole is not defined</span>
+<span class="hljs-keyword">const</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;</code></pre>
+
+<p>所以确保代码没有引用错误的一种方法是确保只使用<code>let</code>和<code>const</code>进行变量声明。</p>
+<ul>
+<li><strong>禁止重复声明</strong></li>
+</ul>
+<p>如果一个标识符已经在代码块内部被定义，那么在此代码块内使用同一个标识符再进行 <code>let</code> 声明就会抛出错误。比如：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>; <span class="hljs-comment">// Uncaught SyntaxError: Identifier &#x27;count&#x27; has already been declared</span></code></pre>
+
+<p>上面例子中<code>count</code> 变量被前后声明了两次：第一次使用 <code>var</code> ，另一次使用 <code>let</code> 。因为 <code>let</code> 不能在同一作用域内重复声明一个已有标识符，此处的 <code>let</code> 声明就会抛出错误。但如果在嵌套的作用域内使用 <code>let</code> 声明一个同名的新变量，则不会抛出错误：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> count = <span class="hljs-number">10</span>;
+<span class="hljs-comment">// 不会抛出错误</span>
+<span class="hljs-keyword">if</span> (condition) &#123;
+  <span class="hljs-keyword">let</span> count = <span class="hljs-number">20</span>;
+  <span class="hljs-comment">// 其他代码</span>
+&#125;</code></pre>
+
+<ul>
+<li><strong>循环中的绑定块作用域的妙用</strong></li>
+</ul>
+<p>开发者可能最希望实现<code>for</code>循环的块级作用域了，因为可以把声明的计数器变量限制在循环内，比如：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+  <span class="hljs-comment">// ...</span>
+&#125;
+<span class="hljs-built_in">console</span>.log(i);
+<span class="hljs-comment">// ReferenceError: i is not defined</span></code></pre>
+
+<p>上面代码中，因为用<code>let</code>声明计数器<code>i</code>，只在<code>for</code>循环体内有效，所以在循环体外引用就会报错。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+  a[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;;
+&#125;
+a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 10</span></code></pre>
+
+<p>上面代码中，变量<code>i</code>是<code>var</code>命令声明的，在全局范围内都有效，所以全局只有一个变量<code>i</code>。每一次循环，变量<code>i</code>的值都会发生改变，而循环内被赋给数组<code>a</code>的函数内部的<code>console.log(i)</code>，里面的<code>i</code>指向的就是全局的<code>i</code>。也就是说，所有数组<code>a</code>的成员里面的<code>i</code>，指向的都是同一个<code>i</code>，导致运行时输出的是最后一轮的<code>i</code>的值，也就是 10。</p>
+<p>如果换使用 let，声明的变量仅在块级作用域内有效，最后输出的是 6。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = [];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;
+  a[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;;
+&#125;
+a[<span class="hljs-number">6</span>](); <span class="hljs-comment">// 6</span></code></pre>
+
+<p>上面代码中，变量<code>i</code>是<code>let</code>声明的，当前的<code>i</code>只在本轮循环有效，所以每一次循环的<code>i</code>其实都是一个新的变量，所以最后输出的是 6。你可能会问，如果每一轮循环的变量 i 都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 JavaScript 引擎内部会记住上一轮循环的值，初始化本轮的变量 i 时，就在上一轮循环的基础上进行计算。</p>
+<p>另外，<code>for</code>循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-keyword">let</span> i = <span class="hljs-string">&quot;abc&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(i);
+&#125;
+<span class="hljs-comment">// abc</span>
+<span class="hljs-comment">// abc</span>
+<span class="hljs-comment">// abc</span>
+<span class="hljs-comment">// abc</span>
+<span class="hljs-comment">// abc</span></code></pre>
+
+<p>上面代码正确运行，输出了 5 次 abc。这表明函数内部的变量 i 与循环变量 i 不在同一个作用域，有各自单独的作用域。</p>
+<h3 id="作用域链-Scope-Chain"><a href="#作用域链-Scope-Chain" class="headerlink" title="作用域链(Scope Chain)"></a>作用域链(Scope Chain)</h3><p>上面用一大篇幅来讲解作用域，其实在里面就有涉及到作用域链的知识了。简单的来说，当查找变量的时候，会先从当前上下文的变量对象中查找，如果没有找到，就会从父级(词法层面上的父级)执行上下文的变量对象中查找，一直找到全局上下文的变量对象，也就是全局对象。这样由多个执行上下文的变量对象构成的链表就叫做<strong>作用域链</strong>。看下面一个例子：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(myVar);
+  &#125;
+
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
+  b();
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+a(); <span class="hljs-comment">// 2</span>
+b(); <span class="hljs-comment">// Uncaught ReferenceError: b is not defined</span></code></pre>
+
+<p>最后加以执行<code>a()</code>和<code>b()</code>，这时候我们会发现两件事：</p>
+<p>1.执行<code>a()</code>会得到 2 的结果：之所以会有这样的结果，是因为当我们执行<code>function a</code>里面的<code>function b</code>时，因为在<code>function b</code>里面它找不到<code>myVar</code>这个变量，因此它开始往它的外层去搜寻，而这时候它的父级作用域是<code>function a</code>，在<code>function a</code>里面它便找到了<code>myVar = 2</code>，因此它就不再往外部环境 (<code>myVar = 1</code>)去找了，直接返回了 2 这样的结果。</p>
+<p>2.<code>b()</code>会得到<code>b is not defined</code>的结果：之所以<code>b</code>会是<code>not defined</code>（记得是<code>not defined</code>不是<code>undefined</code>哦！)，是因为这时候在最外层的全局上下文（<code>global execution context</code>）中，找不到<code>function b</code>。</p>
+<p>而从<code>b() --&gt; a() --&gt; global execution context</code>这样的链，就称为<strong>作用域链（Scope Chain）</strong>：</p>
+<p><img src="/images/scopechain/2.jpg"></p>
+<p>如果我们把<code>function a</code>里面对于<code>myVar</code>的声明拿掉的话，它才会继续往外层搜寻<code>myVar</code>，直到找到全局作用域中的声明<code>myVar = 1</code>，这时候才会返回 1 的结果。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(myVar);
+  &#125;
+
+  <span class="hljs-comment">//var myVar = 2;</span>
+  b();
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+a(); <span class="hljs-comment">// 1</span></code></pre>
+
+<p>如果我们更进一步的把全局作用域中，对于<code>myVar</code>的声明也拿掉，那么现在在全局作用域中也找不到<code>myVar</code>这个变量了，也就是说，在这整个作用域链中都找不到<code>myVar</code>，因此可想而知，最后的结果是<code>not defined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(myVar);
+  &#125;
+
+  <span class="hljs-comment">//var myVar = 2;</span>
+  b();
+&#125;
+
+<span class="hljs-comment">//var myVar = 1;</span>
+a(); <span class="hljs-comment">// Uncaught ReferenceError: myVar is not defined</span></code></pre>
+
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Scope</tag>
+        <tag>Scope Chain</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之内存泄漏</title>
+    <url>/2020/01/30/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F/</url>
+    <content><![CDATA[<p>在程序运行过程中不再用到的内存，没有及时释放，会出现内存泄漏（memory leak），会造成系统内存的浪费，导致程序运行速度减慢甚至系统崩溃等严重后果。</p>
+<p>而内存泄漏是每个开发人员最终必须面对的问题。 即使使用内存管理语言，比如 C 语言有着<code>malloc()</code> 和 <code>free()</code> 这种低级内存管理语言也有可能出现泄露内存的情况。</p>
+<p>这很麻烦，所以为了减轻编程中的负担，大多数语言提供了自动内存管理，这被称为”垃圾回收机制”（garbage collector）。</p>
+<h4 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h4><p>现在各大浏览器通常采用的垃圾回收有两种方法：<strong>标记清除（mark and sweep）</strong>、**引用计数(reference counting)**。</p>
+<p><strong>1、标记清除</strong></p>
+<p>这是 javascript 中最常用的垃圾回收方式。</p>
+<p>工作原理：当变量进入执行环境时，将这个变量标记为“进入环境”。当变量离开环境时，则将其标记为“离开环境”。标记“离开环境”的就回收内存。</p>
+<p>工作流程：</p>
+<ol>
+<li>垃圾回收器，在运行的时候会给存储在内存中的所有变量都加上标记。</li>
+<li>去掉环境中的变量以及被环境中的变量引用的变量的标记。</li>
+<li>之后再被加上标记的变量将被视为准备删除的变量。</li>
+<li>垃圾回收器完成内存清除工作，销毁那些带标记的值并回收他们所占用的内存空间。</li>
+</ol>
+<p><strong>2、引用计数</strong></p>
+<p>工作原理：跟踪记录每个值被引用的次数。</p>
+<p>工作流程：</p>
+<ol>
+<li>将一个引用类型的值赋值给这个声明了的变量，这个引用类型值的引用次数就是 1。</li>
+<li>同一个值又被赋值给另一个变量，这个引用类型值的引用次数加 1。</li>
+<li>当包含这个引用类型值的变量又被赋值成另一个值了，那么这个引用类型值的引用次数减 1</li>
+<li>当引用次数变成 0 时，就表示这个值不再用到了。</li>
+<li>当垃圾收集器下一次运行时，它就会释放引用次数是 0 的值所占的内存。</li>
+</ol>
+<p>但如果一个值不再需要了，引用数却不为 0，垃圾回收机制无法释放这块内存，会导致内存泄漏。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);</code></pre>
+
+<p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为 1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。</p>
+<p>如果增加一行代码，解除 arr 对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);
+arr = <span class="hljs-literal">null</span>;</code></pre>
+
+<p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了 0，内存就可以释放出来了。</p>
+<p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。</p>
+<p>接下来，我将介绍四种常见的 JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a></p>
+<h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong></p>
+<p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
+  bar = <span class="hljs-string">&quot;this is a hidden global variable&quot;</span>;
+&#125;</code></pre>
+
+<p>函数<code>foo</code>内部使用<code>var</code>声明，实际上 JS 会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
+  <span class="hljs-built_in">window</span>.bar = <span class="hljs-string">&quot;this is an explicit global variable&quot;</span>;
+&#125;</code></pre>
+
+<p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。</p>
+<p>另一种可以创建偶然全局变量的情况是<code>this</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.variable = <span class="hljs-string">&quot;potential accidental global&quot;</span>;
+&#125;
+<span class="hljs-comment">// Foo called on its own, this points to the global object (window)</span>
+<span class="hljs-comment">// rather than being undefined.</span>
+foo();</code></pre>
+
+<p><strong>解决方法：</strong></p>
+<p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。</p>
+<p><strong>2.被遗忘的计时器或回调函数</strong></p>
+<p>在 JavaScript 中使用<code>setInterval</code>非常常见。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> someResource = getData();
+<span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
+     <span class="hljs-keyword">var</span> node = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;Node&#x27;</span>);
+     <span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-params">node</span>)</span> &#123;
+         <span class="hljs-comment">// Do stuff with node and someResource.</span>
+         node.innerHTML = <span class="hljs-built_in">JSON</span>.stringify(someResource));
+     &#125; &#125;, <span class="hljs-number">1000</span>);</code></pre>
+
+<p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>);
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onClick</span>(<span class="hljs-params">event</span>) </span>&#123;
+  element.innerHtml = <span class="hljs-string">&quot;text&quot;</span>;
+&#125;
+
+element.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick); <span class="hljs-comment">// Do stuff</span>
+element.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick);
+element.parentNode.removeChild(element);
+
+<span class="hljs-comment">// Now when element goes out of scope,</span>
+<span class="hljs-comment">// both element and onClick will be collected even in old browsers that don&#x27;t</span>
+<span class="hljs-comment">// handle cycles well.</span></code></pre>
+
+<p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中 IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。</p>
+<p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
+<p>诸如 jQuery 之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定 API 时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版 Internet Explorer）下运行也是如此。</p>
+<p><strong>3.闭包</strong></p>
+<p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> theThing = <span class="hljs-literal">null</span>;
+<span class="hljs-keyword">var</span> replaceThing = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> originalThing = theThing;
+  <span class="hljs-keyword">var</span> unused = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">if</span> (originalThing) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hi&quot;</span>);
+  &#125;;
+  theThing = &#123;
+    longStr: newArray(<span class="hljs-number">1000000</span>).join(<span class="hljs-string">&quot;*&quot;</span>),
+    someMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      <span class="hljs-built_in">console</span>.log(someMessage);
+    &#125;,
+  &#125;;
+&#125;;
+<span class="hljs-built_in">setInterval</span>(replaceThing, <span class="hljs-number">1000</span>);</code></pre>
+
+<p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
+<p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。</p>
+<p>解决方法：</p>
+<p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
+<p><strong>4.脱离 DOM 的引用</strong></p>
+<p>如果把 DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> elements = &#123;
+  button: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>),
+  image: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;image&quot;</span>),
+  text: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;text&quot;</span>),
+&#125;;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params"></span>) </span>&#123;
+  image.src = <span class="hljs-string">&quot;http://some.url/image&quot;</span>;
+  button.click();
+  <span class="hljs-built_in">console</span>.log(text.innerHTML);
+  <span class="hljs-comment">// Much more logic</span>
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeButton</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-comment">// The button is a direct child of body.</span>
+  <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>));
+
+  <span class="hljs-comment">// At this point, we still have a reference to #button in the global</span>
+  <span class="hljs-comment">// elements dictionary. In other words, the button element is still in</span>
+  <span class="hljs-comment">// memory and cannot be collected by the GC.</span>
+&#125;</code></pre>
+
+<p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。</p>
+<h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js 垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。</p>
+<p>我们在使用闭包的时候，就会造成严重的内存泄漏，因为闭包的原因，局部变量会一直保存在内存中，所以在使用闭包的时候，要多加小心。</p>
+<h4 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h4><ul>
+<li><a href="http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf">http://www-bcf.usc.edu/~dkempe/CS104/08-29.pdf</a></li>
+<li><a href="https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156">https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156</a></li>
+<li><a href="http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html">http://www.nodesimplified.com/2017/08/javascript-memory-management-and.html</a></li>
+</ul>
+<p>如果有别的关于内存泄漏好的资源，可以分享给我嘛谢谢了~</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>内存</tag>
       </tags>
   </entry>
   <entry>
@@ -4314,6 +4314,110 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
       </tags>
   </entry>
   <entry>
+    <title>JavaScript系列之数据类型</title>
+    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
+<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
+<li>Undefined <code>undefined</code></li>
+<li>Null <code>null</code></li>
+<li>Boolean <code>true</code></li>
+<li>String <code>&#39;hello&#39;</code></li>
+<li>Number <code>123</code></li>
+<li>Symbol(这里先不做介绍)</li>
+</ul>
+<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
+<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
+<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
+
+<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
+<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
+<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
+<ul>
+<li><code>1024</code></li>
+<li><code>3.14</code></li>
+<li><code>1.2e5</code></li>
+<li><code>0x10</code></li>
+<li><code>0o377</code></li>
+</ul>
+<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
+
+<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
+<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
+
+<span class="hljs-comment">// embed a variable</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
+
+<span class="hljs-comment">// embed an expression</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
+
+<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
+<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
+<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
+<ul>
+<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
+<li>字面量或变量定义 <code>var bool = true;</code></li>
+<li>也出现在比较的结果 ：</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
+
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
+
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
+<ul>
+<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
+</ul>
+<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
+<ul>
+<li>变量声明了，但没赋值 <code>var obj;</code></li>
+<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
+<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
+<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
+<li><code>void(expression)</code></li>
+</ul>
+<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
+&#125;)();</code></pre>
+
+<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据类型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript系列之执行上下文和执行栈</title>
     <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
     <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
@@ -4444,110 +4548,6 @@ a();
         <tag>JavaScript</tag>
         <tag>Execution Context</tag>
         <tag>Execution Context Stack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之数据类型</title>
-    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
-<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
-<li>Undefined <code>undefined</code></li>
-<li>Null <code>null</code></li>
-<li>Boolean <code>true</code></li>
-<li>String <code>&#39;hello&#39;</code></li>
-<li>Number <code>123</code></li>
-<li>Symbol(这里先不做介绍)</li>
-</ul>
-<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
-<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
-<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
-<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
-<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
-<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
-
-<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
-<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
-<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
-<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
-<ul>
-<li><code>1024</code></li>
-<li><code>3.14</code></li>
-<li><code>1.2e5</code></li>
-<li><code>0x10</code></li>
-<li><code>0o377</code></li>
-</ul>
-<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
-<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
-
-<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
-<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
-
-<span class="hljs-comment">// embed a variable</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
-
-<span class="hljs-comment">// embed an expression</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
-
-<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
-<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
-
-<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
-<ul>
-<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
-<li>字面量或变量定义 <code>var bool = true;</code></li>
-<li>也出现在比较的结果 ：</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
-
-<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
-
-<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
-<ul>
-<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
-</ul>
-<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
-<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
-<ul>
-<li>变量声明了，但没赋值 <code>var obj;</code></li>
-<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
-<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
-<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
-<li><code>void(expression)</code></li>
-</ul>
-<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
-&#125;)();</code></pre>
-
-<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -6734,6 +6734,77 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
+    <title>使用Hexo+GitHub搭建个人博客</title>
+    <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
+<p>下面一步一步地说怎么用 hexo+github 搭建一个个人博客。</p>
+<p><strong><em>说明：本文只针对 Windows 平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装 node.js 和 git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad">这篇文章</a>，并同时申请 Github 账号，使用的开发工具为 VScode。</p>
+<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>1、首先新建一个文件夹如 myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中 Git Bash Here 在<strong>Git 命令行中打开</strong>。</p>
+<p>2、执行以下命令安装 Hexo 及生成第一篇博客文章：</p>
+<pre><code class="hljs bash">$ npm install -g hexo-cli   //安装hexo
+$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作
+$ hexo generate            //生成静态页面
+$ hexo server              //启动本地服务器，进行博客文章预览</code></pre>
+
+<p>Hexo 会默认生成第一篇博客《Hello World》，在浏览器下打开 localhost://4000 你将会看到：<br><img src="/images/hexogit/1.png"></p>
+<p>myBlog 源文件夹整体目录预览：<br><img src="/images/hexogit/2.jpg"></p>
+<p>其中_config.yml 和 package.json 为项目的配置文件，themes 存放了我们博客的主题，source-&gt;_post 为我们的博客目录，public 为执行 hexo generate 后生成的静态页面。</p>
+<h4 id="关联-Github"><a href="#关联-Github" class="headerlink" title="关联 Github"></a>关联 Github</h4><p>1、在你的 Github 中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a><br><img src="/images/hexogit/3.jpg"></p>
+<p>2、将 myBlog 目录中的_config.yml 文件在 VScode 中打开，编辑网站配置：</p>
+<ul>
+<li>把第 6 行的 title 改成你想要的名字</li>
+<li>把第 10 行的 author 改成你想取大名</li>
+<li>把最后一行的 type 改成 <code>type: git</code></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+</ul>
+<p><img src="/images/hexogit/5.png"></p>
+<p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
+<pre><code class="hljs bash">$ npm install hexo-deployer-git --save    //安装 git 部署插件
+$ hexo deploy                             //将本地博客代码部署到Github上</code></pre>
+
+<p>4、进入「你的用户名.<a href="http://github.io」对应的/">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
+<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开 Hexo 目录下的 source 文件夹，所有的文章都会以 md 形式保存在_post 文件夹中，只要在_post 文件夹中新建 md 类型的文档，就相当于在本地添加了新文章</p>
+<p>2、利用来 VScode 编辑新文章</p>
+<p>3、<code>hexo generate</code></p>
+<p>4、<code>hexo deploy</code></p>
+<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
+<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
+<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
+<p>4、<code>cd themes</code></p>
+<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
+<p>6、<code>cd ..</code></p>
+<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
+<p>8、<code>hexo generate</code></p>
+<p>9、<code>hexo deploy</code></p>
+<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
+<p>2、_config.yml 中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
+<p>3、想要删除博客的话，直接删除 source-&gt;_posts-&gt;对应的博客文章，然后再次执行 hexo generate、hexo deploy 即可；</p>
+<p>4、在_config.yml 中修改 language 为 zh-CN，即可将博客中英文转换为中文；</p>
+<p>5、常用命令：</p>
+<pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;postName&quot;</span>      //新建文章
+hexo new page <span class="hljs-string">&quot;pageName&quot;</span> //新建页面
+hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。
+hexo generate           //生成静态文件
+hexo deploy             //部署到Giihub
+hexo server             //启动本地服务器
+hexo <span class="hljs-built_in">help</span>               //查询帮助</code></pre>
+
+<p>6、md 文件需要用到<a href="https://www.appinn.com/markdown/">markdown 语法</a>。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【译】分享7个好用的JavaScript技巧</title>
     <url>/2020/02/12/%E5%88%86%E4%BA%AB7%E4%B8%AA%E6%9C%89%E7%94%A8%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>就像所有其他编程语言一样，JavaScript 也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个 JavaScript 技巧吧！</p>
@@ -6825,77 +6896,6 @@ hello(<span class="hljs-string">&quot;David&quot;</span>);</code></pre>
       <tags>
         <tag>JavaScript</tag>
         <tag>编程技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Hexo+GitHub搭建个人博客</title>
-    <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
-<p>下面一步一步地说怎么用 hexo+github 搭建一个个人博客。</p>
-<p><strong><em>说明：本文只针对 Windows 平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装 node.js 和 git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad">这篇文章</a>，并同时申请 Github 账号，使用的开发工具为 VScode。</p>
-<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>1、首先新建一个文件夹如 myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中 Git Bash Here 在<strong>Git 命令行中打开</strong>。</p>
-<p>2、执行以下命令安装 Hexo 及生成第一篇博客文章：</p>
-<pre><code class="hljs bash">$ npm install -g hexo-cli   //安装hexo
-$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作
-$ hexo generate            //生成静态页面
-$ hexo server              //启动本地服务器，进行博客文章预览</code></pre>
-
-<p>Hexo 会默认生成第一篇博客《Hello World》，在浏览器下打开 localhost://4000 你将会看到：<br><img src="/images/hexogit/1.png"></p>
-<p>myBlog 源文件夹整体目录预览：<br><img src="/images/hexogit/2.jpg"></p>
-<p>其中_config.yml 和 package.json 为项目的配置文件，themes 存放了我们博客的主题，source-&gt;_post 为我们的博客目录，public 为执行 hexo generate 后生成的静态页面。</p>
-<h4 id="关联-Github"><a href="#关联-Github" class="headerlink" title="关联 Github"></a>关联 Github</h4><p>1、在你的 Github 中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a><br><img src="/images/hexogit/3.jpg"></p>
-<p>2、将 myBlog 目录中的_config.yml 文件在 VScode 中打开，编辑网站配置：</p>
-<ul>
-<li>把第 6 行的 title 改成你想要的名字</li>
-<li>把第 10 行的 author 改成你想取大名</li>
-<li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#105;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
-</ul>
-<p><img src="/images/hexogit/5.png"></p>
-<p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
-<pre><code class="hljs bash">$ npm install hexo-deployer-git --save    //安装 git 部署插件
-$ hexo deploy                             //将本地博客代码部署到Github上</code></pre>
-
-<p>4、进入「你的用户名.<a href="http://github.io」对应的/">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
-<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开 Hexo 目录下的 source 文件夹，所有的文章都会以 md 形式保存在_post 文件夹中，只要在_post 文件夹中新建 md 类型的文档，就相当于在本地添加了新文章</p>
-<p>2、利用来 VScode 编辑新文章</p>
-<p>3、<code>hexo generate</code></p>
-<p>4、<code>hexo deploy</code></p>
-<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
-<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
-<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
-<p>4、<code>cd themes</code></p>
-<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
-<p>6、<code>cd ..</code></p>
-<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
-<p>8、<code>hexo generate</code></p>
-<p>9、<code>hexo deploy</code></p>
-<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。</p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
-<p>2、_config.yml 中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
-<p>3、想要删除博客的话，直接删除 source-&gt;_posts-&gt;对应的博客文章，然后再次执行 hexo generate、hexo deploy 即可；</p>
-<p>4、在_config.yml 中修改 language 为 zh-CN，即可将博客中英文转换为中文；</p>
-<p>5、常用命令：</p>
-<pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;postName&quot;</span>      //新建文章
-hexo new page <span class="hljs-string">&quot;pageName&quot;</span> //新建页面
-hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。
-hexo generate           //生成静态文件
-hexo deploy             //部署到Giihub
-hexo server             //启动本地服务器
-hexo <span class="hljs-built_in">help</span>               //查询帮助</code></pre>
-
-<p>6、md 文件需要用到<a href="https://www.appinn.com/markdown/">markdown 语法</a>。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -7314,6 +7314,44 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
       </tags>
   </entry>
   <entry>
+    <title>学会如何学习（三）</title>
+    <url>/2020/01/22/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<p>第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~</p>
+<h4 id="拖延症的形成"><a href="#拖延症的形成" class="headerlink" title="拖延症的形成"></a>拖延症的形成</h4><p>我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。</p>
+<p><img src="/images/learn3/1.jpg"></p>
+<p>这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。</p>
+<h4 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h4><p>习惯可以分为四个阶段：</p>
+<p><img src="/images/learn3/2.jpg"></p>
+<p>第一阶段是<strong>提示 (cue)</strong> ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。</p>
+<p>第二个阶段就是**惯例 (routine)**，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办的事情就想着当下去解决掉它。这里一个好的建议是，你可以通过关掉手机或者断网，或者远离其他占用碎片时间的消遣来隔离那些最具杀伤力的信号，就像你在进行番茄工作法那样。</p>
+<p>第三阶段是<strong>奖励 (reward)**，是指你做完这个惯例之后得到的反馈，它会刺激你不断按照之前的惯例行事。任何一种习惯得以发展和延续都是因为它可以回报我们，它会立即给我们带来些许愉悦感。拖延是极易产生的习惯，因为你将关注点转向更令人愉悦的事情后，随之而来的奖励迅速而又简单。好习惯也是有奖励的，对于克服拖延症来说，想办法奖励好习惯非常重要，</strong>只有当大脑开始期待那个奖励，旧习惯才能得到重置，你才能养成新习惯**。</p>
+<p>研究发现需要给奖励设定时间点。比如说，午休与朋友到快餐店吃饭，或是在下午 5 点结束主要的任务。这样小而实在的截止期限可以激励你很好地去工作。</p>
+<p>第四阶段是<strong>信念 (belief)</strong> 。改变拖延习惯最重要的一点就是“相信自己能够做到”的这个信念，就好比说必须要摒弃“自己不是学这块知识的料”这一习惯想法，而是要保持自己能够学好的信念并为之做出应有的努力。</p>
+<h4 id="应对生活和学习"><a href="#应对生活和学习" class="headerlink" title="应对生活和学习"></a>应对生活和学习</h4><p>要保持对学习目标的展望，一个很好的办法是每周写下本周关键任务列表，试着在前一晚写下第二日的任务，为什么要在前一晚呢？ 研究表明，这可以让你在潜意识下设法解决任务，从而找到完成方法。</p>
+<p>列下任务清单后，每天花一个或几个番茄钟的时间完成它们。如果可以短时间完成的任务，可以采用结果导向，如果不是则关注过程。你不必一定要设置 25 分钟的番茄钟，比如 22 分钟也是可行的。</p>
+<p>其实，<strong>当你能对一定时间内自己可以完成的工作量做出较准确的判断时，你将很快进步</strong>。计划好完成目标的时间是合理且最为重要的一点，计划你的休息时间和计划工作时间也同样重要，就是在努力学习之余保持健康休闲时间的人，其表现往往胜过那些一味努力学习的人，所以从现在开始，在努力工作学习之余试着挤出点休息时间吧！</p>
+<p>芭芭拉老师还建议在<strong>早晨尽量先开始最重要且最讨厌，最难的工作，至少做一个番茄时间，这证明了极其有效</strong>！有时会发生一些意料之外的事，我们当然需要对计划作出改变，但是请记住幸运法则——<strong>幸运女神会眷顾努力之人</strong>。良好的计划也是努力的一部分，关注学习目标，尽量避免因为偶发事件产生的不确定性。</p>
+<p><img src="/images/learn3/3.jpg"></p>
+<h4 id="提高记忆力"><a href="#提高记忆力" class="headerlink" title="提高记忆力"></a>提高记忆力</h4><p>改变了拖延症的坏习惯后，我们才能更好地利用记忆去学习。我们的大脑天生就擅长记忆不同的空间信息，如果你受邀参观一所陌生的房子 ，你会很快对这个房子有一个大致的概念。例如，整体的家具布局、房间位置、颜色的搭配。只需几分钟，你的大脑就能获取并存储数以千计的信息，甚至几周后，就算你面对是一堵白墙，也仍然能记起许多细节。这一系列空间信息，帮助你在脑中形成地图。如果能够<strong>充分发挥天生就很强大的视觉和空间记忆能力</strong>，你的记忆潜能就可以得到极大提高。</p>
+<p>评判一个人的记忆力好坏，主要看他的长期记忆的能力如何，每个人都可以通过集中注意力使某件事物进入你的临时工作记忆，但<strong>从工作记忆进入长期记忆则要满足两个条件。首先它要令人难忘，其次，信息需要复习和回顾</strong>。那如何让它难忘呢？比如记 F=ma（力=质量 x 加速度）这个物理公式，老师把它想象成一只戴着飞行员眼镜的驴(a flying mule，英文首字母对应公式的简写)，躺在她老家厨房的水槽里，这样就完成了把抽象概念变成具体图像。这个比喻是不是很无厘头啊哈哈，所以说记忆大师们都是一些幻想家。</p>
+<p><img src="/images/learn3/4.jpg"></p>
+<p>记忆宫殿（Mind Palace / Memory Palace）就是这么一个虚拟的，让你储存信息的技巧工具。你可以把熟悉的场景，比如你的家，作为一个放置记忆碎片的地方，然后把要记的抽象的东西，通过联想，组团，转化成具体图像，放在那个场景中的某个地方。而且这个图像不需要阐述你要记住的东西的意义，甚至它越是不合常理，越稀奇古怪，效果就越好。因为大脑通常会滤过习以为常的事物，而对令人惊讶的非典型性事件记忆犹新。</p>
+<p>比如购物清单上要买的牛奶、面包、鸡蛋，使用这个技巧你可以想象在你的家中，有一大瓶牛奶在前门，面包掉到了沙发上，裂了的鸡蛋从咖啡桌边缘滴落。也就是说，你可以想象自己穿过一个熟悉的地方，伴随着一些与要记忆的物体相关的难忘画面，这种记忆方式往往记得很牢。</p>
+<p>题外话，爱看港剧的朋友，相信对 TVB 剧《读心神探》中的记忆宫殿印象深刻。第三集中有一段对记忆方法的特写，我们一起来细究一下吧！第三集刚开始的时候讲的就是记忆人名头像。那么记忆人名第一步就是观察人物的长相特征，这个特征可以看人物穿的衣服，戴的装饰品，五官的长相特点，发型，声音的特色等等，找出特点以后第二步就是对人物的名字进行联想。比如有个人叫袁泉，而正好她戴了一对圆圆的耳环，那么就很容易联想到“圆圈”（利用名字的谐音记忆）；又比如有人叫邓超，那么你可以联想到这个和你初识时，眼睛“邓”的超大的痴痴的望着你，只要你这么一想，那么这个人物名字肯定就在你脑海里留下了深刻的印象，虽然有点点毛骨悚然哈哈。</p>
+<p><img src="/images/learn3/5.jpg"></p>
+<p>看完上面举得例子也许会有人会问你那些名字和特征都是你事先设想好的，所以才容易发现名字与特征之间的联系，但其实这些都是临时想到的真实案例，<strong>其实我们能够观察到的特征是有限的，但是人的想象是无限的</strong>，只要你的想法足够好那肯定能找到一个人物的特征与名字之间的完美契合点，这也是记忆法的精髓。</p>
+<p>最后，在这一周的课外采访中，受采访者是一名美国记忆比赛的冠军，他是“记忆宫殿”这个技巧的专家。他给大家的学习建议是——保持孩童般的想象力与好奇心，通过新奇的想象来帮助你记忆，让学习变得有趣和容易。大家从现在开始不妨试一试~</p>
+<p>下一节课我们会学习复兴式学习与潜力的关系。</p>
+]]></content>
+      <categories>
+        <category>学习之道</category>
+      </categories>
+      <tags>
+        <tag>高效学习</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>学会如何学习（一）</title>
     <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
@@ -7362,44 +7400,6 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
 <p>7、给大家的建议?</p>
 <p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
 <p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
-]]></content>
-      <categories>
-        <category>学习之道</category>
-      </categories>
-      <tags>
-        <tag>高效学习</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>学会如何学习（三）</title>
-    <url>/2020/01/22/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<p>第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~</p>
-<h4 id="拖延症的形成"><a href="#拖延症的形成" class="headerlink" title="拖延症的形成"></a>拖延症的形成</h4><p>我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。</p>
-<p><img src="/images/learn3/1.jpg"></p>
-<p>这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。</p>
-<h4 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h4><p>习惯可以分为四个阶段：</p>
-<p><img src="/images/learn3/2.jpg"></p>
-<p>第一阶段是<strong>提示 (cue)</strong> ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。</p>
-<p>第二个阶段就是**惯例 (routine)**，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办的事情就想着当下去解决掉它。这里一个好的建议是，你可以通过关掉手机或者断网，或者远离其他占用碎片时间的消遣来隔离那些最具杀伤力的信号，就像你在进行番茄工作法那样。</p>
-<p>第三阶段是<strong>奖励 (reward)**，是指你做完这个惯例之后得到的反馈，它会刺激你不断按照之前的惯例行事。任何一种习惯得以发展和延续都是因为它可以回报我们，它会立即给我们带来些许愉悦感。拖延是极易产生的习惯，因为你将关注点转向更令人愉悦的事情后，随之而来的奖励迅速而又简单。好习惯也是有奖励的，对于克服拖延症来说，想办法奖励好习惯非常重要，</strong>只有当大脑开始期待那个奖励，旧习惯才能得到重置，你才能养成新习惯**。</p>
-<p>研究发现需要给奖励设定时间点。比如说，午休与朋友到快餐店吃饭，或是在下午 5 点结束主要的任务。这样小而实在的截止期限可以激励你很好地去工作。</p>
-<p>第四阶段是<strong>信念 (belief)</strong> 。改变拖延习惯最重要的一点就是“相信自己能够做到”的这个信念，就好比说必须要摒弃“自己不是学这块知识的料”这一习惯想法，而是要保持自己能够学好的信念并为之做出应有的努力。</p>
-<h4 id="应对生活和学习"><a href="#应对生活和学习" class="headerlink" title="应对生活和学习"></a>应对生活和学习</h4><p>要保持对学习目标的展望，一个很好的办法是每周写下本周关键任务列表，试着在前一晚写下第二日的任务，为什么要在前一晚呢？ 研究表明，这可以让你在潜意识下设法解决任务，从而找到完成方法。</p>
-<p>列下任务清单后，每天花一个或几个番茄钟的时间完成它们。如果可以短时间完成的任务，可以采用结果导向，如果不是则关注过程。你不必一定要设置 25 分钟的番茄钟，比如 22 分钟也是可行的。</p>
-<p>其实，<strong>当你能对一定时间内自己可以完成的工作量做出较准确的判断时，你将很快进步</strong>。计划好完成目标的时间是合理且最为重要的一点，计划你的休息时间和计划工作时间也同样重要，就是在努力学习之余保持健康休闲时间的人，其表现往往胜过那些一味努力学习的人，所以从现在开始，在努力工作学习之余试着挤出点休息时间吧！</p>
-<p>芭芭拉老师还建议在<strong>早晨尽量先开始最重要且最讨厌，最难的工作，至少做一个番茄时间，这证明了极其有效</strong>！有时会发生一些意料之外的事，我们当然需要对计划作出改变，但是请记住幸运法则——<strong>幸运女神会眷顾努力之人</strong>。良好的计划也是努力的一部分，关注学习目标，尽量避免因为偶发事件产生的不确定性。</p>
-<p><img src="/images/learn3/3.jpg"></p>
-<h4 id="提高记忆力"><a href="#提高记忆力" class="headerlink" title="提高记忆力"></a>提高记忆力</h4><p>改变了拖延症的坏习惯后，我们才能更好地利用记忆去学习。我们的大脑天生就擅长记忆不同的空间信息，如果你受邀参观一所陌生的房子 ，你会很快对这个房子有一个大致的概念。例如，整体的家具布局、房间位置、颜色的搭配。只需几分钟，你的大脑就能获取并存储数以千计的信息，甚至几周后，就算你面对是一堵白墙，也仍然能记起许多细节。这一系列空间信息，帮助你在脑中形成地图。如果能够<strong>充分发挥天生就很强大的视觉和空间记忆能力</strong>，你的记忆潜能就可以得到极大提高。</p>
-<p>评判一个人的记忆力好坏，主要看他的长期记忆的能力如何，每个人都可以通过集中注意力使某件事物进入你的临时工作记忆，但<strong>从工作记忆进入长期记忆则要满足两个条件。首先它要令人难忘，其次，信息需要复习和回顾</strong>。那如何让它难忘呢？比如记 F=ma（力=质量 x 加速度）这个物理公式，老师把它想象成一只戴着飞行员眼镜的驴(a flying mule，英文首字母对应公式的简写)，躺在她老家厨房的水槽里，这样就完成了把抽象概念变成具体图像。这个比喻是不是很无厘头啊哈哈，所以说记忆大师们都是一些幻想家。</p>
-<p><img src="/images/learn3/4.jpg"></p>
-<p>记忆宫殿（Mind Palace / Memory Palace）就是这么一个虚拟的，让你储存信息的技巧工具。你可以把熟悉的场景，比如你的家，作为一个放置记忆碎片的地方，然后把要记的抽象的东西，通过联想，组团，转化成具体图像，放在那个场景中的某个地方。而且这个图像不需要阐述你要记住的东西的意义，甚至它越是不合常理，越稀奇古怪，效果就越好。因为大脑通常会滤过习以为常的事物，而对令人惊讶的非典型性事件记忆犹新。</p>
-<p>比如购物清单上要买的牛奶、面包、鸡蛋，使用这个技巧你可以想象在你的家中，有一大瓶牛奶在前门，面包掉到了沙发上，裂了的鸡蛋从咖啡桌边缘滴落。也就是说，你可以想象自己穿过一个熟悉的地方，伴随着一些与要记忆的物体相关的难忘画面，这种记忆方式往往记得很牢。</p>
-<p>题外话，爱看港剧的朋友，相信对 TVB 剧《读心神探》中的记忆宫殿印象深刻。第三集中有一段对记忆方法的特写，我们一起来细究一下吧！第三集刚开始的时候讲的就是记忆人名头像。那么记忆人名第一步就是观察人物的长相特征，这个特征可以看人物穿的衣服，戴的装饰品，五官的长相特点，发型，声音的特色等等，找出特点以后第二步就是对人物的名字进行联想。比如有个人叫袁泉，而正好她戴了一对圆圆的耳环，那么就很容易联想到“圆圈”（利用名字的谐音记忆）；又比如有人叫邓超，那么你可以联想到这个和你初识时，眼睛“邓”的超大的痴痴的望着你，只要你这么一想，那么这个人物名字肯定就在你脑海里留下了深刻的印象，虽然有点点毛骨悚然哈哈。</p>
-<p><img src="/images/learn3/5.jpg"></p>
-<p>看完上面举得例子也许会有人会问你那些名字和特征都是你事先设想好的，所以才容易发现名字与特征之间的联系，但其实这些都是临时想到的真实案例，<strong>其实我们能够观察到的特征是有限的，但是人的想象是无限的</strong>，只要你的想法足够好那肯定能找到一个人物的特征与名字之间的完美契合点，这也是记忆法的精髓。</p>
-<p>最后，在这一周的课外采访中，受采访者是一名美国记忆比赛的冠军，他是“记忆宫殿”这个技巧的专家。他给大家的学习建议是——保持孩童般的想象力与好奇心，通过新奇的想象来帮助你记忆，让学习变得有趣和容易。大家从现在开始不妨试一试~</p>
-<p>下一节课我们会学习复兴式学习与潜力的关系。</p>
 ]]></content>
       <categories>
         <category>学习之道</category>
@@ -8034,6 +8034,44 @@ SayHI(jaychou); <span class="hljs-comment">// HI Chou</span></code></pre>
       </tags>
   </entry>
   <entry>
+    <title>贵州黔东南之行</title>
+    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
+    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
+<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
+<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
+<p><img src="/images/guizhou/1.jpg"></p>
+<p><img src="/images/guizhou/2.jpg"></p>
+<p><img src="/images/guizhou/3.jpg"></p>
+<p>河边坐落了许多充满文艺的小店和清吧。</p>
+<p><img src="/images/guizhou/4.jpg"></p>
+<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
+<p><img src="/images/guizhou/5.jpg"></p>
+<p><img src="/images/guizhou/6.jpg"></p>
+<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
+<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
+<p><img src="/images/guizhou/7.jpg"></p>
+<p><img src="/images/guizhou/8.jpg"></p>
+<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
+<p><img src="/images/guizhou/9.jpg"></p>
+<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
+<p><img src="/images/guizhou/10.jpg"></p>
+<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
+<p><img src="/images/guizhou/11.jpg"></p>
+<p><img src="/images/guizhou/12.jpg"></p>
+<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
+<p><img src="/images/guizhou/13.jpg"></p>
+<p><img src="/images/guizhou/14.jpg"></p>
+<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>贵州</tag>
+        <tag>游记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>谈谈JavaScript中的函数构造式和prototype的建立</title>
     <url>/2020/04/24/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0%E5%BC%8F%E5%92%8Cprototype%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
     <content><![CDATA[<p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">《谈谈 JavaScript 中的 function constructor 和 new 关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。</p>
@@ -8154,44 +8192,6 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
         <tag>JavaScript</tag>
         <tag>constructor</tag>
         <tag>prototype</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>贵州黔东南之行</title>
-    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
-    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
-<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
-<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
-<p><img src="/images/guizhou/1.jpg"></p>
-<p><img src="/images/guizhou/2.jpg"></p>
-<p><img src="/images/guizhou/3.jpg"></p>
-<p>河边坐落了许多充满文艺的小店和清吧。</p>
-<p><img src="/images/guizhou/4.jpg"></p>
-<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
-<p><img src="/images/guizhou/5.jpg"></p>
-<p><img src="/images/guizhou/6.jpg"></p>
-<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
-<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
-<p><img src="/images/guizhou/7.jpg"></p>
-<p><img src="/images/guizhou/8.jpg"></p>
-<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
-<p><img src="/images/guizhou/9.jpg"></p>
-<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
-<p><img src="/images/guizhou/10.jpg"></p>
-<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
-<p><img src="/images/guizhou/11.jpg"></p>
-<p><img src="/images/guizhou/12.jpg"></p>
-<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
-<p><img src="/images/guizhou/13.jpg"></p>
-<p><img src="/images/guizhou/14.jpg"></p>
-<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>贵州</tag>
-        <tag>游记</tag>
       </tags>
   </entry>
   <entry>

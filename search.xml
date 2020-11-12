@@ -252,185 +252,6 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>DOM Node 的建立、删除与修改</title>
-    <url>/2020/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/</url>
-    <content><![CDATA[<p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
-<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</code></pre>
-
-<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
-<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
-<pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">&quot;myNewDiv&quot;</span>;
-newDiv.className = <span class="hljs-string">&quot;box&quot;</span>;</code></pre>
-
-<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
-<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);
-
-<span class="hljs-comment">// 建立 textNode 文字节点</span>
-<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);
-
-<span class="hljs-comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv</span>
-newDiv.appendChild(textNode);</code></pre>
-
-<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
-<p>例如，一开始我们有一个 HTML 的容器元素：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
-
-<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 取得外层容器 myList</span>
-<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);
-
-<span class="hljs-comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span>
-<span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();
-
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
-  <span class="hljs-comment">// 生成新的 li，加入文字后置入 fragment 中。</span>
-  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);
-  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Item &quot;</span> + (i + <span class="hljs-number">1</span>)));
-  fragment.appendChild(li);
-&#125;
-
-<span class="hljs-comment">// 最后将组合完成的 fragment 放进 ul 容器</span>
-ul.appendChild(fragment);</code></pre>
-
-<p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
-<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
-<p>我们只要将对应的 HTML 字符串传入：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;</span>);</code></pre>
-
-<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);
-
-<span class="hljs-comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了</span>
-<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);</code></pre>
-
-<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;Hello world!&quot;</span>);
-&#125;;</code></pre>
-
-<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
-<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
-<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
-<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg"></p>
-<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
-<span class="javascript">  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
-
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
-
-<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span></span>
-  newList.appendChild(textNode);
-
-<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span></span>
-  myList.appendChild(newList);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg"></p>
-<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
-
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
-
-<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
-
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
-  newNode.appendChild(textNode);
-
-<span class="javascript">  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span></span>
-  myList.insertBefore(newNode, refNode);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg"></p>
-<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myList&#x27;</span>);</span>
-
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;li&#x27;</span>)[<span class="hljs-number">1</span>];</span>
-
-<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);</span>
-
-<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
-  newNode.appendChild(textNode);
-
-<span class="javascript">  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span></span>
-  myList.replaceChild(newNode, oldNode);
-<span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></code></pre>
-
-<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg"></p>
-<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
-
-<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
-<span class="javascript">  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
-
-<span class="javascript">  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span></span>
-  myList.removeChild(removeNode);
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
-<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
-<p>刚好呼应阿基米德的一句众所周知的名言：</p>
-<blockquote>
-<p>「给我一个支点，我就能撬动整个地球。」</p>
-</blockquote>
-<p>那么有了 DOM API 的帮助后， JavaScript 也可以说：</p>
-<blockquote>
-<p>「给我一个节点，我就能建立整个网页世界。」</p>
-</blockquote>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>DOM</tag>
-        <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS笔记—三栏布局</title>
     <url>/2019/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<p>三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：<br><img src="/images/sanlang/1.jpg"></p>
@@ -1334,6 +1155,263 @@ ul.appendChild(fragment);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>DOM Node 的建立、删除与修改</title>
+    <url>/2020/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/</url>
+    <content><![CDATA[<p>在之前的介绍中，我们已经理解了 DOM Node 的类型、以及节点之间的查找与关系。那么在今天的介绍里我将继续来说明，如何通过 DOM API 来建立新的节点、修改以及删除节点。</p>
+<h3 id="DOM-节点的新增"><a href="#DOM-节点的新增" class="headerlink" title="DOM 节点的新增"></a>DOM 节点的新增</h3><h4 id="document-createElement-tagName"><a href="#document-createElement-tagName" class="headerlink" title="document.createElement(tagName)"></a>document.createElement(tagName)</h4><p>通过<code>document.createElement()</code>可以建立一个新的元素：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);</code></pre>
+
+<p>在建立新的<code>div</code>元素<code>newDiv</code>后，这时候我们在浏览器上还看不到它，直到通过<code>appendChild()</code>、<code>insertBefore()</code>或<code>replaceChild()</code>等方法将新元素加入至指定的位置之后才会显示。</p>
+<p>新建立的<code>newDiv</code>我们也可以同时对它指定属性，如：</p>
+<pre><code class="hljs javascript">newDiv.id = <span class="hljs-string">&quot;myNewDiv&quot;</span>;
+newDiv.className = <span class="hljs-string">&quot;box&quot;</span>;</code></pre>
+
+<h4 id="document-createTextNode"><a href="#document-createTextNode" class="headerlink" title="document.createTextNode()"></a>document.createTextNode()</h4><p>之前曾介绍过，除了 HTML 元素节点外，还有文字节点，那么<code>document.createTextNode()</code>就是用来建立文字节点的方法。</p>
+<p>用法很简单，直接在<code>document.createTextNode()</code>加入字符串即可。跟<code>createElement</code>一样的是，新增的 TextNode 在被加入至某个节点前，我们是看不到它的。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> newDiv = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;div&quot;</span>);
+
+<span class="hljs-comment">// 建立 textNode 文字节点</span>
+<span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);
+
+<span class="hljs-comment">// 通过 newDiv.appendChild 将 textNode 加入至 newDiv</span>
+newDiv.appendChild(textNode);</code></pre>
+
+<h4 id="document-createDocumentFragment"><a href="#document-createDocumentFragment" class="headerlink" title="document.createDocumentFragment()"></a>document.createDocumentFragment()</h4><p>在 DOM 规范的所有节点之中，<code>DocumentFragment</code>算是最特殊的一种，它是一种没有父层节点的<strong>最小化文件对象</strong>。可以把它看作是一个轻量化的<code>Document</code>，用如同标准文件一般的方式来保存片段的文件结构。</p>
+<p>例如，一开始我们有一个 HTML 的容器元素：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></code></pre>
+
+<p>接着我们通过<code>document.createDocumentFragment()</code>来建立<code>DocumentFragment</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 取得外层容器 myList</span>
+<span class="hljs-keyword">var</span> ul = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);
+
+<span class="hljs-comment">// 建立一个 DocumentFragment，可以把它看作一个虚拟的容器</span>
+<span class="hljs-keyword">var</span> fragment = <span class="hljs-built_in">document</span>.createDocumentFragment();
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+  <span class="hljs-comment">// 生成新的 li，加入文字后置入 fragment 中。</span>
+  <span class="hljs-keyword">let</span> li = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);
+  li.appendChild(<span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Item &quot;</span> + (i + <span class="hljs-number">1</span>)));
+  fragment.appendChild(li);
+&#125;
+
+<span class="hljs-comment">// 最后将组合完成的 fragment 放进 ul 容器</span>
+ul.appendChild(fragment);</code></pre>
+
+<p>通过操作<code>DocumentFragment</code>与直接操作 DOM 最关键的区别在于<code>DocumentFragment</code>不是真实的 DOM 结构，所以说<code>DocumentFragment</code>的变动并不会影响目前的网页文件，也不会导致回流（reflow）或引起任何影响效果的情况发生。</p>
+<h4 id="document-write"><a href="#document-write" class="headerlink" title="document.write()"></a>document.write()</h4><p><code>document</code>对象要将某内容写入网页也可以用<code>write()</code>方法，当浏览器读取页面，解析到<code>document.write()</code>的时候就会停下来，并且将内容输出，且不只是单纯的字符串，也可以是 HTML 的标签。</p>
+<p>我们只要将对应的 HTML 字符串传入：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;&lt;h1&gt;Hello World!&lt;/h1&gt;&quot;</span>);</code></pre>
+
+<p>甚至，如果要新增一个<code>&lt;script&gt;</code>标签，并指定外部 js 资源也是可以的，但要注意的是：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 写成这样， &lt;/script&gt;会变成目前 script 块的结束，导致错误</span>
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);
+
+<span class="hljs-comment">// 为了避免这种问题，要将结尾的标签这种写法 &lt;\/script&gt; 就 ok 了</span>
+<span class="hljs-built_in">document</span>.write(<span class="hljs-string">&#x27;&lt;script type=&quot;textjavascript&quot; src=&quot;file.js&quot;&gt;&#x27;</span> + <span class="hljs-string">&quot;&lt;/script&gt;&quot;</span>);</code></pre>
+
+<p>另外，需要特别注意的是，当网页已经读取完成后才执行<code>document.write()</code>，则里面的内容会完全覆盖掉目前的网页：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.onload = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">&quot;Hello world!&quot;</span>);
+&#125;;</code></pre>
+
+<p>上面例子的<code>window.onload</code>表示网页已载入完成，此时无论网页原本有什么内容，都会被<code>&quot;Hello world!&quot;</code>所覆盖。</p>
+<h3 id="DOM-节点的修改与删除"><a href="#DOM-节点的修改与删除" class="headerlink" title="DOM 节点的修改与删除"></a>DOM 节点的修改与删除</h3><p>上面介绍了很多建立 DOM 节点的方法，除了最后的<code>document.write</code>之外，其他都只是单纯建立节点，并未输出至网页上。</p>
+<p>那么，接下来要介绍的几个方法，则说明要如何将刚刚建立好的 DOM 节点，置入到我们所需要指定的位置上。</p>
+<h4 id="NODE-appendChild-childNode"><a href="#NODE-appendChild-childNode" class="headerlink" title="NODE.appendChild(childNode)"></a>NODE.appendChild(childNode)</h4><p><img src="/images/domnode/1.jpg"></p>
+<p>通过<code>appendChild()</code>方法，可以将指定的<code>childNode</code>节点，加入到<code>Node</code>父容器节点的末端：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+<span class="javascript">  <span class="hljs-comment">// 建立新的 &lt;li&gt; 元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newList = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 textNode 加入至 newList</span></span>
+  newList.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 通过 appendChild 将 newList 加入至 myList</span></span>
+  myList.appendChild(newList);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<h4 id="NODE-insertBefore-newNode-refNode"><a href="#NODE-insertBefore-newNode-refNode" class="headerlink" title="NODE.insertBefore(newNode, refNode)"></a>NODE.insertBefore(newNode, refNode)</h4><p><img src="/images/domnode/2.jpg"></p>
+<p><code>insertBefore()</code>方法，则是将新节点<code>newNode</code>插入至指定的<code>refNode</code>节点的前面：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> refNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&quot;li&quot;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+  newNode.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 将新节点 newNode 插入 refNode 的前方</span></span>
+  myList.insertBefore(newNode, refNode);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<h4 id="NODE-replaceChild-newChildNode-oldChildNode"><a href="#NODE-replaceChild-newChildNode-oldChildNode" class="headerlink" title="NODE.replaceChild(newChildNode, oldChildNode)"></a>NODE.replaceChild(newChildNode, oldChildNode)</h4><p><img src="/images/domnode/3.jpg"></p>
+<p><code>replaceChild()</code>方法，则是将原本的<code>oldNode</code>替换成指定的<code>newNode</code>。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList  = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;myList&#x27;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> oldNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&#x27;li&#x27;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 li 元素节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> newNode = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">&#x27;li&#x27;</span>);</span>
+
+<span class="javascript">  <span class="hljs-comment">// 建立 textNode 文字节点</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> textNode = <span class="hljs-built_in">document</span>.createTextNode(<span class="hljs-string">&quot;Hello world!&quot;</span>);</span>
+  newNode.appendChild(textNode);
+
+<span class="javascript">  <span class="hljs-comment">// 将原有的 oldNode 替换成新节点 newNode</span></span>
+  myList.replaceChild(newNode, oldNode);
+<span class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span></span></span></code></pre>
+
+<h4 id="NODE-removeChild-childNode"><a href="#NODE-removeChild-childNode" class="headerlink" title="NODE.removeChild(childNode)"></a>NODE.removeChild(childNode)</h4><p><img src="/images/domnode/4.jpg"></p>
+<p><code>removeChild()</code>方法，则是将指定的<code>childNode</code>子节点移除。</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myList&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item1<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item3<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-comment">// 取得容器</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> myList = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;myList&quot;</span>);</span>
+
+<span class="handlebars"><span class="xml">  // 取得 &quot;<span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>Item2<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>&quot; 的元素</span></span>
+<span class="javascript">  <span class="hljs-keyword">var</span> removeNode = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;li&quot;</span>)[<span class="hljs-number">1</span>];</span>
+
+<span class="javascript">  <span class="hljs-comment">// 将 myList 下的 removeNode 节点移除</span></span>
+  myList.removeChild(removeNode);
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p>相信看完今天的分享，已经有能力可以通过 DOM 提供的 API 来进行节点的新增、修改以及删除了吧。</p>
+<p>大家也许会发现，无论要对网页元素做出什么样的操作，我们都会基于某个节点出发对吧？</p>
+<p>刚好呼应阿基米德的一句众所周知的名言：</p>
+<blockquote>
+<p>「给我一个支点，我就能撬动整个地球。」</p>
+</blockquote>
+<p>那么有了 DOM API 的帮助后， JavaScript 也可以说：</p>
+<blockquote>
+<p>「给我一个节点，我就能建立整个网页世界。」</p>
+</blockquote>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>DOM</tag>
+        <tag>API</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git/GitHub操作手册</title>
+    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
+<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
+<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
+<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
+<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
+<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
+
+<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
+<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
+$ git add README.md                //将README.md文件提交到问题暂存区
+$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
+$ git status -sb      //显示当前所有文件的状态</code></pre>
+
+<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
+<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
+<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
+<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
+<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
+<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
+<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
+
+<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
+<pre><code class="hljs bash">$ git push -u origin master</code></pre>
+
+<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
+<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
+<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
+<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
+
+<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
+<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
+
+<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
+<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
+<ul>
+<li>在本地创建仓库</li>
+</ul>
+<ul>
+<li>将本地仓库上传到 GitHub</li>
+</ul>
+<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
+<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
+<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
+<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
+<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
+<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
+
+<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
+<p>1、在本地创建仓库</p>
+<p>2、将本地仓库上传到 GitHub</p>
+<p>3、GitHub 上的仓库克隆下载到本地</p>
+<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
+<p>我们最后再回顾一遍已经学到的命令：</p>
+<blockquote>
+<p>git clone <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+</blockquote>
+<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
+</blockquote>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git命令拓展</title>
     <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
     <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
@@ -1496,84 +1574,6 @@ $ git show --name-only [commit]    //显示某次提交发生变化的文件
 $ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
 
 $ git reflog    //显示当前分支的最近几次提交</code></pre>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git/GitHub操作手册</title>
-    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
-<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
-<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
-<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
-<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
-<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
-
-<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
-<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
-$ git add README.md                //将README.md文件提交到问题暂存区
-$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
-$ git status -sb      //显示当前所有文件的状态</code></pre>
-
-<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
-<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
-<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
-<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
-<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
-<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
-<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
-
-<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
-<pre><code class="hljs bash">$ git push -u origin master</code></pre>
-
-<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
-<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
-<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
-<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
-<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
-<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
-
-<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
-<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
-
-<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
-<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
-<ul>
-<li>在本地创建仓库</li>
-</ul>
-<ul>
-<li>将本地仓库上传到 GitHub</li>
-</ul>
-<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
-<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
-<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
-<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
-<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
-<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
-<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
-
-<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
-<p>1、在本地创建仓库</p>
-<p>2、将本地仓库上传到 GitHub</p>
-<p>3、GitHub 上的仓库克隆下载到本地</p>
-<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
-<p>我们最后再回顾一遍已经学到的命令：</p>
-<blockquote>
-<p>git clone <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
-</blockquote>
-<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
-</blockquote>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
 ]]></content>
       <categories>
         <category>tools</category>
@@ -2185,6 +2185,188 @@ foo.bar = <span class="hljs-string">&quot;lzm&quot;</span>; <span class="hljs-co
       </tags>
   </entry>
   <entry>
+    <title>JavaScript事件三部曲之事件的兄弟姐妹们</title>
+    <url>/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/</url>
+    <content><![CDATA[<p>在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。</p>
+<h3 id="事件的种类"><a href="#事件的种类" class="headerlink" title="事件的种类"></a>事件的种类</h3><p>浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是 Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：</p>
+<h4 id="界面相关事件"><a href="#界面相关事件" class="headerlink" title="界面相关事件"></a>界面相关事件</h4><p>界面相关的事件不一定会与使用者对 DOM 的操作有关系，反而大多数与 window 对象比较有关系。</p>
+<ul>
+<li><code>load</code> 事件：</li>
+</ul>
+<p>注册在 <code>window</code> 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发<code>load</code>事件。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;所有资源都加载完成&quot;</span>);
+&#125;);</code></pre>
+
+<ul>
+<li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
+</ul>
+<p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
+<p><img src="/images/event/7.jpg"></p>
+<ul>
+<li><code>error</code> 事件：</li>
+</ul>
+<p><code>error</code> 事件会在 <code>document</code> 或是图片载入错误时触发。由于考虑到维护性，大多事件的注册我会强烈建议使用「非侵入式 JavaScript」的写法，即 JavaScript 代码和标记的分离。只有 <code>error</code> 事件最适合以 <code>on-event</code> 的写法来处理：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.jpg&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;default.jpg&#x27;&quot;</span> /&gt;</span></code></pre>
+
+<p>像这样，当<code>image.jpg</code>这张图片不存在的时候，马上就会触发<code>error</code>事件，就会通过<code>this.src</code>将<code>&lt;img&gt;</code>的 <code>src</code> 属性替换成指定的图片，是相当实用的技巧。</p>
+<p>若是在网页 <code>load</code> 完成后才注册了<code>error</code>事件，你只会看到破图的结果，因为<code>error</code>事件不会再次被触发，后来挂上去的事件处理函数就等于没有一样。</p>
+<ul>
+<li><p><code>resize</code>事件：在改变浏览器窗口大小时触发，主要发生在<code>window</code>对象上面。</p>
+</li>
+<li><p><code>scroll</code>事件：在文档或文档元素滚动时触发，主要出现在用户拖动滚动条。</p>
+</li>
+<li><p><code>DOMContentLoaded</code>事件：</p>
+</li>
+</ul>
+<p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
+<p><img src="/images/event/8.jpg"></p>
+<p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-comment">// 因 Document 结构未载入，无效</span></span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>那么，改成这样：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.addEventListener(</span>
+<span class="javascript">        <span class="hljs-string">&quot;DOMContentLoaded&quot;</span>,</span>
+<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span>
+<span class="javascript">          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span></span>
+<span class="javascript">          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
+        &#125;,
+<span class="javascript">        <span class="hljs-literal">false</span></span>
+      );
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>就可以排除<code>&lt;script&gt;</code>标签放在<code>&lt;head&gt; ... &lt;/head&gt;</code>抓不到 DOM 的问题啦。</p>
+<p>与大家所熟知的 <code>jQuery$( document ).ready( handler )</code>作用类似。</p>
+<h4 id="鼠标相关事件"><a href="#鼠标相关事件" class="headerlink" title="鼠标相关事件"></a>鼠标相关事件</h4><ul>
+<li><p><code>mousedown</code> / <code>mouseup</code> 事件: 这两个事件分别会在鼠标点击了某元素「按下」(mousedown) 按钮，以及「放开」(mouseup)按钮时触发。</p>
+</li>
+<li><p><code>click</code> 事件: 当鼠标「点击」了某元素时触发。</p>
+</li>
+<li><p><code>dblclick</code>事件: 当鼠标「连点两次」某元素时触发。</p>
+</li>
+<li><p><code>mouseenter</code> / <code>mousemove</code> / <code>mouseleave</code> 事件：这三个事件要放在一起看：</p>
+</li>
+</ul>
+<ol>
+<li>当鼠标光标移入了某元素时，会先触发 <code>mouseenter</code> 事件。</li>
+<li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
+<li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
+</ol>
+<p><img src="/images/event/9.gif"></p>
+<p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
+<h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
+<ul>
+<li><p><code>keydown</code> 事件: 「压下」键盘按键时会触发 <code>keydown</code> 事件。</p>
+</li>
+<li><p><code>keypress</code> 事件: 除了 Shift, Fn, CapsLock 这三种按键外按住时会触发，若按着不放则会连续触发。</p>
+</li>
+<li><p><code>keyup</code> 事件: 「放开」键盘按键时会触发。</p>
+</li>
+</ul>
+<p>如果我们针对同个元素同时绑定了这三个键盘事件，那么这三个事件执行的顺序会是：</p>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">keydown</span>
+<span class="hljs-attribute">keypress</span>
+<span class="hljs-attribute">keyup</span></code></pre>
+
+<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a href="https://gist.github.com/tylerbuchea/8011573">这里</a>查看：</p>
+<p>例如，今天你想要当使用者在<code>input</code>输入框按下 「enter」 时，发动<code>submit</code>，就可以这样做：</p>
+<pre><code class="hljs javascript">textBox.addEventListener(
+  <span class="hljs-string">&quot;keydown&quot;</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+    <span class="hljs-comment">// enter 的 keyCode 是 13</span>
+    <span class="hljs-keyword">if</span> (e.keyCode === <span class="hljs-number">13</span>) &#123;
+      formSubmit();
+    &#125;
+  &#125;,
+  <span class="hljs-literal">false</span>
+);</code></pre>
+
+<p>像这样，通过<code>e.keyCode</code>就可以判断使用者目前按下的是哪个按钮。</p>
+<h4 id="表单相关事件"><a href="#表单相关事件" class="headerlink" title="表单相关事件"></a>表单相关事件</h4><ul>
+<li><p><code>input</code> 事件： 当 <code>input</code>、 <code>textarea</code> 以及带有 <code>contenteditable</code> 的元素內容被改变时，就会触发 <code>input</code> 事件。</p>
+</li>
+<li><p><code>change</code> 事件： 当 <code>input</code>、<code>select</code>、<code>textarea</code>、<code>radio</code>、<code>checkbox</code> 等表单元素被改变时触发。 但与 <code>input</code> 事件不同的是，<code>input</code> 事件会在输入框输入內容的当下触发，而 <code>change</code> 事件则是在目前焦点离开输入框后才触发。</p>
+</li>
+<li><p><code>submit</code> 事件：当表单被送出时触发，通常表单验证都会在这一步处理，若验证未通过则 <code>return false;</code>。</p>
+</li>
+<li><p><code>focus</code> 事件：当元素被聚焦时触发。</p>
+</li>
+<li><p><code>blur</code> 事件：当元素失去焦点时触发。</p>
+</li>
+</ul>
+<h4 id="特殊事件"><a href="#特殊事件" class="headerlink" title="特殊事件"></a>特殊事件</h4><ul>
+<li>Composition Event (组成事件):</li>
+</ul>
+<p><strong>Composition Event</strong> 其实指的是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code> 这三个事件。</p>
+<p>介绍 Composition Events 之前先来谈谈 DOM API 过去对输入框侦测变化的几个方式：</p>
+<p>常见的表单输入框如: <code>&lt;input type=&quot;text&quot;&gt;</code> 如果要动态监听输入框的文字变化时， 大多会通过监听 <code>keydown</code>、<code>keypress</code>、<code>keyup</code> 等键盘事件来判断 <code>value</code> 是否变动，但如果是通过「<strong>复制粘贴</strong>」之类的操作，就无法通过键盘事件来判断。</p>
+<p>而即使是 <code>change</code> 事件则是要在使用者改变內容，且<strong>焦点离开输入框</strong>的前一刻才会被触发。</p>
+<p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
+<p>但是，新的问题来了！</p>
+<p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
+<p><img src="/images/event/10.jpg"></p>
+<p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
+<p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
+<p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
+<p>通过 <code>Composition Events</code> 我们可以观察使用者在输入框內开启输入法 (Input Method Editor, IME) 时，组字或选字的状态。</p>
+<p>Composition Events 提供三个事件给开发者监听：分別是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code>。</p>
+<ul>
+<li><code>compositionstart</code>: 输入框內开启输入法，且正在拼字时触发。</li>
+<li><code>compositionupdate</code>: 输入框內开启输入法，且正在拼字或选字时更改了內容时触发。</li>
+<li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
+</ul>
+<p>执行的时候像这样：</p>
+<p><img src="/images/event/11.jpg"></p>
+<p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
+<h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">&#x27;build&#x27;</span>);
+
+<span class="hljs-comment">// 监听事件</span>
+elem.addEventListener(<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
+
+<span class="hljs-comment">// 触发事件</span>
+elem.dispatchEvent(event);</code></pre>
+
+<p>若是想要在自订事件內增加更多资料，则可以改用<code>CustomEvent</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">&quot;build&quot;</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre>
+
+<p>那么在 Event 处理函数就可以通过<code>event</code>来接收：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventHandler</span>(<span class="hljs-params">e</span>) </span>&#123;
+  log(<span class="hljs-string">&quot;The time is: &quot;</span> + e.detail);
+&#125;</code></pre>
+
+<p>当然，浏览器提供的事件相当多，今天分享的部分主要是比较常见的一些事件，以及工作上实际需要特別注意的部分。</p>
+<p>其他的多数事件你都可以在 MDN 的 <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference</a> 找到。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>事件</tag>
+        <tag>event</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript事件三部曲之事件机制的原理</title>
     <url>/2020/06/26/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<p>JavaScript 是一个事件驱动(Event-driven) 的语言，当浏览器载入网页开始读取后，虽然马上会读取 JavaScript 事件相关的代码，但是必须要等到「事件」被触发(如使用者点击、按下键盘等)后，才会再进行对应代码段的执行。</p>
@@ -2482,188 +2664,6 @@ btn.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, clic
 
 <p>那么以上就是今天为各位介绍 JavaScript 事件机制原理的部分。</p>
 <p>接下来的文章我会继续来介绍事件的种类，以及更多实际上处理「事件」时需要注意的事项。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>事件</tag>
-        <tag>event</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript事件三部曲之事件的兄弟姐妹们</title>
-    <url>/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/</url>
-    <content><![CDATA[<p>在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。</p>
-<h3 id="事件的种类"><a href="#事件的种类" class="headerlink" title="事件的种类"></a>事件的种类</h3><p>浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是 Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：</p>
-<h4 id="界面相关事件"><a href="#界面相关事件" class="headerlink" title="界面相关事件"></a>界面相关事件</h4><p>界面相关的事件不一定会与使用者对 DOM 的操作有关系，反而大多数与 window 对象比较有关系。</p>
-<ul>
-<li><code>load</code> 事件：</li>
-</ul>
-<p>注册在 <code>window</code> 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发<code>load</code>事件。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;所有资源都加载完成&quot;</span>);
-&#125;);</code></pre>
-
-<ul>
-<li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
-</ul>
-<p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
-<p><img src="/images/event/7.jpg"></p>
-<ul>
-<li><code>error</code> 事件：</li>
-</ul>
-<p><code>error</code> 事件会在 <code>document</code> 或是图片载入错误时触发。由于考虑到维护性，大多事件的注册我会强烈建议使用「非侵入式 JavaScript」的写法，即 JavaScript 代码和标记的分离。只有 <code>error</code> 事件最适合以 <code>on-event</code> 的写法来处理：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.jpg&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;default.jpg&#x27;&quot;</span> /&gt;</span></code></pre>
-
-<p>像这样，当<code>image.jpg</code>这张图片不存在的时候，马上就会触发<code>error</code>事件，就会通过<code>this.src</code>将<code>&lt;img&gt;</code>的 <code>src</code> 属性替换成指定的图片，是相当实用的技巧。</p>
-<p>若是在网页 <code>load</code> 完成后才注册了<code>error</code>事件，你只会看到破图的结果，因为<code>error</code>事件不会再次被触发，后来挂上去的事件处理函数就等于没有一样。</p>
-<ul>
-<li><p><code>resize</code>事件：在改变浏览器窗口大小时触发，主要发生在<code>window</code>对象上面。</p>
-</li>
-<li><p><code>scroll</code>事件：在文档或文档元素滚动时触发，主要出现在用户拖动滚动条。</p>
-</li>
-<li><p><code>DOMContentLoaded</code>事件：</p>
-</li>
-</ul>
-<p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
-<p><img src="/images/event/8.jpg"></p>
-<p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">      <span class="hljs-comment">// 因 Document 结构未载入，无效</span></span>
-<span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
-
-<p>那么，改成这样：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">      <span class="hljs-built_in">document</span>.addEventListener(</span>
-<span class="javascript">        <span class="hljs-string">&quot;DOMContentLoaded&quot;</span>,</span>
-<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span>
-<span class="javascript">          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span></span>
-<span class="javascript">          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
-        &#125;,
-<span class="javascript">        <span class="hljs-literal">false</span></span>
-      );
-    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
-
-<p>就可以排除<code>&lt;script&gt;</code>标签放在<code>&lt;head&gt; ... &lt;/head&gt;</code>抓不到 DOM 的问题啦。</p>
-<p>与大家所熟知的 <code>jQuery$( document ).ready( handler )</code>作用类似。</p>
-<h4 id="鼠标相关事件"><a href="#鼠标相关事件" class="headerlink" title="鼠标相关事件"></a>鼠标相关事件</h4><ul>
-<li><p><code>mousedown</code> / <code>mouseup</code> 事件: 这两个事件分别会在鼠标点击了某元素「按下」(mousedown) 按钮，以及「放开」(mouseup)按钮时触发。</p>
-</li>
-<li><p><code>click</code> 事件: 当鼠标「点击」了某元素时触发。</p>
-</li>
-<li><p><code>dblclick</code>事件: 当鼠标「连点两次」某元素时触发。</p>
-</li>
-<li><p><code>mouseenter</code> / <code>mousemove</code> / <code>mouseleave</code> 事件：这三个事件要放在一起看：</p>
-</li>
-</ul>
-<ol>
-<li>当鼠标光标移入了某元素时，会先触发 <code>mouseenter</code> 事件。</li>
-<li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
-<li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
-</ol>
-<p><img src="/images/event/9.gif"></p>
-<p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
-<h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
-<ul>
-<li><p><code>keydown</code> 事件: 「压下」键盘按键时会触发 <code>keydown</code> 事件。</p>
-</li>
-<li><p><code>keypress</code> 事件: 除了 Shift, Fn, CapsLock 这三种按键外按住时会触发，若按着不放则会连续触发。</p>
-</li>
-<li><p><code>keyup</code> 事件: 「放开」键盘按键时会触发。</p>
-</li>
-</ul>
-<p>如果我们针对同个元素同时绑定了这三个键盘事件，那么这三个事件执行的顺序会是：</p>
-<pre><code class="hljs ebnf"><span class="hljs-attribute">keydown</span>
-<span class="hljs-attribute">keypress</span>
-<span class="hljs-attribute">keyup</span></code></pre>
-
-<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a href="https://gist.github.com/tylerbuchea/8011573">这里</a>查看：</p>
-<p>例如，今天你想要当使用者在<code>input</code>输入框按下 「enter」 时，发动<code>submit</code>，就可以这样做：</p>
-<pre><code class="hljs javascript">textBox.addEventListener(
-  <span class="hljs-string">&quot;keydown&quot;</span>,
-  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
-    <span class="hljs-comment">// enter 的 keyCode 是 13</span>
-    <span class="hljs-keyword">if</span> (e.keyCode === <span class="hljs-number">13</span>) &#123;
-      formSubmit();
-    &#125;
-  &#125;,
-  <span class="hljs-literal">false</span>
-);</code></pre>
-
-<p>像这样，通过<code>e.keyCode</code>就可以判断使用者目前按下的是哪个按钮。</p>
-<h4 id="表单相关事件"><a href="#表单相关事件" class="headerlink" title="表单相关事件"></a>表单相关事件</h4><ul>
-<li><p><code>input</code> 事件： 当 <code>input</code>、 <code>textarea</code> 以及带有 <code>contenteditable</code> 的元素內容被改变时，就会触发 <code>input</code> 事件。</p>
-</li>
-<li><p><code>change</code> 事件： 当 <code>input</code>、<code>select</code>、<code>textarea</code>、<code>radio</code>、<code>checkbox</code> 等表单元素被改变时触发。 但与 <code>input</code> 事件不同的是，<code>input</code> 事件会在输入框输入內容的当下触发，而 <code>change</code> 事件则是在目前焦点离开输入框后才触发。</p>
-</li>
-<li><p><code>submit</code> 事件：当表单被送出时触发，通常表单验证都会在这一步处理，若验证未通过则 <code>return false;</code>。</p>
-</li>
-<li><p><code>focus</code> 事件：当元素被聚焦时触发。</p>
-</li>
-<li><p><code>blur</code> 事件：当元素失去焦点时触发。</p>
-</li>
-</ul>
-<h4 id="特殊事件"><a href="#特殊事件" class="headerlink" title="特殊事件"></a>特殊事件</h4><ul>
-<li>Composition Event (组成事件):</li>
-</ul>
-<p><strong>Composition Event</strong> 其实指的是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code> 这三个事件。</p>
-<p>介绍 Composition Events 之前先来谈谈 DOM API 过去对输入框侦测变化的几个方式：</p>
-<p>常见的表单输入框如: <code>&lt;input type=&quot;text&quot;&gt;</code> 如果要动态监听输入框的文字变化时， 大多会通过监听 <code>keydown</code>、<code>keypress</code>、<code>keyup</code> 等键盘事件来判断 <code>value</code> 是否变动，但如果是通过「<strong>复制粘贴</strong>」之类的操作，就无法通过键盘事件来判断。</p>
-<p>而即使是 <code>change</code> 事件则是要在使用者改变內容，且<strong>焦点离开输入框</strong>的前一刻才会被触发。</p>
-<p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
-<p>但是，新的问题来了！</p>
-<p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
-<p><img src="/images/event/10.jpg"></p>
-<p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
-<p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
-<p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
-<p>通过 <code>Composition Events</code> 我们可以观察使用者在输入框內开启输入法 (Input Method Editor, IME) 时，组字或选字的状态。</p>
-<p>Composition Events 提供三个事件给开发者监听：分別是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code>。</p>
-<ul>
-<li><code>compositionstart</code>: 输入框內开启输入法，且正在拼字时触发。</li>
-<li><code>compositionupdate</code>: 输入框內开启输入法，且正在拼字或选字时更改了內容时触发。</li>
-<li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
-</ul>
-<p>执行的时候像这样：</p>
-<p><img src="/images/event/11.jpg"></p>
-<p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
-<h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">&#x27;build&#x27;</span>);
-
-<span class="hljs-comment">// 监听事件</span>
-elem.addEventListener(<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
-
-<span class="hljs-comment">// 触发事件</span>
-elem.dispatchEvent(event);</code></pre>
-
-<p>若是想要在自订事件內增加更多资料，则可以改用<code>CustomEvent</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">&quot;build&quot;</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre>
-
-<p>那么在 Event 处理函数就可以通过<code>event</code>来接收：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventHandler</span>(<span class="hljs-params">e</span>) </span>&#123;
-  log(<span class="hljs-string">&quot;The time is: &quot;</span> + e.detail);
-&#125;</code></pre>
-
-<p>当然，浏览器提供的事件相当多，今天分享的部分主要是比较常见的一些事件，以及工作上实际需要特別注意的部分。</p>
-<p>其他的多数事件你都可以在 MDN 的 <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference</a> 找到。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 ]]></content>
       <categories>
@@ -6069,123 +6069,6 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre>
       </tags>
   </entry>
   <entry>
-    <title>Undefined vs Null</title>
-    <url>/2020/01/17/Undefined%20vs%20Null/</url>
-    <content><![CDATA[<p>在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。</p>
-<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
-<p>本文将探讨 JavaScript 中<code>undefined</code>和<code>null</code>之间的相似和差异之处。</p>
-<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在 if 语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (!<span class="hljs-literal">undefined</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;undefined is false&quot;</span>);
-<span class="hljs-comment">// undefined is false</span>
-
-<span class="hljs-keyword">if</span> (!<span class="hljs-literal">null</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;null is false&quot;</span>);
-<span class="hljs-comment">// null is false</span>
-
-<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>;
-<span class="hljs-comment">// true</span></code></pre>
-
-<p>（2）在 JavaScript 中，只有六个 falsy 值，<code>null</code>和<code>undefined</code>都包含在六个 falsy 值中，当进行逻辑判断时所有的 Falsy 值均为 false。</p>
-<ul>
-<li>false</li>
-<li>0</li>
-<li>‘’ (空字符串，’’和””一样)</li>
-<li><strong>null</strong></li>
-<li><strong>undefined</strong></li>
-<li>NaN</li>
-</ul>
-<p>除了这六个值，JavaScript 中的任何其他值都被认为是 truthy 值，当进行逻辑判断时均为 true。</p>
-<p>（3）同样在 JavaScript 中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。</p>
-<ul>
-<li>Boolean</li>
-<li><strong>Null</strong></li>
-<li><strong>Undefined</strong></li>
-<li>Number</li>
-<li>String</li>
-<li>Symbol</li>
-</ul>
-<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？</p>
-<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！</p>
-<p>1995 年 JavaScript 诞生之初，像 Java 一样，只设置了<code>null</code>作为表示”无”的值。</p>
-<p>根据 C 语言的传统，<code>null</code>被设计成可以自动转为 0。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>);
-<span class="hljs-comment">// 0</span>
-
-<span class="hljs-number">6</span> + <span class="hljs-literal">null</span>;
-<span class="hljs-comment">// 6</span></code></pre>
-
-<p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。</p>
-<p>首先，<code>null</code>像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示”无”的值最好不是对象。</p>
-<p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果<code>null</code>自动转为 0，很不容易发现错误。</p>
-<p>因此，Brendan Eich 又设计增加了一个<code>undefined</code>。</p>
-<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong></p>
-<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。</p>
-<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// undefined</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// object</span></code></pre>
-
-<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？</p>
-<p>原因解释：这是 JS 一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。</p>
-<p><strong>（2）转为数值区别</strong></p>
-<p>JavaScript 的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为 0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">5</span> + <span class="hljs-literal">null</span>;
-<span class="hljs-built_in">console</span>.log(a1); <span class="hljs-comment">// 5</span>
-
-<span class="hljs-keyword">var</span> a2 = <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>;
-<span class="hljs-built_in">console</span>.log(a2); <span class="hljs-comment">// NaN</span></code></pre>
-
-<p><strong>（3）null !== undefined</strong></p>
-<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript 规范规定<code>null</code>不严格等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">null</span> !== <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span>
-
-<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span></code></pre>
-
-<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>在 JavaScript 中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。</p>
-<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。</p>
-<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。</p>
-<p><strong>null 表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
-<p>（1） 利用 document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回 null。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;notExistElement&quot;</span>)); <span class="hljs-comment">// true</span></code></pre>
-
-<p>（2） 作为对象原型链的终点。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Object</span>.getPrototypeOf(<span class="hljs-built_in">Object</span>.prototype); <span class="hljs-comment">// null</span></code></pre>
-
-<p><strong>undefined 表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：</p>
-<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
-<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//函数定义了形参 a</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">a</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
-&#125;
-f(); <span class="hljs-comment">//未传递实参</span></code></pre>
-
-<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
-a.p; <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = f();
-a; <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。</p>
-<p>最后引用玉伯大大对 null 和 undefined 的解释：</p>
-<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>【译】12个编写干净且可扩展的JavaScript技巧</title>
     <url>/2020/04/02/%E3%80%90%E8%AF%91%E3%80%9112%E4%B8%AA%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80%E4%B8%94%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>JavaScript 起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。</p>
@@ -6366,55 +6249,120 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       </tags>
   </entry>
   <entry>
-    <title>一些好用的工具、网站</title>
-    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
-    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
-<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
-<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
-<p><img src="/images/tool/1.jpg"></p>
-<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
-<p>✔ 没广告还免费！</p>
-<p><img src="/images/tool/2.jpg"></p>
-<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
-<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
-<p><img src="/images/tool/3.jpg"></p>
-<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
-<p><img src="/images/tool/4.jpg"></p>
-<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
-<p>✔ 一定也有设计师不知道这个网站滴。</p>
-<p><img src="/images/tool/5.jpg"></p>
-<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
-<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
-<p><img src="/images/tool/6.jpg"></p>
-<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
-<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
-<p><img src="/images/tool/7.jpg"></p>
-<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
-<p>✔ 比如搜索关键词“love”看到的结果：</p>
-<p><img src="/images/tool/8.jpg"></p>
-<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
-<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
-<p><img src="/images/tool/9.jpg"></p>
-<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
-<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
-<p><img src="/images/tool/10.jpg"></p>
-<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
-<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
-<p><img src="/images/tool/11.jpg"></p>
-<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
-<p>✔ 相信你用了后会觉得它很高效的。</p>
-<p><img src="/images/tool/12.jpg"></p>
-<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
-<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
-<p><img src="/images/tool/13.jpg"></p>
+    <title>Undefined vs Null</title>
+    <url>/2020/01/17/Undefined%20vs%20Null/</url>
+    <content><![CDATA[<p>在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。</p>
+<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
+<p>本文将探讨 JavaScript 中<code>undefined</code>和<code>null</code>之间的相似和差异之处。</p>
+<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在 if 语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (!<span class="hljs-literal">undefined</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;undefined is false&quot;</span>);
+<span class="hljs-comment">// undefined is false</span>
+
+<span class="hljs-keyword">if</span> (!<span class="hljs-literal">null</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;null is false&quot;</span>);
+<span class="hljs-comment">// null is false</span>
+
+<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// true</span></code></pre>
+
+<p>（2）在 JavaScript 中，只有六个 falsy 值，<code>null</code>和<code>undefined</code>都包含在六个 falsy 值中，当进行逻辑判断时所有的 Falsy 值均为 false。</p>
+<ul>
+<li>false</li>
+<li>0</li>
+<li>‘’ (空字符串，’’和””一样)</li>
+<li><strong>null</strong></li>
+<li><strong>undefined</strong></li>
+<li>NaN</li>
+</ul>
+<p>除了这六个值，JavaScript 中的任何其他值都被认为是 truthy 值，当进行逻辑判断时均为 true。</p>
+<p>（3）同样在 JavaScript 中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。</p>
+<ul>
+<li>Boolean</li>
+<li><strong>Null</strong></li>
+<li><strong>Undefined</strong></li>
+<li>Number</li>
+<li>String</li>
+<li>Symbol</li>
+</ul>
+<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？</p>
+<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！</p>
+<p>1995 年 JavaScript 诞生之初，像 Java 一样，只设置了<code>null</code>作为表示”无”的值。</p>
+<p>根据 C 语言的传统，<code>null</code>被设计成可以自动转为 0。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>);
+<span class="hljs-comment">// 0</span>
+
+<span class="hljs-number">6</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// 6</span></code></pre>
+
+<p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。</p>
+<p>首先，<code>null</code>像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示”无”的值最好不是对象。</p>
+<p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果<code>null</code>自动转为 0，很不容易发现错误。</p>
+<p>因此，Brendan Eich 又设计增加了一个<code>undefined</code>。</p>
+<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong></p>
+<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。</p>
+<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// object</span></code></pre>
+
+<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？</p>
+<p>原因解释：这是 JS 一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。</p>
+<p><strong>（2）转为数值区别</strong></p>
+<p>JavaScript 的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为 0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">5</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-built_in">console</span>.log(a1); <span class="hljs-comment">// 5</span>
+
+<span class="hljs-keyword">var</span> a2 = <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>;
+<span class="hljs-built_in">console</span>.log(a2); <span class="hljs-comment">// NaN</span></code></pre>
+
+<p><strong>（3）null !== undefined</strong></p>
+<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript 规范规定<code>null</code>不严格等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">null</span> !== <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span>
+
+<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span></code></pre>
+
+<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>在 JavaScript 中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。</p>
+<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。</p>
+<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。</p>
+<p><strong>null 表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
+<p>（1） 利用 document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回 null。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;notExistElement&quot;</span>)); <span class="hljs-comment">// true</span></code></pre>
+
+<p>（2） 作为对象原型链的终点。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Object</span>.getPrototypeOf(<span class="hljs-built_in">Object</span>.prototype); <span class="hljs-comment">// null</span></code></pre>
+
+<p><strong>undefined 表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：</p>
+<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
+<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//函数定义了形参 a</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">a</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
+&#125;
+f(); <span class="hljs-comment">//未传递实参</span></code></pre>
+
+<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+a.p; <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = f();
+a; <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。</p>
+<p>最后引用玉伯大大对 null 和 undefined 的解释：</p>
+<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。</p>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
 <p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
 ]]></content>
       <categories>
-        <category>tools</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>工具</tag>
+        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -6496,6 +6444,58 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       </categories>
       <tags>
         <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一些好用的工具、网站</title>
+    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
+<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
+<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
+<p><img src="/images/tool/1.jpg"></p>
+<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
+<p>✔ 没广告还免费！</p>
+<p><img src="/images/tool/2.jpg"></p>
+<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
+<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
+<p><img src="/images/tool/3.jpg"></p>
+<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
+<p><img src="/images/tool/4.jpg"></p>
+<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
+<p>✔ 一定也有设计师不知道这个网站滴。</p>
+<p><img src="/images/tool/5.jpg"></p>
+<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
+<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
+<p><img src="/images/tool/6.jpg"></p>
+<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
+<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
+<p><img src="/images/tool/7.jpg"></p>
+<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
+<p>✔ 比如搜索关键词“love”看到的结果：</p>
+<p><img src="/images/tool/8.jpg"></p>
+<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
+<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
+<p><img src="/images/tool/9.jpg"></p>
+<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
+<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
+<p><img src="/images/tool/10.jpg"></p>
+<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
+<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
+<p><img src="/images/tool/11.jpg"></p>
+<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
+<p>✔ 相信你用了后会觉得它很高效的。</p>
+<p><img src="/images/tool/12.jpg"></p>
+<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
+<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
+<p><img src="/images/tool/13.jpg"></p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -6756,7 +6756,7 @@ $ hexo server              //启动本地服务器，进行博客文章预览</c
 <li>把第 6 行的 title 改成你想要的名字</li>
 <li>把第 10 行的 author 改成你想取大名</li>
 <li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
 </ul>
 <p><img src="/images/hexogit/5.png"></p>
 <p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
@@ -6771,7 +6771,7 @@ $ hexo deploy                             //将本地博客代码部署到Github
 <p>5、去看你的博客，应该能看到这篇新文章啦！</p>
 <h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
 <p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:iissnan/hexo-theme-next.git</p>
 <p>4、<code>cd themes</code></p>
 <p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
 <p>6、<code>cd ..</code></p>
@@ -7314,44 +7314,6 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
       </tags>
   </entry>
   <entry>
-    <title>学会如何学习（三）</title>
-    <url>/2020/01/22/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
-    <content><![CDATA[<p>第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~</p>
-<h4 id="拖延症的形成"><a href="#拖延症的形成" class="headerlink" title="拖延症的形成"></a>拖延症的形成</h4><p>我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。</p>
-<p><img src="/images/learn3/1.jpg"></p>
-<p>这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。</p>
-<h4 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h4><p>习惯可以分为四个阶段：</p>
-<p><img src="/images/learn3/2.jpg"></p>
-<p>第一阶段是<strong>提示 (cue)</strong> ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。</p>
-<p>第二个阶段就是**惯例 (routine)**，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办的事情就想着当下去解决掉它。这里一个好的建议是，你可以通过关掉手机或者断网，或者远离其他占用碎片时间的消遣来隔离那些最具杀伤力的信号，就像你在进行番茄工作法那样。</p>
-<p>第三阶段是<strong>奖励 (reward)**，是指你做完这个惯例之后得到的反馈，它会刺激你不断按照之前的惯例行事。任何一种习惯得以发展和延续都是因为它可以回报我们，它会立即给我们带来些许愉悦感。拖延是极易产生的习惯，因为你将关注点转向更令人愉悦的事情后，随之而来的奖励迅速而又简单。好习惯也是有奖励的，对于克服拖延症来说，想办法奖励好习惯非常重要，</strong>只有当大脑开始期待那个奖励，旧习惯才能得到重置，你才能养成新习惯**。</p>
-<p>研究发现需要给奖励设定时间点。比如说，午休与朋友到快餐店吃饭，或是在下午 5 点结束主要的任务。这样小而实在的截止期限可以激励你很好地去工作。</p>
-<p>第四阶段是<strong>信念 (belief)</strong> 。改变拖延习惯最重要的一点就是“相信自己能够做到”的这个信念，就好比说必须要摒弃“自己不是学这块知识的料”这一习惯想法，而是要保持自己能够学好的信念并为之做出应有的努力。</p>
-<h4 id="应对生活和学习"><a href="#应对生活和学习" class="headerlink" title="应对生活和学习"></a>应对生活和学习</h4><p>要保持对学习目标的展望，一个很好的办法是每周写下本周关键任务列表，试着在前一晚写下第二日的任务，为什么要在前一晚呢？ 研究表明，这可以让你在潜意识下设法解决任务，从而找到完成方法。</p>
-<p>列下任务清单后，每天花一个或几个番茄钟的时间完成它们。如果可以短时间完成的任务，可以采用结果导向，如果不是则关注过程。你不必一定要设置 25 分钟的番茄钟，比如 22 分钟也是可行的。</p>
-<p>其实，<strong>当你能对一定时间内自己可以完成的工作量做出较准确的判断时，你将很快进步</strong>。计划好完成目标的时间是合理且最为重要的一点，计划你的休息时间和计划工作时间也同样重要，就是在努力学习之余保持健康休闲时间的人，其表现往往胜过那些一味努力学习的人，所以从现在开始，在努力工作学习之余试着挤出点休息时间吧！</p>
-<p>芭芭拉老师还建议在<strong>早晨尽量先开始最重要且最讨厌，最难的工作，至少做一个番茄时间，这证明了极其有效</strong>！有时会发生一些意料之外的事，我们当然需要对计划作出改变，但是请记住幸运法则——<strong>幸运女神会眷顾努力之人</strong>。良好的计划也是努力的一部分，关注学习目标，尽量避免因为偶发事件产生的不确定性。</p>
-<p><img src="/images/learn3/3.jpg"></p>
-<h4 id="提高记忆力"><a href="#提高记忆力" class="headerlink" title="提高记忆力"></a>提高记忆力</h4><p>改变了拖延症的坏习惯后，我们才能更好地利用记忆去学习。我们的大脑天生就擅长记忆不同的空间信息，如果你受邀参观一所陌生的房子 ，你会很快对这个房子有一个大致的概念。例如，整体的家具布局、房间位置、颜色的搭配。只需几分钟，你的大脑就能获取并存储数以千计的信息，甚至几周后，就算你面对是一堵白墙，也仍然能记起许多细节。这一系列空间信息，帮助你在脑中形成地图。如果能够<strong>充分发挥天生就很强大的视觉和空间记忆能力</strong>，你的记忆潜能就可以得到极大提高。</p>
-<p>评判一个人的记忆力好坏，主要看他的长期记忆的能力如何，每个人都可以通过集中注意力使某件事物进入你的临时工作记忆，但<strong>从工作记忆进入长期记忆则要满足两个条件。首先它要令人难忘，其次，信息需要复习和回顾</strong>。那如何让它难忘呢？比如记 F=ma（力=质量 x 加速度）这个物理公式，老师把它想象成一只戴着飞行员眼镜的驴(a flying mule，英文首字母对应公式的简写)，躺在她老家厨房的水槽里，这样就完成了把抽象概念变成具体图像。这个比喻是不是很无厘头啊哈哈，所以说记忆大师们都是一些幻想家。</p>
-<p><img src="/images/learn3/4.jpg"></p>
-<p>记忆宫殿（Mind Palace / Memory Palace）就是这么一个虚拟的，让你储存信息的技巧工具。你可以把熟悉的场景，比如你的家，作为一个放置记忆碎片的地方，然后把要记的抽象的东西，通过联想，组团，转化成具体图像，放在那个场景中的某个地方。而且这个图像不需要阐述你要记住的东西的意义，甚至它越是不合常理，越稀奇古怪，效果就越好。因为大脑通常会滤过习以为常的事物，而对令人惊讶的非典型性事件记忆犹新。</p>
-<p>比如购物清单上要买的牛奶、面包、鸡蛋，使用这个技巧你可以想象在你的家中，有一大瓶牛奶在前门，面包掉到了沙发上，裂了的鸡蛋从咖啡桌边缘滴落。也就是说，你可以想象自己穿过一个熟悉的地方，伴随着一些与要记忆的物体相关的难忘画面，这种记忆方式往往记得很牢。</p>
-<p>题外话，爱看港剧的朋友，相信对 TVB 剧《读心神探》中的记忆宫殿印象深刻。第三集中有一段对记忆方法的特写，我们一起来细究一下吧！第三集刚开始的时候讲的就是记忆人名头像。那么记忆人名第一步就是观察人物的长相特征，这个特征可以看人物穿的衣服，戴的装饰品，五官的长相特点，发型，声音的特色等等，找出特点以后第二步就是对人物的名字进行联想。比如有个人叫袁泉，而正好她戴了一对圆圆的耳环，那么就很容易联想到“圆圈”（利用名字的谐音记忆）；又比如有人叫邓超，那么你可以联想到这个和你初识时，眼睛“邓”的超大的痴痴的望着你，只要你这么一想，那么这个人物名字肯定就在你脑海里留下了深刻的印象，虽然有点点毛骨悚然哈哈。</p>
-<p><img src="/images/learn3/5.jpg"></p>
-<p>看完上面举得例子也许会有人会问你那些名字和特征都是你事先设想好的，所以才容易发现名字与特征之间的联系，但其实这些都是临时想到的真实案例，<strong>其实我们能够观察到的特征是有限的，但是人的想象是无限的</strong>，只要你的想法足够好那肯定能找到一个人物的特征与名字之间的完美契合点，这也是记忆法的精髓。</p>
-<p>最后，在这一周的课外采访中，受采访者是一名美国记忆比赛的冠军，他是“记忆宫殿”这个技巧的专家。他给大家的学习建议是——保持孩童般的想象力与好奇心，通过新奇的想象来帮助你记忆，让学习变得有趣和容易。大家从现在开始不妨试一试~</p>
-<p>下一节课我们会学习复兴式学习与潜力的关系。</p>
-]]></content>
-      <categories>
-        <category>学习之道</category>
-      </categories>
-      <tags>
-        <tag>高效学习</tag>
-        <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>学会如何学习（一）</title>
     <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
     <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
@@ -7400,6 +7362,44 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
 <p>7、给大家的建议?</p>
 <p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
 <p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
+]]></content>
+      <categories>
+        <category>学习之道</category>
+      </categories>
+      <tags>
+        <tag>高效学习</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>学会如何学习（三）</title>
+    <url>/2020/01/22/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/</url>
+    <content><![CDATA[<p>第三周的学习因为拖延稍微拖了那么几天，而这周的主题又刚好是拖延症与记忆的关系。想要高效地学习，就得学会如何运用和提高自己的记忆能力，而这个过程中，必须先克服拖延症。所以上完这节课，我是该好好改改拖延的老毛病了嘻嘻~</p>
+<h4 id="拖延症的形成"><a href="#拖延症的形成" class="headerlink" title="拖延症的形成"></a>拖延症的形成</h4><p>我们常在那些让人不太舒服的事情上拖延，这点大家或多或少都会有，那事实结果是，拖延是一个极其重要、影响广泛的坏习惯，生活的方方面面都会受到拖延的影响。</p>
+<p><img src="/images/learn3/1.jpg"></p>
+<p>这里要强调一下，很多人觉得能靠自己的意志力去战胜拖延症，其实这是适得其反的。人每天的意志力是有限的，调用意志力去克服一件困难的事，会大量消耗能量。为什么拖延症这么容易就产生，是因为它变成了习惯，习惯是不需要意志力去执行的，它能减少大脑的消耗。所以改变习惯，是改变拖延症的正确方法。</p>
+<h4 id="习惯"><a href="#习惯" class="headerlink" title="习惯"></a>习惯</h4><p>习惯可以分为四个阶段：</p>
+<p><img src="/images/learn3/2.jpg"></p>
+<p>第一阶段是<strong>提示 (cue)</strong> ，是指引发你进行某种惯例的信息来源。比如朋友发来的一条微信信息，或是你看到了待办事项清单上的第一件事等等。</p>
+<p>第二个阶段就是**惯例 (routine)**，是指你对提示做出的惯性反应。比如看到微信信息就觉得要立马停下手头上的事情去回信息；看到待办的事情就想着当下去解决掉它。这里一个好的建议是，你可以通过关掉手机或者断网，或者远离其他占用碎片时间的消遣来隔离那些最具杀伤力的信号，就像你在进行番茄工作法那样。</p>
+<p>第三阶段是<strong>奖励 (reward)**，是指你做完这个惯例之后得到的反馈，它会刺激你不断按照之前的惯例行事。任何一种习惯得以发展和延续都是因为它可以回报我们，它会立即给我们带来些许愉悦感。拖延是极易产生的习惯，因为你将关注点转向更令人愉悦的事情后，随之而来的奖励迅速而又简单。好习惯也是有奖励的，对于克服拖延症来说，想办法奖励好习惯非常重要，</strong>只有当大脑开始期待那个奖励，旧习惯才能得到重置，你才能养成新习惯**。</p>
+<p>研究发现需要给奖励设定时间点。比如说，午休与朋友到快餐店吃饭，或是在下午 5 点结束主要的任务。这样小而实在的截止期限可以激励你很好地去工作。</p>
+<p>第四阶段是<strong>信念 (belief)</strong> 。改变拖延习惯最重要的一点就是“相信自己能够做到”的这个信念，就好比说必须要摒弃“自己不是学这块知识的料”这一习惯想法，而是要保持自己能够学好的信念并为之做出应有的努力。</p>
+<h4 id="应对生活和学习"><a href="#应对生活和学习" class="headerlink" title="应对生活和学习"></a>应对生活和学习</h4><p>要保持对学习目标的展望，一个很好的办法是每周写下本周关键任务列表，试着在前一晚写下第二日的任务，为什么要在前一晚呢？ 研究表明，这可以让你在潜意识下设法解决任务，从而找到完成方法。</p>
+<p>列下任务清单后，每天花一个或几个番茄钟的时间完成它们。如果可以短时间完成的任务，可以采用结果导向，如果不是则关注过程。你不必一定要设置 25 分钟的番茄钟，比如 22 分钟也是可行的。</p>
+<p>其实，<strong>当你能对一定时间内自己可以完成的工作量做出较准确的判断时，你将很快进步</strong>。计划好完成目标的时间是合理且最为重要的一点，计划你的休息时间和计划工作时间也同样重要，就是在努力学习之余保持健康休闲时间的人，其表现往往胜过那些一味努力学习的人，所以从现在开始，在努力工作学习之余试着挤出点休息时间吧！</p>
+<p>芭芭拉老师还建议在<strong>早晨尽量先开始最重要且最讨厌，最难的工作，至少做一个番茄时间，这证明了极其有效</strong>！有时会发生一些意料之外的事，我们当然需要对计划作出改变，但是请记住幸运法则——<strong>幸运女神会眷顾努力之人</strong>。良好的计划也是努力的一部分，关注学习目标，尽量避免因为偶发事件产生的不确定性。</p>
+<p><img src="/images/learn3/3.jpg"></p>
+<h4 id="提高记忆力"><a href="#提高记忆力" class="headerlink" title="提高记忆力"></a>提高记忆力</h4><p>改变了拖延症的坏习惯后，我们才能更好地利用记忆去学习。我们的大脑天生就擅长记忆不同的空间信息，如果你受邀参观一所陌生的房子 ，你会很快对这个房子有一个大致的概念。例如，整体的家具布局、房间位置、颜色的搭配。只需几分钟，你的大脑就能获取并存储数以千计的信息，甚至几周后，就算你面对是一堵白墙，也仍然能记起许多细节。这一系列空间信息，帮助你在脑中形成地图。如果能够<strong>充分发挥天生就很强大的视觉和空间记忆能力</strong>，你的记忆潜能就可以得到极大提高。</p>
+<p>评判一个人的记忆力好坏，主要看他的长期记忆的能力如何，每个人都可以通过集中注意力使某件事物进入你的临时工作记忆，但<strong>从工作记忆进入长期记忆则要满足两个条件。首先它要令人难忘，其次，信息需要复习和回顾</strong>。那如何让它难忘呢？比如记 F=ma（力=质量 x 加速度）这个物理公式，老师把它想象成一只戴着飞行员眼镜的驴(a flying mule，英文首字母对应公式的简写)，躺在她老家厨房的水槽里，这样就完成了把抽象概念变成具体图像。这个比喻是不是很无厘头啊哈哈，所以说记忆大师们都是一些幻想家。</p>
+<p><img src="/images/learn3/4.jpg"></p>
+<p>记忆宫殿（Mind Palace / Memory Palace）就是这么一个虚拟的，让你储存信息的技巧工具。你可以把熟悉的场景，比如你的家，作为一个放置记忆碎片的地方，然后把要记的抽象的东西，通过联想，组团，转化成具体图像，放在那个场景中的某个地方。而且这个图像不需要阐述你要记住的东西的意义，甚至它越是不合常理，越稀奇古怪，效果就越好。因为大脑通常会滤过习以为常的事物，而对令人惊讶的非典型性事件记忆犹新。</p>
+<p>比如购物清单上要买的牛奶、面包、鸡蛋，使用这个技巧你可以想象在你的家中，有一大瓶牛奶在前门，面包掉到了沙发上，裂了的鸡蛋从咖啡桌边缘滴落。也就是说，你可以想象自己穿过一个熟悉的地方，伴随着一些与要记忆的物体相关的难忘画面，这种记忆方式往往记得很牢。</p>
+<p>题外话，爱看港剧的朋友，相信对 TVB 剧《读心神探》中的记忆宫殿印象深刻。第三集中有一段对记忆方法的特写，我们一起来细究一下吧！第三集刚开始的时候讲的就是记忆人名头像。那么记忆人名第一步就是观察人物的长相特征，这个特征可以看人物穿的衣服，戴的装饰品，五官的长相特点，发型，声音的特色等等，找出特点以后第二步就是对人物的名字进行联想。比如有个人叫袁泉，而正好她戴了一对圆圆的耳环，那么就很容易联想到“圆圈”（利用名字的谐音记忆）；又比如有人叫邓超，那么你可以联想到这个和你初识时，眼睛“邓”的超大的痴痴的望着你，只要你这么一想，那么这个人物名字肯定就在你脑海里留下了深刻的印象，虽然有点点毛骨悚然哈哈。</p>
+<p><img src="/images/learn3/5.jpg"></p>
+<p>看完上面举得例子也许会有人会问你那些名字和特征都是你事先设想好的，所以才容易发现名字与特征之间的联系，但其实这些都是临时想到的真实案例，<strong>其实我们能够观察到的特征是有限的，但是人的想象是无限的</strong>，只要你的想法足够好那肯定能找到一个人物的特征与名字之间的完美契合点，这也是记忆法的精髓。</p>
+<p>最后，在这一周的课外采访中，受采访者是一名美国记忆比赛的冠军，他是“记忆宫殿”这个技巧的专家。他给大家的学习建议是——保持孩童般的想象力与好奇心，通过新奇的想象来帮助你记忆，让学习变得有趣和容易。大家从现在开始不妨试一试~</p>
+<p>下一节课我们会学习复兴式学习与潜力的关系。</p>
 ]]></content>
       <categories>
         <category>学习之道</category>
@@ -8034,44 +8034,6 @@ SayHI(jaychou); <span class="hljs-comment">// HI Chou</span></code></pre>
       </tags>
   </entry>
   <entry>
-    <title>贵州黔东南之行</title>
-    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
-    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
-<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
-<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
-<p><img src="/images/guizhou/1.jpg"></p>
-<p><img src="/images/guizhou/2.jpg"></p>
-<p><img src="/images/guizhou/3.jpg"></p>
-<p>河边坐落了许多充满文艺的小店和清吧。</p>
-<p><img src="/images/guizhou/4.jpg"></p>
-<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
-<p><img src="/images/guizhou/5.jpg"></p>
-<p><img src="/images/guizhou/6.jpg"></p>
-<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
-<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
-<p><img src="/images/guizhou/7.jpg"></p>
-<p><img src="/images/guizhou/8.jpg"></p>
-<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
-<p><img src="/images/guizhou/9.jpg"></p>
-<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
-<p><img src="/images/guizhou/10.jpg"></p>
-<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
-<p><img src="/images/guizhou/11.jpg"></p>
-<p><img src="/images/guizhou/12.jpg"></p>
-<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
-<p><img src="/images/guizhou/13.jpg"></p>
-<p><img src="/images/guizhou/14.jpg"></p>
-<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>贵州</tag>
-        <tag>游记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈JavaScript中的函数构造式和prototype的建立</title>
     <url>/2020/04/24/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0%E5%BC%8F%E5%92%8Cprototype%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
     <content><![CDATA[<p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">《谈谈 JavaScript 中的 function constructor 和 new 关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。</p>
@@ -8192,6 +8154,44 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
         <tag>JavaScript</tag>
         <tag>constructor</tag>
         <tag>prototype</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贵州黔东南之行</title>
+    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
+    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
+<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
+<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
+<p><img src="/images/guizhou/1.jpg"></p>
+<p><img src="/images/guizhou/2.jpg"></p>
+<p><img src="/images/guizhou/3.jpg"></p>
+<p>河边坐落了许多充满文艺的小店和清吧。</p>
+<p><img src="/images/guizhou/4.jpg"></p>
+<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
+<p><img src="/images/guizhou/5.jpg"></p>
+<p><img src="/images/guizhou/6.jpg"></p>
+<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
+<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
+<p><img src="/images/guizhou/7.jpg"></p>
+<p><img src="/images/guizhou/8.jpg"></p>
+<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
+<p><img src="/images/guizhou/9.jpg"></p>
+<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
+<p><img src="/images/guizhou/10.jpg"></p>
+<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
+<p><img src="/images/guizhou/11.jpg"></p>
+<p><img src="/images/guizhou/12.jpg"></p>
+<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
+<p><img src="/images/guizhou/13.jpg"></p>
+<p><img src="/images/guizhou/14.jpg"></p>
+<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>贵州</tag>
+        <tag>游记</tag>
       </tags>
   </entry>
   <entry>

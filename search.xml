@@ -850,7 +850,7 @@ flex: none  //等同于flex:0 0 auto</code></pre>
   </entry>
   <entry>
     <title>GitHub+jsDelivr+PicGo搭建免费、快速图床</title>
-    <url>/2020/09/27/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
+    <url>/2020/09/28/GitHub+jsDelivr+PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E3%80%81%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
 <p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
 <p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
@@ -903,6 +903,7 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       <tags>
         <tag>github</tag>
         <tag>图床</tag>
+        <tag>PicGo</tag>
       </tags>
   </entry>
   <entry>

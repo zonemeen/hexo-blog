@@ -1383,7 +1383,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
 <p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
 <p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#109;">&#103;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
 <p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
 <pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
 
@@ -1395,7 +1395,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
 <p>我们最后再回顾一遍已经学到的命令：</p>
 <blockquote>
-<p>git clone <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+<p>git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
 </blockquote>
 <h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
 <p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
@@ -2185,188 +2185,6 @@ foo.bar = <span class="hljs-string">&quot;lzm&quot;</span>; <span class="hljs-co
       </tags>
   </entry>
   <entry>
-    <title>JavaScript事件三部曲之事件的兄弟姐妹们</title>
-    <url>/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/</url>
-    <content><![CDATA[<p>在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。</p>
-<h3 id="事件的种类"><a href="#事件的种类" class="headerlink" title="事件的种类"></a>事件的种类</h3><p>浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是 Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：</p>
-<h4 id="界面相关事件"><a href="#界面相关事件" class="headerlink" title="界面相关事件"></a>界面相关事件</h4><p>界面相关的事件不一定会与使用者对 DOM 的操作有关系，反而大多数与 window 对象比较有关系。</p>
-<ul>
-<li><code>load</code> 事件：</li>
-</ul>
-<p>注册在 <code>window</code> 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发<code>load</code>事件。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;所有资源都加载完成&quot;</span>);
-&#125;);</code></pre>
-
-<ul>
-<li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
-</ul>
-<p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
-<p><img src="/images/event/7.jpg"></p>
-<ul>
-<li><code>error</code> 事件：</li>
-</ul>
-<p><code>error</code> 事件会在 <code>document</code> 或是图片载入错误时触发。由于考虑到维护性，大多事件的注册我会强烈建议使用「非侵入式 JavaScript」的写法，即 JavaScript 代码和标记的分离。只有 <code>error</code> 事件最适合以 <code>on-event</code> 的写法来处理：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.jpg&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;default.jpg&#x27;&quot;</span> /&gt;</span></code></pre>
-
-<p>像这样，当<code>image.jpg</code>这张图片不存在的时候，马上就会触发<code>error</code>事件，就会通过<code>this.src</code>将<code>&lt;img&gt;</code>的 <code>src</code> 属性替换成指定的图片，是相当实用的技巧。</p>
-<p>若是在网页 <code>load</code> 完成后才注册了<code>error</code>事件，你只会看到破图的结果，因为<code>error</code>事件不会再次被触发，后来挂上去的事件处理函数就等于没有一样。</p>
-<ul>
-<li><p><code>resize</code>事件：在改变浏览器窗口大小时触发，主要发生在<code>window</code>对象上面。</p>
-</li>
-<li><p><code>scroll</code>事件：在文档或文档元素滚动时触发，主要出现在用户拖动滚动条。</p>
-</li>
-<li><p><code>DOMContentLoaded</code>事件：</p>
-</li>
-</ul>
-<p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
-<p><img src="/images/event/8.jpg"></p>
-<p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">      <span class="hljs-comment">// 因 Document 结构未载入，无效</span></span>
-<span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
-
-<p>那么，改成这样：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">      <span class="hljs-built_in">document</span>.addEventListener(</span>
-<span class="javascript">        <span class="hljs-string">&quot;DOMContentLoaded&quot;</span>,</span>
-<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span>
-<span class="javascript">          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span></span>
-<span class="javascript">          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
-        &#125;,
-<span class="javascript">        <span class="hljs-literal">false</span></span>
-      );
-    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
-
-<p>就可以排除<code>&lt;script&gt;</code>标签放在<code>&lt;head&gt; ... &lt;/head&gt;</code>抓不到 DOM 的问题啦。</p>
-<p>与大家所熟知的 <code>jQuery$( document ).ready( handler )</code>作用类似。</p>
-<h4 id="鼠标相关事件"><a href="#鼠标相关事件" class="headerlink" title="鼠标相关事件"></a>鼠标相关事件</h4><ul>
-<li><p><code>mousedown</code> / <code>mouseup</code> 事件: 这两个事件分别会在鼠标点击了某元素「按下」(mousedown) 按钮，以及「放开」(mouseup)按钮时触发。</p>
-</li>
-<li><p><code>click</code> 事件: 当鼠标「点击」了某元素时触发。</p>
-</li>
-<li><p><code>dblclick</code>事件: 当鼠标「连点两次」某元素时触发。</p>
-</li>
-<li><p><code>mouseenter</code> / <code>mousemove</code> / <code>mouseleave</code> 事件：这三个事件要放在一起看：</p>
-</li>
-</ul>
-<ol>
-<li>当鼠标光标移入了某元素时，会先触发 <code>mouseenter</code> 事件。</li>
-<li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
-<li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
-</ol>
-<p><img src="/images/event/9.gif"></p>
-<p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
-<h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
-<ul>
-<li><p><code>keydown</code> 事件: 「压下」键盘按键时会触发 <code>keydown</code> 事件。</p>
-</li>
-<li><p><code>keypress</code> 事件: 除了 Shift, Fn, CapsLock 这三种按键外按住时会触发，若按着不放则会连续触发。</p>
-</li>
-<li><p><code>keyup</code> 事件: 「放开」键盘按键时会触发。</p>
-</li>
-</ul>
-<p>如果我们针对同个元素同时绑定了这三个键盘事件，那么这三个事件执行的顺序会是：</p>
-<pre><code class="hljs ebnf"><span class="hljs-attribute">keydown</span>
-<span class="hljs-attribute">keypress</span>
-<span class="hljs-attribute">keyup</span></code></pre>
-
-<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a href="https://gist.github.com/tylerbuchea/8011573">这里</a>查看：</p>
-<p>例如，今天你想要当使用者在<code>input</code>输入框按下 「enter」 时，发动<code>submit</code>，就可以这样做：</p>
-<pre><code class="hljs javascript">textBox.addEventListener(
-  <span class="hljs-string">&quot;keydown&quot;</span>,
-  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
-    <span class="hljs-comment">// enter 的 keyCode 是 13</span>
-    <span class="hljs-keyword">if</span> (e.keyCode === <span class="hljs-number">13</span>) &#123;
-      formSubmit();
-    &#125;
-  &#125;,
-  <span class="hljs-literal">false</span>
-);</code></pre>
-
-<p>像这样，通过<code>e.keyCode</code>就可以判断使用者目前按下的是哪个按钮。</p>
-<h4 id="表单相关事件"><a href="#表单相关事件" class="headerlink" title="表单相关事件"></a>表单相关事件</h4><ul>
-<li><p><code>input</code> 事件： 当 <code>input</code>、 <code>textarea</code> 以及带有 <code>contenteditable</code> 的元素內容被改变时，就会触发 <code>input</code> 事件。</p>
-</li>
-<li><p><code>change</code> 事件： 当 <code>input</code>、<code>select</code>、<code>textarea</code>、<code>radio</code>、<code>checkbox</code> 等表单元素被改变时触发。 但与 <code>input</code> 事件不同的是，<code>input</code> 事件会在输入框输入內容的当下触发，而 <code>change</code> 事件则是在目前焦点离开输入框后才触发。</p>
-</li>
-<li><p><code>submit</code> 事件：当表单被送出时触发，通常表单验证都会在这一步处理，若验证未通过则 <code>return false;</code>。</p>
-</li>
-<li><p><code>focus</code> 事件：当元素被聚焦时触发。</p>
-</li>
-<li><p><code>blur</code> 事件：当元素失去焦点时触发。</p>
-</li>
-</ul>
-<h4 id="特殊事件"><a href="#特殊事件" class="headerlink" title="特殊事件"></a>特殊事件</h4><ul>
-<li>Composition Event (组成事件):</li>
-</ul>
-<p><strong>Composition Event</strong> 其实指的是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code> 这三个事件。</p>
-<p>介绍 Composition Events 之前先来谈谈 DOM API 过去对输入框侦测变化的几个方式：</p>
-<p>常见的表单输入框如: <code>&lt;input type=&quot;text&quot;&gt;</code> 如果要动态监听输入框的文字变化时， 大多会通过监听 <code>keydown</code>、<code>keypress</code>、<code>keyup</code> 等键盘事件来判断 <code>value</code> 是否变动，但如果是通过「<strong>复制粘贴</strong>」之类的操作，就无法通过键盘事件来判断。</p>
-<p>而即使是 <code>change</code> 事件则是要在使用者改变內容，且<strong>焦点离开输入框</strong>的前一刻才会被触发。</p>
-<p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
-<p>但是，新的问题来了！</p>
-<p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
-<p><img src="/images/event/10.jpg"></p>
-<p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
-<p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
-<p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
-<p>通过 <code>Composition Events</code> 我们可以观察使用者在输入框內开启输入法 (Input Method Editor, IME) 时，组字或选字的状态。</p>
-<p>Composition Events 提供三个事件给开发者监听：分別是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code>。</p>
-<ul>
-<li><code>compositionstart</code>: 输入框內开启输入法，且正在拼字时触发。</li>
-<li><code>compositionupdate</code>: 输入框內开启输入法，且正在拼字或选字时更改了內容时触发。</li>
-<li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
-</ul>
-<p>执行的时候像这样：</p>
-<p><img src="/images/event/11.jpg"></p>
-<p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
-<h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">&#x27;build&#x27;</span>);
-
-<span class="hljs-comment">// 监听事件</span>
-elem.addEventListener(<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
-
-<span class="hljs-comment">// 触发事件</span>
-elem.dispatchEvent(event);</code></pre>
-
-<p>若是想要在自订事件內增加更多资料，则可以改用<code>CustomEvent</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">&quot;build&quot;</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre>
-
-<p>那么在 Event 处理函数就可以通过<code>event</code>来接收：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventHandler</span>(<span class="hljs-params">e</span>) </span>&#123;
-  log(<span class="hljs-string">&quot;The time is: &quot;</span> + e.detail);
-&#125;</code></pre>
-
-<p>当然，浏览器提供的事件相当多，今天分享的部分主要是比较常见的一些事件，以及工作上实际需要特別注意的部分。</p>
-<p>其他的多数事件你都可以在 MDN 的 <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference</a> 找到。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>事件</tag>
-        <tag>event</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript事件三部曲之事件机制的原理</title>
     <url>/2020/06/26/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%E7%9A%84%E5%8E%9F%E7%90%86/</url>
     <content><![CDATA[<p>JavaScript 是一个事件驱动(Event-driven) 的语言，当浏览器载入网页开始读取后，虽然马上会读取 JavaScript 事件相关的代码，但是必须要等到「事件」被触发(如使用者点击、按下键盘等)后，才会再进行对应代码段的执行。</p>
@@ -2664,6 +2482,188 @@ btn.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, clic
 
 <p>那么以上就是今天为各位介绍 JavaScript 事件机制原理的部分。</p>
 <p>接下来的文章我会继续来介绍事件的种类，以及更多实际上处理「事件」时需要注意的事项。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>事件</tag>
+        <tag>event</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript事件三部曲之事件的兄弟姐妹们</title>
+    <url>/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/</url>
+    <content><![CDATA[<p>在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。 那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM 规范之中究竟提供了哪些事件。</p>
+<h3 id="事件的种类"><a href="#事件的种类" class="headerlink" title="事件的种类"></a>事件的种类</h3><p>浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是 Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：</p>
+<h4 id="界面相关事件"><a href="#界面相关事件" class="headerlink" title="界面相关事件"></a>界面相关事件</h4><p>界面相关的事件不一定会与使用者对 DOM 的操作有关系，反而大多数与 window 对象比较有关系。</p>
+<ul>
+<li><code>load</code> 事件：</li>
+</ul>
+<p>注册在 <code>window</code> 对象上，指的是在页面或某个资源加载成功时触发。注意，页面或资源从浏览器缓存加载，并不会触发<code>load</code>事件。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&quot;load&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;所有资源都加载完成&quot;</span>);
+&#125;);</code></pre>
+
+<ul>
+<li><code>unload</code> 、 <code>beforeunload</code> 事件：</li>
+</ul>
+<p>与 <code>load</code> 事件相反，<code>unload</code> 与 <code>beforeunload</code> 事件分别会在离开页面或重新整理时触发，而 <code>beforeunload</code> 会跳出对话框询问使用者是否要离开当前页面。</p>
+<p><img src="/images/event/7.jpg"></p>
+<ul>
+<li><code>error</code> 事件：</li>
+</ul>
+<p><code>error</code> 事件会在 <code>document</code> 或是图片载入错误时触发。由于考虑到维护性，大多事件的注册我会强烈建议使用「非侵入式 JavaScript」的写法，即 JavaScript 代码和标记的分离。只有 <code>error</code> 事件最适合以 <code>on-event</code> 的写法来处理：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;image.jpg&quot;</span> <span class="hljs-attr">onerror</span>=<span class="hljs-string">&quot;this.src=&#x27;default.jpg&#x27;&quot;</span> /&gt;</span></code></pre>
+
+<p>像这样，当<code>image.jpg</code>这张图片不存在的时候，马上就会触发<code>error</code>事件，就会通过<code>this.src</code>将<code>&lt;img&gt;</code>的 <code>src</code> 属性替换成指定的图片，是相当实用的技巧。</p>
+<p>若是在网页 <code>load</code> 完成后才注册了<code>error</code>事件，你只会看到破图的结果，因为<code>error</code>事件不会再次被触发，后来挂上去的事件处理函数就等于没有一样。</p>
+<ul>
+<li><p><code>resize</code>事件：在改变浏览器窗口大小时触发，主要发生在<code>window</code>对象上面。</p>
+</li>
+<li><p><code>scroll</code>事件：在文档或文档元素滚动时触发，主要出现在用户拖动滚动条。</p>
+</li>
+<li><p><code>DOMContentLoaded</code>事件：</p>
+</li>
+</ul>
+<p>类似于<code>load</code>事件，但不同的是，<code>load</code>事件是在网页「所有」资源都已经载入完成后才会触发，而<code>DOMContentLoaded</code>事件是在 DOM 结构被完整的读取跟解析后就会被触发，不须等待外部资源读取完成，因此可以这么说，这两者所监听的阶段不同，可以用下面这张图来解释：</p>
+<p><img src="/images/event/8.jpg"></p>
+<p>我们在<a href="https://zhuanlan.zhihu.com/p/66576306">《通过 DOM API 查找节点》</a>这篇文章中曾介绍过，<code>&lt;script&gt;</code>标签要是放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间，因为还没解析到网页本体会有选取不到 DOM 的问题对吧？</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-comment">// 因 Document 结构未载入，无效</span></span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>那么，改成这样：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">      <span class="hljs-built_in">document</span>.addEventListener(</span>
+<span class="javascript">        <span class="hljs-string">&quot;DOMContentLoaded&quot;</span>,</span>
+<span class="javascript">        <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span>
+<span class="javascript">          <span class="hljs-comment">// 当 document 结构已解析完成才会执行</span></span>
+<span class="javascript">          <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;hello&quot;</span>).textContent = <span class="hljs-string">&quot;Hello&quot;</span>;</span>
+        &#125;,
+<span class="javascript">        <span class="hljs-literal">false</span></span>
+      );
+    <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;hello&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></code></pre>
+
+<p>就可以排除<code>&lt;script&gt;</code>标签放在<code>&lt;head&gt; ... &lt;/head&gt;</code>抓不到 DOM 的问题啦。</p>
+<p>与大家所熟知的 <code>jQuery$( document ).ready( handler )</code>作用类似。</p>
+<h4 id="鼠标相关事件"><a href="#鼠标相关事件" class="headerlink" title="鼠标相关事件"></a>鼠标相关事件</h4><ul>
+<li><p><code>mousedown</code> / <code>mouseup</code> 事件: 这两个事件分别会在鼠标点击了某元素「按下」(mousedown) 按钮，以及「放开」(mouseup)按钮时触发。</p>
+</li>
+<li><p><code>click</code> 事件: 当鼠标「点击」了某元素时触发。</p>
+</li>
+<li><p><code>dblclick</code>事件: 当鼠标「连点两次」某元素时触发。</p>
+</li>
+<li><p><code>mouseenter</code> / <code>mousemove</code> / <code>mouseleave</code> 事件：这三个事件要放在一起看：</p>
+</li>
+</ul>
+<ol>
+<li>当鼠标光标移入了某元素时，会先触发 <code>mouseenter</code> 事件。</li>
+<li>鼠标光标在这个元素內「移动」时，会连续触发 <code>mousemove</code> 事件。</li>
+<li>直到鼠标光标离开了这个元素，才触发 <code>mouseleave</code> 事件。</li>
+</ol>
+<p><img src="/images/event/9.gif"></p>
+<p>这些鼠标相关的事件，都可以通过<code>event.pageX</code> 与 <code>event.pageY</code>属性去取得目前鼠标在网页对应的坐标。</p>
+<h4 id="键盘相关事件"><a href="#键盘相关事件" class="headerlink" title="键盘相关事件"></a>键盘相关事件</h4><p>键盘常用相关事件有下列三种，在大多数情况下会将键盘事件注册在 <code>input</code> 的输入框上。</p>
+<ul>
+<li><p><code>keydown</code> 事件: 「压下」键盘按键时会触发 <code>keydown</code> 事件。</p>
+</li>
+<li><p><code>keypress</code> 事件: 除了 Shift, Fn, CapsLock 这三种按键外按住时会触发，若按着不放则会连续触发。</p>
+</li>
+<li><p><code>keyup</code> 事件: 「放开」键盘按键时会触发。</p>
+</li>
+</ul>
+<p>如果我们针对同个元素同时绑定了这三个键盘事件，那么这三个事件执行的顺序会是：</p>
+<pre><code class="hljs ebnf"><span class="hljs-attribute">keydown</span>
+<span class="hljs-attribute">keypress</span>
+<span class="hljs-attribute">keyup</span></code></pre>
+
+<p>若此时想要知道使用者按下的按键是哪个，则可以通过<code>event.keyCode</code>属性来查询。<code>keyCode</code>的对应表可以到<a href="https://gist.github.com/tylerbuchea/8011573">这里</a>查看：</p>
+<p>例如，今天你想要当使用者在<code>input</code>输入框按下 「enter」 时，发动<code>submit</code>，就可以这样做：</p>
+<pre><code class="hljs javascript">textBox.addEventListener(
+  <span class="hljs-string">&quot;keydown&quot;</span>,
+  <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123;
+    <span class="hljs-comment">// enter 的 keyCode 是 13</span>
+    <span class="hljs-keyword">if</span> (e.keyCode === <span class="hljs-number">13</span>) &#123;
+      formSubmit();
+    &#125;
+  &#125;,
+  <span class="hljs-literal">false</span>
+);</code></pre>
+
+<p>像这样，通过<code>e.keyCode</code>就可以判断使用者目前按下的是哪个按钮。</p>
+<h4 id="表单相关事件"><a href="#表单相关事件" class="headerlink" title="表单相关事件"></a>表单相关事件</h4><ul>
+<li><p><code>input</code> 事件： 当 <code>input</code>、 <code>textarea</code> 以及带有 <code>contenteditable</code> 的元素內容被改变时，就会触发 <code>input</code> 事件。</p>
+</li>
+<li><p><code>change</code> 事件： 当 <code>input</code>、<code>select</code>、<code>textarea</code>、<code>radio</code>、<code>checkbox</code> 等表单元素被改变时触发。 但与 <code>input</code> 事件不同的是，<code>input</code> 事件会在输入框输入內容的当下触发，而 <code>change</code> 事件则是在目前焦点离开输入框后才触发。</p>
+</li>
+<li><p><code>submit</code> 事件：当表单被送出时触发，通常表单验证都会在这一步处理，若验证未通过则 <code>return false;</code>。</p>
+</li>
+<li><p><code>focus</code> 事件：当元素被聚焦时触发。</p>
+</li>
+<li><p><code>blur</code> 事件：当元素失去焦点时触发。</p>
+</li>
+</ul>
+<h4 id="特殊事件"><a href="#特殊事件" class="headerlink" title="特殊事件"></a>特殊事件</h4><ul>
+<li>Composition Event (组成事件):</li>
+</ul>
+<p><strong>Composition Event</strong> 其实指的是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code> 这三个事件。</p>
+<p>介绍 Composition Events 之前先来谈谈 DOM API 过去对输入框侦测变化的几个方式：</p>
+<p>常见的表单输入框如: <code>&lt;input type=&quot;text&quot;&gt;</code> 如果要动态监听输入框的文字变化时， 大多会通过监听 <code>keydown</code>、<code>keypress</code>、<code>keyup</code> 等键盘事件来判断 <code>value</code> 是否变动，但如果是通过「<strong>复制粘贴</strong>」之类的操作，就无法通过键盘事件来判断。</p>
+<p>而即使是 <code>change</code> 事件则是要在使用者改变內容，且<strong>焦点离开输入框</strong>的前一刻才会被触发。</p>
+<p>所以后来有了 <code>input</code> 事件， <code>input</code> 事件会在输入框的<strong>內容被改变时即时触发</strong>，确实也解决了过去在 <code>onChange</code> 以及键盘相关事件功能不足所产生的问题。</p>
+<p>但是，新的问题来了！</p>
+<p>通常像这样的搜索框，我们会用类似 <code>autocomplete</code> (自动完成) 的方式给使用者搜索建议 (以 google 为例)：</p>
+<p><img src="/images/event/10.jpg"></p>
+<p>如上图，在输入中文的时候，通常会需要通过注音之类的输入法来做拼字。</p>
+<p>但是在大部分的情況下，针对「注音符号」或是「拼音文字」去给搜索建议是没有太大意义的。</p>
+<p>这个时候就需要通过 <code>Composition Events</code> 来为输入框做增强。</p>
+<p>通过 <code>Composition Events</code> 我们可以观察使用者在输入框內开启输入法 (Input Method Editor, IME) 时，组字或选字的状态。</p>
+<p>Composition Events 提供三个事件给开发者监听：分別是 <code>compositionstart</code> 、 <code>compositionend</code> ，以及 <code>compositionupdate</code>。</p>
+<ul>
+<li><code>compositionstart</code>: 输入框內开启输入法，且正在拼字时触发。</li>
+<li><code>compositionupdate</code>: 输入框內开启输入法，且正在拼字或选字时更改了內容时触发。</li>
+<li><code>compositionend</code>: 输入框內开启输入法，拼字或选字完成，正要送出至输入框时触发。</li>
+</ul>
+<p>执行的时候像这样：</p>
+<p><img src="/images/event/11.jpg"></p>
+<p>可以看到，如果要确认使用者输入完成并送出文字时，就可以通过<code>compositionend</code>来做最后确认。</p>
+<h4 id="自订事件"><a href="#自订事件" class="headerlink" title="自订事件"></a>自订事件</h4><p>自订事件可以用<code>Event constructor</code>建立，同样通过<code>addEventListener</code>去监听，由<code>dispatchEvent</code>决定触发的时间。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> Event(<span class="hljs-string">&#x27;build&#x27;</span>);
+
+<span class="hljs-comment">// 监听事件</span>
+elem.addEventListener(<span class="hljs-string">&#x27;build&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">e</span>) </span>&#123; ... &#125;, <span class="hljs-literal">false</span>);
+
+<span class="hljs-comment">// 触发事件</span>
+elem.dispatchEvent(event);</code></pre>
+
+<p>若是想要在自订事件內增加更多资料，则可以改用<code>CustomEvent</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> event = <span class="hljs-keyword">new</span> CustomEvent(<span class="hljs-string">&quot;build&quot;</span>, &#123; <span class="hljs-attr">detail</span>: elem.dataset.time &#125;);</code></pre>
+
+<p>那么在 Event 处理函数就可以通过<code>event</code>来接收：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">eventHandler</span>(<span class="hljs-params">e</span>) </span>&#123;
+  log(<span class="hljs-string">&quot;The time is: &quot;</span> + e.detail);
+&#125;</code></pre>
+
+<p>当然，浏览器提供的事件相当多，今天分享的部分主要是比较常见的一些事件，以及工作上实际需要特別注意的部分。</p>
+<p>其他的多数事件你都可以在 MDN 的 <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference</a> 找到。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 ]]></content>
       <categories>
@@ -4314,110 +4314,6 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
       </tags>
   </entry>
   <entry>
-    <title>JavaScript系列之数据类型</title>
-    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
-<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
-<li>Undefined <code>undefined</code></li>
-<li>Null <code>null</code></li>
-<li>Boolean <code>true</code></li>
-<li>String <code>&#39;hello&#39;</code></li>
-<li>Number <code>123</code></li>
-<li>Symbol(这里先不做介绍)</li>
-</ul>
-<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
-<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
-<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
-<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
-<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
-<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
-
-<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
-<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
-<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
-<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
-<ul>
-<li><code>1024</code></li>
-<li><code>3.14</code></li>
-<li><code>1.2e5</code></li>
-<li><code>0x10</code></li>
-<li><code>0o377</code></li>
-</ul>
-<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
-<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
-
-<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
-<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
-
-<span class="hljs-comment">// embed a variable</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
-
-<span class="hljs-comment">// embed an expression</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
-
-<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
-<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
-
-<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
-<ul>
-<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
-<li>字面量或变量定义 <code>var bool = true;</code></li>
-<li>也出现在比较的结果 ：</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
-
-<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
-
-<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
-<ul>
-<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
-</ul>
-<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
-<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
-<ul>
-<li>变量声明了，但没赋值 <code>var obj;</code></li>
-<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
-<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
-<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
-<li><code>void(expression)</code></li>
-</ul>
-<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
-&#125;)();</code></pre>
-
-<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据类型</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript系列之执行上下文和执行栈</title>
     <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
     <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
@@ -4548,6 +4444,110 @@ a();
         <tag>JavaScript</tag>
         <tag>Execution Context</tag>
         <tag>Execution Context Stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之数据类型</title>
+    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
+<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
+<li>Undefined <code>undefined</code></li>
+<li>Null <code>null</code></li>
+<li>Boolean <code>true</code></li>
+<li>String <code>&#39;hello&#39;</code></li>
+<li>Number <code>123</code></li>
+<li>Symbol(这里先不做介绍)</li>
+</ul>
+<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
+<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
+<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
+
+<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
+<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
+<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
+<ul>
+<li><code>1024</code></li>
+<li><code>3.14</code></li>
+<li><code>1.2e5</code></li>
+<li><code>0x10</code></li>
+<li><code>0o377</code></li>
+</ul>
+<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
+
+<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
+<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
+
+<span class="hljs-comment">// embed a variable</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
+
+<span class="hljs-comment">// embed an expression</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
+
+<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
+<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
+<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
+<ul>
+<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
+<li>字面量或变量定义 <code>var bool = true;</code></li>
+<li>也出现在比较的结果 ：</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
+
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
+
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
+<ul>
+<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
+</ul>
+<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
+<ul>
+<li>变量声明了，但没赋值 <code>var obj;</code></li>
+<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
+<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
+<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
+<li><code>void(expression)</code></li>
+</ul>
+<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
+&#125;)();</code></pre>
+
+<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -6069,6 +6069,123 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Undefined vs Null</title>
+    <url>/2020/01/17/Undefined%20vs%20Null/</url>
+    <content><![CDATA[<p>在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。</p>
+<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
+<p>本文将探讨 JavaScript 中<code>undefined</code>和<code>null</code>之间的相似和差异之处。</p>
+<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在 if 语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (!<span class="hljs-literal">undefined</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;undefined is false&quot;</span>);
+<span class="hljs-comment">// undefined is false</span>
+
+<span class="hljs-keyword">if</span> (!<span class="hljs-literal">null</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;null is false&quot;</span>);
+<span class="hljs-comment">// null is false</span>
+
+<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// true</span></code></pre>
+
+<p>（2）在 JavaScript 中，只有六个 falsy 值，<code>null</code>和<code>undefined</code>都包含在六个 falsy 值中，当进行逻辑判断时所有的 Falsy 值均为 false。</p>
+<ul>
+<li>false</li>
+<li>0</li>
+<li>‘’ (空字符串，’’和””一样)</li>
+<li><strong>null</strong></li>
+<li><strong>undefined</strong></li>
+<li>NaN</li>
+</ul>
+<p>除了这六个值，JavaScript 中的任何其他值都被认为是 truthy 值，当进行逻辑判断时均为 true。</p>
+<p>（3）同样在 JavaScript 中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。</p>
+<ul>
+<li>Boolean</li>
+<li><strong>Null</strong></li>
+<li><strong>Undefined</strong></li>
+<li>Number</li>
+<li>String</li>
+<li>Symbol</li>
+</ul>
+<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？</p>
+<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！</p>
+<p>1995 年 JavaScript 诞生之初，像 Java 一样，只设置了<code>null</code>作为表示”无”的值。</p>
+<p>根据 C 语言的传统，<code>null</code>被设计成可以自动转为 0。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>);
+<span class="hljs-comment">// 0</span>
+
+<span class="hljs-number">6</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-comment">// 6</span></code></pre>
+
+<p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。</p>
+<p>首先，<code>null</code>像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示”无”的值最好不是对象。</p>
+<p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果<code>null</code>自动转为 0，很不容易发现错误。</p>
+<p>因此，Brendan Eich 又设计增加了一个<code>undefined</code>。</p>
+<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong></p>
+<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。</p>
+<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// object</span></code></pre>
+
+<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？</p>
+<p>原因解释：这是 JS 一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。</p>
+<p><strong>（2）转为数值区别</strong></p>
+<p>JavaScript 的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为 0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">5</span> + <span class="hljs-literal">null</span>;
+<span class="hljs-built_in">console</span>.log(a1); <span class="hljs-comment">// 5</span>
+
+<span class="hljs-keyword">var</span> a2 = <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>;
+<span class="hljs-built_in">console</span>.log(a2); <span class="hljs-comment">// NaN</span></code></pre>
+
+<p><strong>（3）null !== undefined</strong></p>
+<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript 规范规定<code>null</code>不严格等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">null</span> !== <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span>
+
+<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span></code></pre>
+
+<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>在 JavaScript 中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。</p>
+<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。</p>
+<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。</p>
+<p><strong>null 表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
+<p>（1） 利用 document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回 null。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;notExistElement&quot;</span>)); <span class="hljs-comment">// true</span></code></pre>
+
+<p>（2） 作为对象原型链的终点。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Object</span>.getPrototypeOf(<span class="hljs-built_in">Object</span>.prototype); <span class="hljs-comment">// null</span></code></pre>
+
+<p><strong>undefined 表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：</p>
+<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
+<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//函数定义了形参 a</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">a</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
+&#125;
+f(); <span class="hljs-comment">//未传递实参</span></code></pre>
+
+<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
+a.p; <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = f();
+a; <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。</p>
+<p>最后引用玉伯大大对 null 和 undefined 的解释：</p>
+<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【译】12个编写干净且可扩展的JavaScript技巧</title>
     <url>/2020/04/02/%E3%80%90%E8%AF%91%E3%80%9112%E4%B8%AA%E7%BC%96%E5%86%99%E5%B9%B2%E5%87%80%E4%B8%94%E5%8F%AF%E6%89%A9%E5%B1%95%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>JavaScript 起源于早期的网络。 从作为脚本语言开始，到现在它已经发展成为一种完全成熟的编程语言，并且支持服务器端执行。</p>
@@ -6246,123 +6363,6 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       <tags>
         <tag>JavaScript</tag>
         <tag>编程技巧</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Undefined vs Null</title>
-    <url>/2020/01/17/Undefined%20vs%20Null/</url>
-    <content><![CDATA[<p>在 JavaScript 中，将一个变量赋值为 undefined 或 null，感觉没啥区别，都表示“无”；但在实际应用中，远非如此，这两个之间区别的不明确可能会导致一些问题。</p>
-<p><em>在<a href="https://luozongmin.com/2019/04/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">这篇文章</a>中，我已经简略介绍了<code>undefined</code>和<code>null</code>的特性了。</em></p>
-<p>本文将探讨 JavaScript 中<code>undefined</code>和<code>null</code>之间的相似和差异之处。</p>
-<h4 id="相似性"><a href="#相似性" class="headerlink" title="相似性"></a>相似性</h4><p>（1）<code>undefined</code>和<code>null</code>在 if 语句中，都会被自动转为<code>false</code>，加!转换为<code>true</code>，相等运算符对于两者比较是相等的。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">if</span> (!<span class="hljs-literal">undefined</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;undefined is false&quot;</span>);
-<span class="hljs-comment">// undefined is false</span>
-
-<span class="hljs-keyword">if</span> (!<span class="hljs-literal">null</span>) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;null is false&quot;</span>);
-<span class="hljs-comment">// null is false</span>
-
-<span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>;
-<span class="hljs-comment">// true</span></code></pre>
-
-<p>（2）在 JavaScript 中，只有六个 falsy 值，<code>null</code>和<code>undefined</code>都包含在六个 falsy 值中，当进行逻辑判断时所有的 Falsy 值均为 false。</p>
-<ul>
-<li>false</li>
-<li>0</li>
-<li>‘’ (空字符串，’’和””一样)</li>
-<li><strong>null</strong></li>
-<li><strong>undefined</strong></li>
-<li>NaN</li>
-</ul>
-<p>除了这六个值，JavaScript 中的任何其他值都被认为是 truthy 值，当进行逻辑判断时均为 true。</p>
-<p>（3）同样在 JavaScript 中，有六个原始值，<code>null</code>和<code>undefined</code>都包含在这六个原始值中。</p>
-<ul>
-<li>Boolean</li>
-<li><strong>Null</strong></li>
-<li><strong>Undefined</strong></li>
-<li>Number</li>
-<li>String</li>
-<li>Symbol</li>
-</ul>
-<p>既然<code>undefined</code>和<code>null</code>的含义与用法都比较相似，那为什么还要无端增加另外一个值，这不是增加混淆吗？</p>
-<h4 id="历史原因"><a href="#历史原因" class="headerlink" title="历史原因"></a>历史原因</h4><p>最近，在阅读阮一峰老师的博客文章时，才从历史因素里得到答案！</p>
-<p>1995 年 JavaScript 诞生之初，像 Java 一样，只设置了<code>null</code>作为表示”无”的值。</p>
-<p>根据 C 语言的传统，<code>null</code>被设计成可以自动转为 0。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>);
-<span class="hljs-comment">// 0</span>
-
-<span class="hljs-number">6</span> + <span class="hljs-literal">null</span>;
-<span class="hljs-comment">// 6</span></code></pre>
-
-<p>但是，JavaScript 的设计者 Brendan Eich，觉得这样做达不到自己的预想，其中有两个原因。</p>
-<p>首先，<code>null</code>像在 Java 里一样，被当成一个对象。但是，JavaScript 的数据类型分成原始类型（primitive）和合成类型（complex）两大类，Brendan Eich 觉得表示”无”的值最好不是对象。</p>
-<p>其次，JavaScript 的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败。Brendan Eich 觉得，如果<code>null</code>自动转为 0，很不容易发现错误。</p>
-<p>因此，Brendan Eich 又设计增加了一个<code>undefined</code>。</p>
-<h4 id="差异性"><a href="#差异性" class="headerlink" title="差异性"></a>差异性</h4><p><strong>（1）数据类型区别</strong></p>
-<p><code>undefined</code>类型只有一个值，undefined；<code>null</code>类型只有一个值，null。</p>
-<p>也就是说<code>undefined</code>值和<code>null</code>值分别属于不同的数据类型，并且这两个数据类型都只有一个值，使用“typeof”运算符判断类型。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// undefined</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">typeof</span> <span class="hljs-literal">null</span>); <span class="hljs-comment">// object</span></code></pre>
-
-<p>第一行输出没毛病，正确打印出<code>undefined</code>类型；而第二行打印结果为<code>object</code>，难道<code>null</code>不是<code>null</code>类型？</p>
-<p>原因解释：这是 JS 一个设计失误，原本正确的结果应该是<code>null</code>，现在只能将错就错，或许以后哪个新版本会修正此问题。</p>
-<p><strong>（2）转为数值区别</strong></p>
-<p>JavaScript 的最初版本为了更好区分这两个值，是这样设定的：<code>null</code>是一个表示”无”的对象，转为数值时为 0；<code>undefined</code>是一个表示”无”的<strong>原始值</strong>，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a1 = <span class="hljs-number">5</span> + <span class="hljs-literal">null</span>;
-<span class="hljs-built_in">console</span>.log(a1); <span class="hljs-comment">// 5</span>
-
-<span class="hljs-keyword">var</span> a2 = <span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>;
-<span class="hljs-built_in">console</span>.log(a2); <span class="hljs-comment">// NaN</span></code></pre>
-
-<p><strong>（3）null !== undefined</strong></p>
-<p>如上所见，<code>null</code>和<code>undefined</code>不同，但有一些相似之处， 因此，ECMAScript 规范规定<code>null</code>不严格等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">null</span> !== <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span>
-
-<span class="hljs-literal">null</span> === <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span></code></pre>
-
-<p>但是，上面也提到了，<code>null</code>松散相等于<code>undefined</code>（相比===的相等程度更低）。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>在 JavaScript 中，==适用松散相等，意味着我们在将它们转换为通用类型后比较两个值。</p>
-<p>只要记住<code>null==undefined</code>会返回<code>true</code>，因为它们是类似的值；但<code>null===undefined</code>会返回<code>false</code>，因为它们是不同类型的值。后续也会增加==与===区别的文章，敬请期待。</p>
-<h4 id="实际用法"><a href="#实际用法" class="headerlink" title="实际用法"></a>实际用法</h4><p>但是，上面的区分，在实践中都不常用。实际上，<code>null</code>和<code>undefined</code>被视为几乎同义的，只有一些细小的差别。</p>
-<p><strong>null 表示一个变量被人为的设置为空对象，而不是原始状态，即该处不应该有值。</strong>一般会在以下 2 种场景中出现：</p>
-<p>（1） 利用 document.getElementById(‘XXX’) 寻找一个不存在的元素，将返回 null。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;notExistElement&quot;</span>)); <span class="hljs-comment">// true</span></code></pre>
-
-<p>（2） 作为对象原型链的终点。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Object</span>.getPrototypeOf(<span class="hljs-built_in">Object</span>.prototype); <span class="hljs-comment">// null</span></code></pre>
-
-<p><strong>undefined 表示一个变量自然的、最原始的状态值，就是此处应该有一个值，但是还没有定义。</strong>一般会在以下 4 种场景中出现：</p>
-<p>（1）声明了一个变量，但没有赋值，就等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a;
-<span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>（2) 函数定义了形参，但没有传递实参，该参数等于<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//函数定义了形参 a</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">f</span>(<span class="hljs-params">a</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(a); <span class="hljs-comment">// undefined</span>
-&#125;
-f(); <span class="hljs-comment">//未传递实参</span></code></pre>
-
-<p>（3）访问对象上不存在的属性，该属性的值为<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();
-a.p; <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>（4）函数没有返回值时，默认返回<code>undefined</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = f();
-a; <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>所以，在实际使用过程中，为了保证变量所代表的语义，不要对一个变量显式的赋值 <code>undefined</code>，当需要<strong>释放一个对象</strong>时，直接赋值为 <code>null</code> 即可。</p>
-<p>最后引用玉伯大大对 null 和 undefined 的解释：</p>
-<p>值类型的“虚无”用<code>undefined</code>，引用类型的“虚无”，用<code>null</code>。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
       </tags>
   </entry>
   <entry>
@@ -6756,7 +6756,7 @@ $ hexo server              //启动本地服务器，进行博客文章预览</c
 <li>把第 6 行的 title 改成你想要的名字</li>
 <li>把第 10 行的 author 改成你想取大名</li>
 <li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
 </ul>
 <p><img src="/images/hexogit/5.png"></p>
 <p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
@@ -6771,7 +6771,7 @@ $ hexo deploy                             //将本地博客代码部署到Github
 <p>5、去看你的博客，应该能看到这篇新文章啦！</p>
 <h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
 <p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:iissnan/hexo-theme-next.git</p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:iissnan/hexo-theme-next.git</p>
 <p>4、<code>cd themes</code></p>
 <p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
 <p>6、<code>cd ..</code></p>

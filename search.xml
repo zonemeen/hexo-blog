@@ -849,6 +849,84 @@ flex: none  //等同于flex:0 0 auto</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Git/GitHub操作手册</title>
+    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
+<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
+<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
+<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
+<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
+<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
+
+<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
+<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
+$ git add README.md                //将README.md文件提交到问题暂存区
+$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
+$ git status -sb      //显示当前所有文件的状态</code></pre>
+
+<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
+<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
+<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
+<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
+<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
+<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
+<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
+
+<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
+<pre><code class="hljs bash">$ git push -u origin master</code></pre>
+
+<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
+<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
+<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
+<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
+
+<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
+<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
+
+<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
+<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
+<ul>
+<li>在本地创建仓库</li>
+</ul>
+<ul>
+<li>将本地仓库上传到 GitHub</li>
+</ul>
+<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
+<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
+<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
+<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
+<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
+<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
+
+<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
+<p>1、在本地创建仓库</p>
+<p>2、将本地仓库上传到 GitHub</p>
+<p>3、GitHub 上的仓库克隆下载到本地</p>
+<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
+<p>我们最后再回顾一遍已经学到的命令：</p>
+<blockquote>
+<p>git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+</blockquote>
+<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
+</blockquote>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS笔记—左右布局</title>
     <url>/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<p>css 左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学 css 的时候更快理解其他复杂的布局方式。</p>
@@ -1331,84 +1409,6 @@ ul.appendChild(fragment);</code></pre>
         <tag>JavaScript</tag>
         <tag>DOM</tag>
         <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git/GitHub操作手册</title>
-    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
-<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
-<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
-<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
-<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
-<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
-
-<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
-<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
-$ git add README.md                //将README.md文件提交到问题暂存区
-$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
-$ git status -sb      //显示当前所有文件的状态</code></pre>
-
-<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
-<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
-<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
-<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
-<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
-<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
-<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
-
-<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
-<pre><code class="hljs bash">$ git push -u origin master</code></pre>
-
-<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
-<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
-<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
-<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
-<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
-<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
-
-<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
-<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
-
-<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
-<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
-<ul>
-<li>在本地创建仓库</li>
-</ul>
-<ul>
-<li>将本地仓库上传到 GitHub</li>
-</ul>
-<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
-<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
-<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
-<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
-<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
-<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
-<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
-
-<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
-<p>1、在本地创建仓库</p>
-<p>2、将本地仓库上传到 GitHub</p>
-<p>3、GitHub 上的仓库克隆下载到本地</p>
-<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
-<p>我们最后再回顾一遍已经学到的命令：</p>
-<blockquote>
-<p>git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#x67;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
-</blockquote>
-<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
-</blockquote>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -3806,161 +3806,6 @@ b.x; <span class="hljs-comment">// 这时 b.x 的值是多少</span></code></pre
       </tags>
   </entry>
   <entry>
-    <title>JavaScript系列之原型与原型链</title>
-    <url>/2020/02/03/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
-    <content><![CDATA[<p>JavaScript 也是一门面向对象的语言，ES6 之前并没有引入类（class）的概念，像 c++ 这种典型的面向对象语言都是通过类来创建实例对象，而 JavaScript 是直接通过构造函数来创建实例。</p>
-<p>所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。</p>
-<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。</p>
-<p>构造函数就是一个普通的函数，创建方式和普通函数没有区别，<strong>不同的是构造函数习惯上首字母大写</strong>。另外就是调用方式的不同，普通函数是直接调用，<strong>而构造函数需要使用 new 关键字来调用</strong>。我们先使用构造函数创建一个对象：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-<span class="hljs-built_in">console</span>.log(dog.name); <span class="hljs-comment">// 阿黄</span></code></pre>
-
-<p>上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。</p>
-<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p><strong>prototype</strong></p>
-<p>JavaScript 是一种<strong>基于原型的语言</strong>(prototype-based language)，每个对象拥有一个<strong>原型对象</strong>，对象以其原型为模板，从原型继承方法和属性，这些属性和方法定义在对象的构造器函数的<code>prototype</code>属性上，而非对象实例本身。看以下代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-built_in">console</span>.log(Dog.prototype);</code></pre>
-
-<p>那这个构造函数的 <code>prototype</code> 属性指向的是什么呢？是这个函数的原型吗？</p>
-<p>打开 chrome 浏览器的开发者工具，在 console 栏输入上面的代码，你可以看到 <code>Dog.prototype</code> 的值：</p>
-<p><img src="/images/prototype/1.jpg"></p>
-<p>其实，函数的 <code>prototype</code> 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的<strong>原型</strong>。</p>
-<p>那什么是<strong>原型</strong>呢？你可以这样理解：每一个 JavaScript 对象(<code>null</code>除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型”继承”属性。</p>
-<p>让我们用一张图来表示构造函数和实例原型之间的关系：</p>
-<p><img src="/images/prototype/2.jpg"></p>
-<p>那么我们该怎么表示实例与实例原型，也就是 <code>dog</code> 和 <code>Dog.prototype</code> 之间的关系呢，接下来就应该讲到第二个属性：</p>
-<p>*<strong>*proto**</strong></p>
-<p>上面可以看到 Dog 原型（<code>Dog.prototype</code>）上有<code>__proto__</code>属性，这是一个访问器属性（即 getter 函数和 setter 函数），通过它可以访问到对象的内部<code>[[Prototype]]</code>(一个对象或<code>null</code>)。</p>
-<p>为了证明这一点,我们可以在 chrome 中输入：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">console</span>.log(dog.__proto__ === Dog.prototype); <span class="hljs-comment">// true</span></code></pre>
-
-<p>这里用<code>dog.__proto__</code>获取对象的原型，<code>__proto__</code>是每个实例上都有的属性，<code>prototype</code>是构造函数的属性，这两个并不一样，但<code>dog.__proto__</code>和<code>Dog.prototype</code>指向同一个对象。于是我们更新下关系图：</p>
-<p><img src="/images/prototype/3.png"></p>
-<p>既然实例对象和构造函数都可以指向原型，那么原型是否有属性指向构造函数或者实例呢？</p>
-<p><strong>constructor</strong></p>
-<p>指向实例对象倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：<code>constructor</code>，每个原型都有一个 <code>constructor</code> 属性指向关联的构造函数。</p>
-<p>为了验证这一点，我们在 chrome 中输入：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor === Dog); <span class="hljs-comment">// true</span></code></pre>
-
-<p>所以再更新下关系图：</p>
-<p><img src="/images/prototype/4.png"></p>
-<p>综上我们已经得出：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-
-<span class="hljs-built_in">console</span>.log(dog.__proto__ == Dog.prototype); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor == Dog); <span class="hljs-comment">// true</span>
-<span class="hljs-comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype); <span class="hljs-comment">// true</span></code></pre>
-
-<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>在上文我们理解了原型，从字面意思看原型链肯定是与原型有关了，是一个个原型链接起来的么？我们先通过下面的图来观察一下。</p>
-<p><img src="/images/prototype/5.jpg"></p>
-<p>解析：</p>
-<p><strong>obj.prop1</strong>：假设我们现在有一个对象，就称作<code>obj</code>，而这个对象包含一个属性<code>（property）</code>，我们称作<code>prop1</code>，现在我们可以使用<code>obj.prop1</code>来读取这个属性的值，就可以直接读取到<code>prop1</code>的属性值了。</p>
-<p><strong>obj.prop2</strong>：JavaScript 中会有一些预设的属性和方法，所有的对象和函数都包含<code>prototype</code>这个属性，假设我们把<code>prototype</code>叫做<code>proto</code>，这时候如果我们使用<code>obj.prop2</code>的时候，JavaScript 引擎会先在<code>obj</code>这个对象的属性里去寻找有没有叫作<code>prop2</code>的属性，<strong>如果它找不到，这时候它就会再进一步往该对象的<code>proto</code>里面去寻找</strong>。所以，虽然我们输入<code>obj.prop2</code>的时候会得到回传值，但实际上这不是<code>obj</code>里面直接的属性名称，而是在<code>obj</code>的<code>proto</code>里面找到的属性名称（即，<code>obj.proto.prop2</code>，但我们不需要这样打）。</p>
-<p><strong>obj.prop3</strong>：同样地，每一个对象里面都包含一个<code>prototype</code>，包括对象<code>proto</code>本身也不例外，所以，如果输入<code>obj.prop3</code>时，JavaScript 会先在<code>obj</code>这个对象里去寻找有没有<code>prop3</code>这个属性名称，找不到时会再往<code>obj</code>的<code>proto</code>去寻找，<strong>如果还是找不到时，就再往<code>proto</code>这个对象里面的<code>proto</code>找下去</strong>，最后找到后回传属性值给我们（<code>obj.proto.proto.prop3</code>）。</p>
-<p>虽然乍看之下，<code>prop3</code>很像是在对象<code>obj</code>里面的属性，但实际上它是在<code>obj → prop → prop</code>的对象里面，而这样从对象本身往<code>proto</code>寻找下去的链我们就称作「原型链（prototype chain）」。这样一直往下找会找到什么时候呢？它会直到某个对象的原型为<code>null</code>为止（也就是不再有原型指向）。</p>
-<p>官方解释是：每个对象拥有一个原型对象，通过<code>__proto__</code>指针指向上一个原型 ，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向<code>null</code>。这种关系被称为**原型链 (prototype chain)**，通过原型链一个对象会拥有定义在其他对象中的属性和方法。</p>
-<h4 id="举个例子来帮助理解原型链"><a href="#举个例子来帮助理解原型链" class="headerlink" title="举个例子来帮助理解原型链"></a>举个例子来帮助理解原型链</h4><p>让我们实际来看个例子帮助我们了解 prototype chain 这个概念，这个例子只是单纯为了用来说明 prototype chain 的概念，实际上千万不要使用这样的方式编程！</p>
-<p>首先，我们先建立一个对象<code>person</code> 和一个对象<code>jay</code>：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
-  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
-  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
-  &#125;,
-&#125;;
-
-<span class="hljs-keyword">var</span> jay = &#123;
-  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
-&#125;;</code></pre>
-
-<p>接着，我们知道<strong>所有的对象里面都会包含原型（prototype）这个对象，在 JavaScript 中这个对象的名称为</strong>proto****。如同上述原型链（prototype chain）的概念，如果在原本的对象中找不到指定的属性名称或方法时，就会进一步到<code>__proto__</code>这里面来找。</p>
-<p>为了示范，我们来对<code>__proto__</code>做一些事：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
-jay.__proto__ = person;</code></pre>
-
-<p>如此，<code>jay</code>这个对象就继承了<code>person</code>对象。在这种情况下，如果我们想要呼叫某个属性或方法，但在原本<code>jay</code>这个对象中找不到这个属性名称或方法时，JavaScript 引擎就会到<code>__proto__</code>里面去找，所以当接着执行如下的代码时，并不会报错：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou;</span></code></pre>
-
-<p>我们可以得到”Jay Chou”的结果。原本在<code>jay</code>的这个对象中，是没有<code>getFullName()</code>这个方法的，但由于我让<code>__proto__</code>里面继承了<code>person</code>这个对象，所以当 JavaScript 引擎在<code>jay</code>对象里面找不到<code>getFullName()</code>这个方法时，它便会到<code>__proto__</code>里面去找，最后它找到了，于是它回传”Jay Chou”的结果。</p>
-<p>如果我是执行：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span></code></pre>
-
-<p>我们会得到的是 John 而不是’Default’，因为 JavaScript 引擎在寻找<code>jay.firstName</code>这个属性时，在<code>jay</code>这个对象里就可以找到了，因此它不会在往<code>__proto__</code>里面找。<strong>这也就是刚刚在上面所的原型链（prototype chain）的概念，一旦它在上层的部分找到该属性或方法时，就不会在往下层的 prototype 去寻找</strong>。</p>
-<p>在了解了 prototype chain 这样的概念后，让我们接着看下面这段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> jane = &#123;
-  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
-&#125;;
-
-jane.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre>
-
-<p>现在，你可以理解到会输出什么结果吗？</p>
-<p>答案是”Jane Default” 。</p>
-<p>因为在<code>jane</code>这个对象里只有<code>firstName</code>这个属性，所以当 JavaScript 引擎要寻找<code>getFullName()</code>这个方法和<code>lastName</code>这个属性时，它都会去找<code>__proto__</code>里面，而这里面找到的就是一开始建立的<code>person</code>这个对象的内容。</p>
-<p>全代码如下：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
-  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
-  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
-  &#125;,
-&#125;;
-
-<span class="hljs-keyword">var</span> jay = &#123;
-  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
-&#125;;
-
-<span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
-jay.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou</span>
-<span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span>
-
-<span class="hljs-keyword">var</span> jane = &#123;
-  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
-&#125;;
-
-jane.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre>
-
-<p>以上就是目前能总结的全部了，肯定还是有缺陷的地方，后续还会修改完善的。最后再看底下这张图，是否有了更深入的理解呢？</p>
-<p><img src="/images/prototype/6.png"></p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>原型</tag>
-        <tag>原型链</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript系列之变量对象</title>
     <url>/2020/05/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</url>
     <content><![CDATA[<p>JavaScript 编程的时候总规避不了声明变量和函数，但是解释器是如何并且在什么地方去查找这些变量和函数呢？接下来，再延续上一篇<a href="https://luozongmin.com/2019/06/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/">《JavaScript 系列之执行上下文和执行栈》</a>，通过对变量对象(Variable Object)的介绍对执行上下文有一个更深一步的了解。</p>
@@ -4129,127 +3974,149 @@ foo(<span class="hljs-number">10</span>);</code></pre>
       </tags>
   </entry>
   <entry>
-    <title>JavaScript系列之执行上下文和执行栈</title>
-    <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
-    <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
-<p>执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
-<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
-<ul>
-<li><strong>全局执行上下文（全局代码）</strong>：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 <code>window</code> 对象，<code>this</code> 指向这个全局对象。</li>
-<li><strong>函数执行上下文（函数体）</strong>：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。</li>
-<li><strong><code>Eval</code> 函数执行上下文（eval 代码）</strong>： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用。</li>
-</ul>
-<p>执行上下文又包括三个生命周期阶段：<strong>创建阶段 → 执行阶段 → 回收阶段</strong>，本文重点介绍创建阶段。</p>
-<p><strong>1.创建阶段</strong></p>
-<p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
-<ul>
-<li>**创建变量对象(Variable object，VO)**：首先初始化函数的参数<code>arguments</code>，提升函数声明和变量声明。后文会详细说明。</li>
-<li><strong>创建作用域链（Scope Chain）</strong>：在执行上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。后文会详细说明。</li>
-<li><strong>确定 this 指向</strong>：包括多种情况，后文会详细说明。</li>
-</ul>
-<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为<code>undefined</code>，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
-<p>另外，一个函数在被执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过函数执行上下文中会多出<code>this</code> 、 <code>arguments</code>和函数的参数。</p>
-<p><strong>2.执行阶段</strong></p>
-<p>进入执行上下文、执行代码</p>
-<p><strong>3.回收阶段</strong></p>
-<p>执行完毕后执行上下文出栈并等待被垃圾回收</p>
-<p><img src="/images/scopechain/1.jpg"></p>
-<h3 id="执行上下文栈（Execution-Context-Stack）"><a href="#执行上下文栈（Execution-Context-Stack）" class="headerlink" title="执行上下文栈（Execution Context Stack）"></a>执行上下文栈（Execution Context Stack）</h3><p>假如我们写的函数多了，每次调用函数时都创建一个新的执行上下文，如何管理创建的那么多执行上下文呢？</p>
-<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，具有 LIFO（后进先出）的栈结构，用于存储在代码执行期间创建的所有执行上下文。</p>
-<p>首次运行 JS 代码时，会创建一个<strong>全局</strong>执行上下文并 Push 到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个<strong>新的函数</strong>执行上下文并 Push 到当前执行栈的顶部，浏览器的 JS 执行引擎总是访问栈顶的执行上下文。</p>
-<p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
-<p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
-<h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  b();
-&#125;
-a();</code></pre>
-
-<p>这段代码背后执行的逻辑是这样的：</p>
-<p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
-<p><img src="/images/context/1.jpg"></p>
-<p>接着，代码会执行到<code>a( )</code>这个部分，这时候，会建立<code>a</code>的执行上下文（execution context），并且被放置到执行栈（execution stack）中。在这个 execution stack 中，最上面的 execution context 会是正在被执行的<code>a( )</code>。如下图：</p>
-<p><img src="/images/context/2.jpg"></p>
-<p><code>function a</code> 的 execution context 建立后，便会开始执行<code>function a</code>中的内容。由于在<code>function a( )</code> 里面有去执行<code>function b</code> ，因此，在这个 execution stack 中，接下来最上面会变成<code>function b</code> 的 execution context。如下图：</p>
-<p><img src="/images/context/3.jpg"></p>
-<p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
-<p><img src="/images/context/4.jpg"></p>
-<h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
+    <title>JavaScript系列之原型与原型链</title>
+    <url>/2020/02/03/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/</url>
+    <content><![CDATA[<p>JavaScript 也是一门面向对象的语言，ES6 之前并没有引入类（class）的概念，像 c++ 这种典型的面向对象语言都是通过类来创建实例对象，而 JavaScript 是直接通过构造函数来创建实例。</p>
+<p>所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。</p>
+<h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。</p>
+<p>构造函数就是一个普通的函数，创建方式和普通函数没有区别，<strong>不同的是构造函数习惯上首字母大写</strong>。另外就是调用方式的不同，普通函数是直接调用，<strong>而构造函数需要使用 new 关键字来调用</strong>。我们先使用构造函数创建一个对象：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
+<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
+<span class="hljs-built_in">console</span>.log(dog.name); <span class="hljs-comment">// 阿黄</span></code></pre>
+
+<p>上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。</p>
+<h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p><strong>prototype</strong></p>
+<p>JavaScript 是一种<strong>基于原型的语言</strong>(prototype-based language)，每个对象拥有一个<strong>原型对象</strong>，对象以其原型为模板，从原型继承方法和属性，这些属性和方法定义在对象的构造器函数的<code>prototype</code>属性上，而非对象实例本身。看以下代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
 &#125;
 
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();</code></pre>
+<span class="hljs-built_in">console</span>.log(Dog.prototype);</code></pre>
 
-<p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
-<p><img src="/images/context/5.jpg"></p>
-<p>我们分别得到了 1、<code>undefined</code>和 2。为什么会这样呢？</p>
-<p>让我们来看看这段代码背后执行的逻辑：</p>
-<p>首先，全局执行上下文（Global Execution Context）会被建立，由于变量提升的缘故，<code>myVar</code>、<code>function a</code>和<code>b</code>都会被建立并储存在内存中，接着便开始逐行执行函数。一开始会碰到<code>var myVar = 1</code>所以，最外层的<code>myVar</code>便被给值为 1，接着执行到了<code>console.log(myVar)</code>，这是在 global execution context 执行的，于是得到了第一个 1 的结果：</p>
-<p><img src="/images/context/6.jpg"></p>
-<p>然后执行到了<code>a ( )</code>，于是建立了<code>a</code>的 execution context，这时候由于逐行执行的关系，会先执行到<code>var myVar = 2</code>，但因为这是在 function a 的 execution context 中，所以并不会影响到 global execution context 的<code>myVar</code>：</p>
-<p><img src="/images/context/7.jpg"></p>
-<p>在执行完<code>function a</code>中的<code>var myVar = 2</code>后，继续逐行执行，于是执行到了<code>b ( )</code>，这时候，<code>function b</code>的 execution function 便被建立，而且会先去执行<code>function b</code>里面的内容：</p>
-<p><img src="/images/context/8.jpg"></p>
-<p><code>function b</code>的 execution function 建立后，会开始逐行执行<code>function b</code>里面的内容，于是读到了<code>var myVar</code>;，这时候在<code>function b</code>这个 execution context 中的<code>myVar</code>变量被建立，但是还没被赋值，所以会是<code>undefined</code>。和上面提到的一样，由于这个<code>myVar</code>是在<code>function b</code>中的 execution context 所建立，所以并不会影响到其他 execution context 的<code>myVar</code>，这时候执行到了<code>function b</code>的 execution context 中的<code>console.log(myVar)</code>，于是得到了第二个看到的<code>undefined</code>：</p>
-<p><img src="/images/context/9.jpg"></p>
-<p>最后，<code>function b</code>执行完之后，会从 execution stack 中离开，继续回到<code>function a</code>中的<code>b( )</code>后逐行执行，也就是<code>console.log(myVar)</code>，这时候是在 function a 的 execution context 加以执行的，因此也就得到了结果中看到的第三个 2 了。</p>
-<p>最后由于<code>b ( )</code> 后面已经没有内容，<code>function a</code>执行完毕，这时候，<code>function a</code>也会从 execution stack 中抽离。</p>
-<p><img src="/images/context/10.jpg"></p>
-<p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
-<p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
-<p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
+<p>那这个构造函数的 <code>prototype</code> 属性指向的是什么呢？是这个函数的原型吗？</p>
+<p>打开 chrome 浏览器的开发者工具，在 console 栏输入上面的代码，你可以看到 <code>Dog.prototype</code> 的值：</p>
+<p><img src="/images/prototype/1.jpg"></p>
+<p>其实，函数的 <code>prototype</code> 属性指向了一个对象，这个对象正是调用该构造函数而创建的实例的<strong>原型</strong>。</p>
+<p>那什么是<strong>原型</strong>呢？你可以这样理解：每一个 JavaScript 对象(<code>null</code>除外)在创建的时候就会与之关联另一个对象，这个对象就是我们所说的原型，每一个对象都会从原型”继承”属性。</p>
+<p>让我们用一张图来表示构造函数和实例原型之间的关系：</p>
+<p><img src="/images/prototype/2.jpg"></p>
+<p>那么我们该怎么表示实例与实例原型，也就是 <code>dog</code> 和 <code>Dog.prototype</code> 之间的关系呢，接下来就应该讲到第二个属性：</p>
+<p>*<strong>*proto**</strong></p>
+<p>上面可以看到 Dog 原型（<code>Dog.prototype</code>）上有<code>__proto__</code>属性，这是一个访问器属性（即 getter 函数和 setter 函数），通过它可以访问到对象的内部<code>[[Prototype]]</code>(一个对象或<code>null</code>)。</p>
+<p>为了证明这一点,我们可以在 chrome 中输入：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
+<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(dog.__proto__ === Dog.prototype); <span class="hljs-comment">// true</span></code></pre>
+
+<p>这里用<code>dog.__proto__</code>获取对象的原型，<code>__proto__</code>是每个实例上都有的属性，<code>prototype</code>是构造函数的属性，这两个并不一样，但<code>dog.__proto__</code>和<code>Dog.prototype</code>指向同一个对象。于是我们更新下关系图：</p>
+<p><img src="/images/prototype/3.png"></p>
+<p>既然实例对象和构造函数都可以指向原型，那么原型是否有属性指向构造函数或者实例呢？</p>
+<p><strong>constructor</strong></p>
+<p>指向实例对象倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：<code>constructor</code>，每个原型都有一个 <code>constructor</code> 属性指向关联的构造函数。</p>
+<p>为了验证这一点，我们在 chrome 中输入：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
 &#125;
 
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span></code></pre>
+<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor === Dog); <span class="hljs-comment">// true</span></code></pre>
 
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
+<p>所以再更新下关系图：</p>
+<p><img src="/images/prototype/4.png"></p>
+<p>综上我们已经得出：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
 &#125;
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
+<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
 
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar);
+<span class="hljs-built_in">console</span>.log(dog.__proto__ == Dog.prototype); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor == Dog); <span class="hljs-comment">// true</span>
+<span class="hljs-comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype); <span class="hljs-comment">// true</span></code></pre>
 
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">打印出</span>
-<span class="hljs-comment">1</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">*/</span></code></pre>
+<h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>在上文我们理解了原型，从字面意思看原型链肯定是与原型有关了，是一个个原型链接起来的么？我们先通过下面的图来观察一下。</p>
+<p><img src="/images/prototype/5.jpg"></p>
+<p>解析：</p>
+<p><strong>obj.prop1</strong>：假设我们现在有一个对象，就称作<code>obj</code>，而这个对象包含一个属性<code>（property）</code>，我们称作<code>prop1</code>，现在我们可以使用<code>obj.prop1</code>来读取这个属性的值，就可以直接读取到<code>prop1</code>的属性值了。</p>
+<p><strong>obj.prop2</strong>：JavaScript 中会有一些预设的属性和方法，所有的对象和函数都包含<code>prototype</code>这个属性，假设我们把<code>prototype</code>叫做<code>proto</code>，这时候如果我们使用<code>obj.prop2</code>的时候，JavaScript 引擎会先在<code>obj</code>这个对象的属性里去寻找有没有叫作<code>prop2</code>的属性，<strong>如果它找不到，这时候它就会再进一步往该对象的<code>proto</code>里面去寻找</strong>。所以，虽然我们输入<code>obj.prop2</code>的时候会得到回传值，但实际上这不是<code>obj</code>里面直接的属性名称，而是在<code>obj</code>的<code>proto</code>里面找到的属性名称（即，<code>obj.proto.prop2</code>，但我们不需要这样打）。</p>
+<p><strong>obj.prop3</strong>：同样地，每一个对象里面都包含一个<code>prototype</code>，包括对象<code>proto</code>本身也不例外，所以，如果输入<code>obj.prop3</code>时，JavaScript 会先在<code>obj</code>这个对象里去寻找有没有<code>prop3</code>这个属性名称，找不到时会再往<code>obj</code>的<code>proto</code>去寻找，<strong>如果还是找不到时，就再往<code>proto</code>这个对象里面的<code>proto</code>找下去</strong>，最后找到后回传属性值给我们（<code>obj.proto.proto.prop3</code>）。</p>
+<p>虽然乍看之下，<code>prop3</code>很像是在对象<code>obj</code>里面的属性，但实际上它是在<code>obj → prop → prop</code>的对象里面，而这样从对象本身往<code>proto</code>寻找下去的链我们就称作「原型链（prototype chain）」。这样一直往下找会找到什么时候呢？它会直到某个对象的原型为<code>null</code>为止（也就是不再有原型指向）。</p>
+<p>官方解释是：每个对象拥有一个原型对象，通过<code>__proto__</code>指针指向上一个原型 ，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向<code>null</code>。这种关系被称为**原型链 (prototype chain)**，通过原型链一个对象会拥有定义在其他对象中的属性和方法。</p>
+<h4 id="举个例子来帮助理解原型链"><a href="#举个例子来帮助理解原型链" class="headerlink" title="举个例子来帮助理解原型链"></a>举个例子来帮助理解原型链</h4><p>让我们实际来看个例子帮助我们了解 prototype chain 这个概念，这个例子只是单纯为了用来说明 prototype chain 的概念，实际上千万不要使用这样的方式编程！</p>
+<p>首先，我们先建立一个对象<code>person</code> 和一个对象<code>jay</code>：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
+  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
+  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
+  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
+  &#125;,
+&#125;;
 
+<span class="hljs-keyword">var</span> jay = &#123;
+  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
+  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
+&#125;;</code></pre>
+
+<p>接着，我们知道<strong>所有的对象里面都会包含原型（prototype）这个对象，在 JavaScript 中这个对象的名称为</strong>proto****。如同上述原型链（prototype chain）的概念，如果在原本的对象中找不到指定的属性名称或方法时，就会进一步到<code>__proto__</code>这里面来找。</p>
+<p>为了示范，我们来对<code>__proto__</code>做一些事：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
+jay.__proto__ = person;</code></pre>
+
+<p>如此，<code>jay</code>这个对象就继承了<code>person</code>对象。在这种情况下，如果我们想要呼叫某个属性或方法，但在原本<code>jay</code>这个对象中找不到这个属性名称或方法时，JavaScript 引擎就会到<code>__proto__</code>里面去找，所以当接着执行如下的代码时，并不会报错：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou;</span></code></pre>
+
+<p>我们可以得到”Jay Chou”的结果。原本在<code>jay</code>的这个对象中，是没有<code>getFullName()</code>这个方法的，但由于我让<code>__proto__</code>里面继承了<code>person</code>这个对象，所以当 JavaScript 引擎在<code>jay</code>对象里面找不到<code>getFullName()</code>这个方法时，它便会到<code>__proto__</code>里面去找，最后它找到了，于是它回传”Jay Chou”的结果。</p>
+<p>如果我是执行：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span></code></pre>
+
+<p>我们会得到的是 John 而不是’Default’，因为 JavaScript 引擎在寻找<code>jay.firstName</code>这个属性时，在<code>jay</code>这个对象里就可以找到了，因此它不会在往<code>__proto__</code>里面找。<strong>这也就是刚刚在上面所的原型链（prototype chain）的概念，一旦它在上层的部分找到该属性或方法时，就不会在往下层的 prototype 去寻找</strong>。</p>
+<p>在了解了 prototype chain 这样的概念后，让我们接着看下面这段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> jane = &#123;
+  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
+&#125;;
+
+jane.__proto__ = person;
+<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre>
+
+<p>现在，你可以理解到会输出什么结果吗？</p>
+<p>答案是”Jane Default” 。</p>
+<p>因为在<code>jane</code>这个对象里只有<code>firstName</code>这个属性，所以当 JavaScript 引擎要寻找<code>getFullName()</code>这个方法和<code>lastName</code>这个属性时，它都会去找<code>__proto__</code>里面，而这里面找到的就是一开始建立的<code>person</code>这个对象的内容。</p>
+<p>全代码如下：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
+  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
+  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
+  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
+  &#125;,
+&#125;;
+
+<span class="hljs-keyword">var</span> jay = &#123;
+  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
+  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
+&#125;;
+
+<span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
+jay.__proto__ = person;
+<span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou</span>
+<span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span>
+
+<span class="hljs-keyword">var</span> jane = &#123;
+  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
+&#125;;
+
+jane.__proto__ = person;
+<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre>
+
+<p>以上就是目前能总结的全部了，肯定还是有缺陷的地方，后续还会修改完善的。最后再看底下这张图，是否有了更深入的理解呢？</p>
+<p><img src="/images/prototype/6.png"></p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 ]]></content>
       <categories>
@@ -4257,8 +4124,8 @@ a();
       </categories>
       <tags>
         <tag>JavaScript</tag>
-        <tag>Execution Context</tag>
-        <tag>Execution Context Stack</tag>
+        <tag>原型</tag>
+        <tag>原型链</tag>
       </tags>
   </entry>
   <entry>
@@ -4444,6 +4311,139 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
         <tag>原型</tag>
         <tag>原型链</tag>
         <tag>继承</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之执行上下文和执行栈</title>
+    <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
+    <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
+<p>执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
+<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
+<ul>
+<li><strong>全局执行上下文（全局代码）</strong>：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 <code>window</code> 对象，<code>this</code> 指向这个全局对象。</li>
+<li><strong>函数执行上下文（函数体）</strong>：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。</li>
+<li><strong><code>Eval</code> 函数执行上下文（eval 代码）</strong>： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用。</li>
+</ul>
+<p>执行上下文又包括三个生命周期阶段：<strong>创建阶段 → 执行阶段 → 回收阶段</strong>，本文重点介绍创建阶段。</p>
+<p><strong>1.创建阶段</strong></p>
+<p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
+<ul>
+<li>**创建变量对象(Variable object，VO)**：首先初始化函数的参数<code>arguments</code>，提升函数声明和变量声明。后文会详细说明。</li>
+<li><strong>创建作用域链（Scope Chain）</strong>：在执行上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。后文会详细说明。</li>
+<li><strong>确定 this 指向</strong>：包括多种情况，后文会详细说明。</li>
+</ul>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为<code>undefined</code>，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在被执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过函数执行上下文中会多出<code>this</code> 、 <code>arguments</code>和函数的参数。</p>
+<p><strong>2.执行阶段</strong></p>
+<p>进入执行上下文、执行代码</p>
+<p><strong>3.回收阶段</strong></p>
+<p>执行完毕后执行上下文出栈并等待被垃圾回收</p>
+<p><img src="/images/scopechain/1.jpg"></p>
+<h3 id="执行上下文栈（Execution-Context-Stack）"><a href="#执行上下文栈（Execution-Context-Stack）" class="headerlink" title="执行上下文栈（Execution Context Stack）"></a>执行上下文栈（Execution Context Stack）</h3><p>假如我们写的函数多了，每次调用函数时都创建一个新的执行上下文，如何管理创建的那么多执行上下文呢？</p>
+<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，具有 LIFO（后进先出）的栈结构，用于存储在代码执行期间创建的所有执行上下文。</p>
+<p>首次运行 JS 代码时，会创建一个<strong>全局</strong>执行上下文并 Push 到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个<strong>新的函数</strong>执行上下文并 Push 到当前执行栈的顶部，浏览器的 JS 执行引擎总是访问栈顶的执行上下文。</p>
+<p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
+<p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
+<h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  b();
+&#125;
+a();</code></pre>
+
+<p>这段代码背后执行的逻辑是这样的：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
+<p><img src="/images/context/1.jpg"></p>
+<p>接着，代码会执行到<code>a( )</code>这个部分，这时候，会建立<code>a</code>的执行上下文（execution context），并且被放置到执行栈（execution stack）中。在这个 execution stack 中，最上面的 execution context 会是正在被执行的<code>a( )</code>。如下图：</p>
+<p><img src="/images/context/2.jpg"></p>
+<p><code>function a</code> 的 execution context 建立后，便会开始执行<code>function a</code>中的内容。由于在<code>function a( )</code> 里面有去执行<code>function b</code> ，因此，在这个 execution stack 中，接下来最上面会变成<code>function b</code> 的 execution context。如下图：</p>
+<p><img src="/images/context/3.jpg"></p>
+<p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
+<p><img src="/images/context/4.jpg"></p>
+<h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();</code></pre>
+
+<p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
+<p><img src="/images/context/5.jpg"></p>
+<p>我们分别得到了 1、<code>undefined</code>和 2。为什么会这样呢？</p>
+<p>让我们来看看这段代码背后执行的逻辑：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，由于变量提升的缘故，<code>myVar</code>、<code>function a</code>和<code>b</code>都会被建立并储存在内存中，接着便开始逐行执行函数。一开始会碰到<code>var myVar = 1</code>所以，最外层的<code>myVar</code>便被给值为 1，接着执行到了<code>console.log(myVar)</code>，这是在 global execution context 执行的，于是得到了第一个 1 的结果：</p>
+<p><img src="/images/context/6.jpg"></p>
+<p>然后执行到了<code>a ( )</code>，于是建立了<code>a</code>的 execution context，这时候由于逐行执行的关系，会先执行到<code>var myVar = 2</code>，但因为这是在 function a 的 execution context 中，所以并不会影响到 global execution context 的<code>myVar</code>：</p>
+<p><img src="/images/context/7.jpg"></p>
+<p>在执行完<code>function a</code>中的<code>var myVar = 2</code>后，继续逐行执行，于是执行到了<code>b ( )</code>，这时候，<code>function b</code>的 execution function 便被建立，而且会先去执行<code>function b</code>里面的内容：</p>
+<p><img src="/images/context/8.jpg"></p>
+<p><code>function b</code>的 execution function 建立后，会开始逐行执行<code>function b</code>里面的内容，于是读到了<code>var myVar</code>;，这时候在<code>function b</code>这个 execution context 中的<code>myVar</code>变量被建立，但是还没被赋值，所以会是<code>undefined</code>。和上面提到的一样，由于这个<code>myVar</code>是在<code>function b</code>中的 execution context 所建立，所以并不会影响到其他 execution context 的<code>myVar</code>，这时候执行到了<code>function b</code>的 execution context 中的<code>console.log(myVar)</code>，于是得到了第二个看到的<code>undefined</code>：</p>
+<p><img src="/images/context/9.jpg"></p>
+<p>最后，<code>function b</code>执行完之后，会从 execution stack 中离开，继续回到<code>function a</code>中的<code>b( )</code>后逐行执行，也就是<code>console.log(myVar)</code>，这时候是在 function a 的 execution context 加以执行的，因此也就得到了结果中看到的第三个 2 了。</p>
+<p>最后由于<code>b ( )</code> 后面已经没有内容，<code>function a</code>执行完毕，这时候，<code>function a</code>也会从 execution stack 中抽离。</p>
+<p><img src="/images/context/10.jpg"></p>
+<p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
+<p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
+<p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();
+<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span></code></pre>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();
+<span class="hljs-built_in">console</span>.log(myVar);
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Execution Context</tag>
+        <tag>Execution Context Stack</tag>
       </tags>
   </entry>
   <entry>
@@ -4728,6 +4728,179 @@ mike.age = <span class="hljs-number">18</span>;
       </tags>
   </entry>
   <entry>
+    <title>JavaScript系列之立即执行函数IIFE</title>
+    <url>/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/</url>
+    <content><![CDATA[<p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
+<p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
+<p>下面我们将做更进一步的介绍和说明。</p>
+<h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
+&#125;
+sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-comment">// 函数表达式</span>
+<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;;
+sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
+
+<h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
+<p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
+<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;;
+<span class="hljs-built_in">console</span>.log(sayHello);</code></pre>
+
+<p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
+<p><img src="/images/IIFE/1.jpg"></p>
+<p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
+<p><img src="/images/IIFE/2.jpg"></p>
+<p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
+<p><img src="/images/IIFE/3.jpg"></p>
+<p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
+  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
+&#125;</code></pre>
+
+<p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
+<p><img src="/images/IIFE/4.jpg"></p>
+<p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
+<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
+<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;);</code></pre>
+
+<p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
+<p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
+<p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
+<p><img src="/images/IIFE/5.jpg"></p>
+<p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
+<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
+  <span class="hljs-comment">// 略...</span>
+&#125;)(<span class="hljs-built_in">window</span>);</code></pre>
+
+<p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
+<p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
+<h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
+
+<p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
+<p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
+<p><img src="/images/IIFE/6.jpg"></p>
+<p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
+<p><img src="/images/IIFE/7.jpg"></p>
+<p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
+<p><img src="/images/IIFE/8.jpg"></p>
+<p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
+<p><img src="/images/IIFE/9.jpg"></p>
+<p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
+<h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
+
+<span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
+
+<p>这时候的打印出的顺序为：</p>
+<p><img src="/images/IIFE/10.jpg"></p>
+<p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
+<p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
+<p><img src="/images/IIFE/11.jpg"></p>
+<p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
+<h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
+<p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
+
+<span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
+
+<p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
+<p><img src="/images/IIFE/12.jpg"></p>
+<p>这操作够骚吧！哈哈~</p>
+<h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;, <span class="hljs-number">1000</span>);
+&#125;</code></pre>
+
+<p>真的是这样吗？我们来看看执行的结果：</p>
+<pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span></code></pre>
+
+<p>为什么会这样呢？</p>
+<p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
+<p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
+<p><img src="/images/IIFE/13.jpg"></p>
+<p>那么要怎么解决这个问题呢？</p>
+<p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span>
+  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span>
+  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
+    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      <span class="hljs-built_in">console</span>.log(x);
+    &#125;, <span class="hljs-number">1000</span>);
+  &#125;)(i);
+&#125;</code></pre>
+
+<p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
+<p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
+<p>所以我们稍微修改一下：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
+    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span>
+    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      <span class="hljs-built_in">console</span>.log(x);
+    &#125;, <span class="hljs-number">1000</span> * x);
+  &#125;)(i);
+&#125;</code></pre>
+
+<p>像这样，就可以依序打印出我们想要的结果喽！</p>
+<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
+<p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
+&#125;</code></pre>
+
+<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>IIFE</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript系列之类型判断</title>
     <url>/2020/01/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/</url>
     <content><![CDATA[<p>类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。</p>
@@ -4956,179 +5129,6 @@ Cat.prototype.CatchMouse = <span class="hljs-function"><span class="hljs-keyword
       </tags>
   </entry>
   <entry>
-    <title>JavaScript系列之立即执行函数IIFE</title>
-    <url>/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/</url>
-    <content><![CDATA[<p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
-<p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
-<p>下面我们将做更进一步的介绍和说明。</p>
-<h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
-&#125;
-sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
-
-<h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
-<p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-<span class="hljs-built_in">console</span>.log(sayHello);</code></pre>
-
-<p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
-<p><img src="/images/IIFE/1.jpg"></p>
-<p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
-<p><img src="/images/IIFE/2.jpg"></p>
-<p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
-<p><img src="/images/IIFE/3.jpg"></p>
-<p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
-&#125;</code></pre>
-
-<p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
-<p><img src="/images/IIFE/4.jpg"></p>
-<p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
-<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
-<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;);</code></pre>
-
-<p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
-<p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
-<p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
-<p><img src="/images/IIFE/5.jpg"></p>
-<p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
-<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
-  <span class="hljs-comment">// 略...</span>
-&#125;)(<span class="hljs-built_in">window</span>);</code></pre>
-
-<p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
-<p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
-<h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
-
-<p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
-<p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
-<p><img src="/images/IIFE/6.jpg"></p>
-<p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
-<p><img src="/images/IIFE/7.jpg"></p>
-<p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
-<p><img src="/images/IIFE/8.jpg"></p>
-<p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
-<p><img src="/images/IIFE/9.jpg"></p>
-<p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
-<h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
-
-<p>这时候的打印出的顺序为：</p>
-<p><img src="/images/IIFE/10.jpg"></p>
-<p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
-<p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
-<p><img src="/images/IIFE/11.jpg"></p>
-<p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
-<h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
-<p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
-
-<p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
-<p><img src="/images/IIFE/12.jpg"></p>
-<p>这操作够骚吧！哈哈~</p>
-<h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;</code></pre>
-
-<p>真的是这样吗？我们来看看执行的结果：</p>
-<pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span></code></pre>
-
-<p>为什么会这样呢？</p>
-<p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
-<p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
-<p><img src="/images/IIFE/13.jpg"></p>
-<p>那么要怎么解决这个问题呢？</p>
-<p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span>
-  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span>
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span>);
-  &#125;)(i);
-&#125;</code></pre>
-
-<p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
-<p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
-<p>所以我们稍微修改一下：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span>
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span> * x);
-  &#125;)(i);
-&#125;</code></pre>
-
-<p>像这样，就可以依序打印出我们想要的结果喽！</p>
-<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
-<p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
-&#125;</code></pre>
-
-<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>IIFE</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>JavaScript系列之类型转换</title>
     <url>/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。</p>
@@ -5324,460 +5324,6 @@ obj +
       <tags>
         <tag>JavaScript</tag>
         <tag>数据类型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之类数组对象arguments</title>
-    <url>/2020/06/19/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1arguments/</url>
-    <content><![CDATA[<p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991">《JavaScript 系列之 this 是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。</p>
-<p>那<code>arguments</code>到底是什么呢？下面就由我来简洁地介绍一下 <code>arguments</code>吧。</p>
-<h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解<code>arguments</code>之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(house);
-  <span class="hljs-built_in">console</span>.log(car);
-  <span class="hljs-built_in">console</span>.log(money);
-&#125;
-
-MyFavorite();</code></pre>
-
-<p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
-<p>一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在 JavaScript 中不太一样的地方在于，即使你没有给它任何参数值就加以执行，也不会报错，而是会返回<code>undefined</code>。</p>
-<p><img src="/images/arguments/1.jpg"></p>
-<p>为什么会得到”<code>undefined</code>“呢？</p>
-<p>之所以会这样是因为当 JavaScript 在执行这个函数的时候，由于提升机制，它会先把我们的参数(<code>house</code>, <code>car</code>, <code>money</code>)存到内存中了，并且赋予它的值是<code>undefined</code>。</p>
-<p>参数值会由左至右读取，如果我依序执行这样的代码就理解了：</p>
-<pre><code class="hljs javascript">MyFavorite();
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>);
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>);
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿元&quot;</span>);</code></pre>
-
-<p>会分别读到以下的结果，表示 JavaScript 会由左至右来读取参数值，而且即使某些参数值有缺值的情况，JavaScript 还是可以正常执行。</p>
-<p><img src="/images/arguments/2.jpg"></p>
-<h3 id="设置函数中参数的默认值"><a href="#设置函数中参数的默认值" class="headerlink" title="设置函数中参数的默认值"></a>设置函数中参数的默认值</h3><p>由于目前的几款浏览器使用的 JavaScript 版本都尚不支持直接在参数的地方设置默认值（ES6 的将可以），所以很多的框架都还不会用这种方式设置默认值。</p>
-<p><strong>方法一：在 ES6 的 JavaScript 中，可以直接通过这种方式设置参数默认值：</strong></p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money = <span class="hljs-string">&quot;一亿元&quot;</span></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(house);
-  <span class="hljs-built_in">console</span>.log(car);
-  <span class="hljs-built_in">console</span>.log(money);
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
-&#125;</code></pre>
-
-<p><strong>方法二：利用强制转换的概念设置默认值</strong></p>
-<p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的默认值，利用简单的”=”和”||”就可以达到参数默认值的效果：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
-  money = money || <span class="hljs-string">&quot;一亿元&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(house);
-  <span class="hljs-built_in">console</span>.log(car);
-  <span class="hljs-built_in">console</span>.log(money);
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
-&#125;</code></pre>
-
-<p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到默认值为”一亿元”：</p>
-<p><img src="/images/arguments/3.jpg"></p>
-<h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>了解了<code>parameters</code>的概念后，让我们回来谈谈<code>arguments</code>，MDN 将它叫做类数组对象，那么什么是类数组对象呢？</p>
-<p>所谓的类数组对象:</p>
-<blockquote>
-<p>就是拥有一个 <code>length</code> 属性和若干索引属性的对象</p>
-</blockquote>
-<p>举个例子：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-string">&#x27;house&#x27;</span>, <span class="hljs-string">&#x27;car&#x27;</span>, <span class="hljs-string">&#x27;money&#x27;</span>];
-
-<span class="hljs-keyword">var</span> arrayLike = &#123;
-    <span class="hljs-number">0</span>: <span class="hljs-string">&#x27;house&#x27;</span>,
-    <span class="hljs-number">1</span>: <span class="hljs-string">&#x27;car&#x27;</span>,
-    <span class="hljs-number">2</span>: <span class="hljs-string">&#x27;money&#x27;</span>,
-    length: <span class="hljs-number">3</span>
-&#125;
-
-<span class="hljs-comment">//读取</span>
-<span class="hljs-built_in">console</span>.log(array[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
-<span class="hljs-built_in">console</span>.log(arrayLike[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
-
-array[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;new house&#x27;</span>;
-arrayLike[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;new house&#x27;</span>;
-
-<span class="hljs-comment">//长度</span>
-<span class="hljs-built_in">console</span>.log(array.length); <span class="hljs-comment">// 3</span>
-<span class="hljs-built_in">console</span>.log(arrayLike.length); <span class="hljs-comment">// 3</span>
-
-<span class="hljs-comment">//遍历</span>
-<span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = array.length; i &lt; len; i++</span>)</span> &#123;
-   ……
-&#125;
-<span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = arrayLike.length; i &lt; len; i++</span>)</span> &#123;
-    ……
-&#125;</code></pre>
-
-<p>上面我们可以看得出来，类数组对象与数组在读取、获取长度、遍历三个方面一样，都能取到，那为什么还叫做类数组对象呢？</p>
-<p>因为类数组对象不可以使用数组的方法，比如：</p>
-<pre><code class="hljs javascript">arrayLike.push(<span class="hljs-string">&quot;name&quot;</span>);</code></pre>
-
-<p>然而上述代码会报错: <code>arrayLike.push is not a function</code>，所以终归还是类数组呐……</p>
-<h3 id="调用数组方法"><a href="#调用数组方法" class="headerlink" title="调用数组方法"></a>调用数组方法</h3><p>如果类数组想用数组的方法怎么办呢？</p>
-<p>直接调用是不可取的，那我们可以通过 <code>Function.call</code> 的方法进行间接调用：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">&quot;house&quot;</span>, <span class="hljs-number">1</span>: <span class="hljs-string">&quot;car&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.join.call(arrayLike, <span class="hljs-string">&quot;&amp;&quot;</span>)); <span class="hljs-comment">// house&amp;car&amp;money</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
-<span class="hljs-comment">// slice可以做到类数组转数组</span>
-
-<span class="hljs-built_in">Array</span>.prototype.map.call(arrayLike, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;
-  <span class="hljs-keyword">return</span> item.toUpperCase();
-&#125;);
-<span class="hljs-comment">// [&quot;HOUSE&quot;, &quot;CAR&quot;, &quot;MONEY&quot;]</span></code></pre>
-
-<p>在上面已经提到了一种类数组转数组的方法，再补充三个：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">&quot;house&quot;</span>, <span class="hljs-number">1</span>: <span class="hljs-string">&quot;car&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
-<span class="hljs-comment">// 1. slice</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
-<span class="hljs-comment">// 2. splice</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.splice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
-<span class="hljs-comment">// 3. ES6 Array.from</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.from(arrayLike)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
-<span class="hljs-comment">// 4. apply</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.concat.apply([], arrayLike));</code></pre>
-
-<p>接下来重点讲讲 <code>Arguments</code> 这个类数组对象。</p>
-<h3 id="arguments-对象"><a href="#arguments-对象" class="headerlink" title="arguments 对象"></a>arguments 对象</h3><p><code>arguments</code>比起<code>this</code>来说，要容易理解的多，<code>arguments</code>对象只定义在函数体中，包括了函数的参数和其他属性。</p>
-<p>同样地通过上面的例子加以理解，我们直接在函数中去打印出”arguments”这个关键字：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
-  money = money || <span class="hljs-string">&quot;一亿元&quot;</span>;
-
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>);
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
-&#125;
-
-MyFavorite();
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>);
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>);
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿元&quot;</span>);</code></pre>
-
-<p>打印结果如下：</p>
-<p><img src="/images/arguments/4.jpg"></p>
-<p>我们可以看到除了类数组的索引属性和<code>length</code>属性之外，还有一个<code>callee</code>属性，而且我们可以看到<code>arguments</code>对象的<code>__ proto __</code>是指向<code>object</code>的，这也说明了他是个类数组对象，而不是一个数组。下面我们进行一一介绍。</p>
-<h4 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h4><p><code>arguments.length</code>为函数实参个数，举个例子：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;实参的长度为：&quot;</span> + <span class="hljs-built_in">arguments</span>.length);
-&#125;
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;形参的长度为：&quot;</span> + foo.length);
-
-foo(<span class="hljs-number">1</span>);
-
-<span class="hljs-comment">// 形参的长度为：3</span>
-<span class="hljs-comment">// 实参的长度为：1</span></code></pre>
-
-<h4 id="callee-属性"><a href="#callee-属性" class="headerlink" title="callee 属性"></a>callee 属性</h4><p>每个参数实例都有一个<code>callee</code>属性，通过它可以调用函数自身。 ES5 的严格模式不允许访问<code>arguments.callee</code>。</p>
-<p>讲个闭包经典面试题使用 <code>callee</code> 的解决方法：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> data = [];
-
-<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
-  (data[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>.callee.i);
-  &#125;).i = i;
-&#125;
-
-data[<span class="hljs-number">0</span>]();
-data[<span class="hljs-number">1</span>]();
-data[<span class="hljs-number">2</span>]();
-
-<span class="hljs-comment">// 0</span>
-<span class="hljs-comment">// 1</span>
-<span class="hljs-comment">// 2</span></code></pre>
-
-<h3 id="最后来看看展开运算符-spread-…"><a href="#最后来看看展开运算符-spread-…" class="headerlink" title="最后来看看展开运算符 spread(…)"></a>最后来看看展开运算符 spread(…)</h3><p>除了<code>arguments</code>这个关键字，在新版 ES6 的 JavaScript 中另外提供了一个展开运算符(spread)，它就是「<code>...</code>」三个点，这个<code>...</code>有什么用呢？</p>
-<p>根据<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">MDN</a>对于展开运算符 spread 的描述如下：</p>
-<blockquote>
-<p>The spread operator allows an expression to be expanded in places where multiple arguments (for function calls) or multiple elements (for array literals) or multiple variables (for destructuring assignment) are expected.</p>
-</blockquote>
-<p>简单来说，就是它可以把函数中许多的参数(<code>arguments</code>)或数组中许多的元素(<code>elements</code>)形成一个新的变量。</p>
-<p>举例来说：</p>
-<p>在函数的部分，在参数的地方我们用”<code>...other</code>“，<code>other</code>是你想要储存成的数组变量名称，可以自己取。</p>
-<p>在执行函数的地方，原本我们只有三个参数(<code>house</code>, <code>car</code>, <code>money</code>)，也只能填写三个参数；但使用了展开运算符”<code>...</code>“后，我们在执行函数的地方就可以带入不只三个参数（例如，我在最后面又加了”老婆”和”孩子”），这些多的参数值最后都会被放到<code>other</code>这个数组当中。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money, ...other</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(other);
-  <span class="hljs-built_in">console</span>.log(
-    <span class="hljs-string">&quot;What my favorite are&quot;</span> + house + <span class="hljs-string">&quot;,&quot;</span> + car + <span class="hljs-string">&quot;,&quot;</span> + money + <span class="hljs-string">&quot;,&quot;</span> + other
-  );
-&#125;
-
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿&quot;</span>);
-MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿&quot;</span>, <span class="hljs-string">&quot;老婆&quot;</span>, <span class="hljs-string">&quot;孩子&quot;</span>);</code></pre>
-
-<p>结果就会长的像这样子：</p>
-<p><img src="/images/arguments/5.jpg"></p>
-<p>展开运算符还有其他的使用方式，像是把数组元素做连接等等，使用灵活的话相当方便，如果有需要的话，可以参考引 1。</p>
-<p>引 1：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Microsoft Developer Netword：展开运算符(…)</a></p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><strong>1.利用 arguments 实现方法的重载</strong></p>
-<p>下面我们利用<code>arguments</code>对象来实现一个参数相加的函数，不论传入多少参数都行，将传入的参数相加后返回。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> len = <span class="hljs-built_in">arguments</span>.length,
-    sum = <span class="hljs-number">0</span>;
-  <span class="hljs-keyword">for</span> (; len--; ) &#123;
-    sum += <span class="hljs-built_in">arguments</span>[len];
-  &#125;
-  <span class="hljs-keyword">return</span> sum;
-&#125;
-
-<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//6</span>
-<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//4</span>
-<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)); <span class="hljs-comment">//17</span></code></pre>
-
-<p>由于 JS 是一种弱类型的语言，没有重载机制，当我们重写函数时，会将原来的函数直接覆盖，这里我们能利用<code>arguments</code>，来判断传入的实参类型与数量进行不同的操作，然后返回不同的数值。</p>
-<p><strong>2.利用 arguments.callee 实现递归</strong></p>
-<p>先来看看平常我们是怎么实现递归的，这是一个结算阶乘的函数。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
-  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-  &#125; <span class="hljs-keyword">else</span> &#123;
-    <span class="hljs-keyword">return</span> num * foo(num - <span class="hljs-number">1</span>);
-  &#125;
-&#125;</code></pre>
-
-<p>但是当这个函数变成了一个匿名函数时，我们就可以利用<code>callee</code>来递归这个函数。</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
-  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
-  &#125; <span class="hljs-keyword">else</span> &#123;
-    <span class="hljs-keyword">return</span> num * <span class="hljs-built_in">arguments</span>.callee(num - <span class="hljs-number">1</span>);
-  &#125;
-&#125;</code></pre>
-
-<p>这个方法虽然好用，但是有一点值得注意，ECMAScript4 中为了限制 JS 的灵活度，让 JS 变得严格，新增了严格模式，在严格模式中我们被禁止不使用<code>var</code>来直接声明一个全局变量，当然这不是重点，重点是<code>arguments.callee</code>这个属性也被禁止了。不过这都不是事儿，ES6 为我们新增了很多好用的变量声明方式和新的语法糖，作为一个时髦的前端，我们赶紧学习一些 ES6 的新语法吧。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>arguments</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之运行机制（Event Loop）</title>
-    <url>/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<p>有了一定 JavaScript 基础的朋友们一定知道，JS 里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的 JavaScript 系列文章里，我就总结了 JS 前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解 JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。</p>
-<h3 id="单线程的问题"><a href="#单线程的问题" class="headerlink" title="单线程的问题"></a>单线程的问题</h3><p>JavaScript 语言的一大特点就是单线程，也就是说，同一个时间只能做一件事，不像诸如 Java 等多线程语言一样能同时进行多个任务和流程。</p>
-<p>其中 JS 引擎中负责解释和执行 JavaScript 代码的线程只有一个，叫它<strong>主线程</strong>。</p>
-<p>但是实际上还存在其他的线程。例如：处理 AJAX 请求的线程、处理 DOM 事件的线程、定时器线程、读写文件的线程(例如在 Node.js 中)等等。这些线程可能存在于 JS 引擎之内，也可能存在于 JS 引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。</p>
-<p>但因单线程随之<strong>所带来的问题</strong>是，所有任务都需要排队，上一个任务没执行完，下一个任务就会一直等待，会导致任务执行阻塞。具体的例子是：在浏览器中，要向服务器发送 ajax 请求，http 通信有延迟，而且等待返回数据的时间也未知，那线程就无法处理其他任务了，页面可能长时间会无法接受响应。</p>
-<p>另外，<strong>GUI 渲染线程与 JS 引擎线程是互斥的</strong>，当 JavaScript 引擎执行时 GUI 线程会被挂起，直到 JS 程序执行完成，才会接着执行。因此如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞。</p>
-<p>所以 JS 用异步任务 (asynchronous callback) 去解决这些<strong>问题</strong>。</p>
-<h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>写基础系列文章的过程中经常能碰到<strong>同步</strong>(Synchronous)与<strong>异步</strong>(Asynchronous)的概念，这也是初学 JavaScript 时容易搞混的特性之一。</p>
-<p>两者容易搞混我觉得很大的原因出在 Synchronous 在国内被翻译成了「<strong>同步</strong>」，光看字面意思会认为「<strong>同步</strong>」就是「所有动作同时进行」，但事实上<strong>刚好相反</strong>。</p>
-<p>要快速理解同步异步 ， 直接先看一段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
-
-<span class="hljs-comment">/*打印出</span>
-<span class="hljs-comment">1</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<p>这段代码的实现就叫做<strong>同步</strong>，也就是说按照顺序一步一步来处理，做完第一件事情之后，再去做下一件事情。</p>
-<p>再来看另一段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
-&#125;, <span class="hljs-number">1000</span>);
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
-
-<span class="hljs-comment">/*打印出</span>
-<span class="hljs-comment">1</span>
-<span class="hljs-comment">3</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<p>这段代码的实现就叫做<strong>异步</strong>，也就是说不完全按照顺序去做，如果在函数 A 返回的时候，调用者还不能够得到预期结果，而是需要通过一定的手段等待一段时间去得到，这样也就不耽搁时间。</p>
-<p>所以说 JavaScript 的同步代码比较好理解，而其优势之一是其如何处理异步代码。异步代码会被放入一个事件队列（下面会讲到），等到所有其他代码执行后才进行，而不会阻塞线程，接下来将重点介绍<strong>异步</strong>。</p>
-<h3 id="异步过程是如何形成的？"><a href="#异步过程是如何形成的？" class="headerlink" title="异步过程是如何形成的？"></a>异步过程是如何形成的？</h3><p>简单的总结一下，一个异步过程通常是这样的：</p>
-<ol>
-<li>主线程发起一个异步请求，相应的工作线程接收请求并告知主线程已收到(异步函数返回)；</li>
-<li>主线程可以继续执行后面的代码，同时工作线程执行异步任务；</li>
-<li>工作线程完成工作后，通知主线程；</li>
-<li>主线程收到通知后，执行一定的动作(调用回调函数)。</li>
-</ol>
-<p>异步函数通常具有以下的形式：</p>
-<pre><code class="hljs javascript">A(argus..., callbackFn)</code></pre>
-
-<p>其中，函数 A 可以叫做异步过程的发起函数，也叫做异步任务注册函数。<code>argus</code>是这个函数需要的参数。<code>callbackFn</code>也是这个函数的参数，但是它比较特殊所以单独列出来。</p>
-<p>所以，从主线程的角度看，一个异步过程包括下面两个要素：</p>
-<ul>
-<li>发起函数(或叫注册函数)<code>A</code></li>
-<li>回调函数<code>callbackFn</code></li>
-</ul>
-<p>它们都是在主线程上调用的，其中注册函数用来发起异步过程，回调函数用来处理结果。</p>
-<p>举一个栗子：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(fn, <span class="hljs-number">1000</span>);</code></pre>
-
-<p>其中的<code>setTimeout</code>就是异步过程的发起函数，<code>fn</code>是回调函数。</p>
-<p>注意：前面说的形式<code>A(argus..., callbackFn)</code>只是一种抽象的表示，并不代表回调函数一定要作为发起函数的参数，例如：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> XMLHttpRequest();
-request.open(<span class="hljs-string">&quot;GET&quot;</span>, url);
-request.send(); <span class="hljs-comment">// 发起函数</span>
-request.onreadystatechange = xxx; <span class="hljs-comment">// 添加回调函数</span></code></pre>
-
-<p>这种形式的发起函数和回调函数就是分离的。</p>
-<h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>上面提到了异步任务完成后，会通知主线程，以 <code>callback</code> 的方式获取结果或者执行回调。但是如果当前的主线程是忙碌的，异步任务的信号无法接收到怎么办呢？所以还需要一个地方保存这些 <code>callback</code>，也就是<strong>任务队列（task queue）</strong>。</p>
-<p>那么这里就要具体提提 JavaScript 异步执行的<strong>运行机制</strong>了，先用一张图来表现整个过程：</p>
-<p><img src="/images/eventloop/1.jpg"></p>
-<p>上图的完整过程就是：所有同步任务都在主线程上执行，形成一个执行栈，当执行栈遇到异步任务时（浏览器通常是调用 WebAPIs，常见的有 <code>XMLHttpRequest</code>，<code>setTimeout</code>，事件回调等），不会等待，而是继续执行往下执行。而异步任务就会以各种方式，把 <code>callback</code> 加入任务队列中。一旦执行栈中的所有同步任务执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个 <code>callback</code> 任务放入到栈中执行。结束后栈内被清空，还会再去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作，而这种循环的机制，就称之为<strong>事件循环</strong>（Event Loop）。</p>
-<h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop(事件循环)"></a>Event Loop(事件循环)</h3><p>事件循环可不是像上面一样一句两句就能讲清的，并且暂时不讨论 node.js 的 Event Loop 执行机制，以下关于浏览器的 Event Loop 执行机制，那在完全了解 Event Loop 之前，还需了解一下宏任务与微任务，因为任务队列又分为<code>macrotask</code>（宏任务）与<code>microtask</code>（微任务），在 ES2015 中 <code>macrotask</code> 即指 Task，而 <code>microtask</code> 则是指代 Job。</p>
-<ul>
-<li>宏任务大概包括：<code>script</code>(整体代码), <code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>（Nodejs 环境）, <code>I/O</code>, <code>UI rendering</code>。</li>
-<li>微任务大概包括: <code>process.nextTick</code>（Nodejs 环境）, <code>Promise</code>, <code>Object.observe</code>(已废弃), <code>MutationObserver</code>(html5 新特性)。</li>
-</ul>
-<p>关于<code>macrotask</code>和<code>microtask</code>的理解，得结合事件循坏的机制，下面这张图就可以说是介绍得很清楚了。</p>
-<p><img src="/images/eventloop/2.jpg"></p>
-<p>事件循环的顺序，决定了 JavaScript 代码的执行顺序，一次事件循环的步骤简单总结起来就是：</p>
-<ol>
-<li>检查<code>macrotask</code>队列是否为空，非空则到步骤 2，为空则到步骤 3；</li>
-<li>执行<code>macrotask</code>中的一个任务；</li>
-<li>继续检查<code>microtask</code>队列是否为空，非空则到步骤 4，否则到步骤 5；</li>
-<li>取出<code>microtask</code>中的任务执行，执行完成返回到步骤 3；</li>
-<li>检查是否需要进行视图更新，需要则进行更新，否则进行下一轮的事件循环；</li>
-</ol>
-<p>上面这么多文字表述是不是有点晦涩难懂，那我们通过 2 个 demo 例子来逐步理解<strong>事件循环</strong>的具体顺序吧：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//demo1</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
-
-<span class="hljs-comment">//setTimeout1</span>
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
-  <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
-  &#125;);
-&#125;);
-
-<span class="hljs-comment">//setTimeout2</span>
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
-&#125;);
-
-<span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>);
-&#125;);
-
-<span class="hljs-comment">// 1，5，2，3，4</span></code></pre>
-
-<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
-<ol>
-<li>主线程上遇到<code>console.log(1)</code>同步代码，执行，输出’1’。</li>
-<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)。</li>
-<li>接着遇到<code>setTimeout2</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)。</li>
-<li>首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘5’。</li>
-<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code>的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，发现队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’3’，<code>microtask</code>队列为空，进入下一个事件循环。</li>
-<li>检查宏任务队列，发现有 <code>setTimeout2</code>的回调函数, 立即执行回调函数输出’4’。</li>
-</ol>
-<p>再思考一下下面代码的执行顺序：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//demo2</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
-
-<span class="hljs-comment">//setTimeout1</span>
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
-&#125;, <span class="hljs-number">0</span>);
-
-<span class="hljs-comment">//setTimeout2</span>
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
-  <span class="hljs-comment">//setTimeout3</span>
-  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
-  &#125;);
-  <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>);
-  &#125;);
-&#125;, <span class="hljs-number">200</span>);
-
-<span class="hljs-comment">//Promise1</span>
-<span class="hljs-built_in">Promise</span>.resolve()
-  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">6</span>);
-  &#125;)
-  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">7</span>);
-  &#125;);
-
-<span class="hljs-comment">//Promise2</span>
-<span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">8</span>);
-&#125;);
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-number">9</span>);
-
-<span class="hljs-comment">// 1，9，6，8，7，2，3，5，4</span></code></pre>
-
-<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
-<ol>
-<li>首先顺序执行完主进程上的同步任务，第一句和最后一句的<code>console.log</code>。</li>
-<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)；</li>
-<li>接着遇到<code>setTimeout2</code>，它的作用是在 200ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)；</li>
-<li>同步任务执行完之后，首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘6’，然后执行第二个<code>promise</code>的<code>then</code>回调，输出’8’，由于第一个<code>promise</code>的<code>.then()</code>的返回依然是<code>promise</code>，所以第二个<code>.then()</code>会放到<code>microtask</code>队列继续执行，输出 ‘7’;</li>
-<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code> 的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，队列为空，进入下一次事件循环；</li>
-<li>检查宏任务队列，发现有 <code>setTimeout2</code> 的回调函数, 立即执行回调函数输出’3’；</li>
-<li>接着遇到<code>setTimeout3</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在下一次的事件循环中执行)，检查微任务队列，即 <code>microtask</code> 队列，发现此队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’5’；</li>
-<li>此时<code>microtask</code>队列为空，进入下一个事件循环，检查宏任务队列，发现有 <code>setTimeout3</code> 的回调函数，立即执行回调函数输出，输出’4’。至此代码执行结束。</li>
-</ol>
-<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>这里再补一道面试题，如何执行这段代码的过程就不详细说明了，朋友们自行去体会：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
-
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
-  process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
-  &#125;);
-  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;4&quot;</span>);
-    resolve();
-  &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;5&quot;</span>);
-  &#125;);
-&#125;);
-process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;6&quot;</span>);
-&#125;);
-<span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;7&quot;</span>);
-  resolve();
-&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;8&quot;</span>);
-&#125;);
-
-<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;9&quot;</span>);
-  process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;10&quot;</span>);
-  &#125;);
-  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;11&quot;</span>);
-    resolve();
-  &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;12&quot;</span>);
-  &#125;);
-&#125;);
-
-<span class="hljs-comment">// 1，7，6，8，2，4，3，5，9，11，10，12</span>
-<span class="hljs-comment">// node环境下的事件监听依赖libuv驱动I/O库与前端环境不完全相同，输出顺序可能会有误差</span></code></pre>
-
-<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><ul>
-<li><a href="https://blog.csdn.net/leftfist/article/details/41891407">Node.js 机制及原理理解初步</a></li>
-<li><a href="http://lynnelv.github.io/js-event-loop-nodejs">深入理解 js 事件循环机制（Node.js 篇）</a></li>
-</ul>
-<p>后续自己也会追加一篇关于 Node.js 的事件循环机制的文章。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>运行机制</tag>
-        <tag>Event Loop</tag>
       </tags>
   </entry>
   <entry>
@@ -6066,6 +5612,460 @@ catCounter(); <span class="hljs-comment">// 3 cats</span></code></pre>
       <tags>
         <tag>JavaScript</tag>
         <tag>闭包</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之运行机制（Event Loop）</title>
+    <url>/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<p>有了一定 JavaScript 基础的朋友们一定知道，JS 里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的 JavaScript 系列文章里，我就总结了 JS 前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解 JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。</p>
+<h3 id="单线程的问题"><a href="#单线程的问题" class="headerlink" title="单线程的问题"></a>单线程的问题</h3><p>JavaScript 语言的一大特点就是单线程，也就是说，同一个时间只能做一件事，不像诸如 Java 等多线程语言一样能同时进行多个任务和流程。</p>
+<p>其中 JS 引擎中负责解释和执行 JavaScript 代码的线程只有一个，叫它<strong>主线程</strong>。</p>
+<p>但是实际上还存在其他的线程。例如：处理 AJAX 请求的线程、处理 DOM 事件的线程、定时器线程、读写文件的线程(例如在 Node.js 中)等等。这些线程可能存在于 JS 引擎之内，也可能存在于 JS 引擎之外，在此我们不做区分。不妨叫它们<strong>工作线程</strong>。</p>
+<p>但因单线程随之<strong>所带来的问题</strong>是，所有任务都需要排队，上一个任务没执行完，下一个任务就会一直等待，会导致任务执行阻塞。具体的例子是：在浏览器中，要向服务器发送 ajax 请求，http 通信有延迟，而且等待返回数据的时间也未知，那线程就无法处理其他任务了，页面可能长时间会无法接受响应。</p>
+<p>另外，<strong>GUI 渲染线程与 JS 引擎线程是互斥的</strong>，当 JavaScript 引擎执行时 GUI 线程会被挂起，直到 JS 程序执行完成，才会接着执行。因此如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞。</p>
+<p>所以 JS 用异步任务 (asynchronous callback) 去解决这些<strong>问题</strong>。</p>
+<h3 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h3><p>写基础系列文章的过程中经常能碰到<strong>同步</strong>(Synchronous)与<strong>异步</strong>(Asynchronous)的概念，这也是初学 JavaScript 时容易搞混的特性之一。</p>
+<p>两者容易搞混我觉得很大的原因出在 Synchronous 在国内被翻译成了「<strong>同步</strong>」，光看字面意思会认为「<strong>同步</strong>」就是「所有动作同时进行」，但事实上<strong>刚好相反</strong>。</p>
+<p>要快速理解同步异步 ， 直接先看一段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
+
+<span class="hljs-comment">/*打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<p>这段代码的实现就叫做<strong>同步</strong>，也就是说按照顺序一步一步来处理，做完第一件事情之后，再去做下一件事情。</p>
+<p>再来看另一段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
+&#125;, <span class="hljs-number">1000</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
+
+<span class="hljs-comment">/*打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">3</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<p>这段代码的实现就叫做<strong>异步</strong>，也就是说不完全按照顺序去做，如果在函数 A 返回的时候，调用者还不能够得到预期结果，而是需要通过一定的手段等待一段时间去得到，这样也就不耽搁时间。</p>
+<p>所以说 JavaScript 的同步代码比较好理解，而其优势之一是其如何处理异步代码。异步代码会被放入一个事件队列（下面会讲到），等到所有其他代码执行后才进行，而不会阻塞线程，接下来将重点介绍<strong>异步</strong>。</p>
+<h3 id="异步过程是如何形成的？"><a href="#异步过程是如何形成的？" class="headerlink" title="异步过程是如何形成的？"></a>异步过程是如何形成的？</h3><p>简单的总结一下，一个异步过程通常是这样的：</p>
+<ol>
+<li>主线程发起一个异步请求，相应的工作线程接收请求并告知主线程已收到(异步函数返回)；</li>
+<li>主线程可以继续执行后面的代码，同时工作线程执行异步任务；</li>
+<li>工作线程完成工作后，通知主线程；</li>
+<li>主线程收到通知后，执行一定的动作(调用回调函数)。</li>
+</ol>
+<p>异步函数通常具有以下的形式：</p>
+<pre><code class="hljs javascript">A(argus..., callbackFn)</code></pre>
+
+<p>其中，函数 A 可以叫做异步过程的发起函数，也叫做异步任务注册函数。<code>argus</code>是这个函数需要的参数。<code>callbackFn</code>也是这个函数的参数，但是它比较特殊所以单独列出来。</p>
+<p>所以，从主线程的角度看，一个异步过程包括下面两个要素：</p>
+<ul>
+<li>发起函数(或叫注册函数)<code>A</code></li>
+<li>回调函数<code>callbackFn</code></li>
+</ul>
+<p>它们都是在主线程上调用的，其中注册函数用来发起异步过程，回调函数用来处理结果。</p>
+<p>举一个栗子：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">setTimeout</span>(fn, <span class="hljs-number">1000</span>);</code></pre>
+
+<p>其中的<code>setTimeout</code>就是异步过程的发起函数，<code>fn</code>是回调函数。</p>
+<p>注意：前面说的形式<code>A(argus..., callbackFn)</code>只是一种抽象的表示，并不代表回调函数一定要作为发起函数的参数，例如：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> request = <span class="hljs-keyword">new</span> XMLHttpRequest();
+request.open(<span class="hljs-string">&quot;GET&quot;</span>, url);
+request.send(); <span class="hljs-comment">// 发起函数</span>
+request.onreadystatechange = xxx; <span class="hljs-comment">// 添加回调函数</span></code></pre>
+
+<p>这种形式的发起函数和回调函数就是分离的。</p>
+<h3 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h3><p>上面提到了异步任务完成后，会通知主线程，以 <code>callback</code> 的方式获取结果或者执行回调。但是如果当前的主线程是忙碌的，异步任务的信号无法接收到怎么办呢？所以还需要一个地方保存这些 <code>callback</code>，也就是<strong>任务队列（task queue）</strong>。</p>
+<p>那么这里就要具体提提 JavaScript 异步执行的<strong>运行机制</strong>了，先用一张图来表现整个过程：</p>
+<p><img src="/images/eventloop/1.jpg"></p>
+<p>上图的完整过程就是：所有同步任务都在主线程上执行，形成一个执行栈，当执行栈遇到异步任务时（浏览器通常是调用 WebAPIs，常见的有 <code>XMLHttpRequest</code>，<code>setTimeout</code>，事件回调等），不会等待，而是继续执行往下执行。而异步任务就会以各种方式，把 <code>callback</code> 加入任务队列中。一旦执行栈中的所有同步任务执行完毕，栈内被清空了，就代表主线程空闲了，这个时候就会去任务队列中按照顺序读取一个 <code>callback</code> 任务放入到栈中执行。结束后栈内被清空，还会再去读取任务队列有没有任务，有就读取执行，一直循环读取-执行的操作，而这种循环的机制，就称之为<strong>事件循环</strong>（Event Loop）。</p>
+<h3 id="Event-Loop-事件循环"><a href="#Event-Loop-事件循环" class="headerlink" title="Event Loop(事件循环)"></a>Event Loop(事件循环)</h3><p>事件循环可不是像上面一样一句两句就能讲清的，并且暂时不讨论 node.js 的 Event Loop 执行机制，以下关于浏览器的 Event Loop 执行机制，那在完全了解 Event Loop 之前，还需了解一下宏任务与微任务，因为任务队列又分为<code>macrotask</code>（宏任务）与<code>microtask</code>（微任务），在 ES2015 中 <code>macrotask</code> 即指 Task，而 <code>microtask</code> 则是指代 Job。</p>
+<ul>
+<li>宏任务大概包括：<code>script</code>(整体代码), <code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>（Nodejs 环境）, <code>I/O</code>, <code>UI rendering</code>。</li>
+<li>微任务大概包括: <code>process.nextTick</code>（Nodejs 环境）, <code>Promise</code>, <code>Object.observe</code>(已废弃), <code>MutationObserver</code>(html5 新特性)。</li>
+</ul>
+<p>关于<code>macrotask</code>和<code>microtask</code>的理解，得结合事件循坏的机制，下面这张图就可以说是介绍得很清楚了。</p>
+<p><img src="/images/eventloop/2.jpg"></p>
+<p>事件循环的顺序，决定了 JavaScript 代码的执行顺序，一次事件循环的步骤简单总结起来就是：</p>
+<ol>
+<li>检查<code>macrotask</code>队列是否为空，非空则到步骤 2，为空则到步骤 3；</li>
+<li>执行<code>macrotask</code>中的一个任务；</li>
+<li>继续检查<code>microtask</code>队列是否为空，非空则到步骤 4，否则到步骤 5；</li>
+<li>取出<code>microtask</code>中的任务执行，执行完成返回到步骤 3；</li>
+<li>检查是否需要进行视图更新，需要则进行更新，否则进行下一轮的事件循环；</li>
+</ol>
+<p>上面这么多文字表述是不是有点晦涩难懂，那我们通过 2 个 demo 例子来逐步理解<strong>事件循环</strong>的具体顺序吧：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//demo1</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
+
+<span class="hljs-comment">//setTimeout1</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
+  <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
+  &#125;);
+&#125;);
+
+<span class="hljs-comment">//setTimeout2</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
+&#125;);
+
+<span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> &#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>);
+&#125;);
+
+<span class="hljs-comment">// 1，5，2，3，4</span></code></pre>
+
+<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
+<ol>
+<li>主线程上遇到<code>console.log(1)</code>同步代码，执行，输出’1’。</li>
+<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)。</li>
+<li>接着遇到<code>setTimeout2</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)。</li>
+<li>首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘5’。</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code>的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，发现队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’3’，<code>microtask</code>队列为空，进入下一个事件循环。</li>
+<li>检查宏任务队列，发现有 <code>setTimeout2</code>的回调函数, 立即执行回调函数输出’4’。</li>
+</ol>
+<p>再思考一下下面代码的执行顺序：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//demo2</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">1</span>);
+
+<span class="hljs-comment">//setTimeout1</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">2</span>);
+&#125;, <span class="hljs-number">0</span>);
+
+<span class="hljs-comment">//setTimeout2</span>
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">3</span>);
+  <span class="hljs-comment">//setTimeout3</span>
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">4</span>);
+  &#125;);
+  <span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">5</span>);
+  &#125;);
+&#125;, <span class="hljs-number">200</span>);
+
+<span class="hljs-comment">//Promise1</span>
+<span class="hljs-built_in">Promise</span>.resolve()
+  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">6</span>);
+  &#125;)
+  .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-number">7</span>);
+  &#125;);
+
+<span class="hljs-comment">//Promise2</span>
+<span class="hljs-built_in">Promise</span>.resolve().then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-number">8</span>);
+&#125;);
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">9</span>);
+
+<span class="hljs-comment">// 1，9，6，8，7，2，3，5，4</span></code></pre>
+
+<p>我们来说明一下, JS 引擎是如何执行这段代码的：</p>
+<ol>
+<li>首先顺序执行完主进程上的同步任务，第一句和最后一句的<code>console.log</code>。</li>
+<li>接着遇到<code>setTimeout1</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在<strong>下</strong>一次的事件循环中执行)；</li>
+<li>接着遇到<code>setTimeout2</code>，它的作用是在 200ms 后将回调函数放到宏任务队列中(这个任务在<strong>下下</strong>一次的事件循环中执行)；</li>
+<li>同步任务执行完之后，首先检查微任务队列, 即 <code>microtask</code>队列，发现此队列不为空，执行第一个<code>promise</code>的<code>then</code>回调，输出 ‘6’，然后执行第二个<code>promise</code>的<code>then</code>回调，输出’8’，由于第一个<code>promise</code>的<code>.then()</code>的返回依然是<code>promise</code>，所以第二个<code>.then()</code>会放到<code>microtask</code>队列继续执行，输出 ‘7’;</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环, 检查宏任务队列，发现有 <code>setTimeout1</code> 的回调函数，立即执行回调函数输出 ‘2’,检查<code>microtask</code> 队列，队列为空，进入下一次事件循环；</li>
+<li>检查宏任务队列，发现有 <code>setTimeout2</code> 的回调函数, 立即执行回调函数输出’3’；</li>
+<li>接着遇到<code>setTimeout3</code>，它的作用是在 0ms 后将回调函数放到宏任务队列中(这个任务在下一次的事件循环中执行)，检查微任务队列，即 <code>microtask</code> 队列，发现此队列不为空，执行<code>promise</code>的<code>then</code>回调，输出’5’；</li>
+<li>此时<code>microtask</code>队列为空，进入下一个事件循环，检查宏任务队列，发现有 <code>setTimeout3</code> 的回调函数，立即执行回调函数输出，输出’4’。至此代码执行结束。</li>
+</ol>
+<h3 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h3><p>这里再补一道面试题，如何执行这段代码的过程就不详细说明了，朋友们自行去体会：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;1&quot;</span>);
+
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;2&quot;</span>);
+  process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;3&quot;</span>);
+  &#125;);
+  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;4&quot;</span>);
+    resolve();
+  &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;5&quot;</span>);
+  &#125;);
+&#125;);
+process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;6&quot;</span>);
+&#125;);
+<span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;7&quot;</span>);
+  resolve();
+&#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;8&quot;</span>);
+&#125;);
+
+<span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;9&quot;</span>);
+  process.nextTick(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;10&quot;</span>);
+  &#125;);
+  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;11&quot;</span>);
+    resolve();
+  &#125;).then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;12&quot;</span>);
+  &#125;);
+&#125;);
+
+<span class="hljs-comment">// 1，7，6，8，2，4，3，5，9，11，10，12</span>
+<span class="hljs-comment">// node环境下的事件监听依赖libuv驱动I/O库与前端环境不完全相同，输出顺序可能会有误差</span></code></pre>
+
+<h3 id="延伸阅读"><a href="#延伸阅读" class="headerlink" title="延伸阅读"></a>延伸阅读</h3><ul>
+<li><a href="https://blog.csdn.net/leftfist/article/details/41891407">Node.js 机制及原理理解初步</a></li>
+<li><a href="http://lynnelv.github.io/js-event-loop-nodejs">深入理解 js 事件循环机制（Node.js 篇）</a></li>
+</ul>
+<p>后续自己也会追加一篇关于 Node.js 的事件循环机制的文章。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>运行机制</tag>
+        <tag>Event Loop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之类数组对象arguments</title>
+    <url>/2020/06/19/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1arguments/</url>
+    <content><![CDATA[<p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991">《JavaScript 系列之 this 是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。</p>
+<p>那<code>arguments</code>到底是什么呢？下面就由我来简洁地介绍一下 <code>arguments</code>吧。</p>
+<h3 id="什么是参数-parameters"><a href="#什么是参数-parameters" class="headerlink" title="什么是参数(parameters)"></a>什么是参数(parameters)</h3><p>在了解<code>arguments</code>之前，我们必须要先了解一下什么是参数(parameter)。参数其实就是我们会带入函数的变量，以下面例子来说，”house”、”car”、”money”，就是我们在执行函式的时候可以任意填入的参数。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+&#125;
+
+MyFavorite();</code></pre>
+
+<p>首先，当我建立好这样的函数，我可以不带任何参数值就去执行这个函数，只要输入<code>MyFavorite()</code>这样就可以了！</p>
+<p>一般如果有参数却又没有给它参数值，函数的执行上往往会有错误！但在 JavaScript 中不太一样的地方在于，即使你没有给它任何参数值就加以执行，也不会报错，而是会返回<code>undefined</code>。</p>
+<p><img src="/images/arguments/1.jpg"></p>
+<p>为什么会得到”<code>undefined</code>“呢？</p>
+<p>之所以会这样是因为当 JavaScript 在执行这个函数的时候，由于提升机制，它会先把我们的参数(<code>house</code>, <code>car</code>, <code>money</code>)存到内存中了，并且赋予它的值是<code>undefined</code>。</p>
+<p>参数值会由左至右读取，如果我依序执行这样的代码就理解了：</p>
+<pre><code class="hljs javascript">MyFavorite();
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>);
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>);
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿元&quot;</span>);</code></pre>
+
+<p>会分别读到以下的结果，表示 JavaScript 会由左至右来读取参数值，而且即使某些参数值有缺值的情况，JavaScript 还是可以正常执行。</p>
+<p><img src="/images/arguments/2.jpg"></p>
+<h3 id="设置函数中参数的默认值"><a href="#设置函数中参数的默认值" class="headerlink" title="设置函数中参数的默认值"></a>设置函数中参数的默认值</h3><p>由于目前的几款浏览器使用的 JavaScript 版本都尚不支持直接在参数的地方设置默认值（ES6 的将可以），所以很多的框架都还不会用这种方式设置默认值。</p>
+<p><strong>方法一：在 ES6 的 JavaScript 中，可以直接通过这种方式设置参数默认值：</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money = <span class="hljs-string">&quot;一亿元&quot;</span></span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
+&#125;</code></pre>
+
+<p><strong>方法二：利用强制转换的概念设置默认值</strong></p>
+<p>由于版本兼容的差异，现今多数的编程都是使用这种方式设置参数的默认值，利用简单的”=”和”||”就可以达到参数默认值的效果：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  money = money || <span class="hljs-string">&quot;一亿元&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(house);
+  <span class="hljs-built_in">console</span>.log(car);
+  <span class="hljs-built_in">console</span>.log(money);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
+&#125;</code></pre>
+
+<p>这时候即使在没有给值的情况下，<code>money</code>一样可以得到默认值为”一亿元”：</p>
+<p><img src="/images/arguments/3.jpg"></p>
+<h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>了解了<code>parameters</code>的概念后，让我们回来谈谈<code>arguments</code>，MDN 将它叫做类数组对象，那么什么是类数组对象呢？</p>
+<p>所谓的类数组对象:</p>
+<blockquote>
+<p>就是拥有一个 <code>length</code> 属性和若干索引属性的对象</p>
+</blockquote>
+<p>举个例子：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> array = [<span class="hljs-string">&#x27;house&#x27;</span>, <span class="hljs-string">&#x27;car&#x27;</span>, <span class="hljs-string">&#x27;money&#x27;</span>];
+
+<span class="hljs-keyword">var</span> arrayLike = &#123;
+    <span class="hljs-number">0</span>: <span class="hljs-string">&#x27;house&#x27;</span>,
+    <span class="hljs-number">1</span>: <span class="hljs-string">&#x27;car&#x27;</span>,
+    <span class="hljs-number">2</span>: <span class="hljs-string">&#x27;money&#x27;</span>,
+    length: <span class="hljs-number">3</span>
+&#125;
+
+<span class="hljs-comment">//读取</span>
+<span class="hljs-built_in">console</span>.log(array[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
+<span class="hljs-built_in">console</span>.log(arrayLike[<span class="hljs-number">0</span>]); <span class="hljs-comment">// house</span>
+
+array[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;new house&#x27;</span>;
+arrayLike[<span class="hljs-number">0</span>] = <span class="hljs-string">&#x27;new house&#x27;</span>;
+
+<span class="hljs-comment">//长度</span>
+<span class="hljs-built_in">console</span>.log(array.length); <span class="hljs-comment">// 3</span>
+<span class="hljs-built_in">console</span>.log(arrayLike.length); <span class="hljs-comment">// 3</span>
+
+<span class="hljs-comment">//遍历</span>
+<span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = array.length; i &lt; len; i++</span>)</span> &#123;
+   ……
+&#125;
+<span class="hljs-function"><span class="hljs-title">for</span>(<span class="hljs-params"><span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>, len = arrayLike.length; i &lt; len; i++</span>)</span> &#123;
+    ……
+&#125;</code></pre>
+
+<p>上面我们可以看得出来，类数组对象与数组在读取、获取长度、遍历三个方面一样，都能取到，那为什么还叫做类数组对象呢？</p>
+<p>因为类数组对象不可以使用数组的方法，比如：</p>
+<pre><code class="hljs javascript">arrayLike.push(<span class="hljs-string">&quot;name&quot;</span>);</code></pre>
+
+<p>然而上述代码会报错: <code>arrayLike.push is not a function</code>，所以终归还是类数组呐……</p>
+<h3 id="调用数组方法"><a href="#调用数组方法" class="headerlink" title="调用数组方法"></a>调用数组方法</h3><p>如果类数组想用数组的方法怎么办呢？</p>
+<p>直接调用是不可取的，那我们可以通过 <code>Function.call</code> 的方法进行间接调用：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">&quot;house&quot;</span>, <span class="hljs-number">1</span>: <span class="hljs-string">&quot;car&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.join.call(arrayLike, <span class="hljs-string">&quot;&amp;&quot;</span>)); <span class="hljs-comment">// house&amp;car&amp;money</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
+<span class="hljs-comment">// slice可以做到类数组转数组</span>
+
+<span class="hljs-built_in">Array</span>.prototype.map.call(arrayLike, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">item</span>) </span>&#123;
+  <span class="hljs-keyword">return</span> item.toUpperCase();
+&#125;);
+<span class="hljs-comment">// [&quot;HOUSE&quot;, &quot;CAR&quot;, &quot;MONEY&quot;]</span></code></pre>
+
+<p>在上面已经提到了一种类数组转数组的方法，再补充三个：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arrayLike = &#123; <span class="hljs-number">0</span>: <span class="hljs-string">&quot;house&quot;</span>, <span class="hljs-number">1</span>: <span class="hljs-string">&quot;car&quot;</span>, <span class="hljs-number">2</span>: <span class="hljs-string">&quot;money&quot;</span>, <span class="hljs-attr">length</span>: <span class="hljs-number">3</span> &#125;;
+<span class="hljs-comment">// 1. slice</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.slice.call(arrayLike)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
+<span class="hljs-comment">// 2. splice</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.splice.call(arrayLike, <span class="hljs-number">0</span>)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
+<span class="hljs-comment">// 3. ES6 Array.from</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.from(arrayLike)); <span class="hljs-comment">// [&quot;house&quot;, &quot;car&quot;, &quot;money&quot;]</span>
+<span class="hljs-comment">// 4. apply</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.prototype.concat.apply([], arrayLike));</code></pre>
+
+<p>接下来重点讲讲 <code>Arguments</code> 这个类数组对象。</p>
+<h3 id="arguments-对象"><a href="#arguments-对象" class="headerlink" title="arguments 对象"></a>arguments 对象</h3><p><code>arguments</code>比起<code>this</code>来说，要容易理解的多，<code>arguments</code>对象只定义在函数体中，包括了函数的参数和其他属性。</p>
+<p>同样地通过上面的例子加以理解，我们直接在函数中去打印出”arguments”这个关键字：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  money = money || <span class="hljs-string">&quot;一亿元&quot;</span>;
+
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>);
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;----------------&quot;</span>);
+&#125;
+
+MyFavorite();
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>);
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>);
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿元&quot;</span>);</code></pre>
+
+<p>打印结果如下：</p>
+<p><img src="/images/arguments/4.jpg"></p>
+<p>我们可以看到除了类数组的索引属性和<code>length</code>属性之外，还有一个<code>callee</code>属性，而且我们可以看到<code>arguments</code>对象的<code>__ proto __</code>是指向<code>object</code>的，这也说明了他是个类数组对象，而不是一个数组。下面我们进行一一介绍。</p>
+<h4 id="length-属性"><a href="#length-属性" class="headerlink" title="length 属性"></a>length 属性</h4><p><code>arguments.length</code>为函数实参个数，举个例子：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">house, car, money</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;实参的长度为：&quot;</span> + <span class="hljs-built_in">arguments</span>.length);
+&#125;
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;形参的长度为：&quot;</span> + foo.length);
+
+foo(<span class="hljs-number">1</span>);
+
+<span class="hljs-comment">// 形参的长度为：3</span>
+<span class="hljs-comment">// 实参的长度为：1</span></code></pre>
+
+<h4 id="callee-属性"><a href="#callee-属性" class="headerlink" title="callee 属性"></a>callee 属性</h4><p>每个参数实例都有一个<code>callee</code>属性，通过它可以调用函数自身。 ES5 的严格模式不允许访问<code>arguments.callee</code>。</p>
+<p>讲个闭包经典面试题使用 <code>callee</code> 的解决方法：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> data = [];
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;
+  (data[i] = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">arguments</span>.callee.i);
+  &#125;).i = i;
+&#125;
+
+data[<span class="hljs-number">0</span>]();
+data[<span class="hljs-number">1</span>]();
+data[<span class="hljs-number">2</span>]();
+
+<span class="hljs-comment">// 0</span>
+<span class="hljs-comment">// 1</span>
+<span class="hljs-comment">// 2</span></code></pre>
+
+<h3 id="最后来看看展开运算符-spread-…"><a href="#最后来看看展开运算符-spread-…" class="headerlink" title="最后来看看展开运算符 spread(…)"></a>最后来看看展开运算符 spread(…)</h3><p>除了<code>arguments</code>这个关键字，在新版 ES6 的 JavaScript 中另外提供了一个展开运算符(spread)，它就是「<code>...</code>」三个点，这个<code>...</code>有什么用呢？</p>
+<p>根据<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">MDN</a>对于展开运算符 spread 的描述如下：</p>
+<blockquote>
+<p>The spread operator allows an expression to be expanded in places where multiple arguments (for function calls) or multiple elements (for array literals) or multiple variables (for destructuring assignment) are expected.</p>
+</blockquote>
+<p>简单来说，就是它可以把函数中许多的参数(<code>arguments</code>)或数组中许多的元素(<code>elements</code>)形成一个新的变量。</p>
+<p>举例来说：</p>
+<p>在函数的部分，在参数的地方我们用”<code>...other</code>“，<code>other</code>是你想要储存成的数组变量名称，可以自己取。</p>
+<p>在执行函数的地方，原本我们只有三个参数(<code>house</code>, <code>car</code>, <code>money</code>)，也只能填写三个参数；但使用了展开运算符”<code>...</code>“后，我们在执行函数的地方就可以带入不只三个参数（例如，我在最后面又加了”老婆”和”孩子”），这些多的参数值最后都会被放到<code>other</code>这个数组当中。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">MyFavorite</span>(<span class="hljs-params">house, car, money, ...other</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(other);
+  <span class="hljs-built_in">console</span>.log(
+    <span class="hljs-string">&quot;What my favorite are&quot;</span> + house + <span class="hljs-string">&quot;,&quot;</span> + car + <span class="hljs-string">&quot;,&quot;</span> + money + <span class="hljs-string">&quot;,&quot;</span> + other
+  );
+&#125;
+
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿&quot;</span>);
+MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hljs-string">&quot;法拉利&quot;</span>, <span class="hljs-string">&quot;一亿&quot;</span>, <span class="hljs-string">&quot;老婆&quot;</span>, <span class="hljs-string">&quot;孩子&quot;</span>);</code></pre>
+
+<p>结果就会长的像这样子：</p>
+<p><img src="/images/arguments/5.jpg"></p>
+<p>展开运算符还有其他的使用方式，像是把数组元素做连接等等，使用灵活的话相当方便，如果有需要的话，可以参考引 1。</p>
+<p>引 1：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Spread_syntax">Microsoft Developer Netword：展开运算符(…)</a></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p><strong>1.利用 arguments 实现方法的重载</strong></p>
+<p>下面我们利用<code>arguments</code>对象来实现一个参数相加的函数，不论传入多少参数都行，将传入的参数相加后返回。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> len = <span class="hljs-built_in">arguments</span>.length,
+    sum = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span> (; len--; ) &#123;
+    sum += <span class="hljs-built_in">arguments</span>[len];
+  &#125;
+  <span class="hljs-keyword">return</span> sum;
+&#125;
+
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//6</span>
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">//4</span>
+<span class="hljs-built_in">console</span>.log(add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>)); <span class="hljs-comment">//17</span></code></pre>
+
+<p>由于 JS 是一种弱类型的语言，没有重载机制，当我们重写函数时，会将原来的函数直接覆盖，这里我们能利用<code>arguments</code>，来判断传入的实参类型与数量进行不同的操作，然后返回不同的数值。</p>
+<p><strong>2.利用 arguments.callee 实现递归</strong></p>
+<p>先来看看平常我们是怎么实现递归的，这是一个结算阶乘的函数。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">return</span> num * foo(num - <span class="hljs-number">1</span>);
+  &#125;
+&#125;</code></pre>
+
+<p>但是当这个函数变成了一个匿名函数时，我们就可以利用<code>callee</code>来递归这个函数。</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">num</span>) </span>&#123;
+  <span class="hljs-keyword">if</span> (num &lt;= <span class="hljs-number">1</span>) &#123;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+  &#125; <span class="hljs-keyword">else</span> &#123;
+    <span class="hljs-keyword">return</span> num * <span class="hljs-built_in">arguments</span>.callee(num - <span class="hljs-number">1</span>);
+  &#125;
+&#125;</code></pre>
+
+<p>这个方法虽然好用，但是有一点值得注意，ECMAScript4 中为了限制 JS 的灵活度，让 JS 变得严格，新增了严格模式，在严格模式中我们被禁止不使用<code>var</code>来直接声明一个全局变量，当然这不是重点，重点是<code>arguments.callee</code>这个属性也被禁止了。不过这都不是事儿，ES6 为我们新增了很多好用的变量声明方式和新的语法糖，作为一个时髦的前端，我们赶紧学习一些 ES6 的新语法吧。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>arguments</tag>
       </tags>
   </entry>
   <entry>
@@ -6676,6 +6676,135 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
+    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
+    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
+<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
+<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
+<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
+<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
+<p><img src="/images/jsdelivr/1.jpg"></p>
+<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
+<p><img src="/images/jsdelivr/2.jpg"></p>
+<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
+<p><img src="/images/jsdelivr/3.jpg"></p>
+<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
+<p><img src="/images/jsdelivr/4.jpg"></p>
+<blockquote>
+<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
+</blockquote>
+<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
+<p><img src="/images/jsdelivr/5.jpg"></p>
+<p>这里需要注意一下：</p>
+<ul>
+<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
+<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
+<li>设定 Token：之前复制下来的 token</li>
+<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
+<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
+<li>gh:代表 GitHub</li>
+<li>miqilin21/static:用户名/仓库名</li>
+<li>@master:分支名称</li>
+</ul>
+<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
+<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
+
+<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
+<p><img src="/images/jsdelivr/6.jpg"></p>
+<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
+<blockquote>
+<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
+</blockquote>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
+<ul>
+<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
+<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
+<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
+</ul>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>图床</tag>
+        <tag>PicGo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用Hexo+GitHub搭建个人博客</title>
+    <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
+<p>下面一步一步地说怎么用 hexo+github 搭建一个个人博客。</p>
+<p><strong><em>说明：本文只针对 Windows 平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装 node.js 和 git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad">这篇文章</a>，并同时申请 Github 账号，使用的开发工具为 VScode。</p>
+<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>1、首先新建一个文件夹如 myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中 Git Bash Here 在<strong>Git 命令行中打开</strong>。</p>
+<p>2、执行以下命令安装 Hexo 及生成第一篇博客文章：</p>
+<pre><code class="hljs bash">$ npm install -g hexo-cli   //安装hexo
+$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作
+$ hexo generate            //生成静态页面
+$ hexo server              //启动本地服务器，进行博客文章预览</code></pre>
+
+<p>Hexo 会默认生成第一篇博客《Hello World》，在浏览器下打开 localhost://4000 你将会看到：<br><img src="/images/hexogit/1.png"></p>
+<p>myBlog 源文件夹整体目录预览：<br><img src="/images/hexogit/2.jpg"></p>
+<p>其中_config.yml 和 package.json 为项目的配置文件，themes 存放了我们博客的主题，source-&gt;_post 为我们的博客目录，public 为执行 hexo generate 后生成的静态页面。</p>
+<h4 id="关联-Github"><a href="#关联-Github" class="headerlink" title="关联 Github"></a>关联 Github</h4><p>1、在你的 Github 中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a><br><img src="/images/hexogit/3.jpg"></p>
+<p>2、将 myBlog 目录中的_config.yml 文件在 VScode 中打开，编辑网站配置：</p>
+<ul>
+<li>把第 6 行的 title 改成你想要的名字</li>
+<li>把第 10 行的 author 改成你想取大名</li>
+<li>把最后一行的 type 改成 <code>type: git</code></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+</ul>
+<p><img src="/images/hexogit/5.png"></p>
+<p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
+<pre><code class="hljs bash">$ npm install hexo-deployer-git --save    //安装 git 部署插件
+$ hexo deploy                             //将本地博客代码部署到Github上</code></pre>
+
+<p>4、进入「你的用户名.<a href="http://github.io」对应的/">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
+<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开 Hexo 目录下的 source 文件夹，所有的文章都会以 md 形式保存在_post 文件夹中，只要在_post 文件夹中新建 md 类型的文档，就相当于在本地添加了新文章</p>
+<p>2、利用来 VScode 编辑新文章</p>
+<p>3、<code>hexo generate</code></p>
+<p>4、<code>hexo deploy</code></p>
+<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
+<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
+<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#105;&#x74;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
+<p>4、<code>cd themes</code></p>
+<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
+<p>6、<code>cd ..</code></p>
+<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
+<p>8、<code>hexo generate</code></p>
+<p>9、<code>hexo deploy</code></p>
+<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。</p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
+<p>2、_config.yml 中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
+<p>3、想要删除博客的话，直接删除 source-&gt;_posts-&gt;对应的博客文章，然后再次执行 hexo generate、hexo deploy 即可；</p>
+<p>4、在_config.yml 中修改 language 为 zh-CN，即可将博客中英文转换为中文；</p>
+<p>5、常用命令：</p>
+<pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;postName&quot;</span>      //新建文章
+hexo new page <span class="hljs-string">&quot;pageName&quot;</span> //新建页面
+hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。
+hexo generate           //生成静态文件
+hexo deploy             //部署到Giihub
+hexo server             //启动本地服务器
+hexo <span class="hljs-built_in">help</span>               //查询帮助</code></pre>
+
+<p>6、md 文件需要用到<a href="https://www.appinn.com/markdown/">markdown 语法</a>。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【译】分享7个好用的JavaScript技巧</title>
     <url>/2020/02/12/%E5%88%86%E4%BA%AB7%E4%B8%AA%E6%9C%89%E7%94%A8%E7%9A%84JavaScript%E6%8A%80%E5%B7%A7/</url>
     <content><![CDATA[<p>就像所有其他编程语言一样，JavaScript 也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个 JavaScript 技巧吧！</p>
@@ -7098,6 +7227,64 @@ hello(<span class="hljs-string">&quot;David&quot;</span>);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>学会如何学习（一）</title>
+    <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
+<p>无意中在<a href="http://link.zhihu.com/?target=https://www.coursera.org/learn/ruhe-xuexi">Coursera</a>上发现了一门神奇适用的课程，叫做“Learning How to Learn”， 旨在利用科学知识以及授课者切身经验教会你学会如何学习，学习这门课我才开始恍然大悟，原来学习应该这样学习，算是初步悟到如何学习的真谛了。下面我将讨论我从第一周课堂中学到的经验教训。</p>
+<h4 id="利用专注与发散思维"><a href="#利用专注与发散思维" class="headerlink" title="利用专注与发散思维"></a>利用专注与发散思维</h4><p>研究发现，人有两种完全不同的思考模式，专注模式（focused mode）和发散模式（diffuse mode）。就目前神经学家所知，专注模式与发散模式只能单独存在，你不能同时使用两种模式。而发散思维是你试图了解新事物时应该采取的思维模式。</p>
+<p>课程讲述萨尔瓦多·达利 (20 世纪著名的超现实主义画家)有时会坐在椅子上，放空自己的大脑，并常常会漫无目的地思考一下之前的工作。这样他就能把脑海中那些在发散模式下得到的的联想和点子及时地收集起来，然后带着这些在发散模式下得到的新想法回到专注模式里去。<br><img src="/images/learn1/1.jpg"></p>
+<p>这个例子目的是告诉我们：当你处于长期专注的学习模式时，可以通过小睡或做一些运动，然后过渡到发散模式，有助于你的大脑建立必要的神经连接，在你的长时间记忆中建立持久的知识块。还要强调的是，当你学习一些新的东西，尤其是比较难的东西的时候，你的大脑需要有在两种学习模式之间来回转换的能力，这能帮助你更高效地学习。想要锻炼你的神经，你需要每天做一点练习，逐步建立起支撑你思考的神经骨架，这就是关键所在。</p>
+<h4 id="拖延症"><a href="#拖延症" class="headerlink" title="拖延症"></a>拖延症</h4><p>每个人或多或少有拖延的毛病，只不过有些人比较严重。当你面对一件你极度不情愿做的事情时，就好像激活了大脑中与疼痛相关的区域。</p>
+<p>所以拖延的过程大概如下图：首先，某件事可能会让你产生轻微的不安；为了消除这种不适感，你会转而去做一些更让人愉悦的事情，这么做的结果就是你觉得更开心了，但这只是暂时的，后续文章会更深入地去了解拖延症。</p>
+<p><img src="/images/learn1/2.jpg"></p>
+<h4 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h4><p>课程告诉我们一个小巧方便的意志力工具，这个小工具叫做番茄工作法 (Pomodoro)。这个小技巧所需的只有一个计时器（手机上搜索“番茄 ToDo”APP，电脑端也有许多类似的软件，可以自行选择），具体的实行过程是这样的：</p>
+<ol>
+<li>首先需要把计时器设定 25 分钟，屏蔽所有会打扰你的事物；</li>
+<li>在 25 分钟内，集中精力专注你所要专注的事；</li>
+<li>最后还有一件很重要的事情是，当你前两步之后要给自己一点小小的奖励。比如：上几分钟网、喝杯咖啡或者简单地做一下运动，来使你的大脑可以愉悦的放松一会儿。<br><img src="/images/learn1/3.jpg"></li>
+</ol>
+<p>实行后你会发现番茄工作法的使用效果非常明显，这就像是你的大脑在健身房做完一次 25 分钟的高强度训练，然后进行休息放松一样。当你无法专注的时候不妨试一试！</p>
+<h4 id="记忆与练习"><a href="#记忆与练习" class="headerlink" title="记忆与练习"></a>记忆与练习</h4><p>当我们回忆数学方程组时，我们使用的是长期记忆。当我们尝试结合脑海中的想法来帮助我们理解某一概念或解决某一问题时，我们使用的是工作记忆。工作记忆和长期记忆是两种主要的记忆系统，工作记忆是大脑在即时且有意识地处理信息时所涉及的那部分记忆。</p>
+<ul>
+<li>长期记忆就像一个储存仓库，不同的长期记忆储存在大脑的不同区域。研究表明，当你首次尝试将一段短期记忆转入长期记忆中时，你需要多次回顾以增加需要时找到相关信息的几率。</li>
+<li>当你遇到新事物时，你通常会运用工作记忆来处理它，如果你想将这个信息转移到长期记忆里，就需要间隔重复的练习来促进这一过程。</li>
+<li>不断重复你尝试记忆的内容，但重复的过程必须间隔开来。如果你尝试在一个晚上重复记忆 20 次相同的内容，记忆效果还比不上在几天内重复同样的次数这种方法。</li>
+</ul>
+<p>练习在数学和科学中学到的思想和概念是很重要的，通过反复实践练习可以帮助你提高和增强学习过程中生成的神经连接，越是抽象的东西越要注重练习。</p>
+<ul>
+<li>学习的时候如果一心一意地专注学习，时间一长学习效果反而不好，需要休息一下或者至少稍稍将注意力转移到其他地方。在这段看似放松的时间里，你大脑的发散模式就有机会在后台帮你完成对概念的理解。如果你不这么做，而是进行填鸭式学习，你的知识库看起来将会像杂乱不堪，基础不牢靠的泥堆。</li>
+<li>如果你有拖延问题，就需要使用番茄工作法帮助你注意力集中一段时间，并适当休息。这会帮你行动起来，并开始建立你需要的神经模式，使你能更有成效地学习更具挑战性的内容！</li>
+</ul>
+<h4 id="睡眠的重要性"><a href="#睡眠的重要性" class="headerlink" title="睡眠的重要性"></a>睡眠的重要性</h4><p>你怎么也不会想到，当你绝对清醒时你的大脑会产生一些有毒的物质，那大脑如何除掉这些有毒物质呢？原来当人们睡觉时，大脑细胞会收缩，从而增加脑内细胞之间的距离。这就像疏通了一条溪流，液体会在细胞空隙间流过，冲走有毒的物质。所以，睡觉这件事有时候看起来像是浪费时间，实际上是大脑保持清洁和健康的一种方式。<br><img src="/images/learn1/4.jpg"></p>
+<p>睡眠不足意味着少量代谢毒素残留在你的大脑之中，而这些有毒物质会让你思维混乱，不仅会让你发挥失常，还会导致头疼、抑郁症、糖尿病、心脏类疾病，甚至寿命缩短，这绝不是在吓你，可以参考一下睡眠不足的危害。</p>
+<p>睡眠对人们解决困难问题和理解所学知识的能力有显著影响，大脑会将你学习和思考过的想法、概念进行整理，清除掉一些不太重要的部分；同时增强你需要或想要记住的区域的记忆。在睡梦中，大脑还会将你努力学习到的东西在神经中枢一遍遍排演以增强加深记忆力！</p>
+<p>如果你在打盹或睡觉之前，复习一遍所学东西，那你将有更大可能性梦到它。如果你更进一步，告诉自己你想要梦到这些内容，你梦到它的几率也会大大提高。梦见你所学的知识，本质上能够增强你的理解能力，在一定程度上可以将你的记忆整合成更易被掌握的组块信息。</p>
+<p>现在是时候去打个盹儿了！</p>
+<h4 id="采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法"><a href="#采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法" class="headerlink" title="采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法"></a>采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法</h4><p>1、当你遇到完全陌生的事物时你是如何更容易学习的？</p>
+<p>答：单刀直入地实践，因为实践出真知，且大量的阅读作用甚微，同时最好有专家的指点。</p>
+<p>2、你是如何让自己在一场枯燥的讲座中保持专注的？</p>
+<p>答：没有简单的方法是可以让你对不感兴趣的东西一直保持参与度的，但是有一个小技巧，就是用提问来“伏击”演讲者，这种打断通常会带出更有趣的讨论；比起被动的听，积极参与会让你学到更多。</p>
+<p>3、你是如何进入发散思维模式，并从中获益的呢？</p>
+<p>答：慢跑或户外锻炼是让思维跳出常规想法的绝佳方法，而且这时极其可能迸发灵感。奔跑中，事物从你身边略过，你会开始思考发生的一些事情，然后意识之外的想法涌上表面，接着通常就会出现有用的新想法。但是，这些转瞬即逝的点子过后很容易忘记，我会随身携带一本小本子及时记下来。</p>
+<p>4、你会同时进行多项任务吗？</p>
+<p>答：生活中有大量任务不断地“轰炸”，我们一刻也离不开多线程工作，如果做不到统筹兼顾，日子将会很难熬。但我们不能真正地同时做两件事，容易混淆且效率低下。同时处理多个任务实际是一种切换任务的能力。你可能要花很多时间才能完成这样的切换，切换任务并回到当时中断的地方开始工作，这是高效完成任务的方法之一。</p>
+<p>5、神经科学方面的知识有运用到学习上的例子吗？</p>
+<p>答：别把自己关在房间里，充足的空间、能激励你的人、很多可以积极参与的事件，以及运动和锻炼都大有助益，它们会增加新神经元的数量并促进神经元的生长。</p>
+<p>6、你有关于高效地集中注意力、学习和创新的技巧吗？</p>
+<p>答：处于富有创新氛围的环境中，是一种提升自身创造力的方法。当你和别人交流、阐述观点，你就会有更好的想法，这一过程通常有助于创新。</p>
+<p>7、给大家的建议?</p>
+<p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
+<p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
+]]></content>
+      <categories>
+        <category>学习之道</category>
+      </categories>
+      <tags>
+        <tag>高效学习</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何快速搭建静态资源服务器</title>
     <url>/2019/12/18/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<p>在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的 http 服务器。以前的时候，都是使用 php 的本地环境，也算比较方便，但是自从学了 nodejs，发现创建 http-server 更方便。<br><img src="/images/http-server/1.jpg"></p>
@@ -7182,64 +7369,6 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
       <tags>
         <tag>Node.js</tag>
         <tag>http-server</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>学会如何学习（一）</title>
-    <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
-<p>无意中在<a href="http://link.zhihu.com/?target=https://www.coursera.org/learn/ruhe-xuexi">Coursera</a>上发现了一门神奇适用的课程，叫做“Learning How to Learn”， 旨在利用科学知识以及授课者切身经验教会你学会如何学习，学习这门课我才开始恍然大悟，原来学习应该这样学习，算是初步悟到如何学习的真谛了。下面我将讨论我从第一周课堂中学到的经验教训。</p>
-<h4 id="利用专注与发散思维"><a href="#利用专注与发散思维" class="headerlink" title="利用专注与发散思维"></a>利用专注与发散思维</h4><p>研究发现，人有两种完全不同的思考模式，专注模式（focused mode）和发散模式（diffuse mode）。就目前神经学家所知，专注模式与发散模式只能单独存在，你不能同时使用两种模式。而发散思维是你试图了解新事物时应该采取的思维模式。</p>
-<p>课程讲述萨尔瓦多·达利 (20 世纪著名的超现实主义画家)有时会坐在椅子上，放空自己的大脑，并常常会漫无目的地思考一下之前的工作。这样他就能把脑海中那些在发散模式下得到的的联想和点子及时地收集起来，然后带着这些在发散模式下得到的新想法回到专注模式里去。<br><img src="/images/learn1/1.jpg"></p>
-<p>这个例子目的是告诉我们：当你处于长期专注的学习模式时，可以通过小睡或做一些运动，然后过渡到发散模式，有助于你的大脑建立必要的神经连接，在你的长时间记忆中建立持久的知识块。还要强调的是，当你学习一些新的东西，尤其是比较难的东西的时候，你的大脑需要有在两种学习模式之间来回转换的能力，这能帮助你更高效地学习。想要锻炼你的神经，你需要每天做一点练习，逐步建立起支撑你思考的神经骨架，这就是关键所在。</p>
-<h4 id="拖延症"><a href="#拖延症" class="headerlink" title="拖延症"></a>拖延症</h4><p>每个人或多或少有拖延的毛病，只不过有些人比较严重。当你面对一件你极度不情愿做的事情时，就好像激活了大脑中与疼痛相关的区域。</p>
-<p>所以拖延的过程大概如下图：首先，某件事可能会让你产生轻微的不安；为了消除这种不适感，你会转而去做一些更让人愉悦的事情，这么做的结果就是你觉得更开心了，但这只是暂时的，后续文章会更深入地去了解拖延症。</p>
-<p><img src="/images/learn1/2.jpg"></p>
-<h4 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h4><p>课程告诉我们一个小巧方便的意志力工具，这个小工具叫做番茄工作法 (Pomodoro)。这个小技巧所需的只有一个计时器（手机上搜索“番茄 ToDo”APP，电脑端也有许多类似的软件，可以自行选择），具体的实行过程是这样的：</p>
-<ol>
-<li>首先需要把计时器设定 25 分钟，屏蔽所有会打扰你的事物；</li>
-<li>在 25 分钟内，集中精力专注你所要专注的事；</li>
-<li>最后还有一件很重要的事情是，当你前两步之后要给自己一点小小的奖励。比如：上几分钟网、喝杯咖啡或者简单地做一下运动，来使你的大脑可以愉悦的放松一会儿。<br><img src="/images/learn1/3.jpg"></li>
-</ol>
-<p>实行后你会发现番茄工作法的使用效果非常明显，这就像是你的大脑在健身房做完一次 25 分钟的高强度训练，然后进行休息放松一样。当你无法专注的时候不妨试一试！</p>
-<h4 id="记忆与练习"><a href="#记忆与练习" class="headerlink" title="记忆与练习"></a>记忆与练习</h4><p>当我们回忆数学方程组时，我们使用的是长期记忆。当我们尝试结合脑海中的想法来帮助我们理解某一概念或解决某一问题时，我们使用的是工作记忆。工作记忆和长期记忆是两种主要的记忆系统，工作记忆是大脑在即时且有意识地处理信息时所涉及的那部分记忆。</p>
-<ul>
-<li>长期记忆就像一个储存仓库，不同的长期记忆储存在大脑的不同区域。研究表明，当你首次尝试将一段短期记忆转入长期记忆中时，你需要多次回顾以增加需要时找到相关信息的几率。</li>
-<li>当你遇到新事物时，你通常会运用工作记忆来处理它，如果你想将这个信息转移到长期记忆里，就需要间隔重复的练习来促进这一过程。</li>
-<li>不断重复你尝试记忆的内容，但重复的过程必须间隔开来。如果你尝试在一个晚上重复记忆 20 次相同的内容，记忆效果还比不上在几天内重复同样的次数这种方法。</li>
-</ul>
-<p>练习在数学和科学中学到的思想和概念是很重要的，通过反复实践练习可以帮助你提高和增强学习过程中生成的神经连接，越是抽象的东西越要注重练习。</p>
-<ul>
-<li>学习的时候如果一心一意地专注学习，时间一长学习效果反而不好，需要休息一下或者至少稍稍将注意力转移到其他地方。在这段看似放松的时间里，你大脑的发散模式就有机会在后台帮你完成对概念的理解。如果你不这么做，而是进行填鸭式学习，你的知识库看起来将会像杂乱不堪，基础不牢靠的泥堆。</li>
-<li>如果你有拖延问题，就需要使用番茄工作法帮助你注意力集中一段时间，并适当休息。这会帮你行动起来，并开始建立你需要的神经模式，使你能更有成效地学习更具挑战性的内容！</li>
-</ul>
-<h4 id="睡眠的重要性"><a href="#睡眠的重要性" class="headerlink" title="睡眠的重要性"></a>睡眠的重要性</h4><p>你怎么也不会想到，当你绝对清醒时你的大脑会产生一些有毒的物质，那大脑如何除掉这些有毒物质呢？原来当人们睡觉时，大脑细胞会收缩，从而增加脑内细胞之间的距离。这就像疏通了一条溪流，液体会在细胞空隙间流过，冲走有毒的物质。所以，睡觉这件事有时候看起来像是浪费时间，实际上是大脑保持清洁和健康的一种方式。<br><img src="/images/learn1/4.jpg"></p>
-<p>睡眠不足意味着少量代谢毒素残留在你的大脑之中，而这些有毒物质会让你思维混乱，不仅会让你发挥失常，还会导致头疼、抑郁症、糖尿病、心脏类疾病，甚至寿命缩短，这绝不是在吓你，可以参考一下睡眠不足的危害。</p>
-<p>睡眠对人们解决困难问题和理解所学知识的能力有显著影响，大脑会将你学习和思考过的想法、概念进行整理，清除掉一些不太重要的部分；同时增强你需要或想要记住的区域的记忆。在睡梦中，大脑还会将你努力学习到的东西在神经中枢一遍遍排演以增强加深记忆力！</p>
-<p>如果你在打盹或睡觉之前，复习一遍所学东西，那你将有更大可能性梦到它。如果你更进一步，告诉自己你想要梦到这些内容，你梦到它的几率也会大大提高。梦见你所学的知识，本质上能够增强你的理解能力，在一定程度上可以将你的记忆整合成更易被掌握的组块信息。</p>
-<p>现在是时候去打个盹儿了！</p>
-<h4 id="采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法"><a href="#采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法" class="headerlink" title="采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法"></a>采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法</h4><p>1、当你遇到完全陌生的事物时你是如何更容易学习的？</p>
-<p>答：单刀直入地实践，因为实践出真知，且大量的阅读作用甚微，同时最好有专家的指点。</p>
-<p>2、你是如何让自己在一场枯燥的讲座中保持专注的？</p>
-<p>答：没有简单的方法是可以让你对不感兴趣的东西一直保持参与度的，但是有一个小技巧，就是用提问来“伏击”演讲者，这种打断通常会带出更有趣的讨论；比起被动的听，积极参与会让你学到更多。</p>
-<p>3、你是如何进入发散思维模式，并从中获益的呢？</p>
-<p>答：慢跑或户外锻炼是让思维跳出常规想法的绝佳方法，而且这时极其可能迸发灵感。奔跑中，事物从你身边略过，你会开始思考发生的一些事情，然后意识之外的想法涌上表面，接着通常就会出现有用的新想法。但是，这些转瞬即逝的点子过后很容易忘记，我会随身携带一本小本子及时记下来。</p>
-<p>4、你会同时进行多项任务吗？</p>
-<p>答：生活中有大量任务不断地“轰炸”，我们一刻也离不开多线程工作，如果做不到统筹兼顾，日子将会很难熬。但我们不能真正地同时做两件事，容易混淆且效率低下。同时处理多个任务实际是一种切换任务的能力。你可能要花很多时间才能完成这样的切换，切换任务并回到当时中断的地方开始工作，这是高效完成任务的方法之一。</p>
-<p>5、神经科学方面的知识有运用到学习上的例子吗？</p>
-<p>答：别把自己关在房间里，充足的空间、能激励你的人、很多可以积极参与的事件，以及运动和锻炼都大有助益，它们会增加新神经元的数量并促进神经元的生长。</p>
-<p>6、你有关于高效地集中注意力、学习和创新的技巧吗？</p>
-<p>答：处于富有创新氛围的环境中，是一种提升自身创造力的方法。当你和别人交流、阐述观点，你就会有更好的想法，这一过程通常有助于创新。</p>
-<p>7、给大家的建议?</p>
-<p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
-<p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
-]]></content>
-      <categories>
-        <category>学习之道</category>
-      </categories>
-      <tags>
-        <tag>高效学习</tag>
-        <tag>方法</tag>
       </tags>
   </entry>
   <entry>
@@ -7905,44 +8034,6 @@ SayHI(jaychou); <span class="hljs-comment">// HI Chou</span></code></pre>
       </tags>
   </entry>
   <entry>
-    <title>贵州黔东南之行</title>
-    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
-    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
-<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
-<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
-<p><img src="/images/guizhou/1.jpg"></p>
-<p><img src="/images/guizhou/2.jpg"></p>
-<p><img src="/images/guizhou/3.jpg"></p>
-<p>河边坐落了许多充满文艺的小店和清吧。</p>
-<p><img src="/images/guizhou/4.jpg"></p>
-<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
-<p><img src="/images/guizhou/5.jpg"></p>
-<p><img src="/images/guizhou/6.jpg"></p>
-<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
-<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
-<p><img src="/images/guizhou/7.jpg"></p>
-<p><img src="/images/guizhou/8.jpg"></p>
-<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
-<p><img src="/images/guizhou/9.jpg"></p>
-<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
-<p><img src="/images/guizhou/10.jpg"></p>
-<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
-<p><img src="/images/guizhou/11.jpg"></p>
-<p><img src="/images/guizhou/12.jpg"></p>
-<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
-<p><img src="/images/guizhou/13.jpg"></p>
-<p><img src="/images/guizhou/14.jpg"></p>
-<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>贵州</tag>
-        <tag>游记</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈JavaScript中的函数构造式和prototype的建立</title>
     <url>/2020/04/24/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0%E6%9E%84%E9%80%A0%E5%BC%8F%E5%92%8Cprototype%E7%9A%84%E5%BB%BA%E7%AB%8B/</url>
     <content><![CDATA[<p>在<a href="https://luozongmin.com/2019/06/11/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E7%9A%84function%20constructor%E5%92%8Cnew%E5%85%B3%E9%94%AE%E5%AD%97/">《谈谈 JavaScript 中的 function constructor 和 new 关键字》</a>这篇文章中我们说明了如何通过函数构造式（function constructor）搭配关键字 new 来建立对象，但其实这样只讲了一半，在这篇我们会补齐另一半，说明 function constructor 如何用来设定该对象的原型（prototype）。</p>
@@ -8063,6 +8154,44 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
         <tag>JavaScript</tag>
         <tag>constructor</tag>
         <tag>prototype</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贵州黔东南之行</title>
+    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
+    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
+<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
+<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
+<p><img src="/images/guizhou/1.jpg"></p>
+<p><img src="/images/guizhou/2.jpg"></p>
+<p><img src="/images/guizhou/3.jpg"></p>
+<p>河边坐落了许多充满文艺的小店和清吧。</p>
+<p><img src="/images/guizhou/4.jpg"></p>
+<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
+<p><img src="/images/guizhou/5.jpg"></p>
+<p><img src="/images/guizhou/6.jpg"></p>
+<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
+<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
+<p><img src="/images/guizhou/7.jpg"></p>
+<p><img src="/images/guizhou/8.jpg"></p>
+<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
+<p><img src="/images/guizhou/9.jpg"></p>
+<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
+<p><img src="/images/guizhou/10.jpg"></p>
+<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
+<p><img src="/images/guizhou/11.jpg"></p>
+<p><img src="/images/guizhou/12.jpg"></p>
+<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
+<p><img src="/images/guizhou/13.jpg"></p>
+<p><img src="/images/guizhou/14.jpg"></p>
+<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>贵州</tag>
+        <tag>游记</tag>
       </tags>
   </entry>
   <entry>
@@ -8367,135 +8496,6 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
       <tags>
         <tag>高效学习</tag>
         <tag>方法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用Hexo+GitHub搭建个人博客</title>
-    <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
-<p>下面一步一步地说怎么用 hexo+github 搭建一个个人博客。</p>
-<p><strong><em>说明：本文只针对 Windows 平台下的搭建过程，其他平台的请自行上网查阅</em></strong></p>
-<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>在搭建博客之前，需要安装 node.js 和 git，具体操作请参考<a href="https://www.jianshu.com/p/0356308834ad">这篇文章</a>，并同时申请 Github 账号，使用的开发工具为 VScode。</p>
-<h4 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h4><p>1、首先新建一个文件夹如 myBlog，用于存放整个博客源文件。右击鼠标点击文件夹，选中 Git Bash Here 在<strong>Git 命令行中打开</strong>。</p>
-<p>2、执行以下命令安装 Hexo 及生成第一篇博客文章：</p>
-<pre><code class="hljs bash">$ npm install -g hexo-cli   //安装hexo
-$ hexo  init               //初始化hexo,这样myBlog就是整个博客的根目录，所有的页面都可以在里面进行增删改操作
-$ hexo generate            //生成静态页面
-$ hexo server              //启动本地服务器，进行博客文章预览</code></pre>
-
-<p>Hexo 会默认生成第一篇博客《Hello World》，在浏览器下打开 localhost://4000 你将会看到：<br><img src="/images/hexogit/1.png"></p>
-<p>myBlog 源文件夹整体目录预览：<br><img src="/images/hexogit/2.jpg"></p>
-<p>其中_config.yml 和 package.json 为项目的配置文件，themes 存放了我们博客的主题，source-&gt;_post 为我们的博客目录，public 为执行 hexo generate 后生成的静态页面。</p>
-<h4 id="关联-Github"><a href="#关联-Github" class="headerlink" title="关联 Github"></a>关联 Github</h4><p>1、在你的 Github 中建立新的 repo，repo 名称必须是「你的用户名.<a href="http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。">http://github.io」（注意你的户名是你的GitHub的用户名），此处我创建的仓库名为：http://miqilin21.github.io，然后与我们的博客建立关联。</a><br><img src="/images/hexogit/3.jpg"></p>
-<p>2、将 myBlog 目录中的_config.yml 文件在 VScode 中打开，编辑网站配置：</p>
-<ul>
-<li>把第 6 行的 title 改成你想要的名字</li>
-<li>把第 10 行的 author 改成你想取大名</li>
-<li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
-</ul>
-<p><img src="/images/hexogit/5.png"></p>
-<p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
-<pre><code class="hljs bash">$ npm install hexo-deployer-git --save    //安装 git 部署插件
-$ hexo deploy                             //将本地博客代码部署到Github上</code></pre>
-
-<p>4、进入「你的用户名.<a href="http://github.io」对应的/">http://github.io」对应的</a> repo，打开 GitHub Pages 功能，如果已经打开了，你应该会看到一个预览链接；最后用浏览器访问「预览链接/index.html」就应该看到了你的博客啦！</p>
-<h4 id="添加新文章"><a href="#添加新文章" class="headerlink" title="添加新文章"></a>添加新文章</h4><p>1、打开 Hexo 目录下的 source 文件夹，所有的文章都会以 md 形式保存在_post 文件夹中，只要在_post 文件夹中新建 md 类型的文档，就相当于在本地添加了新文章</p>
-<p>2、利用来 VScode 编辑新文章</p>
-<p>3、<code>hexo generate</code></p>
-<p>4、<code>hexo deploy</code></p>
-<p>5、去看你的博客，应该能看到这篇新文章啦！</p>
-<h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
-<p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#111;&#109;</a>:iissnan/hexo-theme-next.git</p>
-<p>4、<code>cd themes</code></p>
-<p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
-<p>6、<code>cd ..</code></p>
-<p>7、将 _config.yml 的第 75 行改为 <code>theme: hexo-theme-next</code>，保存</p>
-<p>8、<code>hexo generate</code></p>
-<p>9、<code>hexo deploy</code></p>
-<p>10、等一分钟，然后刷新你的博客页面，你会看到一个新的外观，如果不喜欢这个主题，就回到第 1 步，重选一个主题。</p>
-<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><p>1、最好进入一个安全的目录创建源文件夹，在根目录瞎搞；</p>
-<p>2、_config.yml 中的缩进和空格一定严格按照文件的默认格式来，不然会报错；</p>
-<p>3、想要删除博客的话，直接删除 source-&gt;_posts-&gt;对应的博客文章，然后再次执行 hexo generate、hexo deploy 即可；</p>
-<p>4、在_config.yml 中修改 language 为 zh-CN，即可将博客中英文转换为中文；</p>
-<p>5、常用命令：</p>
-<pre><code class="hljs bash">hexo new <span class="hljs-string">&quot;postName&quot;</span>      //新建文章
-hexo new page <span class="hljs-string">&quot;pageName&quot;</span> //新建页面
-hexo clean              //清除缓存文件db.json和已生成的静态文件 public,网站显示异常时可以执行这条命令试试。
-hexo generate           //生成静态文件
-hexo deploy             //部署到Giihub
-hexo server             //启动本地服务器
-hexo <span class="hljs-built_in">help</span>               //查询帮助</code></pre>
-
-<p>6、md 文件需要用到<a href="https://www.appinn.com/markdown/">markdown 语法</a>。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>GitHub</tag>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
-    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
-<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
-<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
-<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
-<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
-<p><img src="/images/jsdelivr/1.jpg"></p>
-<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
-<p><img src="/images/jsdelivr/2.jpg"></p>
-<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
-<p><img src="/images/jsdelivr/3.jpg"></p>
-<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
-<p><img src="/images/jsdelivr/4.jpg"></p>
-<blockquote>
-<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
-</blockquote>
-<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
-<p><img src="/images/jsdelivr/5.jpg"></p>
-<p>这里需要注意一下：</p>
-<ul>
-<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
-<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
-<li>设定 Token：之前复制下来的 token</li>
-<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
-<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
-<li>gh:代表 GitHub</li>
-<li>miqilin21/static:用户名/仓库名</li>
-<li>@master:分支名称</li>
-</ul>
-<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
-<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
-
-<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
-<p><img src="/images/jsdelivr/6.jpg"></p>
-<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
-<blockquote>
-<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
-</blockquote>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
-<ul>
-<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
-<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
-<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
-</ul>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>图床</tag>
-        <tag>PicGo</tag>
       </tags>
   </entry>
 </search>

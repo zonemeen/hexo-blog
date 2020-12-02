@@ -1334,6 +1334,84 @@ ul.appendChild(fragment);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>Git/GitHub操作手册</title>
+    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
+<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
+<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
+<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
+<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
+<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
+
+<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
+<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
+$ git add README.md                //将README.md文件提交到问题暂存区
+$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
+$ git status -sb      //显示当前所有文件的状态</code></pre>
+
+<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
+<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
+<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
+<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
+<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
+<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
+<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
+
+<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
+<pre><code class="hljs bash">$ git push -u origin master</code></pre>
+
+<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
+<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
+<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
+<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
+<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
+<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
+
+<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
+<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
+
+<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
+<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
+<ul>
+<li>在本地创建仓库</li>
+</ul>
+<ul>
+<li>将本地仓库上传到 GitHub</li>
+</ul>
+<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
+<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
+<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
+<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
+<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
+<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
+
+<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
+<p>1、在本地创建仓库</p>
+<p>2、将本地仓库上传到 GitHub</p>
+<p>3、GitHub 上的仓库克隆下载到本地</p>
+<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
+<p>我们最后再回顾一遍已经学到的命令：</p>
+<blockquote>
+<p>git clone <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;">&#x67;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+</blockquote>
+<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
+</blockquote>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Git命令拓展</title>
     <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
     <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
@@ -1496,84 +1574,6 @@ $ git show --name-only [commit]    //显示某次提交发生变化的文件
 $ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
 
 $ git reflog    //显示当前分支的最近几次提交</code></pre>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git/GitHub操作手册</title>
-    <url>/2019/12/15/Git%E5%8F%8AGithub%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<p>Git 是目前最流行的版本管理工具，也是程序员的必备技能之一。这里主要介绍一下 git/github 远程仓库的使用及相关配置。</p>
-<h4 id="SSH-Keys"><a href="#SSH-Keys" class="headerlink" title="SSH Keys"></a>SSH Keys</h4><p>SSH Keys 是什么呢？简单来说相当于一把钥匙（在机器中即电脑中进行配置），github 相当于一把锁，每次发起请求是会去验证钥匙与锁是否配对。</p>
-<p>由于你的本地 Git 仓库和 GitHub 仓库之间的传输是通过 SSH 加密的，所以，需要一点设置。</p>
-<h4 id="添加远程库"><a href="#添加远程库" class="headerlink" title="添加远程库"></a>添加远程库</h4><p>你已经在本地创建了一个 Git 仓库后，又想在 GitHub 创建一个 Git 仓库，并且让这两个仓库进行远程同步，这样，GitHub 上的仓库既可以作为备份，又可以让其他人通过该仓库来协作。那如何将我们这个本地仓库上传到 GitHub 呢？下图简单描述了 Git 常用的操作流程。<br><img src="/images/github/1.jpg"></p>
-<p>1、在本地新建文件夹，命名为 blog，在本地的 blog 仓库的路径下运行命令行。</p>
-<pre><code class="hljs bash">$ git init    // 在当前目录新建一个Git代码库</code></pre>
-
-<p>这个操作在当前目录下生成一个.git 文件，默认不显示，可在命令行中输入 ls -a,即可看到所有被隐藏文件，接下来进行如下操作：</p>
-<pre><code class="hljs bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;# myblog&quot;</span> &gt;&gt; README.md   //在当前目录下新建README.md,且文件内容为<span class="hljs-string">&#x27;myBlog&#x27;</span>；如果目录下已经有文件，请省略这一步
-$ git add README.md                //将README.md文件提交到问题暂存区
-$ git commit -m <span class="hljs-string">&quot;first commit&quot;</span>     //将暂存区文件提交到本地仓库，且本次提交记录为<span class="hljs-string">&#x27;first commit&#x27;</span>
-$ git status -sb      //显示当前所有文件的状态</code></pre>
-
-<p>这几步操作目的是将上传的文件提交到本地仓库，接下来就是介绍怎么样将本地仓库上传到远端库了。</p>
-<p>2、登陆 GitHub，然后，在右上角找到“Create a new repo”按钮，创建一个新的仓库，名称随意，一般可以跟本地目录名一致。<br><img src="/images/github/2.jpg"></p>
-<p>在 Repository name 填入 blog，其他保持默认设置，点击“Create repository”按钮，就成功地创建了一个新的 Git 仓库。</p>
-<p>3、点击创建按钮之后，GitHub 就会把后续的操作全告诉你，如图:<br><img src="/images/github/3.jpg"></p>
-<p>4、看上图，记得点击 SSH 按钮，如果不点击这个按钮，你就会使用默认的 HTTPS 地址。但是千万不要使用 HTTPS 地址，因为使用 HTTPS 除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但在某些只开放 http 端口的公司内部就无法使用 SSH 协议而只能用 HTTPS 。</p>
-<p>5、目前，在 GitHub 上的这个 blog 仓库还是空的，GitHub 告诉我们，可以在这个仓库创建一个新的本地仓库，也可以把一个已有的本地仓库与之关联，然后，把本地仓库的内容推送到 GitHub 仓库。<br>现在，我们根据 GitHub 的提示，在本地的 blog 仓库下运行命令：</p>
-<pre><code class="hljs bash">$ git remote add origin git@github.com:miqilin21/blog.git</code></pre>
-
-<p>6、下一步，就可以把本地库的所有内容推送到远程库上：</p>
-<pre><code class="hljs bash">$ git push -u origin master</code></pre>
-
-<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支 master 推送到远程。</p>
-<p>由于远程库是空的，我们第一次推送 master 分支时，加上了-u 参数，Git 不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。</p>
-<p>推送成功后，可以立刻在 GitHub 页面中看到远程库的内容已经和本地一模一样:<br><img src="/images/github/4.jpg"></p>
-<p>7、如果你想查看变更历史，可以通过命令：<code>$ git log</code></p>
-<p>8、从现在起，只要本地仓库作了修改，如果你想让改动保存到远程仓库里，你需要先<code>git add</code>文件或者也可以<code>git add</code>。注意，如果这个 文件以前被我们<code>add</code>过，所以此处的<code>git add</code>操作可以省略，但我建议你使用 git 的初期阶段，不要省略<code>git add</code>。换句话说，每一次改动，都要经过<code>git add</code>和<code>git commit</code>两个命令，才能被添加到 .git 本地仓库里。接下来就通过命令：</p>
-<pre><code class="hljs bash">$ git push   //将本地仓库修改内容同步到远程仓库</code></pre>
-
-<p>但是，如果远程库先有修改的话，要想本地仓库与其同步，还需通过命令：</p>
-<pre><code class="hljs bash">$ git pull      //将远程库修改的内容下载到本地库</code></pre>
-
-<p>最后把本地 master 分支的最新修改<code>$ git push</code>推送至 GitHub，现在，你就拥有了真正的分布式版本库！</p>
-<h4 id="从远程库-clone"><a href="#从远程库-clone" class="headerlink" title="从远程库 clone"></a>从远程库 clone</h4><p>上面已经讲了</p>
-<ul>
-<li>在本地创建仓库</li>
-</ul>
-<ul>
-<li>将本地仓库上传到 GitHub</li>
-</ul>
-<p>这里将介绍另外一种用法，那就是直接在 GitHub 创建一个仓库，然后克隆下载到本地。</p>
-<p>1、在 GitHub 上新建一个仓库 git-demo，这次就不创建空仓库了，而是自带 README 和 Lisence 的仓库，创建截图如下：<br><img src="/images/github/5.jpg"></p>
-<p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
-<p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
-<p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
-<p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
-<pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
-
-<p>运行完了你就会发现，桌面上多出一个 git-demo-2 目录，里面的内容和远程库一模一样，至此从远程库克隆到本地就完成啦！</p>
-<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>三种方式都说完了，它们分别是：</p>
-<p>1、在本地创建仓库</p>
-<p>2、将本地仓库上传到 GitHub</p>
-<p>3、GitHub 上的仓库克隆下载到本地</p>
-<p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
-<p>我们最后再回顾一遍已经学到的命令：</p>
-<blockquote>
-<p>git clone <a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;">&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
-</blockquote>
-<h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
-<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
-</blockquote>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
 ]]></content>
       <categories>
         <category>tools</category>
@@ -4314,6 +4314,243 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
       </tags>
   </entry>
   <entry>
+    <title>JavaScript系列之执行上下文和执行栈</title>
+    <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
+    <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
+<p>执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
+<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
+<ul>
+<li><strong>全局执行上下文（全局代码）</strong>：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 <code>window</code> 对象，<code>this</code> 指向这个全局对象。</li>
+<li><strong>函数执行上下文（函数体）</strong>：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。</li>
+<li><strong><code>Eval</code> 函数执行上下文（eval 代码）</strong>： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用。</li>
+</ul>
+<p>执行上下文又包括三个生命周期阶段：<strong>创建阶段 → 执行阶段 → 回收阶段</strong>，本文重点介绍创建阶段。</p>
+<p><strong>1.创建阶段</strong></p>
+<p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
+<ul>
+<li>**创建变量对象(Variable object，VO)**：首先初始化函数的参数<code>arguments</code>，提升函数声明和变量声明。后文会详细说明。</li>
+<li><strong>创建作用域链（Scope Chain</strong>：在执行上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。后文会详细说明。</li>
+<li><strong>确定 this 指向</strong>：包括多种情况，后文会详细说明。</li>
+</ul>
+<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为<code>undefined</code>，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
+<p>另外，一个函数在被执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过函数执行上下文中会多出<code>this</code> 、 <code>arguments</code>和函数的参数。</p>
+<p><strong>2.执行阶段</strong></p>
+<p>进入执行上下文、执行代码</p>
+<p><strong>3.回收阶段</strong></p>
+<p>执行完毕后执行上下文出栈并等待被垃圾回收</p>
+<p><img src="/images/scopechain/1.jpg"></p>
+<h3 id="执行上下文栈（Execution-Context-Stack）"><a href="#执行上下文栈（Execution-Context-Stack）" class="headerlink" title="执行上下文栈（Execution Context Stack）"></a>执行上下文栈（Execution Context Stack）</h3><p>假如我们写的函数多了，每次调用函数时都创建一个新的执行上下文，如何管理创建的那么多执行上下文呢？</p>
+<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，具有 LIFO（后进先出）的栈结构，用于存储在代码执行期间创建的所有执行上下文。</p>
+<p>首次运行 JS 代码时，会创建一个<strong>全局</strong>执行上下文并 Push 到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个<strong>新的函数</strong>执行上下文并 Push 到当前执行栈的顶部，浏览器的 JS 执行引擎总是访问栈顶的执行上下文。</p>
+<p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
+<p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
+<h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  b();
+&#125;
+a();</code></pre>
+
+<p>这段代码背后执行的逻辑是这样的：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
+<p><img src="/images/context/1.jpg"></p>
+<p>接着，代码会执行到<code>a( )</code>这个部分，这时候，会建立<code>a</code>的执行上下文（execution context），并且被放置到执行栈（execution stack）中。在这个 execution stack 中，最上面的 execution context 会是正在被执行的<code>a( )</code>。如下图：</p>
+<p><img src="/images/context/2.jpg"></p>
+<p><code>function a</code> 的 execution context 建立后，便会开始执行<code>function a</code>中的内容。由于在<code>function a( )</code> 里面有去执行<code>function b</code> ，因此，在这个 execution stack 中，接下来最上面会变成<code>function b</code> 的 execution context。如下图：</p>
+<p><img src="/images/context/3.jpg"></p>
+<p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
+<p><img src="/images/context/4.jpg"></p>
+<h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();</code></pre>
+
+<p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
+<p><img src="/images/context/5.jpg"></p>
+<p>我们分别得到了 1、<code>undefined</code>和 2。为什么会这样呢？</p>
+<p>让我们来看看这段代码背后执行的逻辑：</p>
+<p>首先，全局执行上下文（Global Execution Context）会被建立，由于变量提升的缘故，<code>myVar</code>、<code>function a</code>和<code>b</code>都会被建立并储存在内存中，接着便开始逐行执行函数。一开始会碰到<code>var myVar = 1</code>所以，最外层的<code>myVar</code>便被给值为 1，接着执行到了<code>console.log(myVar)</code>，这是在 global execution context 执行的，于是得到了第一个 1 的结果：</p>
+<p><img src="/images/context/6.jpg"></p>
+<p>然后执行到了<code>a ( )</code>，于是建立了<code>a</code>的 execution context，这时候由于逐行执行的关系，会先执行到<code>var myVar = 2</code>，但因为这是在 function a 的 execution context 中，所以并不会影响到 global execution context 的<code>myVar</code>：</p>
+<p><img src="/images/context/7.jpg"></p>
+<p>在执行完<code>function a</code>中的<code>var myVar = 2</code>后，继续逐行执行，于是执行到了<code>b ( )</code>，这时候，<code>function b</code>的 execution function 便被建立，而且会先去执行<code>function b</code>里面的内容：</p>
+<p><img src="/images/context/8.jpg"></p>
+<p><code>function b</code>的 execution function 建立后，会开始逐行执行<code>function b</code>里面的内容，于是读到了<code>var myVar</code>;，这时候在<code>function b</code>这个 execution context 中的<code>myVar</code>变量被建立，但是还没被赋值，所以会是<code>undefined</code>。和上面提到的一样，由于这个<code>myVar</code>是在<code>function b</code>中的 execution context 所建立，所以并不会影响到其他 execution context 的<code>myVar</code>，这时候执行到了<code>function b</code>的 execution context 中的<code>console.log(myVar)</code>，于是得到了第二个看到的<code>undefined</code>：</p>
+<p><img src="/images/context/9.jpg"></p>
+<p>最后，<code>function b</code>执行完之后，会从 execution stack 中离开，继续回到<code>function a</code>中的<code>b( )</code>后逐行执行，也就是<code>console.log(myVar)</code>，这时候是在 function a 的 execution context 加以执行的，因此也就得到了结果中看到的第三个 2 了。</p>
+<p>最后由于<code>b ( )</code> 后面已经没有内容，<code>function a</code>执行完毕，这时候，<code>function a</code>也会从 execution stack 中抽离。</p>
+<p><img src="/images/context/10.jpg"></p>
+<p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
+<p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
+<p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();
+<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span></code></pre>
+
+<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
+<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
+  myVar;
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
+  myVar = <span class="hljs-number">2</span>;
+  b();
+  <span class="hljs-built_in">console</span>.log(myVar);
+&#125;
+
+<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
+<span class="hljs-built_in">console</span>.log(myVar);
+a();
+<span class="hljs-built_in">console</span>.log(myVar);
+
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment">打印出</span>
+<span class="hljs-comment">1</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">2</span>
+<span class="hljs-comment">*/</span></code></pre>
+
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>Execution Context</tag>
+        <tag>Execution Context Stack</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之数据类型</title>
+    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
+<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
+<li>Undefined <code>undefined</code></li>
+<li>Null <code>null</code></li>
+<li>Boolean <code>true</code></li>
+<li>String <code>&#39;hello&#39;</code></li>
+<li>Number <code>123</code></li>
+<li>Symbol(这里先不做介绍)</li>
+</ul>
+<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
+<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
+<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
+
+<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
+<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
+<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
+<ul>
+<li><code>1024</code></li>
+<li><code>3.14</code></li>
+<li><code>1.2e5</code></li>
+<li><code>0x10</code></li>
+<li><code>0o377</code></li>
+</ul>
+<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
+
+<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
+<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
+
+<span class="hljs-comment">// embed a variable</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
+
+<span class="hljs-comment">// embed an expression</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
+
+<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
+<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
+<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
+<ul>
+<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
+<li>字面量或变量定义 <code>var bool = true;</code></li>
+<li>也出现在比较的结果 ：</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
+
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
+
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
+<ul>
+<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
+</ul>
+<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
+<ul>
+<li>变量声明了，但没赋值 <code>var obj;</code></li>
+<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
+<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
+<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
+<li><code>void(expression)</code></li>
+</ul>
+<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
+&#125;)();</code></pre>
+
+<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据类型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript系列之深入理解对象属性</title>
     <url>/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/</url>
     <content><![CDATA[<p>在<a href="https://zhuanlan.zhihu.com/p/64928794">《谈谈 JavaScript 中对象建立(Object)》</a>这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解 JavaScript 的对象与其他编程语言的对象有何差异。</p>
@@ -4488,243 +4725,6 @@ mike.age = <span class="hljs-number">18</span>;
       <tags>
         <tag>JavaScript</tag>
         <tag>对象</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之数据类型</title>
-    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
-<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
-<li>Undefined <code>undefined</code></li>
-<li>Null <code>null</code></li>
-<li>Boolean <code>true</code></li>
-<li>String <code>&#39;hello&#39;</code></li>
-<li>Number <code>123</code></li>
-<li>Symbol(这里先不做介绍)</li>
-</ul>
-<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
-<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
-<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
-<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
-<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
-<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
-
-<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
-<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
-<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
-<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
-<ul>
-<li><code>1024</code></li>
-<li><code>3.14</code></li>
-<li><code>1.2e5</code></li>
-<li><code>0x10</code></li>
-<li><code>0o377</code></li>
-</ul>
-<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
-<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
-
-<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
-<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
-
-<span class="hljs-comment">// embed a variable</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
-
-<span class="hljs-comment">// embed an expression</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
-
-<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
-<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
-
-<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
-<ul>
-<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
-<li>字面量或变量定义 <code>var bool = true;</code></li>
-<li>也出现在比较的结果 ：</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
-
-<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
-
-<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
-<ul>
-<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
-</ul>
-<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
-<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
-<ul>
-<li>变量声明了，但没赋值 <code>var obj;</code></li>
-<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
-<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
-<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
-<li><code>void(expression)</code></li>
-</ul>
-<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
-&#125;)();</code></pre>
-
-<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据类型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之执行上下文和执行栈</title>
-    <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
-    <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
-<p>执行上下文和执行栈是 JavaScript 的难点之一，所以本人尽量用通俗易懂的方式来阐述这些概念。</p>
-<h3 id="执行上下文（Execution-Context）"><a href="#执行上下文（Execution-Context）" class="headerlink" title="执行上下文（Execution Context）"></a>执行上下文（Execution Context）</h3><p>当 JavaScript 代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。执行上下文（可执行代码段）总共有三种类型：</p>
-<ul>
-<li><strong>全局执行上下文（全局代码）</strong>：不在任何函数中的代码都位于全局执行上下文中，只有一个，浏览器中的全局对象就是 <code>window</code> 对象，<code>this</code> 指向这个全局对象。</li>
-<li><strong>函数执行上下文（函数体）</strong>：只有调用函数时，才会为该函数创建一个新的执行上下文，可以存在无数个，每当一个新的执行上下文被创-建，它都会按照特定的顺序执行一系列步骤。</li>
-<li><strong><code>Eval</code> 函数执行上下文（eval 代码）</strong>： 指的是运行在 <code>eval</code> 函数中的代码，很少用而且不建议使用。</li>
-</ul>
-<p>执行上下文又包括三个生命周期阶段：<strong>创建阶段 → 执行阶段 → 回收阶段</strong>，本文重点介绍创建阶段。</p>
-<p><strong>1.创建阶段</strong></p>
-<p>当函数被调用，但未执行任何其内部代码之前，会做以下三件事：</p>
-<ul>
-<li>**创建变量对象(Variable object，VO)**：首先初始化函数的参数<code>arguments</code>，提升函数声明和变量声明。后文会详细说明。</li>
-<li><strong>创建作用域链（Scope Chain）</strong>：在执行上下文的创建阶段，作用域链是在变量对象之后创建的。作用域链本身包含变量对象。作用域链用于解析变量。当被要求解析变量时，JavaScript 始终从代码嵌套的最内层开始，如果最内层没有找到变量，就会跳转到上一层父作用域中查找，直到找到该变量。后文会详细说明。</li>
-<li><strong>确定 this 指向</strong>：包括多种情况，后文会详细说明。</li>
-</ul>
-<p>在一段 JS 脚本执行之前，要先解析代码（所以说 JS 是解释执行的脚本语言），解析的时候会先创建一个全局执行上下文环境，先把代码中即将执行的变量、函数声明都拿出来。变量先暂时赋值为<code>undefined</code>，函数则先声明好可使用。这一步做完了，然后再开始正式执行程序。</p>
-<p>另外，一个函数在被执行之前，也会创建一个函数执行上下文环境，跟全局上下文差不多，不过函数执行上下文中会多出<code>this</code> 、 <code>arguments</code>和函数的参数。</p>
-<p><strong>2.执行阶段</strong></p>
-<p>进入执行上下文、执行代码</p>
-<p><strong>3.回收阶段</strong></p>
-<p>执行完毕后执行上下文出栈并等待被垃圾回收</p>
-<p><img src="/images/scopechain/1.jpg"></p>
-<h3 id="执行上下文栈（Execution-Context-Stack）"><a href="#执行上下文栈（Execution-Context-Stack）" class="headerlink" title="执行上下文栈（Execution Context Stack）"></a>执行上下文栈（Execution Context Stack）</h3><p>假如我们写的函数多了，每次调用函数时都创建一个新的执行上下文，如何管理创建的那么多执行上下文呢？</p>
-<p>所以 JavaScript 引擎创建了执行上下文栈（Execution context stack，ECS）来管理执行上下文，具有 LIFO（后进先出）的栈结构，用于存储在代码执行期间创建的所有执行上下文。</p>
-<p>首次运行 JS 代码时，会创建一个<strong>全局</strong>执行上下文并 Push 到当前的执行栈中。每当发生函数调用，引擎都会为该函数创建一个<strong>新的函数</strong>执行上下文并 Push 到当前执行栈的顶部，浏览器的 JS 执行引擎总是访问栈顶的执行上下文。</p>
-<p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
-<p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
-<h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  b();
-&#125;
-a();</code></pre>
-
-<p>这段代码背后执行的逻辑是这样的：</p>
-<p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
-<p><img src="/images/context/1.jpg"></p>
-<p>接着，代码会执行到<code>a( )</code>这个部分，这时候，会建立<code>a</code>的执行上下文（execution context），并且被放置到执行栈（execution stack）中。在这个 execution stack 中，最上面的 execution context 会是正在被执行的<code>a( )</code>。如下图：</p>
-<p><img src="/images/context/2.jpg"></p>
-<p><code>function a</code> 的 execution context 建立后，便会开始执行<code>function a</code>中的内容。由于在<code>function a( )</code> 里面有去执行<code>function b</code> ，因此，在这个 execution stack 中，接下来最上面会变成<code>function b</code> 的 execution context。如下图：</p>
-<p><img src="/images/context/3.jpg"></p>
-<p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
-<p><img src="/images/context/4.jpg"></p>
-<h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();</code></pre>
-
-<p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
-<p><img src="/images/context/5.jpg"></p>
-<p>我们分别得到了 1、<code>undefined</code>和 2。为什么会这样呢？</p>
-<p>让我们来看看这段代码背后执行的逻辑：</p>
-<p>首先，全局执行上下文（Global Execution Context）会被建立，由于变量提升的缘故，<code>myVar</code>、<code>function a</code>和<code>b</code>都会被建立并储存在内存中，接着便开始逐行执行函数。一开始会碰到<code>var myVar = 1</code>所以，最外层的<code>myVar</code>便被给值为 1，接着执行到了<code>console.log(myVar)</code>，这是在 global execution context 执行的，于是得到了第一个 1 的结果：</p>
-<p><img src="/images/context/6.jpg"></p>
-<p>然后执行到了<code>a ( )</code>，于是建立了<code>a</code>的 execution context，这时候由于逐行执行的关系，会先执行到<code>var myVar = 2</code>，但因为这是在 function a 的 execution context 中，所以并不会影响到 global execution context 的<code>myVar</code>：</p>
-<p><img src="/images/context/7.jpg"></p>
-<p>在执行完<code>function a</code>中的<code>var myVar = 2</code>后，继续逐行执行，于是执行到了<code>b ( )</code>，这时候，<code>function b</code>的 execution function 便被建立，而且会先去执行<code>function b</code>里面的内容：</p>
-<p><img src="/images/context/8.jpg"></p>
-<p><code>function b</code>的 execution function 建立后，会开始逐行执行<code>function b</code>里面的内容，于是读到了<code>var myVar</code>;，这时候在<code>function b</code>这个 execution context 中的<code>myVar</code>变量被建立，但是还没被赋值，所以会是<code>undefined</code>。和上面提到的一样，由于这个<code>myVar</code>是在<code>function b</code>中的 execution context 所建立，所以并不会影响到其他 execution context 的<code>myVar</code>，这时候执行到了<code>function b</code>的 execution context 中的<code>console.log(myVar)</code>，于是得到了第二个看到的<code>undefined</code>：</p>
-<p><img src="/images/context/9.jpg"></p>
-<p>最后，<code>function b</code>执行完之后，会从 execution stack 中离开，继续回到<code>function a</code>中的<code>b( )</code>后逐行执行，也就是<code>console.log(myVar)</code>，这时候是在 function a 的 execution context 加以执行的，因此也就得到了结果中看到的第三个 2 了。</p>
-<p>最后由于<code>b ( )</code> 后面已经没有内容，<code>function a</code>执行完毕，这时候，<code>function a</code>也会从 execution stack 中抽离。</p>
-<p><img src="/images/context/10.jpg"></p>
-<p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
-<p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
-<p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span></code></pre>
-
-<h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
-<pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar);
-
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">打印出</span>
-<span class="hljs-comment">1</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">*/</span></code></pre>
-
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>Execution Context</tag>
-        <tag>Execution Context Stack</tag>
       </tags>
   </entry>
   <entry>
@@ -6366,6 +6366,58 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       </tags>
   </entry>
   <entry>
+    <title>一些好用的工具、网站</title>
+    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
+<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
+<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
+<p><img src="/images/tool/1.jpg"></p>
+<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
+<p>✔ 没广告还免费！</p>
+<p><img src="/images/tool/2.jpg"></p>
+<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
+<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
+<p><img src="/images/tool/3.jpg"></p>
+<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
+<p><img src="/images/tool/4.jpg"></p>
+<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
+<p>✔ 一定也有设计师不知道这个网站滴。</p>
+<p><img src="/images/tool/5.jpg"></p>
+<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
+<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
+<p><img src="/images/tool/6.jpg"></p>
+<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
+<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
+<p><img src="/images/tool/7.jpg"></p>
+<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
+<p>✔ 比如搜索关键词“love”看到的结果：</p>
+<p><img src="/images/tool/8.jpg"></p>
+<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
+<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
+<p><img src="/images/tool/9.jpg"></p>
+<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
+<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
+<p><img src="/images/tool/10.jpg"></p>
+<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
+<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
+<p><img src="/images/tool/11.jpg"></p>
+<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
+<p>✔ 相信你用了后会觉得它很高效的。</p>
+<p><img src="/images/tool/12.jpg"></p>
+<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
+<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
+<p><img src="/images/tool/13.jpg"></p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【译】谈谈“typeof null为object”这一bug的由来</title>
     <url>/2020/02/21/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/</url>
     <content><![CDATA[<p>很多前端初级开发者也许并不深究 typeof null 为何为 Object？想更深地了解这一 bug 的由来，可以参阅 Dr. Axel Rauschmayer 关于”typeof null”的历史这篇文章。</p>
@@ -6491,58 +6543,6 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
         <tag>JavaScript</tag>
         <tag>原型</tag>
         <tag>原型链</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一些好用的工具、网站</title>
-    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
-    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
-<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
-<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
-<p><img src="/images/tool/1.jpg"></p>
-<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
-<p>✔ 没广告还免费！</p>
-<p><img src="/images/tool/2.jpg"></p>
-<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
-<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
-<p><img src="/images/tool/3.jpg"></p>
-<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
-<p><img src="/images/tool/4.jpg"></p>
-<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
-<p>✔ 一定也有设计师不知道这个网站滴。</p>
-<p><img src="/images/tool/5.jpg"></p>
-<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
-<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
-<p><img src="/images/tool/6.jpg"></p>
-<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
-<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
-<p><img src="/images/tool/7.jpg"></p>
-<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
-<p>✔ 比如搜索关键词“love”看到的结果：</p>
-<p><img src="/images/tool/8.jpg"></p>
-<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
-<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
-<p><img src="/images/tool/9.jpg"></p>
-<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
-<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
-<p><img src="/images/tool/10.jpg"></p>
-<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
-<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
-<p><img src="/images/tool/11.jpg"></p>
-<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
-<p>✔ 相信你用了后会觉得它很高效的。</p>
-<p><img src="/images/tool/12.jpg"></p>
-<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
-<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
-<p><img src="/images/tool/13.jpg"></p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -6676,6 +6676,82 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
+    <title>你知道如何高效地在GitHub搜索开源项目吗?</title>
+    <url>/2020/11/23/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</url>
+    <content><![CDATA[<p>作为一个常逛 GitHub 的程序员，你真的知道如何高效地在 GitHub 搜索开源项目吗？你的操作是不是单纯的在搜索框内输入关键词进行搜索的？嘿嘿，这篇文章就来告诉你有啥搜索的技巧或者说骚操作吧。</p>
+<p>先来看看直接在搜索框内输入关键词所搜索出来的内容吧（以搜 vue 项目为例）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-1.png"></p>
+<p>what？竟然找到了 48 多万个相关的开源项目，这时候很多人就不清楚下一步应该干啥了，也不清楚具体找哪个项目练手学习。</p>
+<p>所以下面教你几个精确查找项目的方法。</p>
+<h3 id="GitHub-项目的精确查找"><a href="#GitHub-项目的精确查找" class="headerlink" title="GitHub 项目的精确查找"></a>GitHub 项目的精确查找</h3><h4 id="1-项目名称关键字搜索"><a href="#1-项目名称关键字搜索" class="headerlink" title="1. 项目名称关键字搜索"></a>1. 项目名称关键字搜索</h4><p>搜索方式：</p>
+<pre><code class="hljs applescript"><span class="hljs-keyword">in</span>:<span class="hljs-built_in">name</span> 项目名称关键词</code></pre>
+
+<p>以下图片都以 vue 项目为例：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-2.png"></p>
+<p>这样会发现比单纯搜关键词时的项目量少了一些，并且会将关键词加粗，但搜索出的量还是有点大。</p>
+<h4 id="2-项目描述关键字搜索"><a href="#2-项目描述关键字搜索" class="headerlink" title="2. 项目描述关键字搜索"></a>2. 项目描述关键字搜索</h4><p>搜索方式：</p>
+<pre><code class="hljs avrasm"><span class="hljs-symbol">in:</span>description 项目描述关键词</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-3.png"></p>
+<p>这样也是会比单纯搜关键词时的项目量少了一半多些了，但搜索出的量还是很大的。</p>
+<h4 id="3-项目-README-关键字搜索"><a href="#3-项目-README-关键字搜索" class="headerlink" title="3. 项目 README 关键字搜索"></a>3. 项目 README 关键字搜索</h4><p>搜索方式：</p>
+<pre><code class="hljs avrasm"><span class="hljs-symbol">in:</span>readme readme关键词</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-4.png"></p>
+<p>发现搜索出的量只增不减的，那还有什么方式能更加精准的搜索呢？</p>
+<p>就是利用上面的<strong>三种搜索关键字搜索+以下四种限制条件</strong>来更加精确的搜索。</p>
+<h4 id="4-限制项目的-stars-数或者-forks-数"><a href="#4-限制项目的-stars-数或者-forks-数" class="headerlink" title="4. 限制项目的 stars 数或者 forks 数"></a>4. 限制项目的 stars 数或者 forks 数</h4><p>一般情况下一个项目的 star 或 fork 数多少，是能代表该项目的受欢迎程度的，能很大程度地筛选掉一些比较水的项目。搜索方式：</p>
+<pre><code class="hljs groovy"><span class="hljs-attr">in:</span>name或description或readme 关键字 <span class="hljs-attr">stars:</span>&gt;数字 <span class="hljs-attr">forks:</span>&gt;数字</code></pre>
+
+<p>其中 <code>stars:&gt;数字</code> 可以单独使用，也可和 <code>forks:&gt;数字</code> 结合使用，还是以搜 vue 项目为例：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-5.png"></p>
+<p>只是加了一个对 stars 数大于 1000 的限制条件，这时候发现搜出的项目量是不是少了很多？这个搜索技巧很强大吧。</p>
+<h4 id="5-限制项目的更新时间"><a href="#5-限制项目的更新时间" class="headerlink" title="5. 限制项目的更新时间"></a>5. 限制项目的更新时间</h4><p>我们在确认是否要使用一些开源框架、库的时候，是否继续维护是很重要的一点。如果是已经过时没人维护的项目，踩坑就不好解决了。搜索方式：</p>
+<pre><code class="hljs angelscript"><span class="hljs-keyword">in</span>:name或description或readme 关键字 stars:&gt;数字 pushed:&gt;<span class="hljs-number">2020</span><span class="hljs-number">-06</span><span class="hljs-number">-01</span></code></pre>
+
+<p>上面的 <code>pushed:&gt;2020-06-01</code> 搜到的是 2020 年 6 月 1 号之后还在更新的项目，外加限制 stars 数：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-6.png"></p>
+<p>搜索结果进一步的精确了，如果你是想找指定时间之前或之后创建的仓库也是可以的，把 pushed 改成 <strong>created</strong> 就行了。</p>
+<h4 id="6-限制项目的语言"><a href="#6-限制项目的语言" class="headerlink" title="6. 限制项目的语言"></a>6. 限制项目的语言</h4><p>比如想找 JavaScript 的库， 除了像在搜索结果左侧点击选择语言之外，还可以在搜索中过滤。搜索方式：</p>
+<pre><code class="hljs groovy"><span class="hljs-attr">in:</span>name或description或readme 关键字 <span class="hljs-attr">stars:</span>&gt;数字 <span class="hljs-attr">pushed:</span>&gt;<span class="hljs-number">2020</span><span class="hljs-number">-06</span><span class="hljs-number">-01</span> <span class="hljs-attr">language:</span>javascript</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-7.png"></p>
+<p>这时候的搜索结果已经相当精确了。</p>
+<h4 id="7-限制项目的作者或组织"><a href="#7-限制项目的作者或组织" class="headerlink" title="7. 限制项目的作者或组织"></a>7. 限制项目的作者或组织</h4><p>如果想在 GitHub 上找一下某个大佬提交了什么新的功能，就可以指定其 github 名后搜索，例如咱们想看下尤大（github 名：yyx990803）近期有没有提交新的 JS 代码，其搜索方式：</p>
+<pre><code class="hljs apache"><span class="hljs-attribute">user</span>:yyx<span class="hljs-number">990803</span></code></pre>
+
+<p>如果想找某个组织的代码的话，紧接着第 6 条的搜索条件，可以这样：</p>
+<pre><code class="hljs groovy"><span class="hljs-attr">in:</span>name vue <span class="hljs-attr">stars:</span>&gt;<span class="hljs-number">1000</span> <span class="hljs-attr">pushed:</span>&gt;<span class="hljs-number">2020</span><span class="hljs-number">-06</span><span class="hljs-number">-01</span> <span class="hljs-attr">language:</span>javascript <span class="hljs-attr">org:</span>vuejs</code></pre>
+
+<p><img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource-8.png"></p>
+<p>最终搜索数量定格在 16 条，这个搜索使用起来是不是相当的便捷精确呢?</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>如何高效的从 GitHub 上搜索开源项目，有下面的小技巧（三类关键字搜索+四限制）：</p>
+<ul>
+<li>项目名关键字搜索: <code>in:name 项目名关键字</code></li>
+<li>项目描述关键字搜索： <code>in:description 项目名关键字</code></li>
+<li>项目详细描述关键字搜索： <code>in:readme 项目名关键字</code></li>
+<li>限制项目的火热程度： <code>stars:&gt;数字 或者 forks:&gt;数字</code></li>
+<li>限制项目的更新时间：<code>pushed:&gt;时间</code></li>
+<li>限制项目的语言：<code>language:语言</code></li>
+<li>限制项目的作者或组织：<code>user:作者名 或者 org:组织名</code></li>
+</ul>
+<p>上面的这些命令都可以组合使用，这样可以使得项目搜索更加精确。</p>
+<p>你可以实践试一试这样的搜索技巧，看看是否能找到你想要的开源项目呢？</p>
+<p>延伸阅读：</p>
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzI3MTEwODc5Ng==&mid=2650859642&idx=1&sn=9b2c2dc61686c580f8af1dc8fc197612&chksm=f13297a9c6451ebf083e5335eb2ae4eba0f8c80bc8db420ce7e0aac90eaeb06152f589dcaf6e&scene=21#wechat_redirect">怎样参与到全世界优秀的开源项目中?</a></p>
+</blockquote>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>OpenSource</category>
+      </categories>
+      <tags>
+        <tag>GitHub</tag>
+        <tag>OpenSource</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
     <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
@@ -6756,7 +6832,7 @@ $ hexo server              //启动本地服务器，进行博客文章预览</c
 <li>把第 6 行的 title 改成你想要的名字</li>
 <li>把第 10 行的 author 改成你想取大名</li>
 <li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#103;&#x69;&#116;&#104;&#117;&#98;&#46;&#99;&#x6f;&#109;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
 </ul>
 <p><img src="/images/hexogit/5.png"></p>
 <p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
@@ -6771,7 +6847,7 @@ $ hexo deploy                             //将本地博客代码部署到Github
 <p>5、去看你的博客，应该能看到这篇新文章啦！</p>
 <h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
 <p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:iissnan/hexo-theme-next.git</p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#111;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
 <p>4、<code>cd themes</code></p>
 <p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
 <p>6、<code>cd ..</code></p>
@@ -7675,136 +7751,6 @@ dog.__proto__ === Dog.prototype; <span class="hljs-comment">// true</span></code
       </tags>
   </entry>
   <entry>
-    <title>谈谈浏览器里的JavaScript</title>
-    <url>/2020/03/01/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/</url>
-    <content><![CDATA[<p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与 JavaScript 是网页前端三大要素」，其中：</p>
-<ul>
-<li>HTML 负责资料与结构</li>
-<li>CSS 负责样式与呈现</li>
-<li>JavaScript 负责行为与互动</li>
-</ul>
-<p><img src="/images/dom/1.jpg"></p>
-<p>那么，如果你跟我在学 JavaScript 的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…</p>
-<p><strong>我还是不知道怎么通过 JavaScript 在网页上输出”Hello World!”啊！</strong></p>
-<p><img src="/images/dom/2.png"></p>
-<p>那么相信看完今天的分享，我保证你一定可以通过 JavaScript 在网页上输出”Hello World!” (嘻嘻)</p>
-<h3 id="浏览器里的-JavaScript"><a href="#浏览器里的-JavaScript" class="headerlink" title="浏览器里的 JavaScript"></a>浏览器里的 JavaScript</h3><p>严格来说，JavaScript (或者说 ECMAScript 标准) 并没有提供网页的操作方法。</p>
-<p>事实上，前端开发者在网页的操作方法都是由 JavaScript 的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM 与 DOM。</p>
-<p>所以广泛来说，在浏览器上的 JavaScript 实际上包含了以下三部分：</p>
-<ul>
-<li><strong>JavaScript 核心</strong> (以 ECMAScript 标准为基础)</li>
-<li><strong>BOM</strong> (Browser Object Model，浏览器对象模型)</li>
-<li><strong>DOM</strong> (Document Object Model，文件对象模型)</li>
-</ul>
-<p>由于 BOM 与 DOM 是由浏览器执行环境所提供；所以换句话说，在 node 环境下的 JavaScript 就不会有这两个部分。</p>
-<p>前端开发者就是可以通过 JavaScript 去调用 BOM 与 DOM 提供的 API，进一步通过它们去控制浏览器的行为与网页的内容。</p>
-<p>那么接下来就来具体介绍一下 BOM 与 DOM 吧。</p>
-<h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。</p>
-<p>在早期没有制定标准规范的时候，各家浏览器厂商几乎在自家浏览器上都有各自的功能，非常混乱。直到后来 W3C 把各家浏览器都有的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了 HTML5 的标准中，这也就是我们现在看到的 BOM API。</p>
-<p>BOM 有时也有人非正式地称它为 Level 0 DOM。因为它在 DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以 Level 0 DOM 与 BOM 两者实际上指的是同一个东西。</p>
-<h3 id="BOM-的核心-window-对象"><a href="#BOM-的核心-window-对象" class="headerlink" title="BOM 的核心 window 对象"></a>BOM 的核心 window 对象</h3><p><img src="/images/dom/3.jpg"></p>
-<p>从上图可以看出 BOM 的核心是<code>window</code>对象。</p>
-<p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。</p>
-<p>在浏览器里的<code>window</code>对象会扮演着两种角色：</p>
-<ul>
-<li>ECMAScript 标准里的<strong>全局对象</strong> (Global Object)</li>
-<li>JavaScript 用来与浏览器沟通的窗口</li>
-</ul>
-<p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过 window.xxx 的方式取得它们。比如：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre>
-
-<p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// false</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre>
-
-<p>但若是直接通过指定<code>window</code>对象的属性则可以：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.a = <span class="hljs-number">10</span>;
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// undefined</span></code></pre>
-
-<p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？</p>
-<h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：</p>
-<p><img src="/images/dom/4.jpg"></p>
-<p>(alert on Chrome)</p>
-<p>我想不管是不是刚接触 JavaScript 的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.alert(<span class="hljs-string">&quot;message&quot;</span>);</code></pre>
-
-<p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。</p>
-<p>一行代码就可以生成一个对话框，很神奇吧？</p>
-<p>而这就是浏览器环境的 BOM 提供给 JavaScript 控制的功能之一。</p>
-<p>类似的对话框还有用来提供<strong>确定/取消</strong>的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm">window.confirm()</a>，以及开放式问答的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt">window.prompt()</a>对话框。</p>
-<p>当然 BOM 提供的 API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。</p>
-<h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将 HTML 文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为 DOM Tree。</p>
-<p>简单来说，我们把 HTML 每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的 HTML 如下：</p>
-<pre><code class="hljs javascript">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;米淇淋的个人博客&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;这是主题&lt;/h1&gt;
-    &lt;p&gt;
-      这是一个&lt;i&gt;简单&lt;/i&gt;的段落
-    &lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
-
-<p><img src="/images/domapi-5.jpg"></p>
-<p>在最根部的地方，就是<code>document</code>，就是 BOM 图中<code>window</code>下面的那个。</p>
-<p>往下可以延伸出一个个的 HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
-<p>而 DOM API 就是定义了让 JavaScript 可以存取、改变 HTML 结构、样式和内容的方法，甚至是对节点绑定的事件。</p>
-<p>JavaScript 就是通过 DOM 提供的 API 来对 HTML 做存取与操作。</p>
-<h3 id="DOM-与-BOM-的区别"><a href="#DOM-与-BOM-的区别" class="headerlink" title="DOM 与 BOM 的区别"></a>DOM 与 BOM 的区别</h3><p>前面介绍 BOM 时，我们已经知道 DOM 的<code>document</code>其实也就是<code>window</code>对象的子对象之一。</p>
-<p>而 DOM 与 BOM 最大的区别在于：</p>
-<ul>
-<li>BOM: JavaScript 与<strong>浏览器</strong>沟通的窗口，不涉及网页内容。</li>
-<li>DOM: JavaScript 用来控制<strong>网页</strong>的节点与内容的标准。</li>
-</ul>
-<p>BOM 完全依赖于浏览器厂商实作本身无标准规范，而 DOM 有着 W3C 所制定的标准来规范。</p>
-<p>想要通过 DOM API 取得节点，JavaScript 可以这样写：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 根据传入的值，找到 DOM 中 id 为 &#x27;xxx&#x27; 的元素。</span>
-<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;xxx&quot;</span>);
-
-<span class="hljs-comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span>
-<span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&quot;xxx&quot;</span>);
-
-<span class="hljs-comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span>
-<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">&quot;xxx&quot;</span>);
-
-<span class="hljs-comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span>
-<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;xxx&quot;</span>);
-<span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;xxx&quot;</span>);</code></pre>
-
-<p>而透过 DOM API 选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
-<p>假设有一个 HTML 节点：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;greet&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre>
-
-<p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
-<span class="javascript">  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#greet&quot;</span>).textContent = <span class="hljs-string">&quot;Hello World!&quot;</span>;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
-
-<p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output">JS Bin on jsbin.com</a></p>
-<p>看到这里，恭喜你已经可以通过 JavaScript 在网页上输出”Hello World!” 啦！</p>
-<p>在后续的内容中，我们会继续来介绍各种操作网页的 DOM/BOM API。</p>
-<p>毕竟对前端工程师来说，搞懂<strong>怎么与浏览器打交道、怎么操作网页内容</strong>，就是做好 WebUI 最重要的基础。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>DOM</tag>
-        <tag>BOM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>谈谈JavaScript中创建对象(Object)</title>
     <url>/2020/02/15/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E5%AF%B9%E8%B1%A1%E5%BB%BA%E7%AB%8B(Object)/</url>
     <content><![CDATA[<p>在这篇文章中我将会着重说明如何创建和调用 JavaScript 里的对象（Object）。</p>
@@ -8031,6 +7977,44 @@ SayHI(jaychou); <span class="hljs-comment">// HI Chou</span></code></pre>
         <tag>JavaScript</tag>
         <tag>constructor</tag>
         <tag>new</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>贵州黔东南之行</title>
+    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
+    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
+<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
+<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
+<p><img src="/images/guizhou/1.jpg"></p>
+<p><img src="/images/guizhou/2.jpg"></p>
+<p><img src="/images/guizhou/3.jpg"></p>
+<p>河边坐落了许多充满文艺的小店和清吧。</p>
+<p><img src="/images/guizhou/4.jpg"></p>
+<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
+<p><img src="/images/guizhou/5.jpg"></p>
+<p><img src="/images/guizhou/6.jpg"></p>
+<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
+<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
+<p><img src="/images/guizhou/7.jpg"></p>
+<p><img src="/images/guizhou/8.jpg"></p>
+<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
+<p><img src="/images/guizhou/9.jpg"></p>
+<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
+<p><img src="/images/guizhou/10.jpg"></p>
+<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
+<p><img src="/images/guizhou/11.jpg"></p>
+<p><img src="/images/guizhou/12.jpg"></p>
+<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
+<p><img src="/images/guizhou/13.jpg"></p>
+<p><img src="/images/guizhou/14.jpg"></p>
+<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>贵州</tag>
+        <tag>游记</tag>
       </tags>
   </entry>
   <entry>
@@ -8398,41 +8382,133 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
       </tags>
   </entry>
   <entry>
-    <title>贵州黔东南之行</title>
-    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
-    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
-<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
-<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
-<p><img src="/images/guizhou/1.jpg"></p>
-<p><img src="/images/guizhou/2.jpg"></p>
-<p><img src="/images/guizhou/3.jpg"></p>
-<p>河边坐落了许多充满文艺的小店和清吧。</p>
-<p><img src="/images/guizhou/4.jpg"></p>
-<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
-<p><img src="/images/guizhou/5.jpg"></p>
-<p><img src="/images/guizhou/6.jpg"></p>
-<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
-<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
-<p><img src="/images/guizhou/7.jpg"></p>
-<p><img src="/images/guizhou/8.jpg"></p>
-<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
-<p><img src="/images/guizhou/9.jpg"></p>
-<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
-<p><img src="/images/guizhou/10.jpg"></p>
-<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
-<p><img src="/images/guizhou/11.jpg"></p>
-<p><img src="/images/guizhou/12.jpg"></p>
-<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
-<p><img src="/images/guizhou/13.jpg"></p>
-<p><img src="/images/guizhou/14.jpg"></p>
-<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+    <title>谈谈浏览器里的JavaScript</title>
+    <url>/2020/03/01/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/</url>
+    <content><![CDATA[<p>在许多的网页前端教学或是文章书籍当中，你可能常常听到这样的说法：「HTML、CSS 与 JavaScript 是网页前端三大要素」，其中：</p>
+<ul>
+<li>HTML 负责资料与结构</li>
+<li>CSS 负责样式与呈现</li>
+<li>JavaScript 负责行为与互动</li>
+</ul>
+<p><img src="/images/dom/1.jpg"></p>
+<p>那么，如果你跟我在学 JavaScript 的时候也有一样的疑问：<strong>变量、类型、对象、流程控制、函数</strong>…表面上看似基础都学会了，但…</p>
+<p><strong>我还是不知道怎么通过 JavaScript 在网页上输出”Hello World!”啊！</strong></p>
+<p><img src="/images/dom/2.png"></p>
+<p>那么相信看完今天的分享，我保证你一定可以通过 JavaScript 在网页上输出”Hello World!” (嘻嘻)</p>
+<h3 id="浏览器里的-JavaScript"><a href="#浏览器里的-JavaScript" class="headerlink" title="浏览器里的 JavaScript"></a>浏览器里的 JavaScript</h3><p>严格来说，JavaScript (或者说 ECMAScript 标准) 并没有提供网页的操作方法。</p>
+<p>事实上，前端开发者在网页的操作方法都是由 JavaScript 的执行平台，也就是<strong>浏览器</strong>提供的。这些操作方法基本上会分别由这两种对象所拥有：BOM 与 DOM。</p>
+<p>所以广泛来说，在浏览器上的 JavaScript 实际上包含了以下三部分：</p>
+<ul>
+<li><strong>JavaScript 核心</strong> (以 ECMAScript 标准为基础)</li>
+<li><strong>BOM</strong> (Browser Object Model，浏览器对象模型)</li>
+<li><strong>DOM</strong> (Document Object Model，文件对象模型)</li>
+</ul>
+<p>由于 BOM 与 DOM 是由浏览器执行环境所提供；所以换句话说，在 node 环境下的 JavaScript 就不会有这两个部分。</p>
+<p>前端开发者就是可以通过 JavaScript 去调用 BOM 与 DOM 提供的 API，进一步通过它们去控制浏览器的行为与网页的内容。</p>
+<p>那么接下来就来具体介绍一下 BOM 与 DOM 吧。</p>
+<h3 id="BOM-是什么"><a href="#BOM-是什么" class="headerlink" title="BOM 是什么?"></a>BOM 是什么?</h3><p><strong>BOM</strong>(<strong>Browser Object Model</strong>，浏览器对象模型)，是浏览器所有功能的核心，与网页的内容无关。</p>
+<p>在早期没有制定标准规范的时候，各家浏览器厂商几乎在自家浏览器上都有各自的功能，非常混乱。直到后来 W3C 把各家浏览器都有的部分，以及确定已经(或未来会) 加入的功能，统一集合起来纳入了 HTML5 的标准中，这也就是我们现在看到的 BOM API。</p>
+<p>BOM 有时也有人非正式地称它为 Level 0 DOM。因为它在 DOM level 1 标准前就已存在，而不是真的有文件去规范这些，所以 Level 0 DOM 与 BOM 两者实际上指的是同一个东西。</p>
+<h3 id="BOM-的核心-window-对象"><a href="#BOM-的核心-window-对象" class="headerlink" title="BOM 的核心 window 对象"></a>BOM 的核心 window 对象</h3><p><img src="/images/dom/3.jpg"></p>
+<p>从上图可以看出 BOM 的核心是<code>window</code>对象。</p>
+<p>而<code>window</code>对象提供的属性主要为<code>document</code>、<code>location</code>、<code>navigator</code>、<code>screen</code>、<code>history</code>以及<code>frames</code>。</p>
+<p>在浏览器里的<code>window</code>对象会扮演着两种角色：</p>
+<ul>
+<li>ECMAScript 标准里的<strong>全局对象</strong> (Global Object)</li>
+<li>JavaScript 用来与浏览器沟通的窗口</li>
+</ul>
+<p>凡是<strong>在全局作用域内声明的变量、对象、函数等，都会自动变成全局对象的属性</strong>。通常这样的变量，我们会称它们叫做<strong>全局变量</strong>，可以通过 window.xxx 的方式取得它们。比如：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre>
+
+<p>除此之外，在全局作用域内声明的全局变量还有一个特性，就是无法使用<code>delete</code>关键字来移除：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span></code></pre>
+
+<p>但若是直接通过指定<code>window</code>对象的属性则可以：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.a = <span class="hljs-number">10</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">delete</span> <span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">window</span>.a); <span class="hljs-comment">// undefined</span></code></pre>
+
+<p>现在我们已经知道了全局对象是怎么回事了，那么<code>window</code>对象扮演的另一个角色，<strong>用来与浏览器沟通的窗口</strong>又是什么意思呢？</p>
+<h3 id="浏览器内建的对话框"><a href="#浏览器内建的对话框" class="headerlink" title="浏览器内建的对话框"></a>浏览器内建的对话框</h3><p>先来个最常见的例子：alert()警告对话框：</p>
+<p><img src="/images/dom/4.jpg"></p>
+<p>(alert on Chrome)</p>
+<p>我想不管是不是刚接触 JavaScript 的朋友，对<code>alert</code>应该都不陌生，<code>alert</code>的完整语法其实是这样：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.alert(<span class="hljs-string">&quot;message&quot;</span>);</code></pre>
+
+<p>如同我们所熟知的全局变量一样，<code>window</code>对象下的成员，<code>window</code>是可以省略不打的。</p>
+<p>一行代码就可以生成一个对话框，很神奇吧？</p>
+<p>而这就是浏览器环境的 BOM 提供给 JavaScript 控制的功能之一。</p>
+<p>类似的对话框还有用来提供<strong>确定/取消</strong>的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm">window.confirm()</a>，以及开放式问答的<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt">window.prompt()</a>对话框。</p>
+<p>当然 BOM 提供的 API 很多，包含开启/关闭视窗，改变视窗大小，计时器与取得网址等等。这些在之后的文章当中还会再细说。</p>
+<h3 id="DOM-是什么"><a href="#DOM-是什么" class="headerlink" title="DOM 是什么?"></a>DOM 是什么?</h3><p><strong>DOM</strong>(<strong>Document Object Model</strong>，文件对象模型)，是一个将 HTML 文件以树状的结构来表示的模型，而组合起来的树状图，我们称之为 DOM Tree。</p>
+<p>简单来说，我们把 HTML 每个节点的关系连接起来倒着看，就好像是一棵树一样。假设我们有一个基本的 HTML 如下：</p>
+<pre><code class="hljs javascript">&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;米淇淋的个人博客&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;这是主题&lt;/h1&gt;
+    &lt;p&gt;
+      这是一个&lt;i&gt;简单&lt;/i&gt;的段落
+    &lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p><img src="/images/domapi-5.jpg"></p>
+<p>在最根部的地方，就是<code>document</code>，就是 BOM 图中<code>window</code>下面的那个。</p>
+<p>往下可以延伸出一个个的 HTML 标签，一个节点就是一个标签，往下又可以再延伸出文本节点与属性的节点。</p>
+<p>而 DOM API 就是定义了让 JavaScript 可以存取、改变 HTML 结构、样式和内容的方法，甚至是对节点绑定的事件。</p>
+<p>JavaScript 就是通过 DOM 提供的 API 来对 HTML 做存取与操作。</p>
+<h3 id="DOM-与-BOM-的区别"><a href="#DOM-与-BOM-的区别" class="headerlink" title="DOM 与 BOM 的区别"></a>DOM 与 BOM 的区别</h3><p>前面介绍 BOM 时，我们已经知道 DOM 的<code>document</code>其实也就是<code>window</code>对象的子对象之一。</p>
+<p>而 DOM 与 BOM 最大的区别在于：</p>
+<ul>
+<li>BOM: JavaScript 与<strong>浏览器</strong>沟通的窗口，不涉及网页内容。</li>
+<li>DOM: JavaScript 用来控制<strong>网页</strong>的节点与内容的标准。</li>
+</ul>
+<p>BOM 完全依赖于浏览器厂商实作本身无标准规范，而 DOM 有着 W3C 所制定的标准来规范。</p>
+<p>想要通过 DOM API 取得节点，JavaScript 可以这样写：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 根据传入的值，找到 DOM 中 id 为 &#x27;xxx&#x27; 的元素。</span>
+<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;xxx&quot;</span>);
+
+<span class="hljs-comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span>
+<span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&quot;xxx&quot;</span>);
+
+<span class="hljs-comment">// 针对给定的 class 名称，返回所有符合条件的 NodeList 对象。</span>
+<span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">&quot;xxx&quot;</span>);
+
+<span class="hljs-comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的 NodeList。</span>
+<span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;xxx&quot;</span>);
+<span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;xxx&quot;</span>);</code></pre>
+
+<p>而透过 DOM API 选取出来的节点，我们可以通过操作<code>textContent</code>属性来变更它的文字。</p>
+<p>假设有一个 HTML 节点：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;greet&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre>
+
+<p>再来我们就可以先通过<code>document.querySelector()</code>方法来取得节点，然后修改<code>textContent</code>属性：</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span>
+<span class="javascript">  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#greet&quot;</span>).textContent = <span class="hljs-string">&quot;Hello World!&quot;</span>;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+
+<p><a href="http://jsbin.com/fuhurapivu/embed?html,js,output">JS Bin on jsbin.com</a></p>
+<p>看到这里，恭喜你已经可以通过 JavaScript 在网页上输出”Hello World!” 啦！</p>
+<p>在后续的内容中，我们会继续来介绍各种操作网页的 DOM/BOM API。</p>
+<p>毕竟对前端工程师来说，搞懂<strong>怎么与浏览器打交道、怎么操作网页内容</strong>，就是做好 WebUI 最重要的基础。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 ]]></content>
       <categories>
-        <category>游记</category>
+        <category>JavaScript</category>
       </categories>
       <tags>
-        <tag>贵州</tag>
-        <tag>游记</tag>
+        <tag>JavaScript</tag>
+        <tag>DOM</tag>
+        <tag>BOM</tag>
       </tags>
   </entry>
   <entry>

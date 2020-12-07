@@ -1,6 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Flexbox 对你说爱不完</title>
+    <url>/2020/06/14/CSS%20Flexbox%20%E5%AF%B9%E4%BD%A0%E8%AF%B4%E7%88%B1%E4%B8%8D%E5%AE%8C/</url>
+    <content><![CDATA[<p>Flexbox 意为弹性布局，是一种新的 CSS 3 布局方式，与传统布局方式(基于盒模型，依赖 display 属性 +position 属性 +float 属性)相比，flex 布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。</p>
+<p>废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。</p>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><img src="/images/flex/1.jpg"></p>
+<p>使用了 flex 布局，则有 flex 容器（flex container），子元素为项目(flex item）。</p>
+<p>在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start 和 end 表示对应轴的起始位置，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴。比如将 Flexbox 的方向设置为 row，则主轴就是横轴，而交叉轴就是纵轴；反之设置成 column，则主轴就是纵轴，而交叉轴就是横轴，这个下面会具体讲。</p>
+<p>每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。</p>
+<p>这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cross size，这个还要取决于你主轴的方向，如果你垂直方向是主轴，那么项目的高度就是 main size。</p>
+<p>实际上，要实现 flex 布局需要先指定一个容器，任何一个容器都可以被指定为 flex 布局，这样容器内部的元素就可以使用 flex 来进行布局。语法如下：</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  display: flex | inline-flex; //可以有两种取值
+&#125;</code></pre>
+
+<p>给 div 这类块元素设置<code>display: flex</code>或者给 span 这类行内元素设<code>display: inline-flex</code>，flex 布局即创建！</p>
+<p>而 Flex 布局相关属性正好分为两拨，一拨作用在 flex 容器上，还有一拨作用在 flex 子项上。</p>
+<p><strong>需要注意的是：当时设置 flex 布局之后，子元素的 <code>float</code>、<code>clear</code>、<code>vertical-align</code> 的属性将会失效。</strong></p>
+<h3 id="Flex-容器上的属性"><a href="#Flex-容器上的属性" class="headerlink" title="Flex 容器上的属性"></a>Flex 容器上的属性</h3><p>有下面六种属性可以设置在容器上，它们分别是：</p>
+<ol>
+<li>flex-direction</li>
+<li>flex-wrap</li>
+<li>flex-flow</li>
+<li>justify-content</li>
+<li>align-items</li>
+<li>align-content</li>
+</ol>
+<p><strong>1. flex-direction: 决定主轴的方向(即项目的排列方向)</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">flex-direction</span>: row | row-reverse | column | column-reverse;
+&#125;</code></pre>
+
+<ul>
+<li><code>row</code>（默认）：主轴为水平方向，起点在左端</li>
+</ul>
+<p><img src="/images/flex/2.jpg"></p>
+<ul>
+<li><code>row-reverse</code>：主轴为水平方向，起点在右端</li>
+</ul>
+<p><img src="/images/flex/3.jpg"></p>
+<ul>
+<li><code>column</code>：主轴为垂直方向，起点在上沿</li>
+</ul>
+<p><img src="/images/flex/4.jpg"></p>
+<ul>
+<li><code>column-reverse</code>：主轴为垂直方向，起点在下沿</li>
+</ul>
+<p><img src="/images/flex/5.jpg"></p>
+<p><strong>2. flex-wrap: 决定容器内项目是否可换行</strong></p>
+<p>默认情况下，项目都排在主轴线上，使用 <code>flex-wrap</code> 可实现项目的换行。</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;
+&#125;</code></pre>
+
+<ul>
+<li><code>nowrap</code>（默认）：不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行</li>
+</ul>
+<p><img src="/images/flex/6.jpg"></p>
+<ul>
+<li><code>wrap</code>：项目主轴总尺寸超出容器时换行，第一行在上方</li>
+</ul>
+<p><img src="/images/flex/7.jpg"></p>
+<ul>
+<li><code>wrap-reverse</code>：换行并反向，第一行在下方</li>
+</ul>
+<p><img src="/images/flex/8.jpg"></p>
+<p><strong>3. flex-flow: flex-direction 和 flex-wrap 的复合简写形式</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
+&#125;</code></pre>
+
+<p>默认值为: row nowrap，这个属性其实没多大卵用，不就是两个属性的缩写嘛。</p>
+<p><strong>4. justify-content：定义项目在主轴的对齐方式</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;
+&#125;</code></pre>
+
+<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
+<ul>
+<li><code>flex-start</code>（默认）：左对齐</li>
+</ul>
+<p><img src="/images/flex/9.jpg"></p>
+<ul>
+<li><code>flex-end</code>：右对齐</li>
+</ul>
+<p><img src="/images/flex/10.jpg"></p>
+<ul>
+<li><code>center</code>：居中</li>
+</ul>
+<p><img src="/images/flex/11.jpg"></p>
+<ul>
+<li><code>space-between</code>：两端对齐，项目之间的间隔相等，即剩余空间等分成间隙</li>
+</ul>
+<p><img src="/images/flex/12.jpg"></p>
+<ul>
+<li><code>space-around</code>：每个项目两侧的间隔相等，所以项目之间的间隔是项目与边缘的间隔的两倍</li>
+</ul>
+<p><img src="/images/flex/13.jpg"></p>
+<p><strong>5. align-items: 定义项目在交叉轴上的对齐方式</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;
+&#125;</code></pre>
+
+<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
+<ul>
+<li><code>stretch</code>（默认）：如果项目未设置高度或设为<code>auto</code>，将占满整个容器的高度</li>
+</ul>
+<p><img src="/images/flex/14.jpg"></p>
+<p>假设容器高度设置为 50px，而项目都没有设置高度或设为<code>auto</code>的情况下，则项目的高度也为 50px</p>
+<ul>
+<li><code>flex-start</code>：交叉轴的起点对齐</li>
+</ul>
+<p><img src="/images/flex/15.jpg"></p>
+<ul>
+<li><code>flex-end</code>：交叉轴的终点对齐</li>
+</ul>
+<p><img src="/images/flex/16.jpg"></p>
+<ul>
+<li><code>center</code>：交叉轴的中点对齐</li>
+</ul>
+<p><img src="/images/flex/17.jpg"></p>
+<ul>
+<li><code>baseline</code>: 项目的第一行文字的基线对齐</li>
+</ul>
+<p><img src="/images/flex/18.jpg"></p>
+<p>以文字的底部为主</p>
+<p><strong>6. align-content: 定义多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
+  <span class="hljs-attribute">align-content</span>: stretch | flex-start | flex-end | center | space-between |
+    space-around;
+&#125;</code></pre>
+
+<p>什么叫项目只有一根轴线呢？其实可以这么理解：</p>
+<p>当你 <code>flex-wrap</code> 设置为 <code>nowrap</code> 的时候，容器仅存在一根轴线，因为项目不会换行，就不会产生多条轴线。</p>
+<p>当你 <code>flex-wrap</code> 设置为 <code>wrap</code> 的时候，容器可能会出现多条轴线，这时候你就需要去设置多条轴线之间的对齐方式了。</p>
+<p>建立在主轴为水平方向时测试，即 <code>flex-direction: row</code>, <code>flex-wrap: wrap</code></p>
+<ul>
+<li><code>stretch</code>（默认）：轴线占满整个交叉轴</li>
+</ul>
+<p><img src="/images/flex/19.jpg"></p>
+<ul>
+<li><code>flex-start</code>：轴线全部与交叉轴上的起点对齐</li>
+</ul>
+<p><img src="/images/flex/20.jpg"></p>
+<ul>
+<li><code>flex-end</code>：轴线全部与交叉轴上的终点对齐</li>
+</ul>
+<p><img src="/images/flex/21.jpg"></p>
+<ul>
+<li><code>center</code>：轴线全部在交叉轴上的中间对齐</li>
+</ul>
+<p><img src="/images/flex/22.jpg"></p>
+<ul>
+<li><code>space-between</code>：轴线与交叉轴两端对齐，轴线之间的间隔平均分布</li>
+</ul>
+<p><img src="/images/flex/23.jpg"></p>
+<ul>
+<li><code>space-around</code>：每个轴线两侧的间隔都相等，所以轴线之间的间隔是轴线与边缘的间隔的两倍</li>
+</ul>
+<p><img src="/images/flex/24.jpg"></p>
+<p>到这里关于容器上的所有属性都讲完了，接下来就来讲讲关于在 flex item（项目） 上的属性。</p>
+<h3 id="Flex-项目上的属性"><a href="#Flex-项目上的属性" class="headerlink" title="Flex 项目上的属性"></a>Flex 项目上的属性</h3><p>item 项目上有六种属性可运用，它们分别是：</p>
+<ol>
+<li>order</li>
+<li>flex-grow</li>
+<li>flex-shrink</li>
+<li>flex-basis</li>
+<li>flex</li>
+<li>align-self</li>
+</ol>
+<p><strong>1. order: 定义项目在容器中的排列顺序，数值越小，排列越靠前，默认值为 0</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">order</span>: &lt;integer&gt;;
+&#125;</code></pre>
+
+<p><img src="/images/flex/25.jpg"></p>
+<p><strong>2. flex-grow: 定义项目的放大比例</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">flex-grow</span>: &lt;number&gt;;
+&#125;</code></pre>
+
+<p>默认值为 0，即如果存在剩余空间，也不放大。</p>
+<p>如果所有项目的 <code>flex-grow</code> 属性都为 1，则它们将等分剩余空间（如果有的话）。如果一个项目的 <code>flex-grow</code> 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。</p>
+<p><strong>3. flex-shrink: 定义项目的缩小比例</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">flex-shrink</span>: &lt;number&gt;;
+&#125;</code></pre>
+
+<p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。</p>
+<p><img src="/images/flex/26.jpg"></p>
+<p>如果所有项目的 <code>flex-shrink</code> 属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code> 属性为 0，其他项目都为 1，则空间不足时，前者不缩小。</p>
+<p>负值对该属性无效。</p>
+<p><strong>4. flex-basis: 定义了在分配容器剩余空间之前项目的默认大小。相当于对浏览器提前告知：浏览器兄弟，我要占据这么大的空间，提前帮我预留好</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">flex-basis</span>: &lt;length&gt; | auto;
+&#125;</code></pre>
+
+<p>默认值：<code>auto</code>，即项目本来的大小, 这时候 item 项目的宽高取决于 <code>width</code> 或 <code>height</code> 的值。</p>
+<p>当主轴为水平方向的时候，同时设置 <code>width</code> 和 <code>flex-basis</code>，会忽略 <code>width</code>。flex 顾名思义就是弹性的意思，因此，实际上不建议对 flex 项目使用 <code>width</code> 属性，因为不够弹性。</p>
+<p>当容器剩余空间不足的时候，flex 子项目的实际宽度通常不是设置的 <code>flex-basis</code> 尺寸，因为 flex 布局剩余空间不足的时候默认会收缩，如果有 3 个子项目，则默认按 1:1:1 收缩。</p>
+<p><strong>5. flex: flex-grow, flex-shrink 和 flex-basis 的复合缩写</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">flex</span>: none | [ &lt; <span class="hljs-string">&quot;flex-grow&quot;</span> &gt; &lt; <span class="hljs-string">&quot;flex-shrink&quot;</span> &gt;? || &lt; <span class="hljs-string">&quot;flex-basis&quot;</span> &gt; ];
+&#125;</code></pre>
+
+<p>flex 的默认值是以上三个属性值的组合。假设以上三个属性同样取默认值，则 flex 的默认值为<code>0 1 auto</code>。</p>
+<p>有关快捷值：</p>
+<pre><code class="hljs css">flex: auto  //等同于flex:1 1 auto
+flex: none  //等同于flex:0 0 auto</code></pre>
+
+<p><strong>6. align-self: 控制单独某一个项目的垂直对齐方式，与 align-items 属性语法区别不大</strong></p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
+  <span class="hljs-attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;
+&#125;</code></pre>
+
+<p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自 flex 容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
+<p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
+<h3 id="从垂直居中看出-flex-的强大"><a href="#从垂直居中看出-flex-的强大" class="headerlink" title="从垂直居中看出 flex 的强大"></a>从垂直居中看出 flex 的强大</h3><p>以往让元素垂直居中并不容易，直到 CSS3 的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用 flex，让垂直居中变得异常简单</p>
+<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“wrapper”&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“div”&quot;</span>&gt;</span>flexbox 对你说爱不完<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+
+<p>几行简单代码，即可让 div 垂直居中</p>
+<pre><code class="hljs css"><span class="hljs-selector-class">.wrapper</span> &#123;
+  <span class="hljs-attribute">display</span>: flex;
+  <span class="hljs-attribute">align-items</span>: center;
+  <span class="hljs-attribute">justify-content</span>: center;
+&#125;</code></pre>
+
+<p>这里最重要的就是包裹元素的三个关键属性:</p>
+<ul>
+<li><code>display: flex</code> 将容器指定为 flex 布局，任何一个元素都可以指定</li>
+<li><code>align-items: center</code> 沿交叉轴对齐项目，这里指的是垂直方向</li>
+<li><code>justify-content: center</code> 设置主轴内容对齐方式</li>
+</ul>
+<h3 id="其他-Flex-知识点"><a href="#其他-Flex-知识点" class="headerlink" title="其他 Flex 知识点"></a>其他 Flex 知识点</h3><ul>
+<li>在 Flex 布局中，再强调一遍 flex 子元素中设置<code>float</code>，<code>clear</code>以及<code>vertical-align</code>属性都是没有用的。</li>
+<li>Flexbox 布局最适合应用程序的组件和小规模布局（一维布局），而 Grid 布局则适用于更大规模的布局（二维布局），有关 Grid 布局的文章后面会补充。</li>
+<li>已经 9102 年了，Flex 老语法不用在管了，果断放弃，然后私有前缀也不用再加了，看到就烦。</li>
+<li>如果想更好地理解 Flex 的工作原理，可以在此页面上尝试<a href="http://www.csstutorial.org/flex-both.html">flex 布局编辑器</a>。</li>
+</ul>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+      <tags>
+        <tag>CSS</tag>
+        <tag>布局</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CSS笔记—三栏布局</title>
     <url>/2019/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<p>三栏布局的页面可分为左中右三部分，然后对中间那部分做自适应的一种布局方式。三栏布局在前端页面的开发中十分常见，那么怎么样的才算是三栏布局呢？比如苏宁易购的首页：<br><img src="/images/sanlang/1.jpg"></p>
@@ -598,257 +849,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Flexbox 对你说爱不完</title>
-    <url>/2020/06/14/CSS%20Flexbox%20%E5%AF%B9%E4%BD%A0%E8%AF%B4%E7%88%B1%E4%B8%8D%E5%AE%8C/</url>
-    <content><![CDATA[<p>Flexbox 意为弹性布局，是一种新的 CSS 3 布局方式，与传统布局方式(基于盒模型，依赖 display 属性 +position 属性 +float 属性)相比，flex 布局更加灵活，具有响应式，可以解决在布局上的很多麻烦。</p>
-<p>废话就不多说了，下面我将尽可能地用简洁明了的言语来描述 Flex 布局。</p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><img src="/images/flex/1.jpg"></p>
-<p>使用了 flex 布局，则有 flex 容器（flex container），子元素为项目(flex item）。</p>
-<p>在 flex 容器中默认存在两条轴，水平主轴(main axis) 和垂直的交叉轴(cross axis)，start 和 end 表示对应轴的起始位置，这是默认的设置，当然你可以通过修改使垂直方向变为主轴，水平方向变为交叉轴。比如将 Flexbox 的方向设置为 row，则主轴就是横轴，而交叉轴就是纵轴；反之设置成 column，则主轴就是纵轴，而交叉轴就是横轴，这个下面会具体讲。</p>
-<p>每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。</p>
-<p>这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cross size，这个还要取决于你主轴的方向，如果你垂直方向是主轴，那么项目的高度就是 main size。</p>
-<p>实际上，要实现 flex 布局需要先指定一个容器，任何一个容器都可以被指定为 flex 布局，这样容器内部的元素就可以使用 flex 来进行布局。语法如下：</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  display: flex | inline-flex; //可以有两种取值
-&#125;</code></pre>
-
-<p>给 div 这类块元素设置<code>display: flex</code>或者给 span 这类行内元素设<code>display: inline-flex</code>，flex 布局即创建！</p>
-<p>而 Flex 布局相关属性正好分为两拨，一拨作用在 flex 容器上，还有一拨作用在 flex 子项上。</p>
-<p><strong>需要注意的是：当时设置 flex 布局之后，子元素的 <code>float</code>、<code>clear</code>、<code>vertical-align</code> 的属性将会失效。</strong></p>
-<h3 id="Flex-容器上的属性"><a href="#Flex-容器上的属性" class="headerlink" title="Flex 容器上的属性"></a>Flex 容器上的属性</h3><p>有下面六种属性可以设置在容器上，它们分别是：</p>
-<ol>
-<li>flex-direction</li>
-<li>flex-wrap</li>
-<li>flex-flow</li>
-<li>justify-content</li>
-<li>align-items</li>
-<li>align-content</li>
-</ol>
-<p><strong>1. flex-direction: 决定主轴的方向(即项目的排列方向)</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-direction</span>: row | row-reverse | column | column-reverse;
-&#125;</code></pre>
-
-<ul>
-<li><code>row</code>（默认）：主轴为水平方向，起点在左端</li>
-</ul>
-<p><img src="/images/flex/2.jpg"></p>
-<ul>
-<li><code>row-reverse</code>：主轴为水平方向，起点在右端</li>
-</ul>
-<p><img src="/images/flex/3.jpg"></p>
-<ul>
-<li><code>column</code>：主轴为垂直方向，起点在上沿</li>
-</ul>
-<p><img src="/images/flex/4.jpg"></p>
-<ul>
-<li><code>column-reverse</code>：主轴为垂直方向，起点在下沿</li>
-</ul>
-<p><img src="/images/flex/5.jpg"></p>
-<p><strong>2. flex-wrap: 决定容器内项目是否可换行</strong></p>
-<p>默认情况下，项目都排在主轴线上，使用 <code>flex-wrap</code> 可实现项目的换行。</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;
-&#125;</code></pre>
-
-<ul>
-<li><code>nowrap</code>（默认）：不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行</li>
-</ul>
-<p><img src="/images/flex/6.jpg"></p>
-<ul>
-<li><code>wrap</code>：项目主轴总尺寸超出容器时换行，第一行在上方</li>
-</ul>
-<p><img src="/images/flex/7.jpg"></p>
-<ul>
-<li><code>wrap-reverse</code>：换行并反向，第一行在下方</li>
-</ul>
-<p><img src="/images/flex/8.jpg"></p>
-<p><strong>3. flex-flow: flex-direction 和 flex-wrap 的复合简写形式</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
-&#125;</code></pre>
-
-<p>默认值为: row nowrap，这个属性其实没多大卵用，不就是两个属性的缩写嘛。</p>
-<p><strong>4. justify-content：定义项目在主轴的对齐方式</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;
-&#125;</code></pre>
-
-<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
-<ul>
-<li><code>flex-start</code>（默认）：左对齐</li>
-</ul>
-<p><img src="/images/flex/9.jpg"></p>
-<ul>
-<li><code>flex-end</code>：右对齐</li>
-</ul>
-<p><img src="/images/flex/10.jpg"></p>
-<ul>
-<li><code>center</code>：居中</li>
-</ul>
-<p><img src="/images/flex/11.jpg"></p>
-<ul>
-<li><code>space-between</code>：两端对齐，项目之间的间隔相等，即剩余空间等分成间隙</li>
-</ul>
-<p><img src="/images/flex/12.jpg"></p>
-<ul>
-<li><code>space-around</code>：每个项目两侧的间隔相等，所以项目之间的间隔是项目与边缘的间隔的两倍</li>
-</ul>
-<p><img src="/images/flex/13.jpg"></p>
-<p><strong>5. align-items: 定义项目在交叉轴上的对齐方式</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;
-&#125;</code></pre>
-
-<p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
-<ul>
-<li><code>stretch</code>（默认）：如果项目未设置高度或设为<code>auto</code>，将占满整个容器的高度</li>
-</ul>
-<p><img src="/images/flex/14.jpg"></p>
-<p>假设容器高度设置为 50px，而项目都没有设置高度或设为<code>auto</code>的情况下，则项目的高度也为 50px</p>
-<ul>
-<li><code>flex-start</code>：交叉轴的起点对齐</li>
-</ul>
-<p><img src="/images/flex/15.jpg"></p>
-<ul>
-<li><code>flex-end</code>：交叉轴的终点对齐</li>
-</ul>
-<p><img src="/images/flex/16.jpg"></p>
-<ul>
-<li><code>center</code>：交叉轴的中点对齐</li>
-</ul>
-<p><img src="/images/flex/17.jpg"></p>
-<ul>
-<li><code>baseline</code>: 项目的第一行文字的基线对齐</li>
-</ul>
-<p><img src="/images/flex/18.jpg"></p>
-<p>以文字的底部为主</p>
-<p><strong>6. align-content: 定义多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">align-content</span>: stretch | flex-start | flex-end | center | space-between |
-    space-around;
-&#125;</code></pre>
-
-<p>什么叫项目只有一根轴线呢？其实可以这么理解：</p>
-<p>当你 <code>flex-wrap</code> 设置为 <code>nowrap</code> 的时候，容器仅存在一根轴线，因为项目不会换行，就不会产生多条轴线。</p>
-<p>当你 <code>flex-wrap</code> 设置为 <code>wrap</code> 的时候，容器可能会出现多条轴线，这时候你就需要去设置多条轴线之间的对齐方式了。</p>
-<p>建立在主轴为水平方向时测试，即 <code>flex-direction: row</code>, <code>flex-wrap: wrap</code></p>
-<ul>
-<li><code>stretch</code>（默认）：轴线占满整个交叉轴</li>
-</ul>
-<p><img src="/images/flex/19.jpg"></p>
-<ul>
-<li><code>flex-start</code>：轴线全部与交叉轴上的起点对齐</li>
-</ul>
-<p><img src="/images/flex/20.jpg"></p>
-<ul>
-<li><code>flex-end</code>：轴线全部与交叉轴上的终点对齐</li>
-</ul>
-<p><img src="/images/flex/21.jpg"></p>
-<ul>
-<li><code>center</code>：轴线全部在交叉轴上的中间对齐</li>
-</ul>
-<p><img src="/images/flex/22.jpg"></p>
-<ul>
-<li><code>space-between</code>：轴线与交叉轴两端对齐，轴线之间的间隔平均分布</li>
-</ul>
-<p><img src="/images/flex/23.jpg"></p>
-<ul>
-<li><code>space-around</code>：每个轴线两侧的间隔都相等，所以轴线之间的间隔是轴线与边缘的间隔的两倍</li>
-</ul>
-<p><img src="/images/flex/24.jpg"></p>
-<p>到这里关于容器上的所有属性都讲完了，接下来就来讲讲关于在 flex item（项目） 上的属性。</p>
-<h3 id="Flex-项目上的属性"><a href="#Flex-项目上的属性" class="headerlink" title="Flex 项目上的属性"></a>Flex 项目上的属性</h3><p>item 项目上有六种属性可运用，它们分别是：</p>
-<ol>
-<li>order</li>
-<li>flex-grow</li>
-<li>flex-shrink</li>
-<li>flex-basis</li>
-<li>flex</li>
-<li>align-self</li>
-</ol>
-<p><strong>1. order: 定义项目在容器中的排列顺序，数值越小，排列越靠前，默认值为 0</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">order</span>: &lt;integer&gt;;
-&#125;</code></pre>
-
-<p><img src="/images/flex/25.jpg"></p>
-<p><strong>2. flex-grow: 定义项目的放大比例</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-grow</span>: &lt;number&gt;;
-&#125;</code></pre>
-
-<p>默认值为 0，即如果存在剩余空间，也不放大。</p>
-<p>如果所有项目的 <code>flex-grow</code> 属性都为 1，则它们将等分剩余空间（如果有的话）。如果一个项目的 <code>flex-grow</code> 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。</p>
-<p><strong>3. flex-shrink: 定义项目的缩小比例</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-shrink</span>: &lt;number&gt;;
-&#125;</code></pre>
-
-<p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。</p>
-<p><img src="/images/flex/26.jpg"></p>
-<p>如果所有项目的 <code>flex-shrink</code> 属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code> 属性为 0，其他项目都为 1，则空间不足时，前者不缩小。</p>
-<p>负值对该属性无效。</p>
-<p><strong>4. flex-basis: 定义了在分配容器剩余空间之前项目的默认大小。相当于对浏览器提前告知：浏览器兄弟，我要占据这么大的空间，提前帮我预留好</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-basis</span>: &lt;length&gt; | auto;
-&#125;</code></pre>
-
-<p>默认值：<code>auto</code>，即项目本来的大小, 这时候 item 项目的宽高取决于 <code>width</code> 或 <code>height</code> 的值。</p>
-<p>当主轴为水平方向的时候，同时设置 <code>width</code> 和 <code>flex-basis</code>，会忽略 <code>width</code>。flex 顾名思义就是弹性的意思，因此，实际上不建议对 flex 项目使用 <code>width</code> 属性，因为不够弹性。</p>
-<p>当容器剩余空间不足的时候，flex 子项目的实际宽度通常不是设置的 <code>flex-basis</code> 尺寸，因为 flex 布局剩余空间不足的时候默认会收缩，如果有 3 个子项目，则默认按 1:1:1 收缩。</p>
-<p><strong>5. flex: flex-grow, flex-shrink 和 flex-basis 的复合缩写</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex</span>: none | [ &lt; <span class="hljs-string">&quot;flex-grow&quot;</span> &gt; &lt; <span class="hljs-string">&quot;flex-shrink&quot;</span> &gt;? || &lt; <span class="hljs-string">&quot;flex-basis&quot;</span> &gt; ];
-&#125;</code></pre>
-
-<p>flex 的默认值是以上三个属性值的组合。假设以上三个属性同样取默认值，则 flex 的默认值为<code>0 1 auto</code>。</p>
-<p>有关快捷值：</p>
-<pre><code class="hljs css">flex: auto  //等同于flex:1 1 auto
-flex: none  //等同于flex:0 0 auto</code></pre>
-
-<p><strong>6. align-self: 控制单独某一个项目的垂直对齐方式，与 align-items 属性语法区别不大</strong></p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;
-&#125;</code></pre>
-
-<p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自 flex 容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
-<p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
-<h3 id="从垂直居中看出-flex-的强大"><a href="#从垂直居中看出-flex-的强大" class="headerlink" title="从垂直居中看出 flex 的强大"></a>从垂直居中看出 flex 的强大</h3><p>以往让元素垂直居中并不容易，直到 CSS3 的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用 flex，让垂直居中变得异常简单</p>
-<pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“wrapper”&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“div”&quot;</span>&gt;</span>flexbox 对你说爱不完<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
-
-<p>几行简单代码，即可让 div 垂直居中</p>
-<pre><code class="hljs css"><span class="hljs-selector-class">.wrapper</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">align-items</span>: center;
-  <span class="hljs-attribute">justify-content</span>: center;
-&#125;</code></pre>
-
-<p>这里最重要的就是包裹元素的三个关键属性:</p>
-<ul>
-<li><code>display: flex</code> 将容器指定为 flex 布局，任何一个元素都可以指定</li>
-<li><code>align-items: center</code> 沿交叉轴对齐项目，这里指的是垂直方向</li>
-<li><code>justify-content: center</code> 设置主轴内容对齐方式</li>
-</ul>
-<h3 id="其他-Flex-知识点"><a href="#其他-Flex-知识点" class="headerlink" title="其他 Flex 知识点"></a>其他 Flex 知识点</h3><ul>
-<li>在 Flex 布局中，再强调一遍 flex 子元素中设置<code>float</code>，<code>clear</code>以及<code>vertical-align</code>属性都是没有用的。</li>
-<li>Flexbox 布局最适合应用程序的组件和小规模布局（一维布局），而 Grid 布局则适用于更大规模的布局（二维布局），有关 Grid 布局的文章后面会补充。</li>
-<li>已经 9102 年了，Flex 老语法不用在管了，果断放弃，然后私有前缀也不用再加了，看到就烦。</li>
-<li>如果想更好地理解 Flex 的工作原理，可以在此页面上尝试<a href="http://www.csstutorial.org/flex-both.html">flex 布局编辑器</a>。</li>
-</ul>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>CSS</category>
-      </categories>
-      <tags>
-        <tag>CSS</tag>
-        <tag>布局</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CSS笔记—左右布局</title>
     <url>/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/</url>
     <content><![CDATA[<p>css 左右布局是实现前端页面设计的基础，大部分的布局方式都能分割成左右布局，因此理解左右布局，能使我们在初学 css 的时候更快理解其他复杂的布局方式。</p>
@@ -1383,7 +1383,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
 <p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
 <p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#99;&#x6f;&#109;">&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#99;&#x6f;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
 <p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
 <pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
 
@@ -1395,185 +1395,13 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
 <p>我们最后再回顾一遍已经学到的命令：</p>
 <blockquote>
-<p>git clone <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+<p>git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
 </blockquote>
 <h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
 <p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
 </blockquote>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
 <p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git命令拓展</title>
-    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
-    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
-<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
-<p><img src="/images/git/1.jpg"></p>
-<p>上图中几个专用名词的译名如下：</p>
-<ul>
-<li>Workspace：工作区</li>
-<li>Index / Stage：暂存区</li>
-<li>Repository：本地仓库</li>
-<li>Remote：远程仓库</li>
-</ul>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
-
-$ git config -e [--global]    //编辑Git配置文件
-
-$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
-$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
-
-<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
-
-$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
-
-$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
-
-<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
-
-$ git add [dir]    //添加指定目录到暂存区，包括子目录
-
-$ git add    //添加当前目录的所有文件到暂存区
-
-$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
-
-$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
-
-<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
-
-$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
-
-$ git commit -v    //提交时显示所有diff信息
-
-$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
-
-<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
-
-$ git remote -v    //显示所有远程仓库
-
-$ git remote show [remote]    //显示某个远程仓库的信息
-
-$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
-
-$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
-
-$ git push [remote] [branch]    //上传本地指定分支到远程仓库
-
-$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
-
-$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
-
-<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
-
-$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
-
-$ git checkout    //恢复暂存区的所有文件到工作区
-
-$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-
-$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
-
-$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-
-$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
-
-$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
-
-$ git stash list    //查看保存的工作现场
-
-$ git stash apply    //恢复工作现场
-
-$ git stash drop    //删除stash内容
-
-$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
-
-<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
-
-$ git branch -r    //列出所有远程分支
-
-$ git branch -a    //列出所有本地分支和远程分支
-
-$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
-
-$ git branch [branch] [commit]    //新建一个分支，指向指定commit
-
-$ git checkout -b [branch]    //新建一个分支，并切换到该分支
-
-$ git checkout [branch-name]    //切换到指定分支，并更新工作区
-
-$ git merge [branch]    //合并指定分支到当前分支
-
-$ git push origin [branch-name]    //将分支推送到远程仓库
-
-$ git push --all origin    //将所有分支推送到远程仓库
-
-$ git branch -d [branch-name]    //删除分支
-
-$ git push origin --delete [branch-name]
-$ git push origin :[branch-name]
-$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
-
-<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
-
-$ git tag [tag]    //新建一个tag在当前commit
-
-$ git tag [tag] [commit]    //新建一个tag在指定commit
-
-$ git tag -d [tag]    //删除本地tag
-
-$ git push origin :refs/tags/[tagName]    //删除远程tag
-
-$ git show [tag]    //查看tag信息
-
-$ git push [remote] [tag]    //提交指定tag
-
-$ git push [remote] --tags
-$ git push --tags origin    //提交所有tag</code></pre>
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
-
-$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
-
-$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
-
-$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
-
-$ git <span class="hljs-built_in">log</span> --follow [file]
-$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
-
-$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
-
-$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
-
-$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
-
-$ git blame [file]    //显示指定文件是什么人在什么时间修改过
-
-$ git diff    //显示暂存区和工作区的差异
-
-$ git diff --cached [file]    //显示暂存区和上一个commit的差异
-
-$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
-
-$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
-
-$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
-
-$ git show [commit]    //显示某次提交的元数据和内容变化
-
-$ git show --name-only [commit]    //显示某次提交发生变化的文件
-
-$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
-
-$ git reflog    //显示当前分支的最近几次提交</code></pre>
 ]]></content>
       <categories>
         <category>tools</category>
@@ -1836,6 +1664,178 @@ $ git reflog    //显示当前分支的最近几次提交</code></pre>
       <tags>
         <tag>HTML</tag>
         <tag>标签</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git命令拓展</title>
+    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
+    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
+<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
+<p><img src="/images/git/1.jpg"></p>
+<p>上图中几个专用名词的译名如下：</p>
+<ul>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：本地仓库</li>
+<li>Remote：远程仓库</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
+
+$ git config -e [--global]    //编辑Git配置文件
+
+$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
+$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
+
+<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
+
+$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
+
+$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
+
+<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
+
+$ git add [dir]    //添加指定目录到暂存区，包括子目录
+
+$ git add    //添加当前目录的所有文件到暂存区
+
+$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
+
+$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
+
+<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
+
+$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
+
+$ git commit -v    //提交时显示所有diff信息
+
+$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
+
+<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
+
+$ git remote -v    //显示所有远程仓库
+
+$ git remote show [remote]    //显示某个远程仓库的信息
+
+$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
+
+$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
+
+$ git push [remote] [branch]    //上传本地指定分支到远程仓库
+
+$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
+
+$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
+
+<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
+
+$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
+
+$ git checkout    //恢复暂存区的所有文件到工作区
+
+$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+
+$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
+
+$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+
+$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
+
+$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
+
+$ git stash list    //查看保存的工作现场
+
+$ git stash apply    //恢复工作现场
+
+$ git stash drop    //删除stash内容
+
+$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
+
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
+
+$ git branch -r    //列出所有远程分支
+
+$ git branch -a    //列出所有本地分支和远程分支
+
+$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
+
+$ git branch [branch] [commit]    //新建一个分支，指向指定commit
+
+$ git checkout -b [branch]    //新建一个分支，并切换到该分支
+
+$ git checkout [branch-name]    //切换到指定分支，并更新工作区
+
+$ git merge [branch]    //合并指定分支到当前分支
+
+$ git push origin [branch-name]    //将分支推送到远程仓库
+
+$ git push --all origin    //将所有分支推送到远程仓库
+
+$ git branch -d [branch-name]    //删除分支
+
+$ git push origin --delete [branch-name]
+$ git push origin :[branch-name]
+$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
+
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
+
+$ git tag [tag]    //新建一个tag在当前commit
+
+$ git tag [tag] [commit]    //新建一个tag在指定commit
+
+$ git tag -d [tag]    //删除本地tag
+
+$ git push origin :refs/tags/[tagName]    //删除远程tag
+
+$ git show [tag]    //查看tag信息
+
+$ git push [remote] [tag]    //提交指定tag
+
+$ git push [remote] --tags
+$ git push --tags origin    //提交所有tag</code></pre>
+
+<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
+
+$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
+
+$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
+
+$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
+
+$ git <span class="hljs-built_in">log</span> --follow [file]
+$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
+
+$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
+
+$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
+
+$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
+
+$ git blame [file]    //显示指定文件是什么人在什么时间修改过
+
+$ git diff    //显示暂存区和工作区的差异
+
+$ git diff --cached [file]    //显示暂存区和上一个commit的差异
+
+$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
+
+$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
+
+$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
+
+$ git show [commit]    //显示某次提交的元数据和内容变化
+
+$ git show --name-only [commit]    //显示某次提交发生变化的文件
+
+$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
+
+$ git reflog    //显示当前分支的最近几次提交</code></pre>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -4314,6 +4314,110 @@ Foo.prototype.b = <span class="hljs-number">200</span>;
       </tags>
   </entry>
   <entry>
+    <title>JavaScript系列之数据类型</title>
+    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
+<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
+<li>Undefined <code>undefined</code></li>
+<li>Null <code>null</code></li>
+<li>Boolean <code>true</code></li>
+<li>String <code>&#39;hello&#39;</code></li>
+<li>Number <code>123</code></li>
+<li>Symbol(这里先不做介绍)</li>
+</ul>
+<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
+<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
+&lt;!-- 原始类型变量的包装类型如下 --&gt;
+<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
+<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
+<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
+
+<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
+<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
+<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
+<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
+<ul>
+<li><code>1024</code></li>
+<li><code>3.14</code></li>
+<li><code>1.2e5</code></li>
+<li><code>0x10</code></li>
+<li><code>0o377</code></li>
+</ul>
+<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
+<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
+<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
+
+<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
+<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
+
+<span class="hljs-comment">// embed a variable</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
+
+<span class="hljs-comment">// embed an expression</span>
+<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
+
+<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
+<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
+<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
+
+<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
+<ul>
+<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
+<li>字面量或变量定义 <code>var bool = true;</code></li>
+<li>也出现在比较的结果 ：</li>
+</ul>
+<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
+
+<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
+
+<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
+<ul>
+<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
+</ul>
+<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
+<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
+<ul>
+<li>变量声明了，但没赋值 <code>var obj;</code></li>
+<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
+<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
+<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
+<li><code>void(expression)</code></li>
+</ul>
+<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
+<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
+
+<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
+
+<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
+&#125;)();</code></pre>
+
+<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据类型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript系列之执行上下文和执行栈</title>
     <url>/2020/05/04/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E5%92%8C%E6%89%A7%E8%A1%8C%E6%A0%88/</url>
     <content><![CDATA[<p>如果你想成为一名优秀的 JavaScript 开发者，那你就必须了解 JavaScript 程序内部的执行机制。而执行上下文和执行栈是其关键概念之一， 理解执行上下文和执行栈同样有助于理解其他的 JavaScript 概念如提升机制、作用域和闭包等。</p>
@@ -4444,110 +4548,6 @@ a();
         <tag>JavaScript</tag>
         <tag>Execution Context</tag>
         <tag>Execution Context Stack</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之数据类型</title>
-    <url>/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<p>JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。</p>
-<h4 id="原始类型（值类型）"><a href="#原始类型（值类型）" class="headerlink" title="原始类型（值类型）"></a>原始类型（值类型）</h4><ul>
-<li>Undefined <code>undefined</code></li>
-<li>Null <code>null</code></li>
-<li>Boolean <code>true</code></li>
-<li>String <code>&#39;hello&#39;</code></li>
-<li>Number <code>123</code></li>
-<li>Symbol(这里先不做介绍)</li>
-</ul>
-<h4 id="引用类型（对象类型）"><a href="#引用类型（对象类型）" class="headerlink" title="引用类型（对象类型）"></a>引用类型（对象类型）</h4><ul>
-<li>Object：由以上几种基本类型组成，而且对象里面还可以包含对象</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> obj = &#123;&#125;;
-&lt;!-- 原始类型变量的包装类型如下 --&gt;
-<span class="hljs-keyword">var</span> bool = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">true</span>);
-<span class="hljs-keyword">var</span> str = <span class="hljs-keyword">new</span> <span class="hljs-built_in">String</span>(<span class="hljs-string">&quot;hello&quot;</span>);
-<span class="hljs-keyword">var</span> num = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Number</span>(<span class="hljs-number">1</span>);
-<span class="hljs-keyword">var</span> obj0 = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Object</span>();</code></pre>
-
-<p>如<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Data_structures">MDN</a>所讲，JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言。这意味着你不用提前声明变量的类型，而是在程序运行过程中，类型会被自动确定。</p>
-<p>当然，原始类型和引用类型会有一些<strong>区别</strong>：</p>
-<p>原始类型的值是直接储存在栈（Stack）内存中的，而引用类型的数据是把 Heap 内存地址存在 Stack 里，所以对已引用类型的复制其实只是复制了相同的地址而非实际的变量值。</p>
-<h4 id="Number"><a href="#Number" class="headerlink" title="Number"></a>Number</h4><p>为整型直接量，浮点型直接量，十六进制直接量（0x-)，八进制直接量（0-）等 出现场合：</p>
-<ul>
-<li><code>1024</code></li>
-<li><code>3.14</code></li>
-<li><code>1.2e5</code></li>
-<li><code>0x10</code></li>
-<li><code>0o377</code></li>
-</ul>
-<p>除以上常规数字外，还有所谓的“特殊数值”，它们也属于这种数据类型：<code>Infinity</code>，<code>-Infinity</code>和<code>NaN</code>。</p>
-<h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>JavaScript 中的字符串必须用引号括起来，有 3 种类型的引号 出现场合：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> str = <span class="hljs-string">&quot;Hello, world!&quot;</span>;  <span class="hljs-comment">//双引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">&#x27;Hello, world!&#x27;</span>; <span class="hljs-comment">//单引号</span>
-<span class="hljs-keyword">var</span> str = <span class="hljs-string">`Hello, world!`</span>;  <span class="hljs-comment">//反引号</span></code></pre>
-
-<p>双引号和单引号是“简单”引号，它们在 JavaScript 中没有区别，但由于 HTML 语言的属性值使用双引号，所以很多项目约定 JavaScript 语言的字符串只使用单引号。</p>
-<p>反引号是“扩展功能”的引用，允许我们通过将变量和表达式包装在$ {…}中来将它们嵌入到字符串中，比如：</p>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> name = <span class="hljs-string">&quot;miqilin&quot;</span>;
-
-<span class="hljs-comment">// embed a variable</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`Hello, <span class="hljs-subst">$&#123;name&#125;</span>!`</span> ); <span class="hljs-comment">// Hello, miqilin!</span>
-
-<span class="hljs-comment">// embed an expression</span>
-<span class="hljs-built_in">console</span>.log( <span class="hljs-string">`the result is <span class="hljs-subst">$&#123;<span class="hljs-number">1</span> + <span class="hljs-number">2</span>&#125;</span>`</span> ); <span class="hljs-comment">// the result is 3</span></code></pre>
-
-<p>加反引号后计算<code>$ &#123;...&#125;</code>内的表达式，结果会成为字符串的一部分。 我们可以在其中放置任何东西：像名称这样的变量或像 1 + 2 这样的算术表达式或更复杂的东西。</p>
-<p>但请注意，这只能在反引号中完成。 其他形式没有这种嵌入功能！</p>
-<pre><code class="hljs JavaScript"><span class="hljs-built_in">console</span>.log( <span class="hljs-string">&quot;the result is $&#123;1 + 2&#125;&quot;</span> ); <span class="hljs-comment">// the result is $&#123;1 + 2&#125; (双引号不生效)</span></code></pre>
-
-<h4 id="Boolean"><a href="#Boolean" class="headerlink" title="Boolean"></a>Boolean</h4><p>布尔类型只有两个值：<code>true</code> 和 <code>false</code> 出现场合：</p>
-<ul>
-<li>条件语句导致的系统执行的隐式类型转换 <code>if(隐式转换)&#123;&#125;</code></li>
-<li>字面量或变量定义 <code>var bool = true;</code></li>
-<li>也出现在比较的结果 ：</li>
-</ul>
-<pre><code class="hljs JavaScript"><span class="hljs-keyword">var</span> isGreater = <span class="hljs-number">4</span> &gt; <span class="hljs-number">1</span>;
-
-<span class="hljs-built_in">console</span>.log( isGreater ); <span class="hljs-comment">// true (the comparison result is &quot;yes&quot;)</span></code></pre>
-
-<h4 id="Null"><a href="#Null" class="headerlink" title="Null"></a>Null</h4><p>null 出现场合：</p>
-<ul>
-<li>获取不存在的对象 <code>document.getElementById(&#39;not-exist-element&#39;)</code></li>
-</ul>
-<p>在 JavaScript 中，<code>null</code>不是“对不存在的对象的引用”或者像其他语言中的“空指针”。它只是一个特殊值，代表“无”，“空”或“未知值”。</p>
-<h4 id="Undefined"><a href="#Undefined" class="headerlink" title="Undefined"></a>Undefined</h4><p>undefined 的含义是“未赋值” 出现场合：</p>
-<ul>
-<li>变量声明了，但没赋值 <code>var obj;</code></li>
-<li>获取对象不存在的属性 <code>var obj = &#123;x: 0&#125;; obj.y;</code></li>
-<li>无返回值函数的执行结果 <code>function f()&#123;&#125;; var obj = f();</code></li>
-<li>调用函数时，应该提供的参数没有提供 <code>function f(i)&#123;console.log(i)&#125;; f();</code></li>
-<li><code>void(expression)</code></li>
-</ul>
-<p><code>null</code>与<code>undefined</code>都可以表示“没有”，含义非常相似。将一个变量赋值为<code>undefined</code>或<code>null</code>，老实说，语法效果几乎没区别。</p>
-<pre><code class="hljs javascript"><span class="hljs-literal">undefined</span> == <span class="hljs-literal">null</span>; <span class="hljs-comment">// true</span></code></pre>
-
-<p>但也有一丝区别，区别是这样的：<code>null</code>是一个表示“空”的对象，转为数值时为 0；<code>undefined</code>是一个表示”此处无定义”的原始值，转为数值时为<code>NaN</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-number">5</span> + <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<h4 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h4><p>属性集合 出现场合：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">var</span> obj = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;miqilin&quot;</span> &#125;;
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> Cat();
-
-<span class="hljs-keyword">var</span> obj = <span class="hljs-keyword">new</span> (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.sound = <span class="hljs-string">&quot;wow&quot;</span>;
-&#125;)();</code></pre>
-
-<p>但请注意，我们还没有提到过<code>Array</code>，<code>Date</code>，甚至是函数，因为正式地说，它们都是对象类型。</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -4725,6 +4725,179 @@ mike.age = <span class="hljs-number">18</span>;
       <tags>
         <tag>JavaScript</tag>
         <tag>对象</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JavaScript系列之立即执行函数IIFE</title>
+    <url>/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/</url>
+    <content><![CDATA[<p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
+<p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
+<p>下面我们将做更进一步的介绍和说明。</p>
+<h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
+&#125;
+sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-comment">// 函数表达式</span>
+<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;;
+sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
+
+<h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
+<p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
+<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;;
+<span class="hljs-built_in">console</span>.log(sayHello);</code></pre>
+
+<p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
+<p><img src="/images/IIFE/1.jpg"></p>
+<p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
+<p><img src="/images/IIFE/2.jpg"></p>
+<p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
+<p><img src="/images/IIFE/3.jpg"></p>
+<p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
+  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
+&#125;</code></pre>
+
+<p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
+<p><img src="/images/IIFE/4.jpg"></p>
+<p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
+<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
+<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+&#125;);</code></pre>
+
+<p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
+<p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
+<p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
+<p><img src="/images/IIFE/5.jpg"></p>
+<p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
+<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
+  <span class="hljs-comment">// 略...</span>
+&#125;)(<span class="hljs-built_in">window</span>);</code></pre>
+
+<p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
+<p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
+<h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
+
+<p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
+<p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
+<p><img src="/images/IIFE/6.jpg"></p>
+<p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
+<p><img src="/images/IIFE/7.jpg"></p>
+<p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
+<p><img src="/images/IIFE/8.jpg"></p>
+<p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
+<p><img src="/images/IIFE/9.jpg"></p>
+<p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
+<h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
+
+<span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
+
+<p>这时候的打印出的顺序为：</p>
+<p><img src="/images/IIFE/10.jpg"></p>
+<p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
+<p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
+<p><img src="/images/IIFE/11.jpg"></p>
+<p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
+<h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
+<p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
+<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
+
+<span class="hljs-comment">//IIFE</span>
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
+  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
+  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
+  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
+&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
+
+<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
+
+<p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
+<p><img src="/images/IIFE/12.jpg"></p>
+<p>这操作够骚吧！哈哈~</p>
+<h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;, <span class="hljs-number">1000</span>);
+&#125;</code></pre>
+
+<p>真的是这样吗？我们来看看执行的结果：</p>
+<pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span>
+<span class="hljs-number">5</span></code></pre>
+
+<p>为什么会这样呢？</p>
+<p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
+<p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
+<p><img src="/images/IIFE/13.jpg"></p>
+<p>那么要怎么解决这个问题呢？</p>
+<p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span>
+  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span>
+  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
+    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      <span class="hljs-built_in">console</span>.log(x);
+    &#125;, <span class="hljs-number">1000</span>);
+  &#125;)(i);
+&#125;</code></pre>
+
+<p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
+<p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
+<p>所以我们稍微修改一下：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
+    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span>
+    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+      <span class="hljs-built_in">console</span>.log(x);
+    &#125;, <span class="hljs-number">1000</span> * x);
+  &#125;)(i);
+&#125;</code></pre>
+
+<p>像这样，就可以依序打印出我们想要的结果喽！</p>
+<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
+<p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
+<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
+  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
+    <span class="hljs-built_in">console</span>.log(i);
+  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
+&#125;</code></pre>
+
+<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>IIFE</tag>
       </tags>
   </entry>
   <entry>
@@ -4953,179 +5126,6 @@ Cat.prototype.CatchMouse = <span class="hljs-function"><span class="hljs-keyword
       <tags>
         <tag>JavaScript</tag>
         <tag>数据类型</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之立即执行函数IIFE</title>
-    <url>/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/</url>
-    <content><![CDATA[<p>在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。</p>
-<p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
-<p>下面我们将做更进一步的介绍和说明。</p>
-<h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
-&#125;
-sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
-
-<h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
-<p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-<span class="hljs-built_in">console</span>.log(sayHello);</code></pre>
-
-<p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
-<p><img src="/images/IIFE/1.jpg"></p>
-<p>如果是 IIFE 就在这段代码的最后，加上一个执行的指令，也就是括号<code>( )</code>：</p>
-<p><img src="/images/IIFE/2.jpg"></p>
-<p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
-<p><img src="/images/IIFE/3.jpg"></p>
-<p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
-&#125;</code></pre>
-
-<p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
-<p><img src="/images/IIFE/4.jpg"></p>
-<p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
-<p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
-<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;);</code></pre>
-
-<p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
-<p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
-<p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
-<p><img src="/images/IIFE/5.jpg"></p>
-<p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
-<pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
-  <span class="hljs-comment">// 略...</span>
-&#125;)(<span class="hljs-built_in">window</span>);</code></pre>
-
-<p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
-<p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
-<h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre>
-
-<p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
-<p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
-<p><img src="/images/IIFE/6.jpg"></p>
-<p>接着，JavaScript 引擎会执行到我们所建立的这段 IIFE，它会将这个匿名函数储存在全局执行上下文。</p>
-<p><img src="/images/IIFE/7.jpg"></p>
-<p>由于我们在函数的最后有加上<code>( )</code>，所以这段函数会立即被执行，也因此，JavaScript 会为这个匿名函数建立一个新的执行上下文。</p>
-<p><img src="/images/IIFE/8.jpg"></p>
-<p>接着，它会去逐行执行我们这个函数中的代码内容，它发现到我们的代码中建立了一个变量，名称是”greeting”，因此，这个变量就被建立在函数的这个执行上下文中，而不是被建立在全局上下文中。</p>
-<p><img src="/images/IIFE/9.jpg"></p>
-<p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
-<h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
-
-<p>这时候的打印出的顺序为：</p>
-<p><img src="/images/IIFE/10.jpg"></p>
-<p>你会发现，虽然同样都是调用 greeting 这个变量，但是一个是在函数执行上下文内的 greeting，一个是在全局执行上下文的 greeting，两者是不会互相影响的。</p>
-<p>同样把它画成上面一样的图形，它们两个是不同的执行上下文被储存在不同的内存中，所以不会相互影响。</p>
-<p><img src="/images/IIFE/11.jpg"></p>
-<p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
-<h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
-<p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre>
-
-<p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
-<p><img src="/images/IIFE/12.jpg"></p>
-<p>这操作够骚吧！哈哈~</p>
-<h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;</code></pre>
-
-<p>真的是这样吗？我们来看看执行的结果：</p>
-<pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span></code></pre>
-
-<p>为什么会这样呢？</p>
-<p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
-<p>也就是说，当<code>window.setTimeout</code>内的回调函数执行时，拿到的<code>i</code>已经是跑完<code>for()</code>循环的<code>5</code>。</p>
-<p><img src="/images/IIFE/13.jpg"></p>
-<p>那么要怎么解决这个问题呢？</p>
-<p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span>
-  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span>
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span>);
-  &#125;)(i);
-&#125;</code></pre>
-
-<p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
-<p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
-<p>所以我们稍微修改一下：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span>
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span> * x);
-  &#125;)(i);
-&#125;</code></pre>
-
-<p>像这样，就可以依序打印出我们想要的结果喽！</p>
-<p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
-<p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
-<pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
-&#125;</code></pre>
-
-<p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>IIFE</tag>
       </tags>
   </entry>
   <entry>
@@ -6676,6 +6676,64 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
+    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
+    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
+<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
+<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
+<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
+<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
+<p><img src="/images/jsdelivr/1.jpg"></p>
+<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
+<p><img src="/images/jsdelivr/2.jpg"></p>
+<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
+<p><img src="/images/jsdelivr/3.jpg"></p>
+<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
+<p><img src="/images/jsdelivr/4.jpg"></p>
+<blockquote>
+<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
+</blockquote>
+<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
+<p><img src="/images/jsdelivr/5.jpg"></p>
+<p>这里需要注意一下：</p>
+<ul>
+<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
+<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
+<li>设定 Token：之前复制下来的 token</li>
+<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
+<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
+<li>gh:代表 GitHub</li>
+<li>miqilin21/static:用户名/仓库名</li>
+<li>@master:分支名称</li>
+</ul>
+<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
+<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
+
+<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
+<p><img src="/images/jsdelivr/6.jpg"></p>
+<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
+<blockquote>
+<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
+</blockquote>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
+<ul>
+<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
+<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
+<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
+</ul>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>图床</tag>
+        <tag>PicGo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>你知道如何高效地在GitHub搜索开源项目吗?</title>
     <url>/2020/11/23/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p>作为一个常逛 GitHub 的程序员，你真的知道如何高效地在 GitHub 搜索开源项目吗？你的操作是不是单纯的在搜索框内输入关键词进行搜索的？嘿嘿，这篇文章就来告诉你有啥搜索的技巧或者说骚操作吧。</p>
@@ -6752,64 +6810,6 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
-    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
-    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
-<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
-<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
-<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
-<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
-<p><img src="/images/jsdelivr/1.jpg"></p>
-<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
-<p><img src="/images/jsdelivr/2.jpg"></p>
-<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
-<p><img src="/images/jsdelivr/3.jpg"></p>
-<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
-<p><img src="/images/jsdelivr/4.jpg"></p>
-<blockquote>
-<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
-</blockquote>
-<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
-<p><img src="/images/jsdelivr/5.jpg"></p>
-<p>这里需要注意一下：</p>
-<ul>
-<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
-<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
-<li>设定 Token：之前复制下来的 token</li>
-<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
-<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
-<li>gh:代表 GitHub</li>
-<li>miqilin21/static:用户名/仓库名</li>
-<li>@master:分支名称</li>
-</ul>
-<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
-<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
-
-<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
-<p><img src="/images/jsdelivr/6.jpg"></p>
-<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
-<blockquote>
-<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
-</blockquote>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
-<ul>
-<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
-<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
-<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
-</ul>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>图床</tag>
-        <tag>PicGo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用Hexo+GitHub搭建个人博客</title>
     <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
@@ -6832,7 +6832,7 @@ $ hexo server              //启动本地服务器，进行博客文章预览</c
 <li>把第 6 行的 title 改成你想要的名字</li>
 <li>把第 10 行的 author 改成你想取大名</li>
 <li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
 </ul>
 <p><img src="/images/hexogit/5.png"></p>
 <p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
@@ -6847,7 +6847,7 @@ $ hexo deploy                             //将本地博客代码部署到Github
 <p>5、去看你的博客，应该能看到这篇新文章啦！</p>
 <h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
 <p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a>:iissnan/hexo-theme-next.git</p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>:iissnan/hexo-theme-next.git</p>
 <p>4、<code>cd themes</code></p>
 <p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
 <p>6、<code>cd ..</code></p>
@@ -8233,6 +8233,44 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
       </tags>
   </entry>
   <entry>
+    <title>贵州黔东南之行</title>
+    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
+    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
+<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
+<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
+<p><img src="/images/guizhou/1.jpg"></p>
+<p><img src="/images/guizhou/2.jpg"></p>
+<p><img src="/images/guizhou/3.jpg"></p>
+<p>河边坐落了许多充满文艺的小店和清吧。</p>
+<p><img src="/images/guizhou/4.jpg"></p>
+<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
+<p><img src="/images/guizhou/5.jpg"></p>
+<p><img src="/images/guizhou/6.jpg"></p>
+<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
+<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
+<p><img src="/images/guizhou/7.jpg"></p>
+<p><img src="/images/guizhou/8.jpg"></p>
+<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
+<p><img src="/images/guizhou/9.jpg"></p>
+<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
+<p><img src="/images/guizhou/10.jpg"></p>
+<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
+<p><img src="/images/guizhou/11.jpg"></p>
+<p><img src="/images/guizhou/12.jpg"></p>
+<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
+<p><img src="/images/guizhou/13.jpg"></p>
+<p><img src="/images/guizhou/14.jpg"></p>
+<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
+]]></content>
+      <categories>
+        <category>游记</category>
+      </categories>
+      <tags>
+        <tag>贵州</tag>
+        <tag>游记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>通过DOM API 查找节点</title>
     <url>/2020/03/08/%E9%80%9A%E8%BF%87DOM%20API%20%E6%9F%A5%E6%89%BE%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<p>在上一篇的分享当中，我们简单介绍了 BOM 与 DOM，也了解到 JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。</p>
@@ -8471,44 +8509,6 @@ Person.prototype.getFullName = <span class="hljs-function"><span class="hljs-key
         <tag>JavaScript</tag>
         <tag>DOM</tag>
         <tag>API</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>贵州黔东南之行</title>
-    <url>/2019/09/01/%E8%B4%B5%E5%B7%9E%E9%BB%94%E4%B8%9C%E5%8D%97%E4%B9%8B%E8%A1%8C/</url>
-    <content><![CDATA[<p>2019 年 8 月 下旬，第一次踏足贵州黔东南苗族侗族自治州，听名字就知道是一个少数民族很多的地方，此行的主要目的也是来体验一波当地的风土人情。</p>
-<h4 id="镇远古镇"><a href="#镇远古镇" class="headerlink" title="镇远古镇"></a>镇远古镇</h4><p>第一站来到镇远古镇，路上听导游说这里还是一位皇帝的故乡呢！哈哈~当然不是古代的皇帝啦，其实是延禧攻略里面皇帝扮演者聂远的故乡啦 😜。</p>
-<p>我们到古城的时间也接近傍晚了，吃完晚饭散步在古城河边，天空中飘着乌云，真有一种“天青色等烟雨”的既视感了。</p>
-<p><img src="/images/guizhou/1.jpg"></p>
-<p><img src="/images/guizhou/2.jpg"></p>
-<p><img src="/images/guizhou/3.jpg"></p>
-<p>河边坐落了许多充满文艺的小店和清吧。</p>
-<p><img src="/images/guizhou/4.jpg"></p>
-<p>晚上的镇远古镇，虽说夜景和去过的其它几个古镇有些相似，但镇远独特之处在于宁静，有一种与世无争的感觉。</p>
-<p><img src="/images/guizhou/5.jpg"></p>
-<p><img src="/images/guizhou/6.jpg"></p>
-<p>在镇远古镇悠悠闲闲的一天里，给我最大的感受还是来自于它的静，很静，很舒服。</p>
-<h4 id="西江千户苗寨"><a href="#西江千户苗寨" class="headerlink" title="西江千户苗寨"></a>西江千户苗寨</h4><p>第二站到达的西江千户苗寨，号称世界上最大的苗寨，一眼望去全是木质结构的屋子，层层叠叠错落有致。</p>
-<p><img src="/images/guizhou/7.jpg"></p>
-<p><img src="/images/guizhou/8.jpg"></p>
-<p>在苗寨里面瞎逛的途中遇到了当地苗族朋友的游行表演。</p>
-<p><img src="/images/guizhou/9.jpg"></p>
-<p>来千户苗寨当然不能错过来自苗族朋友的热情，热情之一就是宴席上的“高山流水”，其实就是灌客人们喝甜甜的米酒，自知酒量不行，仪式开始之前就躲得远远的了哈哈，同桌几个男的就被灌了 😄。</p>
-<p><img src="/images/guizhou/10.jpg"></p>
-<p>因为苗寨难得遇到断电，“幸运地”被我们给遇上了，晚上只好回州府凯里住了，晚饭刚好感受了侗族形式的“高山流水”以及侗族的歌舞表演，表演倒是没啥好看的，不过有几个侗族小姐姐还是比较好看的~啊哈哈哈</p>
-<p><img src="/images/guizhou/11.jpg"></p>
-<p><img src="/images/guizhou/12.jpg"></p>
-<h4 id="高要梯田"><a href="#高要梯田" class="headerlink" title="高要梯田"></a>高要梯田</h4><p>第三站抵达高要梯田，高要的梯田虽没有像广西龙胜、云南元阳被外界所熟知，但其美景完全不逊于前者，可惜不是金秋时节来，不然景色应该会更美。</p>
-<p><img src="/images/guizhou/13.jpg"></p>
-<p><img src="/images/guizhou/14.jpg"></p>
-<p>总体来说，此次贵州之行还是很轻松的，可惜的是没时间去到黄果树，希望下次有机会带未来的那个她一起来哦~嘻嘻 🤭。</p>
-]]></content>
-      <categories>
-        <category>游记</category>
-      </categories>
-      <tags>
-        <tag>贵州</tag>
-        <tag>游记</tag>
       </tags>
   </entry>
   <entry>

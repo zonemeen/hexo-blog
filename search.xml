@@ -1383,7 +1383,7 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>请按图中所示，一模一样的操作，然后点击创建按钮。</p>
 <p>2、这样一来，这个仓库就会自动生成三个文件：<br><img src="/images/github/6.jpg"></p>
 <p>3、现在，远程库已经准备好了，下一步是用命令 git clone 克隆一个本地库，点击页面中唯一的绿色按钮「clone or download」，会看到一个弹出层：<br><img src="/images/github/7.jpg"></p>
-<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
+<p>请确保弹出层里的地址是 SSH 地址，也就是 <a href="mailto:&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;</a> 开头的地址，如果不是，就点击 Use SSH 按钮，然后复制这个地址。</p>
 <p>4、打开 Git Bash，找一个安全目录，比如 ~/Desktop 桌面目录就很安全：cd ~/Desktop，然后运行：</p>
 <pre><code class="hljs bash">$ git <span class="hljs-built_in">clone</span> git@github.com:miqilin21/git-demo.git</code></pre>
 
@@ -1395,13 +1395,185 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
 <p>其实呢，还有很多种不同的方式，但是，你记住这几种就行了，已经够你用了。我们并不想要了解 git 的所有高级用法，我们的目的很明确：能通过 Git 命令使用 GitHub 就行。</p>
 <p>我们最后再回顾一遍已经学到的命令：</p>
 <blockquote>
-<p>git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#111;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
+<p>git clone <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:xxxx，克隆下载远程仓库<br>git init，初始化本地仓库 .git<br>git status -sb，显示当前所有文件的状态<br>git add 文件路径，用来将变动加到暂存区<br>git commit -m “信息”，用来正式提交变动，并备注信息，提交至 .git 仓库<br>如果有新的变动，我们只需要依次执行 git add xxx 和 git commit -m ‘xxx’ 两个命令即可。<br>git log 查看变更历史</p>
 </blockquote>
 <h4 id="其他学习资源"><a href="#其他学习资源" class="headerlink" title="其他学习资源"></a>其他学习资源</h4><blockquote>
 <p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a> &gt; <a href="http://www.runoob.com/git/git-install-setup.html">Git 菜鸟教程</a> &gt; <a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013743256916071d599b3aed534aaab22a0db6c4e07fd0000">廖雪峰的 Git 教程</a></p>
 </blockquote>
 <p>本人 Github 链接如下，欢迎各位 Star</p>
 <p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Git命令拓展</title>
+    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
+    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
+<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
+<p><img src="/images/git/1.jpg"></p>
+<p>上图中几个专用名词的译名如下：</p>
+<ul>
+<li>Workspace：工作区</li>
+<li>Index / Stage：暂存区</li>
+<li>Repository：本地仓库</li>
+<li>Remote：远程仓库</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
+
+$ git config -e [--global]    //编辑Git配置文件
+
+$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
+$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
+
+<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
+
+$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
+
+$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
+
+<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
+
+$ git add [dir]    //添加指定目录到暂存区，包括子目录
+
+$ git add    //添加当前目录的所有文件到暂存区
+
+$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
+
+$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
+
+<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
+
+$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
+
+$ git commit -v    //提交时显示所有diff信息
+
+$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
+
+<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
+
+$ git remote -v    //显示所有远程仓库
+
+$ git remote show [remote]    //显示某个远程仓库的信息
+
+$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
+
+$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
+
+$ git push [remote] [branch]    //上传本地指定分支到远程仓库
+
+$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
+
+$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
+
+<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
+
+$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
+
+$ git checkout    //恢复暂存区的所有文件到工作区
+
+$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+
+$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
+
+$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
+
+$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
+
+$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
+
+$ git stash list    //查看保存的工作现场
+
+$ git stash apply    //恢复工作现场
+
+$ git stash drop    //删除stash内容
+
+$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
+
+<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
+
+$ git branch -r    //列出所有远程分支
+
+$ git branch -a    //列出所有本地分支和远程分支
+
+$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
+
+$ git branch [branch] [commit]    //新建一个分支，指向指定commit
+
+$ git checkout -b [branch]    //新建一个分支，并切换到该分支
+
+$ git checkout [branch-name]    //切换到指定分支，并更新工作区
+
+$ git merge [branch]    //合并指定分支到当前分支
+
+$ git push origin [branch-name]    //将分支推送到远程仓库
+
+$ git push --all origin    //将所有分支推送到远程仓库
+
+$ git branch -d [branch-name]    //删除分支
+
+$ git push origin --delete [branch-name]
+$ git push origin :[branch-name]
+$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
+
+<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
+
+$ git tag [tag]    //新建一个tag在当前commit
+
+$ git tag [tag] [commit]    //新建一个tag在指定commit
+
+$ git tag -d [tag]    //删除本地tag
+
+$ git push origin :refs/tags/[tagName]    //删除远程tag
+
+$ git show [tag]    //查看tag信息
+
+$ git push [remote] [tag]    //提交指定tag
+
+$ git push [remote] --tags
+$ git push --tags origin    //提交所有tag</code></pre>
+
+<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
+
+$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
+
+$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
+
+$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
+
+$ git <span class="hljs-built_in">log</span> --follow [file]
+$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
+
+$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
+
+$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
+
+$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
+
+$ git blame [file]    //显示指定文件是什么人在什么时间修改过
+
+$ git diff    //显示暂存区和工作区的差异
+
+$ git diff --cached [file]    //显示暂存区和上一个commit的差异
+
+$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
+
+$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
+
+$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
+
+$ git show [commit]    //显示某次提交的元数据和内容变化
+
+$ git show --name-only [commit]    //显示某次提交发生变化的文件
+
+$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
+
+$ git reflog    //显示当前分支的最近几次提交</code></pre>
 ]]></content>
       <categories>
         <category>tools</category>
@@ -1664,178 +1836,6 @@ $ git status -sb      //显示当前所有文件的状态</code></pre>
       <tags>
         <tag>HTML</tag>
         <tag>标签</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Git命令拓展</title>
-    <url>/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/</url>
-    <content><![CDATA[<p>本文的内容基本上是从廖雪峰及阮一峰老师的 Git 教程中总结出来的，方便自己以后查阅相关命令。</p>
-<p>一般来说，日常使用只需要记住下图 6 个命令即可。但是想往深度使用 Git，恐怕还需要记住其余的几十个命令。</p>
-<p><img src="/images/git/1.jpg"></p>
-<p>上图中几个专用名词的译名如下：</p>
-<ul>
-<li>Workspace：工作区</li>
-<li>Index / Stage：暂存区</li>
-<li>Repository：本地仓库</li>
-<li>Remote：远程仓库</li>
-</ul>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><pre><code class="hljs bash">$ git config --list    //显示当前的Git配置
-
-$ git config -e [--global]    //编辑Git配置文件
-
-$ git config --global user.name <span class="hljs-string">&quot;miqilin21&quot;</span>
-$ git config --global user.email miqilin21@example.com   //设置你的仓库用户名及邮箱，用于标识提交者</code></pre>
-
-<h4 id="新建-Git-代码库"><a href="#新建-Git-代码库" class="headerlink" title="新建 Git 代码库"></a>新建 Git 代码库</h4><pre><code class="hljs bash">$ git init    //在当前目录新建一个Git代码库
-
-$ git init [project-name]   //新建一个目录，将其初始化为Git代码库
-
-$ git <span class="hljs-built_in">clone</span> [url]    //下载一个项目和它的整个代码历史</code></pre>
-
-<h4 id="添加-删除文件"><a href="#添加-删除文件" class="headerlink" title="添加/删除文件"></a>添加/删除文件</h4><pre><code class="hljs bash">$ git add [file1] [file2] ...    //添加一个或多个文件到暂存区
-
-$ git add [dir]    //添加指定目录到暂存区，包括子目录
-
-$ git add    //添加当前目录的所有文件到暂存区
-
-$ git rm [file1] [file2] ..    //删除工作区文件，并放入暂存区
-
-$ git rm --cached [file]    //停止追踪指定文件，但该文件会保留在工作区</code></pre>
-
-<h4 id="本地文件提交"><a href="#本地文件提交" class="headerlink" title="本地文件提交"></a>本地文件提交</h4><pre><code class="hljs bash">$ git commit -m <span class="hljs-string">&quot;Commit message&quot;</span>    //提交暂存区到仓库区
-
-$ git commit -a    //提交工作区自上次commit之后更改的所有文件，直接到仓库区
-
-$ git commit -v    //提交时显示所有diff信息
-
-$ git commit --amend -m <span class="hljs-string">&quot;Latest commit message&quot;</span>    //使用一次新的commit，替代上一次提交；如果代码没有任何新变化，则用来改写上一次commit的提交信息</code></pre>
-
-<h4 id="同步远程仓库"><a href="#同步远程仓库" class="headerlink" title="同步远程仓库"></a>同步远程仓库</h4><pre><code class="hljs bash">$ git fetch [remote]    //下载远程仓库的所有变动
-
-$ git remote -v    //显示所有远程仓库
-
-$ git remote show [remote]    //显示某个远程仓库的信息
-
-$ git remote add [shortname] [url]    //增加一个新的远程仓库，并命名
-
-$ git pull [remote] [branch]    //同步远程仓库的变化，并与本地分支合并
-
-$ git push [remote] [branch]    //上传本地指定分支到远程仓库
-
-$ git push [remote] --force     //强行推送当前分支到远程仓库，即使有冲突
-
-$ git push [remote] --all    //推送所有分支到远程仓库</code></pre>
-
-<h4 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h4><pre><code class="hljs bash">$ git checkout [file]    //恢复暂存区的指定文件到工作区
-
-$ git checkout [commit] [file]    //恢复某个commit过的文件到暂存区和工作区
-
-$ git checkout    //恢复暂存区的所有文件到工作区
-
-$ git reset [file]    //重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
-
-$ git reset --hard    //重置暂存区与工作区，与上一次commit保持一致
-
-$ git reset --hard [commit]    //重置当前分支的HEAD为指定commit，同时重置暂存区和工作区，与指定commit一致
-
-$ git revert [commit]    //新建一个commit，用来撤销指定commit；后者的所有变化都将被前者抵消，并且应用到当前分支
-
-$ git stash    //将工作区现场保存起来，等以后恢复后继续工作。通常用于处理更为着急的任务时，例如：bug
-
-$ git stash list    //查看保存的工作现场
-
-$ git stash apply    //恢复工作现场
-
-$ git stash drop    //删除stash内容
-
-$ git stash pop    //恢复的同时直接删除stash内容</code></pre>
-
-<h4 id="分支"><a href="#分支" class="headerlink" title="分支"></a>分支</h4><pre><code class="hljs bash">$ git branch    //列出所有本地分支
-
-$ git branch -r    //列出所有远程分支
-
-$ git branch -a    //列出所有本地分支和远程分支
-
-$ git branch [branch-name]    //新建一个分支，但依然停留在当前分支
-
-$ git branch [branch] [commit]    //新建一个分支，指向指定commit
-
-$ git checkout -b [branch]    //新建一个分支，并切换到该分支
-
-$ git checkout [branch-name]    //切换到指定分支，并更新工作区
-
-$ git merge [branch]    //合并指定分支到当前分支
-
-$ git push origin [branch-name]    //将分支推送到远程仓库
-
-$ git push --all origin    //将所有分支推送到远程仓库
-
-$ git branch -d [branch-name]    //删除分支
-
-$ git push origin --delete [branch-name]
-$ git push origin :[branch-name]
-$ git branch -dr [remote/branch]     //删除远程分支</code></pre>
-
-<h4 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h4><pre><code class="hljs bash">$ git tag    //列出所有tag
-
-$ git tag [tag]    //新建一个tag在当前commit
-
-$ git tag [tag] [commit]    //新建一个tag在指定commit
-
-$ git tag -d [tag]    //删除本地tag
-
-$ git push origin :refs/tags/[tagName]    //删除远程tag
-
-$ git show [tag]    //查看tag信息
-
-$ git push [remote] [tag]    //提交指定tag
-
-$ git push [remote] --tags
-$ git push --tags origin    //提交所有tag</code></pre>
-
-<h4 id="查看信息"><a href="#查看信息" class="headerlink" title="查看信息"></a>查看信息</h4><pre><code class="hljs bash">$ git status    //显示有变更的文件
-
-$ git <span class="hljs-built_in">log</span>    //显示当前分支的版本历史
-
-$ git <span class="hljs-built_in">log</span> --<span class="hljs-built_in">stat</span>    //显示commit历史，以及每次commit发生变更的文件
-
-$ git <span class="hljs-built_in">log</span> -S [keyword]    //搜索提交历史，根据关键词
-
-$ git <span class="hljs-built_in">log</span> --follow [file]
-$ git whatchanged [file]    //显示某个文件的版本历史，包括文件改名
-
-$ git <span class="hljs-built_in">log</span> -p [file]    //显示指定文件相关的每一次diff
-
-$ git <span class="hljs-built_in">log</span> -5 --pretty --oneline    //显示过去5次提交
-
-$ git shortlog -sn    //显示所有提交过的用户，按提交次数排序
-
-$ git blame [file]    //显示指定文件是什么人在什么时间修改过
-
-$ git diff    //显示暂存区和工作区的差异
-
-$ git diff --cached [file]    //显示暂存区和上一个commit的差异
-
-$ git diff HEAD    //显示工作区与当前分支最新commit之间的差异
-
-$ git diff [first-branch]...[second-branch]    //显示两次提交之间的差异
-
-$ git diff --shortstat <span class="hljs-string">&quot;@&#123;0 day ago&#125;&quot;</span>    //显示今天你写了多少行代码
-
-$ git show [commit]    //显示某次提交的元数据和内容变化
-
-$ git show --name-only [commit]    //显示某次提交发生变化的文件
-
-$ git show [commit]:[filename]     //显示某次提交时，某个文件的内容
-
-$ git reflog    //显示当前分支的最近几次提交</code></pre>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>GitHub</tag>
       </tags>
   </entry>
   <entry>
@@ -5129,6 +5129,204 @@ Cat.prototype.CatchMouse = <span class="hljs-function"><span class="hljs-keyword
       </tags>
   </entry>
   <entry>
+    <title>JavaScript系列之类型转换</title>
+    <url>/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。</p>
+<p>以下我将介绍将各种类型的值，分别转换成<strong>数字</strong>、<strong>字符串</strong>或者<strong>布尔值</strong>（基于 ES5 规范）。</p>
+<h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h4><p><strong>（1）Number()</strong></p>
+<p>使用 Number 函数，可以将任意类型的值转化成数值。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">//数值</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// 123  转换后为原值</span>
+
+<span class="hljs-comment">//字符串</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;123&quot;</span>); <span class="hljs-comment">// 123  转换为相应的数值，前提能被解析为数值</span>
+
+<span class="hljs-comment">//字符串</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;123abc&quot;</span>); <span class="hljs-comment">// NaN  如果不能被解析为数值，则返回 NaN</span>
+
+<span class="hljs-comment">//布尔值</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 0</span>
+
+<span class="hljs-comment">//undefined</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
+
+<span class="hljs-comment">//null</span>
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
+
+<span class="hljs-comment">//对象</span>
+<span class="hljs-built_in">Number</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">Number</span>([<span class="hljs-number">5</span>]); <span class="hljs-comment">// 5  //包含单个数值的数组将返回数字</span></code></pre>
+
+<p><strong>（2）ParseInt()</strong></p>
+<p><code>parseInt</code>函数可用于将字符串转为整数。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;123&quot;</span>); <span class="hljs-comment">// 123</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;   123&quot;</span>); <span class="hljs-comment">// 123  如果字符串头部有空格，空格会被自动去除</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-number">1.23</span>); <span class="hljs-comment">// 1  如果参数不是字符串，则会先转为字符串再转换</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;8a&quot;</span>); <span class="hljs-comment">//  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;abc&quot;</span>); <span class="hljs-comment">// NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN</span>
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;+1&quot;</span>); <span class="hljs-comment">// 1</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;1000&quot;</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 1000  第二个参数（2到36之间），表示被解析的值的进制</span></code></pre>
+
+<p>如上，<code>Number()</code>函数会整体将目标字符串转为数值，只要有一个字符无法转成数值，目标就会被转为<code>NaN</code>，这点要比<code>parseInt()</code>函数严格很多。</p>
+<p>这里要注意一点，就是转换’011’时看起来 01 结构是 8 进制，实际上 JS 经过升级，后面加逗号 8 才是转为 8 进制或其他进制。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;011&quot;</span>); <span class="hljs-comment">// 11</span>
+
+<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;011&quot;</span>, <span class="hljs-number">8</span>); <span class="hljs-comment">// 9</span></code></pre>
+
+<p><strong>（3）ParseFloat()</strong><br><code>parseFloat</code>函数用于将一个字符串转为浮点数。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;3.14&quot;</span>); <span class="hljs-comment">//  3.14</span>
+
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;3.14more&quot;</span>); <span class="hljs-comment">// 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分</span>
+
+<span class="hljs-built_in">parseFloat</span>([]); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;AAA&quot;</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN</span></code></pre>
+
+<p>上面代码中，尤其注意的是，<code>parseFloat</code>会将空字符串转为<code>NaN</code>。</p>
+<p>这些特点使得<code>parseFloat</code>的转换结果不同于<code>Number</code>函数。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// NaN</span>
+
+<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// NaN</span>
+
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// NaN</span>
+
+<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;1.23A&quot;</span>); <span class="hljs-comment">// NaN</span>
+<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;1.23A&quot;</span>); <span class="hljs-comment">// 1.23</span></code></pre>
+
+<p><strong>（4）字符串减 0</strong></p>
+<p>字符串数字后直接减一个 0，可将字符串转为数值。</p>
+<pre><code class="hljs javascript"><span class="hljs-string">&quot;1&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1</span>
+
+<span class="hljs-string">&quot;123&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 123</span>
+
+<span class="hljs-string">&quot;1.23&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1.23</span>
+
+<span class="hljs-string">&quot;12A&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN  字符串里不是数字，则返回NaN</span>
+<span class="hljs-string">&quot;null&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<p>上面代码中，字符串减 0 操作既有<code>parseInt</code>、也有<code>parseFloat</code>的功能。</p>
+<p>还比较省代码数量，在实际应用中会比较常见。</p>
+<p><strong>（5）字符串前加+</strong></p>
+<p>字符串数字前加一个+，可将字符串转为数字。</p>
+<pre><code class="hljs javascript">+<span class="hljs-string">&quot;1&quot;</span> + <span class="hljs-comment">// 1</span>
+  <span class="hljs-string">&quot;1.23&quot;</span> + <span class="hljs-comment">// 1.23</span>
+  <span class="hljs-string">&quot;.1&quot;</span> + <span class="hljs-comment">// 0.1</span>
+  <span class="hljs-string">&quot;-1&quot;</span> + <span class="hljs-comment">// -1</span>
+  <span class="hljs-string">&quot;12A&quot;</span>; <span class="hljs-comment">// NaN</span></code></pre>
+
+<p>上面代码中，字符串前加+操作也有<code>parseInt</code>和<code>parseFloat</code>的功能。</p>
+<h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p><strong>（1）toString()</strong></p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-number">123</span>;
+a.toString(); <span class="hljs-comment">// &quot;123&quot;</span>
+
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">true</span>;
+a.toString(); <span class="hljs-comment">// &quot;true&quot;</span>
+
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">undefined</span>;
+a.toString(); <span class="hljs-comment">// 报错</span>
+
+<span class="hljs-comment">// null</span>
+<span class="hljs-keyword">var</span> a = <span class="hljs-literal">null</span>;
+a.toString(); <span class="hljs-comment">// 报错</span>
+
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-keyword">var</span> a = &#123;&#125;;
+a.toString(); <span class="hljs-comment">// &quot;[object Object]&quot;</span></code></pre>
+
+<p>上面代码中，注意一点<code>null</code>、<code>undefined</code>用<code>toString()</code>转为字符串是不行的，而且<code>toString()</code>方法占的字节较多，那么有别的解决方法吗？</p>
+<p><strong>（2）加’’(双引号)</strong></p>
+<p>当然有，更常用的转为字符串方法为：</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-number">1</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;1&quot;</span>
+<span class="hljs-string">&quot;&quot;</span> + <span class="hljs-number">1</span>; <span class="hljs-comment">// &quot;1&quot;</span>
+
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-literal">true</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;true&quot;</span>
+<span class="hljs-string">&quot;&quot;</span> + <span class="hljs-literal">true</span>; <span class="hljs-comment">// &quot;true&quot;</span>
+
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-literal">undefined</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;undefined&quot;</span>
+
+<span class="hljs-comment">// null</span>
+<span class="hljs-literal">null</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;null&quot;</span>
+
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-keyword">var</span> obj = &#123;&#125;;
+obj +
+  <span class="hljs-string">&quot;&quot;</span>[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)] + <span class="hljs-comment">// &quot;[object Object]&quot;</span>
+  <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;1,2,3&quot;  数组，返回该数组的字符串形式</span></code></pre>
+
+<p>相比<code>toString()</code>方法，这种方法更为常用，且和前后加’’的顺序无关。</p>
+<p><strong>（3）String()</strong></p>
+<p><code>String</code>函数可以将任意类型的值转化成字符串。</p>
+<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// &quot;123&quot;</span>
+
+<span class="hljs-comment">// 布尔值</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// &quot;true&quot;</span>
+
+<span class="hljs-comment">// undefined</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// &quot;undefined&quot;</span>
+
+<span class="hljs-comment">// null</span>
+<span class="hljs-built_in">String</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// &quot;null&quot;</span>
+
+<span class="hljs-comment">// 对象</span>
+<span class="hljs-built_in">String</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// &quot;[object Object]&quot;</span>
+<span class="hljs-built_in">String</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// &quot;1,2,3&quot;  数组，返回该数组的字符串形式</span></code></pre>
+
+<h4 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h4><p><strong>（1）Boolean()</strong></p>
+<p><code>Boolean</code>函数可以将任意类型的值转为布尔值。</p>
+<p>它的转换规则比较简单：除了以下五个<code>falsy</code>值的转换结果为<code>false</code>，其余的值全部为<code>true</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">// false 包括+0、-0</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">NaN</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// false 和&quot;&quot;一样都为空字符串，这里当成同一种</span></code></pre>
+
+<p>所以的话，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(&#123;&#125;); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">Boolean</span>([]); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">false</span>)); <span class="hljs-comment">// true</span></code></pre>
+
+<p>这里需要注意的是，<code>Boolean()</code>操作对于’’和’ ‘（中间有空格）的结果是不一样的：</p>
+<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;  &quot;</span>); <span class="hljs-comment">// true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容</span></code></pre>
+
+<p><strong>（2）类型值前加！！</strong></p>
+<p>任何数据类型值前面加两个！！，都可以将其转为布尔类型。</p>
+<pre><code class="hljs javascript">!!<span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-literal">null</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-number">0</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-literal">NaN</span>; <span class="hljs-comment">// false</span>
+!!<span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// false</span></code></pre>
+
+<p>从<code>Boolean()</code>九个字符变为！！两个字符，省了代码量；转换规则也与<code>Boolean</code>函数一致，故老手多用此类方法。</p>
+<p>目前总结的就这么多啦，如有一些遗漏或有误的地方，欢迎大家指正~</p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>数据类型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JavaScript系列之类数组对象arguments</title>
     <url>/2020/06/19/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1arguments/</url>
     <content><![CDATA[<p>之前在<a href="https://zhuanlan.zhihu.com/p/71490991">《JavaScript 系列之 this 是什么》</a>这篇文章中，我们曾谈过”this”这个关键字，本章将会谈到另一个 JavaScript 中的关键字，叫做”arguments”。</p>
@@ -5355,204 +5553,6 @@ MyFavorite(<span class="hljs-string">&quot;别墅&quot;</span>, <span class="hlj
       <tags>
         <tag>JavaScript</tag>
         <tag>arguments</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>JavaScript系列之类型转换</title>
-    <url>/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<p>JavaScript 是一种<strong>弱类型</strong>或者说是一门<strong>动态</strong>语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。</p>
-<p>以下我将介绍将各种类型的值，分别转换成<strong>数字</strong>、<strong>字符串</strong>或者<strong>布尔值</strong>（基于 ES5 规范）。</p>
-<h4 id="ToNumber"><a href="#ToNumber" class="headerlink" title="ToNumber"></a>ToNumber</h4><p><strong>（1）Number()</strong></p>
-<p>使用 Number 函数，可以将任意类型的值转化成数值。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">//数值</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// 123  转换后为原值</span>
-
-<span class="hljs-comment">//字符串</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;123&quot;</span>); <span class="hljs-comment">// 123  转换为相应的数值，前提能被解析为数值</span>
-
-<span class="hljs-comment">//字符串</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;123abc&quot;</span>); <span class="hljs-comment">// NaN  如果不能被解析为数值，则返回 NaN</span>
-
-<span class="hljs-comment">//布尔值</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-literal">false</span>); <span class="hljs-comment">// 0</span>
-
-<span class="hljs-comment">//undefined</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// NaN</span>
-
-<span class="hljs-comment">//null</span>
-<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
-
-<span class="hljs-comment">//对象</span>
-<span class="hljs-built_in">Number</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// NaN</span>
-<span class="hljs-built_in">Number</span>([<span class="hljs-number">5</span>]); <span class="hljs-comment">// 5  //包含单个数值的数组将返回数字</span></code></pre>
-
-<p><strong>（2）ParseInt()</strong></p>
-<p><code>parseInt</code>函数可用于将字符串转为整数。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;123&quot;</span>); <span class="hljs-comment">// 123</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;   123&quot;</span>); <span class="hljs-comment">// 123  如果字符串头部有空格，空格会被自动去除</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-number">1.23</span>); <span class="hljs-comment">// 1  如果参数不是字符串，则会先转为字符串再转换</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;8a&quot;</span>); <span class="hljs-comment">//  8  如果遇到不能转为数字的字符，就不再进行下去，返回可转的部分</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;abc&quot;</span>); <span class="hljs-comment">// NaN  如果第一个字符不能转化为数字（后面跟着数字的正负号除外），返回NaN</span>
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;+1&quot;</span>); <span class="hljs-comment">// 1</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;1000&quot;</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 1000  第二个参数（2到36之间），表示被解析的值的进制</span></code></pre>
-
-<p>如上，<code>Number()</code>函数会整体将目标字符串转为数值，只要有一个字符无法转成数值，目标就会被转为<code>NaN</code>，这点要比<code>parseInt()</code>函数严格很多。</p>
-<p>这里要注意一点，就是转换’011’时看起来 01 结构是 8 进制，实际上 JS 经过升级，后面加逗号 8 才是转为 8 进制或其他进制。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;011&quot;</span>); <span class="hljs-comment">// 11</span>
-
-<span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&quot;011&quot;</span>, <span class="hljs-number">8</span>); <span class="hljs-comment">// 9</span></code></pre>
-
-<p><strong>（3）ParseFloat()</strong><br><code>parseFloat</code>函数用于将一个字符串转为浮点数。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;3.14&quot;</span>); <span class="hljs-comment">//  3.14</span>
-
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;3.14more&quot;</span>); <span class="hljs-comment">// 3.14  如果字符串包含不能转为浮点数的字符，则不再进行往后转换，返回已经转好的部分</span>
-
-<span class="hljs-built_in">parseFloat</span>([]); <span class="hljs-comment">// NaN</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;AAA&quot;</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// NaN  如果参数不是字符串或空，亦或字符串的第一个字符不能转化为浮点数，则返回NaN</span></code></pre>
-
-<p>上面代码中，尤其注意的是，<code>parseFloat</code>会将空字符串转为<code>NaN</code>。</p>
-<p>这些特点使得<code>parseFloat</code>的转换结果不同于<code>Number</code>函数。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Number</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// 1</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// NaN</span>
-
-<span class="hljs-built_in">Number</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// 0</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// NaN</span>
-
-<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// 0</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// NaN</span>
-
-<span class="hljs-built_in">Number</span>(<span class="hljs-string">&quot;1.23A&quot;</span>); <span class="hljs-comment">// NaN</span>
-<span class="hljs-built_in">parseFloat</span>(<span class="hljs-string">&quot;1.23A&quot;</span>); <span class="hljs-comment">// 1.23</span></code></pre>
-
-<p><strong>（4）字符串减 0</strong></p>
-<p>字符串数字后直接减一个 0，可将字符串转为数值。</p>
-<pre><code class="hljs javascript"><span class="hljs-string">&quot;1&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1</span>
-
-<span class="hljs-string">&quot;123&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 123</span>
-
-<span class="hljs-string">&quot;1.23&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// 1.23</span>
-
-<span class="hljs-string">&quot;12A&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN  字符串里不是数字，则返回NaN</span>
-<span class="hljs-string">&quot;null&quot;</span> - <span class="hljs-number">0</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<p>上面代码中，字符串减 0 操作既有<code>parseInt</code>、也有<code>parseFloat</code>的功能。</p>
-<p>还比较省代码数量，在实际应用中会比较常见。</p>
-<p><strong>（5）字符串前加+</strong></p>
-<p>字符串数字前加一个+，可将字符串转为数字。</p>
-<pre><code class="hljs javascript">+<span class="hljs-string">&quot;1&quot;</span> + <span class="hljs-comment">// 1</span>
-  <span class="hljs-string">&quot;1.23&quot;</span> + <span class="hljs-comment">// 1.23</span>
-  <span class="hljs-string">&quot;.1&quot;</span> + <span class="hljs-comment">// 0.1</span>
-  <span class="hljs-string">&quot;-1&quot;</span> + <span class="hljs-comment">// -1</span>
-  <span class="hljs-string">&quot;12A&quot;</span>; <span class="hljs-comment">// NaN</span></code></pre>
-
-<p>上面代码中，字符串前加+操作也有<code>parseInt</code>和<code>parseFloat</code>的功能。</p>
-<h4 id="ToString"><a href="#ToString" class="headerlink" title="ToString"></a>ToString</h4><p><strong>（1）toString()</strong></p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
-<span class="hljs-keyword">var</span> a = <span class="hljs-number">123</span>;
-a.toString(); <span class="hljs-comment">// &quot;123&quot;</span>
-
-<span class="hljs-comment">// 布尔值</span>
-<span class="hljs-keyword">var</span> a = <span class="hljs-literal">true</span>;
-a.toString(); <span class="hljs-comment">// &quot;true&quot;</span>
-
-<span class="hljs-comment">// undefined</span>
-<span class="hljs-keyword">var</span> a = <span class="hljs-literal">undefined</span>;
-a.toString(); <span class="hljs-comment">// 报错</span>
-
-<span class="hljs-comment">// null</span>
-<span class="hljs-keyword">var</span> a = <span class="hljs-literal">null</span>;
-a.toString(); <span class="hljs-comment">// 报错</span>
-
-<span class="hljs-comment">// 对象</span>
-<span class="hljs-keyword">var</span> a = &#123;&#125;;
-a.toString(); <span class="hljs-comment">// &quot;[object Object]&quot;</span></code></pre>
-
-<p>上面代码中，注意一点<code>null</code>、<code>undefined</code>用<code>toString()</code>转为字符串是不行的，而且<code>toString()</code>方法占的字节较多，那么有别的解决方法吗？</p>
-<p><strong>（2）加’’(双引号)</strong></p>
-<p>当然有，更常用的转为字符串方法为：</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
-<span class="hljs-number">1</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;1&quot;</span>
-<span class="hljs-string">&quot;&quot;</span> + <span class="hljs-number">1</span>; <span class="hljs-comment">// &quot;1&quot;</span>
-
-<span class="hljs-comment">// 布尔值</span>
-<span class="hljs-literal">true</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;true&quot;</span>
-<span class="hljs-string">&quot;&quot;</span> + <span class="hljs-literal">true</span>; <span class="hljs-comment">// &quot;true&quot;</span>
-
-<span class="hljs-comment">// undefined</span>
-<span class="hljs-literal">undefined</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;undefined&quot;</span>
-
-<span class="hljs-comment">// null</span>
-<span class="hljs-literal">null</span> + <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;null&quot;</span>
-
-<span class="hljs-comment">// 对象</span>
-<span class="hljs-keyword">var</span> obj = &#123;&#125;;
-obj +
-  <span class="hljs-string">&quot;&quot;</span>[(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)] + <span class="hljs-comment">// &quot;[object Object]&quot;</span>
-  <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;1,2,3&quot;  数组，返回该数组的字符串形式</span></code></pre>
-
-<p>相比<code>toString()</code>方法，这种方法更为常用，且和前后加’’的顺序无关。</p>
-<p><strong>（3）String()</strong></p>
-<p><code>String</code>函数可以将任意类型的值转化成字符串。</p>
-<pre><code class="hljs javascript"><span class="hljs-comment">// 数值</span>
-<span class="hljs-built_in">String</span>(<span class="hljs-number">123</span>); <span class="hljs-comment">// &quot;123&quot;</span>
-
-<span class="hljs-comment">// 布尔值</span>
-<span class="hljs-built_in">String</span>(<span class="hljs-literal">true</span>); <span class="hljs-comment">// &quot;true&quot;</span>
-
-<span class="hljs-comment">// undefined</span>
-<span class="hljs-built_in">String</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// &quot;undefined&quot;</span>
-
-<span class="hljs-comment">// null</span>
-<span class="hljs-built_in">String</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// &quot;null&quot;</span>
-
-<span class="hljs-comment">// 对象</span>
-<span class="hljs-built_in">String</span>(&#123; <span class="hljs-attr">a</span>: <span class="hljs-number">1</span> &#125;); <span class="hljs-comment">// &quot;[object Object]&quot;</span>
-<span class="hljs-built_in">String</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]); <span class="hljs-comment">// &quot;1,2,3&quot;  数组，返回该数组的字符串形式</span></code></pre>
-
-<h4 id="ToBoolean"><a href="#ToBoolean" class="headerlink" title="ToBoolean"></a>ToBoolean</h4><p><strong>（1）Boolean()</strong></p>
-<p><code>Boolean</code>函数可以将任意类型的值转为布尔值。</p>
-<p>它的转换规则比较简单：除了以下五个<code>falsy</code>值的转换结果为<code>false</code>，其余的值全部为<code>true</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">null</span>); <span class="hljs-comment">// false</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">// false 包括+0、-0</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">NaN</span>); <span class="hljs-comment">// false</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// false 和&quot;&quot;一样都为空字符串，这里当成同一种</span></code></pre>
-
-<p>所以的话，所有对象（包括空对象）的转换结果都是<code>true</code>，甚至连<code>false</code>对应的布尔对象<code>new Boolean(false)</code>也是<code>true</code>。</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(&#123;&#125;); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">Boolean</span>([]); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Boolean</span>(<span class="hljs-literal">false</span>)); <span class="hljs-comment">// true</span></code></pre>
-
-<p>这里需要注意的是，<code>Boolean()</code>操作对于’’和’ ‘（中间有空格）的结果是不一样的：</p>
-<pre><code class="hljs javascript"><span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;&quot;</span>); <span class="hljs-comment">// false</span>
-<span class="hljs-built_in">Boolean</span>(<span class="hljs-string">&quot;  &quot;</span>); <span class="hljs-comment">// true 因为中间有空格，代表有空格键输入，不算真正意义上的无内容</span></code></pre>
-
-<p><strong>（2）类型值前加！！</strong></p>
-<p>任何数据类型值前面加两个！！，都可以将其转为布尔类型。</p>
-<pre><code class="hljs javascript">!!<span class="hljs-literal">undefined</span>; <span class="hljs-comment">// false</span>
-!!<span class="hljs-literal">null</span>; <span class="hljs-comment">// false</span>
-!!<span class="hljs-number">0</span>; <span class="hljs-comment">// false</span>
-!!<span class="hljs-literal">NaN</span>; <span class="hljs-comment">// false</span>
-!!<span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// false</span></code></pre>
-
-<p>从<code>Boolean()</code>九个字符变为！！两个字符，省了代码量；转换规则也与<code>Boolean</code>函数一致，故老手多用此类方法。</p>
-<p>目前总结的就这么多啦，如有一些遗漏或有误的地方，欢迎大家指正~</p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>JavaScript</category>
-      </categories>
-      <tags>
-        <tag>JavaScript</tag>
-        <tag>数据类型</tag>
       </tags>
   </entry>
   <entry>
@@ -6366,6 +6366,58 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       </tags>
   </entry>
   <entry>
+    <title>一些好用的工具、网站</title>
+    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
+<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
+<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
+<p><img src="/images/tool/1.jpg"></p>
+<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
+<p>✔ 没广告还免费！</p>
+<p><img src="/images/tool/2.jpg"></p>
+<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
+<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
+<p><img src="/images/tool/3.jpg"></p>
+<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
+<p><img src="/images/tool/4.jpg"></p>
+<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
+<p>✔ 一定也有设计师不知道这个网站滴。</p>
+<p><img src="/images/tool/5.jpg"></p>
+<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
+<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
+<p><img src="/images/tool/6.jpg"></p>
+<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
+<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
+<p><img src="/images/tool/7.jpg"></p>
+<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
+<p>✔ 比如搜索关键词“love”看到的结果：</p>
+<p><img src="/images/tool/8.jpg"></p>
+<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
+<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
+<p><img src="/images/tool/9.jpg"></p>
+<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
+<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
+<p><img src="/images/tool/10.jpg"></p>
+<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
+<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
+<p><img src="/images/tool/11.jpg"></p>
+<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
+<p>✔ 相信你用了后会觉得它很高效的。</p>
+<p><img src="/images/tool/12.jpg"></p>
+<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
+<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
+<p><img src="/images/tool/13.jpg"></p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>【译】谈谈“typeof null为object”这一bug的由来</title>
     <url>/2020/02/21/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/</url>
     <content><![CDATA[<p>很多前端初级开发者也许并不深究 typeof null 为何为 Object？想更深地了解这一 bug 的由来，可以参阅 Dr. Axel Rauschmayer 关于”typeof null”的历史这篇文章。</p>
@@ -6444,58 +6496,6 @@ cities.forEach(<span class="hljs-function"><span class="hljs-keyword">function</
       </categories>
       <tags>
         <tag>JavaScript</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>一些好用的工具、网站</title>
-    <url>/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/</url>
-    <content><![CDATA[<p>这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。</p>
-<h4 id="Evernote：一款神奇的笔记"><a href="#Evernote：一款神奇的笔记" class="headerlink" title="Evernote：一款神奇的笔记"></a>Evernote：一款神奇的笔记</h4><p>✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…</p>
-<p>✔ 如果你还没用过，推荐你现在关闭答案去应用市场下载一个，相信我你都会爱上它的。</p>
-<p><img src="/images/tool/1.jpg"></p>
-<h4 id="免费人工智能-PPT-制作平台：beautiful-ai"><a href="#免费人工智能-PPT-制作平台：beautiful-ai" class="headerlink" title="免费人工智能 PPT 制作平台：beautiful.ai"></a>免费人工智能 PPT 制作平台：<a href="https://www.beautiful.ai/">beautiful.ai</a></h4><p>✔ 这个国外的黑科技网站，网站提供很多超赞的板式，我们将文字放进去，AI 智能帮助我们制作 PPT。真的让我这个一做 PPT 就头疼的人，感到开心！</p>
-<p>✔ 没广告还免费！</p>
-<p><img src="/images/tool/2.jpg"></p>
-<h4 id="录制-GIF-工具-：GifCam"><a href="#录制-GIF-工具-：GifCam" class="headerlink" title="录制 GIF 工具 ：GifCam"></a>录制 GIF 工具 ：GifCam</h4><p>✔ 录制动图对许多人来说也算是必备的东西了。</p>
-<p>✔ 窗口化录屏，也可以直接设置全屏幕录制，录制完毕后直接保存为 GIF 图片，软件大小不超过 2M，简直太方便太良心了~</p>
-<p><img src="/images/tool/3.jpg"></p>
-<h4 id="截图-贴图神器：Snipaste"><a href="#截图-贴图神器：Snipaste" class="headerlink" title="截图/贴图神器：Snipaste"></a>截图/贴图神器：Snipaste</h4><p>✔ 它在我心中绝对可以堪称神器了！令人惊叹不仅仅是它的强大截图功能，而是它的贴图功能也实在是太好用了！</p>
-<p><img src="/images/tool/4.jpg"></p>
-<h4 id="设计网址导航网站：牛大拿"><a href="#设计网址导航网站：牛大拿" class="headerlink" title="设计网址导航网站：牛大拿"></a>设计网址导航网站：<a href="http://www.niudana.com/">牛大拿</a></h4><p>✔ 精选国内外优秀的 UI 设计网站,设计参考文章与免费的 UI 设计素材与资源，每日更新 Dribbble 精选内容、Behance 精选内容、站酷精选内容、UI 中国…</p>
-<p>✔ 一定也有设计师不知道这个网站滴。</p>
-<p><img src="/images/tool/5.jpg"></p>
-<h4 id="国外设计师常用网站：Dribbble"><a href="#国外设计师常用网站：Dribbble" class="headerlink" title="国外设计师常用网站：Dribbble"></a>国外设计师常用网站：<a href="https://dribbble.com/">Dribbble</a></h4><p>✔ 通过 Dribbble，你可以浏览许多创意设计，它们出自世界各地的个人设计师、设计团队以及设计公司。</p>
-<p>✔ 这些作品并不仅限于网页或手机 app 设计，还有图片设计、品牌设计、动画、插图、平面艺术等等。</p>
-<p><img src="/images/tool/6.jpg"></p>
-<h4 id="国内设计师常用网站：花瓣网"><a href="#国内设计师常用网站：花瓣网" class="headerlink" title="国内设计师常用网站：花瓣网"></a>国内设计师常用网站：花瓣网</h4><p>✔ 花瓣网算是一个国内比较好的素材采集网，平时想要找的各种类型的图片素材在花瓣都能采集到，比如平面、漫画、摄影、UI 等等。</p>
-<p>✔ 而且花瓣的素材普遍都很有设计感和时尚感，很适合年轻一代做设计。</p>
-<p><img src="/images/tool/7.jpg"></p>
-<h4 id="设计师和开发常用网站：iconfont-cn"><a href="#设计师和开发常用网站：iconfont-cn" class="headerlink" title="设计师和开发常用网站：iconfont.cn"></a>设计师和开发常用网站：<a href="https://www.iconfont.cn/">iconfont.cn</a></h4><p>✔ 阿里巴巴旗下的免费 icon 百科网站，可免费下载矢量源文件，选择时可以打包所有你感兴趣的放在购物车，Download 时还可以选择颜色和大小,很贴心有木有！同时支持下载开发用代码。</p>
-<p>✔ 比如搜索关键词“love”看到的结果：</p>
-<p><img src="/images/tool/8.jpg"></p>
-<h4 id="壁纸天堂：Wallhaven"><a href="#壁纸天堂：Wallhaven" class="headerlink" title="壁纸天堂：Wallhaven"></a>壁纸天堂：<a href="https://alpha.wallhaven.cc/">Wallhaven</a></h4><p>✔ 图片量大而且还高清，分类清晰(人物/风景/动画)。</p>
-<p>✔ 相比一些图库不全，广告遍地，收费下载的壁纸网站，免费下载的 wallhaven 简直就是业界良心。</p>
-<p><img src="/images/tool/9.jpg"></p>
-<h4 id="在线制作流程图网站：ProcessOn"><a href="#在线制作流程图网站：ProcessOn" class="headerlink" title="在线制作流程图网站：ProcessOn"></a>在线制作流程图网站：<a href="https://www.processon.com/">ProcessOn</a></h4><p>✔ProcessOn 在线支持流程图、思维导图、原型图、UML、网络拓扑图、组织结构图等。</p>
-<p>✔ 轻松绘制，基本上是 0 难度上手。</p>
-<p><img src="/images/tool/10.jpg"></p>
-<h4 id="在线生成图片链接网站：SM-MS"><a href="#在线生成图片链接网站：SM-MS" class="headerlink" title="在线生成图片链接网站：SM.MS"></a>在线生成图片链接网站：<a href="https://sm.ms/">SM.MS</a></h4><p>✔SM.MS 图床网站只需上传一张本地的图片，点击生成链接即可，操作简单快捷。</p>
-<p>✔ 永久存储免注册，图片链接支持 https，可以删除上传的图片，提供多种图片链接格式。</p>
-<p><img src="/images/tool/11.jpg"></p>
-<h4 id="Listary：电脑文件秒搜-路径直达"><a href="#Listary：电脑文件秒搜-路径直达" class="headerlink" title="Listary：电脑文件秒搜+路径直达"></a>Listary：电脑文件秒搜+路径直达</h4><p>✔ 软件体积非常小，全局本地搜索的便捷工具，设置热键后，能在任何环境下调出窗口搜索文件，如我设置的是’Win+F’，想要找某文件时按下 Win+F 调出小长条搜索框就能进行实时搜索，非常便捷。</p>
-<p>✔ 相信你用了后会觉得它很高效的。</p>
-<p><img src="/images/tool/12.jpg"></p>
-<h4 id="v9porn"><a href="#v9porn" class="headerlink" title="v9porn"></a><a href="https://github.com/techGay/v9porn">v9porn</a></h4><p>✔ 看到上面的标题，想必大多数人都知道了吧嘿嘿嘿</p>
-<p>✔ 那这个项目就不多介绍了，自行体会，体验好的话就默默点个赞哦</p>
-<p><img src="/images/tool/13.jpg"></p>
-<p>本人 Github 链接如下，欢迎各位 Star</p>
-<p><a href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -6676,64 +6676,6 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
-    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
-    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
-<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
-<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
-<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
-<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
-<p><img src="/images/jsdelivr/1.jpg"></p>
-<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
-<p><img src="/images/jsdelivr/2.jpg"></p>
-<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
-<p><img src="/images/jsdelivr/3.jpg"></p>
-<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
-<p><img src="/images/jsdelivr/4.jpg"></p>
-<blockquote>
-<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
-</blockquote>
-<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
-<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
-<p><img src="/images/jsdelivr/5.jpg"></p>
-<p>这里需要注意一下：</p>
-<ul>
-<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
-<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
-<li>设定 Token：之前复制下来的 token</li>
-<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
-<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
-<li>gh:代表 GitHub</li>
-<li>miqilin21/static:用户名/仓库名</li>
-<li>@master:分支名称</li>
-</ul>
-<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
-<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
-
-<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
-<p><img src="/images/jsdelivr/6.jpg"></p>
-<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
-<blockquote>
-<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
-</blockquote>
-<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
-<ul>
-<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
-<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
-<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
-</ul>
-<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
-]]></content>
-      <categories>
-        <category>tools</category>
-      </categories>
-      <tags>
-        <tag>github</tag>
-        <tag>图床</tag>
-        <tag>PicGo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>你知道如何高效地在GitHub搜索开源项目吗?</title>
     <url>/2020/11/23/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</url>
     <content><![CDATA[<p>作为一个常逛 GitHub 的程序员，你真的知道如何高效地在 GitHub 搜索开源项目吗？你的操作是不是单纯的在搜索框内输入关键词进行搜索的？嘿嘿，这篇文章就来告诉你有啥搜索的技巧或者说骚操作吧。</p>
@@ -6810,6 +6752,64 @@ $div.addClass(<span class="hljs-string">&quot;red&quot;</span>); <span class="hl
       </tags>
   </entry>
   <entry>
+    <title>使用GitHub+jsDelivr+PicGo搭建免费快速图床</title>
+    <url>/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。</p>
+<p>2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天需要收费或者关闭服务了，Blog 上的图片只能 GG 了。</p>
+<p>3.使用 GitHub 仓库创建一个图床，存在的问题是国内访问 github 的速度不是很快，可以利用 jsDelivr CDN 加速访问（jsDelivr 是一个免费开源的 CDN 解决方案）。jsDelivr 是首个「打通中国大陆与海外的免费 CDN 服务」，网页开发者无须担心中国防火墙问题而影响体验。</p>
+<h3 id="实际搭建"><a href="#实际搭建" class="headerlink" title="实际搭建"></a>实际搭建</h3><h4 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h4><p>首先得在<code>GitHub</code>创建一个<strong>存放图片</strong>的仓库，这个无须多言。不会的<a href="https://wiki.jikexueyuan.com/project/github-basics/creat-new-repo.html">点此链接</a>查看如何创建。</p>
+<h4 id="获取-token"><a href="#获取-token" class="headerlink" title="获取 token"></a>获取 token</h4><p>① 访问<a href="https://github.com/settings/tokens%EF%BC%8C%E7%82%B9%E5%87%BB%60Generate">https://github.com/settings/tokens，点击`Generate</a> new token`按钮。</p>
+<p><img src="/images/jsdelivr/1.jpg"></p>
+<p>② 填入<code>Note</code>，这里就叫 PicGo 好了，并勾选<code>repo</code> 。</p>
+<p><img src="/images/jsdelivr/2.jpg"></p>
+<p>③ 滚动到最下面点击<code>Generate token</code>。</p>
+<p><img src="/images/jsdelivr/3.jpg"></p>
+<p>④ 然后就将生成的<code>token</code>复制下来，后面在<code>PicGo</code>配置的时候会用到。</p>
+<p><img src="/images/jsdelivr/4.jpg"></p>
+<blockquote>
+<p>如果没有复制就离开了此页面，是需要再生成一次的。进入之前输入的<code>Note</code>中会有一个<code>Regenerate token</code>，重新再点击生成一次即可。</p>
+</blockquote>
+<h4 id="配置-PicGo"><a href="#配置-PicGo" class="headerlink" title="配置 PicGo"></a>配置 PicGo</h4><p>① 首先下载安装<code>PicGo</code>软件，Mac 与 Win 都支持。下载地址：<a href="https://github.com/Molunerfinn/PicGo/releases">https://github.com/Molunerfinn/PicGo/releases</a></p>
+<p>② 然后打开<code>PicGo</code>，进入到<code>图床设置</code>-&gt;<code>github图床</code>进行如下配置：</p>
+<p><img src="/images/jsdelivr/5.jpg"></p>
+<p>这里需要注意一下：</p>
+<ul>
+<li>设定仓库名：填写你的仓库名称，格式：用户名/仓库名</li>
+<li>设定分支名：仓库的分支名，一般填写 master 就行</li>
+<li>设定 Token：之前复制下来的 token</li>
+<li>指定存储路径：图片在仓库中的存储路径，img/可自定义名称</li>
+<li>设定自定义域名：访问图片的域名，例：<a href="https://cdn.jsdelivr.net/gh/miqilin21/static@master">https://cdn.jsdelivr.net/gh/miqilin21/static@master</a></li>
+<li>gh:代表 GitHub</li>
+<li>miqilin21/static:用户名/仓库名</li>
+<li>@master:分支名称</li>
+</ul>
+<p>一个完整的图片路径如下，比如存放名为 12jiqiao.jpg 的图片：</p>
+<pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>cdn.jsdelivr.net<span class="hljs-regexp">/gh/mi</span>qilin21<span class="hljs-regexp">/static@master/img</span><span class="hljs-regexp">/12jiqiao.jpg</span></code></pre>
+
+<p>到这里你就可以搞定了，接下来你可以通过 PicGo 方便地上传图片了，它支持拖拽、点击、剪贴板上传，上传到 Github 仓库后，你就可以复制 PicGo 相册里的图片链接啦。</p>
+<p><img src="/images/jsdelivr/6.jpg"></p>
+<p>当然，你也可以通过 Git 命令，将本地图片批量上传到 Github 对应的仓库上，再替换成原文中的图片链接地址，以完成图片迁移的工作。</p>
+<blockquote>
+<p>关于 PicGo 的使用，请参考<a href="https://picgo.github.io/PicGo-Doc/zh/">官方文档</a></p>
+</blockquote>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>整个过程算比较简单，创建 Github 仓库，并获取 token，填入 PicGo 配置，上传图片即可完成。GitHub+jsDelivr+PicGo 搭建的图片有这样的好处：</p>
+<ul>
+<li>在 Github 存储图片，利于博主对于图片的掌控，并且 Github 仓库的容量有 1G 的上限，对个人博客来说绰绰有余。</li>
+<li>使用 jsDelivr 加速静态文件访问，能够优化博客体验。</li>
+<li>使用 PicGo 的原因是因为能够方便地将上传图片到 Github，并直接获取 jsDelivr 的加速后的图片地址。</li>
+</ul>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+]]></content>
+      <categories>
+        <category>tools</category>
+      </categories>
+      <tags>
+        <tag>github</tag>
+        <tag>图床</tag>
+        <tag>PicGo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>使用Hexo+GitHub搭建个人博客</title>
     <url>/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>hexo 是一个快速、简洁且高效的博客框架，拥有一个简单的服务器（可以用来当简单的动态博客使用），也有生成器，生成的静态文件可以一键部署到 Github Pages 上，用起来比较方便，并且能使用的主题也很多，所以就用它啦~</p>
@@ -6832,7 +6832,7 @@ $ hexo server              //启动本地服务器，进行博客文章预览</c
 <li>把第 6 行的 title 改成你想要的名字</li>
 <li>把第 10 行的 author 改成你想取大名</li>
 <li>把最后一行的 type 改成 <code>type: git</code></li>
-<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#117;&#98;&#46;&#x63;&#111;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
+<li>在最后一行后面新增一行，左边与 type 平齐，加上一行 <code>repo: 仓库地址</code> （请将仓库地址改为「你的用户名.github.io」对应的仓库地址，仓库地址最好以 <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a>: 开头）<br><img src="/images/hexogit/4.jpg"></li>
 </ul>
 <p><img src="/images/hexogit/5.png"></p>
 <p>3、修改完成配置后在 myBlog 目录下执行命令：</p>
@@ -6847,7 +6847,7 @@ $ hexo deploy                             //将本地博客代码部署到Github
 <p>5、去看你的博客，应该能看到这篇新文章啦！</p>
 <h4 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h4><p>1、<a href="https://github.com/hexojs/hexo/wiki/Themes">https://github.com/hexojs/hexo/wiki/Themes</a> 上面有主题合集</p>
 <p>2、随便找一个主题，进入主题的 GitHub 首页，比如我找的是 <a href="https://github.com/iissnan/hexo-theme-next">https://github.com/iissnan/hexo-theme-next</a></p>
-<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>:iissnan/hexo-theme-next.git</p>
+<p>3、复制它的 SSH 地址或 HTTPS 地址，假设地址为 <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#99;&#111;&#x6d;</a>:iissnan/hexo-theme-next.git</p>
 <p>4、<code>cd themes</code></p>
 <p>5、<code>git clone git@github.com:iissnan/hexo-theme-next.git</code></p>
 <p>6、<code>cd ..</code></p>
@@ -7303,6 +7303,64 @@ hello(<span class="hljs-string">&quot;David&quot;</span>);</code></pre>
       </tags>
   </entry>
   <entry>
+    <title>学会如何学习（一）</title>
+    <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
+<p>无意中在<a href="http://link.zhihu.com/?target=https://www.coursera.org/learn/ruhe-xuexi">Coursera</a>上发现了一门神奇适用的课程，叫做“Learning How to Learn”， 旨在利用科学知识以及授课者切身经验教会你学会如何学习，学习这门课我才开始恍然大悟，原来学习应该这样学习，算是初步悟到如何学习的真谛了。下面我将讨论我从第一周课堂中学到的经验教训。</p>
+<h4 id="利用专注与发散思维"><a href="#利用专注与发散思维" class="headerlink" title="利用专注与发散思维"></a>利用专注与发散思维</h4><p>研究发现，人有两种完全不同的思考模式，专注模式（focused mode）和发散模式（diffuse mode）。就目前神经学家所知，专注模式与发散模式只能单独存在，你不能同时使用两种模式。而发散思维是你试图了解新事物时应该采取的思维模式。</p>
+<p>课程讲述萨尔瓦多·达利 (20 世纪著名的超现实主义画家)有时会坐在椅子上，放空自己的大脑，并常常会漫无目的地思考一下之前的工作。这样他就能把脑海中那些在发散模式下得到的的联想和点子及时地收集起来，然后带着这些在发散模式下得到的新想法回到专注模式里去。<br><img src="/images/learn1/1.jpg"></p>
+<p>这个例子目的是告诉我们：当你处于长期专注的学习模式时，可以通过小睡或做一些运动，然后过渡到发散模式，有助于你的大脑建立必要的神经连接，在你的长时间记忆中建立持久的知识块。还要强调的是，当你学习一些新的东西，尤其是比较难的东西的时候，你的大脑需要有在两种学习模式之间来回转换的能力，这能帮助你更高效地学习。想要锻炼你的神经，你需要每天做一点练习，逐步建立起支撑你思考的神经骨架，这就是关键所在。</p>
+<h4 id="拖延症"><a href="#拖延症" class="headerlink" title="拖延症"></a>拖延症</h4><p>每个人或多或少有拖延的毛病，只不过有些人比较严重。当你面对一件你极度不情愿做的事情时，就好像激活了大脑中与疼痛相关的区域。</p>
+<p>所以拖延的过程大概如下图：首先，某件事可能会让你产生轻微的不安；为了消除这种不适感，你会转而去做一些更让人愉悦的事情，这么做的结果就是你觉得更开心了，但这只是暂时的，后续文章会更深入地去了解拖延症。</p>
+<p><img src="/images/learn1/2.jpg"></p>
+<h4 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h4><p>课程告诉我们一个小巧方便的意志力工具，这个小工具叫做番茄工作法 (Pomodoro)。这个小技巧所需的只有一个计时器（手机上搜索“番茄 ToDo”APP，电脑端也有许多类似的软件，可以自行选择），具体的实行过程是这样的：</p>
+<ol>
+<li>首先需要把计时器设定 25 分钟，屏蔽所有会打扰你的事物；</li>
+<li>在 25 分钟内，集中精力专注你所要专注的事；</li>
+<li>最后还有一件很重要的事情是，当你前两步之后要给自己一点小小的奖励。比如：上几分钟网、喝杯咖啡或者简单地做一下运动，来使你的大脑可以愉悦的放松一会儿。<br><img src="/images/learn1/3.jpg"></li>
+</ol>
+<p>实行后你会发现番茄工作法的使用效果非常明显，这就像是你的大脑在健身房做完一次 25 分钟的高强度训练，然后进行休息放松一样。当你无法专注的时候不妨试一试！</p>
+<h4 id="记忆与练习"><a href="#记忆与练习" class="headerlink" title="记忆与练习"></a>记忆与练习</h4><p>当我们回忆数学方程组时，我们使用的是长期记忆。当我们尝试结合脑海中的想法来帮助我们理解某一概念或解决某一问题时，我们使用的是工作记忆。工作记忆和长期记忆是两种主要的记忆系统，工作记忆是大脑在即时且有意识地处理信息时所涉及的那部分记忆。</p>
+<ul>
+<li>长期记忆就像一个储存仓库，不同的长期记忆储存在大脑的不同区域。研究表明，当你首次尝试将一段短期记忆转入长期记忆中时，你需要多次回顾以增加需要时找到相关信息的几率。</li>
+<li>当你遇到新事物时，你通常会运用工作记忆来处理它，如果你想将这个信息转移到长期记忆里，就需要间隔重复的练习来促进这一过程。</li>
+<li>不断重复你尝试记忆的内容，但重复的过程必须间隔开来。如果你尝试在一个晚上重复记忆 20 次相同的内容，记忆效果还比不上在几天内重复同样的次数这种方法。</li>
+</ul>
+<p>练习在数学和科学中学到的思想和概念是很重要的，通过反复实践练习可以帮助你提高和增强学习过程中生成的神经连接，越是抽象的东西越要注重练习。</p>
+<ul>
+<li>学习的时候如果一心一意地专注学习，时间一长学习效果反而不好，需要休息一下或者至少稍稍将注意力转移到其他地方。在这段看似放松的时间里，你大脑的发散模式就有机会在后台帮你完成对概念的理解。如果你不这么做，而是进行填鸭式学习，你的知识库看起来将会像杂乱不堪，基础不牢靠的泥堆。</li>
+<li>如果你有拖延问题，就需要使用番茄工作法帮助你注意力集中一段时间，并适当休息。这会帮你行动起来，并开始建立你需要的神经模式，使你能更有成效地学习更具挑战性的内容！</li>
+</ul>
+<h4 id="睡眠的重要性"><a href="#睡眠的重要性" class="headerlink" title="睡眠的重要性"></a>睡眠的重要性</h4><p>你怎么也不会想到，当你绝对清醒时你的大脑会产生一些有毒的物质，那大脑如何除掉这些有毒物质呢？原来当人们睡觉时，大脑细胞会收缩，从而增加脑内细胞之间的距离。这就像疏通了一条溪流，液体会在细胞空隙间流过，冲走有毒的物质。所以，睡觉这件事有时候看起来像是浪费时间，实际上是大脑保持清洁和健康的一种方式。<br><img src="/images/learn1/4.jpg"></p>
+<p>睡眠不足意味着少量代谢毒素残留在你的大脑之中，而这些有毒物质会让你思维混乱，不仅会让你发挥失常，还会导致头疼、抑郁症、糖尿病、心脏类疾病，甚至寿命缩短，这绝不是在吓你，可以参考一下睡眠不足的危害。</p>
+<p>睡眠对人们解决困难问题和理解所学知识的能力有显著影响，大脑会将你学习和思考过的想法、概念进行整理，清除掉一些不太重要的部分；同时增强你需要或想要记住的区域的记忆。在睡梦中，大脑还会将你努力学习到的东西在神经中枢一遍遍排演以增强加深记忆力！</p>
+<p>如果你在打盹或睡觉之前，复习一遍所学东西，那你将有更大可能性梦到它。如果你更进一步，告诉自己你想要梦到这些内容，你梦到它的几率也会大大提高。梦见你所学的知识，本质上能够增强你的理解能力，在一定程度上可以将你的记忆整合成更易被掌握的组块信息。</p>
+<p>现在是时候去打个盹儿了！</p>
+<h4 id="采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法"><a href="#采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法" class="headerlink" title="采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法"></a>采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法</h4><p>1、当你遇到完全陌生的事物时你是如何更容易学习的？</p>
+<p>答：单刀直入地实践，因为实践出真知，且大量的阅读作用甚微，同时最好有专家的指点。</p>
+<p>2、你是如何让自己在一场枯燥的讲座中保持专注的？</p>
+<p>答：没有简单的方法是可以让你对不感兴趣的东西一直保持参与度的，但是有一个小技巧，就是用提问来“伏击”演讲者，这种打断通常会带出更有趣的讨论；比起被动的听，积极参与会让你学到更多。</p>
+<p>3、你是如何进入发散思维模式，并从中获益的呢？</p>
+<p>答：慢跑或户外锻炼是让思维跳出常规想法的绝佳方法，而且这时极其可能迸发灵感。奔跑中，事物从你身边略过，你会开始思考发生的一些事情，然后意识之外的想法涌上表面，接着通常就会出现有用的新想法。但是，这些转瞬即逝的点子过后很容易忘记，我会随身携带一本小本子及时记下来。</p>
+<p>4、你会同时进行多项任务吗？</p>
+<p>答：生活中有大量任务不断地“轰炸”，我们一刻也离不开多线程工作，如果做不到统筹兼顾，日子将会很难熬。但我们不能真正地同时做两件事，容易混淆且效率低下。同时处理多个任务实际是一种切换任务的能力。你可能要花很多时间才能完成这样的切换，切换任务并回到当时中断的地方开始工作，这是高效完成任务的方法之一。</p>
+<p>5、神经科学方面的知识有运用到学习上的例子吗？</p>
+<p>答：别把自己关在房间里，充足的空间、能激励你的人、很多可以积极参与的事件，以及运动和锻炼都大有助益，它们会增加新神经元的数量并促进神经元的生长。</p>
+<p>6、你有关于高效地集中注意力、学习和创新的技巧吗？</p>
+<p>答：处于富有创新氛围的环境中，是一种提升自身创造力的方法。当你和别人交流、阐述观点，你就会有更好的想法，这一过程通常有助于创新。</p>
+<p>7、给大家的建议?</p>
+<p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
+<p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
+]]></content>
+      <categories>
+        <category>学习之道</category>
+      </categories>
+      <tags>
+        <tag>高效学习</tag>
+        <tag>方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何快速搭建静态资源服务器</title>
     <url>/2019/12/18/%E5%A6%82%E4%BD%95%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
     <content><![CDATA[<p>在开发中，很多时候需要在本地开启静态资源服务器来测试，所以就需要一个简单省事好用的 http 服务器。以前的时候，都是使用 php 的本地环境，也算比较方便，但是自从学了 nodejs，发现创建 http-server 更方便。<br><img src="/images/http-server/1.jpg"></p>
@@ -7387,64 +7445,6 @@ npm config <span class="hljs-built_in">set</span> progress <span class="hljs-lit
       <tags>
         <tag>Node.js</tag>
         <tag>http-server</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>学会如何学习（一）</title>
-    <url>/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</url>
-    <content><![CDATA[<p>我最近对前端开发有着强烈的热情，这促使我有不断学习的冲动，但这对于我来说是一个全新的领域，以我一贯用的那种填鸭式的方法学习是肯定行不通的。那么面对新知识，自己为什么总是学不好？那如何才能学好？</p>
-<p>无意中在<a href="http://link.zhihu.com/?target=https://www.coursera.org/learn/ruhe-xuexi">Coursera</a>上发现了一门神奇适用的课程，叫做“Learning How to Learn”， 旨在利用科学知识以及授课者切身经验教会你学会如何学习，学习这门课我才开始恍然大悟，原来学习应该这样学习，算是初步悟到如何学习的真谛了。下面我将讨论我从第一周课堂中学到的经验教训。</p>
-<h4 id="利用专注与发散思维"><a href="#利用专注与发散思维" class="headerlink" title="利用专注与发散思维"></a>利用专注与发散思维</h4><p>研究发现，人有两种完全不同的思考模式，专注模式（focused mode）和发散模式（diffuse mode）。就目前神经学家所知，专注模式与发散模式只能单独存在，你不能同时使用两种模式。而发散思维是你试图了解新事物时应该采取的思维模式。</p>
-<p>课程讲述萨尔瓦多·达利 (20 世纪著名的超现实主义画家)有时会坐在椅子上，放空自己的大脑，并常常会漫无目的地思考一下之前的工作。这样他就能把脑海中那些在发散模式下得到的的联想和点子及时地收集起来，然后带着这些在发散模式下得到的新想法回到专注模式里去。<br><img src="/images/learn1/1.jpg"></p>
-<p>这个例子目的是告诉我们：当你处于长期专注的学习模式时，可以通过小睡或做一些运动，然后过渡到发散模式，有助于你的大脑建立必要的神经连接，在你的长时间记忆中建立持久的知识块。还要强调的是，当你学习一些新的东西，尤其是比较难的东西的时候，你的大脑需要有在两种学习模式之间来回转换的能力，这能帮助你更高效地学习。想要锻炼你的神经，你需要每天做一点练习，逐步建立起支撑你思考的神经骨架，这就是关键所在。</p>
-<h4 id="拖延症"><a href="#拖延症" class="headerlink" title="拖延症"></a>拖延症</h4><p>每个人或多或少有拖延的毛病，只不过有些人比较严重。当你面对一件你极度不情愿做的事情时，就好像激活了大脑中与疼痛相关的区域。</p>
-<p>所以拖延的过程大概如下图：首先，某件事可能会让你产生轻微的不安；为了消除这种不适感，你会转而去做一些更让人愉悦的事情，这么做的结果就是你觉得更开心了，但这只是暂时的，后续文章会更深入地去了解拖延症。</p>
-<p><img src="/images/learn1/2.jpg"></p>
-<h4 id="番茄工作法"><a href="#番茄工作法" class="headerlink" title="番茄工作法"></a>番茄工作法</h4><p>课程告诉我们一个小巧方便的意志力工具，这个小工具叫做番茄工作法 (Pomodoro)。这个小技巧所需的只有一个计时器（手机上搜索“番茄 ToDo”APP，电脑端也有许多类似的软件，可以自行选择），具体的实行过程是这样的：</p>
-<ol>
-<li>首先需要把计时器设定 25 分钟，屏蔽所有会打扰你的事物；</li>
-<li>在 25 分钟内，集中精力专注你所要专注的事；</li>
-<li>最后还有一件很重要的事情是，当你前两步之后要给自己一点小小的奖励。比如：上几分钟网、喝杯咖啡或者简单地做一下运动，来使你的大脑可以愉悦的放松一会儿。<br><img src="/images/learn1/3.jpg"></li>
-</ol>
-<p>实行后你会发现番茄工作法的使用效果非常明显，这就像是你的大脑在健身房做完一次 25 分钟的高强度训练，然后进行休息放松一样。当你无法专注的时候不妨试一试！</p>
-<h4 id="记忆与练习"><a href="#记忆与练习" class="headerlink" title="记忆与练习"></a>记忆与练习</h4><p>当我们回忆数学方程组时，我们使用的是长期记忆。当我们尝试结合脑海中的想法来帮助我们理解某一概念或解决某一问题时，我们使用的是工作记忆。工作记忆和长期记忆是两种主要的记忆系统，工作记忆是大脑在即时且有意识地处理信息时所涉及的那部分记忆。</p>
-<ul>
-<li>长期记忆就像一个储存仓库，不同的长期记忆储存在大脑的不同区域。研究表明，当你首次尝试将一段短期记忆转入长期记忆中时，你需要多次回顾以增加需要时找到相关信息的几率。</li>
-<li>当你遇到新事物时，你通常会运用工作记忆来处理它，如果你想将这个信息转移到长期记忆里，就需要间隔重复的练习来促进这一过程。</li>
-<li>不断重复你尝试记忆的内容，但重复的过程必须间隔开来。如果你尝试在一个晚上重复记忆 20 次相同的内容，记忆效果还比不上在几天内重复同样的次数这种方法。</li>
-</ul>
-<p>练习在数学和科学中学到的思想和概念是很重要的，通过反复实践练习可以帮助你提高和增强学习过程中生成的神经连接，越是抽象的东西越要注重练习。</p>
-<ul>
-<li>学习的时候如果一心一意地专注学习，时间一长学习效果反而不好，需要休息一下或者至少稍稍将注意力转移到其他地方。在这段看似放松的时间里，你大脑的发散模式就有机会在后台帮你完成对概念的理解。如果你不这么做，而是进行填鸭式学习，你的知识库看起来将会像杂乱不堪，基础不牢靠的泥堆。</li>
-<li>如果你有拖延问题，就需要使用番茄工作法帮助你注意力集中一段时间，并适当休息。这会帮你行动起来，并开始建立你需要的神经模式，使你能更有成效地学习更具挑战性的内容！</li>
-</ul>
-<h4 id="睡眠的重要性"><a href="#睡眠的重要性" class="headerlink" title="睡眠的重要性"></a>睡眠的重要性</h4><p>你怎么也不会想到，当你绝对清醒时你的大脑会产生一些有毒的物质，那大脑如何除掉这些有毒物质呢？原来当人们睡觉时，大脑细胞会收缩，从而增加脑内细胞之间的距离。这就像疏通了一条溪流，液体会在细胞空隙间流过，冲走有毒的物质。所以，睡觉这件事有时候看起来像是浪费时间，实际上是大脑保持清洁和健康的一种方式。<br><img src="/images/learn1/4.jpg"></p>
-<p>睡眠不足意味着少量代谢毒素残留在你的大脑之中，而这些有毒物质会让你思维混乱，不仅会让你发挥失常，还会导致头疼、抑郁症、糖尿病、心脏类疾病，甚至寿命缩短，这绝不是在吓你，可以参考一下睡眠不足的危害。</p>
-<p>睡眠对人们解决困难问题和理解所学知识的能力有显著影响，大脑会将你学习和思考过的想法、概念进行整理，清除掉一些不太重要的部分；同时增强你需要或想要记住的区域的记忆。在睡梦中，大脑还会将你努力学习到的东西在神经中枢一遍遍排演以增强加深记忆力！</p>
-<p>如果你在打盹或睡觉之前，复习一遍所学东西，那你将有更大可能性梦到它。如果你更进一步，告诉自己你想要梦到这些内容，你梦到它的几率也会大大提高。梦见你所学的知识，本质上能够增强你的理解能力，在一定程度上可以将你的记忆整合成更易被掌握的组块信息。</p>
-<p>现在是时候去打个盹儿了！</p>
-<h4 id="采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法"><a href="#采访特伦斯·谢诺沃斯基-Terrence-Sejnowski-博士的学习方法" class="headerlink" title="采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法"></a>采访特伦斯·谢诺沃斯基 (Terrence Sejnowski) 博士的学习方法</h4><p>1、当你遇到完全陌生的事物时你是如何更容易学习的？</p>
-<p>答：单刀直入地实践，因为实践出真知，且大量的阅读作用甚微，同时最好有专家的指点。</p>
-<p>2、你是如何让自己在一场枯燥的讲座中保持专注的？</p>
-<p>答：没有简单的方法是可以让你对不感兴趣的东西一直保持参与度的，但是有一个小技巧，就是用提问来“伏击”演讲者，这种打断通常会带出更有趣的讨论；比起被动的听，积极参与会让你学到更多。</p>
-<p>3、你是如何进入发散思维模式，并从中获益的呢？</p>
-<p>答：慢跑或户外锻炼是让思维跳出常规想法的绝佳方法，而且这时极其可能迸发灵感。奔跑中，事物从你身边略过，你会开始思考发生的一些事情，然后意识之外的想法涌上表面，接着通常就会出现有用的新想法。但是，这些转瞬即逝的点子过后很容易忘记，我会随身携带一本小本子及时记下来。</p>
-<p>4、你会同时进行多项任务吗？</p>
-<p>答：生活中有大量任务不断地“轰炸”，我们一刻也离不开多线程工作，如果做不到统筹兼顾，日子将会很难熬。但我们不能真正地同时做两件事，容易混淆且效率低下。同时处理多个任务实际是一种切换任务的能力。你可能要花很多时间才能完成这样的切换，切换任务并回到当时中断的地方开始工作，这是高效完成任务的方法之一。</p>
-<p>5、神经科学方面的知识有运用到学习上的例子吗？</p>
-<p>答：别把自己关在房间里，充足的空间、能激励你的人、很多可以积极参与的事件，以及运动和锻炼都大有助益，它们会增加新神经元的数量并促进神经元的生长。</p>
-<p>6、你有关于高效地集中注意力、学习和创新的技巧吗？</p>
-<p>答：处于富有创新氛围的环境中，是一种提升自身创造力的方法。当你和别人交流、阐述观点，你就会有更好的想法，这一过程通常有助于创新。</p>
-<p>7、给大家的建议?</p>
-<p>1） 聪明的人并不一定会成功，有很多聪明的人并不成功，而那些富有激情并且坚持努力的人容易达到，是因为人生中的成功多半来自于激情和努力，往往成功的人的身上都具有这样的品质。</p>
-<p>2）每天我们周围都有值得发现去重新理解的东西，我们必须要用不同的视角来看待这些普通的东西，这很重要。</p>
-]]></content>
-      <categories>
-        <category>学习之道</category>
-      </categories>
-      <tags>
-        <tag>高效学习</tag>
-        <tag>方法</tag>
       </tags>
   </entry>
   <entry>

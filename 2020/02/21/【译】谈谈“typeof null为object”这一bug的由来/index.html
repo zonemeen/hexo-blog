@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>【译】谈谈“typeof null为object”这一bug的由来 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      762 字
+      764 字
     </span>
   
 
@@ -249,44 +249,13 @@
 <li><code>null</code>(JSVAL_NULL) 为机器码 NULL 的空指针，或者说：为 0 的 object 类型标签。</li>
 </ul>
 <p>现在应该明白为什么<code>typeof</code>认为<code>null</code>是一个对象：它检测一个他的类型标签并且返回”<code>object</code>”。 以下是<code>typeof</code>的引擎代码：</p>
-<div class="hljs"><pre><code class="hljs c">JS_PUBLIC_API(JSType)
-   JS_TypeOfValue(JSContext *cx, jsval v)
-   &#123;
-       JSType type = JSTYPE_VOID;
-       JSObject *obj;
-       JSObjectOps *ops;
-       JSClass *clasp;
-
-       CHECK_REQUEST(cx);
-       <span class="hljs-keyword">if</span> (JSVAL_IS_VOID(v)) &#123;  <span class="hljs-comment">// (1)</span>
-           type = JSTYPE_VOID;
-       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_OBJECT(v)) &#123;  <span class="hljs-comment">// (2)</span>
-           obj = JSVAL_TO_OBJECT(v);
-           <span class="hljs-keyword">if</span> (obj &amp;&amp;
-               (ops = obj-&gt;<span class="hljs-built_in">map</span>-&gt;ops,
-                ops == &amp;js_ObjectOps
-                ? (clasp = OBJ_GET_CLASS(cx, obj),
-                   clasp-&gt;call || clasp == &amp;js_FunctionClass) <span class="hljs-comment">// (3,4)</span>
-                : ops-&gt;call != <span class="hljs-number">0</span>)) &#123;  <span class="hljs-comment">// (3)</span>
-               type = JSTYPE_FUNCTION;
-           &#125; <span class="hljs-keyword">else</span> &#123;
-               type = JSTYPE_OBJECT;
-           &#125;
-       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_NUMBER(v)) &#123;
-           type = JSTYPE_NUMBER;
-       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_STRING(v)) &#123;
-           type = JSTYPE_STRING;
-       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_BOOLEAN(v)) &#123;
-           type = JSTYPE_BOOLEAN;
-       &#125;
-       <span class="hljs-keyword">return</span> type;
-   &#125;</code></pre></div>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">JS_PUBLIC_API(JSType)<br>   JS_TypeOfValue(JSContext *cx, jsval v)<br>   &#123;<br>       JSType type = JSTYPE_VOID;<br>       JSObject *obj;<br>       JSObjectOps *ops;<br>       JSClass *clasp;<br><br>       CHECK_REQUEST(cx);<br>       <span class="hljs-keyword">if</span> (JSVAL_IS_VOID(v)) &#123;  <span class="hljs-comment">// (1)</span><br>           type = JSTYPE_VOID;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_OBJECT(v)) &#123;  <span class="hljs-comment">// (2)</span><br>           obj = JSVAL_TO_OBJECT(v);<br>           <span class="hljs-keyword">if</span> (obj &amp;&amp;<br>               (ops = obj-&gt;<span class="hljs-built_in">map</span>-&gt;ops,<br>                ops == &amp;js_ObjectOps<br>                ? (clasp = OBJ_GET_CLASS(cx, obj),<br>                   clasp-&gt;call || clasp == &amp;js_FunctionClass) <span class="hljs-comment">// (3,4)</span><br>                : ops-&gt;call != <span class="hljs-number">0</span>)) &#123;  <span class="hljs-comment">// (3)</span><br>               type = JSTYPE_FUNCTION;<br>           &#125; <span class="hljs-keyword">else</span> &#123;<br>               type = JSTYPE_OBJECT;<br>           &#125;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_NUMBER(v)) &#123;<br>           type = JSTYPE_NUMBER;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_STRING(v)) &#123;<br>           type = JSTYPE_STRING;<br>       &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (JSVAL_IS_BOOLEAN(v)) &#123;<br>           type = JSTYPE_BOOLEAN;<br>       &#125;<br>       <span class="hljs-keyword">return</span> type;<br>   &#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>上述代码执行的步骤如下：</p>
 <ul>
 <li>（1）引擎首先检测值是否是<code>undefined</code>(VOID)，它通过<code>==</code>做了这样的比较：</li>
 </ul>
-<div class="hljs"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span></code></pre></div>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span><br></code></pre></div></td></tr></table></figure>
 
 <ul>
 <li><p>下一个（2）是检测该值是否具有<code>object type</code>。如果它可使用<code>call</code>被调用（3）或其存在内部属性<code>[[Class]]</code>标记为函数（4），则 v 是函数。 否则，它是一个对象。 这是由<code>typeof null</code>生成的结果。</p>
@@ -294,7 +263,7 @@
 <li><p>后续检查是针对<code>number</code>，<code>string</code>和<code>boolean</code>，甚至没有明确检查<code>null</code>。这可以由以下 C 语言宏执行。</p>
 </li>
 </ul>
-<div class="hljs"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`</span></code></pre></div>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> JSVAL_IS_NULL(v)  ((v) == JSVAL_NULL)`</span><br></code></pre></div></td></tr></table></figure>
 
 <p>这看似是一个非常明显的 bug，但不要忘记，第一个版本的 JavaScript 完成只用了极少的时间，具体可以看看<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2011/06/birth_of_javascript.html">JavaScript 的诞生</a>。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
@@ -405,21 +374,16 @@
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -433,8 +397,8 @@
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -452,25 +416,26 @@
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

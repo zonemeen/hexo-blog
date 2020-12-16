@@ -11,7 +11,7 @@ Fluid.utils = {
   scrollToElement: function(target, offset) {
     var of = $(target).offset();
     if (of) {
-      $('body,html').animate({
+      $('html,body').animate({
         scrollTop: of.top + (offset || 0),
         easing   : 'swing'
       });

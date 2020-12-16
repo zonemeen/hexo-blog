@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>JavaScript系列之回调函数 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -233,109 +233,40 @@
 <p>先前介绍事件的时候有说过，「JavaScript 是一个事件驱动(Event-driven) 的编程语言」，而事件的概念就如同：</p>
 <p><strong>办公室电话响了(事件被触发 Event fired) -&gt; 接电话(处理事件 Event Handler)</strong></p>
 <p>而写成代码形式就类似：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 注：这里只是比喻，并没有电话响这个事件</span>
-Office.addEventListener(<span class="hljs-string">&quot;电话响&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> 接电话(<span class="hljs-params"></span>) </span>&#123;&#125;, <span class="hljs-literal">false</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 注：这里只是比喻，并没有电话响这个事件</span><br>Office.addEventListener(<span class="hljs-string">&quot;电话响&quot;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> 接电话(<span class="hljs-params"></span>) </span>&#123;&#125;, <span class="hljs-literal">false</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>可以看到，<code>Office</code>通过<code>addEventListener</code>方法去注册了一个事件，当这个事件被触发时，它会去执行我们所指定的第二个参数，也就是某个「函数」(接电话)。</p>
 <p>换句话说，这个函数只会在满足了某个条件才会被动地去执行，我们就可以说这是一个<strong>回调函数</strong>。</p>
 <p>经历过各种「事件」的你，想必也发现了一件事，所谓的回调函数其实就是「<strong>把函数作为参数传递给另一个函数，然后通过另一个函数来调用它</strong>」。</p>
 <p>不知大家有没有听懂？那我再讲一个简单案例吧：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; ... &#125;, <span class="hljs-number">1000</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">window</span>.setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123; ... &#125;, <span class="hljs-number">1000</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>如果我们希望隔某段时间之后，执行某件事，就可以通过<code>window.setTimeout</code>来帮助我们完成。</p>
 <p>像是上面的范例中，<code>window.setTimeout</code>带有两个参数，第一个是要做的事情，用一个函数来代表，第二个则是时间(1/1000 秒, milliseconds)。而第一个参数的函数也是回调函数的一种：「在经过了某段时间之后，才执行的函数」。</p>
 <p>当然，上面两个范例中的回调函数我们也可以把它单独抽出来定义：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> handler = <span class="hljs-function"><span class="hljs-keyword">function</span> 接电话(<span class="hljs-params"></span>) </span>&#123;&#125;;
-
-Office.addEventListener(<span class="hljs-string">&quot;电话响&quot;</span>, handler, <span class="hljs-literal">false</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> handler = <span class="hljs-function"><span class="hljs-keyword">function</span> 接电话(<span class="hljs-params"></span>) </span>&#123;&#125;;<br><br>Office.addEventListener(<span class="hljs-string">&quot;电话响&quot;</span>, handler, <span class="hljs-literal">false</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>这样会使你的代码看起来更清楚。</p>
 <p>除了事件以外，还有另一个会需要用到回调函数的场景，就是「<strong>控制多个函数间执行的顺序</strong>」。</p>
 <p>啥意思呢？来看个简单的例子：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);
-&#125;;
-
-<span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);
-&#125;;
-
-funA();
-funB();</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);<br>&#125;;<br><br><span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);<br>&#125;;<br><br>funA();<br>funB();<br></code></pre></div></td></tr></table></figure>
 
 <p>因为<code>funcA</code>与<code>funcB</code>都会立即执行，并且 JavaScript 的单线程模型决定了同时只能执行一个任务，其他任务都必须在后面排队等待，所以执行结果必定为：</p>
-<div class="hljs"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span>
-<span class="hljs-keyword">function</span> <span class="hljs-title">B</span></code></pre></div>
+<figure class="highlight ada"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ada"><span class="hljs-keyword">function</span> <span class="hljs-title">A</span><br><span class="hljs-keyword">function</span> <span class="hljs-title">B</span><br></code></pre></div></td></tr></table></figure>
 
 <p>但是，如果<code>funcA</code>是异步操作，<code>funcB</code>会立即执行，不会等到<code>funcA</code>结束再执行：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;;
-
-<span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);
-&#125;;
-
-funA();
-funB();</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);<br>  &#125;, <span class="hljs-number">1000</span>);<br>&#125;;<br><br><span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);<br>&#125;;<br><br>funA();<br>funB();<br></code></pre></div></td></tr></table></figure>
 
 <p>像这种时候，为了确保先执行<code>funcA</code>，就可以通过回调函数的形式来进行处理：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 为了确保先执行 funA 再执行 funB</span>
-<span class="hljs-comment">// 我们在 funA 加上 callback 参数</span>
-<span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>&#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);
-
-    <span class="hljs-comment">// 如果 callback 是个函数就调用它</span>
-    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">&quot;function&quot;</span>) &#123;
-      callback();
-    &#125;
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;;
-
-<span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);
-&#125;;
-
-<span class="hljs-comment">// 将 funB 作为参数带入 funA()</span>
-funA(funB);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 为了确保先执行 funA 再执行 funB</span><br><span class="hljs-comment">// 我们在 funA 加上 callback 参数</span><br><span class="hljs-keyword">var</span> funA = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">callback</span>) </span>&#123;<br>  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function A&quot;</span>);<br><br>    <span class="hljs-comment">// 如果 callback 是个函数就调用它</span><br>    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> callback === <span class="hljs-string">&quot;function&quot;</span>) &#123;<br>      callback();<br>    &#125;<br>  &#125;, <span class="hljs-number">1000</span>);<br>&#125;;<br><br><span class="hljs-keyword">var</span> funB = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;function B&quot;</span>);<br>&#125;;<br><br><span class="hljs-comment">// 将 funB 作为参数带入 funA()</span><br>funA(funB);<br></code></pre></div></td></tr></table></figure>
 
 <p>像这样，无论<code>funA</code>在执行的时候要等多久，<code>funB</code>都会等到<code>console.log(&#39;function A&#39;);</code>之后才执行。</p>
 <p>不过需要注意的是，我们可以将不止一个的回调函数作为参数传递给一个函数，就像我们能够传递不止一个变量一样，过多的异步编程嵌套在一起产生的多重回调函数甚至叫回调地狱，维护起来真的如名字一样会很可怕！</p>
 <p>多重回调函数就类似下面这样的形式：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">async</span>(<span class="hljs-params">arg, callback</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;参数为 &quot;</span> + arg + <span class="hljs-string">&quot; , 1秒后返回结果&quot;</span>);
-  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    callback(arg * <span class="hljs-number">2</span>);
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">final</span>(<span class="hljs-params">value</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;完成: &quot;</span>, value);
-&#125;
-
-<span class="hljs-keyword">async</span>(<span class="hljs-number">1</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;
-  <span class="hljs-keyword">async</span>(<span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;
-    <span class="hljs-keyword">async</span>(<span class="hljs-number">3</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;
-      <span class="hljs-keyword">async</span>(<span class="hljs-number">4</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;
-        <span class="hljs-keyword">async</span>(<span class="hljs-number">5</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;
-          <span class="hljs-keyword">async</span>(<span class="hljs-number">6</span>, final);
-        &#125;);
-      &#125;);
-    &#125;);
-  &#125;);
-&#125;);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">async</span>(<span class="hljs-params">arg, callback</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;参数为 &quot;</span> + arg + <span class="hljs-string">&quot; , 1秒后返回结果&quot;</span>);<br>  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    callback(arg * <span class="hljs-number">2</span>);<br>  &#125;, <span class="hljs-number">1000</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">final</span>(<span class="hljs-params">value</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;完成: &quot;</span>, value);<br>&#125;<br><br><span class="hljs-keyword">async</span>(<span class="hljs-number">1</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;<br>  <span class="hljs-keyword">async</span>(<span class="hljs-number">2</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;<br>    <span class="hljs-keyword">async</span>(<span class="hljs-number">3</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;<br>      <span class="hljs-keyword">async</span>(<span class="hljs-number">4</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;<br>        <span class="hljs-keyword">async</span>(<span class="hljs-number">5</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">value</span>) </span>&#123;<br>          <span class="hljs-keyword">async</span>(<span class="hljs-number">6</span>, final);<br>        &#125;);<br>      &#125;);<br>    &#125;);<br>  &#125;);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
 
 <p>执行结果为：</p>
-<div class="hljs"><pre><code class="hljs angelscript">参数为 <span class="hljs-number">1</span> , <span class="hljs-number">1</span>秒后返回结果
-参数为 <span class="hljs-number">2</span> , <span class="hljs-number">1</span>秒后返回结果
-参数为 <span class="hljs-number">3</span> , <span class="hljs-number">1</span>秒后返回结果
-参数为 <span class="hljs-number">4</span> , <span class="hljs-number">1</span>秒后返回结果
-参数为 <span class="hljs-number">5</span> , <span class="hljs-number">1</span>秒后返回结果
-参数为 <span class="hljs-number">6</span> , <span class="hljs-number">1</span>秒后返回结果
-完成:  <span class="hljs-number">12</span></code></pre></div>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">参数为 <span class="hljs-number">1</span> , <span class="hljs-number">1</span>秒后返回结果<br>参数为 <span class="hljs-number">2</span> , <span class="hljs-number">1</span>秒后返回结果<br>参数为 <span class="hljs-number">3</span> , <span class="hljs-number">1</span>秒后返回结果<br>参数为 <span class="hljs-number">4</span> , <span class="hljs-number">1</span>秒后返回结果<br>参数为 <span class="hljs-number">5</span> , <span class="hljs-number">1</span>秒后返回结果<br>参数为 <span class="hljs-number">6</span> , <span class="hljs-number">1</span>秒后返回结果<br>完成:  <span class="hljs-number">12</span><br></code></pre></div></td></tr></table></figure>
 
 <p>上面代码中，六个回调函数的嵌套，不仅写起来麻烦，容易出错，而且难以维护。</p>
 <p>如果真的不幸需要写到这么多层，这点后续我们介绍到<code>Promise</code>时会再说明如何摆脱这种困境。</p>
@@ -449,21 +380,16 @@ funA(funB);</code></pre></div>
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -477,8 +403,8 @@ funA(funB);</code></pre></div>
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -496,25 +422,26 @@ funA(funB);</code></pre></div>
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

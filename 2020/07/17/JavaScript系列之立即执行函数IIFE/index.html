@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>JavaScript系列之立即执行函数IIFE - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -232,25 +232,11 @@
 <p><strong>IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接来理解，Immediately 就是立即的意思，invoked 则是执行某个函数时「执行」的意思，function expression 是一种用来创建函数的方法，</strong>总的来说，就是用函数表达式的方式建立函数后并立即执行它**。</p>
 <p>下面我们将做更进一步的介绍和说明。</p>
 <h3 id="函数的声明"><a href="#函数的声明" class="headerlink" title="函数的声明"></a>函数的声明</h3><p>JavaScript 中有两种常见的声明函数的方法，分别是通过<strong>function 命令</strong>或<strong>函数表达式声明</strong>，来看个简单的例子：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);
-&#125;
-sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// function 命令</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sayHi</span>(<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hi&quot;</span> + name);<br>&#125;<br>sayHi(<span class="hljs-string">&quot;miqilin&quot;</span>);<br><br><span class="hljs-comment">// 函数表达式</span><br><span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);<br>&#125;;<br>sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 
 <h3 id="立即执行函数-IIFE"><a href="#立即执行函数-IIFE" class="headerlink" title="立即执行函数(IIFE)"></a>立即执行函数(IIFE)</h3><p>那么什么是<strong>IIFE</strong>呢？如同文章一开始所叙述的，<strong>IIFE 指的就是通过函数表达式的方式来创建函数，并且立即执行它</strong>。那我们要怎么做呢？</p>
 <p>首先我们可以用 console.log 的方式，先来看一下，我们刚刚创建的 sayHello 打印出来会长什么样子呢？</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span>
-<span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;;
-<span class="hljs-built_in">console</span>.log(sayHello);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 函数表达式</span><br><span class="hljs-keyword">var</span> sayHello = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);<br>&#125;;<br><span class="hljs-built_in">console</span>.log(sayHello);<br></code></pre></div></td></tr></table></figure>
 
 <p>结果会发现，直接把 sayHello 打印出来后，它会直接返回整个函数的代码内容，这是尚未”执行（Invoked）”代码前的结果。</p>
 <p><img src="/images/IIFE/1.jpg" srcset="/img/loading.gif"></p>
@@ -259,36 +245,25 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
 <p>上图就可以看出，在我们定义函数的同时，这段函数就会立即被执行了，当然最后的<code>( )</code>中可以加入参数：</p>
 <p><img src="/images/IIFE/3.jpg" srcset="/img/loading.gif"></p>
 <p>那如果我们把前面的声明变量去了呢，变成一个匿名函数：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;
-  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//不可行的做法</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"> name </span>)  </span>&#123;<br>  <span class="hljs-built_in">console</span>.log( <span class="hljs-string">&#x27;Hello &#x27;</span>  + name ) ;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>但是这么做是不可行的，因为 JavaScript 引擎在解析代码的时候，你用<code>function</code>作为开头，引擎会认为你现在要输入<code>function</code> 命令去创建函数，<strong>可是你却没有给该 function 名称，于是它无法正确理解这段代码便抛出错误</strong>：</p>
 <p><img src="/images/IIFE/4.jpg" srcset="/img/loading.gif"></p>
 <p>所以，这时候我们要做的是告诉 JavaScript 引擎说，这一整个并不是<code>function</code> 命令。要达到这样的目的，我们要让引擎在解析代码的时候，不是以读到<code>function</code> 作为开头。</p>
 <p>为了要达到这样的目的，我们最常使用的做法就是用括号<code>()</code>将<code>function()&#123; ...&#125;</code>包起来，像是这样：</p>
-<div class="hljs"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);
-&#125;);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello &quot;</span> + name);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
 
 <p><strong>因为我们只会在括号内放入表达式，例如(3+2)，而不会放命令在括号内，所以 JavaScript 就会以表达式的方式来读取这段函数。</strong></p>
 <p>在这种情况下，这个函数会被建立，但是不会被存在任何变量当中，也不会被执行。</p>
 <p>结合刚刚上面 IIFE 的概念，我们可以在创建这个函数的同时，将这个函数加以执行，我们同样只需要在最后加上括号<code>()</code>就可以了：</p>
 <p><img src="/images/IIFE/5.jpg" srcset="/img/loading.gif"></p>
 <p>这样 IIFE 的型式，会在许多的 JavaScript 框架中都看得到，比如 jQuery，jQuery 用了这样的手法将<code>window</code>与<code>undefined</code>保留起来：</p>
-<div class="hljs"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;
-  <span class="hljs-comment">// 略...</span>
-&#125;)(<span class="hljs-built_in">window</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">window</span>, <span class="hljs-literal">undefined</span></span>) </span>&#123;<br>  <span class="hljs-comment">// 略...</span><br>&#125;)(<span class="hljs-built_in">window</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>其中<code>undefined</code>是可以被修改的，虽然 jQuery 在 IIFE 定义了两个参数，但只传了一个<code>winodw</code>，就是为了保持<code>undefined</code>原本的样子。</p>
 <p><strong>通过这样的方式，我们可以「直接执行某个函数」，一个很重要的一点是，这样做不仅避免了外界访问此 IIFE 内的变量，而且又不会污染全局作用域。</strong></p>
 <h3 id="IIFE-执行过程解析"><a href="#IIFE-执行过程解析" class="headerlink" title="IIFE 执行过程解析"></a>IIFE 执行过程解析</h3><p>先看段 IIFE 实例代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//IIFE</span><br>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;<br>  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);<br>&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>让我们看看，当我们在执行这段代码的过程中，JavaScript 引擎实际发生了什么事吧！</p>
 <p>首先，当我执行这段代码时，会先建立全局执行上下文（Global Execution Context），但这时候这个执行上下文里面是没有任何内容的，因为我们并没有在全局这层建立任何变量（如果有的话，变量的名称会先提升在全局上下文中。）</p>
@@ -301,16 +276,7 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
 <p><img src="/images/IIFE/9.jpg" srcset="/img/loading.gif"></p>
 <p>因此，通过 IIFE，我们可以发现，在 IIFE 中所建立的变量，都不会影响到全局执行上下文所建立的变量，这里再次提一下，通过 IIFE，它避免了我们的变量间可能会互相干扰覆盖的情况。</p>
 <h3 id="IIFE-的实际应用"><a href="#IIFE-的实际应用" class="headerlink" title="IIFE 的实际应用"></a>IIFE 的实际应用</h3><p>让我们先回到上面的代码，这时候我们在函数的外面，声明一个同样的变量名(greeting)。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span><br><span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;<br><br><span class="hljs-comment">//IIFE</span><br>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">name</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;<br>  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);<br>&#125;)(<span class="hljs-string">&quot;miqilin&quot;</span>);<br><br><span class="hljs-built_in">console</span>.log(greeting);<br></code></pre></div></td></tr></table></figure>
 
 <p>这时候的打印出的顺序为：</p>
 <p><img src="/images/IIFE/10.jpg" srcset="/img/loading.gif"></p>
@@ -320,35 +286,16 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
 <p>如此，我们可以很直观地确定，放在 IIFE 里面的变量，并不会影响到其他外层的变量，也不会被外层的变量影响到。</p>
 <h3 id="如果执意要影响外层变量呢？"><a href="#如果执意要影响外层变量呢？" class="headerlink" title="如果执意要影响外层变量呢？"></a>如果执意要影响外层变量呢？</h3><p>虽然我们使用 IIFE 的主要目的就是希望不同执行上下文之间的变量不要互相影响，但如果我们还是想让函数执行上下文这层的变量能够同时影响到全局执行上下文的变量时，我们可以怎么操作呢？</p>
 <p>首先，我们得多一个参数，叫做 global，在最后带入参数的地方，我们填入对象<code>window</code>，由于我们知道对象是引用类型的特性，因此我们可以直接针对<code>window</code>里面的对象去做改变，像这里，我就可以直接把<code>global</code>层次的对象改成<code>hola</code>（<code>global.greeting = &#39;Hola&#39;</code>）：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span>
-<span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;
-
-<span class="hljs-comment">//IIFE</span>
-(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;
-  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;
-  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;
-  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);
-&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);
-
-<span class="hljs-built_in">console</span>.log(greeting);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//全局执行上下文</span><br><span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hi&quot;</span>;<br><br><span class="hljs-comment">//IIFE</span><br>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"><span class="hljs-built_in">global</span>, name</span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> greeting = <span class="hljs-string">&quot;Hello&quot;</span>;<br>  <span class="hljs-built_in">global</span>.greeting = <span class="hljs-string">&quot;Hola&quot;</span>;<br>  <span class="hljs-built_in">console</span>.log(greeting + <span class="hljs-string">&quot; &quot;</span> + name);<br>&#125;)(<span class="hljs-built_in">window</span>, <span class="hljs-string">&quot;miqilin&quot;</span>);<br><br><span class="hljs-built_in">console</span>.log(greeting);<br></code></pre></div></td></tr></table></figure>
 
 <p>结果如下，原本在全局执行上下文的<code>Hi</code>，被变换为<code>Hola</code>了：</p>
 <p><img src="/images/IIFE/12.jpg" srcset="/img/loading.gif"></p>
 <p>这操作够骚吧！哈哈~</p>
 <h3 id="一道-IIFE-经典面试题"><a href="#一道-IIFE-经典面试题" class="headerlink" title="一道 IIFE 经典面试题"></a>一道 IIFE 经典面试题</h3><p>题目是这样的：假设想通过循环+ setTimeout 来做到，在五秒钟之内，每秒钟依序通过<code>console.log</code>打印出：<code>0 1 2 3 4</code></p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span>);
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(i);<br>  &#125;, <span class="hljs-number">1000</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>真的是这样吗？我们来看看执行的结果：</p>
-<div class="hljs"><pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span>
-<span class="hljs-number">5</span></code></pre></div>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript"><span class="hljs-comment">//过了接近一秒五个五同时打出</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br><span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure>
 
 <p>为什么会这样呢？</p>
 <p>我们知道， JavaScript 是一个「异步」的语言，所以当我们执行这段代码时，<code>for</code>循环并不会等待<code>window.setTimeout</code>结束后才继续，而是在执行阶段就<strong>一口气跑完</strong>。</p>
@@ -356,36 +303,17 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
 <p><img src="/images/IIFE/13.jpg" srcset="/img/loading.gif"></p>
 <p>那么要怎么解决这个问题呢？</p>
 <p>我们可以把<code>window.setTimeout</code>包装成一个 IIFE，这个问题就迎刃而解了：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span>
-  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span>
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span>);
-  &#125;)(i);
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>  <span class="hljs-comment">// 为了凸显差异，我们将传入后的参数改名为 x</span><br>  <span class="hljs-comment">// 当然由于作用域的不同，要继续在内部沿用 i 也是可以的。</span><br>  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;<br>    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(x);<br>    &#125;, <span class="hljs-number">1000</span>);<br>  &#125;)(i);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>这时候你会发现，执行的结果就会是我们预期的<code>0 1 2 3 4</code>了，但还是有一个问题：就是<code>0 1 2 3 4</code>还是在一秒钟后同时出现啊？怎么解决？</p>
 <p>嘿嘿，相信聪明的你已经发现，由于<code>for</code>循环在一瞬间就跑完，等于那一瞬间它向<code>window</code>依序注册了五次 timer，每个 timer 都只等待一秒钟，当然同时出现喽。</p>
 <p>所以我们稍微修改一下：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;
-    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span>
-    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(x);
-    &#125;, <span class="hljs-number">1000</span> * x);
-  &#125;)(i);
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>  (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">x</span>) </span>&#123;<br>    <span class="hljs-comment">// 将原来的 1000 改成 1000 * x</span><br>    <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(x);<br>    &#125;, <span class="hljs-number">1000</span> * x);<br>  &#125;)(i);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>像这样，就可以依序打印出我们想要的结果喽！</p>
 <p>[注] ES6 以后新增了<code>let</code>与<code>const</code>，且改以<code>&#123; &#125;</code>作为它的块级作用域。</p>
 <p>换句话说，将上例中的<code>for</code>改为<code>let</code>就可以做到保留<code>i</code>在执行循环当下的「值」，打出一样的效果：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;
-  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-built_in">console</span>.log(i);
-  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) &#123;<br>  <span class="hljs-built_in">window</span>.setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-built_in">console</span>.log(i);<br>  &#125;, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>));<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>块级作用域的出现，实际上使得获得广泛应用的匿名立即执行函数表达式（匿名 IIFE）不再那么必要了。</p>
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
@@ -498,21 +426,16 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -526,8 +449,8 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -545,25 +468,26 @@ sayHello(<span class="hljs-string">&quot;miqilin&quot;</span>);</code></pre></di
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

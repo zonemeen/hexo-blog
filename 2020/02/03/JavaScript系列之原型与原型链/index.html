@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>JavaScript系列之原型与原型链 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -232,21 +232,12 @@
 <p>所以理解两种继承模式的差异是需要一定时间的，今天我们就来了解一下原型和原型链，在介绍原型和原型链之前，我们有必要先了解一下构造函数的知识。</p>
 <h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><p>构造函数模式的目的就是为了创建一个自定义类，并且创建这个类的实例。</p>
 <p>构造函数就是一个普通的函数，创建方式和普通函数没有区别，<strong>不同的是构造函数习惯上首字母大写</strong>。另外就是调用方式的不同，普通函数是直接调用，<strong>而构造函数需要使用 new 关键字来调用</strong>。我们先使用构造函数创建一个对象：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-<span class="hljs-built_in">console</span>.log(dog.name); <span class="hljs-comment">// 阿黄</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;<br>&#125;<br><br><span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();<br><span class="hljs-built_in">console</span>.log(dog.name); <span class="hljs-comment">// 阿黄</span><br></code></pre></div></td></tr></table></figure>
 
 <p>上面例子中，Dog 就是一个构造函数，我们使用 new 创建了一个实例对象 dog。</p>
 <h4 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h4><p><strong>prototype</strong></p>
 <p>JavaScript 是一种<strong>基于原型的语言</strong>(prototype-based language)，每个对象拥有一个<strong>原型对象</strong>，对象以其原型为模板，从原型继承方法和属性，这些属性和方法定义在对象的构造器函数的<code>prototype</code>属性上，而非对象实例本身。看以下代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-built_in">console</span>.log(Dog.prototype);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(Dog.prototype);<br></code></pre></div></td></tr></table></figure>
 
 <p>那这个构造函数的 <code>prototype</code> 属性指向的是什么呢？是这个函数的原型吗？</p>
 <p>打开 chrome 浏览器的开发者工具，在 console 栏输入上面的代码，你可以看到 <code>Dog.prototype</code> 的值：</p>
@@ -259,14 +250,7 @@
 <p>*<strong>*proto**</strong></p>
 <p>上面可以看到 Dog 原型（<code>Dog.prototype</code>）上有<code>__proto__</code>属性，这是一个访问器属性（即 getter 函数和 setter 函数），通过它可以访问到对象的内部<code>[[Prototype]]</code>(一个对象或<code>null</code>)。</p>
 <p>为了证明这一点,我们可以在 chrome 中输入：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">console</span>.log(dog.__proto__ === Dog.prototype); <span class="hljs-comment">// true</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;<br>&#125;<br><br><span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();<br><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === dog.__proto__); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(dog.__proto__ === Dog.prototype); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 
 <p>这里用<code>dog.__proto__</code>获取对象的原型，<code>__proto__</code>是每个实例上都有的属性，<code>prototype</code>是构造函数的属性，这两个并不一样，但<code>dog.__proto__</code>和<code>Dog.prototype</code>指向同一个对象。于是我们更新下关系图：</p>
 <p><img src="/images/prototype/3.png" srcset="/img/loading.gif"></p>
@@ -274,25 +258,12 @@
 <p><strong>constructor</strong></p>
 <p>指向实例对象倒是没有，因为一个构造函数可以生成多个实例，但是原型指向构造函数倒是有的，这就要讲到第三个属性：<code>constructor</code>，每个原型都有一个 <code>constructor</code> 属性指向关联的构造函数。</p>
 <p>为了验证这一点，我们在 chrome 中输入：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor === Dog); <span class="hljs-comment">// true</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;<br>&#125;<br><br><span class="hljs-built_in">console</span>.log(Dog.prototype.constructor === Dog); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 
 <p>所以再更新下关系图：</p>
 <p><img src="/images/prototype/4.png" srcset="/img/loading.gif"></p>
 <p>综上我们已经得出：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;
-&#125;
-
-<span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();
-
-<span class="hljs-built_in">console</span>.log(dog.__proto__ == Dog.prototype); <span class="hljs-comment">// true</span>
-<span class="hljs-built_in">console</span>.log(Dog.prototype.constructor == Dog); <span class="hljs-comment">// true</span>
-<span class="hljs-comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span>
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype); <span class="hljs-comment">// true</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Dog</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;阿黄&quot;</span>;<br>&#125;<br><br><span class="hljs-keyword">var</span> dog = <span class="hljs-keyword">new</span> Dog();<br><br><span class="hljs-built_in">console</span>.log(dog.__proto__ == Dog.prototype); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(Dog.prototype.constructor == Dog); <span class="hljs-comment">// true</span><br><span class="hljs-comment">// 顺便学习一个ES5的方法,可以获得对象的原型</span><br><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Object</span>.getPrototypeOf(dog) === Dog.prototype); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 
 <h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><p>在上文我们理解了原型，从字面意思看原型链肯定是与原型有关了，是一个个原型链接起来的么？我们先通过下面的图来观察一下。</p>
 <p><img src="/images/prototype/5.jpg" srcset="/img/loading.gif"></p>
@@ -304,68 +275,28 @@
 <p>官方解释是：每个对象拥有一个原型对象，通过<code>__proto__</code>指针指向上一个原型 ，并从中继承方法和属性，同时原型对象也可能拥有原型，这样一层一层，最终指向<code>null</code>。这种关系被称为**原型链 (prototype chain)**，通过原型链一个对象会拥有定义在其他对象中的属性和方法。</p>
 <h4 id="举个例子来帮助理解原型链"><a href="#举个例子来帮助理解原型链" class="headerlink" title="举个例子来帮助理解原型链"></a>举个例子来帮助理解原型链</h4><p>让我们实际来看个例子帮助我们了解 prototype chain 这个概念，这个例子只是单纯为了用来说明 prototype chain 的概念，实际上千万不要使用这样的方式编程！</p>
 <p>首先，我们先建立一个对象<code>person</code> 和一个对象<code>jay</code>：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
-  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
-  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
-  &#125;,
-&#125;;
-
-<span class="hljs-keyword">var</span> jay = &#123;
-  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
-&#125;;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;<br>  firstName: <span class="hljs-string">&quot;Default&quot;</span>,<br>  lastName: <span class="hljs-string">&quot;Default&quot;</span>,<br>  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;,<br>&#125;;<br><br><span class="hljs-keyword">var</span> jay = &#123;<br>  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,<br>  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,<br>&#125;;<br></code></pre></div></td></tr></table></figure>
 
 <p>接着，我们知道<strong>所有的对象里面都会包含原型（prototype）这个对象，在 JavaScript 中这个对象的名称为</strong>proto****。如同上述原型链（prototype chain）的概念，如果在原本的对象中找不到指定的属性名称或方法时，就会进一步到<code>__proto__</code>这里面来找。</p>
 <p>为了示范，我们来对<code>__proto__</code>做一些事：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
-jay.__proto__ = person;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span><br>jay.__proto__ = person;<br></code></pre></div></td></tr></table></figure>
 
 <p>如此，<code>jay</code>这个对象就继承了<code>person</code>对象。在这种情况下，如果我们想要呼叫某个属性或方法，但在原本<code>jay</code>这个对象中找不到这个属性名称或方法时，JavaScript 引擎就会到<code>__proto__</code>里面去找，所以当接着执行如下的代码时，并不会报错：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou;</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou;</span><br></code></pre></div></td></tr></table></figure>
 
 <p>我们可以得到”Jay Chou”的结果。原本在<code>jay</code>的这个对象中，是没有<code>getFullName()</code>这个方法的，但由于我让<code>__proto__</code>里面继承了<code>person</code>这个对象，所以当 JavaScript 引擎在<code>jay</code>对象里面找不到<code>getFullName()</code>这个方法时，它便会到<code>__proto__</code>里面去找，最后它找到了，于是它回传”Jay Chou”的结果。</p>
 <p>如果我是执行：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span><br></code></pre></div></td></tr></table></figure>
 
 <p>我们会得到的是 John 而不是’Default’，因为 JavaScript 引擎在寻找<code>jay.firstName</code>这个属性时，在<code>jay</code>这个对象里就可以找到了，因此它不会在往<code>__proto__</code>里面找。<strong>这也就是刚刚在上面所的原型链（prototype chain）的概念，一旦它在上层的部分找到该属性或方法时，就不会在往下层的 prototype 去寻找</strong>。</p>
 <p>在了解了 prototype chain 这样的概念后，让我们接着看下面这段代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> jane = &#123;
-  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
-&#125;;
-
-jane.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> jane = &#123;<br>  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,<br>&#125;;<br><br>jane.__proto__ = person;<br><span class="hljs-built_in">console</span>.log(jane.getFullName());<br></code></pre></div></td></tr></table></figure>
 
 <p>现在，你可以理解到会输出什么结果吗？</p>
 <p>答案是”Jane Default” 。</p>
 <p>因为在<code>jane</code>这个对象里只有<code>firstName</code>这个属性，所以当 JavaScript 引擎要寻找<code>getFullName()</code>这个方法和<code>lastName</code>这个属性时，它都会去找<code>__proto__</code>里面，而这里面找到的就是一开始建立的<code>person</code>这个对象的内容。</p>
 <p>全代码如下：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;
-  firstName: <span class="hljs-string">&quot;Default&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Default&quot;</span>,
-  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;
-  &#125;,
-&#125;;
-
-<span class="hljs-keyword">var</span> jay = &#123;
-  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,
-  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,
-&#125;;
-
-<span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span>
-jay.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou</span>
-<span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span>
-
-<span class="hljs-keyword">var</span> jane = &#123;
-  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,
-&#125;;
-
-jane.__proto__ = person;
-<span class="hljs-built_in">console</span>.log(jane.getFullName());</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> person = &#123;<br>  firstName: <span class="hljs-string">&quot;Default&quot;</span>,<br>  lastName: <span class="hljs-string">&quot;Default&quot;</span>,<br>  getFullName: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.firstName + <span class="hljs-string">&quot; &quot;</span> + <span class="hljs-built_in">this</span>.lastName;<br>  &#125;,<br>&#125;;<br><br><span class="hljs-keyword">var</span> jay = &#123;<br>  firstName: <span class="hljs-string">&quot;Jay&quot;</span>,<br>  lastName: <span class="hljs-string">&quot;Chou&quot;</span>,<br>&#125;;<br><br><span class="hljs-comment">//千万不要照着下面这样做，这么做只是为了示范</span><br>jay.__proto__ = person;<br><span class="hljs-built_in">console</span>.log(jay.getFullName()); <span class="hljs-comment">// Jay Chou</span><br><span class="hljs-built_in">console</span>.log(jay.firstName); <span class="hljs-comment">// Jay</span><br><br><span class="hljs-keyword">var</span> jane = &#123;<br>  firstName: <span class="hljs-string">&quot;Jane&quot;</span>,<br>&#125;;<br><br>jane.__proto__ = person;<br><span class="hljs-built_in">console</span>.log(jane.getFullName());<br></code></pre></div></td></tr></table></figure>
 
 <p>以上就是目前能总结的全部了，肯定还是有缺陷的地方，后续还会修改完善的。最后再看底下这张图，是否有了更深入的理解呢？</p>
 <p><img src="/images/prototype/6.png" srcset="/img/loading.gif"></p>
@@ -481,21 +412,16 @@ jane.__proto__ = person;
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -509,8 +435,8 @@ jane.__proto__ = person;
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -528,25 +454,26 @@ jane.__proto__ = person;
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

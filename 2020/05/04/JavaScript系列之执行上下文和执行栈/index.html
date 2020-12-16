@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>JavaScript系列之执行上下文和执行栈 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -257,11 +257,7 @@
 <p>根据执行栈 LIFO 规则，当栈顶函数运行完成后，其对应的<strong>函数</strong>执行上下文将会从执行栈中 Pop 出，上下文控制权将移到当前执行栈的<strong>下一个</strong>执行上下文，最终移回到<strong>全局</strong>执行上下文，全局上下文只有唯一的一个，它在浏览器关闭时 Pop 出。</p>
 <p>看到目前为止，是否觉得这两个概念还是有点晦涩难懂呢？那…接下来通过几小段代码和图解来详细介绍并理解吧。</p>
 <h3 id="执行上下文是如何执行的呢？"><a href="#执行上下文是如何执行的呢？" class="headerlink" title="执行上下文是如何执行的呢？"></a>执行上下文是如何执行的呢？</h3><p>让我们先来看一下这段简单代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  b();
-&#125;
-a();</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;<br>  b();<br>&#125;<br>a();<br></code></pre></div></td></tr></table></figure>
 
 <p>这段代码背后执行的逻辑是这样的：</p>
 <p>首先，全局执行上下文（Global Execution Context）会被建立，这时候会一并建立<code>this</code>、<code>global object</code> (<code>window</code>)，在函数开始执行的过程中，<code>function a</code>和<code>b</code>由于 JS 提升机制的缘故会先被建立在内存中，接着才会开始逐行执行函数。</p>
@@ -273,20 +269,7 @@ a();</code></pre></div>
 <p>当<code>function b</code> 执行完之后，会从 execution stack 中离开，继续逐行执行<code>function a</code>。当<code>function a</code> 执行完之后，一样会从 execution stack 中抽离，再回到 Global Execution Context 逐行执行。如下图：</p>
 <p><img src="/images/context/4.jpg" srcset="/img/loading.gif"></p>
 <h3 id="不同执行上下文中的变量是不同的"><a href="#不同执行上下文中的变量是不同的" class="headerlink" title="不同执行上下文中的变量是不同的"></a>不同执行上下文中的变量是不同的</h3><p>在了解了一般的函数其运作背后的逻辑后，让我们来看一下这段代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> myVar;<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;<br>  b();<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;<br><span class="hljs-built_in">console</span>.log(myVar);<br>a();<br></code></pre></div></td></tr></table></figure>
 
 <p>你可以想像，如果我们在不同的 execution context 中去把<code>myVar</code>这个变量打出来，会得到什么结果呢？结果如下：</p>
 <p><img src="/images/context/5.jpg" srcset="/img/loading.gif"></p>
@@ -306,46 +289,10 @@ a();</code></pre></div>
 <p>最后回到 Global Execution Context，如果函数中的<code>a( )</code>后面还有内容的话，会继续进行逐行执行。</p>
 <p>由上面的例子，我们可以知道，我们是在不同的 execution context 中分别去声明变量<code>myVar</code>的，<strong>因此在不同的 execution context，变量彼此之间不会影响</strong>，所以虽然这三个变量都叫做<code>myVar</code>，但其实是三个不同的变量。</p>
 <p>由于我们是在不同的 execution context 中去声明变量，所以这其实是位于三个不同 execution context 中的变量，所以即使我们是在执行完<code>a( )</code>后再去调用一次<code>myVar</code>，一样会得到” 1”的结果:</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> myVar;<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> myVar = <span class="hljs-number">2</span>;<br>  b();<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;<br><span class="hljs-built_in">console</span>.log(myVar);<br>a();<br><span class="hljs-built_in">console</span>.log(myVar); <span class="hljs-comment">// 一样会得到&quot;1&quot;</span><br></code></pre></div></td></tr></table></figure>
 
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>最后需要注意的是，如果是在<code>function</code>里面直接使用<code>myVar</code>这个变量，而没有通过<code>var</code>重新声明它的话，就会得到不同的结果！因为在函数作用域内加 <code>var</code> 定义的变量是局部变量，不加 <code>var</code> 定义的就成了全局变量。在未声明新的变量的情况下，在该 execution context 中 JavaScript 引擎找不到这个变量，它就会往它的外层去寻找，最后会得到，1 ,2 ,2 ,2 的结果:</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar;
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;
-  myVar = <span class="hljs-number">2</span>;
-  b();
-  <span class="hljs-built_in">console</span>.log(myVar);
-&#125;
-
-<span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;
-<span class="hljs-built_in">console</span>.log(myVar);
-a();
-<span class="hljs-built_in">console</span>.log(myVar);
-
-<span class="hljs-comment">/*</span>
-<span class="hljs-comment">打印出</span>
-<span class="hljs-comment">1</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">2</span>
-<span class="hljs-comment">*/</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params"></span>) </span>&#123;<br>  myVar;<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params"></span>) </span>&#123;<br>  myVar = <span class="hljs-number">2</span>;<br>  b();<br>  <span class="hljs-built_in">console</span>.log(myVar);<br>&#125;<br><br><span class="hljs-keyword">var</span> myVar = <span class="hljs-number">1</span>;<br><span class="hljs-built_in">console</span>.log(myVar);<br>a();<br><span class="hljs-built_in">console</span>.log(myVar);<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">打印出</span><br><span class="hljs-comment">1</span><br><span class="hljs-comment">2</span><br><span class="hljs-comment">2</span><br><span class="hljs-comment">2</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
 
 <p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
 
@@ -459,21 +406,16 @@ a();
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -487,8 +429,8 @@ a();
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -506,25 +448,26 @@ a();
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

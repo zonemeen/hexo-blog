@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>Flexbox 对你说爱不完 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      2.6k 字
     </span>
   
 
@@ -236,9 +236,7 @@
 <p>每个项目(flex item)占据的主轴空间为 (main size), 占据的交叉轴的空间为 (cross size)。</p>
 <p>这里还需要注意的是，不能直截了当地认为宽度就是 main size，高度就是 cross size，这个还要取决于你主轴的方向，如果你垂直方向是主轴，那么项目的高度就是 main size。</p>
 <p>实际上，要实现 flex 布局需要先指定一个容器，任何一个容器都可以被指定为 flex 布局，这样容器内部的元素就可以使用 flex 来进行布局。语法如下：</p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  display: flex | inline-flex; //可以有两种取值
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  display: flex | inline-flex; //可以有两种取值<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>给 div 这类块元素设置<code>display: flex</code>或者给 span 这类行内元素设<code>display: inline-flex</code>，flex 布局即创建！</p>
 <p>而 Flex 布局相关属性正好分为两拨，一拨作用在 flex 容器上，还有一拨作用在 flex 子项上。</p>
@@ -253,9 +251,7 @@
 <li>align-content</li>
 </ol>
 <p><strong>1. flex-direction: 决定主轴的方向(即项目的排列方向)</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-direction</span>: row | row-reverse | column | column-reverse;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">flex-direction</span>: row | row-reverse | column | column-reverse;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <ul>
 <li><code>row</code>（默认）：主轴为水平方向，起点在左端</li>
@@ -275,9 +271,7 @@
 <p><img src="/images/flex/5.jpg" srcset="/img/loading.gif"></p>
 <p><strong>2. flex-wrap: 决定容器内项目是否可换行</strong></p>
 <p>默认情况下，项目都排在主轴线上，使用 <code>flex-wrap</code> 可实现项目的换行。</p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">flex-wrap</span>: nowrap | wrap | wrap-reverse;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <ul>
 <li><code>nowrap</code>（默认）：不换行，即当主轴尺寸固定时，当空间不足时，项目尺寸会随之调整而并不会挤到下一行</li>
@@ -292,15 +286,11 @@
 </ul>
 <p><img src="/images/flex/8.jpg" srcset="/img/loading.gif"></p>
 <p><strong>3. flex-flow: flex-direction 和 flex-wrap 的复合简写形式</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">flex-flow</span>: &lt;flex-direction&gt; || &lt;flex-wrap&gt;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>默认值为: row nowrap，这个属性其实没多大卵用，不就是两个属性的缩写嘛。</p>
 <p><strong>4. justify-content：定义项目在主轴的对齐方式</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">justify-content</span>: flex-start | flex-end | center | space-between | space-around;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
 <ul>
@@ -324,9 +314,7 @@
 </ul>
 <p><img src="/images/flex/13.jpg" srcset="/img/loading.gif"></p>
 <p><strong>5. align-items: 定义项目在交叉轴上的对齐方式</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">align-items</span>: stretch | flex-start | flex-end | center | baseline;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>建立在主轴为水平方向时的测试，即 <code>flex-direction: row</code></p>
 <ul>
@@ -352,10 +340,7 @@
 <p><img src="/images/flex/18.jpg" srcset="/img/loading.gif"></p>
 <p>以文字的底部为主</p>
 <p><strong>6. align-content: 定义多根轴线的对齐方式，如果项目只有一根轴线，那么该属性将不起作用</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;
-  <span class="hljs-attribute">align-content</span>: stretch | flex-start | flex-end | center | space-between |
-    space-around;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.container</span> &#123;<br>  <span class="hljs-attribute">align-content</span>: stretch | flex-start | flex-end | center | space-between |<br>    space-around;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>什么叫项目只有一根轴线呢？其实可以这么理解：</p>
 <p>当你 <code>flex-wrap</code> 设置为 <code>nowrap</code> 的时候，容器仅存在一根轴线，因为项目不会换行，就不会产生多条轴线。</p>
@@ -396,63 +381,44 @@
 <li>align-self</li>
 </ol>
 <p><strong>1. order: 定义项目在容器中的排列顺序，数值越小，排列越靠前，默认值为 0</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">order</span>: &lt;integer&gt;;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">order</span>: &lt;integer&gt;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p><img src="/images/flex/25.jpg" srcset="/img/loading.gif"></p>
 <p><strong>2. flex-grow: 定义项目的放大比例</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-grow</span>: &lt;number&gt;;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">flex-grow</span>: &lt;number&gt;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>默认值为 0，即如果存在剩余空间，也不放大。</p>
 <p>如果所有项目的 <code>flex-grow</code> 属性都为 1，则它们将等分剩余空间（如果有的话）。如果一个项目的 <code>flex-grow</code> 属性为 2，其他项目都为 1，则前者占据的剩余空间将比其他项多一倍。</p>
 <p><strong>3. flex-shrink: 定义项目的缩小比例</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-shrink</span>: &lt;number&gt;;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">flex-shrink</span>: &lt;number&gt;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p><code>flex-shrink</code>属性定义了项目的缩小比例，默认为 1，即如果空间不足，该项目将缩小。</p>
 <p><img src="/images/flex/26.jpg" srcset="/img/loading.gif"></p>
 <p>如果所有项目的 <code>flex-shrink</code> 属性都为 1，当空间不足时，都将等比例缩小。如果一个项目的<code>flex-shrink</code> 属性为 0，其他项目都为 1，则空间不足时，前者不缩小。</p>
 <p>负值对该属性无效。</p>
 <p><strong>4. flex-basis: 定义了在分配容器剩余空间之前项目的默认大小。相当于对浏览器提前告知：浏览器兄弟，我要占据这么大的空间，提前帮我预留好</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex-basis</span>: &lt;length&gt; | auto;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">flex-basis</span>: &lt;length&gt; | auto;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>默认值：<code>auto</code>，即项目本来的大小, 这时候 item 项目的宽高取决于 <code>width</code> 或 <code>height</code> 的值。</p>
 <p>当主轴为水平方向的时候，同时设置 <code>width</code> 和 <code>flex-basis</code>，会忽略 <code>width</code>。flex 顾名思义就是弹性的意思，因此，实际上不建议对 flex 项目使用 <code>width</code> 属性，因为不够弹性。</p>
 <p>当容器剩余空间不足的时候，flex 子项目的实际宽度通常不是设置的 <code>flex-basis</code> 尺寸，因为 flex 布局剩余空间不足的时候默认会收缩，如果有 3 个子项目，则默认按 1:1:1 收缩。</p>
 <p><strong>5. flex: flex-grow, flex-shrink 和 flex-basis 的复合缩写</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">flex</span>: none | [ &lt; <span class="hljs-string">&quot;flex-grow&quot;</span> &gt; &lt; <span class="hljs-string">&quot;flex-shrink&quot;</span> &gt;? || &lt; <span class="hljs-string">&quot;flex-basis&quot;</span> &gt; ];
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">flex</span>: none | [ &lt; <span class="hljs-string">&quot;flex-grow&quot;</span> &gt; &lt; <span class="hljs-string">&quot;flex-shrink&quot;</span> &gt;? || &lt; <span class="hljs-string">&quot;flex-basis&quot;</span> &gt; ];<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>flex 的默认值是以上三个属性值的组合。假设以上三个属性同样取默认值，则 flex 的默认值为<code>0 1 auto</code>。</p>
 <p>有关快捷值：</p>
-<div class="hljs"><pre><code class="hljs css">flex: auto  //等同于flex:1 1 auto
-flex: none  //等同于flex:0 0 auto</code></pre></div>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">flex: auto  //等同于flex:1 1 auto<br>flex: none  //等同于flex:0 0 auto<br></code></pre></div></td></tr></table></figure>
 
 <p><strong>6. align-self: 控制单独某一个项目的垂直对齐方式，与 align-items 属性语法区别不大</strong></p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;
-  <span class="hljs-attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.item</span> &#123;<br>  <span class="hljs-attribute">align-self</span>: auto | flex-start | flex-end | center | baseline | stretch;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>唯一区别就是<code>align-self</code>多了个<code>auto</code>（默认值），表示继承自 flex 容器的<code>align-items</code>属性值，如果没有父元素，则等同于 <code>stretch</code>。</p>
 <p>跟 <code>align-items</code> 其他属性值含义一样，只不过 <code>align-self</code> 是对单个项目生效的，而 <code>align-items</code> 则是对容器下的所有项目生效的。</p>
 <h3 id="从垂直居中看出-flex-的强大"><a href="#从垂直居中看出-flex-的强大" class="headerlink" title="从垂直居中看出 flex 的强大"></a>从垂直居中看出 flex 的强大</h3><p>以往让元素垂直居中并不容易，直到 CSS3 的出现，使用绝对定位配合<code>translate</code>属性才让垂直居中变得简单，不过还有一个更爽的办法，那就是使用 flex，让垂直居中变得异常简单</p>
-<div class="hljs"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“wrapper”&quot;</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“div”&quot;</span>&gt;</span>flexbox 对你说爱不完<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre></div>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“wrapper”&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;“div”&quot;</span>&gt;</span>flexbox 对你说爱不完<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
 <p>几行简单代码，即可让 div 垂直居中</p>
-<div class="hljs"><pre><code class="hljs css"><span class="hljs-selector-class">.wrapper</span> &#123;
-  <span class="hljs-attribute">display</span>: flex;
-  <span class="hljs-attribute">align-items</span>: center;
-  <span class="hljs-attribute">justify-content</span>: center;
-&#125;</code></pre></div>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.wrapper</span> &#123;<br>  <span class="hljs-attribute">display</span>: flex;<br>  <span class="hljs-attribute">align-items</span>: center;<br>  <span class="hljs-attribute">justify-content</span>: center;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>这里最重要的就是包裹元素的三个关键属性:</p>
 <ul>
@@ -576,21 +542,16 @@ flex: none  //等同于flex:0 0 auto</code></pre></div>
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -604,8 +565,8 @@ flex: none  //等同于flex:0 0 auto</code></pre></div>
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -623,25 +584,26 @@ flex: none  //等同于flex:0 0 auto</code></pre></div>
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

@@ -14,27 +14,27 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 JavaScript / Node.js / Vue 等编程技术类文章。">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue 等编程技术类文章。">
   <meta name="author" content="miqilin">
-  <meta name="keywords" content="前端,程序员,编程,技术,JavaScript,Node.js,分享,博客,Blog,米淇淋,miqilin，生活，爱好">
+  <meta name="keywords" content="前端,程序员,编程,博客,技术,转行,JavaScript,vue,react,Node.js,分享,blog,米淇淋,miqilin,生活,爱好">
   <title>JavaScript系列之内存泄漏 - 米淇淋的个人博客</title>
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/css/bootstrap.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
 
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
   <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
 
   
     
     
       
-      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github.min.css" />
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
     
   
 
   
-    <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -55,7 +55,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.5","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -253,84 +253,41 @@
 <li>当垃圾收集器下一次运行时，它就会释放引用次数是 0 的值所占的内存。</li>
 </ol>
 <p>但如果一个值不再需要了，引用数却不为 0，垃圾回收机制无法释放这块内存，会导致内存泄漏。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>上面代码中，数组<code>[1, 2, 3]</code>会占用内存，赋值给了变量<code>arr</code>，因此引用次数为 1。尽管后面的一段代码没有用到<code>arr</code>，它还是会持续占用内存。</p>
 <p>如果增加一行代码，解除 arr 对<code>[1, 2, 3]</code>引用，这块内存就可以被垃圾回收机制释放了。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
-<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);
-arr = <span class="hljs-literal">null</span>;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];<br><span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hello miqilin&quot;</span>);<br>arr = <span class="hljs-literal">null</span>;<br></code></pre></div></td></tr></table></figure>
 
 <p>上面代码中，<code>arr</code>重置为<code>null</code>，就解除了对<code>[1, 2, 3]</code>的引用，引用次数变成了 0，内存就可以释放出来了。</p>
 <p>因此，并不是说有了垃圾回收机制，程序员就无事一身轻了。你还是需要关注内存占用：那些很占空间的值，一旦不再用到，你必须检查是否还存在对它们的引用。如果是的话，就必须手动解除引用。</p>
 <p>接下来，我将介绍四种常见的 JavaScript 内存泄漏及如何避免。目前水平有限，借鉴了国外大牛的文章了解这几种内存泄漏，原文链接：<a target="_blank" rel="noopener" href="https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec">https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec</a></p>
 <h4 id="四种常见的-JavaScript-内存泄漏"><a href="#四种常见的-JavaScript-内存泄漏" class="headerlink" title="四种常见的 JavaScript 内存泄漏"></a>四种常见的 JavaScript 内存泄漏</h4><p><strong>1.意外的全局变量</strong></p>
 <p>未定义的变量会在全局对象创建一个新变量，对于在浏览器的情况下，全局对象是<code>window</code>。 看以下代码：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
-  bar = <span class="hljs-string">&quot;this is a hidden global variable&quot;</span>;
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;<br>  bar = <span class="hljs-string">&quot;this is a hidden global variable&quot;</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>函数<code>foo</code>内部使用<code>var</code>声明，实际上 JS 会把<code>bar</code>挂载在全局对象上，意外创建一个全局变量。等同于：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;
-  <span class="hljs-built_in">window</span>.bar = <span class="hljs-string">&quot;this is an explicit global variable&quot;</span>;
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg</span>) </span>&#123;<br>  <span class="hljs-built_in">window</span>.bar = <span class="hljs-string">&quot;this is an explicit global variable&quot;</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>在上述情况下， 泄漏一个简单的字符串不会造成太大的伤害，但它肯定会更糟。</p>
 <p>另一种可以创建偶然全局变量的情况是<code>this</code>：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-built_in">this</span>.variable = <span class="hljs-string">&quot;potential accidental global&quot;</span>;
-&#125;
-<span class="hljs-comment">// Foo called on its own, this points to the global object (window)</span>
-<span class="hljs-comment">// rather than being undefined.</span>
-foo();</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-built_in">this</span>.variable = <span class="hljs-string">&quot;potential accidental global&quot;</span>;<br>&#125;<br><span class="hljs-comment">// Foo called on its own, this points to the global object (window)</span><br><span class="hljs-comment">// rather than being undefined.</span><br>foo();<br></code></pre></div></td></tr></table></figure>
 
 <p><strong>解决方法：</strong></p>
 <p>在 JavaScript 文件头部加上 <code>&#39;use strict&#39;</code>，使用严格模式避免意外的全局变量，此时上例中的<code>this</code>指向<code>undefined</code>。如果必须使用全局变量存储大量数据时，确保用完以后把它设置为 <code>null</code> 或者重新定义。</p>
 <p><strong>2.被遗忘的计时器或回调函数</strong></p>
 <p>在 JavaScript 中使用<code>setInterval</code>非常常见。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> someResource = getData();
-<span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;
-     <span class="hljs-keyword">var</span> node = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;Node&#x27;</span>);
-     <span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-params">node</span>)</span> &#123;
-         <span class="hljs-comment">// Do stuff with node and someResource.</span>
-         node.innerHTML = <span class="hljs-built_in">JSON</span>.stringify(someResource));
-     &#125; &#125;, <span class="hljs-number">1000</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> someResource = getData();<br><span class="hljs-built_in">setInterval</span>(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;<br>     <span class="hljs-keyword">var</span> node = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;Node&#x27;</span>);<br>     <span class="hljs-function"><span class="hljs-title">if</span>(<span class="hljs-params">node</span>)</span> &#123;<br>         <span class="hljs-comment">// Do stuff with node and someResource.</span><br>         node.innerHTML = <span class="hljs-built_in">JSON</span>.stringify(someResource));<br>     &#125; &#125;, <span class="hljs-number">1000</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>上面的代码表明，在节点<code>node</code>或者数据不再需要时，定时器依旧指向这些数据。所以哪怕当<code>node</code>节点被移除后，<code>interval</code> 仍旧存活并且垃圾回收器没办法回收，它的依赖也没办法被回收，除非终止定时器。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>);
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onClick</span>(<span class="hljs-params">event</span>) </span>&#123;
-  element.innerHtml = <span class="hljs-string">&quot;text&quot;</span>;
-&#125;
-
-element.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick); <span class="hljs-comment">// Do stuff</span>
-element.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick);
-element.parentNode.removeChild(element);
-
-<span class="hljs-comment">// Now when element goes out of scope,</span>
-<span class="hljs-comment">// both element and onClick will be collected even in old browsers that don&#x27;t</span>
-<span class="hljs-comment">// handle cycles well.</span></code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> element = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>);<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">onClick</span>(<span class="hljs-params">event</span>) </span>&#123;<br>  element.innerHtml = <span class="hljs-string">&quot;text&quot;</span>;<br>&#125;<br><br>element.addEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick); <span class="hljs-comment">// Do stuff</span><br>element.removeEventListener(<span class="hljs-string">&quot;click&quot;</span>, onClick);<br>element.parentNode.removeChild(element);<br><br><span class="hljs-comment">// Now when element goes out of scope,</span><br><span class="hljs-comment">// both element and onClick will be collected even in old browsers that don&#x27;t</span><br><span class="hljs-comment">// handle cycles well.</span><br></code></pre></div></td></tr></table></figure>
 
 <p>对于上面观察者的例子，一旦它们不再需要（或者关联的对象变成不可达），明确地移除它们非常重要。其中 IE 6 是无法处理循环引用的。因为老版本的 IE 是无法检测 DOM 节点与 JavaScript 代码之间的循环引用，会导致内存泄漏。</p>
 <p>但是，现代的浏览器（包括 IE 和 Microsoft Edge）使用了更先进的垃圾回收算法（标记清除），已经可以正确检测和处理循环引用了。即回收节点内存时，不必非要调用<code>removeEventListener</code>了。</p>
 <p>诸如 jQuery 之类的框架和库在处理节点之前会删除侦听器（当使用它们的特定 API 时）。 这由库内部处理，并确保不会产生任何泄漏，即使在有问题的浏览器（如旧版 Internet Explorer）下运行也是如此。</p>
 <p><strong>3.闭包</strong></p>
 <p>JavaScript 开发的一个关键知识是闭包：这是一个内部函数，它可以访问外部（封闭）函数的变量。由于 JavaScript 运行时的实现细节，用下边这种方式可能会造成内存泄漏：</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> theThing = <span class="hljs-literal">null</span>;
-<span class="hljs-keyword">var</span> replaceThing = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-keyword">var</span> originalThing = theThing;
-  <span class="hljs-keyword">var</span> unused = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-    <span class="hljs-keyword">if</span> (originalThing) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hi&quot;</span>);
-  &#125;;
-  theThing = &#123;
-    longStr: newArray(<span class="hljs-number">1000000</span>).join(<span class="hljs-string">&quot;*&quot;</span>),
-    someMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;
-      <span class="hljs-built_in">console</span>.log(someMessage);
-    &#125;,
-  &#125;;
-&#125;;
-<span class="hljs-built_in">setInterval</span>(replaceThing, <span class="hljs-number">1000</span>);</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> theThing = <span class="hljs-literal">null</span>;<br><span class="hljs-keyword">var</span> replaceThing = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">var</span> originalThing = theThing;<br>  <span class="hljs-keyword">var</span> unused = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (originalThing) <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;hi&quot;</span>);<br>  &#125;;<br>  theThing = &#123;<br>    longStr: newArray(<span class="hljs-number">1000000</span>).join(<span class="hljs-string">&quot;*&quot;</span>),<br>    someMethod: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>      <span class="hljs-built_in">console</span>.log(someMessage);<br>    &#125;,<br>  &#125;;<br>&#125;;<br><span class="hljs-built_in">setInterval</span>(replaceThing, <span class="hljs-number">1000</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>每次调用<code>replaceThing</code>，<code>theThing</code>得到一个包含一个大数组和一个新闭包（<code>someMethod</code>）的新对象。同时，变量<code>unused</code>是一个引用<code>originalThing</code>的闭包（先前的<code>replaceThing</code>又调用了<code>theThing</code>）。<code>someMethod</code>可以通过<code>theThing</code>使用，<code>someMethod</code>与<code>unused</code>分享闭包作用域，尽管<code>unused</code>从未使用，它引用的<code>originalThing</code>迫使它保留在内存中（防止被回收）。需要记住的是<strong>一旦一个闭包作用域被同一个父作用域的闭包所创建，那么这个作用域是共享的</strong>。</p>
 <p>所有这些都可能导致严重的内存泄漏。当上面的代码片段一次又一次地运行时，你可以看到内存使用量的急剧增加。当垃圾收集器运行时，也不会减少。一个链接列表闭包被创建（在这种情况下 <code>theThing</code> 变量是根源），每一个闭包作用域对打数组进行间接引用。</p>
@@ -338,27 +295,7 @@ element.parentNode.removeChild(element);
 <p>在 <code>replaceThing</code> 的最后添加 <code>originalThing = null</code> 。将所有联系都切断。</p>
 <p><strong>4.脱离 DOM 的引用</strong></p>
 <p>如果把 DOM 存成字典（JSON 键值对）或者数组，此时，同样的 DOM 元素存在两个引用：一个在 DOM 树中，另一个在字典中。如果在将来某个时候您决定删除这些行，则需要使两个引用都无法访问，都清除掉。</p>
-<div class="hljs"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> elements = &#123;
-  button: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>),
-  image: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;image&quot;</span>),
-  text: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;text&quot;</span>),
-&#125;;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params"></span>) </span>&#123;
-  image.src = <span class="hljs-string">&quot;http://some.url/image&quot;</span>;
-  button.click();
-  <span class="hljs-built_in">console</span>.log(text.innerHTML);
-  <span class="hljs-comment">// Much more logic</span>
-&#125;
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeButton</span>(<span class="hljs-params"></span>) </span>&#123;
-  <span class="hljs-comment">// The button is a direct child of body.</span>
-  <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>));
-
-  <span class="hljs-comment">// At this point, we still have a reference to #button in the global</span>
-  <span class="hljs-comment">// elements dictionary. In other words, the button element is still in</span>
-  <span class="hljs-comment">// memory and cannot be collected by the GC.</span>
-&#125;</code></pre></div>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> elements = &#123;<br>  button: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>),<br>  image: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;image&quot;</span>),<br>  text: <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;text&quot;</span>),<br>&#125;;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params"></span>) </span>&#123;<br>  image.src = <span class="hljs-string">&quot;http://some.url/image&quot;</span>;<br>  button.click();<br>  <span class="hljs-built_in">console</span>.log(text.innerHTML);<br>  <span class="hljs-comment">// Much more logic</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">removeButton</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-comment">// The button is a direct child of body.</span><br>  <span class="hljs-built_in">document</span>.body.removeChild(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;button&quot;</span>));<br><br>  <span class="hljs-comment">// At this point, we still have a reference to #button in the global</span><br>  <span class="hljs-comment">// elements dictionary. In other words, the button element is still in</span><br>  <span class="hljs-comment">// memory and cannot be collected by the GC.</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>如果代码中保存了表格某一个<code>&lt;td&gt;</code>的引用。将来决定删除整个表格的时候，直觉认为 GC 会回收除了已保存的<code>&lt;td&gt;</code>以外的其它节点。实际情况并非如此：此<code>&lt;td&gt;</code>是表格的子节点，子元素与父元素是引用关系。由于<strong>代码保留了<code>&lt;td&gt;</code>的引用</strong>，导致整个表格仍待在内存中。所以保存 DOM 元素引用的时候，要小心谨慎。</p>
 <h4 id="避免内存泄漏"><a href="#避免内存泄漏" class="headerlink" title="避免内存泄漏"></a>避免内存泄漏</h4><p>在局部作用域中，等函数执行完毕，变量就没有存在的必要了，js 垃圾回收机制很快做出判断并且回收，但是全局变量什么时候需要自动释放内存空间则很难判断，因此在我们的开发中，需要尽量避免使用全局变量。</p>
@@ -480,21 +417,16 @@ element.parentNode.removeChild(element);
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-  </div>
-  米淇淋的个人博客 2019–2020
-  
-
-  
-
-  
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  米淇淋的个人博客 2019–2020 
+ 
+ 
 </footer>
 
 <!-- SCRIPTS -->
 
-  <script  src="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
   <script>
     NProgress.configure({"showSpinner":false,"trickleSpeed":200})
@@ -508,8 +440,8 @@ element.parentNode.removeChild(element);
   </script>
 
 
-<script  src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js" ></script>
-<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.5.3/js/bootstrap.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
 <script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -527,25 +459,26 @@ element.parentNode.removeChild(element);
 
 
 
-  <script  src="https://cdn.staticfile.org/tocbot/4.12.0/tocbot.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
-  <script  src="https://cdn.staticfile.org/anchor-js/4.3.0/anchor.min.js" ></script>
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
-  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 
 
 
-  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
   <script>
     (function (window, document) {
       var typing = Fluid.plugins.typing;

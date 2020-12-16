@@ -473,6 +473,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
+    <lastmod>2020-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/HTML/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -481,13 +488,6 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E6%A0%87%E7%AD%BE/</loc>
-    <lastmod>2020-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,13 +529,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/this/</loc>
-    <lastmod>2020-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/Scope/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -544,6 +537,13 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Scope-Chain/</loc>
+    <lastmod>2020-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/this/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -746,13 +746,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Object/</loc>
-    <lastmod>2020-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/constructor/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -761,6 +754,13 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/new/</loc>
+    <lastmod>2020-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/Object/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -811,14 +811,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/HTML/</loc>
+    <loc>https://me.miqilin21.cn/categories/HTTP/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/HTTP/</loc>
+    <loc>https://me.miqilin21.cn/categories/HTML/</loc>
     <lastmod>2020-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

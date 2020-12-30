@@ -230,7 +230,7 @@
             <div class="markdown-body">
               <p>上一篇<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/69910449">《JavaScript 系列之作用域和作用域链》</a>中，了解到了执行上下文创建阶段的作用域链(Scope chain)，在这篇文章里，我们将讨论跟执行上下文直接相关的更多细节。</p>
 <p>再来回顾一下关于执行上下文的三个阶段生命周期：</p>
-<p><img src="/images/scopechain-1.jpg" srcset="/img/loading.gif"></p>
+<p><img src="/images/scopechain/1.jpg" srcset="/img/loading.gif"></p>
 <p>本章将专门介绍与执行上下文创建阶段直接相关的最后一个细节——<strong>this</strong>是什么？以及它的指向到底是什么。</p>
 <h3 id="了解-this"><a href="#了解-this" class="headerlink" title="了解 this"></a>了解 this</h3><p>也许你在其他面向对象的编程语言曾经看过<code>this</code>，也知道它会指向某个构造器(constructor)所建立的对象。但事实上在 JavaScript 里面，<code>this</code>所代表的不仅仅是那个被建立的对象。</p>
 <p>先来看看 ECMAScript 标准规范对 this 的定义：</p>

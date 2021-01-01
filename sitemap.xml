@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://me.miqilin21.cn/2020/11/20/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/</loc>
+    
+    <lastmod>2021-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
+    
+    <lastmod>2021-01-01</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/2020/12/11/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%20Promise/</loc>
+    
+    <lastmod>2020-12-31</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/2020/05/24/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8Bthis%E6%98%AF%E4%BB%80%E4%B9%88/</loc>
     
     <lastmod>2020-12-30</lastmod>
@@ -9,23 +30,9 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/2020/12/11/%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA%20Promise/</loc>
-    
-    <lastmod>2020-12-21</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/google9f6892f153d2a6a6.html</loc>
     
     <lastmod>2020-12-07</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/2020/11/23/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc>
-    
-    <lastmod>2020-12-02</lastmod>
     
   </url>
   
@@ -424,7 +431,7 @@
 
   <url>
     <loc>https://me.miqilin21.cn/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -432,371 +439,385 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/CSS/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%B8%83%E5%B1%80/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/JavaScript/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/DOM/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/API/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Git/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/GitHub/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/JavaScript/</loc>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/DOM/</loc>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/API/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/HTML/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E6%A0%87%E7%AD%BE/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Hexo/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%AF%B9%E8%B1%A1/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E5%AF%B9%E8%B1%A1/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E4%BA%8B%E4%BB%B6/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/event/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/this/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Scope/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Scope-Chain/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Callback-function/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E7%BB%A7%E6%89%BF/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Execution-Context/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Execution-Context-Stack/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/IIFE/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/arguments/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Event-Loop/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E9%97%AD%E5%8C%85/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/jQuery/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/OpenSource/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/github/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E5%9B%BE%E5%BA%8A/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/PicGo/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Node-js/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/http-server/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E6%96%B9%E6%B3%95/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Promise/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E9%98%B2%E6%8A%96/</loc>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E8%8A%82%E6%B5%81/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E7%BB%84/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/BOM/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Function/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Object/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <loc>https://me.miqilin21.cn/tags/BOM/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/constructor/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/new/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/Object/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/prototype/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E8%B4%B5%E5%B7%9E/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E6%B8%B8%E8%AE%B0/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -805,63 +826,63 @@
   
   <url>
     <loc>https://me.miqilin21.cn/categories/CSS/</loc>
-    <lastmod>2020-12-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/categories/JavaScript/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/tools/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/categories/JavaScript/</loc>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/HTML/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/HTTP/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/OpenSource/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%81%93/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://me.miqilin21.cn/categories/%E6%B8%B8%E8%AE%B0/</loc>
-    <lastmod>2020-12-30</lastmod>
+    <lastmod>2021-01-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>

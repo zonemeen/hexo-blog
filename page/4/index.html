@@ -180,6 +180,64 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2020/02/21/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/nullbug.jpg" srcset="/img/loading.gif" alt="【译】谈谈“typeof null为object”这一bug的由来">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/02/21/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/">【译】谈谈“typeof null为object”这一bug的由来</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2020/02/21/%E3%80%90%E8%AF%91%E3%80%91%E8%B0%88%E8%B0%88%E2%80%9Ctypeof%20null%E4%B8%BAobject%E2%80%9D%E8%BF%99%E4%B8%80bug%E7%9A%84%E7%94%B1%E6%9D%A5/">
+          
+          
+            
+          
+          很多前端初级开发者也许并不深究 typeof null 为何为 Object？想更深地了解这一 bug 的由来，可以参阅 Dr. Axel Rauschmayer 关于”typeof null”的历史这篇文章。
+
+原文链接：http://www.2ality.com/2013/10/typeof-null.html
+
+我看了下 C 语言关于typeof的规范，它对于typeof null为何结果是
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-02-21 00:00" pubdate>
+              2020-02-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2020/02/18/JS%E4%B8%AD%E4%B8%80%E5%88%87%E9%83%BD%E6%98%AF%E5%AF%B9%E8%B1%A1%E5%90%97%EF%BC%9F%E7%9C%8B%E8%BF%99%E4%B8%80%E7%AF%87%E5%B0%B1%E7%9F%A5%E9%81%93%E4%BA%86/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/allobject.jpg" srcset="/img/loading.gif" alt="JS中一切都是对象吗？看这一篇就知道了">
         </a>
@@ -708,66 +766,6 @@ DOM 节点的新增document.createElement(tagName)通过document.createElement()
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/leixingzhh.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型转换">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">JavaScript系列之类型转换</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2020/01/15/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
-          
-          
-            
-          
-          JavaScript 是一种弱类型或者说是一门动态语言，这意味着你不用提前声明变量的类型，而是在程序运行过程中，运算符会自动将值转换为正确的类型，但也有一些情况需要强制类型转换。
-以下我将介绍将各种类型的值，分别转换成数字、字符串或者布尔值（基于 ES5 规范）。
-ToNumber（1）Number()
-使用 Number 函数，可以将任意类型的值转化成数值。
-123456789101112131
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-15 00:00" pubdate>
-              2020-01-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
@@ -826,7 +824,7 @@ ToNumber（1）Number()
 
   <footer class="text-center mt-5 py-3">
   <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
-  米淇淋的个人博客 2019–2020 
+  米淇淋的个人博客 2019–2021 
  
  
 </footer>

@@ -36,6 +36,10 @@
 
 <!-- 自定义样式保持在最底部 -->
 
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2565223_au34lf2lyd7.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
@@ -49,92 +53,86 @@
 
 <body>
   <header style="height: 60vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+    <nav
+  id="navbar"
+  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
+>
   <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>米淇淋的个人博客</strong>&nbsp;</a>
+    <a class="navbar-brand" href="/"
+      >&nbsp;<strong>米淇淋的个人博客</strong
+      >&nbsp;</a
+    >
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      id="navbar-toggler-btn"
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <div class="animated-icon"><span></span><span></span><span></span></div>
     </button>
 
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto text-center">
-        
+            
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="iconfont icon-home-fill"></i> 首页
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="iconfont icon-archive-fill"></i> 归档
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="iconfont icon-category-fill"></i> 分类
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="iconfont icon-tags-fill"></i> 标签
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">
+            <i class="iconfont icon-user-fill"></i> 关于
+          </a>
+        </li>
           
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                归档
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                标签
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
+        <li class="nav-item" id="search-btn">
+          <a class="nav-link" data-toggle="modal" data-target="#modalSearch"
+            >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="color-toggle-btn">
+          <a class="nav-link" href="javascript:"
+            >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
+            >&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="music-toggle-btn">
+          <a class="nav-link" href="javascript:"
+            >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
+            >&nbsp;<audio id="player" loop>
+              <source
+                src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+                type="audio/mp3"
+              /></audio
+          ></a>
+        </li>
         
       </ul>
     </div>
@@ -183,12 +181,6 @@
     <a href="/2020/03/16/%E4%BB%8E%E5%8E%9F%E7%94%9FJS%E5%AE%9E%E7%8E%B0jQuery%E7%9A%84%E4%B8%80%E4%B8%AAAPI%E4%B8%AD%E4%BD%93%E4%BC%9A%E5%85%B6%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">从原生JS实现jQuery的一个API中体会其设计思想</span>
       <time style="float: right;">03-16</time>
-    </a>
-  
-    
-    <a href="/2020/03/01/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">谈谈浏览器里的JavaScript</span>
-      <time style="float: right;">03-01</time>
     </a>
   
 </div>

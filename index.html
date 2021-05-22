@@ -47,6 +47,11 @@
 
     <!-- 自定义样式保持在最底部 -->
 
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2565223_au34lf2lyd7.css"
+    />
+
     <script id="fluid-configs">
       var Fluid = window.Fluid || {};
       var CONFIG = {
@@ -123,36 +128,31 @@
             <ul class="navbar-nav ml-auto text-center">
               <li class="nav-item">
                 <a class="nav-link" href="/">
-                  <i class="iconfont icon-home-fill"></i>
-                  首页
+                  <i class="iconfont icon-home-fill"></i> 首页
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="/archives/">
-                  <i class="iconfont icon-archive-fill"></i>
-                  归档
+                  <i class="iconfont icon-archive-fill"></i> 归档
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="/categories/">
-                  <i class="iconfont icon-category-fill"></i>
-                  分类
+                  <i class="iconfont icon-category-fill"></i> 分类
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="/tags/">
-                  <i class="iconfont icon-tags-fill"></i>
-                  标签
+                  <i class="iconfont icon-tags-fill"></i> 标签
                 </a>
               </li>
 
               <li class="nav-item">
                 <a class="nav-link" href="/about/">
-                  <i class="iconfont icon-user-fill"></i>
-                  关于
+                  <i class="iconfont icon-user-fill"></i> 关于
                 </a>
               </li>
 
@@ -173,6 +173,20 @@
                   ></i
                   >&nbsp;</a
                 >
+              </li>
+
+              <li class="nav-item" id="music-toggle-btn">
+                <a class="nav-link" href="javascript:"
+                  >&nbsp;<i
+                    class="iconfont icon-music"
+                    id="music-toggle-icon"
+                  ></i
+                  >&nbsp;<audio id="player" loop>
+                    <source
+                      src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+                      type="audio/mp3"
+                    /></audio
+                ></a>
               </li>
             </ul>
           </div>

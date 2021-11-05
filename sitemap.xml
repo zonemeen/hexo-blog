@@ -508,6 +508,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B/</loc>
+    <lastmod>2021-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
@@ -516,13 +523,6 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/event/</loc>
-    <lastmod>2021-11-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -557,13 +557,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Callback-function/</loc>
-    <lastmod>2021-11-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
@@ -571,14 +564,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
+    <loc>https://me.miqilin21.cn/tags/Callback-function/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E7%BB%A7%E6%89%BF/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -599,6 +592,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/%E7%BB%A7%E6%89%BF/</loc>
+    <lastmod>2021-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
@@ -607,6 +607,20 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/IIFE/</loc>
+    <lastmod>2021-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E9%97%AD%E5%8C%85/</loc>
+    <lastmod>2021-11-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/arguments/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -627,14 +641,7 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/arguments/</loc>
-    <lastmod>2021-11-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/%E9%97%AD%E5%8C%85/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -642,13 +649,6 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/</loc>
-    <lastmod>2021-11-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2021-11-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

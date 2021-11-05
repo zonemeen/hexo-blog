@@ -1,937 +1,998 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<html lang="zh-CN" data-default-color-scheme="&#34;auto&#34;">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
 
+    <meta name="theme-color" content="#2f4154" />
+    <meta
+      name="description"
+      content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue / React 等编程技术类文章。"
+    />
+    <meta name="author" content="miqilin21" />
+    <meta
+      name="keywords"
+      content="前端、前端学习、前端编程、程序员、编程、博客、技术、转行、HTML、CSS、JavaScript、vue、react、Node.js、分享、blog、米淇淋、灵谦、miqilin、生活、爱好"
+    />
+    <meta
+      name="google-site-verification"
+      content="oz_e-RU18JsH9u2IBEweZUAkq8odzPJAlsmQ42LuMsY"
+    />
+    <title>灵谦的个人博客</title>
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    />
 
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue / React 等编程技术类文章。">
-  <meta name="author" content="miqilin21">
-  <meta name="keywords" content="前端、前端学习、前端编程、程序员、编程、博客、技术、转行、HTML、CSS、JavaScript、vue、react、Node.js、分享、blog、米淇淋、灵谦、miqilin、生活、爱好">
-  <meta name="google-site-verification" content="oz_e-RU18JsH9u2IBEweZUAkq8odzPJAlsmQ42LuMsY" />
-  <title>灵谦的个人博客</title>
+    <!-- 主题依赖的图标库，不要自行修改 -->
 
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css"
+    />
 
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css"
+    />
 
+    <link rel="stylesheet" href="/css/main.css" />
 
-<!-- 主题依赖的图标库，不要自行修改 -->
+    <!-- 自定义样式保持在最底部 -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+    <link
+      rel="stylesheet"
+      href="//at.alicdn.com/t/font_2565223_esykp744a67.css"
+    />
 
+    <script id="fluid-configs">
+      var Fluid = window.Fluid || {};
+      var CONFIG = {
+        hostname: "me.miqilin21.cn",
+        root: "/",
+        version: "1.8.6",
+        typing: { enable: true, typeSpeed: 70, cursorChar: "_", loop: false },
+        toc: {
+          enable: true,
+          headingSelector: "h1,h2,h3,h4,h5,h6",
+          collapseDepth: 0,
+        },
+        anchorjs: {
+          enable: true,
+          element: "h1,h2,h3,h4,h5,h6",
+          placement: "right",
+          visible: "hover",
+          icon: "#",
+        },
+        copy_btn: true,
+        image_zoom: { enable: true },
+        lazyload: { enable: true, onlypost: false },
+        web_analytics: {
+          enable: false,
+          baidu: null,
+          google: null,
+          gtag: null,
+          tencent: { sid: null, cid: null },
+          woyaola: null,
+          cnzz: null,
+          leancloud: { app_id: null, app_key: null, server_url: null },
+        },
+      };
+    </script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/color-schema.js"></script>
+    <meta name="generator" content="Hexo 5.2.0" />
+    <link
+      rel="alternate"
+      href="/atom.xml"
+      title="灵谦的个人博客"
+      type="application/atom+xml"
+    />
+  </head>
 
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-  
-<link rel="stylesheet" href="//at.alicdn.com/t/font_2565223_esykp744a67.css">
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="灵谦的个人博客" type="application/atom+xml">
-</head>
-
-
-<body>
-  <header style="height: 100vh;">
-    <nav
-  id="navbar"
-  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
->
-  <div class="container">
-    <a class="navbar-brand" href="/"
-      >&nbsp;<strong>灵谦的个人博客</strong
-      >&nbsp;</a
-    >
-
-    <button
-      id="navbar-toggler-btn"
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-            
-        <li class="nav-item">
-          <a class="nav-link" href="/">
-            <i class="iconfont icon-home-fill"></i> 首页
-          </a>
-        </li>
-             
-        <li class="nav-item">
-          <a class="nav-link" href="/archives/">
-            <i class="iconfont icon-archive-fill"></i> 归档
-          </a>
-        </li>
-             
-        <li class="nav-item">
-          <a class="nav-link" href="/categories/">
-            <i class="iconfont icon-category-fill"></i> 分类
-          </a>
-        </li>
-             
-        <li class="nav-item">
-          <a class="nav-link" href="/tags/">
-            <i class="iconfont icon-tags-fill"></i> 标签
-          </a>
-        </li>
-             
-        <li class="nav-item">
-          <a class="nav-link" href="/about/">
-            <i class="iconfont icon-user-fill"></i> 关于
-          </a>
-        </li>
-          
-        <li class="nav-item" id="search-btn">
-          <a class="nav-link" data-toggle="modal" data-target="#modalSearch"
-            >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+  <body>
+    <header style="height: 100vh">
+      <nav
+        id="navbar"
+        class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
+      >
+        <div class="container">
+          <a class="navbar-brand" href="/"
+            >&nbsp;<strong>灵谦的个人博客</strong>&nbsp;</a
           >
-        </li>
-         
-        <li class="nav-item" id="color-toggle-btn">
-          <a class="nav-link" href="javascript:"
-            >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
-            >&nbsp;</a
+
+          <button
+            id="navbar-toggler-btn"
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
           >
-        </li>
-         
-        <li class="nav-item" id="music-toggle-btn">
-          <a class="nav-link" href="javascript:"
-            >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
-            >&nbsp;<audio id="player" loop>
-              <source
-                src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
-                type="audio/mp3"
-              /></audio
-          ></a>
-        </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
+            <div class="animated-icon">
+              <span></span><span></span><span></span>
+            </div>
+          </button>
 
-    <div class="banner intro-2" id="background" parallax=true
-         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/bg-blog.png') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="亲亲 这边建议您要多喝热水哦">
-              
-            </span>
+          <!-- Collapsible content -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto text-center">
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <i class="iconfont icon-home-fill"></i> 首页
+                </a>
+              </li>
 
-            
+              <li class="nav-item">
+                <a class="nav-link" href="/archives/">
+                  <i class="iconfont icon-archive-fill"></i> 归档
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/categories/">
+                  <i class="iconfont icon-category-fill"></i> 分类
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/tags/">
+                  <i class="iconfont icon-tags-fill"></i> 标签
+                </a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="/about/">
+                  <i class="iconfont icon-user-fill"></i> 关于
+                </a>
+              </li>
+
+              <li class="nav-item" id="search-btn">
+                <a
+                  class="nav-link"
+                  data-toggle="modal"
+                  data-target="#modalSearch"
+                  >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+                >
+              </li>
+
+              <li class="nav-item" id="color-toggle-btn">
+                <a class="nav-link" href="javascript:;"
+                  >&nbsp;<i
+                    class="iconfont icon-dark"
+                    id="color-toggle-icon"
+                  ></i
+                  >&nbsp;</a
+                >
+              </li>
+
+              <li class="nav-item" id="music-toggle-btn">
+                <a class="nav-link" href="javascript:;"
+                  >&nbsp;<i
+                    class="iconfont icon-music"
+                    id="music-toggle-icon"
+                  ></i
+                  >&nbsp;</a
+                ><audio id="player" loop>
+                  <source
+                    src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+                    type="audio/mp3"
+                  />
+                </audio>
+              </li>
+            </ul>
           </div>
+        </div>
+      </nav>
 
-          
+      <div
+        class="banner intro-2"
+        id="background"
+        parallax="true"
+        style="
+          background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/bg-blog.png')
+            no-repeat center center;
+          background-size: cover;
+        "
+      >
+        <div class="full-bg-img">
+          <div
+            class="mask flex-center"
+            style="background-color: rgba(0, 0, 0, 0.3)"
+          >
+            <div class="page-header text-center fade-in-up">
+              <span
+                class="h2"
+                id="subtitle"
+                title="亲亲 这边建议您要多喝热水哦"
+              >
+              </span>
+            </div>
+
             <div class="scroll-down-bar">
               <i class="iconfont icon-arrowdown"></i>
             </div>
-          
+          </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    
+    <main>
       <div class="container nopadding-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
+        <div class="py-5" id="board" style="margin-top: 0">
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
-                
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource.jpg"
+                        srcset="/img/loading.gif"
+                        alt="你知道如何高效地在GitHub搜索开源项目吗?"
+                      />
+                    </a>
+                  </div>
 
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"
+                        >你知道如何高效地在GitHub搜索开源项目吗?</a
+                      >
+                    </h1>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/12/11/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%20Promise/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/promise.jpg" srcset="/img/loading.gif" alt="手写系列之实现一个 Promise">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/11/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%20Promise/">手写系列之实现一个 Promise</a>
-      </h1>
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"
+                      >
+                        作为一个常逛 GitHub 的程序员，你真的知道如何高效地在
+                        GitHub
+                        搜索开源项目吗？你的操作是不是单纯的在搜索框内输入关键词进行搜索的？嘿嘿，这篇文章就来告诉你有啥搜索的技巧或者说骚操作吧。
+                        先来看看直接在搜索框内输入关键词所搜索出来的内容吧（以搜
+                        vue 项目为例）： what？竟然找到了 48
+                        多万个相关的开源项目，这时候很多人就不清楚下一步应该干啥了，也不清楚具体找哪个项目练手学习
+                      </a>
+                    </p>
 
-      <p class="index-excerpt">
-        <a href="/2020/12/11/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%20Promise/">
-          
-          
-            
-          
-          Promise 是一个异步操作返回的对象，用来传递异步操作的消息。基本使用可以看阮一峰老师的《ECMAScript 6 入门》。
-下面是根据自己对 Promise 的理解，实现一个 Promise :
-实现一个 PromisePromise 有三种状态：Pending 初始态； Fulfilled 成功态； Rejected 失败态。
-1234567891011121314151617181920
-        </a>
-      </p>
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-12-01 00:00" pubdate>
+                          2020-12-01
+                        </time>
+                      </div>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-11 00:00" pubdate>
-              2020-12-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/Promise/">Promise</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gitopensource.jpg" srcset="/img/loading.gif" alt="你知道如何高效地在GitHub搜索开源项目吗?">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">你知道如何高效地在GitHub搜索开源项目吗?</a>
-      </h1>
+                        <a href="/categories/OpenSource/">OpenSource</a>
+                      </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/12/01/%E4%BD%A0%E7%9F%A5%E9%81%93%E5%A6%82%E4%BD%95%E9%AB%98%E6%95%88%E5%9C%B0%E5%9C%A8github%E4%B8%8A%E6%89%BE%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">
-          
-          
-            
-          
-          作为一个常逛 GitHub 的程序员，你真的知道如何高效地在 GitHub 搜索开源项目吗？你的操作是不是单纯的在搜索框内输入关键词进行搜索的？嘿嘿，这篇文章就来告诉你有啥搜索的技巧或者说骚操作吧。
-先来看看直接在搜索框内输入关键词所搜索出来的内容吧（以搜 vue 项目为例）：
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
 
-what？竟然找到了 48 多万个相关的开源项目，这时候很多人就不清楚下一步应该干啥了，也不清楚具体找哪个项目练手学习
-        </a>
-      </p>
+                        <a href="/tags/GitHub/">GitHub</a>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-12-01 00:00" pubdate>
-              2020-12-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/OpenSource/">OpenSource</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/GitHub/">GitHub</a>
-            
-              <a href="/tags/OpenSource/">OpenSource</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/tags/OpenSource/">OpenSource</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/11/20/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/debounce.png" srcset="/img/loading.gif" alt="手写系列之防抖和节流">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/11/20/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">手写系列之防抖和节流</a>
-      </h1>
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/english-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="前端必备英语词汇，你了解多少呢？"
+                      />
+                    </a>
+                  </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/11/20/%E6%89%8B%E5%86%99%E7%B3%BB%E5%88%97%E4%B9%8B%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81/">
-          
-          
-            
-          
-          前言在前端日常开发中会遇到一些频繁的事件触发，比如：
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/"
+                        >前端必备英语词汇，你了解多少呢？</a
+                      >
+                    </h1>
 
-window 的 resize、scroll
-mousedown、mousemove
-keyup、keydown……
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/"
+                      >
+                        掌握前端开发过程中常用的英语词汇还是非常有必要的，现整理出一些前端英语词汇，希望对从事前端的你有所帮助。
+                        前端常用英语词汇表Aabstraction 抽象、抽象物、抽象性
+                        access 存取、访问 account 账户 action 动作 activate 激活
+                        adapter 适配器 address 地址 advanced 高级的 aggregation
+                        聚合、聚集 algorithm 算法 a
+                      </a>
+                    </p>
 
-我们来举一个简单的场景例子来了解事件如何频繁的触发，假设这里有一个按钮，点击按钮就能提交用户填好的表单。
-写个 index.html 文件：
-1234567891011121314151617&lt;!DOCTYPE htm
-        </a>
-      </p>
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-10-12 00:00" pubdate>
+                          2020-10-12
+                        </time>
+                      </div>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-11-20 00:00" pubdate>
-              2020-11-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/%E9%98%B2%E6%8A%96/">防抖</a>
-            
-              <a href="/tags/%E8%8A%82%E6%B5%81/">节流</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/english-1.jpg" srcset="/img/loading.gif" alt="前端必备英语词汇，你了解多少呢？">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/">前端必备英语词汇，你了解多少呢？</a>
-      </h1>
+                        <a
+                          href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/"
+                          >前端相关</a
+                        >
+                      </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/10/12/%E5%89%8D%E7%AB%AF%E5%BF%85%E5%A4%87%E8%8B%B1%E8%AF%AD%E8%AF%8D%E6%B1%87%EF%BC%8C%E4%BD%A0%E4%BA%86%E8%A7%A3%E5%A4%9A%E5%B0%91%E5%91%A2/">
-          
-          
-            
-          
-          掌握前端开发过程中常用的英语词汇还是非常有必要的，现整理出一些前端英语词汇，希望对从事前端的你有所帮助。
-前端常用英语词汇表Aabstraction 抽象、抽象物、抽象性
-access 存取、访问
-account 账户
-action 动作
-activate 激活
-adapter 适配器
-address 地址
-advanced 高级的
-aggregation 聚合、聚集
-algorithm 算法
-a
-        </a>
-      </p>
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-10-12 00:00" pubdate>
-              2020-10-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%8D%E7%AB%AF%E7%9B%B8%E5%85%B3/">前端相关</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/">英语术语</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/"
+                          >英语术语</a
+                        >
+                      </div>
+                    </div>
+                  </article>
+                </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jsdelivr.jpg" srcset="/img/loading.gif" alt="使用GitHub+jsDelivr+PicGo搭建免费快速图床">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/">使用GitHub+jsDelivr+PicGo搭建免费快速图床</a>
-      </h1>
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/jsdelivr.jpg"
+                        srcset="/img/loading.gif"
+                        alt="使用GitHub+jsDelivr+PicGo搭建免费快速图床"
+                      />
+                    </a>
+                  </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/">
-          
-          
-            
-          
-          前言1.相信不少朋友写 markdown 博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成 URL，直接在 markdown 引入 url。
-2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云 COS、阿里云 OSS 等都有各种限制，不是收费就是出了防外链。免费的也有 SM.MS，不过假如哪天
-        </a>
-      </p>
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/"
+                        >使用GitHub+jsDelivr+PicGo搭建免费快速图床</a
+                      >
+                    </h1>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-28 00:00" pubdate>
-              2020-09-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/tools/">tools</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/github/">github</a>
-            
-              <a href="/tags/%E5%9B%BE%E5%BA%8A/">图床</a>
-            
-              <a href="/tags/PicGo/">PicGo</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/09/28/%E4%BD%BF%E7%94%A8GitHub%E3%80%81jsDelivr%E3%80%81PicGo%E6%90%AD%E5%BB%BA%E5%85%8D%E8%B4%B9%E5%BF%AB%E9%80%9F%E5%9B%BE%E5%BA%8A/"
+                      >
+                        前言1.相信不少朋友写 markdown
+                        博客时，想插入一些图片，会采用本地存储方式，需要手动设置路径并把图片上传，这样稍显麻烦，所以可以考虑将图片上传至图床生成
+                        URL，直接在 markdown 引入 url。
+                        2.可是呢，现在国内用的各种图床，例如：微博图床、Imgur、七牛云、又拍云、腾讯云
+                        COS、阿里云 OSS
+                        等都有各种限制，不是收费就是出了防外链。免费的也有
+                        SM.MS，不过假如哪天
+                      </a>
+                    </p>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/eventloop-1.jpg" srcset="/img/loading.gif" alt="JavaScript系列之运行机制（Event Loop）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/">JavaScript系列之运行机制（Event Loop）</a>
-      </h1>
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-09-28 00:00" pubdate>
+                          2020-09-28
+                        </time>
+                      </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/">
-          
-          
-            
-          
-          有了一定 JavaScript 基础的朋友们一定知道，JS 里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的 JavaScript 系列文章里，我就总结了 JS 前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解 JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。
-单线程的问题JavaScript 语言的一
-        </a>
-      </p>
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-09-14 00:00" pubdate>
-              2020-09-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/">运行机制</a>
-            
-              <a href="/tags/Event-Loop/">Event Loop</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/categories/tools/">tools</a>
+                      </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/objectshenru-1.jpg" srcset="/img/loading.gif" alt="JavaScript系列之深入理解对象属性">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/">JavaScript系列之深入理解对象属性</a>
-      </h1>
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
 
-      <p class="index-excerpt">
-        <a href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/">
-          
-          
-            
-          
-          在《谈谈 JavaScript 中对象建立(Object)》这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解 JavaScript 的对象与其他编程语言的对象有何差异。
-开始介绍之前先来复习一下。
-之前说过，所有原始类型(Primitives) 以外的值都是对象，原始类型有以下几种：
+                        <a href="/tags/github/">github</a>
 
-string
-number
-boolean
-null
-undefin
-        </a>
-      </p>
+                        <a href="/tags/%E5%9B%BE%E5%BA%8A/">图床</a>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-08-13 00:00" pubdate>
-              2020-08-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/%E5%AF%B9%E8%B1%A1/">对象</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/tags/PicGo/">PicGo</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/tool-1.jpg" srcset="/img/loading.gif" alt="一些好用的工具、网站">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/">一些好用的工具、网站</a>
-      </h1>
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/eventloop-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript系列之运行机制（Event Loop）"
+                      />
+                    </a>
+                  </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/">
-          
-          
-            
-          
-          这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下 13 款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。
-Evernote：一款神奇的笔记✔ 如果一款工具能满足你对笔记的所有需求的话，那就是 Evernote 了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…
-✔ 如果你还没用过，推荐你现在关闭答
-        </a>
-      </p>
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"
+                        >JavaScript系列之运行机制（Event Loop）</a
+                      >
+                    </h1>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-23 00:00" pubdate>
-              2020-07-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/tools/">tools</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/09/14/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"
+                      >
+                        有了一定 JavaScript 基础的朋友们一定知道，JS
+                        里有三座大山，分别指：原型与原型链，作用域与闭包，异步。在之前的
+                        JavaScript 系列文章里，我就总结了 JS
+                        前两座（原型、作用域），有兴趣的朋友可以翻阅之前的系列文章，而第三座（异步）也该做一个总结了，这篇文章的目的就是通过了解
+                        JS 执行顺序及机制，来更好地理顺代码中的一些异步操作。
+                        单线程的问题JavaScript 语言的一
+                      </a>
+                    </p>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/iife-1.png" srcset="/img/loading.gif" alt="JavaScript系列之立即执行函数IIFE">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/">JavaScript系列之立即执行函数IIFE</a>
-      </h1>
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-09-14 00:00" pubdate>
+                          2020-09-14
+                        </time>
+                      </div>
 
-      <p class="index-excerpt">
-        <a href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/">
-          
-          
-            
-          
-          在之前的文章当中，我们已经介绍了函数的参数，arguments 对象以及回调函数，那么在今天的分享中，我们继续来看看函数在 JavaScript 的另外一种面貌——立即执行函数表达式（Immediately Invoked Functions Expressions，IIFE）。
-IIFE(Immediately Invoked Functions Expressions)**其实可以就字面上直接
-        </a>
-      </p>
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-17 00:00" pubdate>
-              2020-07-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/IIFE/">IIFE</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/callback-1.jpg" srcset="/img/loading.gif" alt="JavaScript系列之回调函数">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">JavaScript系列之回调函数</a>
-      </h1>
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
 
-      <p class="index-excerpt">
-        <a href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
-          
-          
-            
-          
-          在之前的文章当中，我们已经介绍了函数的参数与 arguments 对象，那么今天的分享中，我们继续来看看函数在 JavaScript 的各种不同面貌——回调函数。
-回调函数你可能常听到人家在谈论回调函数（Callback function），但你真的知道回调函数是什么吗？其实回调函数跟一般的函数没什么不同，差别只在于被调用执行的时机。
-先前介绍事件的时候有说过，「JavaScript 是一个事件驱
-        </a>
-      </p>
+                        <a href="/tags/JavaScript/">JavaScript</a>
 
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-07-10 00:00" pubdate>
-              2020-07-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-              <a href="/tags/Callback-function/">Callback function</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
+                        <a href="/tags/%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/"
+                          >运行机制</a
+                        >
 
+                        <a href="/tags/Event-Loop/">Event Loop</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
 
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/objectshenru-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript系列之深入理解对象属性"
+                      />
+                    </a>
+                  </div>
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-  
-  <script>
-    for (ele of document.getElementById("pagination").getElementsByTagName("a")) {
-      ele.href += '#board';
-    }
-  </script>
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/"
+                        >JavaScript系列之深入理解对象属性</a
+                      >
+                    </h1>
 
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/08/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7/"
+                      >
+                        在《谈谈 JavaScript
+                        中对象建立(Object)》这一文中，我们曾经简单地介绍过对象及其创建方式。在今天这一篇文章当中呢，我们要更深入地来理解
+                        JavaScript 的对象与其他编程语言的对象有何差异。
+                        开始介绍之前先来复习一下。
+                        之前说过，所有原始类型(Primitives)
+                        以外的值都是对象，原始类型有以下几种： string number
+                        boolean null undefin
+                      </a>
+                    </p>
 
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-08-13 00:00" pubdate>
+                          2020-08-13
+                        </time>
+                      </div>
 
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/JavaScript/">JavaScript</a>
+
+                        <a href="/tags/%E5%AF%B9%E8%B1%A1/">对象</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/tool-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="一些好用的工具、网站"
+                      />
+                    </a>
+                  </div>
+
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/"
+                        >一些好用的工具、网站</a
+                      >
+                    </h1>
+
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/07/23/%E4%B8%80%E4%BA%9B%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7%E3%80%81%E7%BD%91%E7%AB%99/"
+                      >
+                        这里收集了一些我觉得能堪称神器的工具，能堪称神器的工具的一个关键词就是简单好用，对我们的工作生活要有所帮助，我就推荐一下
+                        13
+                        款我觉得好用的一些工具及网站。最后一个工具嘛~你懂的嘿嘿嘿。
+                        Evernote：一款神奇的笔记✔
+                        如果一款工具能满足你对笔记的所有需求的话，那就是
+                        Evernote
+                        了，写笔记，列清单，时间管理，录音，工作同步，手机和电脑端都可下载…
+                        ✔ 如果你还没用过，推荐你现在关闭答
+                      </a>
+                    </p>
+
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-07-23 00:00" pubdate>
+                          2020-07-23
+                        </time>
+                      </div>
+
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/tools/">tools</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/%E5%B7%A5%E5%85%B7/">工具</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/iife-1.png"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript系列之立即执行函数IIFE"
+                      />
+                    </a>
+                  </div>
+
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/"
+                        >JavaScript系列之立即执行函数IIFE</a
+                      >
+                    </h1>
+
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/07/17/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%AB%8B%E5%8D%B3%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0IIFE/"
+                      >
+                        在之前的文章当中，我们已经介绍了函数的参数，arguments
+                        对象以及回调函数，那么在今天的分享中，我们继续来看看函数在
+                        JavaScript
+                        的另外一种面貌——立即执行函数表达式（Immediately Invoked
+                        Functions Expressions，IIFE）。 IIFE(Immediately Invoked
+                        Functions Expressions)**其实可以就字面上直接
+                      </a>
+                    </p>
+
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-07-17 00:00" pubdate>
+                          2020-07-17
+                        </time>
+                      </div>
+
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/JavaScript/">JavaScript</a>
+
+                        <a href="/tags/IIFE/">IIFE</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/callback-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript系列之回调函数"
+                      />
+                    </a>
+                  </div>
+
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
+                        >JavaScript系列之回调函数</a
+                      >
+                    </h1>
+
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/07/10/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"
+                      >
+                        在之前的文章当中，我们已经介绍了函数的参数与 arguments
+                        对象，那么今天的分享中，我们继续来看看函数在 JavaScript
+                        的各种不同面貌——回调函数。
+                        回调函数你可能常听到人家在谈论回调函数（Callback
+                        function），但你真的知道回调函数是什么吗？其实回调函数跟一般的函数没什么不同，差别只在于被调用执行的时机。
+                        先前介绍事件的时候有说过，「JavaScript 是一个事件驱
+                      </a>
+                    </p>
+
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-07-10 00:00" pubdate>
+                          2020-07-10
+                        </time>
+                      </div>
+
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/JavaScript/">JavaScript</a>
+
+                        <a href="/tags/Callback-function/">Callback function</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/eventjiemei-1.png"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript事件三部曲之事件的兄弟姐妹们"
+                      />
+                    </a>
+                  </div>
+
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/"
+                        >JavaScript事件三部曲之事件的兄弟姐妹们</a
+                      >
+                    </h1>
+
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/07/03/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%84%E5%BC%9F%E5%A7%90%E5%A6%B9%E4%BB%AC/"
+                      >
+                        在前面的两篇文章中，已经介绍了事件的传达机制，以及如何阻止事件的冒泡与默认的行为。
+                        那么，作为「事件三部曲」的最后一篇，我们就来大概介绍一下，DOM
+                        规范之中究竟提供了哪些事件。
+                        事件的种类浏览器可能发生的事件有很多种，了解这些事件的情境及效果，是
+                        Web 开发不能忽略的基础，接下来介绍一下常见的几种事件：
+                        界面相关事件界面相关的事件不一定会与使用者对 DOM
+                        的操作有关系，反而大多数与 wind
+                      </a>
+                    </p>
+
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-07-03 00:00" pubdate>
+                          2020-07-03
+                        </time>
+                      </div>
+
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/JavaScript/">JavaScript</a>
+
+                        <a href="/tags/%E4%BA%8B%E4%BB%B6/">事件</a>
+
+                        <a href="/tags/event/">event</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="row mx-auto index-card">
+                  <div class="col-12 col-md-4 m-auto index-img">
+                    <a
+                      href="/2020/06/28/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/"
+                      target="_self"
+                    >
+                      <img
+                        src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/secret-1.jpg"
+                        srcset="/img/loading.gif"
+                        alt="JavaScript事件三部曲之隐藏在其中的&#39;秘密&#39;"
+                      />
+                    </a>
+                  </div>
+
+                  <article class="col-12 col-md-8 mx-auto index-info">
+                    <h1 class="index-header">
+                      <a
+                        href="/2020/06/28/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/"
+                        >JavaScript事件三部曲之隐藏在其中的&#39;秘密&#39;</a
+                      >
+                    </h1>
+
+                    <p class="index-excerpt">
+                      <a
+                        href="/2020/06/28/JavaScript%E4%BA%8B%E4%BB%B6%E4%B8%89%E9%83%A8%E6%9B%B2%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9C%A8%E5%85%B6%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86/"
+                      >
+                        上篇文章我们提到，注册事件的方法
+                        addEventListener()内有三个参数，分别是「事件名称」、「事件的处理程序」，以及「捕获」或「冒泡」的机制切换。
+                        那么，今天我们要来看的第一个部分，就是隐藏在事件处理程序中的event
+                        。
+                        隐藏在监听函数中的”event”当监听的事件发生时，浏览器会去执行我们通过addEventListener()注册的事件处理程序函数。
+                        这个时候，EventList
+                      </a>
+                    </p>
+
+                    <div class="index-btm post-metas">
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-date"></i>
+                        <time datetime="2020-06-28 00:00" pubdate>
+                          2020-06-28
+                        </time>
+                      </div>
+
+                      <div class="post-meta mr-3">
+                        <i class="iconfont icon-category"></i>
+
+                        <a href="/categories/JavaScript/">JavaScript</a>
+                      </div>
+
+                      <div class="post-meta">
+                        <i class="iconfont icon-tags"></i>
+
+                        <a href="/tags/JavaScript/">JavaScript</a>
+
+                        <a href="/tags/%E4%BA%8B%E4%BB%B6/">事件</a>
+
+                        <a href="/tags/event/">event</a>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <nav aria-label="navigation">
+                  <span class="pagination" id="pagination">
+                    <span class="page-number current">1</span
+                    ><a class="page-number" href="/page/2/">2</a
+                    ><a class="page-number" href="/page/3/">3</a
+                    ><span class="space">&hellip;</span
+                    ><a class="page-number" href="/page/6/">6</a
+                    ><a class="extend next" rel="next" href="/page/2/"
+                      ><i class="iconfont icon-arrowright"></i
+                    ></a>
+                  </span>
+                </nav>
+
+                <script>
+                  for (ele of document
+                    .getElementById("pagination")
+                    .getElementsByTagName("a")) {
+                    ele.href += "#board";
+                  }
+                </script>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
 
-    
       <a id="scroll-top-button" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
-    
 
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">关键词</label>
+      <div
+        class="modal fade"
+        id="modalSearch"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="ModalLabel"
+        aria-hidden="true"
+      >
+        <div
+          class="modal-dialog modal-dialog-scrollable modal-lg"
+          role="document"
+        >
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+              <button
+                type="button"
+                id="local-search-close"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-3">
+              <div class="md-form mb-5">
+                <input
+                  type="text"
+                  id="local-search-input"
+                  class="form-control validate"
+                />
+                <label data-error="x" data-success="v" for="local-search-input"
+                  >关键词</label
+                >
+              </div>
+              <div class="list-group" id="local-search-result"></div>
+            </div>
+          </div>
         </div>
-        <div class="list-group" id="local-search-result"></div>
       </div>
-    </div>
-  </div>
-</div>
-    
+    </main>
 
-    
-  </main>
+    <footer class="text-center mt-5 py-3">
+      <div class="footer-content">
+        <a href="https://hexo.io" target="_blank" rel="nofollow noopener"
+          ><span>Hexo</span></a
+        >
+        <i class="iconfont icon-love"></i>
+        <a
+          href="https://github.com/fluid-dev/hexo-theme-fluid"
+          target="_blank"
+          rel="nofollow noopener"
+          ><span>Fluid</span></a
+        >
+      </div>
+      灵谦的个人博客 2019–2021
+    </footer>
 
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
-  灵谦的个人博客 2019–2021 
- 
- 
-</footer>
+    <!-- SCRIPTS -->
 
-<!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css"
+    />
 
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+    <script>
+      NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
+      NProgress.start();
+      document.addEventListener("DOMContentLoaded", function () {
+        window.NProgress && window.NProgress.inc();
+      });
+      window.addEventListener("load", function () {
+        NProgress.done();
+      });
+    </script>
 
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
-    NProgress.start()
-    document.addEventListener('DOMContentLoaded', function() {
-      window.NProgress && window.NProgress.inc();
-    })
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"></script>
+    <script src="/js/debouncer.js"></script>
+    <script src="/js/events.js"></script>
+    <script src="/js/plugins.js"></script>
 
+    <!-- Plugins -->
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+    <script src="/js/lazyload.js"></script>
 
-<!-- Plugins -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"
+    ></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+    <script>
+      (function (window, document) {
+        var typing = Fluid.plugins.typing;
+        var title = document.getElementById("subtitle").title;
 
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+        typing(title);
+      })(window, document);
+    </script>
 
+    <script src="/js/local-search.js"></script>
+    <script>
+      (function () {
+        var path = "/local-search.xml";
+        var inputArea = document.querySelector("#local-search-input");
+        inputArea.onclick = function () {
+          searchFunc(path, "local-search-input", "local-search-result");
+          this.onclick = null;
+        };
+      })();
+    </script>
 
-
-  
-
-
-
-
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
-    })()
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
-
-
-</body>
+    <!-- 主题的启动项 保持在最底部 -->
+    <script src="/js/boot.js"></script>
+  </body>
 </html>

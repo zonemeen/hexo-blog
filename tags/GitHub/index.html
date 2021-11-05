@@ -117,21 +117,22 @@
         </li>
          
         <li class="nav-item" id="color-toggle-btn">
-          <a class="nav-link" href="javascript:"
+          <a class="nav-link" href="javascript:;"
             >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
             >&nbsp;</a
           >
         </li>
          
         <li class="nav-item" id="music-toggle-btn">
-          <a class="nav-link" href="javascript:"
+          <a class="nav-link" href="javascript:;"
             >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
-            >&nbsp;<audio id="player" loop>
-              <source
-                src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
-                type="audio/mp3"
-              /></audio
-          ></a>
+            >&nbsp;</a
+          ><audio id="player" loop>
+            <source
+              src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+              type="audio/mp3"
+            />
+          </audio>
         </li>
         
       </ul>
@@ -279,6 +280,59 @@
 
 
   <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
+ src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
 
 
 

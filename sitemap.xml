@@ -480,13 +480,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
-    <lastmod>2021-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/HTML/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -501,6 +494,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/HTTP/</loc>
+    <lastmod>2021-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/Hexo/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -508,7 +508,7 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E5%AF%B9%E8%B1%A1/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -529,7 +529,7 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%AF%B9%E8%B1%A1/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -537,6 +537,13 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/this/</loc>
+    <lastmod>2021-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/%E5%86%85%E5%AD%98/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -557,13 +564,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%86%85%E5%AD%98/</loc>
-    <lastmod>2021-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/%E5%8E%9F%E5%9E%8B%E9%93%BE/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -571,14 +571,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Callback-function/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1/</loc>
+    <loc>https://me.miqilin21.cn/tags/Callback-function/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -697,6 +697,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/</loc>
+    <lastmod>2021-12-16</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/Node-js/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -725,13 +732,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E8%8B%B1%E8%AF%AD%E6%9C%AF%E8%AF%AD/</loc>
-    <lastmod>2021-12-16</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
@@ -746,14 +746,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Object/</loc>
+    <loc>https://me.miqilin21.cn/tags/BOM/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/BOM/</loc>
+    <loc>https://me.miqilin21.cn/tags/Object/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -839,14 +839,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/HTTP/</loc>
+    <loc>https://me.miqilin21.cn/categories/HTML/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/HTML/</loc>
+    <loc>https://me.miqilin21.cn/categories/HTTP/</loc>
     <lastmod>2021-12-16</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

@@ -179,34 +179,27 @@
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型">
+        <a href="/2021/01/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lexingpd.jpg" srcset="/img/loading.gif" alt="JavaScript系列之类型判断">
         </a>
       </div>
     
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">JavaScript系列之数据类型</a>
+        <a href="/2021/01/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">JavaScript系列之类型判断</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+        <a href="/2021/01/13/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E7%B1%BB%E5%9E%8B%E5%88%A4%E6%96%AD/">
           
           
             
           
-          JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。
-原始类型（值类型）
-Undefined undefined
-Null null
-Boolean true
-String &#39;hello&#39;
-Number 123
-Symbol(这里先不做介绍)
-
-引用类型（对象类型）
-Object：由以上几种基本类型组成，而且对象里面还可以包含
+          类型判断在 web 开发中较为常见，简单的有判断数字还是字符串，判断是数组还是对象稍微复杂一些，再复杂一点的有判断日期、正则、错误类型，再再复杂一点还有比如判断 plainObject、空对象、Window 对象等等。
+通过本文，我将尝试概述 Javascript 中类型判断的几种方法（基于 ES5 的规范）。
+typeoftypeof 判断类型方法算是我们最最常用的了，直接上代码：
+123456
         </a>
       </p>
 
@@ -214,8 +207,8 @@ Object：由以上几种基本类型组成，而且对象里面还可以包含
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-12 00:00" pubdate>
-              2020-01-12
+            <time datetime="2021-01-13 00:00" pubdate>
+              2021-01-13
             </time>
           </div>
         
@@ -245,7 +238,73 @@ Object：由以上几种基本类型组成，而且对象里面还可以包含
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
+        <a href="/2021/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" target="_self">
+          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/shujulx.jpg" srcset="/img/loading.gif" alt="JavaScript系列之数据类型">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">JavaScript系列之数据类型</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/01/12/JavaScript%E7%B3%BB%E5%88%97%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">
+          
+          
+            
+          
+          JavaScript 提供了不同的数据类型来保存不同类型的值，主要有两种类型的数据类型：原始类型和引用类型。
+原始类型（值类型）
+Undefined undefined
+Null null
+Boolean true
+String &#39;hello&#39;
+Number 123
+Symbol(这里先不做介绍)
+
+引用类型（对象类型）
+Object：由以上几种基本类型组成，而且对象里面还可以包含
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-01-12 00:00" pubdate>
+              2021-01-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JavaScript/">JavaScript</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn2.jpg" srcset="/img/loading.gif" alt="学会如何学习（二）">
         </a>
       </div>
@@ -253,11 +312,11 @@ Object：由以上几种基本类型组成，而且对象里面还可以包含
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">学会如何学习（二）</a>
+        <a href="/2021/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">学会如何学习（二）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+        <a href="/2021/01/10/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
           
           
             
@@ -271,8 +330,8 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-10 00:00" pubdate>
-              2020-01-10
+            <time datetime="2021-01-10 00:00" pubdate>
+              2021-01-10
             </time>
           </div>
         
@@ -302,7 +361,7 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/" target="_self">
+        <a href="/2021/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/lastobject.jpg" srcset="/img/loading.gif" alt="JavaScript中任何值的prototype到最后都是Object">
         </a>
       </div>
@@ -310,11 +369,11 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/">JavaScript中任何值的prototype到最后都是Object</a>
+        <a href="/2021/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/">JavaScript中任何值的prototype到最后都是Object</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/">
+        <a href="/2021/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/">
           
           
             
@@ -330,8 +389,8 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-09 00:00" pubdate>
-              2020-01-09
+            <time datetime="2021-01-09 00:00" pubdate>
+              2021-01-09
             </time>
           </div>
         
@@ -361,7 +420,7 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/" target="_self">
+        <a href="/2021/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexobug.png" srcset="/img/loading.gif" alt="Hexo搭建博客中遇到的一些&#39;事&#39;">
         </a>
       </div>
@@ -369,11 +428,11 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/">Hexo搭建博客中遇到的一些&#39;事&#39;</a>
+        <a href="/2021/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/">Hexo搭建博客中遇到的一些&#39;事&#39;</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/">
+        <a href="/2021/01/08/Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%BA%9B%E2%80%9C%E4%BA%8B%E2%80%9D/">
           
           
             
@@ -387,8 +446,8 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-08 00:00" pubdate>
-              2020-01-08
+            <time datetime="2021-01-08 00:00" pubdate>
+              2021-01-08
             </time>
           </div>
         
@@ -416,7 +475,7 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
+        <a href="/2021/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/learn1.jpg" srcset="/img/loading.gif" alt="学会如何学习（一）">
         </a>
       </div>
@@ -424,11 +483,11 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">学会如何学习（一）</a>
+        <a href="/2021/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">学会如何学习（一）</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2020/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+        <a href="/2021/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
           
           
             
@@ -442,8 +501,8 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-01-06 00:00" pubdate>
-              2020-01-06
+            <time datetime="2021-01-06 00:00" pubdate>
+              2021-01-06
             </time>
           </div>
         
@@ -473,7 +532,7 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/" target="_self">
+        <a href="/2020/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/gittuozh.jpg" srcset="/img/loading.gif" alt="Git命令拓展">
         </a>
       </div>
@@ -481,11 +540,11 @@ Part1 组块什么是组块什么是组块 (chunk) ？对于绝大多数人来�
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/">Git命令拓展</a>
+        <a href="/2020/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/">Git命令拓展</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/">
+        <a href="/2020/12/30/Git%E5%91%BD%E4%BB%A4%E6%8B%93%E5%B1%95/">
           
           
             
@@ -508,8 +567,8 @@ Remote：远程仓库
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-30 00:00" pubdate>
-              2019-12-30
+            <time datetime="2020-12-30 00:00" pubdate>
+              2020-12-30
             </time>
           </div>
         
@@ -539,7 +598,7 @@ Remote：远程仓库
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_self">
+        <a href="/2020/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/hexogit.jpg" srcset="/img/loading.gif" alt="使用Hexo+GitHub搭建个人博客">
         </a>
       </div>
@@ -547,11 +606,11 @@ Remote：远程仓库
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">使用Hexo+GitHub搭建个人博客</a>
+        <a href="/2020/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">使用Hexo+GitHub搭建个人博客</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        <a href="/2020/12/27/%E4%BD%BF%E7%94%A8Hexo%E3%80%81GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
           
           
             
@@ -567,8 +626,8 @@ Remote：远程仓库
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-27 00:00" pubdate>
-              2019-12-27
+            <time datetime="2020-12-27 00:00" pubdate>
+              2020-12-27
             </time>
           </div>
         
@@ -598,7 +657,7 @@ Remote：远程仓库
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/" target="_self">
+        <a href="/2020/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csssl.jpg" srcset="/img/loading.gif" alt="CSS笔记—三栏布局">
         </a>
       </div>
@@ -606,11 +665,11 @@ Remote：远程仓库
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/">CSS笔记—三栏布局</a>
+        <a href="/2020/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/">CSS笔记—三栏布局</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/">
+        <a href="/2020/12/24/CSS%E5%B8%83%E5%B1%80%E2%80%94%E4%B8%89%E6%A0%8F%E5%B8%83%E5%B1%80/">
           
           
             
@@ -626,8 +685,8 @@ Remote：远程仓库
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-24 00:00" pubdate>
-              2019-12-24
+            <time datetime="2020-12-24 00:00" pubdate>
+              2020-12-24
             </time>
           </div>
         
@@ -657,7 +716,7 @@ Remote：远程仓库
     
     
       <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/" target="_self">
+        <a href="/2020/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/" target="_self">
           <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/csszy.png" srcset="/img/loading.gif" alt="CSS笔记—左右布局">
         </a>
       </div>
@@ -665,11 +724,11 @@ Remote：远程仓库
     <article class="col-12 col-md-8 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/">CSS笔记—左右布局</a>
+        <a href="/2020/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/">CSS笔记—左右布局</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2019/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/">
+        <a href="/2020/12/22/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B7%A6%E5%8F%B3%E5%B8%83%E5%B1%80/">
           
           
             
@@ -685,67 +744,8 @@ position: absolute 实现在父级元素内设置两个子元素，绝对定位�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-22 00:00" pubdate>
-              2019-12-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CSS/">CSS</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CSS/">CSS</a>
-            
-              <a href="/tags/%E5%B8%83%E5%B1%80/">布局</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2019/12/21/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/" target="_self">
-          <img src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/cssjuzh.png" srcset="/img/loading.gif" alt="CSS笔记—居中布局">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2019/12/21/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/">CSS笔记—居中布局</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2019/12/21/CSS%E5%B8%83%E5%B1%80%E2%80%94%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/">
-          
-          
-            
-          
-          我们在网页布局的时候，经常会碰到需要居中的情况，平时大家所看到的居中效果主要分为三大类：水平居中、垂直居中和水平垂直居中。
-水平居中元素宽高未知当元素的宽高都未知的时候，可以利用以下两种方法将元素水平居中：
-①CSS3 transform：
-12345678.parent &#123;  position: relative;&#125;.child &#123;  position: absol
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2019-12-21 00:00" pubdate>
-              2019-12-21
+            <time datetime="2020-12-22 00:00" pubdate>
+              2020-12-22
             </time>
           </div>
         

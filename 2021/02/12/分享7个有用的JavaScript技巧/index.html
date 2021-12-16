@@ -1,0 +1,478 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue / React 等编程技术类文章。">
+  <meta name="author" content="miqilin21">
+  <meta name="keywords" content="前端、前端学习、前端编程、程序员、编程、博客、技术、转行、HTML、CSS、JavaScript、vue、react、Node.js、分享、blog、米淇淋、灵谦、miqilin、生活、爱好">
+  <title>【译】分享7个好用的JavaScript技巧 - 灵谦的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2565223_esykp744a67.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="灵谦的个人博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav
+  id="navbar"
+  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="/"
+      >&nbsp;<strong>灵谦的个人博客</strong
+      >&nbsp;</a
+    >
+
+    <button
+      id="navbar-toggler-btn"
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+            
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="iconfont icon-home-fill"></i> 首页
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="iconfont icon-archive-fill"></i> 归档
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="iconfont icon-category-fill"></i> 分类
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="iconfont icon-tags-fill"></i> 标签
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">
+            <i class="iconfont icon-user-fill"></i> 关于
+          </a>
+        </li>
+          
+        <li class="nav-item" id="search-btn">
+          <a class="nav-link" data-toggle="modal" data-target="#modalSearch"
+            >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="color-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
+            >&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="music-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
+            >&nbsp;</a
+          ><audio id="player" loop>
+            <source
+              src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+              type="audio/mp3"
+            />
+          </audio>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="【译】分享7个好用的JavaScript技巧">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-12 00:00" pubdate>
+        2021年2月12日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      961 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">【译】分享7个好用的JavaScript技巧</h1>
+            
+            <div class="markdown-body">
+              <p>就像所有其他编程语言一样，JavaScript 也有许多技巧可以完成简单和困难的任务。 一些技巧广为人知，而其他技巧则足以让你大吃一惊。 让我们来看看你今天就可以开始使用的七个 JavaScript 技巧吧！</p>
+<p><img src="/images/skill/1.jpg" srcset="/img/loading.gif"></p>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://davidwalsh.name/javascript-tricks#comments">https://davidwalsh.name/javascript-tricks#comments</a></p>
+<h4 id="数组去重"><a href="#数组去重" class="headerlink" title="数组去重"></a>数组去重</h4><p>数组去重可能比您想象的更容易：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> j = [...new <span class="hljs-built_in">Set</span>([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>])] &gt;&gt; [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];<br></code></pre></div></td></tr></table></figure>
+
+<p>很简单有木有！</p>
+<h4 id="过滤掉-falsy-值"><a href="#过滤掉-falsy-值" class="headerlink" title="过滤掉 falsy 值"></a>过滤掉 falsy 值</h4><p>是否需要从数组中过滤出 falsy 值（<code>0</code>，<code>undefined</code>，<code>null</code>，<code>false</code>等）？ 你可能不知道还有这个技巧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> res = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">0</span>,<span class="hljs-literal">undefined</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">false</span>,<span class="hljs-string">&#x27;&#x27;</span>].filter(<span class="hljs-built_in">Boolean</span>);<br>&gt;&gt; <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="创建空对象"><a href="#创建空对象" class="headerlink" title="创建空对象"></a>创建空对象</h4><p>您可以使用<code>&#123; &#125;</code>创建一个看似空的对象，但该对象仍然具有<code>__proto__</code>和通常的<code>hasOwnProperty</code>以及其他对象方法。 但是，有一种方法可以创建一个纯粹的“字典”对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> dict = <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>);<br><br><span class="hljs-comment">// dict.__proto__ === &quot;undefined&quot;</span><br><span class="hljs-comment">// No object properties exist until you add them</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这种方式创建的对象就很纯粹，没有任何属性和对象，非常干净。</p>
+<h4 id="合并对象"><a href="#合并对象" class="headerlink" title="合并对象"></a>合并对象</h4><p>在 JavaScript 中合并多个对象的需求已经存在，尤其是当我们开始使用选项创建类和小工具时：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> person = &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;David Walsh&quot;</span>, <span class="hljs-attr">gender</span>: <span class="hljs-string">&quot;Male&quot;</span> &#125;;<br><span class="hljs-keyword">const</span> tools = &#123; <span class="hljs-attr">computer</span>: <span class="hljs-string">&quot;Mac&quot;</span>, <span class="hljs-attr">editor</span>: <span class="hljs-string">&quot;Atom&quot;</span> &#125;;<br><span class="hljs-keyword">const</span> attributes = &#123; <span class="hljs-attr">handsomeness</span>: <span class="hljs-string">&quot;Extreme&quot;</span>, <span class="hljs-attr">hair</span>: <span class="hljs-string">&quot;Brown&quot;</span>, <span class="hljs-attr">eyes</span>: <span class="hljs-string">&quot;Blue&quot;</span> &#125;;<br><br><span class="hljs-keyword">const</span> summary = &#123; ...person, ...tools, ...attributes &#125;;<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">Object &#123;</span><br><span class="hljs-comment">  &quot;computer&quot;: &quot;Mac&quot;,</span><br><span class="hljs-comment">  &quot;editor&quot;: &quot;Atom&quot;,</span><br><span class="hljs-comment">  &quot;eyes&quot;: &quot;Blue&quot;,</span><br><span class="hljs-comment">  &quot;gender&quot;: &quot;Male&quot;,</span><br><span class="hljs-comment">  &quot;hair&quot;: &quot;Brown&quot;,</span><br><span class="hljs-comment">  &quot;handsomeness&quot;: &quot;Extreme&quot;,</span><br><span class="hljs-comment">  &quot;name&quot;: &quot;David Walsh&quot;,</span><br><span class="hljs-comment">&#125;</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这三个点<code>(...)</code>使任务变得更加容易！</p>
+<h4 id="Require-函数参数"><a href="#Require-函数参数" class="headerlink" title="Require 函数参数"></a>Require 函数参数</h4><p>能够为函数参数设置默认值是 JavaScript 的一个很棒的补充，但是请查看这个技巧，要求为给定的参数传递值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> isRequired = <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;param is required&quot;</span>);<br>&#125;;<br><br><span class="hljs-keyword">const</span> hello = <span class="hljs-function">(<span class="hljs-params">name = isRequired()</span>) =&gt;</span> &#123;<br>  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`hello <span class="hljs-subst">$&#123;name&#125;</span>`</span>);<br>&#125;;<br><br><span class="hljs-comment">// This will throw an error because no name is provided</span><br>hello();<br><br><span class="hljs-comment">// This will also throw an error</span><br>hello(<span class="hljs-literal">undefined</span>);<br><br><span class="hljs-comment">// These are good!</span><br>hello(<span class="hljs-literal">null</span>);<br>hello(<span class="hljs-string">&quot;David&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="解构添加别名"><a href="#解构添加别名" class="headerlink" title="解构添加别名"></a>解构添加别名</h4><p>解构是 JavaScript 的一个非常受欢迎的补充，但有时我们更喜欢用其他名称来引用这些属性，所以我们可以利用别名：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> obj = &#123; <span class="hljs-attr">x</span>: <span class="hljs-number">1</span> &#125;;<br><br><span class="hljs-comment">// Grabs obj.x as &#123; x &#125;</span><br><span class="hljs-keyword">const</span> &#123; x &#125; = obj;<br><br><span class="hljs-comment">// Grabs obj.x as &#123; otherName &#125;</span><br><span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">x</span>: otherName &#125; = obj;<br></code></pre></div></td></tr></table></figure>
+
+<p>有助于避免与现有变量的命名冲突！</p>
+<h4 id="获取查询字符串参数"><a href="#获取查询字符串参数" class="headerlink" title="获取查询字符串参数"></a>获取查询字符串参数</h4><p>获取 url 里面的参数值或者追加查询字符串，在这之前，我们一般通过正则表达式来获取查询字符串值，然而现在有一个新的 api，具体详情可以查看<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/URLSearchParams">这里</a>，可以让我们以很简单的方式去处理 url。</p>
+<p>比如现在我们有这样一个 url，”?post=1234&amp;action=edit”，我们可以利用下面的技巧来处理这个 url。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// Assuming &quot;?post=1234&amp;action=edit&quot;</span><br><br><span class="hljs-keyword">var</span> urlParams = <span class="hljs-keyword">new</span> URLSearchParams(<span class="hljs-built_in">window</span>.location.search);<br><br><span class="hljs-built_in">console</span>.log(urlParams.has(<span class="hljs-string">&quot;post&quot;</span>)); <span class="hljs-comment">// true</span><br><span class="hljs-built_in">console</span>.log(urlParams.get(<span class="hljs-string">&quot;action&quot;</span>)); <span class="hljs-comment">// &quot;edit&quot;</span><br><span class="hljs-built_in">console</span>.log(urlParams.getAll(<span class="hljs-string">&quot;action&quot;</span>)); <span class="hljs-comment">// [&quot;edit&quot;]</span><br><span class="hljs-built_in">console</span>.log(urlParams.toString()); <span class="hljs-comment">// &quot;?post=1234&amp;action=edit&quot;</span><br><span class="hljs-built_in">console</span>.log(urlParams.append(<span class="hljs-string">&quot;active&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>)); <span class="hljs-comment">// &quot;?post=1234&amp;action=edit&amp;active=1&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>比我们过去用的容易多了！</p>
+<p>多年来 JavaScript 已经发生了很大的变化，但是我最喜欢的 JavaScript 部分是我们所看到的语言改进的速度。 尽管 JavaScript 的动态不断变化，我们仍然需要采用一些不错的技巧; 将这些技巧保存在工具箱中，以便在需要时使用！</p>
+<p>那你最喜欢的 JavaScript 技巧是什么？</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BC%96%E7%A8%8B%E6%8A%80%E5%B7%A7/">编程技巧</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/15/%E8%B0%88%E8%B0%88JavaScript%E4%B8%AD%E5%AF%B9%E8%B1%A1%E5%BB%BA%E7%AB%8B(Object)/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">谈谈JavaScript中创建对象(Object)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/">
+                        <span class="hidden-mobile">DOM Node 的建立、删除与修改</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  灵谦的个人博客 2019–2021 
+ 
+ 
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

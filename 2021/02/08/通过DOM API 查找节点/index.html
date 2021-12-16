@@ -1,0 +1,561 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue / React 等编程技术类文章。">
+  <meta name="author" content="miqilin21">
+  <meta name="keywords" content="前端、前端学习、前端编程、程序员、编程、博客、技术、转行、HTML、CSS、JavaScript、vue、react、Node.js、分享、blog、米淇淋、灵谦、miqilin、生活、爱好">
+  <title>通过DOM API 查找节点 - 灵谦的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2565223_esykp744a67.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="灵谦的个人博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav
+  id="navbar"
+  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="/"
+      >&nbsp;<strong>灵谦的个人博客</strong
+      >&nbsp;</a
+    >
+
+    <button
+      id="navbar-toggler-btn"
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+            
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="iconfont icon-home-fill"></i> 首页
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="iconfont icon-archive-fill"></i> 归档
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="iconfont icon-category-fill"></i> 分类
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="iconfont icon-tags-fill"></i> 标签
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">
+            <i class="iconfont icon-user-fill"></i> 关于
+          </a>
+        </li>
+          
+        <li class="nav-item" id="search-btn">
+          <a class="nav-link" data-toggle="modal" data-target="#modalSearch"
+            >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="color-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
+            >&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="music-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
+            >&nbsp;</a
+          ><audio id="player" loop>
+            <source
+              src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+              type="audio/mp3"
+            />
+          </audio>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="通过DOM API 查找节点">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-08 00:00" pubdate>
+        2021年2月8日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">通过DOM API 查找节点</h1>
+            
+            <div class="markdown-body">
+              <p>在上一篇的分享当中，我们简单介绍了 BOM 与 DOM，也了解到 JavaScript 是怎么通过它们提供的方法来与浏览器进行沟通。</p>
+<p>当一个网页被载入到浏览器时，浏览器会首先分析这个 HTML 文档，然后会依照这份 HTML 的内容解析成 DOM (Document Object Model，即文件对象模型)。</p>
+<p>而 DOM 是 W3C 制定的一个规范，它是独立于平台与语言的标准。换言之，只要遵守这样的规范，不管是什么平台或者是什么语言开发，都可以通过 DOM 提供的 API 来操作 DOM 的内容、结构与样式。</p>
+<p>所以说，DOM 是网页的根本，懂得<strong>控制 DOM 就可以控制整个网页，做出良好的互动体验</strong>。</p>
+<p>那么在今天的分享中，我们就继续来介绍 DOM API 查找节点的方法吧。</p>
+<h3 id="前言-script-标签放哪里有区别吗？"><a href="#前言-script-标签放哪里有区别吗？" class="headerlink" title="前言:script 标签放哪里有区别吗？"></a>前言:script 标签放哪里有区别吗？</h3><p>针对<code>&lt;script&gt;</code>标签放哪里，这个题目其实没有标准答案，一般你会看到有两种版本：</p>
+<ul>
+<li>放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间</li>
+<li>放在<code>&lt;/body&gt;</code>之前</li>
+</ul>
+<p>还有人会说为什么放在<code>&lt;head&gt; ... &lt;/head&gt;</code>里面的 JavaScript 没有作用？我觉得这说的有出入，这里我们简单来讲一下问题所在。</p>
+<p>那么我们来试试上一篇介绍过的，先以<code>document.querySelector</code>取得<code>id=&quot;hello&quot;</code>的节点，然后通过<code>textContent</code>来修改内容。</p>
+<p>先来试试把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>之前。在 jsbin 里面马上执行看看，看起来似乎很 ok 呢！</p>
+<p><img src="/images/domapi/1.jpg" srcset="/img/loading.gif"></p>
+<p>接着，我们试着把<code>&lt;script&gt;</code>标签移到<code>&lt;head&gt; ... &lt;/head&gt;</code>之间：</p>
+<p><img src="/images/domapi/2.jpg" srcset="/img/loading.gif"></p>
+<p>咦？怎么什么都没有呢？而且也没有错误信息，JavaScript 真的如大家说的一样，很垃圾吗？</p>
+<p><img src="/images/domapi/3.jpg" srcset="/img/loading.gif"></p>
+<p>冷静一下，容我解释一下。</p>
+<p>前面说过，当一个网页被载入到浏览器时，浏览器会先分析这个 HTML 文档，由上而下依序来读取解析：</p>
+<p><img src="/images/domapi/4.jpg" srcset="/img/loading.gif"></p>
+<p>所以上面 jsbin 例子中，当浏览器在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间遇到<code>&lt;script&gt;</code>标签时，就会暂停解析网页，并且<strong>立即</strong>执行<code>&lt;script&gt;</code>里的内容，直到 script 执行完毕后再继续解析网页。</p>
+<p>当<code>&lt;head&gt; ... &lt;/head&gt;</code>里的<code>&lt;script&gt;</code>想要尝试去寻找<code>&lt;div id=&quot;hello&quot;&gt;</code>这个标签，但因为还没解析到网页本体，所以也无从取得。</p>
+<p>不是浏览器坏掉，也不是 JavaScript 太渣，而是因为我们<strong>不理解浏览器执行的原理所造成的误会</strong>。</p>
+<p>这里是浏览器加载一个有 <code>&lt;script&gt;</code> 标签的网站所发生的事情:</p>
+<ol>
+<li>拉取 HTML 页面</li>
+<li>开始解析 HTML</li>
+<li>解析到 <code>&lt;script&gt;</code> 标签之后准备获取 script 文件.</li>
+<li>浏览器获取 script 文件。同时，html 解析中断并且<strong>阻断</strong>页面上其他 html 的解析。</li>
+<li>一段时间后，script 下载完成并且<strong>执行</strong>。</li>
+<li>继续解析 HTML 文档的其他部分（解析 script 之后的 html 代码）</li>
+</ol>
+<p>第 4 步导致了很不好的用户体验，直到 script 文件全部下载完成之前 HTML 都不能得到解析。</p>
+<p>那么，当我们把<code>&lt;script&gt;</code>标签放在<code>&lt;/body&gt;</code>结束之前，由于 DOM 已经解析完成，所以<code>document.querySelector</code>就可以顺利取得<code>id=&quot;hello&quot;</code>的节点，并且把<code>&#39;HELLO&#39;</code>的字串放在网页里啦！</p>
+<p>这样说起来，<code>&lt;script&gt;</code>标签是不是就不适合放在<code>&lt;head&gt; ... &lt;/head&gt;</code>之间呢？</p>
+<p>也不能这么说，这点认真要讲的话之后或许可以用一整篇来说明这个。</p>
+<h3 id="DOM-节点的选取"><a href="#DOM-节点的选取" class="headerlink" title="DOM 节点的选取"></a>DOM 节点的选取</h3><p><img src="/images/domapi/5.jpg" srcset="/img/loading.gif"></p>
+<p>上一篇文章说过，<code>document对象</code>是 DOM tree 的根节点，所以当我们要存取 HTML 时，都从<code>document</code>对象开始。而 DOM 的节点类型除了<strong>HTML 元素节点</strong>(element nodes)外，还有<strong>文字节点</strong>(text nodes)、<strong>注释节点</strong>(comment nodes)等。</p>
+<p>而常见的 DOM 选取方法有下列这些：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 根据传入的值，找到 DOM 中 id 为 &#x27;xxx&#x27; 的元素。</span><br><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;xxx&quot;</span>);<br><br><span class="hljs-comment">// 针对给定的 tag 名称，返回所有符合条件的 NodeList 对象(节点的集合)</span><br><span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&quot;xxx&quot;</span>);<br><br><span class="hljs-comment">// 针对给定的 class 名称，返回所有符合条件的节点集合</span><br><span class="hljs-built_in">document</span>.getElementsByClassName(<span class="hljs-string">&quot;xxx&quot;</span>);<br><br><span class="hljs-comment">// 针对给定的 Selector 条件，返回第一个 或 所有符合条件的节点集合</span><br><span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;xxx&quot;</span>);<br><span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;xxx&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="DOM-节点的类型"><a href="#DOM-节点的类型" class="headerlink" title="DOM 节点的类型"></a>DOM 节点的类型</h3><p>DOM 常用的节点类型有下面几种：</p>
+<p><img src="/images/domapi/6.jpg" srcset="/img/loading.gif"></p>
+<p>可以通过节点类型常数或是对应数值来判断：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">document</span>.nodeType === Node.DOCUMENT_NODE; <span class="hljs-comment">//true</span><br><span class="hljs-built_in">document</span>.nodeType === <span class="hljs-number">9</span>; <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>其他不常用或是已经废弃的部分可以参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Node/nodeType">MDN Node.nodeType</a>一节。</p>
+<h3 id="DOM-节点间的查找遍历-Traversing"><a href="#DOM-节点间的查找遍历-Traversing" class="headerlink" title="DOM 节点间的查找遍历(Traversing)"></a>DOM 节点间的查找遍历(Traversing)</h3><p>由于 DOM 节点有分层的概念，于是节点与节点之间的关系，我们大致上可以分成以下两种：</p>
+<ul>
+<li><strong>父子关系</strong>：除了<code>document</code>之外，每一个节点都会有个上层的节点，我们通常称之为「父节点」 (Parent node)，而相对地，从属于自己下层的节点，就会称为「子节点」 (Child node)。</li>
+<li><strong>兄弟关系</strong>：有同一个「父节点」的节点，那么他们彼此之间就是「兄弟节点」(Siblings node)。</li>
+</ul>
+<p>而隔层的节点基本上没有直接关系。</p>
+<p><img src="/images/domapi/7.jpg" srcset="/img/loading.gif"></p>
+<p>上图中水平方向的邻层节点为父子关系，垂直方向的同层节点为兄弟关系。</p>
+<p><strong>Node.childNodes</strong></p>
+<p>所有的 DOM 节点对象都有<code>childNodes</code>属性，且此种属性无法修改。</p>
+<p>我们可以通过<code>Node.hasChildNodes()</code>来检查某个 DOM 节点是否有子节点。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> node = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;#hello&quot;</span>);<br><br><span class="hljs-comment">// 如果 node 內有子元素</span><br><span class="hljs-keyword">if</span> (node.hasChildNodes()) &#123;<br>  <span class="hljs-comment">// 可以通过 node.childNodes[n] (n 为数字索引) 取得对应的节点</span><br>  <span class="hljs-comment">// 注意，NodeList 对象內容为即时更新的集合</span><br>  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; node.childNodes[i].length; i++) &#123;<br>    <span class="hljs-comment">// ...</span><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><code>Node.childNodes</code>返回的可能会有这几种：</p>
+<ul>
+<li>HTML 元素节点(element nodes)</li>
+<li>文字节点(text nodes)，包含空格</li>
+<li>注释节点(comment nodes)</li>
+</ul>
+<p><strong>Node.firstChild</strong></p>
+<p><code>Node.firstChild</code>可以取得<code>Node</code>节点的<strong>第一个</strong>子节点，如果没有子节点则返回<code>null</code>。</p>
+<p>要注意的是，子节点包括空白节点，如下面例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> p = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;p&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-comment">// tagName 属性可以取得 node 的标签名称</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(p.firstChild.tagName); <span class="hljs-comment">// undefined</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>因为取得的是<code>&lt;p&gt;</code>与第一个<code>&lt;span&gt;</code>中间的换行字元，所以<code>p.firstChild.tagName</code>会得到<code>undefined</code>。所以改成这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> p = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;p&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-comment">// tagName 属性可以取得 node 的标签名称</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(p.firstChild.tagName); <span class="hljs-comment">// &quot;SPAN&quot;</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>把中间的换行与空白移除，就会得到预期中的<code>&quot;SPAN&quot;</code>了。</p>
+<p><strong>Node.lastChild</strong></p>
+<p><code>Node.lastChild</code>可以取得<code>Node</code>节点的最后一个子节点，如果没有子节点则返回<code>null</code>。</p>
+<p>与<code>Node.firstChild</code>一样的是，子节点也包括空白节点，所以像这样：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> p = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;p&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-comment">// textContent 属性可以取得节点内的文字内容</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(p.lastChild.textContent); <span class="hljs-comment">// &quot;&quot; (换行字元)</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>得到的会是一个换行字元的空字符串。</p>
+<p>移除节点之间多余的空白后：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> p = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;p&quot;</span>);</span><br><span class="javascript">  <span class="hljs-comment">// textContent 属性可以取得节点内的文字内容</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(p.lastChild.textContent); <span class="hljs-comment">// &quot;span 3&quot;</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>输出的就会是正确的”span 3” 啦。</p>
+<p><strong>Node.parentNode</strong></p>
+<p>那么相较于 Child 系列，<code>parentNode</code>就单纯一些。</p>
+<p>通过<code>Node.parentNode</code>可以用来取得父元素，返回值可能会是一个元素节点(Element node)、根节点(Document node)或 DocumentFragment 节点。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;span&quot;</span>);</span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(el.parentNode.nodeName); <span class="hljs-comment">// &quot;P&quot;</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Node.previousSibling</strong></p>
+<p>看完了 DOM 父与子之后，接着来看看兄弟节点。</p>
+<p>通过<code>Node.previousSibling</code>可以取得同层之间的前一个节点，如果 node 已经是第一个节点且前面无节点，则返回<code>null</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-keyword">var</span> el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;span&quot;</span>);</span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(el.previousSibling); <span class="hljs-comment">// null</span></span><br><br><span class="javascript">  <span class="hljs-comment">// document.querySelectorAll 会取得所有符合条件的集合，</span></span><br><span class="javascript">  <span class="hljs-comment">// 而 document.querySelectorAll(&#x27;span&#x27;)[2] 指的是「第三个」符合条件的元素。</span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> el2 = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;span&quot;</span>)[<span class="hljs-number">2</span>];</span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(el2.previousSibling.textContent); <span class="hljs-comment">// &quot;span 2&quot;</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>Node.nextSibling</strong></p>
+<p>与<code>Node.previousSibling</code>类似，通过<code>Node.nextSibling</code>可以取得同层之间的下一个节点，如果 node 已经是最后一个节点，则返回<code>null</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 1<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 2<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>span 3<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript">  <span class="hljs-comment">// document.querySelector 会取得第一个符合条件的元素</span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> el = <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&quot;span&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(el.nextSibling.textContent); <span class="hljs-comment">// &quot;span 2&quot;</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>document.getElementsBy*与 document.querySelector/ document.querySelectorAll 的差异</strong></p>
+<p>今天分享了很多关于 DOM 的选取以及查找遍历的方式，其中，像是<code>document.getElementById</code>以及<code>document.querySelector</code>因为取得的一定只会有一个元素/节点，所以不会有<code>index</code>与<code>length</code>属性。</p>
+<p>而<code>document.getElementsBy**</code>(注意，这里有个 s)以及<code>document.querySelectorAll</code>则分别返回 HTMLCollection 与 NodeList。</p>
+<p>这两者其实是有点差别的，HTMLCollection 只收集 HTML element 节点，而 NodeList 除了 HTML element 节点，也包含文字节点、属性节点等。当然两者也有类似的地方，虽然不能使用数组的 method，但这两种都可以用数组索引的方式来存取内容，也就是伪数组。</p>
+<p>另一个需要注意的地方是，HTMLCollection/NodeList 在大部分情况下是<strong>即时更新</strong>的，但通过<code>document.querySelector</code>/<code>document.querySelectorAll</code>取得的 NodeList 是<strong>静态</strong>的。</p>
+<p>啥意思呢？举个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;inner&quot;</span>&gt;</span>inner<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="handlebars"><span class="xml">  // <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span></span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> outerDiv = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;outer&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-comment">// 所有的 &lt;div&gt; 标签</span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> allDivs = <span class="hljs-built_in">document</span>.getElementsByTagName(<span class="hljs-string">&quot;div&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(allDivs.length); <span class="hljs-comment">// 2</span></span><br><br><span class="handlebars"><span class="xml">  // 清空 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span> 下的节点</span></span><br><span class="javascript">  outerDiv.innerHTML = <span class="hljs-string">&quot;&quot;</span>;</span><br><br><span class="handlebars"><span class="xml">  // 因为清空了<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span> 下的节点，所以只剩下 outer</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(allDivs.length); <span class="hljs-comment">// 1</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果改成<code>document.querySelector</code>的写法：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;inner&quot;</span>&gt;</span>inner<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="handlebars"><span class="xml">  // <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span></span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> outerDiv = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;outer&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-comment">// 所有的 &lt;div&gt; 标签</span></span><br><span class="javascript">  <span class="hljs-keyword">var</span> allDivs = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;div&quot;</span>);</span><br><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(allDivs.length); <span class="hljs-comment">// 2</span></span><br><br><span class="handlebars"><span class="xml">  // 清空 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;outer&quot;</span>&gt;</span> 下的节点</span></span><br><span class="javascript">  outerDiv.innerHTML = <span class="hljs-string">&quot;&quot;</span>;</span><br><br><span class="javascript">  <span class="hljs-comment">// document.querySelector 返回的是静态的 NodeList，不受 outerDiv 更新影响</span></span><br><span class="javascript">  <span class="hljs-built_in">console</span>.log(allDivs.length); <span class="hljs-comment">// 2</span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>那么以上就是今天所要介绍的内容啦。</p>
+<p>在后续的文章会再继续说明 DOM API 新增/删除/修改节点的部分，欢迎持续关注。</p>
+<p><strong>如果觉得文章对你有些许帮助，欢迎在<a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">我的 GitHub 博客</a>点赞和关注，感激不尽！</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JavaScript/">JavaScript</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JavaScript/">JavaScript</a>
+                    
+                      <a class="hover-with-bg" href="/tags/DOM/">DOM</a>
+                    
+                      <a class="hover-with-bg" href="/tags/API/">API</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/11/DOM%20Node%20%E7%9A%84%E5%BB%BA%E7%AB%8B%E3%80%81%E5%88%A0%E9%99%A4%E4%B8%8E%E4%BF%AE%E6%94%B9/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">DOM Node 的建立、删除与修改</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/06/%E8%81%8A%E4%B8%80%E8%81%8A%E6%B5%8F%E8%A7%88%E5%99%A8%E9%87%8C%E7%9A%84JavaScript/">
+                        <span class="hidden-mobile">谈谈浏览器里的JavaScript</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  灵谦的个人博客 2019–2021 
+ 
+ 
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

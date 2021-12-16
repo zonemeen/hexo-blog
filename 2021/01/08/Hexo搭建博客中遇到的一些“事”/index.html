@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="一位前端工程师的文章分享，主要发布 前端 / JavaScript / Node.js / Vue / React 等编程技术类文章。">
+  <meta name="author" content="miqilin21">
+  <meta name="keywords" content="前端、前端学习、前端编程、程序员、编程、博客、技术、转行、HTML、CSS、JavaScript、vue、react、Node.js、分享、blog、米淇淋、灵谦、miqilin、生活、爱好">
+  <title>Hexo搭建博客中遇到的一些&#39;事&#39; - 灵谦的个人博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//at.alicdn.com/t/font_2565223_esykp744a67.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"me.miqilin21.cn","root":"/","version":"1.8.6","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"#"},"copy_btn":true,"image_zoom":{"enable":true},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="灵谦的个人博客" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav
+  id="navbar"
+  class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="/"
+      >&nbsp;<strong>灵谦的个人博客</strong
+      >&nbsp;</a
+    >
+
+    <button
+      id="navbar-toggler-btn"
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+            
+        <li class="nav-item">
+          <a class="nav-link" href="/">
+            <i class="iconfont icon-home-fill"></i> 首页
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/archives/">
+            <i class="iconfont icon-archive-fill"></i> 归档
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/categories/">
+            <i class="iconfont icon-category-fill"></i> 分类
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/tags/">
+            <i class="iconfont icon-tags-fill"></i> 标签
+          </a>
+        </li>
+             
+        <li class="nav-item">
+          <a class="nav-link" href="/about/">
+            <i class="iconfont icon-user-fill"></i> 关于
+          </a>
+        </li>
+          
+        <li class="nav-item" id="search-btn">
+          <a class="nav-link" data-toggle="modal" data-target="#modalSearch"
+            >&nbsp;<i class="iconfont icon-search"></i>&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="color-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-dark" id="color-toggle-icon"></i
+            >&nbsp;</a
+          >
+        </li>
+         
+        <li class="nav-item" id="music-toggle-btn">
+          <a class="nav-link" href="javascript:;"
+            >&nbsp;<i class="iconfont icon-music" id="music-toggle-icon"></i
+            >&nbsp;</a
+          ><audio id="player" loop>
+            <source
+              src="https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/Prospect.mp3"
+              type="audio/mp3"
+            />
+          </audio>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/miqilin21/static@master/img/test1.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Hexo搭建博客中遇到的一些'事'">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-08 00:00" pubdate>
+        2021年1月8日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo搭建博客中遇到的一些&#39;事&#39;</h1>
+            
+            <div class="markdown-body">
+              <p>我写的这篇<a target="_blank" rel="noopener" href="https://luozongmin.com/2019/03/21/%E4%BD%BF%E7%94%A8Hexo+GitHub%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">文章</a>已经详细讲解了怎样利用 hexo 搭建 GitHub 个人博客，自从入了 hexo 搭建博客的坑后，发现 hexo 真的是巨 TM 好用， 配置好以后对我最大的方便就是想改就改，想删就删，一条 $ hexo g -d 命令搞定了事，支持 Markdown ，还支持非备案域名绑定，开心！</p>
+<p>搭建过程中也并非一切顺利，稍微不注意就出现 bug，接下来罗列了几条我搭建过程中所遇到的一些“事”及解决办法。</p>
+<h4 id="仓库的名字"><a href="#仓库的名字" class="headerlink" title="仓库的名字"></a>仓库的名字</h4><p>仓库的名字的正确格式应该是<code>github用户名.github.io</code>，比如说，如果你的 github 用户名是 test，那么你就应该新建<code>test.github.io</code>的仓库（必须是你的 github 用户名，这里再强调一遍，其它名称无效，之前因为没仔细看，随便起了个名字，果断报错）。</p>
+<h4 id="首页文章内容部分展示"><a href="#首页文章内容部分展示" class="headerlink" title="首页文章内容部分展示"></a>首页文章内容部分展示</h4><p>我用的是 next 主题，默认会把所有文章内容都展示出来，这可不简洁美观。所以查了一下，有一个小技巧，就是在你觉得要展示在首页的 Mrakdown 文件内容文字后面添加<code>&lt;!--more--&gt;</code>即可。例如：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">HTML、CSS、JS中unicode字符的处理</span><br><span class="hljs-meta">---</span><br><span class="hljs-comment"># 前言</span><br><span class="hljs-string">使用github</span> <span class="hljs-string">pages服务搭建博客的好处有：</span><br><span class="hljs-number">1</span><span class="hljs-string">.</span> <span class="hljs-string">全是静态文件，访问速度快；</span><br><span class="hljs-number">2</span><span class="hljs-string">.</span> <span class="hljs-string">免费方便，不用花一分钱就可以搭建一个自由的个人博客，不需要服务器不需要后台；</span><br><span class="hljs-number">3</span><span class="hljs-string">.</span> <span class="hljs-string">可以随意绑定自己的域名，不仔细看的话根本看不出来你的网站是基于github的；</span><br><span class="hljs-string">&lt;!--more--&gt;</span><br><span class="hljs-number">4</span><span class="hljs-string">.</span> <span class="hljs-string">数据绝对安全，基于github的版本管理，想恢复到哪个历史版本都行；</span><br><span class="hljs-number">5</span><span class="hljs-string">.</span> <span class="hljs-string">博客内容可以轻松打包、转移、发布到其它平台；</span><br><span class="hljs-number">6</span><span class="hljs-string">.</span> <span class="hljs-string">等等；</span><br></code></pre></div></td></tr></table></figure>
+
+<p><img src="/images/hexobug/1.jpg" srcset="/img/loading.gif"></p>
+<h4 id="GitHub-Pages-绑定域名后每次-hexo-d-都会失效"><a href="#GitHub-Pages-绑定域名后每次-hexo-d-都会失效" class="headerlink" title="GitHub Pages 绑定域名后每次 hexo d 都会失效"></a>GitHub Pages 绑定域名后每次 hexo d 都会失效</h4><p>在 GitHub Pages 绑定域名之后，发现每次<code>hexo d</code>后，域名网址都会报错 404，又要重新部署，就有点太麻烦了。</p>
+<p><img src="/images/hexobug/2.jpg" srcset="/img/loading.gif"></p>
+<p>搞了很久还是不行，后面在网上和群里问出，到这里域名绑定并没有结束，还差关键一步：</p>
+<p>具体就是在 Hexo 目录里的 source 文件下添加一个名为<code>CNAME</code>的文件，注意<strong>这个文件是没有后缀的，千万不要设置成.txt 文本文件</strong>，文件的内容就是域名，格式如：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">luozongmin</span><span class="hljs-selector-class">.com</span><br></code></pre></div></td></tr></table></figure>
+
+<p>添加后重新部署文件到 github，这个时候再试，应该就成功了。</p>
+<h4 id="创建分类页面"><a href="#创建分类页面" class="headerlink" title="创建分类页面"></a>创建分类页面</h4><p>添加一个分类页面，并在菜单中显示页面链接。应先新建一个页面，命名为 categories ，命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ hexo new page categories<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意！！！</strong>categories 中千万别加””(双引号)，不然会导致部署完后网站中不显示具体分类：</p>
+<p><img src="/images/hexobug/3.jpg" srcset="/img/loading.gif"></p>
+<p>之后在编辑刚新建的页面中，将页面的类型设置为<code>categories</code>； 最后编辑主题的<code>_config.yml</code>，将<code>menu</code>中的<code>categories: /categories</code>注释去掉即可。</p>
+<h4 id="Busuanzi-统计浏览量失效"><a href="#Busuanzi-统计浏览量失效" class="headerlink" title="Busuanzi 统计浏览量失效"></a>Busuanzi 统计浏览量失效</h4><p>由于 busuanzi(不蒜子)的网址更新，导致了使用 Hexo Next 主题时统计浏览量时失效。</p>
+<p>解决方法:</p>
+<p>到 hexo 的 themes 文件夹下, 进入\themes\next\layout_third-party\analytics</p>
+<p>打开: busuanzi-counter.swig</p>
+<p>将 src=“<a target="_blank" rel="noopener" href="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js%E2%80%9D">https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js”</a></p>
+<p>修改为 src=“<a target="_blank" rel="noopener" href="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js%E2%80%9D">https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js”</a></p>
+<p>即可。</p>
+<p>不蒜子官网:<a target="_blank" rel="noopener" href="http://ibruce.info/2015/04/04/busuanzi/">http://ibruce.info/2015/04/04/busuanzi/</a></p>
+<h4 id="Hexo-迁移错误-TypeError-Cannot-read-property-‘count’-of-undefined"><a href="#Hexo-迁移错误-TypeError-Cannot-read-property-‘count’-of-undefined" class="headerlink" title="Hexo 迁移错误 TypeError: Cannot read property ‘count’ of undefined"></a>Hexo 迁移错误 TypeError: Cannot read property ‘count’ of undefined</h4><p>hexo 搭建的博客，从旧电脑迁移到新电脑时，输入 $ hexo g 命令时，报出如下错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ hexo g<br><br>INFO Start processing<br>FATAL Something<span class="hljs-string">&#x27;s wrong. Maybe you can find the solution here: http://hexo.io/docs/troubleshooting.html</span><br><span class="hljs-string"></span><br><span class="hljs-string">TypeError: Cannot read property &#x27;</span>count<span class="hljs-string">&#x27; of undefined at Hexo.module.exports (E:\github\hexo\node_modules\hexo-baidu-url-submit\lib\generator.js:4:40)</span><br><span class="hljs-string">at Hexo.tryCatcher (E:\github\hexo\node_modules\bluebird\js\release\util.js:16:23)at Hexo. (E:\github\hexo\node_modules\bluebird\js\release\method.js:15:34)</span><br><span class="hljs-string">at E:\github\hexo\node_modules\hexo\lib\hexo\index.js:337:24 at tryCatcher (E:\github\hexo\node_modules\bluebird\js\release\util.js:16:23)</span><br><span class="hljs-string">at MappingPromiseArray._promiseFulfilled (E:\github\hexo\node_modules\bluebird\js\release\map.js:61:38)</span><br><span class="hljs-string">at MappingPromiseArray.PromiseArray._iterate (E:\github\hexo\node_modules\bluebird\js\release\promise_array.js:113:31)</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>解决方案：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">$ npm remove hexo-baidu-url-submit<br>$ hexo clean<br>$ hexo g<br></code></pre></div></td></tr></table></figure>
+
+<p>删除百度自动提交就好了。</p>
+<p><strong>未完待续……</strong></p>
+<p>本人 Github 链接如下，欢迎各位 Star</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/miqilin21/miqilin21.github.io">https://github.com/miqilin21/miqilin21.github.io</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/tools/">tools</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/09/JavaScript%E4%B8%AD%E4%BB%BB%E4%BD%95%E5%80%BC%E7%9A%84prototype%E5%88%B0%E6%9C%80%E5%90%8E%E9%83%BD%E6%98%AFObject/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JavaScript中任何值的prototype到最后都是Object</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/06/%E5%AD%A6%E4%BC%9A%E5%A6%82%E4%BD%95%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+                        <span class="hidden-mobile">学会如何学习（一）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content"> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> </div>
+  灵谦的个人博客 2019–2021 
+ 
+ 
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":200})
+    NProgress.start()
+    document.addEventListener('DOMContentLoaded', function() {
+      window.NProgress && window.NProgress.inc();
+    })
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

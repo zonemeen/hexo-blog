@@ -445,6 +445,20 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/Git/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/GitHub/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/JavaScript/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
@@ -460,20 +474,6 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/API/</loc>
-    <lastmod>2022-02-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/Git/</loc>
-    <lastmod>2022-02-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/GitHub/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -536,13 +536,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/this/</loc>
-    <lastmod>2022-02-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/Scope/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
@@ -551,6 +544,13 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/Scope-Chain/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/this/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -606,14 +606,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/IIFE/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</loc>
+    <loc>https://me.miqilin21.cn/tags/IIFE/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -655,6 +655,13 @@
   </url>
   
   <url>
+    <loc>https://me.miqilin21.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://me.miqilin21.cn/tags/jQuery/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
@@ -663,13 +670,6 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/OpenSource/</loc>
-    <lastmod>2022-02-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://me.miqilin21.cn/tags/%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -732,13 +732,6 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E7%BB%84/</loc>
-    <lastmod>2022-02-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://me.miqilin21.cn/tags/%E6%AD%A3%E5%88%99/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
@@ -760,7 +753,7 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/tags/Function/</loc>
+    <loc>https://me.miqilin21.cn/tags/%E6%95%B0%E7%BB%84/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -768,6 +761,13 @@
   
   <url>
     <loc>https://me.miqilin21.cn/tags/BOM/</loc>
+    <lastmod>2022-02-14</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://me.miqilin21.cn/tags/Function/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -825,14 +825,14 @@
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/JavaScript/</loc>
+    <loc>https://me.miqilin21.cn/categories/tools/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://me.miqilin21.cn/categories/tools/</loc>
+    <loc>https://me.miqilin21.cn/categories/JavaScript/</loc>
     <lastmod>2022-02-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
